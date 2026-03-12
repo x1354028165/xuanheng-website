@@ -876,8 +876,8 @@ API 文档结构：
 适用场景：工业局域网环境 / 与第三方 PLC, SCADA 集成 / 二次开发
 鉴权方式：设备级 Token（在 Neuron 配置工具中生成），与云端账号体系独立
 
-渲染方案：OpenAPI Spec (YAML) + Redoc 自动渲染
-           后端维护 spec 文件，前端不需要手动写文档
+渲染方案：API 文档工具自动渲染（具体方案详见技术选型文档）
+           后端维护结构化 API 描述文件，前端不需要手动写文档
            权限控制在 API 网关层实现，无权限的端点返回 403
 
 申请接入表单字段（公开页，未登录可提交）：
@@ -1785,7 +1785,7 @@ API Key 管理页：
           <tr><td rowspan="2"><strong>第一层<br>核心维护</strong></td><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
           <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
           <tr><td><strong>第二层<br>自动转换</strong></td><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td>🔄 由 zh-CN 自动繁简转换，人工校对关键词</td><td><span class="badge badge-p0">P0</span></td></tr>
-          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de-DE</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，DeepL 生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de-DE</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，机器翻译生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
           <tr><td><code>fr-FR</code></td><td>法文</td><td>法国及法语区</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
           <tr><td><code>pt-BR</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
           <tr><td><code>es-ES</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
@@ -1795,7 +1795,7 @@ API Key 管理页：
 
       <div class="highlight">
         <strong>核心设计原则：2套核心 + 1套自动 + 5套机器翻译辅助，不是 8套独立维护。</strong><br>
-        日常只需维护 zh-CN 和 en-US。zh-TW 自动同步，zh-CN 更新后自动触发繁简转换。P1 五种语言：en-US 内容更新后，系统自动标记对应语言「需要重新翻译」，运营一键触发 DeepL 重新生成初稿，人工校对后发布。
+        日常只需维护 zh-CN 和 en-US。zh-TW 自动同步，zh-CN 更新后自动触发繁简转换。P1 五种语言：en-US 内容更新后，系统自动标记对应语言「需要重新翻译」，运营一键触发机器翻译生成初稿，人工校对后发布。
       </div>
 
       <p><strong>回退链：</strong> 某语言内容未翻译或未发布时，按以下顺序回退：</p>
@@ -1816,7 +1816,7 @@ API Key 管理页：
       <p><strong>翻译工作流（P1 语言）：</strong></p>
       <ul>
         <li>en-US 内容发布 → 系统自动标记 5 种语言「待翻译」</li>
-        <li>运营在 CMS 点击「一键翻译」→ DeepL API 生成全部语言初稿</li>
+        <li>运营在 CMS 点击「一键翻译」→ 机器翻译 API 生成全部语言初稿</li>
         <li>人工校对（可批量导出 Excel 交翻译人员）→ 确认后逐语言发布</li>
         <li>每条内容显示翻译状态：✅ 已发布 / ⚠️ 待校对 / 🔄 使用回退</li>
       </ul>
@@ -1948,17 +1948,19 @@ API Key 管理页：
         <li><strong>隐私政策页：</strong>独立页面，通过 CMS 管理内容，支持多语言版本独立维护。涵盖：数据收集范围、使用目的、存储期限、用户权利（查阅/删除/更正）、数据出境说明。</li>
       </ul>
 
-      <h4>7.11 CDN 部署策略与国内备案</h4>
+      <h4>7.11 访问加速与国内备案</h4>
       <div class="gray-box">
         <div style="font-weight:700; color:var(--primary); margin-bottom:6px">为什么要双节点？</div>
-        <p style="font-size:13px; margin:0">CDN（内容分发网络）是把网站静态资源缓存到离用户最近的服务器节点，加快访问速度。旭衡官网需要同时服务国内客户（访问速度快、合规要求备案）和海外客户（不能因国内网络波动影响固件下载和 API 调用）。单节点无法同时满足两端需求，因此需要国内外分别部署。ICP 备案是国内网站上线的法律要求，包含中文内容的站点必须完成后才能对国内用户提供服务。</p>
+        <p style="font-size:13px; margin:0">旭衡官网需要同时服务国内客户（访问速度快、合规要求备案）和海外客户（不能因国内网络波动影响固件下载和 API 调用）。单节点无法同时满足两端需求，因此需要国内外分别部署加速节点。ICP 备案是国内网站上线的法律要求，包含中文内容的站点必须完成后才能对国内用户提供服务。</p>
       </div>
-      <p>旭衡官网同时服务国内和海外用户，且包含大量文件下载（文档/固件/软件），需采用双节点 CDN 策略：</p>
+      <p>旭衡官网同时服务国内和海外用户，且包含大量文件下载（文档/固件/软件），需满足以下访问要求：</p>
       <ul>
-        <li><strong>国内节点：</strong>域名（alwayscontrol.com.cn）需完成 ICP 备案。国内用户访问走国内 CDN 节点，保证访问速度。文件下载走国内 OSS + CDN，避免境外带宽影响下载体验。</li>
-        <li><strong>海外节点：</strong>海外用户访问走境外 CDN 节点（如 Cloudflare 或阿里云海外节点）。API 文档、固件下载等资源在海外节点缓存，确保海外客户访问不受国内网络波动影响。开发者调用 <code>api.alwayscontrol.com.cn</code> 的延迟需在可接受范围内（建议提供海外 API 接入点）。</li>
-        <li><strong>备案要求：</strong>zh-CN 版本内容必须完成 ICP 备案后才能上线。建议国内外域名分离或采用 GeoDNS 智能解析，海外用户自动路由至境外节点。</li>
+        <li><strong>国内访问：</strong>域名（alwayscontrol.com.cn）需完成 ICP 备案。国内用户访问须经国内加速节点，保证访问速度；文件下载走国内对象存储 + CDN，避免境外带宽影响体验。</li>
+        <li><strong>海外访问：</strong>海外用户访问须走境外加速节点，确保不受国内网络波动影响。API 文档、固件下载等资源需在海外节点缓存，开发者调用 <code>api.alwayscontrol.com.cn</code> 的延迟应在可接受范围内。</li>
+        <li><strong>智能路由：</strong>须支持按用户地理位置自动路由至就近加速节点，海外用户不走国内节点。</li>
+        <li><strong>备案要求：</strong>zh-CN 版本内容必须在 ICP 备案完成后才能上线，此项为上线硬性前提。</li>
       </ul>
+      <p style="font-size:12px; color:var(--muted)">具体 CDN 服务商选型、部署架构详见技术选型文档。</p>
 
       <h4>7.13 全局搜索能力</h4>
       <p>官网 Header 常驻全局搜索框，支持跨全站内容索引，覆盖以下内容类型：</p>
