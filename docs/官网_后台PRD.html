@@ -1647,6 +1647,34 @@ API Key 管理页：
                 <tr><td>状态跟踪</td><td>待处理 / 跟进中 / 已关闭</td></tr>
                 <tr><td>企业微信推送</td><td>按意向分类推对应业务群</td></tr>
                 <tr><td>来源标记</td><td>记录来自哪个页面</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>媒体库</strong></td><td>统一图片/视频上传</td><td>OSS 直传，自动生成 CDN 链接，运营无需手动配置存储</td></tr>
+                <tr><td>图片分类与搜索</td><td>按用途分类（产品图/Banner/Logo/案例封面），支持文件名搜索</td></tr>
+                <tr><td>图片替换（覆盖原链接）</td><td>替换后所有引用该图的页面自动更新，无需逐页修改</td></tr>
+                <tr><td>引用追踪</td><td>每张图片显示被哪些页面/内容引用，防误删在用图片</td></tr>
+                <tr><td>自动压缩（WebP）</td><td>上传时自动转 WebP，在线裁剪适配不同展示比例</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>页面内容管理</strong></td><td>首页 Hero 区块编辑</td><td>主标语/副标语/背景图/CTA 文字与链接，支持多语言，草稿预览后发布</td></tr>
+                <tr><td>首页数字展示区块</td><td>兼容品牌数/覆盖国家数/已交付项目数可配置（⚠️ 上线前填真实数据）</td></tr>
+                <tr><td>各页面 Banner 图替换</td><td>解决方案页/产品页顶部 Banner 独立替换，不走代码发布</td></tr>
+                <tr><td>草稿预览 + 变更历史</td><td>修改后先预览，确认后发布；可回滚至历史版本</td></tr>
+                <tr><td>隐私政策等独立页面</td><td>法律声明/隐私政策/Cookie 政策由 CMS 管理多语言版本</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>产品内容管理</strong></td><td>产品基本信息</td><td>产品名称/定位一句话/主图（从媒体库选择），支持多语言</td></tr>
+                <tr><td>核心参数表（硬件）</td><td>结构化字段：通信接口/支持协议/供电/温度/防护等级/认证，非富文本</td></tr>
+                <tr><td>核心功能卡片（云平台）</td><td>图文卡片列表，含图标/截图（从媒体库选择）+ 标题 + 描述，可拖拽排序</td></tr>
+                <tr><td>接入方式说明</td><td>富文本，支持多语言</td></tr>
+                <tr><td>产品发布状态控制</td><td>产品下线时前台自动隐藏，关联的跳转卡片同步隐藏</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>解决方案内容管理</strong></td><td>场景基本信息</td><td>场景名称/一句话描述/Banner 图（从媒体库选择），支持多语言</td></tr>
+                <tr><td>场景背景 / 痛点描述</td><td>富文本，支持图文混排，支持多语言</td></tr>
+                <tr><td>技术亮点列表</td><td>结构化列表（标题+描述），可拖拽排序，支持多语言</td></tr>
+                <tr><td>应用案例关联</td><td>从案例库中选择关联案例，未关联时该区块自动隐藏</td></tr>
+                <tr><td>场景发布状态控制</td><td>场景下线时前台自动隐藏该场景入口</td></tr>
+
+                <tr><td rowspan="3" style="background:#fff"><strong>运维工具（基础）</strong></td><td>缓存清除（全站 / 按页）</td><td>内容错误时快速清除缓存生效，无需联系开发</td></tr>
+                <tr><td>CDN 资源刷新</td><td>媒体库图片替换后，一键刷新 CDN 节点缓存</td></tr>
+                <tr><td>死链扫描</td><td>定期检查全站 404 链接，列出问题 URL 及来源页</td></tr>
               </tbody>
             </table>
           </div>
@@ -1723,7 +1751,10 @@ API Key 管理页：
                 <tr><td rowspan="2" style="background:#fff"><strong>系统状态页</strong></td><td>服务状态展示</td><td>各 API 服务实时状态、30天可用率、历史故障记录</td></tr>
                 <tr><td>维护通知发布</td><td>计划维护提前公告，开发者中心和 Footer 展示入口</td></tr>
 
-                <tr><td style="background:#fff"><strong>操作日志</strong></td><td>审计追踪</td><td>谁在什么时间改了什么</td></tr>
+                <tr><td style="background:#fff"><strong>操作日志</strong></td><td>审计追踪</td><td>谁在什么时间改了什么，保留 90 天</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>运维工具（高级）</strong></td><td>Sitemap 手动触发</td><td>手动触发生成并提交 Google Search Console</td></tr>
+                <tr><td>多语言完整性检查</td><td>列出所有「待翻译」/「使用回退」的内容区块，辅助翻译排期</td></tr>
               </tbody>
             </table>
           </div>
