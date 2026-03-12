@@ -1098,11 +1098,51 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
       </table>
 
       <div class="epic" style="margin-top:20px">EP-13 隐私合规</div>
+      <div class="note">📌 两件独立的事：① Cookie 同意横幅（UI组件，非页面）② 隐私政策页（独立文本页，EP-09）。两者需配合工作，但开发和内容准备可分开进行。</div>
+
+      <h4>EP-13A · Cookie 同意横幅（UI 组件）</h4>
+      <div class="arch-box">触发时机：用户首次访问任意页面时，页面底部弹出横幅
+
+横幅内容：
+┌──────────────────────────────────────────────────────┐
+│  🍪 我们使用 Cookie 来改善您的浏览体验。               │
+│  继续使用即表示您同意我们的 Cookie 政策。              │
+│  [了解更多] → 跳转隐私政策页                          │
+│                            [拒绝] [接受所有 Cookie]   │
+└──────────────────────────────────────────────────────┘
+
+用户操作后行为：
+  点击「接受」：记录同意状态（localStorage），横幅消失，不再出现
+  点击「拒绝」：记录拒绝状态，横幅消失，仅保留必要 Cookie
+  再次访问：已有记录则不再弹出，除非清除浏览器数据
+
+适用法规：GDPR（欧盟）/ LGPD（巴西）/ PIPL（中国）</div>
+
+      <h4>EP-13B · Cookie 同意横幅功能清单</h4>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>Cookie 授权弹窗（GDPR/LGPD）</td><td>首次访问弹出，支持多语言</td></tr>
-          <tr><td>隐私政策页（多语言）</td><td>⚠️ 法务审核后上线，不使用模板占位</td></tr>
+          <tr><td>首次访问自动弹出</td><td>无论用户从哪个页面进入，均弹出横幅</td></tr>
+          <tr><td>同意状态持久化</td><td>用户选择记录在 localStorage，有效期 12 个月</td></tr>
+          <tr><td>「了解更多」跳转</td><td>跳转至 EP-09 隐私政策页（/zh-CN/privacy-policy）</td></tr>
+          <tr><td>多语言支持</td><td>横幅文案通过多语言字典（CMS-14）配置</td></tr>
+          <tr><td>拒绝后仅保留必要 Cookie</td><td>必要 Cookie：Session / CSRF Token / 语言偏好；禁止加载第三方分析 Cookie</td></tr>
+          <tr><td>不阻断用户操作</td><td>横幅悬浮于底部，不遮挡页面主内容，用户可继续浏览</td></tr>
+        </tbody>
+      </table>
+      <div class="ac">首次访问时底部横幅正常出现，点击「接受」后再次访问不再弹出。</div>
+      <div class="ac">点击「了解更多」正确跳转隐私政策页对应语言版本。</div>
+      <div class="ac">点击「拒绝」后，第三方分析脚本不加载（Network 面板可验证）。</div>
+
+      <h4>EP-13C · 隐私政策页说明（→ 详见 EP-09）</h4>
+      <table>
+        <thead><tr><th>项目</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>页面 URL</td><td>/zh-CN/privacy-policy（多语言各有独立路径）</td></tr>
+          <tr><td>内容准备</td><td>⚠️ 须经法务审核，不可使用模板占位；上线前 Checklist 必须包含此项</td></tr>
+          <tr><td>与横幅的关系</td><td>横幅「了解更多」链接至本页；本页内容独立存在，用户也可直接通过 Footer 链接访问</td></tr>
+          <tr><td>包含内容</td><td>隐私政策 + Cookie 政策（合并在同一页面，分章节展示）</td></tr>
+          <tr><td>CMS 管理</td><td>内容在 CMS-06 页面内容模块维护，法务可自行更新无需开发介入</td></tr>
         </tbody>
       </table>
 
