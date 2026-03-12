@@ -180,6 +180,7 @@
       <li><a href="#s7">七、非功能性需求</a></li>
       <li><a href="#s8">八、访问控制与权限体系</a></li>
       <li><a href="#s9">九、前台内容 CMS 覆盖审计</a></li>
+      <li><a href="#s10">十、上线前必须完成清单</a></li>
     </ul>
   </aside>
 
@@ -1823,8 +1824,35 @@ API Key 管理页：
       <h4>7.4 文件下载可靠性</h4>
       <p>所有可下载资产（文档、软件、固件）通过统一的文件管理系统分发，下载链接稳定可用。文件更新后旧链接不失效（旧版本归档保留），新版本通过 CMS 发布。</p>
 
-      <h4>7.5 表单通知实时性</h4>
-      <p>官网所有表单（业务咨询、在线报修、API Key 申请）提交后，相关人员应在 5 分钟内通过企业微信收到通知，确保线索不丢失。</p>
+      <h4>7.5 表单通知配置</h4>
+      <p>官网所有表单（业务咨询、在线报修、API Key 申请）提交后，必须同时触发以下通知，确保线索 5 分钟内到达相关人员。通知目标和内容均通过 CMS 后台配置，<strong>不硬编码联系人信息</strong>。</p>
+
+      <div class="gray-box">
+        <p style="font-weight:700; margin-bottom:10px">通知渠道（CMS 后台「通知配置」模块统一管理）：</p>
+        <table>
+          <thead><tr><th>通知类型</th><th>触发条件</th><th>配置内容</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td><strong>企业微信群机器人</strong></td><td>所有表单提交</td><td>配置企微 Webhook URL；按意向分类（商务/报修/API 申请）路由至不同群</td><td>运营在后台填写各类型对应的 Webhook，不改代码</td></tr>
+            <tr><td><strong>邮件通知（内部）</strong></td><td>商务咨询 / 报修工单</td><td>配置接收邮箱列表（支持多个邮箱，逗号分隔）；按意向分类路由</td><td>如：Rory 接收国内商务咨询，Julie 接收海外咨询，Alan 接收报修工单</td></tr>
+            <tr><td><strong>邮件回执（用户侧）</strong></td><td>所有表单提交</td><td>配置发件人显示名 / 发件邮箱；回执邮件模板（标题/正文）支持多语言编辑</td><td>用户提交后自动收到确认邮件，告知已收到并预计响应时间</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-weight:700; margin: 14px 0 8px">通知消息内容（固定字段，所有渠道通用）：</p>
+        <ul>
+          <li>提交时间 / 来源页面 / 意向分类</li>
+          <li>姓名 / 公司名 / 邮箱 / 电话</li>
+          <li>用户填写的具体内容（咨询描述/报修描述）</li>
+          <li>CMS 后台直达链接（一键跳转至该线索详情）</li>
+        </ul>
+
+        <p style="font-weight:700; margin: 14px 0 8px">用户侧回执邮件内容（示意，多语言模板）：</p>
+        <ul>
+          <li>主题：「感谢您的咨询 / Thank you for contacting us」</li>
+          <li>内容：已收到您的提交，我们的团队将在 1 个工作日内与您联系；附带提交信息摘要供用户确认</li>
+          <li>模板在 CMS「通知配置 → 邮件模板」中编辑，支持 zh-CN / en-US，其余语言机器翻译</li>
+        </ul>
+      </div>
 
       <h4>7.6 移动端适配策略</h4>
       <p>官网以 PC 端为主要使用场景（B2B 客户决策链路长，主要在办公环境访问），但部分页面有移动端访问需求：</p>
@@ -1885,6 +1913,27 @@ API Key 管理页：
         </tbody>
       </table>
       <p style="font-size:13px; color:var(--muted)"><strong>回退原则：</strong> zh-TW 未覆盖内容回退至 zh-CN；de/fr/pt/es/ru 未覆盖内容先回退至 en-US，再回退至 zh-CN。不允许显示空内容或乱码。P1 语言随业务进入对应市场时开启，不强制与 P0 同步上线。</p>
+
+      <h4>7.9 预发布环境（Staging）</h4>
+      <p>官网必须配备独立的预发布环境（staging），与生产环境（production）完全隔离。运营人员所有内容更新必须先在 staging 验证，确认无误后才能发布到生产环境。</p>
+      <div class="gray-box">
+        <table>
+          <thead><tr><th>维度</th><th>Staging 环境</th><th>Production 环境</th></tr></thead>
+          <tbody>
+            <tr><td>域名</td><td><code>staging.alwayscontrol.com.cn</code>（访问需鉴权）</td><td><code>alwayscontrol.com.cn</code></td></tr>
+            <tr><td>数据库</td><td>独立数据库，与生产完全隔离</td><td>生产数据库</td></tr>
+            <tr><td>CMS 后台</td><td>独立 CMS 实例，改动不影响生产</td><td>生产 CMS</td></tr>
+            <tr><td>内容同步</td><td>可一键从生产拉取最新内容快照</td><td>—</td></tr>
+            <tr><td>用途</td><td>新功能测试 / 内容预览 / 上线前验收</td><td>面向真实用户</td></tr>
+          </tbody>
+        </table>
+        <ul style="margin-top:12px">
+          <li><strong>内容发布流程：</strong>CMS 编辑内容 → Staging 预览确认 → 超管审核 → 发布至 Production</li>
+          <li><strong>紧急修复例外：</strong>生产环境发现紧急问题（错误联系方式/错别字）允许直接修生产，但事后必须同步回 Staging</li>
+          <li><strong>访问控制：</strong>Staging 域名需 HTTP Basic Auth 或 IP 白名单保护，防止被搜索引擎索引</li>
+          <li><strong>SEO 隔离：</strong>Staging 全站加 <code>noindex</code> 响应头，不被 Google 收录</li>
+        </ul>
+      </div>
 
       <h4>7.10 隐私合规（GDPR / LGPD）</h4>
       <div class="gray-box">
@@ -2234,11 +2283,71 @@ CMS 后台 → 客户账号管理 → 搜索客户
       </div>
     </div>
 
+    <div class="section" id="s10">
+      <div class="section-label">附录</div>
+      <h2>十、上线前必须完成清单（Pre-launch Checklist）</h2>
+      <p>以下事项为技术开发完成后、正式上线前必须逐项核对的非技术确认项。带 ⚠️ 的项目需要业务或法务人员确认，不可由开发人员代为填写。</p>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--danger)">🔴 内容确认（必须完成，不得带占位上线）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>首页信任背书数字：兼容品牌数、覆盖国家数、已交付项目数——填入真实数据</td><td>业务负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>2</td><td>关于我们页核心数字（与首页同源）——与首页数字一致</td><td>业务负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>3</td><td>联系我们页联系人信息（姓名/职位/邮箱/电话）——Rory / Julie / Alan 真实信息</td><td>各联系人本人确认</td><td>⬜ 待确认</td></tr>
+            <tr><td>4</td><td>帮助中心技术支持电话——替换「400-888-8888」占位内容</td><td>运维负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>5</td><td>公司简介文字（中英文）——准确描述公司，无夸大无错误</td><td>市场负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>6</td><td>隐私政策 / Cookie 政策（中英文）——法务审核通过</td><td>法务</td><td>⬜ 待确认</td></tr>
+            <tr><td>7</td><td>FAQ 内容——替换 3 条占位示例，至少准备 10 条真实常见问题</td><td>技术支持</td><td>⬜ 待确认</td></tr>
+            <tr><td>8</td><td>至少 1 条新闻动态发布（不空白）</td><td>市场负责人</td><td>⬜ 待确认</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--warning)">🟡 系统配置（技术人员确认）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>9</td><td>企业微信 Webhook 配置——商务咨询 / 报修 / API 申请三类分别配置正确群</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>10</td><td>邮件通知配置——各意向分类的内部收件邮箱填写正确</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>11</td><td>用户侧回执邮件——发件箱配置、邮件模板（中英文）确认可正常发送</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>12</td><td>SSO 接入——爱尚管理后台 OAuth2 接口联调通过，登录 / 登出 / token 刷新均正常</td><td>后端开发</td><td>⬜ 待联调</td></tr>
+            <tr><td>13</td><td>OSS 存储桶 + CDN 域名配置——文件上传 / 下载 / 图片加速链接均可访问</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>14</td><td>HTTPS 证书——<code>alwayscontrol.com.cn</code> 及所有子域名证书有效</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>15</td><td>Staging 环境 <code>noindex</code> 隔离——确认 Staging 不被 Google 收录</td><td>后端开发</td><td>⬜ 待验证</td></tr>
+            <tr><td>16</td><td>多语言回退链正常——未翻译内容正确回退至 en-US / zh-CN，无空白页</td><td>前端开发</td><td>⬜ 待验证</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--success)">🟢 上线验收（所有人）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>17</td><td>所有页面在 Staging 完整浏览一遍——无乱码、无404、无占位文字残留</td><td>项目负责人</td><td>⬜ 待验收</td></tr>
+            <tr><td>18</td><td>商务咨询表单提交测试——企微通知 + 内部邮件 + 用户回执邮件三路均正常收到</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>19</td><td>报修工单提交测试——工单进入 CMS 收件箱，技术支持收到通知</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>20</td><td>文件下载测试——权限控制正确（未登录无法下载受限文件），下载链接有效</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>21</td><td>移动端页面验收——首页 / 联系我们 / 产品页在 iPhone 和 Android 各测试一遍</td><td>前端开发</td><td>⬜ 待测试</td></tr>
+            <tr><td>22</td><td>语言切换测试——zh-CN / en-US 切换正常，URL 结构正确，SEO 独立索引</td><td>前端开发</td><td>⬜ 待测试</td></tr>
+            <tr><td>23</td><td>Google Search Console 提交 Sitemap——生产域名 Sitemap 提交完成</td><td>运维</td><td>⬜ 待执行</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight">
+        <strong>上线原则：</strong> 以上 23 项全部完成并在 Staging 验收通过后，方可执行生产环境发布。第 1–8 项内容确认项由业务侧负责，<strong>开发完成不等于可以上线</strong>。
+      </div>
+    </div>
+
   </main>
 </div>
 
 <div class="doc-footer">
-  Always Control · Website &amp; CMS Blueprint v3.1 &nbsp;·&nbsp; 2026-03-12（新增：多语言扩展至8种、产品×解决方案双向互通、前台CMS覆盖审计）
+  Always Control · Website &amp; CMS Blueprint v3.7 &nbsp;·&nbsp; 2026-03-12（v3.7：表单通知配置化、Staging环境、§7.9补入、上线前Checklist）
 </div>
 
 <script>
