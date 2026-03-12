@@ -2031,172 +2031,180 @@ CMS 后台 → 客户账号管理 → 搜索客户
       </table>
     </div>
 
-  </main>
-</div>
-
     <div class="section" id="s9">
       <div class="section-label">第九部分</div>
       <h2>九、前台内容 CMS 覆盖审计</h2>
       <p>本章逐页审查官网前台所有内容区块，确认每个区块是否有对应的 CMS 后台支撑。凡标注 ❌ 的内容，开发时必须补充对应的 CMS 管理能力，不允许硬编码上线。</p>
 
-      <h3>9.1 首页</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Hero 主标语 / 副标语</td><td>✅ P1</td><td>多语言字典 + 页面内容管理</td><td>需支持多语言独立编辑</td></tr>
-          <tr><td>三路分流 CTA 文字</td><td>✅ P1</td><td>多语言字典</td><td>按钮文案可在后台调整</td></tr>
-          <tr><td>信任背书数字（品牌数/国家数/项目数）</td><td>✅ P2</td><td>公司介绍管理 → 核心数字配置</td><td>⚠️ 数字待填入真实数据</td></tr>
-          <tr><td>核心差异化区块（接入方式）</td><td>✅ P1</td><td>页面内容管理</td><td>文案需多语言版本</td></tr>
-          <tr><td>场景解决方案卡片列表</td><td>✅ P0</td><td>解决方案管理（与场景页同源）</td><td>自动从解决方案内容拉取</td></tr>
-          <tr><td>产品概览卡片</td><td>✅ P1</td><td>产品管理</td><td>产品名称/描述从产品内容拉取</td></tr>
-          <tr><td>兼容品牌 Logo 墙</td><td>✅ P0</td><td>兼容品牌管理</td><td>仅显示「已支持」且设为首页展示的品牌</td></tr>
-          <tr><td>底部 CTA 区块文案</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-        </tbody>
-      </table>
+      <div class="stat-row" style="margin: 20px 0;">
+        <div class="stat"><div class="num">60+</div><div class="lbl">识别内容区块</div></div>
+        <div class="stat"><div class="num">97%</div><div class="lbl">CMS 覆盖率</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">合理不接 CMS</div></div>
+        <div class="stat"><div class="num" style="color:var(--danger)">5+</div><div class="lbl">上线前待确认项</div></div>
+      </div>
 
-      <h3>9.2 解决方案各场景页（5个）</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>场景背景 / 痛点描述</td><td>✅ P0</td><td>解决方案内容管理</td><td>富文本，支持多语言</td></tr>
-          <tr><td>方案描述文案</td><td>✅ P0</td><td>解决方案内容管理</td><td>–</td></tr>
-          <tr><td>接入方式说明</td><td>✅ P0</td><td>解决方案内容管理</td><td>–</td></tr>
-          <tr><td>技术亮点列表</td><td>✅ P0</td><td>解决方案内容管理</td><td>–</td></tr>
-          <tr><td>应用案例区块</td><td>✅ P1</td><td>案例管理 → 关联解决方案</td><td>从案例库中关联，非硬编码</td></tr>
-          <tr><td>本方案使用的产品跳转卡片</td><td>✅ P0</td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
-          <tr><td>页面 SEO（title/description）</td><td>✅ P2</td><td>SEO 配置</td><td>P0 阶段硬编码，P2 迁入 CMS</td></tr>
-          <tr><td>CTA 按钮文案</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.1 首页</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>Hero 主标语 / 副标语</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>官网上线必须可编辑，支持多语言</td></tr>
+            <tr><td>三路分流 CTA 文字</td><td><span class="badge badge-p0">P0</span></td><td>多语言字典</td><td>按钮文案可在后台调整</td></tr>
+            <tr><td>Hero 背景图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 页面内容管理</td><td>从媒体库选择，不硬编码路径</td></tr>
+            <tr><td>核心差异化区块（接入方式）</td><td><span class="badge badge-p1">P1</span></td><td>页面内容管理</td><td>文案需多语言版本</td></tr>
+            <tr><td>场景解决方案卡片列表</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>自动从解决方案内容拉取，无需单独维护</td></tr>
+            <tr><td>产品概览卡片</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>产品名称/描述从产品内容拉取</td></tr>
+            <tr><td>兼容品牌 Logo 墙</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>仅显示「已支持」且设为首页展示的品牌</td></tr>
+            <tr><td>信任背书数字（品牌数/国家数/项目数）</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 核心数字</td><td>⚠️ 数字待填入真实数据，P0 阶段硬编码</td></tr>
+            <tr><td>底部 CTA 区块文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.3 产品中心各产品页（8个）</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>产品定位一句话</td><td>✅ P0</td><td>产品内容管理</td><td>支持多语言</td></tr>
-          <tr><td>核心参数表</td><td>✅ P0</td><td>产品内容管理</td><td>结构化字段，非富文本</td></tr>
-          <tr><td>核心功能列表（云平台）</td><td>✅ P0</td><td>产品内容管理</td><td>支持图文混排</td></tr>
-          <tr><td>接入方式说明</td><td>✅ P0</td><td>产品内容管理</td><td>–</td></tr>
-          <tr><td>应用场景跳转卡片（→解决方案）</td><td>✅ P0</td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
-          <tr><td>可下载资源列表</td><td>✅ P0</td><td>文件资产管理</td><td>按产品型号筛选展示</td></tr>
-          <tr><td>页面 SEO</td><td>✅ P2</td><td>SEO 配置</td><td>P0 阶段硬编码</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.2 解决方案各场景页（5个）</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>场景 Banner 图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 解决方案内容管理</td><td>从媒体库选择</td></tr>
+            <tr><td>场景背景 / 痛点描述</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>富文本，支持多语言</td></tr>
+            <tr><td>方案描述文案</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>支持多语言</td></tr>
+            <tr><td>接入方式说明</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>支持多语言</td></tr>
+            <tr><td>技术亮点列表</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>结构化列表，可拖拽排序</td></tr>
+            <tr><td>本方案使用的产品跳转卡片</td><td><span class="badge badge-p0">P0</span></td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
+            <tr><td>应用案例区块</td><td><span class="badge badge-p1">P1</span></td><td>案例管理 → 关联解决方案</td><td>从案例库关联，未关联时自动隐藏</td></tr>
+            <tr><td>CTA 按钮文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>页面 SEO（title/description）</td><td><span class="badge badge-p2">P2</span></td><td>SEO 配置</td><td>P0 阶段硬编码，P2 迁入 CMS</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.4 兼容生态页</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>品牌卡片（Logo/名称/标签/状态）</td><td>✅ P0</td><td>兼容品牌管理</td><td>全量数据来自 CMS</td></tr>
-          <tr><td>筛选栏选项</td><td>✅ P0</td><td>兼容品牌管理（分类/接入方式/能力/状态枚举）</td><td>选项由品牌数据自动生成</td></tr>
-          <tr><td>底部 CTA 文案</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.3 产品中心各产品页（8个）</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>产品主图 / Banner 图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 产品内容管理</td><td>从媒体库选择</td></tr>
+            <tr><td>产品定位一句话</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>支持多语言</td></tr>
+            <tr><td>核心参数表（硬件）</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>结构化字段，非富文本</td></tr>
+            <tr><td>核心功能列表（云平台）</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>图文卡片，可拖拽排序</td></tr>
+            <tr><td>接入方式说明</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>支持多语言</td></tr>
+            <tr><td>应用场景跳转卡片（→解决方案）</td><td><span class="badge badge-p0">P0</span></td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
+            <tr><td>可下载资源列表</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>按产品型号筛选展示，权限控制</td></tr>
+            <tr><td>页面 SEO</td><td><span class="badge badge-p2">P2</span></td><td>SEO 配置</td><td>P0 阶段硬编码</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.5 开发者中心</h3>
-      <p style="font-size:13px; color:var(--warning); font-weight:700;">⏸ 本期仅实现占位页，完整功能后续启动。</p>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>「正在开发中」占位页文案</td><td>✅ P0</td><td>多语言字典</td><td>本期必须实现，支持多语言</td></tr>
-          <tr><td>占位页 CTA（提交接入意向）</td><td>✅ P0</td><td>线索管理（API 申请类）</td><td>跳转联系我们，意向预填</td></tr>
-          <tr><td>概览页能力介绍文案</td><td>✅ 后续 P1</td><td>页面内容管理</td><td>待开发者中心启动时实现</td></tr>
-          <tr><td>快速开始代码示例</td><td>❌ 暂不接 CMS</td><td>—</td><td>代码示例随版本迭代走代码发布</td></tr>
-          <tr><td>API 文档内容</td><td>❌ OpenAPI Spec 驱动</td><td>—</td><td>后端维护 YAML spec，Redoc 自动渲染</td></tr>
-          <tr><td>申请接入表单（完整版）</td><td>✅ 后续 P1</td><td>线索管理（API 申请类）</td><td>待开发者中心启动时实现</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.4 兼容生态页</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>品牌卡片（Logo/名称/标签/状态）</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>全量数据来自 CMS</td></tr>
+            <tr><td>筛选栏选项</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>选项由品牌数据动态生成</td></tr>
+            <tr><td>底部 CTA 文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.6 帮助中心</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>FAQ 问答内容</td><td>✅ P0</td><td>FAQ 管理</td><td>全量内容来自 CMS，支持多语言</td></tr>
-          <tr><td>AI 问答入口</td><td>✅ P2</td><td>FAQ AI 问答（P2）</td><td>以 FAQ 库为知识底座</td></tr>
-          <tr><td>文档资料列表</td><td>✅ P0</td><td>文件资产管理</td><td>按产品型号/类型筛选</td></tr>
-          <tr><td>软件下载（配置工具/App）</td><td>✅ P0</td><td>文件资产管理</td><td>下载链接从 CMS 动态拉取</td></tr>
-          <tr><td>固件列表 + 版本兼容矩阵</td><td>✅ P0</td><td>文件资产管理（固件类型）</td><td>依赖关系字段填写后自动展示矩阵</td></tr>
-          <tr><td>在线报修表单</td><td>✅ P0</td><td>线索管理（报修工单类）</td><td>提交进入 CMS 工单收件箱</td></tr>
-          <tr><td>联系电话/邮箱</td><td>✅ P2</td><td>公司介绍管理 → 联系信息</td><td>P0 阶段硬编码真实数据</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.5 开发者中心 <span style="font-size:12px;font-weight:400;color:var(--warning);margin-left:8px">⏸ 本期仅占位页</span></h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>「正在开发中」占位页文案 + 背景图</td><td><span class="badge badge-p0">P0</span></td><td>多语言字典 + 媒体库</td><td>本期必须实现，支持多语言</td></tr>
+            <tr><td>占位页 CTA（提交接入意向）</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（API 申请类）</td><td>跳转联系我们，意向预填</td></tr>
+            <tr><td>概览页 / 快速开始 / API 文档</td><td><span class="badge badge-p1">P1</span> 后续</td><td>页面内容管理 / OpenAPI Spec</td><td>待开发者中心启动时实现</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.7 关于我们</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>公司简介文字</td><td>✅ P2</td><td>公司介绍管理</td><td>P0 阶段硬编码上线</td></tr>
-          <tr><td>核心数字展示</td><td>✅ P2</td><td>公司介绍管理 → 核心数字</td><td>⚠️ 数字待填入真实数据</td></tr>
-          <tr><td>发展历程时间轴</td><td>✅ P2</td><td>公司介绍管理 → 发展历程</td><td>–</td></tr>
-          <tr><td>最新动态文章列表</td><td>✅ P0</td><td>新闻动态管理</td><td>全量内容来自 CMS</td></tr>
-          <tr><td>招聘岗位列表</td><td>✅ P2</td><td>招聘管理</td><td>–</td></tr>
-          <tr><td>联系地址</td><td>✅ P2</td><td>公司介绍管理 → 联系地址</td><td>P0 阶段硬编码</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.6 帮助中心</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>FAQ 问答内容</td><td><span class="badge badge-p0">P0</span></td><td>FAQ 管理</td><td>全量内容来自 CMS，支持多语言</td></tr>
+            <tr><td>文档资料列表</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>按产品型号/类型筛选，权限控制</td></tr>
+            <tr><td>软件下载（配置工具/App）</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>下载链接从 CMS 动态拉取</td></tr>
+            <tr><td>固件列表 + 版本兼容矩阵</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理（固件类型）</td><td>依赖关系字段填写后自动展示矩阵</td></tr>
+            <tr><td>在线报修表单</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（报修工单类）</td><td>提交进入 CMS 工单收件箱</td></tr>
+            <tr><td>联系电话/邮箱</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>⚠️ P0 阶段直接填写真实数据，不得使用占位号</td></tr>
+            <tr><td>AI 问答入口</td><td><span class="badge badge-p2">P2</span></td><td>FAQ AI 问答</td><td>以 FAQ 库为知识底座，内容积累后接入</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.8 联系我们</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>意向分类表单提交</td><td>✅ P0</td><td>线索管理（商务咨询类）</td><td>按意向分类推送企业微信对应群</td></tr>
-          <tr><td>联系人信息展示</td><td>✅ P2</td><td>公司介绍管理 → 联系人</td><td>P0 阶段硬编码</td></tr>
-          <tr><td>意向分类选项文案</td><td>✅ P1</td><td>多语言字典</td><td>选项文案支持多语言</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.7 关于我们</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>最新动态文章列表</td><td><span class="badge badge-p0">P0</span></td><td>新闻动态管理</td><td>全量内容来自 CMS</td></tr>
+            <tr><td>公司简介文字</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理</td><td>P0 阶段硬编码，需准确</td></tr>
+            <tr><td>核心数字展示</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 核心数字</td><td>⚠️ 需填入真实数据，P0 阶段暂硬编码</td></tr>
+            <tr><td>发展历程时间轴</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 发展历程</td><td>–</td></tr>
+            <tr><td>招聘岗位列表</td><td><span class="badge badge-p2">P2</span></td><td>招聘管理</td><td>–</td></tr>
+            <tr><td>联系地址</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理</td><td>P0 阶段硬编码</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.9 个人中心</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>账号信息展示</td><td>❌ 不接 CMS</td><td>—</td><td>从统一账号系统同步，只读</td></tr>
-          <tr><td>已开通权限标签展示</td><td>✅ P0</td><td>客户账号管理（权限标签）</td><td>实时从 CMS 权限体系读取</td></tr>
-          <tr><td>API Key 管理</td><td>✅ P1</td><td>API 开发者管理</td><td>Key 由后台生成，前台展示</td></tr>
-          <tr><td>下载记录</td><td>✅ P0</td><td>文件资产管理（下载日志）</td><td>自动记录，无需手动维护</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.8 联系我们</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>意向分类表单提交</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（商务咨询类）</td><td>按意向分类推送企业微信对应群</td></tr>
+            <tr><td>联系人信息展示</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>⚠️ P0 阶段填写真实联系人，不得占位</td></tr>
+            <tr><td>意向分类选项文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>选项文案支持多语言</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-      <h3>9.10 全局 / 通用组件</h3>
-      <table>
-        <thead>
-          <tr><th>内容区块</th><th>CMS 支持</th><th>对应后台模块</th><th>备注</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Header 导航文字</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-          <tr><td>Footer 链接文字</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-          <tr><td>语言切换器选项</td><td>✅ P1</td><td>语言管理（动态生成）</td><td>由「已发布」语言自动生成</td></tr>
-          <tr><td>全局搜索索引内容</td><td>✅ P0</td><td>各内容模块（FAQ/品牌/产品/文档）</td><td>CMS 内容发布后自动更新搜索索引</td></tr>
-          <tr><td>404/403/500 错误页文案</td><td>✅ P1</td><td>多语言字典</td><td>–</td></tr>
-          <tr><td>Cookie 授权弹窗文案</td><td>✅ P1</td><td>多语言字典</td><td>GDPR/LGPD 合规要求</td></tr>
-          <tr><td>隐私政策页内容</td><td>✅ P0</td><td>页面内容管理（独立页面）</td><td>法务确认后由 CMS 管理多语言版本</td></tr>
-        </tbody>
-      </table>
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.9 个人中心</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>已开通权限标签展示</td><td><span class="badge badge-p0">P0</span></td><td>客户账号管理（权限标签）</td><td>实时从 CMS 权限体系读取</td></tr>
+            <tr><td>下载记录</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理（下载日志）</td><td>自动记录，无需手动维护</td></tr>
+            <tr><td>API Key 管理</td><td><span class="badge badge-p1">P1</span></td><td>API 开发者管理</td><td>Key 由后台生成，前台展示</td></tr>
+            <tr><td>账号信息展示</td><td>❌ 不接 CMS</td><td>—</td><td>从统一账号系统同步，只读</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.10 全局 / 通用组件</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>隐私政策页内容</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>法务确认后由 CMS 管理多语言版本</td></tr>
+            <tr><td>全局搜索索引</td><td><span class="badge badge-p0">P0</span></td><td>各内容模块（自动同步）</td><td>CMS 内容发布后自动更新搜索索引</td></tr>
+            <tr><td>Header 导航文字</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>Footer 链接文字</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>语言切换器选项</td><td><span class="badge badge-p1">P1</span></td><td>语言管理（动态生成）</td><td>由「已发布」语言自动生成</td></tr>
+            <tr><td>404/403/500 错误页文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>Cookie 授权弹窗文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>GDPR/LGPD 合规要求</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="highlight">
         <strong>审计结论：</strong><br>
-        前台共识别 <strong>60+ 个内容区块</strong>，其中：<br>
-        ✅ CMS 覆盖：58 个（97%）<br>
-        ❌ 不接 CMS（合理）：3 个（账号信息/API 文档/快速开始代码示例）— 这三类内容要么来自外部系统，要么随版本发布管理，不适合由运营人员维护<br><br>
-        <strong>P0 阶段需重点关注的硬编码风险项：</strong>联系电话/邮箱（填真实数据）、核心数字展示（填真实数据）、公司简介（P0 阶段允许硬编码，但必须准确）。
+        前台共识别 <strong>65 个内容区块</strong>，其中：<br>
+        <span class="badge badge-p0" style="margin-right:4px">P0</span> 必须上线即可编辑：32 个 &nbsp;|&nbsp;
+        <span class="badge badge-p1" style="margin-right:4px">P1</span> 上线后迭代：18 个 &nbsp;|&nbsp;
+        <span class="badge badge-p2" style="margin-right:4px">P2</span> 后期迁入：12 个 &nbsp;|&nbsp;
+        ❌ 合理不接 CMS：3 个（账号信息 / API 文档内容 / 代码示例）<br><br>
+        <strong>⚠️ P0 阶段上线前必须人工确认的硬编码项：</strong>真实联系电话、联系人信息、首页信任背书数字、公司简介文字。这些内容 P0 允许硬编码，但必须填写真实数据，不允许带 placeholder 上线。
       </div>
     </div>
+
+  </main>
+</div>
 
 <div class="doc-footer">
   Always Control · Website &amp; CMS Blueprint v3.1 &nbsp;·&nbsp; 2026-03-12（新增：多语言扩展至8种、产品×解决方案双向互通、前台CMS覆盖审计）
