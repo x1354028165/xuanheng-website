@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测试用例 · 旭衡电子</title>
+
+<style>
+  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
+  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
+  h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
+  h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
+  h4{font-size:13px;font-weight:700;color:var(--muted);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;}
+  p{margin-bottom:12px;color:var(--text);}
+  ul,ol{padding-left:22px;margin-bottom:12px;}
+  li{margin-bottom:4px;}
+  a{color:var(--accent);}
+  code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;color:#c0392b;}
+  pre{background:#1e2d3d;color:#e8eaf0;padding:18px 20px;border-radius:8px;overflow-x:auto;margin:14px 0;font-size:12px;line-height:1.6;}
+  pre code{background:none;color:inherit;padding:0;font-size:12px;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+  th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
+  td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:#f9fbfd;}
+  blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
+  hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
+  strong{color:var(--text);}
+</style>
+
+</head>
+<body>
+<div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
+    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
+    <span style="color:#3d6080;font-size:12px">|</span>
+    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
+    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+  </div>
+</div>
+<div class="md-body">
+<h1>测试用例</h1>
+
+<blockquote>版本 v1.0 · 2026-03-12 · 旭衡电子官网重构</blockquote>
+<blockquote>优先级：🔴 P0 上线前必测 / 🟡 P1 / 🟢 P2</blockquote>
+
+<hr>
+
+<h2>一、前台功能测试</h2>
+
+<h3>TC-01 首页</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-01-01</td><td>首页正常加载</td><td>访问 <code>/zh-CN</code></td><td>页面在 3s 内完整渲染，Hero 文案正确显示</td><td>🔴</td></tr>
+<tr><td>TC-01-02</td><td>语言切换</td><td>点击 Header 语言切换器，选择 en-US</td><td>URL 变为 <code>/en-US</code>，页面内容切换为英文</td><td>🔴</td></tr>
+<tr><td>TC-01-03</td><td>三路分流 CTA</td><td>点击「查看解决方案」</td><td>跳转至 <code>/zh-CN/solutions</code></td><td>🔴</td></tr>
+<tr><td>TC-01-04</td><td>开发者中心 CTA</td><td>点击「开发者中心」</td><td>跳转至占位页，显示「正在开发中」</td><td>🔴</td></tr>
+<tr><td>TC-01-05</td><td>解决方案卡片跳转</td><td>点击任意解决方案卡片</td><td>跳转至对应场景页</td><td>🔴</td></tr>
+<tr><td>TC-01-06</td><td>产品卡片跳转</td><td>点击任意产品卡片</td><td>跳转至对应产品页</td><td>🔴</td></tr>
+<tr><td>TC-01-07</td><td>兼容品牌展示</td><td>首页加载完成</td><td>品牌 Logo 墙显示（数量与 CMS 一致）</td><td>🔴</td></tr>
+<tr><td>TC-01-08</td><td>移动端首页</td><td>用 iPhone 375px 宽度访问</td><td>导航折叠为 Hamburger，内容无横向溢出</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-02 解决方案页</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-02-01</td><td>5个场景页可访问</td><td>逐一访问 5 个场景 URL</td><td>每页正常加载，内容来自 CMS</td><td>🔴</td></tr>
+<tr><td>TC-02-02</td><td>产品跳转卡片</td><td>点击「本方案使用的产品」卡片</td><td>跳转至对应产品页</td><td>🔴</td></tr>
+<tr><td>TC-02-03</td><td>应用案例区块（无案例）</td><td>访问未关联案例的场景页</td><td>应用案例区块不显示（自动隐藏）</td><td>🔴</td></tr>
+<tr><td>TC-02-04</td><td>多语言内容</td><td>切换为 en-US 后访问场景页</td><td>所有内容（标题/描述/亮点）均为英文</td><td>🔴</td></tr>
+<tr><td>TC-02-05</td><td>回退机制</td><td>访问某 zh-TW 未翻译的页面</td><td>内容显示 zh-CN 版本，无空白</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-03 产品页</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-03-01</td><td>8个产品页可访问</td><td>逐一访问 8 个产品 URL</td><td>每页正常加载</td><td>🔴</td></tr>
+<tr><td>TC-03-02</td><td>硬件参数表展示</td><td>访问 Neuron II 页面</td><td>参数表字段完整（接口/协议/温度/防护等级）</td><td>🔴</td></tr>
+<tr><td>TC-03-03</td><td>应用场景跳转</td><td>点击「应用场景」跳转卡片</td><td>跳转至对应解决方案场景页</td><td>🔴</td></tr>
+<tr><td>TC-03-04</td><td>文件下载（P0 全公开）</td><td>点击任意文件下载按钮</td><td>文件正常下载，无需登录</td><td>🔴</td></tr>
+<tr><td>TC-03-05</td><td>产品主图显示</td><td>访问产品页</td><td>主图正常显示（非破图/占位图）</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-04 兼容生态页</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-04-01</td><td>品牌列表加载</td><td>访问兼容生态页</td><td>品牌卡片完整显示，Logo 无破图</td><td>🔴</td></tr>
+<tr><td>TC-04-02</td><td>筛选功能</td><td>选择「云端直连」筛选项</td><td>列表更新为仅显示云端直连品牌</td><td>🔴</td></tr>
+<tr><td>TC-04-03</td><td>多选筛选</td><td>同时选择「云端直连」+「已支持」</td><td>列表显示同时满足两个条件的品牌</td><td>🔴</td></tr>
+<tr><td>TC-04-04</td><td>清空筛选</td><td>点击「清空筛选」</td><td>恢复全量展示</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-05 帮助中心</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-05-01</td><td>FAQ 列表加载</td><td>访问帮助中心 FAQ</td><td>显示来自 CMS 的真实问答（≥10条，非占位）</td><td>🔴</td></tr>
+<tr><td>TC-05-02</td><td>FAQ 展开/收起</td><td>点击 FAQ 条目</td><td>答案展开；再次点击收起</td><td>🔴</td></tr>
+<tr><td>TC-05-03</td><td>文件下载列表</td><td>切换产品型号筛选</td><td>文件列表按型号正确过滤</td><td>🔴</td></tr>
+<tr><td>TC-05-04</td><td>报修表单提交</td><td>填写完整表单并提交</td><td>企微群收到通知；提交者邮箱收到确认邮件</td><td>🔴</td></tr>
+<tr><td>TC-05-05</td><td>报修表单校验</td><td>提交空表单</td><td>必填字段显示错误提示，不发送请求</td><td>🔴</td></tr>
+<tr><td>TC-05-06</td><td>报修表单邮箱格式</td><td>填写错误邮箱格式并提交</td><td>显示「邮箱格式不正确」错误</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-06 联系我们</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-06-01</td><td>商务咨询表单提交</td><td>完整填写并选择意向分类，提交</td><td>对应企微群收到通知；内部邮件收到；用户收到回执邮件</td><td>🔴</td></tr>
+<tr><td>TC-06-02</td><td>通知路由（国内销售）</td><td>选择「国内业务咨询」提交</td><td>国内销售对应邮箱/群收到，而非海外销售</td><td>🔴</td></tr>
+<tr><td>TC-06-03</td><td>通知路由（海外销售）</td><td>选择「海外业务咨询」提交</td><td>海外销售对应邮箱/群收到</td><td>🔴</td></tr>
+<tr><td>TC-06-04</td><td>联系人信息展示</td><td>访问联系我们页面</td><td>显示真实联系人（非占位信息）</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-07 多语言全局</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-07-01</td><td>语言偏好记忆</td><td>切换为 en-US，关闭标签页，重新打开</td><td>默认展示 en-US</td><td>🔴</td></tr>
+<tr><td>TC-07-02</td><td>zh-TW 自动转换</td><td>访问 <code>/zh-TW/</code> 任意页面</td><td>显示繁体中文，无简体字符混入</td><td>🔴</td></tr>
+<tr><td>TC-07-03</td><td>未发布语言不显示</td><td>在 CMS 将某语言设为「未发布」</td><td>语言切换器不显示该语言选项</td><td>🔴</td></tr>
+<tr><td>TC-07-04</td><td>回退链完整</td><td>删除某 en-US 内容翻译</td><td>访问该 en-US 页面显示 zh-CN 内容，非空白</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-08 SEO 基础</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-08-01</td><td>页面 title 正确</td><td>打开任意产品页，查看浏览器 tab</td><td>title 格式：「产品名 \</td><td>旭衡电子」</td><td>🔴</td></tr>
+<tr><td>TC-08-02</td><td>hreflang 标签</td><td>查看任意页面 <code><head></code></td><td>包含所有已发布语言的 hreflang link 标签</td><td>🔴</td></tr>
+<tr><td>TC-08-03</td><td>Sitemap 可访问</td><td>访问 <code>/sitemap.xml</code></td><td>返回 XML，包含所有已发布页面 URL</td><td>🔴</td></tr>
+<tr><td>TC-08-04</td><td>Staging noindex</td><td>访问 Staging 任意页面，查看响应头</td><td>包含 <code>X-Robots-Tag: noindex</code></td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-09 隐私合规</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-09-01</td><td>Cookie 弹窗首次展示</td><td>清除 cookies 后访问首页</td><td>Cookie 授权弹窗出现</td><td>🔴</td></tr>
+<tr><td>TC-09-02</td><td>Cookie 弹窗多语言</td><td>en-US 环境下触发弹窗</td><td>弹窗内容为英文</td><td>🔴</td></tr>
+<tr><td>TC-09-03</td><td>隐私政策页可访问</td><td>访问 <code>/zh-CN/privacy</code></td><td>页面正常加载，内容为法务确认版本（非模板）</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>二、CMS 后台功能测试</h2>
+
+<h3>TC-10 媒体库</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-10-01</td><td>图片上传</td><td>上传一张 PNG 图片</td><td>上传成功，自动生成 CDN URL；同时生成 WebP 版本</td><td>🔴</td></tr>
+<tr><td>TC-10-02</td><td>超大文件上传</td><td>上传 20MB 图片</td><td>提示文件超限，不允许上传</td><td>🔴</td></tr>
+<tr><td>TC-10-03</td><td>图片替换覆盖</td><td>替换已使用的图片</td><td>选择「覆盖原链接」后，引用该图的页面自动更新</td><td>🔴</td></tr>
+<tr><td>TC-10-04</td><td>删除引用中的图片</td><td>对正在被引用的图片点删除</td><td>提示「此图片正被 N 个内容引用，无法删除」</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-11 产品内容管理</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-11-01</td><td>编辑产品定位一句话</td><td>修改 Neuron II 的定位描述，保存发布</td><td>前台产品页实时更新（5分钟内）</td><td>🔴</td></tr>
+<tr><td>TC-11-02</td><td>草稿保存</td><td>修改内容后点「保存草稿」</td><td>前台不更新；后台显示「草稿」状态</td><td>🔴</td></tr>
+<tr><td>TC-11-03</td><td>多语言独立编辑</td><td>切换到 en-US 标签，修改英文内容</td><td>英文版内容更新，中文版不受影响</td><td>🔴</td></tr>
+<tr><td>TC-11-04</td><td>产品下线</td><td>将某产品状态改为「已下线」</td><td>前台该产品页 404；首页/其他页面不再显示该产品卡片</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-12 线索管理</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-12-01</td><td>查看新线索</td><td>前台提交商务咨询表单后，查看后台</td><td>线索出现在「待处理」列表，信息完整</td><td>🔴</td></tr>
+<tr><td>TC-12-02</td><td>状态流转</td><td>将线索状态改为「跟进中」</td><td>状态更新，显示操作人和时间</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<h3>TC-13 通知配置</h3>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>TC-13-01</td><td>配置企微 Webhook</td><td>填写企微群机器人 Webhook URL，保存</td><td>提交对应类型表单后，该群收到通知</td><td>🔴</td></tr>
+<tr><td>TC-13-02</td><td>更换企微群</td><td>修改 Webhook URL 为新的群</td><td>更换后，通知发送到新群</td><td>🔴</td></tr>
+<tr><td>TC-13-03</td><td>邮件模板编辑</td><td>修改用户回执邮件中文模板</td><td>下次表单提交后，用户收到的邮件为新版模板</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>三、性能测试</h2>
+
+<table>
+<thead><tr><th>ID</th><th>指标</th><th>测试方法</th><th>通过标准</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>PT-01</td><td>首页 LCP</td><td>Lighthouse / WebPageTest</td><td>< 2.5s（P75）</td><td>🔴</td></tr>
+<tr><td>PT-02</td><td>首页 CLS</td><td>Lighthouse</td><td>< 0.1</td><td>🔴</td></tr>
+<tr><td>PT-03</td><td>产品页加载</td><td>WebPageTest（国内节点）</td><td>首字节 < 300ms</td><td>🔴</td></tr>
+<tr><td>PT-04</td><td>文件下载链接响应</td><td>curl 测试响应时间</td><td>下载链接生成 < 500ms</td><td>🟡</td></tr>
+<tr><td>PT-05</td><td>并发表单提交</td><td>k6 并发 50</td><td>无 5xx 错误，响应 < 2s</td><td>🟡</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>四、安全测试</h2>
+
+<table>
+<thead><tr><th>ID</th><th>用例</th><th>预期结果</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>SEC-01</td><td>XSS 注入（表单）</td><td>在表单字段输入 <code><script>alert(1)</script></code> 并提交</td><td>内容被转义，不执行脚本</td><td>🔴</td></tr>
+<tr><td>SEC-02</td><td>速率限制</td><td>同一 IP 1分钟内提交表单 6 次</td><td>第 6 次返回 429 Too Many Requests</td><td>🔴</td></tr>
+<tr><td>SEC-03</td><td>非法文件上传</td><td>上传 <code>.php</code> / <code>.exe</code> 伪装为图片</td><td>后端拒绝，返回错误</td><td>🔴</td></tr>
+<tr><td>SEC-04</td><td>CORS 检查</td><td>从非白名单域名调用 CMS API</td><td>返回 CORS 错误，请求被拒绝</td><td>🔴</td></tr>
+<tr><td>SEC-05</td><td>Staging 隔离</td><td>用 Google 搜索 Staging 域名内容</td><td>无结果（noindex 生效）</td><td>🔴</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>五、上线前回归测试清单</h2>
+
+<p>上线前必须完成全量回归，以下为最小化验证集：</p>
+
+<ul>
+<li>[ ] TC-01-01 首页加载</li>
+<li>[ ] TC-01-02 语言切换</li>
+<li>[ ] TC-02-01 解决方案 5 个场景页全部可访问</li>
+<li>[ ] TC-03-01 产品 8 个页面全部可访问</li>
+<li>[ ] TC-03-04 文件下载可用</li>
+<li>[ ] TC-05-04 报修表单（企微+邮件+回执三路通知）</li>
+<li>[ ] TC-06-01 商务咨询表单（三路通知）</li>
+<li>[ ] TC-07-01 语言偏好记忆</li>
+<li>[ ] TC-08-03 Sitemap 可访问</li>
+<li>[ ] TC-09-01 Cookie 弹窗</li>
+<li>[ ] TC-09-03 隐私政策页（法务确认版本）</li>
+<li>[ ] PT-01 首页 LCP &lt; 2.5s</li>
+<li>[ ] SEC-01 XSS 防护</li>
+<li>[ ] 所有页面无 placeholder 文字残留（"400-888-8888" / "待填入" / "示例"）</li>
+</ul>
+
+</div>
+</body>
+</html>

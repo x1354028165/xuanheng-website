@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技术选型备忘 · 旭衡电子</title>
+
+<style>
+  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
+  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
+  h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
+  h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
+  h4{font-size:13px;font-weight:700;color:var(--muted);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;}
+  p{margin-bottom:12px;color:var(--text);}
+  ul,ol{padding-left:22px;margin-bottom:12px;}
+  li{margin-bottom:4px;}
+  a{color:var(--accent);}
+  code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;color:#c0392b;}
+  pre{background:#1e2d3d;color:#e8eaf0;padding:18px 20px;border-radius:8px;overflow-x:auto;margin:14px 0;font-size:12px;line-height:1.6;}
+  pre code{background:none;color:inherit;padding:0;font-size:12px;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+  th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
+  td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:#f9fbfd;}
+  blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
+  hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
+  strong{color:var(--text);}
+</style>
+
+</head>
+<body>
+<div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
+    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
+    <span style="color:#3d6080;font-size:12px">|</span>
+    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
+    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+  </div>
+</div>
+<div class="md-body">
+<h1>技术选型备忘</h1>
+
+<blockquote>本文档记录官网重构项目的技术实现选型，与 PRD 分开维护。</blockquote>
+<blockquote>PRD 描述"要做什么"，本文档记录"怎么做"。</blockquote>
+<blockquote>状态：⬜ 待决策 / ✅ 已确认 / 🔄 待评估</blockquote>
+
+<hr>
+
+<h2>一、前端框架</h2>
+
+<table>
+<thead><tr><th>候选</th><th>优势</th><th>劣势</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td><strong>Next.js（React）</strong></td><td>生态最强，ISR 缓存策略适合新闻/品牌页毫秒级访问，SSR + SEO 成熟，国内外 CDN 分离方案案例丰富</td><td>团队需有 React 基础</td><td>⬜ 待确认</td></tr>
+<tr><td><strong>Nuxt.js（Vue）</strong></td><td>若现有云平台前端大量使用 Vue，团队认知切换成本低</td><td>部分企业级方案不如 Next.js 成熟</td><td>⬜ 待确认</td></tr>
+</tbody>
+</table>
+
+<p><strong>决策关键点：</strong> 确认现有开发团队（AU-03 项目等）主要使用 React 还是 Vue。</p>
+
+<hr>
+
+<h2>二、CMS 框架</h2>
+
+<table>
+<thead><tr><th>候选</th><th>优势</th><th>劣势</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td><strong>Strapi（Node.js）</strong></td><td>自带 RBAC 权限管理、文件资产管理，2-4 周内可完成核心业务逻辑配置，社区活跃</td><td>需后端有 Node.js 基础；复杂自定义逻辑需二次开发</td><td>🔄 推荐评估</td></tr>
+<tr><td><strong>Directus（Node.js）</strong></td><td>数据模型完全自定义，适合 BMS 告警字典等复杂结构，自带 REST + GraphQL API</td><td>上手曲线稍陡</td><td>🔄 推荐评估</td></tr>
+<tr><td><strong>完全自研</strong></td><td>最灵活，无外部依赖</td><td>工期 3–6 个月，当前阶段过重</td><td>❌ 不推荐</td></tr>
+<tr><td><strong>SaaS CMS（Contentful / Sanity）</strong></td><td>上手快</td><td>多语言字典管理等自定义逻辑受限，长期按量计费</td><td>❌ 不推荐</td></tr>
+</tbody>
+</table>
+
+<p><strong>决策关键点：</strong> 确认后端团队 Node.js 熟练程度。Strapi 适合快速上线，Directus 适合数据模型复杂场景。</p>
+
+<hr>
+
+<h2>三、后端语言 / 框架</h2>
+
+<table>
+<thead><tr><th>候选</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>Node.js（配合 Strapi/Directus）</td><td>⬜ 待确认</td></tr>
+<tr><td>Python（FastAPI / Django）</td><td>⬜ 待确认</td></tr>
+<tr><td>Go</td><td>⬜ 待确认</td></tr>
+</tbody>
+</table>
+
+<p><strong>决策关键点：</strong> 若 CMS 选 Strapi/Directus，Node.js 是自然选择。自研后端则视团队技术栈决定。</p>
+
+<hr>
+
+<h2>四、CDN 服务商</h2>
+
+<p><strong>需求（来自 PRD §7.11）：</strong></p>
+<ul>
+<li>国内用户走国内加速节点</li>
+<li>海外用户走境外加速节点</li>
+<li>支持按地理位置智能路由</li>
+<li>ICP 备案在国内节点完成后方可上线</li>
+</ul>
+
+<table>
+<thead><tr><th>候选</th><th>适用场景</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td><strong>阿里云 CDN + 阿里云海外节点</strong></td><td>国内覆盖好，海外节点一般</td><td>⬜ 待评估</td></tr>
+<tr><td><strong>腾讯云 CDN</strong></td><td>与阿里云类似</td><td>⬜ 待评估</td></tr>
+<tr><td><strong>阿里云（国内）+ Cloudflare（海外）</strong></td><td>国内外分别最优，但需双平台维护</td><td>⬜ 待评估</td></tr>
+<tr><td><strong>单一全球 CDN（Cloudflare）</strong></td><td>管理简单，但国内速度受限，ICP 备案需额外配置</td><td>❌ 不推荐（ICP 合规风险）</td></tr>
+</tbody>
+</table>
+
+<p><strong>备注：</strong> 对象存储（OSS 等）选型随 CDN 服务商确定，建议同一厂商减少跨平台传输成本。</p>
+
+<hr>
+
+<h2>五、机器翻译 API</h2>
+
+<p><strong>需求（来自 PRD §7.3）：</strong></p>
+<ul>
+<li>以 en-US 为源，生成 de/fr/pt/es/ru 五种语言初稿</li>
+<li>人工校对后发布</li>
+<li>CMS 后台一键触发翻译</li>
+</ul>
+
+<table>
+<thead><tr><th>候选</th><th>质量</th><th>价格</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td><strong>DeepL API</strong></td><td>欧洲语言质量最佳</td><td>按字符计费，有免费额度</td><td>🔄 推荐</td></tr>
+<tr><td><strong>Google Cloud Translation</strong></td><td>覆盖语种最广</td><td>按字符计费</td><td>⬜ 备选</td></tr>
+<tr><td><strong>Azure Cognitive Services</strong></td><td>质量一般，价格低</td><td>按字符计费</td><td>⬜ 备选</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>六、API 文档渲染（开发者中心，后续 P1）</h2>
+
+<blockquote>开发者中心本期暂缓，以下为后续启动时的技术方案参考。</blockquote>
+
+<ul>
+<li><strong>推荐方案：</strong> OpenAPI Spec（YAML）描述 API，使用 Redoc 或 Swagger UI 自动渲染</li>
+<li><strong>后端维护：</strong> 后端维护 <code>.yaml</code> spec 文件，前端不需要手动写文档页</li>
+<li><strong>权限控制：</strong> 在 API 网关层实现，无权限的端点返回 403，不在前端做伪隐藏</li>
+</ul>
+
+<hr>
+
+<h2>七、文件下载安全</h2>
+
+<p><strong>需求（来自 PRD §8）：</strong></p>
+<ul>
+<li>权限受控文件不能直接暴露 CDN 链接</li>
+<li>防止链接外泄后被无限次使用</li>
+</ul>
+
+<p><strong>推荐方案：</strong> 对象存储签名临时链接（Pre-signed URL），有效期 5 分钟</p>
+<ul>
+<li>阿里云 OSS / 腾讯云 COS 均支持此功能</li>
+<li>用户点击下载时，后端实时生成签名链接并返回，不存储静态链接</li>
+</ul>
+
+<hr>
+
+<h2>八、SSO 接口（待对接）</h2>
+
+<p><strong>需求（来自 PRD §8）：</strong></p>
+<ul>
+<li>官网客户端登录复用爱尚管理后台账号体系</li>
+<li>登录后携带 token，官网服务端校验获取用户标签</li>
+</ul>
+
+<p><strong>待确认（需与爱尚团队对接）：</strong></p>
+<ul>
+<li>[ ] 授权流程：OAuth2 授权码流程 还是 JWT 直接验证？</li>
+<li>[ ] Token 有效期 / 刷新机制</li>
+<li>[ ] 用户标签（产品线权限）读取方式：JWT Claims 还是单独 API？</li>
+<li>[ ] 接口地址 / 文档</li>
+<li>[ ] 爱尚侧对接负责人</li>
+</ul>
+
+<hr>
+
+<p><em>文档创建：2026-03-12 | 关联 PRD：docs/官网_后台PRD.html</em></p>
+
+</div>
+</body>
+</html>

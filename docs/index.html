@@ -5,94 +5,147 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>旭衡电子官网重构 · 文档中心</title>
 <style>
-  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
+  :root{
+    --primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;
+    --success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--purple:#8e44ad;
+    --bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;
+  }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:-apple-system,"Segoe UI","PingFang SC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-  .header{background:linear-gradient(135deg,var(--primary) 0%,#2a5a8c 100%);color:#fff;padding:48px 40px 40px;}
-  .header h1{font-size:28px;font-weight:700;letter-spacing:.5px;}
-  .header p{opacity:.75;margin-top:8px;font-size:14px;}
-  .container{max-width:960px;margin:0 auto;padding:40px 24px;}
-  h2{font-size:15px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:36px;}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px 24px;text-decoration:none;color:inherit;display:block;transition:.2s;position:relative;overflow:hidden;}
-  .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px);border-color:var(--accent);}
-  .card-icon{font-size:28px;margin-bottom:12px;}
-  .card-title{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px;}
-  .card-desc{font-size:12px;color:var(--muted);line-height:1.6;}
-  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-top:10px;}
-  .b-design{background:#eaf4ff;color:var(--accent);}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);}
+  .header{background:linear-gradient(135deg,#0f2035 0%,#1a3a5c 50%,#2a5a8c 100%);color:#fff;padding:56px 40px 48px;}
+  .header-inner{max-width:960px;margin:0 auto;}
+  .header h1{font-size:30px;font-weight:700;letter-spacing:.5px;margin-bottom:8px;}
+  .header p{opacity:.7;font-size:14px;line-height:1.6;}
+  .header-tags{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;}
+  .header-tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:12px;color:rgba(255,255,255,.85);}
+  .container{max-width:960px;margin:0 auto;padding:40px 24px 60px;}
+  .group-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:32px 0 14px;display:flex;align-items:center;gap:8px;}
+  .group-title::after{content:'';flex:1;height:1px;background:var(--border);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;}
+  .card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:22px 22px 18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;transition:.18s;position:relative;}
+  .card:hover{box-shadow:0 6px 20px rgba(41,128,185,.15);border-color:var(--accent);transform:translateY(-2px);}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;}
+  .card-icon{font-size:26px;}
+  .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.3px;}
+  .b-arch{background:#f0eaff;color:#7c3aed;}
+  .b-req{background:#eaf4ff;color:var(--accent);}
+  .b-design{background:#fff0f3;color:#c0392b;}
   .b-tech{background:#eafaf1;color:var(--success);}
   .b-test{background:#fef9e7;color:var(--warning);}
-  .b-arch{background:#f0eaff;color:#7c3aed;}
-  .footer{text-align:center;padding:32px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:8px;}
+  .b-pending{background:#f5f5f5;color:var(--muted);}
+  .card-title{font-size:15px;font-weight:700;color:var(--primary);line-height:1.3;}
+  .card-desc{font-size:12px;color:var(--muted);line-height:1.65;flex:1;}
+  .card-footer{font-size:11px;color:var(--accent);display:flex;align-items:center;gap:4px;margin-top:4px;}
+  .card-footer.gray{color:var(--muted);}
+  .card.wip{opacity:.75;}
+  .card.wip::after{content:'⏸ 待补充';position:absolute;top:12px;right:12px;font-size:10px;color:var(--warning);background:#fef9e7;padding:2px 8px;border-radius:10px;font-weight:700;}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🗂 旭衡电子官网重构 · 文档中心</h1>
-  <p>alwayscontrol.com.cn &nbsp;·&nbsp; 项目文档索引 &nbsp;·&nbsp; 最后更新 2026-03-12</p>
+  <div class="header-inner">
+    <h1>🗂 旭衡电子官网重构 · 文档中心</h1>
+    <p>alwayscontrol.com.cn &nbsp;·&nbsp; 所有项目文档在此集中管理，点击卡片直接查看</p>
+    <div class="header-tags">
+      <span class="header-tag">架构设计 v1.0</span>
+      <span class="header-tag">P0 暂不含 SSO</span>
+      <span class="header-tag">8种语言支持</span>
+      <span class="header-tag">2026-03-12 更新</span>
+    </div>
+  </div>
 </div>
 
 <div class="container">
 
-  <h2>📐 设计与需求</h2>
+  <!-- 设计与需求 -->
+  <div class="group-title">📐 设计与需求文档</div>
   <div class="grid">
+
     <a class="card" href="架构设计文档.html">
-      <div class="card-icon">🏛</div>
+      <div class="card-top">
+        <span class="card-icon">🏛</span>
+        <span class="badge b-arch">Architecture</span>
+      </div>
       <div class="card-title">架构设计文档</div>
-      <div class="card-desc">完整业务逻辑规格：页面结构、CMS 模块设计、权限体系、多语言策略、上线 Checklist</div>
-      <span class="badge b-arch">Architecture · v1.0</span>
+      <div class="card-desc">完整业务逻辑规格：页面结构、CMS 十章节详细设计、权限体系、多语言策略、上线 Checklist（23项）</div>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
+
     <a class="card" href="需求文档.html">
-      <div class="card-icon">📋</div>
+      <div class="card-top">
+        <span class="card-icon">📋</span>
+        <span class="badge b-req">Requirements</span>
+      </div>
       <div class="card-title">需求文档</div>
       <div class="card-desc">用户故事 + 功能清单 + 验收标准，按 P0/P1/P2 优先级组织，供开发团队排期使用</div>
-      <span class="badge b-design">Requirements · v1.0</span>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
+
     <a class="card" href="视觉规范.html">
-      <div class="card-icon">🎨</div>
+      <div class="card-top">
+        <span class="card-icon">🎨</span>
+        <span class="badge b-design">Design System</span>
+      </div>
       <div class="card-title">视觉规范</div>
-      <div class="card-desc">色彩系统、字体规范、间距、按钮、表单、图标、图片尺寸规范，含实时预览</div>
-      <span class="badge b-design">Design System · v1.0</span>
+      <div class="card-desc">色彩系统、字体规范、间距基准、按钮/表单/图标/图片尺寸规范，含实时预览组件</div>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
+
   </div>
 
-  <h2>⚙️ 技术规范</h2>
+  <!-- 技术规范 -->
+  <div class="group-title">⚙️ 技术规范</div>
   <div class="grid">
-    <a class="card" href="前端技术规范.md">
-      <div class="card-icon">🖥</div>
+
+    <a class="card" href="前端技术规范.html">
+      <div class="card-top">
+        <span class="card-icon">🖥</span>
+        <span class="badge b-tech">Frontend</span>
+      </div>
       <div class="card-title">前端技术规范</div>
-      <div class="card-desc">技术栈要求、目录结构、多语言实现、SEO 规范、性能指标、组件命名、环境变量</div>
-      <span class="badge b-tech">Frontend · v1.0</span>
+      <div class="card-desc">技术栈要求（SSR 强制）、目录结构、多语言实现、SEO 规范、性能指标、组件规范、环境变量</div>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
-    <a class="card" href="后端技术规范.md">
-      <div class="card-icon">🗄</div>
+
+    <a class="card" href="后端技术规范.html">
+      <div class="card-top">
+        <span class="card-icon">🗄</span>
+        <span class="badge b-tech">Backend</span>
+      </div>
       <div class="card-title">后端技术规范</div>
-      <div class="card-desc">API 设计规范、数据库 Schema、文件上传流程、邮件队列、安全规范、部署要求</div>
-      <span class="badge b-tech">Backend · v1.0</span>
+      <div class="card-desc">API 设计规范、完整数据库 Schema、文件上传流程、邮件队列、安全规范、部署要求</div>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
-    <a class="card" href="技术选型备忘.md">
-      <div class="card-icon">🔍</div>
+
+    <a class="card" href="技术选型备忘.html">
+      <div class="card-top">
+        <span class="card-icon">🔍</span>
+        <span class="badge b-pending">待确认</span>
+      </div>
       <div class="card-title">技术选型备忘</div>
-      <div class="card-desc">前端框架、CMS 框架、CDN 服务商、机器翻译 API 候选对比，SSO 待确认事项</div>
-      <span class="badge b-tech">Tech Decision · 待确认</span>
+      <div class="card-desc">前端框架、CMS 框架、CDN 服务商、机器翻译 API 候选对比，SSO 对接待确认事项</div>
+      <div class="card-footer gray">→ 在线查看 HTML</div>
     </a>
+
   </div>
 
-  <h2>🧪 测试</h2>
+  <!-- 测试 -->
+  <div class="group-title">🧪 测试文档</div>
   <div class="grid">
-    <a class="card" href="测试用例.md">
-      <div class="card-icon">✅</div>
+
+    <a class="card" href="测试用例.html">
+      <div class="card-top">
+        <span class="card-icon">✅</span>
+        <span class="badge b-test">Test Cases</span>
+      </div>
       <div class="card-title">测试用例</div>
-      <div class="card-desc">80+ 测试用例：前台功能测试、CMS 后台测试、性能测试、安全测试、上线前回归清单</div>
-      <span class="badge b-test">Test Cases · v1.0</span>
+      <div class="card-desc">80+ 测试用例：前台功能、CMS 后台、性能测试、安全测试，以及上线前最小化回归清单</div>
+      <div class="card-footer">→ 在线查看 HTML</div>
     </a>
+
   </div>
 
 </div>
-
-<div class="footer">旭衡电子 · Always Control · 文档中心 &nbsp;|&nbsp; <a href="https://github.com/x1354028165/xuanheng-website" style="color:var(--accent)">GitHub 仓库</a></div>
-
 </body>
 </html>

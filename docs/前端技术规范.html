@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前端技术规范 · 旭衡电子</title>
+
+<style>
+  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
+  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
+  h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
+  h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
+  h4{font-size:13px;font-weight:700;color:var(--muted);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;}
+  p{margin-bottom:12px;color:var(--text);}
+  ul,ol{padding-left:22px;margin-bottom:12px;}
+  li{margin-bottom:4px;}
+  a{color:var(--accent);}
+  code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;color:#c0392b;}
+  pre{background:#1e2d3d;color:#e8eaf0;padding:18px 20px;border-radius:8px;overflow-x:auto;margin:14px 0;font-size:12px;line-height:1.6;}
+  pre code{background:none;color:inherit;padding:0;font-size:12px;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+  th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
+  td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:#f9fbfd;}
+  blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
+  hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
+  strong{color:var(--text);}
+</style>
+
+</head>
+<body>
+<div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
+    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
+    <span style="color:#3d6080;font-size:12px">|</span>
+    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
+    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+  </div>
+</div>
+<div class="md-body">
+<h1>前端技术规范</h1>
+
+<blockquote>版本 v1.0 · 2026-03-12 · 旭衡电子官网重构</blockquote>
+<blockquote>技术选型最终确认后更新，当前为规范框架。</blockquote>
+
+<hr>
+
+<h2>一、技术栈要求</h2>
+
+<table>
+<thead><tr><th>层级</th><th>要求</th><th>备注</th></tr></thead>
+<tbody>
+<tr><td>框架</td><td>Next.js（React）或 Nuxt.js（Vue），<strong>必须 SSR</strong></td><td>待团队确认，见技术选型备忘.md</td></tr>
+<tr><td>语言</td><td>TypeScript（强制）</td><td>不允许 <code>.js</code> 文件，全部 <code>.ts</code> / <code>.tsx</code></td></tr>
+<tr><td>样式</td><td>Tailwind CSS 或 CSS Modules</td><td>不使用全局裸 CSS，不使用内联 style</td></tr>
+<tr><td>包管理</td><td>pnpm</td><td>不使用 npm / yarn</td></tr>
+<tr><td>代码规范</td><td>ESLint + Prettier，提交前强制通过</td><td><code>pre-commit</code> hook 检查</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>二、目录结构（Next.js 示例）</h2>
+
+<pre><code class="language-">
+src/
+├── app/                    # App Router 页面
+│   ├── [locale]/           # 多语言路由根节点
+│   │   ├── page.tsx        # 首页
+│   │   ├── solutions/
+│   │   │   └── [slug]/     # 解决方案场景页
+│   │   ├── products/
+│   │   │   └── [slug]/     # 产品页
+│   │   ├── ecosystem/      # 兼容生态页
+│   │   ├── help/           # 帮助中心
+│   │   ├── contact/        # 联系我们
+│   │   ├── about/          # 关于我们
+│   │   └── developers/     # 开发者中心（占位页）
+├── components/
+│   ├── ui/                 # 原子组件（Button / Input / Badge）
+│   ├── layout/             # Header / Footer / Sidebar
+│   ├── blocks/             # 页面区块组件（Hero / ProductCard）
+│   └── forms/              # 表单组件
+├── lib/
+│   ├── cms/                # CMS API 封装
+│   ├── i18n/               # 多语言工具
+│   └── utils/              # 工具函数
+├── types/                  # TypeScript 类型定义
+└── styles/                 # 全局样式变量
+</code></pre>
+
+<hr>
+
+<h2>三、多语言实现规范</h2>
+
+<h3>URL 结构</h3>
+<pre><code class="language-">
+/zh-CN/           首页（简体中文）
+/en-US/           首页（英文）
+/zh-TW/           首页（繁体，自动生成）
+/zh-CN/solutions/hems
+/en-US/products/neuron-ii
+</code></pre>
+
+<h3>语言配置</h3>
+<ul>
+<li>语言列表从 CMS「语言管理」API 动态拉取，不硬编码</li>
+<li>默认语言检测顺序：URL 路径 → 用户偏好（localStorage） → IP 地理位置 → zh-CN</li>
+<li>切换语言时保持当前页面路径，仅替换 locale 前缀</li>
+</ul>
+
+<h3>i18n 实现</h3>
+<ul>
+<li>UI 固定词条（按钮/导航/错误提示）通过 CMS 多语言字典 API 获取</li>
+<li>页面内容（产品描述/解决方案文案）通过各内容 API 直接返回对应语言版本</li>
+<li>未翻译内容按回退链处理：zh-TW → zh-CN；de/fr/pt/es/ru → en-US → zh-CN</li>
+</ul>
+
+<hr>
+
+<h2>四、SEO 规范</h2>
+
+<h3>每页必须包含</h3>
+<pre><code class="language-typescript">
+// 每个页面组件导出 generateMetadata
+export async function generateMetadata({ params }): Promise&lt;Metadata&gt; {
+  return {
+    title: '产品名称 | 旭衡电子',
+    description: '页面描述，100-160字符',
+    openGraph: {
+      title: '...',
+      description: '...',
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    },
+    alternates: {
+      canonical: 'https://alwayscontrol.com.cn/zh-CN/...',
+      languages: {
+        'zh-CN': 'https://alwayscontrol.com.cn/zh-CN/...',
+        'en-US': 'https://alwayscontrol.com.cn/en-US/...',
+      },
+    },
+  }
+}
+</code></pre>
+
+<h3>禁止事项</h3>
+<ul>
+<li>❌ 不使用客户端渲染（CSR）展示 SEO 关键内容</li>
+<li>❌ 不在 <code>&lt;head&gt;</code> 外放置 <code>&lt;meta&gt;</code> 标签</li>
+<li>❌ 不使用 <code>noindex</code> 在生产环境（Staging 需要）</li>
+</ul>
+
+<hr>
+
+<h2>五、性能规范</h2>
+
+<table>
+<thead><tr><th>指标</th><th>目标</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>LCP（最大内容绘制）</td><td>< 2.5s</td><td>Core Web Vitals P75</td></tr>
+<tr><td>FID / INP</td><td>< 100ms</td><td>交互响应</td></tr>
+<tr><td>CLS（累积布局偏移）</td><td>< 0.1</td><td>避免内容跳动</td></tr>
+<tr><td>首屏图片</td><td>WebP + 懒加载</td><td>Hero 图使用 priority 预加载</td></tr>
+<tr><td>JS Bundle（首屏）</td><td>< 200KB gzip</td><td>Tree-shake 未使用代码</td></tr>
+</tbody>
+</table>
+
+<h3>图片处理</h3>
+<pre><code class="language-tsx">
+// 使用框架内置 Image 组件（自动优化）
+import Image from 'next/image'
+&lt;Image src={url} width={800} height={600} alt="产品图" loading="lazy" /&gt;
+
+// Hero 图使用 priority
+&lt;Image src={heroUrl} ... priority /&gt;
+</code></pre>
+
+<hr>
+
+<h2>六、组件规范</h2>
+
+<h3>命名规则</h3>
+<ul>
+<li>组件文件：<code>PascalCase.tsx</code>（如 <code>ProductCard.tsx</code>）</li>
+<li>工具函数：<code>camelCase.ts</code>（如 <code>formatDate.ts</code>）</li>
+<li>CSS Module：<code>ComponentName.module.css</code></li>
+<li>常量：<code>UPPER_SNAKE_CASE</code></li>
+</ul>
+
+<h3>Props 规范</h3>
+<pre><code class="language-typescript">
+// 每个组件必须定义 Props 类型
+interface ProductCardProps {
+  product: Product        // 明确类型，不用 any
+  locale: SupportedLocale // 多语言必传
+  className?: string      // 可选样式扩展
+}
+</code></pre>
+
+<h3>禁止事项</h3>
+<ul>
+<li>❌ 不使用 <code>any</code> 类型</li>
+<li>❌ 不在组件内直接调用 CMS API（通过 lib/cms 封装）</li>
+<li>❌ 不使用 <code>document</code> / <code>window</code>（SSR 不可用）</li>
+<li>❌ 不内联样式（<code>style={{ color: 'red' }}</code>）</li>
+</ul>
+
+<hr>
+
+<h2>七、CMS 数据获取</h2>
+
+<pre><code class="language-typescript">
+// lib/cms/index.ts 统一封装
+export async function getProducts(locale: string): Promise&lt;Product[]&gt; {
+  const res = await fetch(`${CMS_API}/products?locale=${locale}`, {
+    next: { revalidate: 300 }, // ISR：5分钟缓存
+  })
+  if (!res.ok) throw new Error('Failed to fetch products')
+  return res.json()
+}
+
+// 静态生成页面（产品/解决方案）
+export async function generateStaticParams() {
+  const products = await getProducts('zh-CN')
+  return products.map(p =&gt; ({ slug: p.slug }))
+}
+</code></pre>
+
+<h3>缓存策略</h3>
+<table>
+<thead><tr><th>内容类型</th><th>revalidate</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>产品页 / 解决方案页</td><td>300s（5分钟）</td><td>ISR，内容更新后自动刷新</td></tr>
+<tr><td>首页</td><td>60s</td><td>更新频率较高</td></tr>
+<tr><td>FAQ</td><td>600s</td><td>更新不频繁</td></tr>
+<tr><td>新闻</td><td>120s</td><td>发布后较快可见</td></tr>
+<tr><td>兼容品牌</td><td>3600s</td><td>变化极少</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>八、错误处理</h2>
+
+<pre><code class="language-typescript">
+// 全局 Error Boundary
+// app/[locale]/error.tsx
+
+export default function Error({ error, reset }) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;出现了一些问题&lt;/h2&gt;
+      &lt;button onClick={() =&gt; reset()}&gt;重试&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}
+
+// 404 页面
+// app/[locale]/not-found.tsx
+</code></pre>
+
+<hr>
+
+<h2>九、环境变量</h2>
+
+<pre><code class="language-bash">
+# .env.local（本地，不提交 git）
+NEXT_PUBLIC_CMS_API_URL=http://localhost:1337/api
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# .env.production（生产）
+NEXT_PUBLIC_CMS_API_URL=https://cms.alwayscontrol.com.cn/api
+NEXT_PUBLIC_SITE_URL=https://alwayscontrol.com.cn
+</code></pre>
+
+<p><strong>规则：</strong></p>
+<ul>
+<li>含有 <code>NEXT_PUBLIC_</code> 前缀的变量会暴露到客户端，不放敏感信息</li>
+<li>真实密钥（邮件/企微/翻译API）只放服务端环境变量，不加 <code>NEXT_PUBLIC_</code> 前缀</li>
+<li>敏感变量不提交 git，通过部署平台（CI/CD）注入</li>
+</ul>
+
+</div>
+</body>
+</html>
