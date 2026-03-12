@@ -92,7 +92,23 @@
             <li><a href="#ep08" class="sub">EP-08 联系我们</a></li>
           </ul>
         </li>
-        <li><a href="#s3">三、CMS 后台</a></li>
+        <li><a href="#s3">三、CMS 后台</a>
+          <ul>
+            <li><a href="#s3" class="sub">CMS-01 仪表盘</a></li>
+            <li><a href="#s3" class="sub">CMS-02 媒体库</a></li>
+            <li><a href="#s3" class="sub">CMS-03 兼容品牌</a></li>
+            <li><a href="#s3" class="sub">CMS-04 文件资产</a></li>
+            <li><a href="#s3" class="sub">CMS-05 客户线索</a></li>
+            <li><a href="#s3" class="sub">CMS-06 FAQ</a></li>
+            <li><a href="#s3" class="sub">CMS-07 通知配置</a></li>
+            <li><a href="#s3" class="sub">CMS-08 产品内容</a></li>
+            <li><a href="#s3" class="sub">CMS-09 解决方案内容</a></li>
+            <li><a href="#s3" class="sub">CMS-10 新闻动态</a></li>
+            <li><a href="#s3" class="sub">CMS-11 招聘岗位</a></li>
+            <li><a href="#s3" class="sub">CMS-12 多语言字典</a></li>
+            <li><a href="#s3" class="sub">CMS-13 Sitemap</a></li>
+          </ul>
+        </li>
         <li><a href="#s4">四、全局功能</a></li>
         <li><a href="#s5">五、非功能性需求</a></li>
       </ul>
@@ -687,6 +703,147 @@ FAQ 列表表格：
   商务咨询回执（zh-CN / en-US）
   报修工单回执（zh-CN / en-US）
   开发者申请回执（zh-CN / en-US）</div>
+
+      <!-- CMS-08 产品内容管理 -->
+      <div class="epic" style="margin-top:24px">CMS-08 产品内容管理</div>
+      <h4>区块结构</h4>
+      <pre>Toolbar：左侧 [新增产品]，右侧：搜索框 + 产品类型筛选（硬件/云平台）
+
+产品列表表格：
+产品名称 | 类型 | Slug | 多语言状态 | 最后更新 | 操作（编辑/删除）
+
+新增/编辑弹窗字段：
+  基本信息：
+    产品名称（必填）
+    Slug（必填，URL 友好格式，如 neuron-ii）
+    产品类型（必填，单选）：硬件网关 / 云平台软件
+    产品图标（必填，从媒体库选取）
+    一句话定位描述（必填，多语言）
+  多语言内容 Tab（zh-CN 必填，en-US 必填）：
+    详细描述（富文本）
+    核心功能模块（多条，每条含：标题 + 说明）
+    规格参数表（键值对列表）
+  关联配置：
+    关联解决方案（多选，双向生效）
+    关联文件资产（多选）
+  SEO：
+    页面 title（必填，多语言）
+    meta description（必填，多语言）</pre>
+      <div class="ac">产品内容修改发布后，官网对应产品页通过 ISR 自动刷新，无需代码部署。</div>
+      <div class="ac">关联解决方案配置后，产品页「应用场景」卡片和解决方案页「本方案使用的产品」卡片同步生效。</div>
+
+      <!-- CMS-09 解决方案内容管理 -->
+      <div class="epic" style="margin-top:24px">CMS-09 解决方案内容管理</div>
+      <h4>区块结构</h4>
+      <pre>Toolbar：左侧 [新增场景]，右侧：搜索框
+
+场景列表表格：
+场景名称 | Slug | 多语言状态 | 最后更新 | 操作（编辑/删除）
+
+新增/编辑弹窗字段：
+  基本信息：
+    场景名称（必填，多语言）
+    Slug（必填）
+    Banner 图片（必填，从媒体库选取）
+    一句话定位描述（必填，多语言）
+  多语言内容 Tab（zh-CN 必填，en-US 必填）：
+    3个核心痛点（每个：标题 + 说明）
+    方案描述（富文本）
+    接入方式说明（单选：云端直连 / 网关局域网 / 两者均支持）
+    架构示意图（可选，从媒体库选取）
+  关联配置：
+    关联产品（多选，双向生效）
+    关联案例（多选）</pre>
+      <div class="ac">关联产品配置后，解决方案页产品跳转卡片自动展示对应产品信息。</div>
+
+      <!-- CMS-10 新闻动态管理 -->
+      <div class="epic" style="margin-top:24px">CMS-10 新闻动态管理</div>
+      <h4>区块结构</h4>
+      <pre>Toolbar：左侧 [新建文章]，右侧：搜索框 + 分类筛选 + 状态筛选（草稿/已发布/定时发布）
+
+文章列表表格：
+封面图 | 标题 | 分类 | 状态 | 发布时间 | 操作（编辑/预览/删除）
+
+新增/编辑弹窗字段：
+  基本信息：
+    标题（必填，多语言）
+    Slug（必填，自动从标题生成，可手动修改）
+    封面图（必填，从媒体库选取）
+    摘要（必填，2行以内，多语言）
+    分类（必填，单选）：行业动态 / 产品更新 / 公司新闻 / 展会活动
+  内容：
+    正文（必填，富文本编辑器，支持图文混排）
+    作者（选填）
+  发布设置：
+    状态（草稿 / 立即发布 / 定时发布）
+    定时发布时间（状态为「定时发布」时必填）
+  SEO：
+    页面 title（多语言）
+    meta description（多语言）</pre>
+      <div class="ac">定时发布文章在设定时间自动上线，无需手动操作。</div>
+      <div class="ac">文章详情页 URL：/zh-CN/news/{slug}，SEO 可独立索引。</div>
+
+      <!-- CMS-11 招聘岗位管理 -->
+      <div class="epic" style="margin-top:24px">CMS-11 招聘岗位管理</div>
+      <h4>区块结构</h4>
+      <pre>Toolbar：左侧 [新增岗位]，右侧：搜索框 + 状态筛选（招募中/已关闭）
+
+岗位列表表格：
+岗位名称 | 工作地点 | 岗位类型 | 状态 | 操作（编辑/删除）
+
+新增/编辑弹窗字段：
+  岗位名称（必填，多语言）
+  工作地点（必填）
+  岗位类型（必填，单选）：全职 / 实习
+  职责描述（必填，富文本，多语言）
+  岗位要求（必填，富文本，多语言）
+  薪资范围（选填）
+  投递方式（必填）：邮件地址 或 外部链接
+  状态（必填）：招募中 / 已关闭</pre>
+      <div class="ac">岗位状态改为「已关闭」后，加入我们页面自动隐藏该岗位。</div>
+
+      <!-- CMS-12 多语言字典管理 -->
+      <div class="epic" style="margin-top:24px">CMS-12 多语言字典管理</div>
+      <h4>区块结构</h4>
+      <pre>Toolbar：左侧 [新增词条]，右侧：搜索框（Key 或翻译内容）+ 命名空间筛选
+
+词条列表表格：
+Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
+
+命名空间分类：
+  common      — 通用词条（按钮/标签/状态文字）
+  nav         — 导航菜单文字
+  home        — 首页各区块文案
+  products    — 产品页通用文案
+  solutions   — 解决方案页通用文案
+  support     — 帮助中心通用文案
+  developer   — 开发者中心 Tooltip 文案
+  forms       — 表单字段/提示文字
+  emails      — 邮件模板通用文案
+
+编辑弹窗字段：
+  Key（只读，创建后不可修改）
+  命名空间（只读）
+  各语言翻译内容（zh-CN 必填，en-US 必填，其他语言选填）</pre>
+      <div class="ac">词条修改发布后，前台对应文案通过 ISR 自动刷新，无需代码部署。</div>
+      <div class="ac">Key 一经创建不可修改，避免前端引用失效。</div>
+
+      <!-- CMS-13 Sitemap 管理 -->
+      <div class="epic" style="margin-top:24px">CMS-13 Sitemap 管理</div>
+      <h4>区块结构</h4>
+      <pre>页面状态概览：
+总页面数 | 已索引 | 上次更新时间
+
+操作区：
+  [手动触发 Sitemap 更新]   — 全量重新生成
+  [提交 Google Search Console] — 自动调用 GSC API
+
+规则说明（只读展示）：
+  - 内容发布/修改后 Sitemap 自动更新（通过 ISR Webhook 触发）
+  - Staging 环境 robots.txt 已设置 noindex，Sitemap 不对外暴露
+  - 自动生成频率：内容发布触发 + 每日凌晨全量重建</pre>
+      <div class="ac">生产环境 Sitemap 可通过 /sitemap.xml 正常访问。</div>
+      <div class="ac">Staging 环境 robots.txt 包含 Disallow: / 且 Sitemap 不提交至搜索引擎。</div>
 
     </div>
 
