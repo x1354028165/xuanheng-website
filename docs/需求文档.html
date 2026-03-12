@@ -205,9 +205,25 @@
         <tr><td>导航菜单高亮</td><td>进入场景页后，导航「解决方案」菜单自动高亮当前场景</td></tr>
       </tbody>
     </table>
+
+    <h4>产品跳转卡片交互规格</h4>
+    <pre>卡片内容（每张）：
+  ┌─────────────────────────────┐
+  │  [产品图标]                  │
+  │  产品名称（如：HEMS）         │
+  │  一句话定位描述               │
+  │  [查看产品 →]                │
+  └─────────────────────────────┘
+
+点击行为：当前标签页内跳转（非新窗口）
+跳转目标：/zh-CN/products/{slug}
+Hover 状态：卡片整体轻微上浮（box-shadow 加深），光标变为 pointer
+卡片数量：按 CMS 关联配置动态生成，通常 1~2 张（云平台 + 硬件各一）</pre>
+
     <div class="ac">5个场景页独立 URL（/zh-CN/solutions/{slug}）。</div>
-    <div class="ac">产品跳转卡片点击后正确跳转对应产品页。</div>
-    <div class="ac">无案例时区块不显示。</div>
+    <div class="ac">产品跳转卡片点击后在当前页跳转对应产品页（/zh-CN/products/{slug}）。</div>
+    <div class="ac">卡片展示：产品图标 + 产品名称 + 一句话描述 + [查看产品 →] 按钮，内容由 CMS 产品字段自动填充。</div>
+    <div class="ac">无案例时案例区块不显示。</div>
 
     <!-- EP-03 产品中心 -->
     <div class="epic" style="margin-top:24px">EP-03 产品中心</div>
@@ -252,9 +268,23 @@
         <tr><td>VPP</td><td>虚拟电厂调度（定制）</td><td>VPP 运营商、能源聚合商</td><td>不需要（纯云端）</td></tr>
       </tbody>
     </table>
+    <h4>应用场景跳转卡片交互规格</h4>
+    <pre>卡片内容（每张）：
+  ┌─────────────────────────────┐
+  │  场景名称（如：充电站管理）    │
+  │  一句话痛点描述               │
+  │  [查看解决方案 →]            │
+  └─────────────────────────────┘
+
+点击行为：当前标签页内跳转（非新窗口）
+跳转目标：/zh-CN/solutions/{slug}
+Hover 状态：卡片整体轻微上浮（box-shadow 加深），光标变为 pointer
+卡片数量：按 CMS 产品-解决方案关联配置动态生成</pre>
+
     <div class="ac">8个产品页独立 URL（/zh-CN/products/{slug}）。</div>
     <div class="ac">参数表字段完整，文件下载链接有效。</div>
-    <div class="ac">应用场景跳转卡片点击后正确跳转至对应解决方案页。</div>
+    <div class="ac">应用场景跳转卡片点击后在当前页跳转对应解决方案页（/zh-CN/solutions/{slug}）。</div>
+    <div class="ac">卡片展示：场景名称 + 一句话痛点 + [查看解决方案 →] 按钮，内容由 CMS 解决方案字段自动填充。</div>
 
     <!-- EP-04 兼容生态页 -->
     <div class="epic" style="margin-top:24px">EP-04 兼容生态页</div>
