@@ -1307,7 +1307,7 @@ API Key 管理页：
 
       <h3>5.1 各模块通用规范</h3>
       <ul>
-        <li><strong>多语言支持</strong>：所有面向用户的内容字段，均需支持简体中文 / 繁体中文 / 英文三套独立维护，互不干扰</li>
+        <li><strong>多语言支持</strong>：所有面向用户的内容字段，均需支持多语言维护。核心维护语言为简体中文（zh-CN）和英文（en-US），繁体中文（zh-TW）由 zh-CN 自动转换，德/法/葡/西/俄五种语言以 en-US 为源、机器翻译辅助、人工校对后发布</li>
         <li><strong>草稿与发布分离</strong>：内容支持保存草稿后预览，确认无误后再正式发布，避免未完成的内容意外上线</li>
         <li><strong>版本可追溯</strong>：关键内容（新闻、产品描述）保留修改历史，支持查看历史版本</li>
         <li><strong>软删除</strong>：内容下架不等于物理删除，保留归档记录，支持查阅历史</li>
@@ -1345,7 +1345,7 @@ API Key 管理页：
         <p>管理官网"最新动态"板块的内容，替代现有的代码写死方式。<strong>核心需求：</strong></p>
         <ul>
           <li>支持富文本编辑，可插入图片、标题、段落、列表等</li>
-          <li>每篇文章独立管理三种语言版本</li>
+          <li>每篇文章维护 zh-CN 和 en-US 两个核心语言版本；zh-TW 自动转换；de/fr/pt/es/ru 以 en-US 为源，支持一键机器翻译生成初稿</li>
           <li>支持设置发布时间（可提前写好定时发布）</li>
           <li>文章列表支持按日期、标题搜索</li>
         </ul>
@@ -1423,7 +1423,7 @@ API Key 管理页：
         <p><strong>核心需求：</strong></p>
         <ul>
           <li>支持管理官网所有语言的 UI 公共词条（按 key-value 对维护）</li>
-          <li>词条按语言分组：zh-CN / zh-TW / en-US 各自维护，互不干扰</li>
+          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；zh-TW 由 zh-CN 自动转换；de-DE / fr-FR / pt-BR / es-ES / ru-RU 由 en-US 机器翻译初稿，支持人工校对覆盖</li>
           <li>支持新增语言：当官网需要扩展新语言时（如 de-DE），在后台添加语言后即可开始维护词条，无需修改代码结构</li>
           <li>支持批量导入/导出（Excel/CSV），方便交给翻译人员处理后批量回填</li>
           <li>词条修改后官网实时生效，无需重新部署</li>
@@ -1433,13 +1433,13 @@ API Key 管理页：
         <p style="font-size:13px; font-weight: 600; margin-top: 12px;">字典示例：</p>
         <table style="font-size:13px;">
           <thead>
-            <tr><th>Key</th><th>zh-CN</th><th>zh-TW</th><th>en-US</th></tr>
+            <tr><th>Key</th><th>zh-CN（核心）</th><th>zh-TW（自动转换）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机器翻译）</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>nav.solutions</code></td><td>解决方案</td><td>解決方案</td><td>Solutions</td></tr>
-            <tr><td><code>nav.products</code></td><td>产品中心</td><td>產品中心</td><td>Products</td></tr>
-            <tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>聯絡我們</td><td>Contact Us</td></tr>
-            <tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>暫無資料</td><td>No results found</td></tr>
+            <tr><td><code>nav.solutions</code></td><td>解决方案</td><td>解決方案（自动）</td><td>Solutions</td><td>Lösungen / Solutions / Soluções…（机器翻译）</td></tr>
+            <tr><td><code>nav.products</code></td><td>产品中心</td><td>產品中心（自动）</td><td>Products</td><td>Produkte / Produits…（机器翻译）</td></tr>
+            <tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>聯絡我們（自动）</td><td>Contact Us</td><td>Kontakt / Contactez…（机器翻译）</td></tr>
+            <tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>暫無資料（自动）</td><td>No results found</td><td>Keine Ergebnisse…（机器翻译）</td></tr>
           </tbody>
         </table>
 <pre>后台操作界面：
@@ -1523,7 +1523,7 @@ API Key 管理页：
                 <tr><td>排序控制</td><td>数字权重或拖拽</td></tr>
 
                 <tr><td rowspan="3" style="background:#fff"><strong>新闻动态</strong></td><td>富文本编辑</td><td>图文混排，图片上传 OSS</td></tr>
-                <tr><td>三语言独立编辑</td><td>zh-CN / zh-TW / en-US</td></tr>
+                <tr><td>语言版本管理</td><td>zh-CN / en-US 人工维护；zh-TW 自动转换；de/fr/pt/es/ru 机器翻译辅助</td></tr>
                 <tr><td>草稿/发布状态</td><td>先存草稿，确认后发布</td></tr>
 
                 <tr><td rowspan="2" style="background:#fff"><strong>FAQ 管理</strong></td><td>CRUD 条目</td><td>运营自助增删改</td></tr>
@@ -1568,7 +1568,7 @@ API Key 管理页：
 
                 <tr><td rowspan="4" style="background:#fff"><strong>案例管理</strong></td><td>案例 CRUD</td><td>标题 / 封面图 / 正文 / 关联场景</td></tr>
                 <tr><td>关联解决方案页</td><td>每个案例可关联到一个或多个场景页</td></tr>
-                <tr><td>三语言支持</td><td>中/繁/英 独立维护</td></tr>
+                <tr><td>多语言支持</td><td>zh-CN / en-US 核心维护；其他语言自动/机器翻译</td></tr>
                 <tr><td>草稿/发布状态</td><td>先存草稿，确认后上线</td></tr>
               </tbody>
             </table>
@@ -1599,9 +1599,9 @@ API Key 管理页：
 
                 <tr><td rowspan="5" style="background:#fff"><strong>公司介绍管理</strong></td><td>公司简介编辑</td><td>富文本，支持三语言</td></tr>
                 <tr><td>核心数字配置</td><td>兼容品牌数 / 覆盖国家数 / 已交付项目数，与首页数字同源</td></tr>
-                <tr><td>核心能力说明编辑</td><td>支持三语言独立维护</td></tr>
-                <tr><td>发展历程管理</td><td>时间轴条目增删改，支持三语言</td></tr>
-                <tr><td>联系地址编辑</td><td>文字地址，支持三语言</td></tr>
+                <tr><td>核心能力说明编辑</td><td>zh-CN / en-US 核心维护；其他语言自动/机器翻译</td></tr>
+                <tr><td>发展历程管理</td><td>时间轴条目增删改；zh-CN / en-US 核心维护</td></tr>
+                <tr><td>联系地址编辑</td><td>文字地址；各语言版本同步（地址本身不翻译，说明文字翻译）</td></tr>
 
                 <tr><td rowspan="2" style="background:#fff"><strong>多区域内容管理</strong></td><td>语言+区域组合管理</td><td>支持同一语言下按区域差异化内容（如 en-AU / en-Global）</td></tr>
                 <tr><td>区域内容开关</td><td>各区域内容可独立上线/下线，按市场进度按需开启</td></tr>
@@ -1629,42 +1629,50 @@ API Key 管理页：
       <p>每个页面的 SEO 元数据（标题、描述、关键词、社交分享图）必须通过 CMS 独立配置。站点地图随内容变化自动更新，不能是静态文件。</p>
 
       <h4>7.3 多语言完整覆盖</h4>
-      <p>官网支持以下 8 种语言，内容独立维护，互不影响：</p>
+      <p>官网支持 8 种语言，分三个层级管理，<strong>维护成本不均等</strong>：</p>
+
       <table>
         <thead>
-          <tr><th>语言代码</th><th>语言</th><th>目标市场</th><th>优先级</th></tr>
+          <tr><th>层级</th><th>语言代码</th><th>语言</th><th>目标市场</th><th>维护方式</th><th>优先级</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td><span class="badge badge-p0">P0</span></td></tr>
-          <tr><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td><span class="badge badge-p0">P0</span></td></tr>
-          <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td><span class="badge badge-p0">P0</span></td></tr>
-          <tr><td><code>de-DE</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>fr-FR</code></td><td>法文</td><td>法国及法语区</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>pt-BR</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>es-ES</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>ru-RU</code></td><td>俄文</td><td>俄罗斯及独联体</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td rowspan="2"><strong>第一层<br>核心维护</strong></td><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td><strong>第二层<br>自动转换</strong></td><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td>🔄 由 zh-CN 自动繁简转换，人工校对关键词</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de-DE</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，DeepL 生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>fr-FR</code></td><td>法文</td><td>法国及法语区</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>pt-BR</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>es-ES</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>ru-RU</code></td><td>俄文</td><td>俄罗斯及独联体</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
         </tbody>
       </table>
 
       <div class="highlight">
-        <strong>核心设计原则：语言由后台配置驱动，前台自动适配。</strong><br>
-        CMS 后台「语言管理」模块维护全站支持的语言列表。新增一种语言后，前台 Header 的语言切换器自动出现该选项，无需改代码。语言未发布时，前台不显示该选项。运营可按市场进度按需开启。
+        <strong>核心设计原则：2套核心 + 1套自动 + 5套机器翻译辅助，不是 8套独立维护。</strong><br>
+        日常只需维护 zh-CN 和 en-US。zh-TW 自动同步，zh-CN 更新后自动触发繁简转换。P1 五种语言：en-US 内容更新后，系统自动标记对应语言「需要重新翻译」，运营一键触发 DeepL 重新生成初稿，人工校对后发布。
       </div>
+
+      <p><strong>回退链：</strong> 某语言内容未翻译或未发布时，按以下顺序回退：</p>
+      <ul>
+        <li>zh-TW → 回退至 zh-CN</li>
+        <li>de / fr / pt / es / ru → 先回退至 en-US，en-US 也缺失时回退至 zh-CN</li>
+        <li>不允许显示空内容或乱码；回退内容在 CMS 中自动标记「使用回退语言」</li>
+      </ul>
 
       <p><strong>前台语言切换器行为：</strong></p>
       <ul>
-        <li>Header 右上角固定展示语言切换下拉，仅显示已在 CMS 后台「发布」状态的语言</li>
-        <li>默认语言根据访客 IP 地理位置自动判断，匹配优先顺序：IP 地区语言 → 浏览器语言 → zh-CN</li>
-        <li>用户手动切换后，记录偏好（localStorage），下次访问直接使用上次选择</li>
-        <li>URL 结构：<code>/zh-CN/solutions/hems</code>、<code>/en-US/solutions/hems</code>，支持 SEO 独立索引</li>
-        <li>某语言版本内容未翻译时，回退显示 zh-CN 版本，并在 CMS 中自动标记「待翻译」</li>
+        <li>Header 右上角固定展示语言切换下拉，仅显示已在 CMS 后台「已发布」状态的语言</li>
+        <li>默认语言根据访客 IP 地理位置自动判断：IP 地区语言 → 浏览器语言 → zh-CN</li>
+        <li>用户手动切换后记录偏好（localStorage），下次访问直接使用上次选择</li>
+        <li>URL 结构：<code>/zh-CN/solutions/hems</code>、<code>/en-US/solutions/hems</code>，各语言独立 URL，支持 SEO 独立索引</li>
       </ul>
 
-      <p><strong>翻译工作流：</strong></p>
+      <p><strong>翻译工作流（P1 语言）：</strong></p>
       <ul>
-        <li>CMS 后台支持批量导出待翻译词条（Excel/CSV），交翻译人员处理后批量导入</li>
-        <li>每条内容显示翻译状态：✅ 已翻译 / ⚠️ 待翻译 / 🔒 使用中文回退</li>
-        <li>P1 语言（德/法/葡/西/俄）建议接入机器翻译 API（如 DeepL）辅助初稿，人工校对后发布</li>
+        <li>en-US 内容发布 → 系统自动标记 5 种语言「待翻译」</li>
+        <li>运营在 CMS 点击「一键翻译」→ DeepL API 生成全部语言初稿</li>
+        <li>人工校对（可批量导出 Excel 交翻译人员）→ 确认后逐语言发布</li>
+        <li>每条内容显示翻译状态：✅ 已发布 / ⚠️ 待校对 / 🔄 使用回退</li>
       </ul>
 
       <h4>7.4 文件下载可靠性</h4>
@@ -1705,7 +1713,7 @@ API Key 管理页：
       <h4>7.8 多语言与多区域内容策略</h4>
       <p>旭衡业务覆盖多个海外市场（包括但不限于澳洲、东南亚、拉美等），官网需要区分两个层次：</p>
       <ul>
-        <li><strong>层次一：多语言（i18n） — 文字翻译</strong><br>简体中文（zh-CN）/ 繁体中文（zh-TW）/ 英文（en-US）三套文字版本。语言切换对所有用户可见，通过 URL 或语言选择器控制。</li>
+        <li><strong>层次一：多语言（i18n） — 文字翻译</strong><br>核心维护语言：zh-CN / en-US（人工全量维护）；zh-TW 自动转换；de/fr/pt/es/ru 机器翻译辅助。语言切换对所有用户可见，通过 URL 或语言选择器控制（详见 §7.3）。</li>
         <li><strong>层次二：多区域（Localization） — 内容差异化</strong><br>同一语言下，不同市场的用户看到针对性的场景描述、案例和法规话术。CMS 需支持按「语言 + 区域」的组合管理内容，而不仅是按语言。具体覆盖哪些区域、何时上线，由运营按市场进度按需配置，PRD 不约束。</li>
       </ul>
 
@@ -1717,21 +1725,21 @@ API Key 管理页：
       <p><strong>多语言覆盖优先级：</strong></p>
       <table>
         <thead>
-          <tr><th>内容类型</th><th>zh-CN</th><th>zh-TW</th><th>en-US</th><th>de/fr/pt/es/ru</th><th>说明</th></tr>
+          <tr><th>内容类型</th><th>zh-CN（核心）</th><th>zh-TW（自动）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机翻）</th><th>说明</th></tr>
         </thead>
         <tbody>
-          <tr><td>首页 / 解决方案 / 产品介绍</td><td>必须</td><td>必须</td><td>必须</td><td>P1 上线时必须</td><td>核心转化页面，随语言上线同步</td></tr>
-          <tr><td>帮助中心（FAQ / 文档列表）</td><td>必须</td><td>可选</td><td>必须</td><td>可选</td><td>按目标市场决定是否翻译</td></tr>
-          <tr><td>开发者中心</td><td>必须</td><td>不要求</td><td>必须</td><td>可选（英文回退）</td><td>开发者以中英为主</td></tr>
-          <tr><td>新闻动态</td><td>必须</td><td>可选</td><td>可选</td><td>可选</td><td>按目标市场选择性翻译</td></tr>
-          <tr><td>案例内容</td><td>必须</td><td>可选</td><td>可选</td><td>可选</td><td>按案例目标市场决定</td></tr>
-          <tr><td>兼容生态页</td><td>必须</td><td>必须</td><td>必须</td><td>P1 上线时必须</td><td>品牌名称通用，说明文字需翻译</td></tr>
-          <tr><td>联系人信息</td><td>必须</td><td>必须</td><td>必须</td><td>必须</td><td>所有语言版本显示相同联系人</td></tr>
-          <tr><td>隐私政策页</td><td>必须</td><td>必须</td><td>必须</td><td>必须（合规要求）</td><td>GDPR/LGPD 合规，必须有当地语言版本</td></tr>
-          <tr><td>CMS 后台界面</td><td>必须</td><td>不要求</td><td>不要求</td><td>不要求</td><td>内部系统，中文即可</td></tr>
+          <tr><td>首页 / 解决方案 / 产品介绍</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>P1 上线时校对发布</td><td>核心转化页面</td></tr>
+          <tr><td>帮助中心（FAQ / 文档列表）</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>可选，未翻译回退 en-US</td><td>按市场需求决定</td></tr>
+          <tr><td>开发者中心</td><td>✅ 必须</td><td>❌ 不要求</td><td>✅ 必须</td><td>可选，回退 en-US</td><td>开发者以中英为主</td></tr>
+          <tr><td>新闻动态</td><td>✅ 必须</td><td>🔄 自动转换</td><td>可选</td><td>可选</td><td>按目标市场选择性翻译</td></tr>
+          <tr><td>案例内容</td><td>✅ 必须</td><td>🔄 自动转换</td><td>可选</td><td>可选</td><td>按案例目标市场决定</td></tr>
+          <tr><td>兼容生态页</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>P1 上线时校对发布</td><td>说明文字需翻译，品牌名通用</td></tr>
+          <tr><td>联系人信息</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>✅ 必须（显示相同联系人）</td><td>各语言展示相同内容</td></tr>
+          <tr><td>隐私政策页</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>✅ 必须（GDPR/LGPD 合规）</td><td>法律要求，机翻后须法务审核</td></tr>
+          <tr><td>CMS 后台界面</td><td>✅ 必须</td><td>❌ 不要求</td><td>❌ 不要求</td><td>❌ 不要求</td><td>内部系统，中文即可</td></tr>
         </tbody>
       </table>
-      <p style="font-size:13px; color:var(--muted)"><strong>原则：</strong> 某语言版本内容未准备好时，允许暂时回退显示简体中文（de/fr/pt/es/ru 回退至 en-US），但需在 CMS 中标记「待翻译」，不允许显示空内容或乱码。P1 语言随业务进入对应市场时开启，不强制与 P0 同步上线。</p>
+      <p style="font-size:13px; color:var(--muted)"><strong>回退原则：</strong> zh-TW 未覆盖内容回退至 zh-CN；de/fr/pt/es/ru 未覆盖内容先回退至 en-US，再回退至 zh-CN。不允许显示空内容或乱码。P1 语言随业务进入对应市场时开启，不强制与 P0 同步上线。</p>
 
       <h4>7.10 隐私合规（GDPR / LGPD）</h4>
       <div class="gray-box">
@@ -1778,7 +1786,7 @@ API Key 管理页：
         <li>搜索框在 Header 始终可见，点击展开全屏搜索覆盖层</li>
         <li>搜索结果按内容类型分组展示（FAQ / API 文档 / 品牌 / 产品页）</li>
         <li>权限控制：受限内容（如需登录的 API 文档）在搜索结果中显示标题和摘要，点击后跳转至对应引导页（登录 / 联系商务）</li>
-        <li>支持三语言索引，搜索结果与当前语言版本匹配</li>
+        <li>支持全部已发布语言的独立索引，搜索结果与当前语言版本匹配；未完整翻译的语言回退展示 en-US 或 zh-CN 结果</li>
       </ul>
       <p style="font-size:13px; color:var(--muted)"><strong>实现建议：</strong> 可使用 Algolia 或 Typesense 等成熟搜索组件，接入成本低，支持中文分词，无需自研。</p>
 
