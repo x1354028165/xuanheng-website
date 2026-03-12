@@ -890,20 +890,24 @@ API 文档结构：
       <h3>4.5 帮助中心</h3>
 
       <h4>访问控制说明：</h4>
-      <p>帮助中心的内容按资源标签分层开放，未登录访客只能看到入口页面，具体文件/软件/固件需要登录并具备对应权限才能下载。</p>
+      <div class="gray-box" style="border-left:4px solid var(--warning);border-radius:0 8px 8px 0;margin-bottom:16px">
+        <strong>⏸ P0 阶段：所有文件全部公开下载，无需登录</strong><br>
+        P1 阶段接入 SSO 后，再按下表启用分层权限控制。
+      </div>
+      <p>帮助中心内容分层开放策略（<strong>P1 启用</strong>）：</p>
       <table>
         <thead>
-          <tr><th>内容类型</th><th>最低权限要求</th></tr>
+          <tr><th>内容类型</th><th>P0 阶段</th><th>P1 阶段（权限控制上线后）</th></tr>
         </thead>
         <tbody>
-          <tr><td>FAQ（通用）</td><td><code>[公开]</code> — 无需登录</td></tr>
-          <tr><td>产品文档（基础说明手册）</td><td><code>[客户基础]</code> — 登录即可</td></tr>
-          <tr><td>产品文档（高级技术文档）</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
-          <tr><td>软件下载</td><td><code>[客户基础]</code> — 登录即可</td></tr>
-          <tr><td>固件下载</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
+          <tr><td>FAQ（通用）</td><td>✅ 公开</td><td>✅ 公开</td></tr>
+          <tr><td>产品文档（基础说明手册）</td><td>✅ 公开下载</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>产品文档（高级技术文档）</td><td>✅ 公开下载</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
+          <tr><td>软件下载</td><td>✅ 公开下载</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>固件下载</td><td>✅ 公开下载</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
         </tbody>
       </table>
-      <p>未登录用户访问受限资源时，跳转至登录页，登录后自动返回原页面。登录后权限不足时，展示「请联系商务开通权限」提示并引导至联系我们。</p>
+      <p style="font-size:12px;color:var(--muted)">P1 阶段权限体系上线后，未登录用户访问受限资源时跳转至登录页，登录后自动返回原页面；权限不足时引导至联系我们。</p>
 
     <pre>文档资料页（优化现有）：
 分类维度调整：
@@ -1617,15 +1621,6 @@ API Key 管理页：
                 <tr><th>模块</th><th>能力</th><th>说明</th></tr>
               </thead>
               <tbody>
-                <tr><td rowspan="4" style="background:#fff"><strong>客户权限管理</strong></td><td>账号与统一账号系统打通</td><td>复用旭衡统一账号体系（如：爱尚管理后台），官网不单独维护账号密码</td></tr>
-                <tr><td>产品线标签分配</td><td>给每个客户账号打标签：HEMS / ESS / EVCMS / VPP / PQMS</td></tr>
-                <tr><td>标签批量操作</td><td>支持批量给多个账号增减标签</td></tr>
-                <tr><td>权限变更即时生效</td><td>修改标签后官网访问权限实时更新，无需重新登录</td></tr>
-
-                <tr><td rowspan="3" style="background:#fff"><strong>资源权限标注</strong></td><td>文件权限标签</td><td>每个文件可设置最低访问权限（公开/客户基础/产品线标签）</td></tr>
-                <tr><td>API 文档模块权限</td><td>每个 API 文档模块可独立配置所需标签</td></tr>
-                <tr><td>权限变更审计</td><td>记录谁在什么时间修改了哪个资源的权限设置</td></tr>
-
                 <tr><td rowspan="5" style="background:#fff"><strong>文件资产管理</strong></td><td>OSS 直传上传</td><td>前端直传 OSS，应用层不经手文件流</td></tr>
                 <tr><td>版本号管理</td><td>语义化版本（x.y.z），新版本不覆盖旧版</td></tr>
                 <tr><td>平台/分类标注</td><td>Win / Mac / iOS / Android / 通用</td></tr>
@@ -1692,6 +1687,15 @@ API Key 管理页：
                 <tr><th>模块</th><th>能力</th><th>说明</th></tr>
               </thead>
               <tbody>
+                <tr><td rowspan="4" style="background:#fff"><strong>客户权限管理（SSO）</strong></td><td>账号与统一账号系统打通</td><td>复用旭衡统一账号体系（爱尚管理后台），官网不单独维护账号密码；<strong>P0 阶段跳过，P1 接入</strong></td></tr>
+                <tr><td>产品线标签分配</td><td>给每个客户账号打标签：HEMS / ESS / EVCMS / VPP / PQMS</td></tr>
+                <tr><td>标签批量操作</td><td>支持批量给多个账号增减标签</td></tr>
+                <tr><td>权限变更即时生效</td><td>修改标签后官网访问权限实时更新，无需重新登录</td></tr>
+
+                <tr><td rowspan="3" style="background:#fff"><strong>资源权限标注</strong></td><td>文件权限标签</td><td>每个文件可设置最低访问权限（公开/客户基础/产品线标签）；<strong>P0 阶段全部公开</strong></td></tr>
+                <tr><td>API 文档模块权限</td><td>每个 API 文档模块可独立配置所需标签</td></tr>
+                <tr><td>权限变更审计</td><td>记录谁在什么时间修改了哪个资源的权限设置</td></tr>
+
                 <tr><td rowspan="4" style="background:#fff"><strong>多语言字典管理</strong></td><td>语言管理</td><td>维护官网支持的语言列表，新增语言无需改代码</td></tr>
                 <tr><td>词条 CRUD</td><td>按 key-value 管理 UI 公共翻译词条</td></tr>
                 <tr><td>批量导入/导出</td><td>Excel/CSV 格式，方便交翻译人员处理</td></tr>
@@ -2000,6 +2004,13 @@ API Key 管理页：
       <div class="section-label">第八部分</div>
       <h2>八、访问控制与权限体系</h2>
 
+      <div class="gray-box" style="border-left: 4px solid var(--warning); border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+        <strong>⏸ P1 阶段实现，P0 阶段跳过本章</strong><br>
+        P0 阶段官网为纯展示型，所有内容公开访问，无需登录。文件下载（文档/固件/软件）P0 阶段全部公开，不做权限控制。<br><br>
+        SSO 接入（爱尚管理后台账号体系）、产品线标签权限、个人中心均推后至 <strong>P1 阶段</strong>，届时再完成接口对接与权限体系部署。<br><br>
+        <strong>P0 阶段前台无任何登录入口，Header 不显示「登录」按钮。</strong>
+      </div>
+
       <h3>8.1 设计原则</h3>
       <p>官网采用 <strong>RBAC + 资源标签（Role-Based Access Control + Resource Tag）</strong> 混合模式：</p>
       <ul>
@@ -2245,15 +2256,16 @@ CMS 后台 → 客户账号管理 → 搜索客户
         </table>
       </div>
 
-      <div class="gray-box">
-        <h3 style="margin-top:0">9.9 个人中心</h3>
+      <div class="gray-box" style="border-left:4px solid var(--warning);border-radius:0 8px 8px 0;">
+        <h3 style="margin-top:0">9.9 个人中心 <span style="font-size:12px;font-weight:400;color:var(--warning);margin-left:8px">⏸ P1 阶段实现，依赖 SSO 接入</span></h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px">P0 阶段无登录功能，个人中心整体推后至 P1。SSO 接入完成后按下表实现。</p>
         <table>
           <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
           <tbody>
-            <tr><td>已开通权限标签展示</td><td><span class="badge badge-p0">P0</span></td><td>客户账号管理（权限标签）</td><td>实时从 CMS 权限体系读取</td></tr>
-            <tr><td>下载记录</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理（下载日志）</td><td>自动记录，无需手动维护</td></tr>
-            <tr><td>API Key 管理</td><td><span class="badge badge-p1">P1</span></td><td>API 开发者管理</td><td>Key 由后台生成，前台展示</td></tr>
-            <tr><td>账号信息展示</td><td>❌ 不接 CMS</td><td>—</td><td>从统一账号系统同步，只读</td></tr>
+            <tr><td>已开通权限标签展示</td><td><span class="badge badge-p1">P1</span></td><td>客户账号管理（权限标签）</td><td>依赖 SSO，P1 实现</td></tr>
+            <tr><td>下载记录</td><td><span class="badge badge-p1">P1</span></td><td>文件资产管理（下载日志）</td><td>依赖登录态，P1 实现</td></tr>
+            <tr><td>API Key 管理</td><td><span class="badge badge-p1">P1</span> 后续</td><td>API 开发者管理</td><td>开发者中心启动时实现</td></tr>
+            <tr><td>账号信息展示</td><td><span class="badge badge-p1">P1</span></td><td>—</td><td>从统一账号系统同步，只读</td></tr>
           </tbody>
         </table>
       </div>
@@ -2315,8 +2327,7 @@ CMS 后台 → 客户账号管理 → 搜索客户
             <tr><td>9</td><td>企业微信 Webhook 配置——商务咨询 / 报修 / API 申请三类分别配置正确群</td><td>运维</td><td>⬜ 待配置</td></tr>
             <tr><td>10</td><td>邮件通知配置——各意向分类的内部收件邮箱填写正确</td><td>运维</td><td>⬜ 待配置</td></tr>
             <tr><td>11</td><td>用户侧回执邮件——发件箱配置、邮件模板（中英文）确认可正常发送</td><td>运维</td><td>⬜ 待配置</td></tr>
-            <tr><td>12</td><td>SSO 接入——爱尚管理后台 OAuth2 接口联调通过，登录 / 登出 / token 刷新均正常</td><td>后端开发</td><td>⬜ 待联调</td></tr>
-            <tr><td>13</td><td>OSS 存储桶 + CDN 域名配置——文件上传 / 下载 / 图片加速链接均可访问</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>12</td><td>对象存储 + CDN 域名配置——文件上传 / 下载 / 图片加速链接均可访问</td><td>运维</td><td>⬜ 待配置</td></tr>
             <tr><td>14</td><td>HTTPS 证书——<code>alwayscontrol.com.cn</code> 及所有子域名证书有效</td><td>运维</td><td>⬜ 待配置</td></tr>
             <tr><td>15</td><td>Staging 环境 <code>noindex</code> 隔离——确认 Staging 不被 Google 收录</td><td>后端开发</td><td>⬜ 待验证</td></tr>
             <tr><td>16</td><td>多语言回退链正常——未翻译内容正确回退至 en-US / zh-CN，无空白页</td><td>前端开发</td><td>⬜ 待验证</td></tr>
