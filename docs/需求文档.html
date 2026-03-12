@@ -120,6 +120,50 @@
     <div class="section" id="s0">
       <h2>说明</h2>
       <p>本文档为功能需求清单，列出官网所有页面及 CMS 模块的详细功能规格与验收标准，供开发团队确认范围使用。每个页面/模块按以下格式描述：区块结构（布局图）、功能清单表格、验收标准（绿色框）。</p>
+
+      <h3>范围总览</h3>
+      <table>
+        <thead><tr><th>类型</th><th>数量</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td><strong>前台固定页面</strong></td><td><strong>23 个</strong></td><td>不含动态生成的新闻详情页</td></tr>
+          <tr><td>前台动态页面</td><td>动态</td><td>新闻动态详情 /news/{slug}，由 CMS 内容数量决定</td></tr>
+          <tr><td><strong>CMS 后台模块</strong></td><td><strong>12 个</strong></td><td>不含 CMS 框架自带功能（用户管理/内置仪表盘等）</td></tr>
+        </tbody>
+      </table>
+
+      <h3>前台页面明细（23 个固定模板）</h3>
+      <table>
+        <thead><tr><th>导航入口</th><th>页面数</th><th>页面清单</th></tr></thead>
+        <tbody>
+          <tr><td>首页</td><td>1</td><td>首页 /</td></tr>
+          <tr><td>产品中心</td><td>8</td><td>Neuron II / Neuron III / Neuron III Lite / HEMS / ESS / EVCMS / PQMS / VPP</td></tr>
+          <tr><td>解决方案</td><td>5</td><td>户用家庭储能 / 工商业储能 / 充电站管理 / VPP 虚拟电厂 / 电能质量管理</td></tr>
+          <tr><td>兼容生态</td><td>1</td><td>兼容品牌列表页</td></tr>
+          <tr><td>开发者中心</td><td>0</td><td>无独立页面，导航按钮显示 Tooltip 提示</td></tr>
+          <tr><td>帮助中心</td><td>4</td><td>文档资料（含3 Tab）/ 版本兼容矩阵 / FAQ / 在线报修</td></tr>
+          <tr><td>关于我们</td><td>3</td><td>公司介绍 / 最新动态列表 / 加入我们</td></tr>
+          <tr><td>联系我们</td><td>1</td><td>联系表单页</td></tr>
+        </tbody>
+      </table>
+
+      <h3>CMS 后台模块明细（12 个）</h3>
+      <table>
+        <thead><tr><th>编号</th><th>模块</th><th>核心职责</th></tr></thead>
+        <tbody>
+          <tr><td>CMS-01</td><td>媒体库</td><td>图片/文件统一管理，引用追踪</td></tr>
+          <tr><td>CMS-02</td><td>兼容品牌管理</td><td>品牌信息、能力标签、Logo 墙配置</td></tr>
+          <tr><td>CMS-03</td><td>文件资产管理</td><td>产品文档/软件/固件，含版本依赖关系</td></tr>
+          <tr><td>CMS-04</td><td>客户线索管理</td><td>表单提交记录，状态跟进</td></tr>
+          <tr><td>CMS-05</td><td>FAQ 管理</td><td>多语言 FAQ，分类与产品关联</td></tr>
+          <tr><td>CMS-06</td><td>通知配置</td><td>企微 Webhook + 内部邮箱 + 用户回执模板</td></tr>
+          <tr><td>CMS-07</td><td>产品内容管理</td><td>8 个产品页内容，含规格参数与关联配置</td></tr>
+          <tr><td>CMS-08</td><td>解决方案内容管理</td><td>5 个场景页内容，含痛点与产品双向关联</td></tr>
+          <tr><td>CMS-09</td><td>新闻动态管理</td><td>文章列表，草稿/定时发布</td></tr>
+          <tr><td>CMS-10</td><td>招聘岗位管理</td><td>岗位上线/下架，投递方式配置</td></tr>
+          <tr><td>CMS-11</td><td>多语言字典管理</td><td>按命名空间管理前台所有文案词条</td></tr>
+          <tr><td>CMS-12</td><td>Sitemap 管理</td><td>自动更新 + 手动触发，Staging noindex</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- ══════════════════════════════════════════════════════
