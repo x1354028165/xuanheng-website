@@ -90,6 +90,7 @@
             <li><a href="#ep06" class="sub">EP-06 帮助中心</a></li>
             <li><a href="#ep07" class="sub">EP-07 关于我们</a></li>
             <li><a href="#ep08" class="sub">EP-08 联系我们</a></li>
+            <li><a href="#ep09" class="sub">EP-09 隐私政策页</a></li>
           </ul>
         </li>
         <li><a href="#s3">三、CMS 后台</a>
@@ -132,7 +133,7 @@
       <table>
         <thead><tr><th>类型</th><th>数量</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td><strong>前台固定页面</strong></td><td><strong>23 个</strong></td><td>不含动态生成的新闻详情页</td></tr>
+          <tr><td><strong>前台固定页面</strong></td><td><strong>24 个</strong></td><td>不含动态生成的新闻详情页</td></tr>
           <tr><td>前台动态页面</td><td>动态</td><td>新闻动态详情 /news/{slug}，由 CMS 内容数量决定</td></tr>
           <tr><td><strong>CMS 后台模块</strong></td><td><strong>20 个</strong></td><td>不含 CMS 框架自带功能（用户管理/内置仪表盘等）</td></tr>
         </tbody>
@@ -150,6 +151,7 @@
           <tr><td>帮助中心</td><td>4</td><td>文档资料（含3 Tab）/ 版本兼容矩阵 / FAQ / 在线报修</td></tr>
           <tr><td>关于我们</td><td>3</td><td>公司介绍 / 最新动态列表 / 加入我们</td></tr>
           <tr><td>联系我们</td><td>1</td><td>联系表单页</td></tr>
+          <tr><td>隐私政策页</td><td>1</td><td>⚠️ 法务审核后上线，CMS 维护多语言内容</td></tr>
         </tbody>
       </table>
 
@@ -617,6 +619,32 @@ FAQ 列表展示：
       </table>
       <div class="ac">不同意向分类提交后路由到正确企微群。</div>
       <div class="ac">用户邮箱 5 分钟内收到确认邮件。</div>
+
+      <!-- EP-09 隐私政策页 -->
+      <div class="epic" id="ep09" style="margin-top:24px">EP-09 隐私政策页</div>
+      <div class="note">⚠️ 页面内容须经法务审核后方可上线，不使用模板占位内容。上线前 Checklist 中必须包含此项。</div>
+      <h4>区块结构</h4>
+      <pre>① 隐私政策正文（富文本，多语言独立维护）
+   涵盖：数据收集范围 / 使用目的 / 存储期限 /
+         用户权利（查阅/删除/更正）/ 数据出境说明
+② Cookie 政策正文（富文本，多语言独立维护）
+③ 最后更新日期（自动显示 CMS 发布时间）
+④ 联系数据控制方（邮件地址，不硬编码）</pre>
+
+      <h4>功能清单</h4>
+      <table>
+        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>独立 URL</td><td>/zh-CN/privacy-policy，SEO 可索引，多语言各有独立路径</td></tr>
+          <tr><td>内容由 CMS 管理</td><td>隐私政策正文 + Cookie 政策正文均在 CMS 页面内容模块（CMS-06）维护</td></tr>
+          <tr><td>多语言</td><td>zh-CN / en-US 各自独立维护，不可互相翻译替代</td></tr>
+          <tr><td>Footer 入口</td><td>所有页面 Footer 提供隐私政策链接</td></tr>
+          <tr><td>Cookie 弹窗关联</td><td>首次访问的 Cookie 授权弹窗中，「了解更多」链接至本页</td></tr>
+        </tbody>
+      </table>
+      <div class="ac">隐私政策页内容经法务确认签字后方可发布上线。</div>
+      <div class="ac">Footer 中隐私政策链接可正常跳转，多语言环境下链接跳转至对应语言版本。</div>
+      <div class="ac">Cookie 弹窗「了解更多」点击后正确跳转至隐私政策页。</div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════

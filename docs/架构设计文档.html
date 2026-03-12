@@ -755,15 +755,16 @@
       <h3>4.4 开发者中心</h3>
 
       <div class="gray-box" style="border-left: 4px solid var(--warning); border-radius: 0 8px 8px 0; margin-bottom: 20px;">
-        <strong>⏸ 当前阶段：暂缓开发</strong><br>
-        开发者中心本期不实现完整功能。导航菜单保留入口，点击后显示「正在开发中」占位页，保留申请意向入口引导潜在开发者留资。以下为完整功能规划，待后续阶段启动时执行。
+        <strong>⏸ 当前阶段：不建独立页面，仅显示 Tooltip 提示</strong><br>
+        开发者中心本期不实现任何独立页面。导航菜单和首页 Hero CTA 保留「开发者中心」入口，但点击/悬停后仅显示 Tooltip 气泡，引导用户前往联系我们留资。以下为完整功能规划，待后续阶段启动时执行。
         <br><br>
-        <strong>占位页内容要求：</strong>
+        <strong>Tooltip 交互规格：</strong>
         <ul style="margin-top:8px; padding-left:20px;">
-          <li>标题：「开发者中心即将上线」</li>
-          <li>副文案：「API 文档、接入指南、SDK 正在准备中，欢迎提前留资，我们将在第一时间通知您」</li>
-          <li>CTA：[提交接入意向] → 跳转联系我们（意向分类预填「API 接口接入需求」）</li>
-          <li>支持多语言，文案通过多语言字典管理</li>
+          <li>触发方式：PC 端悬停 300ms，移动端点击</li>
+          <li>内容：「🚀 开发者中心即将上线 · API 文档 / SDK 正在准备中」+ [立即留资，优先获取通知 →]</li>
+          <li>点击 [立即留资]：跳转联系我们（意向分类预填「API 接口接入需求」）</li>
+          <li>无独立 URL，/developers 路径不存在</li>
+          <li>文案通过多语言字典管理</li>
         </ul>
       </div>
 
