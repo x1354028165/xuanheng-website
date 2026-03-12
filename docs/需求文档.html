@@ -21,10 +21,6 @@
   h2 { font-size: 18px; color: var(--primary); border-bottom: 2px solid var(--accent-light); padding-bottom: 10px; margin-bottom: 20px; }
   h3 { font-size: 15px; color: var(--primary); margin: 20px 0 10px; }
   h4 { font-size: 13px; font-weight: 700; margin: 14px 0 6px; color: var(--text); }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
-  .p0 { background: #fde8e8; color: var(--danger); }
-  .p1 { background: #fef3e2; color: var(--warning); }
-  .p2 { background: #e8f8f0; color: var(--success); }
   table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
   th { background: var(--primary); color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
   td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -32,7 +28,7 @@
   .story { background: var(--bg); border-left: 3px solid var(--accent); padding: 10px 14px; margin: 8px 0; border-radius: 0 6px 6px 0; font-size: 13px; }
   .ac { background: #e8f8f0; border-left: 3px solid var(--success); padding: 8px 14px; margin: 6px 0; border-radius: 0 6px 6px 0; font-size: 12px; }
   .ac::before { content: "✅ 验收标准："; font-weight: 700; color: var(--success); }
-  .paused { background: #fff8e6; border-left: 4px solid var(--warning); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; margin: 8px 0; }
+  .note { background: #fff8e6; border-left: 4px solid var(--warning); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; margin: 8px 0; }
   .epic { font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
 </style>
 </head>
@@ -42,70 +38,58 @@
     <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
     <span style="color:#3d6080;font-size:12px">|</span>
     <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
-    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="需求文档.html" style="color:#fff;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0;background:rgba(255,255,255,.15)">📋 需求文档</a>
     <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
-    <a href="前端技术规范.md" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
-    <a href="后端技术规范.md" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
-    <a href="测试用例.md" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
-    <a href="技术选型备忘.md" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
   </div>
 </div>
 
-
 <div class="header">
   <h1>旭衡电子官网 · 需求文档</h1>
-  <div class="meta">版本 v1.0 &nbsp;·&nbsp; 2026-03-12 &nbsp;·&nbsp; 基于架构设计文档 v1.0 &nbsp;·&nbsp; alwayscontrol.com.cn</div>
+  <div class="meta">版本 v1.1 &nbsp;·&nbsp; 2026-03-12 &nbsp;·&nbsp; 基于架构设计文档 v1.0 &nbsp;·&nbsp; alwayscontrol.com.cn</div>
 </div>
 
 <div class="container">
 
-  <!-- ── 0. 说明 ──────────────────────────────────────────── -->
+  <!-- ── 说明 ──────────────────────────────────────────── -->
   <div class="section">
     <h2>说明</h2>
-    <p>本文档为功能需求清单，供开发团队排期使用。详细业务逻辑、页面结构、CMS 模块规格见《架构设计文档》。</p>
-    <br>
-    <table>
-      <thead><tr><th>优先级</th><th>含义</th><th>目标</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge p0">P0</span></td><td>官网上线必须具备</td><td>第一版上线</td></tr>
-        <tr><td><span class="badge p1">P1</span></td><td>上线后第一轮迭代</td><td>SSO、权限体系、语言扩展</td></tr>
-        <tr><td><span class="badge p2">P2</span></td><td>后续持续优化</td><td>AI 问答、SEO 精细化、开发者中心</td></tr>
-      </tbody>
-    </table>
+    <p>本文档为功能需求清单，列出官网所有功能模块及验收标准，供开发团队确认范围使用。详细业务逻辑、页面结构、CMS 模块规格见《架构设计文档》。</p>
   </div>
 
-  <!-- ── 1. 前台页面需求 ──────────────────────────────────── -->
+  <!-- ── 一、前台页面需求 ──────────────────────────────────── -->
   <div class="section">
     <h2>一、前台页面需求</h2>
 
     <div class="epic">EP-01 首页</div>
     <div class="story">作为访客，我需要在首页快速判断"旭衡能解决我的问题"，并找到对应的解决方案或产品入口。</div>
-    <h4>功能清单</h4>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>Hero 区块（主标语 / 副标语 / CTA）</td><td><span class="badge p0">P0</span></td><td>文案由 CMS 配置，支持多语言</td></tr>
-        <tr><td>三路分流 CTA（解决方案 / 开发者中心 / 联系我们）</td><td><span class="badge p0">P0</span></td><td>开发者中心跳转占位页</td></tr>
-        <tr><td>解决方案场景卡片列表（5个）</td><td><span class="badge p0">P0</span></td><td>自动从 CMS 解决方案内容拉取</td></tr>
-        <tr><td>产品概览卡片</td><td><span class="badge p0">P0</span></td><td>自动从 CMS 产品内容拉取</td></tr>
-        <tr><td>兼容品牌 Logo 墙</td><td><span class="badge p0">P0</span></td><td>从 CMS 兼容品牌管理拉取</td></tr>
-        <tr><td>信任背书数字展示</td><td><span class="badge p1">P1</span></td><td>P0 阶段硬编码，P1 迁入 CMS</td></tr>
-        <tr><td>底部 CTA 区块</td><td><span class="badge p0">P0</span></td><td>文案通过多语言字典配置</td></tr>
+        <tr><td>Hero 区块（主标语 / 副标语 / CTA）</td><td>文案由 CMS 配置，支持多语言</td></tr>
+        <tr><td>三路分流 CTA（解决方案 / 开发者中心 / 联系我们）</td><td>开发者中心跳转占位页</td></tr>
+        <tr><td>解决方案场景卡片列表（5个）</td><td>自动从 CMS 解决方案内容拉取</td></tr>
+        <tr><td>产品概览卡片</td><td>自动从 CMS 产品内容拉取</td></tr>
+        <tr><td>兼容品牌 Logo 墙</td><td>从 CMS 兼容品牌管理拉取</td></tr>
+        <tr><td>信任背书数字展示</td><td>覆盖国家数 / 兼容品牌数 / 已交付项目数等核心数字</td></tr>
+        <tr><td>底部 CTA 区块</td><td>文案通过多语言字典配置</td></tr>
       </tbody>
     </table>
     <div class="ac">Hero 内容可在 CMS 后台修改并实时生效，不需要代码发布。</div>
     <div class="ac">三路分流 CTA 点击后正确跳转，开发者中心显示「正在开发中」占位页。</div>
 
     <div class="epic" style="margin-top:20px">EP-02 解决方案（5个场景页）</div>
-    <div class="story">作为采购方，我需要了解旭衡在我所在场景（储能/充电/VPP/电能质量）的完整解决方案，并快速找到相关产品。</div>
-    <h4>功能清单</h4>
+    <div class="story">作为采购方，我需要了解旭衡在我所在场景（储能/充电/VPP/电能质量/微电网）的完整解决方案，并快速找到相关产品。</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>场景页通用布局（Banner / 痛点 / 方案 / 亮点 / 产品卡片）</td><td><span class="badge p0">P0</span></td><td>全量内容由 CMS 配置，支持多语言</td></tr>
-        <tr><td>「本方案使用的产品」跳转卡片</td><td><span class="badge p0">P0</span></td><td>从产品-解决方案关联自动展示</td></tr>
-        <tr><td>应用案例区块</td><td><span class="badge p1">P1</span></td><td>从案例库关联，无案例时自动隐藏</td></tr>
-        <tr><td>导航菜单正确高亮当前场景</td><td><span class="badge p0">P0</span></td><td>—</td></tr>
+        <tr><td>场景页通用布局（Banner / 痛点 / 方案 / 亮点 / 产品卡片）</td><td>全量内容由 CMS 配置，支持多语言</td></tr>
+        <tr><td>「本方案使用的产品」跳转卡片</td><td>从产品-解决方案关联自动展示</td></tr>
+        <tr><td>应用案例区块</td><td>从案例库关联，无案例时自动隐藏</td></tr>
+        <tr><td>导航菜单正确高亮当前场景</td><td>—</td></tr>
       </tbody>
     </table>
     <div class="ac">5个场景页均能独立访问，URL 结构：/zh-CN/solutions/{slug}。</div>
@@ -113,15 +97,14 @@
 
     <div class="epic" style="margin-top:20px">EP-03 产品中心（8个产品页）</div>
     <div class="story">作为研发工程师，我需要找到某款硬件/云平台产品的详细参数和接入说明，并了解它适用于哪些场景。</div>
-    <h4>功能清单</h4>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>硬件产品页（参数表 / 接入方式 / 资源下载）</td><td><span class="badge p0">P0</span></td><td>Neuron II / III / III Lite，全量由 CMS 配置</td></tr>
-        <tr><td>云平台产品页（功能列表 / 技术规格 / 接入方式）</td><td><span class="badge p0">P0</span></td><td>HEMS / ESS / EVCMS / PQMS / VPP，由 CMS 配置</td></tr>
-        <tr><td>「应用场景」跳转卡片（→解决方案页）</td><td><span class="badge p0">P0</span></td><td>从产品-解决方案关联自动展示</td></tr>
-        <tr><td>文件下载列表（P0 阶段全部公开）</td><td><span class="badge p0">P0</span></td><td>从 CMS 文件资产管理拉取</td></tr>
-        <tr><td>文件下载权限控制（P1 接入 SSO 后启用）</td><td><span class="badge p1">P1</span></td><td>—</td></tr>
+        <tr><td>硬件产品页（参数表 / 接入方式 / 资源下载）</td><td>Neuron II / III / III Lite，全量由 CMS 配置</td></tr>
+        <tr><td>云平台产品页（功能列表 / 技术规格 / 接入方式）</td><td>HEMS / ESS / EVCMS / PQMS / VPP，由 CMS 配置</td></tr>
+        <tr><td>「应用场景」跳转卡片（→解决方案页）</td><td>从产品-解决方案关联自动展示</td></tr>
+        <tr><td>文件下载列表</td><td>从 CMS 文件资产管理拉取，上线初期全部公开</td></tr>
+        <tr><td>文件下载权限控制</td><td>接入 SSO 后启用，未登录时引导联系商务</td></tr>
       </tbody>
     </table>
     <div class="ac">8 个产品页各自可访问，URL 结构：/zh-CN/products/{slug}。</div>
@@ -130,175 +113,175 @@
     <div class="epic" style="margin-top:20px">EP-04 兼容生态页</div>
     <div class="story">作为采购方，我需要查看旭衡支持哪些品牌的设备，以确认我现有设备是否兼容。</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>品牌卡片列表（Logo / 名称 / 接入方式 / 状态）</td><td><span class="badge p0">P0</span></td><td>全量来自 CMS 兼容品牌管理</td></tr>
-        <tr><td>多维筛选（接入方式 / 状态 / 协议）</td><td><span class="badge p0">P0</span></td><td>选项由品牌数据动态生成</td></tr>
+        <tr><td>品牌卡片列表（Logo / 名称 / 接入方式 / 状态）</td><td>全量来自 CMS 兼容品牌管理</td></tr>
+        <tr><td>多维筛选（接入方式 / 状态 / 协议）</td><td>选项由品牌数据动态生成</td></tr>
       </tbody>
     </table>
     <div class="ac">筛选功能正常，筛选结果与 CMS 数据一致。</div>
 
     <div class="epic" style="margin-top:20px">EP-05 帮助中心</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>FAQ 列表（分类 + 搜索）</td><td><span class="badge p0">P0</span></td><td>全量来自 CMS FAQ 管理，支持多语言</td></tr>
-        <tr><td>文件/软件/固件下载列表（P0 全部公开）</td><td><span class="badge p0">P0</span></td><td>按产品型号/类型筛选</td></tr>
-        <tr><td>在线报修表单</td><td><span class="badge p0">P0</span></td><td>提交后企微+邮件通知，用户收回执邮件</td></tr>
-        <tr><td>AI 问答</td><td><span class="badge p2">P2</span></td><td>以 FAQ 库为底座</td></tr>
+        <tr><td>FAQ 列表（分类 + 搜索）</td><td>全量来自 CMS FAQ 管理，支持多语言</td></tr>
+        <tr><td>文件/软件/固件下载列表</td><td>按产品型号/类型筛选，上线初期全部公开</td></tr>
+        <tr><td>在线报修表单</td><td>提交后企微+邮件通知，用户收回执邮件</td></tr>
+        <tr><td>AI 问答</td><td>以 FAQ 库为底座，后续迭代启用</td></tr>
       </tbody>
     </table>
     <div class="ac">报修表单提交后，企微收到通知，用户邮箱收到确认邮件。</div>
 
     <div class="epic" style="margin-top:20px">EP-06 联系我们</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>商务咨询表单（意向分类）</td><td><span class="badge p0">P0</span></td><td>按意向路由至不同企微群 + 内部邮件</td></tr>
-        <tr><td>用户侧回执邮件</td><td><span class="badge p0">P0</span></td><td>提交后自动发送确认邮件给用户</td></tr>
-        <tr><td>联系人信息展示</td><td><span class="badge p0">P0</span></td><td>⚠️ 上线前填写真实联系人，不使用占位</td></tr>
+        <tr><td>商务咨询表单（意向分类）</td><td>按意向路由至不同企微群 + 内部邮件</td></tr>
+        <tr><td>用户侧回执邮件</td><td>提交后自动发送确认邮件给用户</td></tr>
+        <tr><td>联系人信息展示</td><td>⚠️ 上线前填写真实联系人，不使用占位</td></tr>
       </tbody>
     </table>
 
     <div class="epic" style="margin-top:20px">EP-07 关于我们</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>公司简介 / 发展历程</td><td><span class="badge p0">P0</span></td><td>P0 硬编码，P2 迁入 CMS</td></tr>
-        <tr><td>最新动态列表</td><td><span class="badge p0">P0</span></td><td>来自 CMS 新闻动态管理</td></tr>
-        <tr><td>招聘岗位列表</td><td><span class="badge p2">P2</span></td><td>—</td></tr>
+        <tr><td>公司简介 / 发展历程</td><td>—</td></tr>
+        <tr><td>最新动态列表</td><td>来自 CMS 新闻动态管理</td></tr>
+        <tr><td>招聘岗位列表</td><td>后续迭代启用</td></tr>
       </tbody>
     </table>
 
-    <div class="epic" style="margin-top:20px">EP-08 开发者中心（占位页）</div>
-    <div class="paused">⏸ 本期仅实现占位页，完整功能 P2 启动</div>
+    <div class="epic" style="margin-top:20px">EP-08 开发者中心</div>
+    <div class="note">📌 初版仅实现占位页，完整功能（API 文档 / 权限控制）后续迭代启动。</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>「正在开发中」占位页</td><td><span class="badge p0">P0</span></td><td>文案 + CTA「提交接入意向」，支持多语言</td></tr>
-        <tr><td>完整开发者中心（API 文档 / 权限控制）</td><td><span class="badge p2">P2</span></td><td>—</td></tr>
+        <tr><td>「正在开发中」占位页</td><td>文案 + CTA「提交接入意向」，支持多语言</td></tr>
+        <tr><td>完整开发者中心（API 文档 / 权限控制）</td><td>后续迭代</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ── 2. 全局功能需求 ──────────────────────────────────── -->
+  <!-- ── 二、全局功能需求 ──────────────────────────────────── -->
   <div class="section">
     <h2>二、全局功能需求</h2>
 
     <div class="epic">EP-09 多语言</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>zh-CN / en-US 双语全量覆盖</td><td><span class="badge p0">P0</span></td><td>核心维护语言</td></tr>
-        <tr><td>zh-TW 自动繁简转换</td><td><span class="badge p0">P0</span></td><td>由 zh-CN 自动生成</td></tr>
-        <tr><td>Header 语言切换器</td><td><span class="badge p0">P0</span></td><td>仅显示已发布语言</td></tr>
-        <tr><td>URL 多语言结构（/zh-CN/... /en-US/...）</td><td><span class="badge p0">P0</span></td><td>SEO 独立索引</td></tr>
-        <tr><td>de / fr / pt / es / ru 机器翻译辅助</td><td><span class="badge p1">P1</span></td><td>以 en-US 为源，机器翻译 + 人工校对</td></tr>
-        <tr><td>内容回退机制</td><td><span class="badge p0">P0</span></td><td>未翻译内容按链回退，不显示空白</td></tr>
+        <tr><td>zh-CN / en-US 双语全量覆盖</td><td>核心维护语言</td></tr>
+        <tr><td>zh-TW 自动繁简转换</td><td>由 zh-CN 自动生成</td></tr>
+        <tr><td>Header 语言切换器</td><td>仅显示已发布语言</td></tr>
+        <tr><td>URL 多语言结构（/zh-CN/... /en-US/...）</td><td>SEO 独立索引</td></tr>
+        <tr><td>de / fr / pt / es / ru 机器翻译辅助</td><td>以 en-US 为源，机器翻译 + 人工校对</td></tr>
+        <tr><td>内容回退机制</td><td>未翻译内容按链回退，不显示空白</td></tr>
       </tbody>
     </table>
     <div class="ac">切换语言后 URL 变更，页面内容正确切换，SEO 元数据同步更新。</div>
 
     <div class="epic" style="margin-top:20px">EP-10 全局搜索</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>Header 常驻搜索框</td><td><span class="badge p0">P0</span></td><td>跨 FAQ / 品牌 / 产品 / 文档全站索引</td></tr>
-        <tr><td>CMS 内容发布后自动更新索引</td><td><span class="badge p0">P0</span></td><td>—</td></tr>
+        <tr><td>Header 常驻搜索框</td><td>跨 FAQ / 品牌 / 产品 / 文档全站索引</td></tr>
+        <tr><td>CMS 内容发布后自动更新索引</td><td>—</td></tr>
       </tbody>
     </table>
 
     <div class="epic" style="margin-top:20px">EP-11 表单通知</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>企业微信群机器人通知（按意向分类路由）</td><td><span class="badge p0">P0</span></td><td>Webhook URL 在 CMS 后台配置</td></tr>
-        <tr><td>内部邮件通知（按意向分类路由至指定邮箱）</td><td><span class="badge p0">P0</span></td><td>收件邮箱在 CMS 后台配置</td></tr>
-        <tr><td>用户侧确认回执邮件</td><td><span class="badge p0">P0</span></td><td>邮件模板在 CMS 后台编辑，支持多语言</td></tr>
+        <tr><td>企业微信群机器人通知（按意向分类路由）</td><td>Webhook URL 在 CMS 后台配置</td></tr>
+        <tr><td>内部邮件通知（按意向分类路由至指定邮箱）</td><td>收件邮箱在 CMS 后台配置</td></tr>
+        <tr><td>用户侧确认回执邮件</td><td>邮件模板在 CMS 后台编辑，支持多语言</td></tr>
       </tbody>
     </table>
     <div class="ac">表单提交 5 分钟内，企微群和指定邮箱均收到通知；用户邮箱收到确认邮件。</div>
 
     <div class="epic" style="margin-top:20px">EP-12 SEO 基础</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>SSR（服务端渲染）</td><td><span class="badge p0">P0</span></td><td>不使用 SPA，保证搜索引擎可索引</td></tr>
-        <tr><td>每页 title / description / OG Tags 可配置</td><td><span class="badge p0">P0</span></td><td>P0 阶段硬编码，P2 迁入 CMS</td></tr>
-        <tr><td>Sitemap 自动生成</td><td><span class="badge p0">P0</span></td><td>内容发布后自动更新</td></tr>
-        <tr><td>robots.txt 配置</td><td><span class="badge p0">P0</span></td><td>Staging 全站 noindex</td></tr>
+        <tr><td>SSR（服务端渲染）</td><td>不使用 SPA，保证搜索引擎可索引</td></tr>
+        <tr><td>每页 title / description / OG Tags 可配置</td><td>—</td></tr>
+        <tr><td>Sitemap 自动生成</td><td>内容发布后自动更新</td></tr>
+        <tr><td>robots.txt 配置</td><td>Staging 全站 noindex</td></tr>
       </tbody>
     </table>
 
     <div class="epic" style="margin-top:20px">EP-13 隐私合规</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>Cookie 授权弹窗（GDPR/LGPD）</td><td><span class="badge p0">P0</span></td><td>首次访问弹出，支持多语言</td></tr>
-        <tr><td>隐私政策页（多语言）</td><td><span class="badge p0">P0</span></td><td>⚠️ 法务审核后上线，不使用模板占位</td></tr>
+        <tr><td>Cookie 授权弹窗（GDPR/LGPD）</td><td>首次访问弹出，支持多语言</td></tr>
+        <tr><td>隐私政策页（多语言）</td><td>⚠️ 法务审核后上线，不使用模板占位</td></tr>
       </tbody>
     </table>
 
-    <div class="epic" style="margin-top:20px">EP-14 访问控制 / SSO（P1）</div>
-    <div class="paused">⏸ P0 阶段跳过，所有内容公开，无登录入口。P1 阶段接入爱尚管理后台 SSO 后启用。</div>
+    <div class="epic" style="margin-top:20px">EP-14 访问控制 / SSO</div>
+    <div class="note">📌 初版上线时所有内容公开，无登录入口。SSO 及权限体系在后续迭代中接入爱尚管理后台后启用。</div>
     <table>
-      <thead><tr><th>功能点</th><th>优先级</th><th>说明</th></tr></thead>
+      <thead><tr><th>功能点</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>客户登录（SSO → 统一账号系统）</td><td><span class="badge p1">P1</span></td><td>Header 显示登录按钮</td></tr>
-        <tr><td>产品线标签权限控制</td><td><span class="badge p1">P1</span></td><td>HEMS / ESS / EVCMS / VPP / PQMS</td></tr>
-        <tr><td>文件下载权限分层</td><td><span class="badge p1">P1</span></td><td>按标签控制，无权限时引导联系商务</td></tr>
-        <tr><td>个人中心</td><td><span class="badge p1">P1</span></td><td>权限标签展示 / 下载记录 / API Key</td></tr>
+        <tr><td>客户登录（SSO → 统一账号系统）</td><td>Header 显示登录按钮</td></tr>
+        <tr><td>产品线标签权限控制</td><td>HEMS / ESS / EVCMS / VPP / PQMS</td></tr>
+        <tr><td>文件下载权限分层</td><td>按标签控制，无权限时引导联系商务</td></tr>
+        <tr><td>个人中心</td><td>权限标签展示 / 下载记录 / API Key</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ── 3. CMS 后台需求 ──────────────────────────────────── -->
+  <!-- ── 三、CMS 后台需求 ──────────────────────────────────── -->
   <div class="section">
     <h2>三、CMS 后台需求</h2>
     <table>
-      <thead><tr><th>模块</th><th>优先级</th><th>核心能力（详见架构设计文档 §5）</th></tr></thead>
+      <thead><tr><th>模块</th><th>核心能力（详见架构设计文档 §5）</th></tr></thead>
       <tbody>
-        <tr><td>媒体库</td><td><span class="badge p0">P0</span></td><td>图片统一管理、OSS 直传、替换覆盖原链接、引用追踪</td></tr>
-        <tr><td>页面内容管理</td><td><span class="badge p0">P0</span></td><td>首页 Hero / Banner / CTA 文案配置、草稿预览、变更历史</td></tr>
-        <tr><td>产品内容管理</td><td><span class="badge p0">P0</span></td><td>8 个产品页全量内容（参数表 / 功能卡片 / 接入方式）</td></tr>
-        <tr><td>解决方案内容管理</td><td><span class="badge p0">P0</span></td><td>5 个场景页全量内容（痛点 / 方案 / 亮点 / 案例关联）</td></tr>
-        <tr><td>文件资产管理</td><td><span class="badge p0">P0</span></td><td>文档 / 软件 / 固件上传、版本管理、下载统计</td></tr>
-        <tr><td>兼容品牌管理</td><td><span class="badge p0">P0</span></td><td>品牌 CRUD、Logo 上传、状态管理、排序</td></tr>
-        <tr><td>新闻动态管理</td><td><span class="badge p0">P0</span></td><td>富文本编辑、草稿/发布、多语言</td></tr>
-        <tr><td>FAQ 管理</td><td><span class="badge p0">P0</span></td><td>CRUD、分类、多语言</td></tr>
-        <tr><td>线索管理</td><td><span class="badge p0">P0</span></td><td>表单收件箱、状态跟踪、企微+邮件通知配置</td></tr>
-        <tr><td>通知配置</td><td><span class="badge p0">P0</span></td><td>企微 Webhook / 内部邮件 / 用户回执邮件模板</td></tr>
-        <tr><td>产品-解决方案关联</td><td><span class="badge p0">P0</span></td><td>一次配置双向自动展示</td></tr>
-        <tr><td>运维工具（基础）</td><td><span class="badge p0">P0</span></td><td>缓存清除 / CDN 刷新 / 死链扫描</td></tr>
-        <tr><td>多语言字典管理</td><td><span class="badge p1">P1</span></td><td>UI 词条管理、批量导出、语言列表管理</td></tr>
-        <tr><td>客户权限管理（SSO）</td><td><span class="badge p1">P1</span></td><td>账号打通 / 标签分配 / 权限即时生效</td></tr>
-        <tr><td>API 开发者管理</td><td><span class="badge p1">P1</span></td><td>申请审核 / Key 生成 / 配额管理</td></tr>
-        <tr><td>案例管理</td><td><span class="badge p1">P1</span></td><td>CRUD / 关联解决方案 / 多语言</td></tr>
-        <tr><td>SEO 配置</td><td><span class="badge p2">P2</span></td><td>每页独立配置 title/description/OG</td></tr>
-        <tr><td>公司介绍管理</td><td><span class="badge p2">P2</span></td><td>简介 / 核心数字 / 发展历程</td></tr>
-        <tr><td>招聘管理</td><td><span class="badge p2">P2</span></td><td>岗位 CRUD / 上下线控制</td></tr>
-        <tr><td>FAQ AI 问答</td><td><span class="badge p2">P2</span></td><td>RAG 知识库 / 自然语言问答</td></tr>
-        <tr><td>操作日志</td><td><span class="badge p2">P2</span></td><td>审计追踪，保留 90 天</td></tr>
+        <tr><td>媒体库</td><td>图片统一管理、OSS 直传、替换覆盖原链接、引用追踪</td></tr>
+        <tr><td>页面内容管理</td><td>首页 Hero / Banner / CTA 文案配置、草稿预览、变更历史</td></tr>
+        <tr><td>产品内容管理</td><td>8 个产品页全量内容（参数表 / 功能卡片 / 接入方式）</td></tr>
+        <tr><td>解决方案内容管理</td><td>5 个场景页全量内容（痛点 / 方案 / 亮点 / 案例关联）</td></tr>
+        <tr><td>文件资产管理</td><td>文档 / 软件 / 固件上传、版本管理、下载统计</td></tr>
+        <tr><td>兼容品牌管理</td><td>品牌 CRUD、Logo 上传、状态管理、排序</td></tr>
+        <tr><td>新闻动态管理</td><td>富文本编辑、草稿/发布、多语言</td></tr>
+        <tr><td>FAQ 管理</td><td>CRUD、分类、多语言</td></tr>
+        <tr><td>线索管理</td><td>表单收件箱、状态跟踪、企微+邮件通知配置</td></tr>
+        <tr><td>通知配置</td><td>企微 Webhook / 内部邮件 / 用户回执邮件模板</td></tr>
+        <tr><td>产品-解决方案关联</td><td>一次配置双向自动展示</td></tr>
+        <tr><td>运维工具</td><td>缓存清除 / CDN 刷新 / 死链扫描</td></tr>
+        <tr><td>多语言字典管理</td><td>UI 词条管理、批量导出、语言列表管理</td></tr>
+        <tr><td>客户权限管理（SSO）</td><td>账号打通 / 标签分配 / 权限即时生效</td></tr>
+        <tr><td>API 开发者管理</td><td>申请审核 / Key 生成 / 配额管理</td></tr>
+        <tr><td>案例管理</td><td>CRUD / 关联解决方案 / 多语言</td></tr>
+        <tr><td>SEO 配置</td><td>每页独立配置 title/description/OG</td></tr>
+        <tr><td>公司介绍管理</td><td>简介 / 核心数字 / 发展历程</td></tr>
+        <tr><td>招聘管理</td><td>岗位 CRUD / 上下线控制</td></tr>
+        <tr><td>FAQ AI 问答</td><td>RAG 知识库 / 自然语言问答</td></tr>
+        <tr><td>操作日志</td><td>审计追踪，保留 90 天</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ── 4. 非功能性需求摘要 ──────────────────────────────── -->
+  <!-- ── 四、非功能性需求 ──────────────────────────────────── -->
   <div class="section">
-    <h2>四、非功能性需求摘要</h2>
+    <h2>四、非功能性需求</h2>
     <table>
-      <thead><tr><th>指标</th><th>要求</th><th>优先级</th></tr></thead>
+      <thead><tr><th>指标</th><th>要求</th></tr></thead>
       <tbody>
-        <tr><td>内容更新不走代码发布</td><td>所有面向用户的内容通过 CMS 管理，运营独立操作</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>SSR 服务端渲染</td><td>不使用纯 SPA，保证 SEO 可索引</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>表单通知时效</td><td>提交 5 分钟内企微/邮件到达</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>国内外双节点访问</td><td>国内/海外用户均走就近加速节点</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>ICP 备案</td><td>上线前完成，不得先上线再备案</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>Staging 环境</td><td>独立数据库 + CMS，noindex 隔离</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>移动端基础适配</td><td>首页 / 联系我们 / 产品页移动端正常可用</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>隐私合规（GDPR / LGPD）</td><td>Cookie 弹窗 + 隐私政策法务确认</td><td><span class="badge p0">P0</span></td></tr>
-        <tr><td>文件下载签名临时链接</td><td>P1 权限启用后，下载链接有效期 ≤ 5 分钟</td><td><span class="badge p1">P1</span></td></tr>
-        <tr><td>SEO 元数据可配置</td><td>每页 title/description/OG 独立配置</td><td><span class="badge p2">P2</span></td></tr>
+        <tr><td>内容更新不走代码发布</td><td>所有面向用户的内容通过 CMS 管理，运营独立操作</td></tr>
+        <tr><td>SSR 服务端渲染</td><td>不使用纯 SPA，保证 SEO 可索引</td></tr>
+        <tr><td>表单通知时效</td><td>提交 5 分钟内企微/邮件到达</td></tr>
+        <tr><td>国内外双节点访问</td><td>国内/海外用户均走就近加速节点</td></tr>
+        <tr><td>ICP 备案</td><td>上线前完成，不得先上线再备案</td></tr>
+        <tr><td>Staging 环境</td><td>独立数据库 + CMS，noindex 隔离</td></tr>
+        <tr><td>移动端适配</td><td>首页 / 联系我们 / 产品页移动端正常可用</td></tr>
+        <tr><td>隐私合规（GDPR / LGPD）</td><td>Cookie 弹窗 + 隐私政策法务确认后上线</td></tr>
+        <tr><td>文件下载签名临时链接</td><td>权限启用后，下载链接有效期 ≤ 5 分钟</td></tr>
+        <tr><td>SEO 元数据可配置</td><td>每页 title/description/OG 独立配置</td></tr>
       </tbody>
     </table>
   </div>
