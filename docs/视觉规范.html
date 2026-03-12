@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>旭衡电子官网 视觉规范</title>
+<style>
+  :root {
+    --primary:#1a3a5c; --primary-light:#2a5a8c; --primary-dark:#0f2035;
+    --accent:#2980b9; --accent-light:#d6eaf8; --accent-hover:#1f6391;
+    --success:#27ae60; --danger:#e74c3c; --warning:#f39c12; --purple:#8e44ad;
+    --bg:#f5f7fa; --card:#fff; --border:#dde3ea;
+    --text:#2c3e50; --text-secondary:#5d6d7e; --muted:#7f8c8d;
+    --shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
+  .header{background:var(--primary);color:#fff;padding:40px;background-image:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);}
+  .header h1{font-size:26px;font-weight:700;letter-spacing:.5px;}
+  .header p{opacity:.7;margin-top:6px;font-size:13px;}
+  .container{max-width:1040px;margin:0 auto;padding:32px 24px;}
+  .section{background:var(--card);border-radius:10px;padding:30px 32px;margin-bottom:28px;border:1px solid var(--border);}
+  h2{font-size:18px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:10px;margin-bottom:24px;}
+  h3{font-size:14px;font-weight:700;color:var(--text-secondary);margin:20px 0 10px;text-transform:uppercase;letter-spacing:.5px;}
+  .grid{display:grid;gap:16px;}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .grid-6{grid-template-columns:repeat(6,1fr);}
+  /* Color Swatches */
+  .swatch{border-radius:8px;overflow:hidden;box-shadow:var(--shadow);}
+  .swatch-color{height:80px;}
+  .swatch-info{padding:10px 12px;font-size:12px;background:#fff;}
+  .swatch-name{font-weight:700;margin-bottom:2px;}
+  .swatch-hex{color:var(--muted);font-family:monospace;}
+  .swatch-usage{color:var(--text-secondary);font-size:11px;margin-top:4px;}
+  /* Typography */
+  .type-sample{padding:16px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px;}
+  .type-label{font-size:11px;color:var(--muted);margin-bottom:6px;font-family:monospace;}
+  /* Spacing */
+  .space-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+  .space-block{background:var(--accent-light);border-radius:3px;}
+  .space-label{font-size:12px;color:var(--muted);min-width:80px;font-family:monospace;}
+  /* Components */
+  .comp-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:16px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px;}
+  .comp-label{font-size:11px;color:var(--muted);width:100%;margin-bottom:4px;}
+  /* Buttons */
+  .btn{display:inline-block;padding:10px 22px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:.2s;}
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{background:var(--accent-hover);}
+  .btn-outline{background:transparent;color:var(--accent);border:2px solid var(--accent);}
+  .btn-ghost{background:transparent;color:var(--primary);border:2px solid var(--border);}
+  .btn-danger{background:var(--danger);color:#fff;}
+  .btn-sm{padding:6px 14px;font-size:12px;}
+  .btn-lg{padding:14px 32px;font-size:16px;}
+  /* Badges */
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+  /* Cards */
+  .card-demo{background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow);}
+  /* Icons */
+  .icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;}
+  .icon-item{text-align:center;padding:12px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--muted);}
+  .icon-item span{display:block;font-size:22px;margin-bottom:4px;}
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
+  td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  /* Alert / Notice */
+  .alert{padding:12px 16px;border-radius:6px;font-size:13px;margin-bottom:10px;}
+  .alert-info{background:var(--accent-light);border-left:4px solid var(--accent);color:var(--primary);}
+  .alert-success{background:#eafaf1;border-left:4px solid var(--success);color:#1e7e40;}
+  .alert-warning{background:#fef9e7;border-left:4px solid var(--warning);color:#9a6205;}
+  .alert-danger{background:#fdedec;border-left:4px solid var(--danger);color:#922b21;}
+  /* Form */
+  .form-group{margin-bottom:16px;}
+  .form-label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
+  .form-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text);outline:none;transition:.2s;}
+  .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(41,128,185,.15);}
+  .form-input.error{border-color:var(--danger);}
+  .form-hint{font-size:11px;color:var(--muted);margin-top:4px;}
+  .form-error{font-size:11px;color:var(--danger);margin-top:4px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>旭衡电子官网 · 视觉规范</h1>
+  <p>Design System v1.0 &nbsp;·&nbsp; 2026-03-12 &nbsp;·&nbsp; alwayscontrol.com.cn</p>
+</div>
+
+<div class="container">
+
+  <!-- 色彩 -->
+  <div class="section">
+    <h2>一、色彩系统 Color System</h2>
+
+    <h3>品牌主色</h3>
+    <div class="grid grid-3" style="margin-bottom:20px">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1a3a5c"></div>
+        <div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#1A3A5C</div><div class="swatch-usage">导航栏、标题、重要文字</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2980b9"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent Blue</div><div class="swatch-hex">#2980B9</div><div class="swatch-usage">主按钮、链接、强调色</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#d6eaf8"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent Light</div><div class="swatch-hex">#D6EAF8</div><div class="swatch-usage">背景高亮、选中态</div></div>
+      </div>
+    </div>
+
+    <h3>功能色</h3>
+    <div class="grid grid-4" style="margin-bottom:20px">
+      <div class="swatch"><div class="swatch-color" style="background:#27ae60"></div><div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-hex">#27AE60</div><div class="swatch-usage">成功状态、P0 标签</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#e74c3c"></div><div class="swatch-info"><div class="swatch-name">Danger</div><div class="swatch-hex">#E74C3C</div><div class="swatch-usage">错误、警告必填、P0优先级</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#f39c12"></div><div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-hex">#F39C12</div><div class="swatch-usage">待注意、P1 标签</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8e44ad"></div><div class="swatch-info"><div class="swatch-name">Purple</div><div class="swatch-hex">#8E44AD</div><div class="swatch-usage">标签、徽章装饰</div></div></div>
+    </div>
+
+    <h3>中性色</h3>
+    <div class="grid grid-6">
+      <div class="swatch"><div class="swatch-color" style="background:#f5f7fa;border:1px solid #dde3ea"></div><div class="swatch-info"><div class="swatch-name">BG</div><div class="swatch-hex">#F5F7FA</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#ffffff;border:1px solid #dde3ea"></div><div class="swatch-info"><div class="swatch-name">Card</div><div class="swatch-hex">#FFFFFF</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#dde3ea"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#DDE3EA</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#2c3e50"></div><div class="swatch-info"><div class="swatch-name">Text</div><div class="swatch-hex">#2C3E50</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#5d6d7e"></div><div class="swatch-info"><div class="swatch-name">Secondary</div><div class="swatch-hex">#5D6D7E</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7f8c8d"></div><div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#7F8C8D</div></div></div>
+    </div>
+  </div>
+
+  <!-- 字体 -->
+  <div class="section">
+    <h2>二、字体规范 Typography</h2>
+
+    <h3>字体栈</h3>
+    <table style="margin-bottom:20px">
+      <thead><tr><th>场景</th><th>字体栈</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>正文（中文）</td><td><code>-apple-system, "PingFang SC", "Microsoft YaHei", sans-serif</code></td><td>系统字体优先，无需加载外部字体</td></tr>
+        <tr><td>正文（英文/数字）</td><td><code>-apple-system, "Segoe UI", "Helvetica Neue", sans-serif</code></td><td>同上</td></tr>
+        <tr><td>代码 / 技术参数</td><td><code>"JetBrains Mono", "Fira Code", "Courier New", monospace</code></td><td>等宽字体，参数表和代码块使用</td></tr>
+      </tbody>
+    </table>
+
+    <h3>字阶</h3>
+    <div class="type-sample"><div class="type-label">H1 · 32px / 700 · line-height 1.3 · 页面主标题</div><div style="font-size:32px;font-weight:700;color:var(--primary)">驱动每一度电的智慧</div></div>
+    <div class="type-sample"><div class="type-label">H2 · 24px / 700 · line-height 1.4 · 章节标题</div><div style="font-size:24px;font-weight:700;color:var(--primary)">解决方案中心</div></div>
+    <div class="type-sample"><div class="type-label">H3 · 18px / 600 · line-height 1.5 · 卡片标题</div><div style="font-size:18px;font-weight:600">户用家庭储能解决方案</div></div>
+    <div class="type-sample"><div class="type-label">Body · 14px / 400 · line-height 1.7 · 正文</div><div style="font-size:14px">旭衡电子深耕能源 IoT 领域，为储能、充电、电能质量等场景提供硬件网关与云平台一体化解决方案。</div></div>
+    <div class="type-sample"><div class="type-label">Small · 12px / 400 · line-height 1.6 · 辅助说明</div><div style="font-size:12px;color:var(--muted)">此内容需要开通对应产品线权限后访问。如有疑问请联系商务团队。</div></div>
+    <div class="type-sample"><div class="type-label">Code · 13px / monospace · 技术参数 / 代码</div><div style="font-size:13px;font-family:monospace;background:#f5f7fa;padding:4px 8px;border-radius:4px;display:inline-block">RS485 / Modbus RTU / 4G / WiFi</div></div>
+  </div>
+
+  <!-- 间距 -->
+  <div class="section">
+    <h2>三、间距系统 Spacing</h2>
+    <p style="margin-bottom:16px;font-size:13px;color:var(--muted)">基于 4px 基准单位，所有间距为 4 的倍数。</p>
+    <div class="space-row"><div class="space-label">4px · xs</div><div class="space-block" style="width:4px;height:20px"></div><div style="font-size:12px;color:var(--muted)">图标与文字间距、徽章内边距</div></div>
+    <div class="space-row"><div class="space-label">8px · sm</div><div class="space-block" style="width:8px;height:20px"></div><div style="font-size:12px;color:var(--muted)">列表项间距、按钮内边距</div></div>
+    <div class="space-row"><div class="space-label">12px · md</div><div class="space-block" style="width:12px;height:20px"></div><div style="font-size:12px;color:var(--muted)">表单元素间距</div></div>
+    <div class="space-row"><div class="space-label">16px · lg</div><div class="space-block" style="width:16px;height:20px"></div><div style="font-size:12px;color:var(--muted)">卡片内边距（小）、段落间距</div></div>
+    <div class="space-row"><div class="space-label">24px · xl</div><div class="space-block" style="width:24px;height:20px"></div><div style="font-size:12px;color:var(--muted)">卡片内边距（标准）、区块间距</div></div>
+    <div class="space-row"><div class="space-label">32px · 2xl</div><div class="space-block" style="width:32px;height:20px"></div><div style="font-size:12px;color:var(--muted)">章节间距、模块间距</div></div>
+    <div class="space-row"><div class="space-label">48px · 3xl</div><div class="space-block" style="width:48px;height:20px"></div><div style="font-size:12px;color:var(--muted)">页面级大间距、Hero 内边距</div></div>
+    <div class="space-row"><div class="space-label">64px · 4xl</div><div class="space-block" style="width:64px;height:20px"></div><div style="font-size:12px;color:var(--muted)">Hero 区块上下边距</div></div>
+  </div>
+
+  <!-- 圆角 & 阴影 -->
+  <div class="section">
+    <h2>四、圆角与阴影</h2>
+    <div class="grid grid-3" style="margin-bottom:20px">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:16px;text-align:center"><div style="font-size:12px;color:var(--muted)">4px · 小组件</div><div style="font-size:11px;font-family:monospace;margin-top:4px">btn / badge / tag</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center"><div style="font-size:12px;color:var(--muted)">8px · 卡片</div><div style="font-size:11px;font-family:monospace;margin-top:4px">card / input / dropdown</div></div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center"><div style="font-size:12px;color:var(--muted)">12px · 大卡片</div><div style="font-size:11px;font-family:monospace;margin-top:4px">modal / panel / section</div></div>
+    </div>
+    <table>
+      <thead><tr><th>层级</th><th>CSS</th><th>使用场景</th></tr></thead>
+      <tbody>
+        <tr><td>Level 0（无阴影）</td><td><code>none</code></td><td>背景区块、内嵌元素</td></tr>
+        <tr><td>Level 1（轻阴影）</td><td><code>0 2px 8px rgba(0,0,0,.08)</code></td><td>卡片、下拉菜单</td></tr>
+        <tr><td>Level 2（中阴影）</td><td><code>0 4px 16px rgba(0,0,0,.12)</code></td><td>悬停态卡片、浮层</td></tr>
+        <tr><td>Level 3（深阴影）</td><td><code>0 8px 32px rgba(0,0,0,.16)</code></td><td>模态框、Popover</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 按钮 -->
+  <div class="section">
+    <h2>五、按钮组件 Buttons</h2>
+    <div class="comp-row">
+      <div class="comp-label">Primary · 主操作</div>
+      <button class="btn btn-primary">查看解决方案</button>
+      <button class="btn btn-primary btn-sm">联系我们</button>
+      <button class="btn btn-primary btn-lg">立即咨询</button>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Outline · 次要操作</div>
+      <button class="btn btn-outline">了解更多</button>
+      <button class="btn btn-outline btn-sm">查看详情</button>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Ghost · 弱操作</div>
+      <button class="btn btn-ghost">取消</button>
+      <button class="btn btn-ghost btn-sm">返回</button>
+    </div>
+    <div class="comp-row">
+      <div class="comp-label">Danger · 危险操作</div>
+      <button class="btn btn-danger">删除</button>
+    </div>
+    <table style="margin-top:16px">
+      <thead><tr><th>规则</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>每个操作区最多一个 Primary 按钮</td><td>避免视觉重心分散</td></tr>
+        <tr><td>Danger 按钮需二次确认</td><td>删除/下线等不可逆操作必须弹窗确认</td></tr>
+        <tr><td>按钮文字 ≤ 8 个字</td><td>超出用 Tooltip 展示完整说明</td></tr>
+        <tr><td>禁用态 opacity: 0.5</td><td>不改变颜色，仅降低透明度</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 表单 -->
+  <div class="section">
+    <h2>六、表单组件 Forms</h2>
+    <div class="grid grid-2">
+      <div>
+        <div class="form-group">
+          <label class="form-label">公司名称 <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" placeholder="请输入贵公司名称">
+          <div class="form-hint">请填写营业执照上的公司全称</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">联系邮箱 <span style="color:var(--danger)">*</span></label>
+          <input class="form-input error" value="wrong-email" placeholder="example@company.com">
+          <div class="form-error">请输入有效的邮箱地址</div>
+        </div>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>规则</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>必填标记</td><td>红色 * 号紧跟 label</td></tr>
+            <tr><td>错误状态</td><td>边框变红，下方显示错误文字</td></tr>
+            <tr><td>聚焦状态</td><td>蓝色边框 + 蓝色光晕</td></tr>
+            <tr><td>Placeholder</td><td>灰色，提示填写格式</td></tr>
+            <tr><td>最大宽度</td><td>输入框不超过 480px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 状态提示 -->
+  <div class="section">
+    <h2>七、状态提示 Alerts</h2>
+    <div class="alert alert-info">ℹ️ <strong>提示：</strong>此功能需要完成 ICP 备案后方可上线。</div>
+    <div class="alert alert-success">✅ <strong>成功：</strong>表单已提交，我们将在 1 个工作日内与您联系。</div>
+    <div class="alert alert-warning">⚠️ <strong>注意：</strong>此文档待翻译，当前显示中文版本。</div>
+    <div class="alert alert-danger">❌ <strong>错误：</strong>上传文件超过 50MB 限制，请压缩后重试。</div>
+  </div>
+
+  <!-- 布局 -->
+  <div class="section">
+    <h2>八、页面布局规范 Layout</h2>
+    <table>
+      <thead><tr><th>断点</th><th>范围</th><th>布局</th></tr></thead>
+      <tbody>
+        <tr><td>Mobile</td><td>&lt; 768px</td><td>单列，Hamburger 导航，字号 -1px</td></tr>
+        <tr><td>Tablet</td><td>768px – 1024px</td><td>双列卡片，导航折叠</td></tr>
+        <tr><td>Desktop</td><td>1024px – 1440px</td><td>标准三/四列布局，主要目标</td></tr>
+        <tr><td>Wide</td><td>&gt; 1440px</td><td>内容居中，最大宽度 1280px</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <table>
+      <thead><tr><th>元素</th><th>规格</th></tr></thead>
+      <tbody>
+        <tr><td>Header 高度</td><td>64px（固定顶部，页面滚动时保持）</td></tr>
+        <tr><td>内容最大宽度</td><td>1280px，居中对齐</td></tr>
+        <tr><td>页面内边距（左右）</td><td>Desktop: 40px，Mobile: 16px</td></tr>
+        <tr><td>卡片网格间距</td><td>24px</td></tr>
+        <tr><td>章节上下间距</td><td>64px（大章节）/ 40px（小章节）</td></tr>
+        <tr><td>Footer 高度</td><td>Auto，最小 160px</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 图标 -->
+  <div class="section">
+    <h2>九、图标规范 Icons</h2>
+    <p style="font-size:13px;margin-bottom:16px">推荐使用 <strong>Lucide Icons</strong> 或 <strong>Heroicons</strong>（MIT 协议），风格统一，提供 SVG 和组件两种用法。</p>
+    <div class="icon-grid">
+      <div class="icon-item"><span>⚡</span>储能</div>
+      <div class="icon-item"><span>🔌</span>充电</div>
+      <div class="icon-item"><span>🌐</span>全球</div>
+      <div class="icon-item"><span>📊</span>数据</div>
+      <div class="icon-item"><span>🔒</span>权限</div>
+      <div class="icon-item"><span>📁</span>文件</div>
+      <div class="icon-item"><span>💬</span>联系</div>
+      <div class="icon-item"><span>✅</span>完成</div>
+    </div>
+    <br>
+    <table>
+      <thead><tr><th>尺寸</th><th>像素</th><th>使用场景</th></tr></thead>
+      <tbody>
+        <tr><td>xs</td><td>14px</td><td>行内图标、表格内图标</td></tr>
+        <tr><td>sm</td><td>18px</td><td>按钮图标、标签图标</td></tr>
+        <tr><td>md</td><td>24px</td><td>导航图标、卡片图标（标准）</td></tr>
+        <tr><td>lg</td><td>32px</td><td>功能模块入口图标</td></tr>
+        <tr><td>xl</td><td>48px</td><td>空状态插图、大图标</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 图片规范 -->
+  <div class="section">
+    <h2>十、图片规范 Images</h2>
+    <table>
+      <thead><tr><th>用途</th><th>推荐尺寸</th><th>比例</th><th>格式</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>Hero 背景图</td><td>1920 × 900px</td><td>16:7.5</td><td>WebP / JPG</td><td>大图压缩至 300KB 以内</td></tr>
+        <tr><td>解决方案 Banner</td><td>1280 × 480px</td><td>8:3</td><td>WebP / JPG</td><td>—</td></tr>
+        <tr><td>产品主图</td><td>800 × 800px</td><td>1:1</td><td>WebP / PNG</td><td>透明背景，展示设备实物</td></tr>
+        <tr><td>案例封面图</td><td>800 × 500px</td><td>16:10</td><td>WebP / JPG</td><td>—</td></tr>
+        <tr><td>兼容品牌 Logo</td><td>240 × 120px</td><td>2:1</td><td>SVG 优先 / PNG</td><td>透明背景，品牌色保留</td></tr>
+        <tr><td>新闻封面图</td><td>600 × 400px</td><td>3:2</td><td>WebP / JPG</td><td>—</td></tr>
+        <tr><td>OG 分享图</td><td>1200 × 630px</td><td>1.91:1</td><td>JPG / PNG</td><td>社交分享必备</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="alert alert-info">ℹ️ 所有图片上传至媒体库时，系统自动转换为 WebP 格式并压缩，无需手动处理。</div>
+  </div>
+
+</div>
+</body>
+</html>
