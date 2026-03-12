@@ -141,8 +141,8 @@
 ├── 兼容生态 /ecosystem
 │   └── 已接入品牌（储能/逆变器/充电桩，按接入方式/能力筛选）
 │
-├── 开发者中心 /developers
-│   └── 占位页（完整功能后续迭代）
+├── 开发者中心（无独立页面）
+│   └── 导航按钮悬停 Tooltip：「即将上线，欢迎留资」+ [联系我们] 跳转
 │
 ├── 帮助中心 /support
 │   ├── 文档资料（文档/软件/固件 三Tab）
@@ -204,7 +204,7 @@
         </tbody>
       </table>
       <div class="ac">Hero 内容在 CMS 后台修改后实时生效，无需代码发布。</div>
-      <div class="ac">三路 CTA 点击跳转正确；开发者中心跳转占位页。</div>
+      <div class="ac">三路 CTA 中「开发者中心」按钮点击后不跳转页面，显示 Tooltip 提示「即将上线，欢迎留资」，并提供 [联系我们] 跳转链接。</div>
       <div class="ac">Logo 墙数据与 CMS 兼容品牌模块一致。</div>
 
       <!-- EP-02 解决方案 -->
@@ -369,28 +369,45 @@ Hover 状态：卡片整体轻微上浮（box-shadow 加深），光标变为 po
       <div class="ac">能力标签正确展示在品牌卡片上。</div>
 
       <!-- EP-05 开发者中心 -->
-      <div class="epic" id="ep05" style="margin-top:24px">EP-05 开发者中心（占位页）</div>
-      <div class="note">📌 初版仅实现占位页，完整功能（API 文档 / 权限控制 / SDK）后续迭代启动。</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">┌─────────────────────────────────────────┐
-│  开发者中心即将上线                       │
-│                                         │
-│  API 文档、接入指南、SDK 正在准备中，     │
-│  欢迎提前留资，我们将第一时间通知您        │
-│                                         │
-│  [提交接入意向]                           │
-│  → 跳转联系我们（意向预填「API 接口接入需求」）│
-└─────────────────────────────────────────┘</div>
+      <div class="epic" id="ep05" style="margin-top:24px">EP-05 开发者中心（Tooltip 提示，无独立页面）</div>
+      <div class="note">📌 初版不建独立页面。导航入口和 Hero CTA 保留，点击/悬停后显示 Tooltip，引导用户前往联系我们留资。完整功能（API 文档 / 权限控制 / SDK）后续迭代启动。</div>
+
+      <h4>交互规格</h4>
+      <div class="arch-box">触发方式：
+  - 导航栏「开发者中心」按钮：悬停（PC）或点击（移动端）
+  - 首页 Hero「开发者中心」CTA 按钮：点击
+
+Tooltip 内容：
+  ┌──────────────────────────────┐
+  │  🚀 开发者中心即将上线         │
+  │  API 文档 / SDK 正在准备中     │
+  │  [立即留资，优先获取通知 →]    │
+  └──────────────────────────────┘
+
+点击 [立即留资]：
+  跳转联系我们页面（/zh-CN/contact）
+  意向分类自动预填「API 接口接入需求」
+
+样式要求：
+  背景深色（#1a3a5c），白色文字
+  圆角卡片，带小三角指向触发元素
+  PC：悬停 300ms 后出现，鼠标移出后消失
+  移动端：点击出现，点击页面其他区域消失</div>
 
       <h4>功能清单</h4>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>占位页文案</td><td>多语言支持，文案通过多语言字典配置</td></tr>
-          <tr><td>[提交接入意向] CTA</td><td>跳转联系我们，意向分类自动预填「API 接口接入需求」</td></tr>
-          <tr><td>导航菜单入口</td><td>保留「开发者中心」导航入口</td></tr>
+          <tr><td>导航栏 Tooltip</td><td>PC 悬停 / 移动端点击触发，不跳转页面</td></tr>
+          <tr><td>Hero CTA Tooltip</td><td>点击触发，行为与导航栏一致</td></tr>
+          <tr><td>Tooltip 文案</td><td>多语言支持，通过多语言字典配置</td></tr>
+          <tr><td>[立即留资] 跳转</td><td>跳转联系我们，意向分类自动预填「API 接口接入需求」</td></tr>
+          <tr><td>无独立 URL</td><td>/developers 路径不存在，无需创建页面文件</td></tr>
         </tbody>
       </table>
+      <div class="ac">点击「开发者中心」按钮后，Tooltip 正确弹出，不发生页面跳转。</div>
+      <div class="ac">Tooltip 内 [立即留资] 点击后跳转联系我们，意向分类自动预填。</div>
+      <div class="ac">移动端点击页面其他区域后 Tooltip 消失。</div>
 
       <!-- EP-06 帮助中心 -->
       <div class="epic" id="ep06" style="margin-top:24px">EP-06 帮助中心</div>
