@@ -78,14 +78,31 @@
 <li>使用 HTTPS，HTTP 强制跳转</li>
 </ul>
 
-<h3>URL 命名</h3>
-<pre><code class="language-">
-GET    /api/v1/products              # 列表
-GET    /api/v1/products/:slug        # 详情
-POST   /api/v1/leads                 # 创建线索
-PATCH  /api/v1/leads/:id             # 更新状态
-DELETE /api/v1/brands/:id            # 删除（软删除）
-</code></pre>
+<h3>完整端点清单</h3>
+<table>
+<thead><tr><th>方法</th><th>路径</th><th>说明</th><th>认证</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">前台公开接口（P0 全部公开，无需认证）</td></tr>
+<tr><td>GET</td><td>/api/v1/products</td><td>产品列表，支持 ?locale= 参数</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/products/:slug</td><td>产品详情</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/solutions</td><td>解决方案列表</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/solutions/:slug</td><td>解决方案详情</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/brands</td><td>兼容品牌列表，支持 ?type= &amp;integration= &amp;capability= &amp;status= 筛选</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/files</td><td>文件资产列表，支持 ?type= &amp;product= 筛选</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/files/:id/download</td><td>文件下载（P0 公开；P1 启用权限后改为签名链接，有效期 ≤5 分钟）</td><td>无（P0）</td></tr>
+<tr><td>GET</td><td>/api/v1/faqs</td><td>FAQ 列表，支持 ?category= &amp;q= 搜索</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/news</td><td>新闻动态列表，支持 ?category= &amp;page= 分页</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/news/:slug</td><td>新闻详情</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/jobs</td><td>招聘岗位列表</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/search</td><td>全站搜索，支持 ?q= &amp;locale=</td><td>无</td></tr>
+<tr><td>GET</td><td>/api/v1/i18n</td><td>多语言词条，支持 ?locale= &amp;ns=（namespace）</td><td>无</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">前台写入接口</td></tr>
+<tr><td>POST</td><td>/api/v1/leads</td><td>提交联系表单（触发三路通知）</td><td>无 + rate limit</td></tr>
+<tr><td>POST</td><td>/api/v1/repair-requests</td><td>提交报修工单（触发企微+用户邮件）</td><td>无 + rate limit</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">CMS 触发接口</td></tr>
+<tr><td>POST</td><td>/api/v1/revalidate</td><td>CMS 发布内容后触发 ISR 缓存刷新，需携带 REVALIDATE_SECRET</td><td>Secret Token</td></tr>
+</tbody>
+</table>
 
 <h3>响应格式</h3>
 <pre><code class="language-json">
@@ -110,8 +127,20 @@ DELETE /api/v1/brands/:id            # 删除（软删除）
 <h3>多语言参数</h3>
 <pre><code class="language-">
 GET /api/v1/products?locale=zh-CN
-GET /api/v1/solutions?locale=en-US&amp;populate=*
+GET /api/v1/solutions?locale=en-US&populate=*
 </code></pre>
+
+<h3>错误码对照表</h3>
+<table>
+<thead><tr><th>HTTP 状态</th><th>error.code</th><th>含义</th><th>前端处理建议</th></tr></thead>
+<tbody>
+<tr><td>400</td><td>VALIDATION_ERROR</td><td>字段校验失败</td><td>显示 details.field 对应字段的错误提示</td></tr>
+<tr><td>404</td><td>NOT_FOUND</td><td>资源不存在</td><td>跳转 404 页面</td></tr>
+<tr><td>429</td><td>RATE_LIMIT_EXCEEDED</td><td>提交过于频繁</td><td>提示「提交过于频繁，请稍后再试」</td></tr>
+<tr><td>500</td><td>INTERNAL_ERROR</td><td>服务器内部错误</td><td>提示通用错误，不暴露堆栈信息</td></tr>
+<tr><td>503</td><td>CMS_UNAVAILABLE</td><td>CMS 连接失败</td><td>前端展示上次缓存数据，页面不崩溃</td></tr>
+</tbody>
+</table>
 
 <hr>
 
@@ -334,6 +363,58 @@ WECHAT_WEBHOOK_ENCRYPT_KEY=
 <li>生产数据库每日自动备份，保留 7 天</li>
 <li>Staging 数据库可一键从生产快照恢复（用于测试数据同步）</li>
 </ul>
+
+<hr>
+
+<h2>九、数据流通设计</h2>
+
+<h3>表单提交流（联系我们 / 在线报修）</h3>
+<pre><code class="language-">
+① 用户提交表单
+    ↓
+② POST /api/v1/leads（或 /api/v1/repair-requests）
+    ↓  服务端校验（必填字段 + 格式 + rate limit）
+    ↓  写入数据库（leads 表）
+    ↓  立即返回 201 成功响应（不阻塞后续通知）
+    ↓
+③ 异步队列并行触发（最长5分钟内完成）：
+    ├─ A. 企微 Webhook
+    │     根据 lead.type 从 notification_configs 查对应 webhook_url
+    │     POST Webhook → 企微「对应群」
+    │
+    ├─ B. 内部通知邮件
+    │     根据 lead.type 查对应内部邮箱列表
+    │     发送邮件（含完整表单数据）
+    │
+    └─ C. 用户回执邮件
+          根据 lead.locale 选择邮件模板
+          发送至 lead.email
+
+④ 任意通知失败：重试3次（指数退避），失败写 error log
+   不影响已返回的 201 响应（用户侧无感知）
+</code></pre>
+
+<h3>CMS 内容发布流（内容更新 → 前端生效）</h3>
+<pre><code class="language-">
+① 运营在 CMS 后台修改内容并点击「发布」
+    ↓
+② CMS 触发 Webhook（配置在 CMS 后台）
+    POST /api/v1/revalidate
+    Header: Authorization: Bearer {REVALIDATE_SECRET}
+    Body: { "type": "product", "slug": "neuron-ii", "locale": "zh-CN" }
+    ↓
+③ Next.js ISR 缓存刷新
+    revalidateTag(type)  或  revalidatePath(path)
+    ↓
+④ CDN 边缘节点缓存失效
+    ↓
+⑤ 下次用户请求时，服务端重新从 CMS 拉取最新数据渲染页面
+
+规则：
+- 全量刷新（type=all）仅在 CMS 后台「缓存管理」手动触发，不自动全量
+- 每次发布精确传入 type + slug，避免不必要的全量缓存失效
+- REVALIDATE_SECRET 通过环境变量注入，不写入代码库
+</code></pre>
 
 </div>
 </body>
