@@ -6,10 +6,22 @@
 <title>后端技术规范 · 旭衡电子</title>
 
 <style>
-  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
+  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;--sidebar-w:240px;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
-  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
+
+  /* Layout with sidebar */
+  .page-wrapper{display:flex;max-width:1280px;margin:0 auto;min-height:calc(100vh - 44px);}
+  .sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--card);border-right:1px solid var(--border);position:sticky;top:44px;height:calc(100vh - 44px);overflow-y:auto;padding:20px 0;font-size:12px;}
+  .sidebar::-webkit-scrollbar{width:4px;}
+  .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+  .sidebar .toc-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:0 16px;margin-bottom:12px;}
+  .sidebar a{display:block;padding:5px 16px;color:var(--text);text-decoration:none;border-left:3px solid transparent;transition:all .15s;}
+  .sidebar a:hover{background:var(--accent-light);color:var(--accent);border-left-color:var(--accent);}
+  .sidebar a.l1{font-weight:700;color:var(--primary);padding:8px 16px;margin-top:6px;}
+  .sidebar a.l2{padding-left:28px;color:var(--muted);font-size:11px;}
+
+  .md-body{flex:1;min-width:0;max-width:860px;padding:40px 32px 80px;background:var(--card);}
   h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
   h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
   h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
@@ -28,6 +40,15 @@
   blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
   hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
   strong{color:var(--text);}
+  .arch-diagram{background:#0d1b2a;color:#a8d8ea;padding:20px 24px;border-radius:8px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;line-height:1.5;overflow-x:auto;margin:14px 0;white-space:pre;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;}
+  .badge-yes{background:#d5f5e3;color:#1e8449;}
+  .badge-no{background:#fadbd8;color:#922b21;}
+
+  @media(max-width:900px){
+    .sidebar{display:none;}
+    .md-body{max-width:100%;}
+  }
 </style>
 
 </head>
@@ -40,382 +61,1230 @@
     <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
     <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
     <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
-    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="后端技术规范.html" style="color:#fff;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;background:rgba(255,255,255,.15)">🗄 后端规范</a>
     <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
     <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
   </div>
 </div>
+
+<div class="page-wrapper">
+
+<!-- Sidebar TOC -->
+<nav class="sidebar">
+  <div class="toc-title">目录</div>
+  <a href="#ch1" class="l1">一、架构概览</a>
+  <a href="#s1-1" class="l2">1.1 系统架构图</a>
+  <a href="#s1-2" class="l2">1.2 Strapi 的角色</a>
+  <a href="#s1-3" class="l2">1.3 部署拓扑</a>
+  <a href="#ch2" class="l1">二、内容类型设计</a>
+  <a href="#s2-1" class="l2">2.1 设计原则</a>
+  <a href="#s2-2" class="l2">2.2 内容类型清单</a>
+  <a href="#s2-3" class="l2">2.3 字段定义</a>
+  <a href="#ch3" class="l1">三、API 设计规范</a>
+  <a href="#s3-1" class="l2">3.1 基础规则</a>
+  <a href="#s3-2" class="l2">3.2 端点清单</a>
+  <a href="#s3-3" class="l2">3.3 响应格式</a>
+  <a href="#s3-4" class="l2">3.4 多语言参数</a>
+  <a href="#s3-5" class="l2">3.5 错误码对照表</a>
+  <a href="#ch4" class="l1">四、数据库 Schema</a>
+  <a href="#s4-1" class="l2">4.1 设计原则</a>
+  <a href="#s4-2" class="l2">4.2 核心表结构</a>
+  <a href="#s4-3" class="l2">4.3 多语言扩展</a>
+  <a href="#ch5" class="l1">五、ISR Webhook</a>
+  <a href="#s5-1" class="l2">5.1 触发流程</a>
+  <a href="#s5-2" class="l2">5.2 Webhook 配置</a>
+  <a href="#s5-3" class="l2">5.3 revalidate 端点</a>
+  <a href="#s5-4" class="l2">5.4 安全验签</a>
+  <a href="#ch6" class="l1">六、文件上传与媒体</a>
+  <a href="#s6-1" class="l2">6.1 上传流程</a>
+  <a href="#s6-2" class="l2">6.2 OSS 配置</a>
+  <a href="#s6-3" class="l2">6.3 图片处理规范</a>
+  <a href="#s6-4" class="l2">6.4 文件限制</a>
+  <a href="#ch7" class="l1">七、联系表单处理</a>
+  <a href="#s7-1" class="l2">7.1 提交流程</a>
+  <a href="#s7-2" class="l2">7.2 企微 Webhook</a>
+  <a href="#s7-3" class="l2">7.3 邮件通知</a>
+  <a href="#s7-4" class="l2">7.4 防垃圾策略</a>
+  <a href="#ch8" class="l1">八、安全规范</a>
+  <a href="#s8-1" class="l2">8.1 API Token 管理</a>
+  <a href="#s8-2" class="l2">8.2 CORS 配置</a>
+  <a href="#s8-3" class="l2">8.3 Rate Limiting</a>
+  <a href="#s8-4" class="l2">8.4 输入验证</a>
+  <a href="#s8-5" class="l2">8.5 Staging 隔离</a>
+  <a href="#ch9" class="l1">九、环境变量规范</a>
+  <a href="#s9-1" class="l2">9.1 变量清单</a>
+  <a href="#s9-2" class="l2">9.2 环境差异</a>
+  <a href="#ch10" class="l1">十、部署与运维</a>
+  <a href="#s10-1" class="l2">10.1 Docker Compose</a>
+  <a href="#s10-2" class="l2">10.2 健康检查</a>
+  <a href="#s10-3" class="l2">10.3 备份策略</a>
+  <a href="#s10-4" class="l2">10.4 日志规范</a>
+</nav>
+
+<!-- Main Content -->
 <div class="md-body">
+
 <h1>后端技术规范</h1>
 
-<blockquote>版本 v1.0 · 2026-03-12 · 旭衡电子官网重构</blockquote>
-<blockquote>CMS 框架选型确认后补充细节，当前为规范框架。</blockquote>
-
-<hr>
-
-<h2>一、技术栈要求</h2>
+<blockquote>版本 v2.0 · 2026-03-13 · 旭衡电子（AlwaysControl Technology）官网重构</blockquote>
+<blockquote>技术选型已确认：Strapi v4 + PostgreSQL + 阿里云 OSS + Docker 部署</blockquote>
 
 <table>
-<thead><tr><th>层级</th><th>要求</th><th>备注</th></tr></thead>
+<thead><tr><th>层级</th><th>技术选型</th><th>说明</th></tr></thead>
 <tbody>
-<tr><td>CMS 框架</td><td>Strapi v4 或 Directus</td><td>待确认，见技术选型备忘.html</td></tr>
-<tr><td>运行时</td><td>Node.js ≥ 20 LTS</td><td></td></tr>
-<tr><td>数据库</td><td>PostgreSQL ≥ 15</td><td>不使用 SQLite（仅限开发环境）</td></tr>
-<tr><td>对象存储</td><td>阿里云 OSS 或腾讯云 COS</td><td>随 CDN 选型确定</td></tr>
-<tr><td>进程管理</td><td>PM2 或 Docker</td><td>生产环境必须有进程守护</td></tr>
+<tr><td>CMS 框架</td><td>Strapi v4</td><td>Node.js Headless CMS，REST API</td></tr>
+<tr><td>数据库</td><td>PostgreSQL 15</td><td>生产/测试均使用 PostgreSQL</td></tr>
+<tr><td>文件存储</td><td>阿里云 OSS</td><td>S3 兼容接口，CDN 加速</td></tr>
+<tr><td>部署方式</td><td>Docker + ECS</td><td>Docker Compose 编排</td></tr>
+<tr><td>邮件服务</td><td>SMTP（阿里云邮件推送）</td><td>SendGrid 备选</td></tr>
+<tr><td>即时通知</td><td>企业微信 Webhook</td><td>线索实时推送</td></tr>
+<tr><td>前端框架</td><td>Next.js 14（App Router + ISR）</td><td>Vercel 部署，Strapi Webhook 触发 revalidate</td></tr>
 </tbody>
 </table>
 
 <hr>
 
-<h2>二、API 设计规范</h2>
+<!-- ============================================================ -->
+<!-- 一、架构概览 -->
+<!-- ============================================================ -->
+<h2 id="ch1">一、架构概览</h2>
 
-<h3>基础规则</h3>
+<h3 id="s1-1">1.1 系统架构图</h3>
+
+<div class="arch-diagram">┌─────────────────────────────────────────────────────────────┐
+│                        用户浏览器                            │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ HTTPS
+┌──────────────────────────▼──────────────────────────────────┐
+│                Vercel Edge Network (CDN)                     │
+│                Next.js 14 (App Router + ISR)                 │
+│                alwayscontrol.com.cn                          │
+└───────────┬─────────────────────────────┬───────────────────┘
+            │                             │
+  静态资源 / ISR 页面             API Route（表单 / revalidate）
+            │                             │
+┌───────────▼─────────────────────────────▼───────────────────┐
+│                    Strapi v4 CMS                             │
+│                    api.alwayscontrol.com.cn                  │
+│                    Node.js 18 + PostgreSQL 15                │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+              ┌────────────▼────────────┐
+              │       阿里云 OSS        │
+              │     cdn.alwayscontrol   │
+              │      .com.cn            │
+              │     媒体文件存储         │
+              └─────────────────────────┘
+
+  通知出口：
+  ├── 企业微信 Webhook → 销售群（线索实时通知）
+  └── SMTP → 阿里云邮件推送（用户回执 + 内部通知）</div>
+
+<h3 id="s1-2">1.2 Strapi 在整体架构中的角色</h3>
 <ul>
-<li>RESTful 风格，JSON 格式</li>
-<li>所有接口添加 <code>/api</code> 前缀</li>
-<li>版本化：<code>/api/v1/...</code></li>
-<li>使用 HTTPS，HTTP 强制跳转</li>
+<li><strong>唯一内容数据源（Single Source of Truth）</strong>：所有页面内容、产品信息、解决方案、新闻等均通过 Strapi 管理</li>
+<li><strong>REST API 提供者</strong>：供 Next.js 在构建时（SSG）和增量静态再生（ISR）时拉取数据</li>
+<li><strong>内置媒体库</strong>：对接阿里云 OSS，提供统一的文件上传和管理</li>
+<li><strong>Webhook 触发器</strong>：内容发布/更新时自动触发 Next.js ISR 刷新</li>
+<li><strong>i18n 多语言支持</strong>：内置国际化插件，支持 zh-CN / en-US 等多语言内容管理</li>
 </ul>
 
-<h3>完整端点清单</h3>
+<h3 id="s1-3">1.3 部署拓扑</h3>
 <table>
-<thead><tr><th>方法</th><th>路径</th><th>说明</th><th>认证</th></tr></thead>
+<thead><tr><th>环境</th><th>组件</th><th>部署位置</th><th>域名</th></tr></thead>
 <tbody>
-<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">前台公开接口（P0 全部公开，无需认证）</td></tr>
-<tr><td>GET</td><td>/api/v1/products</td><td>产品列表，支持 ?locale= 参数</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/products/:slug</td><td>产品详情</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/solutions</td><td>解决方案列表</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/solutions/:slug</td><td>解决方案详情</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/brands</td><td>兼容品牌列表，支持 ?type= &amp;integration= &amp;capability= &amp;status= 筛选</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/files</td><td>文件资产列表，支持 ?type= &amp;product= 筛选</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/files/:id/download</td><td>文件下载（P0 公开；P1 启用权限后改为签名链接，有效期 ≤5 分钟）</td><td>无（P0）</td></tr>
-<tr><td>GET</td><td>/api/v1/faqs</td><td>FAQ 列表，支持 ?category= &amp;q= 搜索</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/news</td><td>新闻动态列表，支持 ?category= &amp;page= 分页</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/news/:slug</td><td>新闻详情</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/jobs</td><td>招聘岗位列表</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/search</td><td>全站搜索，支持 ?q= &amp;locale=</td><td>无</td></tr>
-<tr><td>GET</td><td>/api/v1/i18n</td><td>多语言词条，支持 ?locale= &amp;ns=（namespace）</td><td>无</td></tr>
-<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">前台写入接口</td></tr>
-<tr><td>POST</td><td>/api/v1/leads</td><td>提交联系表单（触发三路通知）</td><td>无 + rate limit</td></tr>
-<tr><td>POST</td><td>/api/v1/repair-requests</td><td>提交报修工单（触发企微+用户邮件）</td><td>无 + rate limit</td></tr>
-<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">CMS 触发接口</td></tr>
-<tr><td>POST</td><td>/api/v1/revalidate</td><td>CMS 发布内容后触发 ISR 缓存刷新，需携带 REVALIDATE_SECRET</td><td>Secret Token</td></tr>
+<tr><td rowspan="3"><strong>Production</strong></td><td>Strapi + PostgreSQL</td><td>阿里云 ECS（Docker Compose）</td><td>api.alwayscontrol.com.cn</td></tr>
+<tr><td>Next.js 前端</td><td>Vercel</td><td>alwayscontrol.com.cn</td></tr>
+<tr><td>媒体文件</td><td>阿里云 OSS + CDN</td><td>cdn.alwayscontrol.com.cn</td></tr>
+<tr><td rowspan="3"><strong>Staging</strong></td><td>Strapi + PostgreSQL</td><td>阿里云 ECS（独立实例）</td><td>staging-api.alwayscontrol.com.cn</td></tr>
+<tr><td>Next.js 前端</td><td>Vercel Preview</td><td>staging.alwayscontrol.com.cn</td></tr>
+<tr><td>媒体文件</td><td>阿里云 OSS（独立 Bucket）</td><td>staging-cdn.alwayscontrol.com.cn</td></tr>
+</tbody>
+</table>
+<p><strong>隔离原则</strong>：Staging 与 Production 使用独立数据库、独立 OSS Bucket、独立 API Token，互不干扰。Staging 所有页面添加 <code>robots: noindex</code>。</p>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- 二、Strapi 内容类型设计 -->
+<!-- ============================================================ -->
+<h2 id="ch2">二、Strapi 内容类型设计</h2>
+
+<h3 id="s2-1">2.1 设计原则</h3>
+<ul>
+<li>所有面向前台展示的内容必须开启 Strapi <strong>i18n 插件</strong>（多语言字段）</li>
+<li>富文本字段使用 Strapi 内置 Rich Text（基于 Slate.js），不引入第三方编辑器</li>
+<li>关系字段（如产品 ↔ 解决方案）使用 Strapi <strong>多对多关系</strong>（many-to-many）</li>
+<li>所有 Collection Type 默认包含字段：<code>createdAt</code> / <code>updatedAt</code> / <code>publishedAt</code> / <code>locale</code></li>
+<li>UID 字段（slug）统一使用英文，基于 <code>name</code> 自动生成，确保 URL 友好</li>
+<li>排序字段 <code>sortOrder</code> 默认值为 0，数值越小越靠前</li>
+</ul>
+
+<h3 id="s2-2">2.2 完整内容类型清单</h3>
+
+<table>
+<thead><tr><th>类型名</th><th>Strapi 集合名</th><th>对应 CMS 模块</th><th>i18n</th><th>类型</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>产品内容</td><td><code>products</code></td><td>CMS-07</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>8 个产品，含参数表/手册/视频</td></tr>
+<tr><td>解决方案</td><td><code>solutions</code></td><td>CMS-08</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>5 个场景，含功能点/适用产品</td></tr>
+<tr><td>新闻动态</td><td><code>articles</code></td><td>CMS-01</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>新闻/公告，含封面图、发布时间</td></tr>
+<tr><td>FAQ</td><td><code>faqs</code></td><td>CMS-02</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>问题 + 答案，按分类分组</td></tr>
+<tr><td>案例管理</td><td><code>case-studies</code></td><td>CMS-03</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>客户案例，含场景/产品关联</td></tr>
+<tr><td>招聘岗位</td><td><code>job-openings</code></td><td>CMS-04</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>职位名、描述、要求、状态</td></tr>
+<tr><td>页面内容</td><td><code>page-contents</code></td><td>CMS-06</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>首页 Hero/统计数字等可编辑内容</td></tr>
+<tr><td>兼容品牌</td><td><code>compatible-brands</code></td><td>CMS-10</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>品牌名 + Logo，排序权重</td></tr>
+<tr><td>客户线索</td><td><code>leads</code></td><td>CMS-12</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>表单提交，含状态追踪</td></tr>
+<tr><td>报修工单</td><td><code>repair-tickets</code></td><td>CMS-13</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>报修申请，含处理流程</td></tr>
+<tr><td>多语言词条</td><td><code>i18n-keys</code></td><td>CMS-14</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>UI 文案词条（非内容型）</td></tr>
+<tr><td>SEO 配置</td><td><code>seo-configs</code></td><td>CMS-16</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>每页 title/description/OG 图</td></tr>
 </tbody>
 </table>
 
-<h3>响应格式</h3>
-<pre><code class="language-json">
-// 成功响应
-{
-  "data": { ... } | [ ... ],
+<h3 id="s2-3">2.3 各内容类型字段定义</h3>
+
+<h4>products（产品）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>✅</td><td>产品名称</td></tr>
+<tr><td><code>slug</code></td><td>UID（基于 name）</td><td>❌</td><td>✅</td><td>URL 标识，英文，全局唯一</td></tr>
+<tr><td><code>shortDescription</code></td><td>Text</td><td>✅</td><td>✅</td><td>简短描述，用于列表页</td></tr>
+<tr><td><code>fullDescription</code></td><td>RichText</td><td>✅</td><td>❌</td><td>完整产品描述（Slate.js）</td></tr>
+<tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>产品封面图</td></tr>
+<tr><td><code>gallery</code></td><td>Media（多图）</td><td>❌</td><td>❌</td><td>产品图片集</td></tr>
+<tr><td><code>specSheet</code></td><td>Media（PDF）</td><td>❌</td><td>❌</td><td>规格手册下载</td></tr>
+<tr><td><code>videoUrl</code></td><td>String</td><td>❌</td><td>❌</td><td>视频链接（YouTube/B 站）</td></tr>
+<tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>gateway</code> | <code>ems</code> | <code>charging</code> | <code>storage</code></td></tr>
+<tr><td><code>relatedSolutions</code></td><td>Relation（M2M → solutions）</td><td>❌</td><td>❌</td><td>关联解决方案</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重，默认 0</td></tr>
+</tbody>
+</table>
+
+<h4>solutions（解决方案场景）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>✅</td><td>场景名称</td></tr>
+<tr><td><code>slug</code></td><td>UID</td><td>❌</td><td>✅</td><td><code>hems</code> | <code>ess</code> | <code>evcms</code> | <code>vpp</code> | <code>pqms</code></td></tr>
+<tr><td><code>tagline</code></td><td>String</td><td>✅</td><td>❌</td><td>副标题</td></tr>
+<tr><td><code>description</code></td><td>RichText</td><td>✅</td><td>✅</td><td>场景详细描述</td></tr>
+<tr><td><code>heroImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>场景主图</td></tr>
+<tr><td><code>features</code></td><td>JSON</td><td>✅</td><td>❌</td><td>功能点列表（结构化数组）</td></tr>
+<tr><td><code>relatedProducts</code></td><td>Relation（M2M → products）</td><td>❌</td><td>❌</td><td>关联产品</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>leads（客户线索）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>姓名</td></tr>
+<tr><td><code>email</code></td><td>Email</td><td>✅</td><td>邮箱地址</td></tr>
+<tr><td><code>company</code></td><td>String</td><td>❌</td><td>公司名称</td></tr>
+<tr><td><code>country</code></td><td>String</td><td>❌</td><td>国家/地区</td></tr>
+<tr><td><code>phone</code></td><td>String</td><td>❌</td><td>电话号码</td></tr>
+<tr><td><code>subject</code></td><td>String</td><td>❌</td><td>咨询主题</td></tr>
+<tr><td><code>message</code></td><td>Text</td><td>✅</td><td>留言内容</td></tr>
+<tr><td><code>source</code></td><td>String</td><td>❌</td><td>来源页面 URL</td></tr>
+<tr><td><code>status</code></td><td>Enumeration</td><td>❌</td><td><code>new</code> | <code>contacted</code> | <code>converted</code> | <code>archived</code>，默认 <code>new</code></td></tr>
+<tr><td><code>assignedTo</code></td><td>String</td><td>❌</td><td>处理人</td></tr>
+<tr><td><code>notes</code></td><td>Text</td><td>❌</td><td>内部备注</td></tr>
+</tbody>
+</table>
+
+<h4>page-contents（页面可编辑内容）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>pageKey</code></td><td>String</td><td>❌</td><td>✅</td><td>唯一标识：<code>hero_title</code> / <code>trust_stats</code> / <code>cta_text</code> 等</td></tr>
+<tr><td><code>value</code></td><td>JSON</td><td>✅</td><td>✅</td><td>结构化内容（灵活 JSON 格式）</td></tr>
+<tr><td><code>description</code></td><td>String</td><td>❌</td><td>❌</td><td>编辑说明（供内容运营参考）</td></tr>
+</tbody>
+</table>
+
+<h4>articles（新闻动态）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>title</code></td><td>String</td><td>✅</td><td>✅</td><td>文章标题</td></tr>
+<tr><td><code>slug</code></td><td>UID（基于 title）</td><td>❌</td><td>✅</td><td>URL 标识</td></tr>
+<tr><td><code>excerpt</code></td><td>Text</td><td>✅</td><td>❌</td><td>摘要</td></tr>
+<tr><td><code>content</code></td><td>RichText</td><td>✅</td><td>✅</td><td>正文内容</td></tr>
+<tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>封面图</td></tr>
+<tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>news</code> | <code>announcement</code> | <code>industry</code></td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>compatible-brands（兼容品牌）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>品牌名称</td></tr>
+<tr><td><code>logo</code></td><td>Media（单图）</td><td>✅</td><td>品牌 Logo（PNG 透明背景）</td></tr>
+<tr><td><code>website</code></td><td>String</td><td>❌</td><td>品牌官网链接</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>seo-configs（SEO 配置）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>pageKey</code></td><td>String</td><td>❌</td><td>✅</td><td>页面标识：<code>home</code> / <code>products</code> / <code>solutions</code> 等</td></tr>
+<tr><td><code>metaTitle</code></td><td>String</td><td>✅</td><td>✅</td><td>页面 title 标签</td></tr>
+<tr><td><code>metaDescription</code></td><td>Text</td><td>✅</td><td>✅</td><td>meta description</td></tr>
+<tr><td><code>ogImage</code></td><td>Media（单图）</td><td>❌</td><td>❌</td><td>Open Graph 分享图</td></tr>
+<tr><td><code>canonicalUrl</code></td><td>String</td><td>❌</td><td>❌</td><td>规范链接</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- 三、API 设计规范 -->
+<!-- ============================================================ -->
+<h2 id="ch3">三、API 设计规范</h2>
+
+<h3 id="s3-1">3.1 基础规则</h3>
+<ul>
+<li>全部使用 <strong>Strapi 原生 REST API</strong>，不自定义路由（除非必要）</li>
+<li>基础路径：<code>https://api.alwayscontrol.com.cn/api/</code></li>
+<li>认证：Bearer Token
+  <ul>
+    <li><strong>只读 Token</strong>：给 Next.js 使用，仅 <code>find</code> / <code>findOne</code> 权限</li>
+    <li><strong>管理 Token</strong>：仅 Strapi 后台内部使用，不对外暴露</li>
+  </ul>
+</li>
+<li>分页：默认 <code>pagination[pageSize]=25</code>，最大 100</li>
+<li>排序：<code>sort[0]=sortOrder:asc</code></li>
+<li>多语言：<code>locale=zh-CN</code>（所有请求必须指定 locale）</li>
+<li>关系填充：<code>populate=*</code>（浅层）或 <code>populate[relation]=*</code>（指定关系）</li>
+</ul>
+
+<h3 id="s3-2">3.2 完整端点清单</h3>
+
+<table>
+<thead><tr><th>端点</th><th>方法</th><th>说明</th><th>前端用途</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">📖 内容读取接口（Bearer Token 认证）</td></tr>
+<tr><td><code>/api/products?locale=zh-CN&amp;populate=*</code></td><td>GET</td><td>产品列表</td><td>EP-06 产品中心</td></tr>
+<tr><td><code>/api/products?filters[slug][$eq]={slug}&amp;locale=zh-CN</code></td><td>GET</td><td>单个产品详情</td><td>产品详情页</td></tr>
+<tr><td><code>/api/solutions?locale=zh-CN&amp;populate=*</code></td><td>GET</td><td>解决方案列表</td><td>EP-02 解决方案</td></tr>
+<tr><td><code>/api/solutions?filters[slug][$eq]={slug}&amp;locale=zh-CN</code></td><td>GET</td><td>单个场景详情</td><td>场景详情页</td></tr>
+<tr><td><code>/api/compatible-brands?sort=sortOrder:asc</code></td><td>GET</td><td>兼容品牌列表</td><td>EP-03 生态 / 首页</td></tr>
+<tr><td><code>/api/articles?sort=publishedAt:desc&amp;locale=zh-CN</code></td><td>GET</td><td>新闻列表</td><td>EP-07 新闻动态</td></tr>
+<tr><td><code>/api/articles?filters[slug][$eq]={slug}&amp;locale=zh-CN</code></td><td>GET</td><td>新闻详情</td><td>新闻详情页</td></tr>
+<tr><td><code>/api/faqs?sort=sortOrder:asc&amp;locale=zh-CN</code></td><td>GET</td><td>FAQ 列表</td><td>EP-04 支持</td></tr>
+<tr><td><code>/api/case-studies?locale=zh-CN&amp;populate=*</code></td><td>GET</td><td>案例列表</td><td>案例展示</td></tr>
+<tr><td><code>/api/job-openings?filters[status][$eq]=open&amp;locale=zh-CN</code></td><td>GET</td><td>招聘列表</td><td>EP-07 关于我们</td></tr>
+<tr><td><code>/api/seo-configs?filters[pageKey][$eq]={key}&amp;locale=zh-CN</code></td><td>GET</td><td>SEO 配置</td><td>各页面 meta</td></tr>
+<tr><td><code>/api/page-contents?filters[pageKey][$eq]={key}&amp;locale=zh-CN</code></td><td>GET</td><td>页面可编辑内容</td><td>首页 Hero 等</td></tr>
+<tr><td><code>/api/i18n-keys?locale=zh-CN</code></td><td>GET</td><td>UI 多语言词条</td><td>前端 i18n</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">📝 表单写入接口（无需认证 + Rate Limit）</td></tr>
+<tr><td><code>/api/leads</code></td><td>POST</td><td>提交客户线索</td><td>EP-08 联系表单</td></tr>
+<tr><td><code>/api/repair-tickets</code></td><td>POST</td><td>提交报修工单</td><td>EP-04 在线报修</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🔄 系统接口（Secret Token 认证）</td></tr>
+<tr><td><code>/api/revalidate</code></td><td>POST</td><td>ISR 缓存刷新触发</td><td>Strapi Webhook → Next.js</td></tr>
+</tbody>
+</table>
+
+<h3 id="s3-3">3.3 标准响应格式</h3>
+
+<h4>成功响应（列表）</h4>
+<pre><code>{
+  "data": [
+    {
+      "id": 1,
+      "attributes": {
+        "name": "EMS Pro",
+        "slug": "ems-pro",
+        "shortDescription": "专业能源管理系统",
+        "category": "ems",
+        "locale": "zh-CN",
+        "createdAt": "2024-01-01T00:00:00.000Z",
+        "updatedAt": "2024-01-15T08:30:00.000Z",
+        "publishedAt": "2024-01-01T00:00:00.000Z",
+        "coverImage": {
+          "data": {
+            "id": 10,
+            "attributes": {
+              "url": "https://cdn.alwayscontrol.com.cn/products/ems-pro-cover.webp",
+              "width": 800,
+              "height": 600
+            }
+          }
+        }
+      }
+    }
+  ],
   "meta": {
-    "pagination": { "page": 1, "pageSize": 20, "total": 100 }
+    "pagination": {
+      "page": 1,
+      "pageSize": 25,
+      "pageCount": 1,
+      "total": 8
+    }
   }
-}
+}</code></pre>
 
-// 错误响应
-{
+<h4>成功响应（单条）</h4>
+<pre><code>{
+  "data": {
+    "id": 1,
+    "attributes": {
+      "name": "EMS Pro",
+      "slug": "ems-pro",
+      "locale": "zh-CN",
+      ...
+    }
+  },
+  "meta": {}
+}</code></pre>
+
+<h4>错误响应</h4>
+<pre><code>{
+  "data": null,
   "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "邮箱格式不正确",
-    "details": { "field": "email" }
+    "status": 400,
+    "name": "ValidationError",
+    "message": "Missing required fields",
+    "details": {
+      "errors": [
+        {
+          "path": ["email"],
+          "message": "email is a required field",
+          "name": "ValidationError"
+        }
+      ]
+    }
   }
-}
-</code></pre>
+}</code></pre>
 
-<h3>多语言参数</h3>
-<pre><code class="language-">
-GET /api/v1/products?locale=zh-CN
-GET /api/v1/solutions?locale=en-US&populate=*
-</code></pre>
+<h3 id="s3-4">3.4 多语言参数（locale）</h3>
 
-<h3>错误码对照表</h3>
+<p>所有支持 i18n 的内容类型，请求时必须携带 <code>locale</code> 参数：</p>
+<pre><code># 获取中文产品列表
+GET /api/products?locale=zh-CN&amp;populate=*
+
+# 获取英文解决方案
+GET /api/solutions?locale=en-US&amp;populate=relatedProducts
+
+# 获取所有语言版本（包含 localizations）
+GET /api/products?locale=zh-CN&amp;populate[localizations][fields][0]=locale&amp;populate[localizations][fields][1]=name</code></pre>
+
+<p><strong>支持的 locale 值</strong>：</p>
+<ul>
+<li><code>zh-CN</code>（简体中文，主语言）</li>
+<li><code>en-US</code>（英语，面向海外市场）</li>
+</ul>
+
+<h3 id="s3-5">3.5 错误码对照表</h3>
 <table>
-<thead><tr><th>HTTP 状态</th><th>error.code</th><th>含义</th><th>前端处理建议</th></tr></thead>
+<thead><tr><th>HTTP 状态码</th><th>含义</th><th>前端处理方式</th></tr></thead>
 <tbody>
-<tr><td>400</td><td>VALIDATION_ERROR</td><td>字段校验失败</td><td>显示 details.field 对应字段的错误提示</td></tr>
-<tr><td>404</td><td>NOT_FOUND</td><td>资源不存在</td><td>跳转 404 页面</td></tr>
-<tr><td>429</td><td>RATE_LIMIT_EXCEEDED</td><td>提交过于频繁</td><td>提示「提交过于频繁，请稍后再试」</td></tr>
-<tr><td>500</td><td>INTERNAL_ERROR</td><td>服务器内部错误</td><td>提示通用错误，不暴露堆栈信息</td></tr>
-<tr><td>503</td><td>CMS_UNAVAILABLE</td><td>CMS 连接失败</td><td>前端展示上次缓存数据，页面不崩溃</td></tr>
+<tr><td>200</td><td>请求成功</td><td>正常处理数据</td></tr>
+<tr><td>400</td><td>请求参数错误 / 验证失败</td><td>显示字段级错误信息</td></tr>
+<tr><td>401</td><td>未授权（Token 无效或缺失）</td><td>检查 <code>STRAPI_API_TOKEN</code> 配置</td></tr>
+<tr><td>403</td><td>权限不足</td><td>检查 Strapi 角色权限配置</td></tr>
+<tr><td>404</td><td>资源不存在</td><td>前端显示 404 页面</td></tr>
+<tr><td>429</td><td>请求过多（Rate Limit）</td><td>提示"提交过于频繁，请稍后再试"</td></tr>
+<tr><td>500</td><td>服务器内部错误</td><td>记录日志，显示通用错误页</td></tr>
 </tbody>
 </table>
 
 <hr>
 
-<h2>三、数据库 Schema 核心模型</h2>
+<!-- ============================================================ -->
+<!-- 四、数据库 Schema -->
+<!-- ============================================================ -->
+<h2 id="ch4">四、数据库 Schema（核心模型）</h2>
 
-<h3>products（产品）</h3>
-<pre><code class="language-sql">
-id          UUID PRIMARY KEY DEFAULT gen_random_uuid()
-slug        VARCHAR(100) UNIQUE NOT NULL   -- URL slug，如 neuron-ii
-type        VARCHAR(20) NOT NULL           -- 'hardware' | 'cloud'
-status      VARCHAR(20) DEFAULT 'published' -- 'draft' | 'published' | 'archived'
-sort_order  INTEGER DEFAULT 0
-created_at  TIMESTAMP DEFAULT NOW()
-updated_at  TIMESTAMP DEFAULT NOW()
+<h3 id="s4-1">4.1 设计原则</h3>
+<ul>
+<li>使用 <strong>Strapi 自动生成的 Schema</strong>（基于内容类型定义），不手动修改数据库</li>
+<li>多语言使用 Strapi i18n 插件：<strong>单表存储</strong>（<code>locale</code> 字段区分） + <code>localizations</code> 中间表关联</li>
+<li>不直接操作 PostgreSQL，所有数据变更通过 Strapi API / Admin Panel 进行</li>
+<li>关系表由 Strapi 自动生成和维护</li>
+</ul>
 
--- 多语言内容（单独表）
--- product_translations (product_id, locale, name, tagline, description, ...)
-</code></pre>
+<h3 id="s4-2">4.2 核心表结构</h3>
 
-<h3>product_translations（产品多语言内容）</h3>
-<pre><code class="language-sql">
-id          UUID PRIMARY KEY
-product_id  UUID REFERENCES products(id)
-locale      VARCHAR(10) NOT NULL           -- zh-CN, en-US, zh-TW ...
-name        VARCHAR(200) NOT NULL
-tagline     VARCHAR(500)                   -- 定位一句话
-description TEXT                          -- 富文本 HTML
-translated_at TIMESTAMP
-translated_by VARCHAR(100)               -- 'human' | 'machine'
-status      VARCHAR(20) DEFAULT 'draft'   -- 'draft' | 'published'
-UNIQUE(product_id, locale)
-</code></pre>
+<h4>products 表</h4>
+<pre><code>-- Strapi 自动生成，此处展示关键字段
+CREATE TABLE products (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR(255),
+  slug          VARCHAR(255) UNIQUE,
+  short_description TEXT,
+  full_description  JSONB,          -- Slate.js 富文本 JSON
+  video_url     VARCHAR(500),
+  sort_order    INTEGER DEFAULT 0,
+  category      VARCHAR(50),        -- gateway | ems | charging | storage
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);</code></pre>
 
-<h3>solutions（解决方案场景）</h3>
-<pre><code class="language-sql">
-id, slug, status, sort_order, created_at, updated_at
--- solution_translations: (solution_id, locale, name, tagline, background, description, highlights_json, ...)
-</code></pre>
+<h4>solutions 表</h4>
+<pre><code>CREATE TABLE solutions (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR(255),
+  slug          VARCHAR(255) UNIQUE, -- hems | ess | evcms | vpp | pqms
+  tagline       VARCHAR(500),
+  description   JSONB,               -- Slate.js 富文本
+  features      JSONB,               -- 功能点 JSON 数组
+  sort_order    INTEGER DEFAULT 0,
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW()
+);</code></pre>
 
-<h3>product_solution_links（产品-解决方案双向关联）</h3>
-<pre><code class="language-sql">
-id            UUID PRIMARY KEY
-product_id    UUID REFERENCES products(id)
-solution_id   UUID REFERENCES solutions(id)
-show_on_product  BOOLEAN DEFAULT TRUE      -- 在产品页显示场景跳转
-show_on_solution BOOLEAN DEFAULT TRUE      -- 在解决方案页显示产品跳转
-sort_order    INTEGER DEFAULT 0
-UNIQUE(product_id, solution_id)
-</code></pre>
+<h4>leads 表</h4>
+<pre><code>CREATE TABLE leads (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR(100) NOT NULL,
+  email         VARCHAR(255) NOT NULL,
+  company       VARCHAR(200),
+  country       VARCHAR(100),
+  phone         VARCHAR(50),
+  subject       VARCHAR(255),
+  message       TEXT,
+  source        VARCHAR(200),        -- 来源页面 URL
+  status        VARCHAR(20) DEFAULT 'new',
+                                     -- new | contacted | converted | archived
+  assigned_to   VARCHAR(100),
+  notes         TEXT,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW()
+);
 
-<h3>files（文件资产）</h3>
-<pre><code class="language-sql">
-id, name, version, type (doc|software|firmware|other),
-platform (win|mac|ios|android|universal),
-oss_key, cdn_url, file_size, download_count,
-status (published|archived), sort_order,
-related_product_ids JSON,                 -- 关联产品 UUID 数组
-created_at, updated_at
-</code></pre>
+-- 性能索引
+CREATE INDEX idx_leads_status ON leads(status);
+CREATE INDEX idx_leads_created_at ON leads(created_at DESC);
+CREATE INDEX idx_leads_email ON leads(email);</code></pre>
 
-<h3>brands（兼容品牌）</h3>
-<pre><code class="language-sql">
-id, name, logo_url, logo_oss_key,
-connection_types JSON,                    -- ['cloud', 'local']
-protocols JSON,                           -- ['Modbus', 'OCPP']
-capabilities JSON,                        -- ['telemetry', 'control']
-status (supported|developing|planned),
-show_on_homepage BOOLEAN DEFAULT FALSE,
-sort_order, created_at, updated_at
--- brand_translations: (brand_id, locale, description)
-</code></pre>
+<h4>关系中间表（Strapi 自动生成）</h4>
+<pre><code>-- 产品 ↔ 解决方案多对多关系
+CREATE TABLE products_solutions_links (
+  id            SERIAL PRIMARY KEY,
+  product_id    INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  solution_id   INTEGER REFERENCES solutions(id) ON DELETE CASCADE,
+  product_order DOUBLE PRECISION,    -- Strapi 排序
+  solution_order DOUBLE PRECISION
+);
 
-<h3>leads（线索/表单提交）</h3>
-<pre><code class="language-sql">
-id, type (inquiry|repair|api_request),
-name, company, email, phone,
-intent_category VARCHAR(100),            -- 商务咨询意向分类
-content TEXT,
-source_page VARCHAR(500),               -- 来源 URL
-status (pending|following|closed),
-assigned_to VARCHAR(100),
-notified_at TIMESTAMP,                  -- 企微/邮件通知时间
-user_email_sent_at TIMESTAMP,           -- 用户回执发送时间
-created_at, updated_at
-</code></pre>
+-- i18n 多语言关联
+CREATE TABLE products_localizations_links (
+  id            SERIAL PRIMARY KEY,
+  product_id    INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  inv_product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  product_order DOUBLE PRECISION
+);</code></pre>
 
-<h3>i18n_messages（多语言词条）</h3>
-<pre><code class="language-sql">
-id, key VARCHAR(200) UNIQUE NOT NULL,    -- 如 nav.solutions
-scope VARCHAR(100),                      -- 词条分组
-created_at, updated_at
+<h3 id="s4-3">4.3 多语言扩展模式</h3>
 
--- i18n_message_translations: (message_id, locale, value, status)
-</code></pre>
+<p>Strapi i18n 插件的工作原理：</p>
+<ul>
+<li>每个多语言记录在<strong>同一张表</strong>中存储，通过 <code>locale</code> 字段区分语言版本</li>
+<li>不同语言版本通过 <code>{content_type}_localizations_links</code> 中间表建立关联</li>
+<li><code>zh-CN</code> 为主语言（默认 locale），<code>en-US</code> 为翻译语言</li>
+<li>Media 字段（图片/文件）默认在语言版本间<strong>共享</strong>，不重复上传</li>
+<li>非 i18n 字段（如 slug、sortOrder）在各语言版本中保持一致</li>
+</ul>
 
-<h3>notification_configs（通知配置）</h3>
-<pre><code class="language-sql">
-id, type (inquiry|repair|api_request),
-wechat_webhook_url TEXT,
-internal_emails JSON,                    -- 收件邮箱数组
-email_reply_template_id UUID,           -- 关联邮件模板
-enabled BOOLEAN DEFAULT TRUE,
-updated_at
-</code></pre>
+<pre><code>-- 示例：同一产品的中英文版本在 products 表中各占一行
+-- id=1: name="能源管理系统 EMS Pro", locale="zh-CN"
+-- id=2: name="Energy Management System EMS Pro", locale="en-US"
+-- 通过 products_localizations_links 关联：
+--   (product_id=1, inv_product_id=2)
+--   (product_id=2, inv_product_id=1)</code></pre>
 
 <hr>
 
-<h2>四、文件上传规范</h2>
+<!-- ============================================================ -->
+<!-- 五、ISR Webhook 机制 -->
+<!-- ============================================================ -->
+<h2 id="ch5">五、ISR Webhook 机制</h2>
 
-<h3>上传流程</h3>
-<pre><code class="language-">
-前端 → POST /api/v1/media/presign → 获取 OSS 预签名上传 URL
-前端 → PUT {presign_url} → 直传 OSS（不经过 CMS 服务器）
-前端 → POST /api/v1/media/confirm → 通知 CMS 记录文件元数据
-CMS  → 自动生成 CDN 访问链接存入数据库
-</code></pre>
+<h3 id="s5-1">5.1 触发流程</h3>
 
-<h3>限制</h3>
+<div class="arch-diagram">编辑者在 Strapi 后台发布/更新内容
+          │
+          ▼
+Strapi 触发 Webhook（POST 请求）
+          │
+          ▼
+Next.js /api/revalidate 接收请求
+          │
+          ▼
+验签（对比 Authorization Header 中的 Secret Token）
+          │
+          ▼
+根据 model 名称确定需刷新的路径
+          │
+          ▼
+调用 revalidatePath() 标记受影响页面为 stale
+          │
+          ▼
+下次用户访问时，Next.js 重新生成静态页面（ISR）</div>
+
+<h3 id="s5-2">5.2 Strapi Webhook 配置</h3>
+
 <table>
-<thead><tr><th>文件类型</th><th>最大大小</th><th>允许格式</th></tr></thead>
+<thead><tr><th>配置项</th><th>值</th></tr></thead>
 <tbody>
-<tr><td>图片</td><td>10MB</td><td>jpg / png / webp / svg</td></tr>
-<tr><td>文档</td><td>100MB</td><td>pdf / docx / xlsx / zip</td></tr>
-<tr><td>固件</td><td>500MB</td><td>bin / hex / zip</td></tr>
-<tr><td>软件安装包</td><td>500MB</td><td>exe / dmg / apk / zip</td></tr>
+<tr><td>目标 URL</td><td><code>https://alwayscontrol.com.cn/api/revalidate</code></td></tr>
+<tr><td>请求方法</td><td>POST</td></tr>
+<tr><td>Headers</td><td><code>Authorization: Bearer {REVALIDATE_SECRET}</code></td></tr>
+<tr><td>触发事件</td><td><code>Entry.create</code> / <code>Entry.update</code> / <code>Entry.delete</code> / <code>Entry.publish</code> / <code>Entry.unpublish</code></td></tr>
 </tbody>
 </table>
 
-<h3>图片处理</h3>
+<p><strong>Strapi 后台配置路径</strong>：Settings → Webhooks → Add new webhook</p>
+
+<h3 id="s5-3">5.3 Next.js revalidate 端点实现</h3>
+
+<pre><code>// app/api/revalidate/route.ts
+import { revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  // 1. 验证 Secret Token
+  const secret = req.headers.get('authorization')?.replace('Bearer ', '');
+  if (secret !== process.env.REVALIDATE_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // 2. 解析 Strapi Webhook payload
+  const body = await req.json();
+  const model = body.model; // 'product', 'solution', 'article' 等
+
+  // 3. 按内容类型映射需刷新的路径
+  const pathMap: Record&lt;string, string[]&gt; = {
+    'product':           ['/zh-CN/products', '/en-US/products'],
+    'solution':          ['/zh-CN/solutions', '/en-US/solutions'],
+    'article':           ['/zh-CN/about/news', '/en-US/about/news'],
+    'compatible-brand':  ['/zh-CN', '/en-US', '/zh-CN/ecosystem', '/en-US/ecosystem'],
+    'page-content':      ['/zh-CN', '/en-US'],
+    'seo-config':        ['/zh-CN', '/en-US'],
+    'faq':               ['/zh-CN/support', '/en-US/support'],
+    'case-study':        ['/zh-CN/cases', '/en-US/cases'],
+    'job-opening':       ['/zh-CN/about', '/en-US/about'],
+  };
+
+  const paths = pathMap[model] || ['/zh-CN', '/en-US'];
+
+  // 4. 刷新所有受影响路径
+  for (const path of paths) {
+    revalidatePath(path, 'page');
+  }
+
+  console.log(`[Revalidate] model=${model}, paths=${JSON.stringify(paths)}`);
+  return NextResponse.json({ revalidated: true, model, paths });
+}</code></pre>
+
+<h3 id="s5-4">5.4 安全验签</h3>
+
 <ul>
-<li>上传后自动生成 WebP 版本</li>
-<li>生成三种尺寸：original / medium(800px) / thumbnail(200px)</li>
-<li>记录所有尺寸的 CDN URL</li>
+<li><strong>Secret Token 方式</strong>（推荐）：Strapi Webhook Header 携带 <code>Authorization: Bearer {SECRET}</code>，Next.js 端对比环境变量 <code>REVALIDATE_SECRET</code></li>
+<li><strong>Token 要求</strong>：至少 32 位随机字符串，使用 <code>openssl rand -hex 32</code> 生成</li>
+<li><strong>防重放（可选）</strong>：在 Webhook payload 中加入 <code>timestamp</code> 字段，Next.js 端拒绝超过 5 分钟的请求</li>
+<li><strong>IP 白名单（可选）</strong>：在 Vercel 或 Nginx 层限制仅允许 Strapi 服务器 IP 访问 <code>/api/revalidate</code></li>
 </ul>
 
 <hr>
 
-<h2>五、邮件发送规范</h2>
+<!-- ============================================================ -->
+<!-- 六、文件上传与媒体管理 -->
+<!-- ============================================================ -->
+<h2 id="ch6">六、文件上传与媒体管理</h2>
 
-<pre><code class="language-javascript">
-// 表单提交后触发（异步队列，不阻塞响应）
-await emailQueue.add('send-notification', {
-  to: config.internal_emails,
-  template: 'lead-notification',
-  data: { lead, sourceUrl }
-})
+<h3 id="s6-1">6.1 上传流程</h3>
 
-await emailQueue.add('send-user-receipt', {
-  to: lead.email,
-  template: `user-receipt-${lead.type}`,
-  locale: lead.locale,
-  data: { lead }
-})
-</code></pre>
+<div class="arch-diagram">编辑者在 Strapi 媒体库上传文件
+          │
+          ▼
+Strapi 调用 strapi-provider-upload-aws-s3（兼容 OSS S3 接口）
+          │
+          ▼
+文件上传至阿里云 OSS Bucket
+          │
+          ▼
+OSS 返回文件地址，Strapi 替换为 CDN 域名
+          │
+          ▼
+API 响应中 url 字段直接返回 CDN 地址
+https://cdn.alwayscontrol.com.cn/uploads/products/ems-pro-cover_abc123.webp</div>
 
-<p><strong>规则：</strong></p>
-<ul>
-<li>邮件发送必须异步处理（队列），不在请求响应链中同步发送</li>
-<li>发送失败重试 3 次，间隔指数退避</li>
-<li>记录发送状态到 <code>leads.user_email_sent_at</code></li>
-<li>敏感信息（SMTP 密码）只通过环境变量注入</li>
-</ul>
-
-<hr>
-
-<h2>六、安全规范</h2>
+<h3 id="s6-2">6.2 阿里云 OSS 配置</h3>
 
 <table>
-<thead><tr><th>类型</th><th>要求</th></tr></thead>
+<thead><tr><th>配置项</th><th>值</th></tr></thead>
 <tbody>
-<tr><td>CORS</td><td>只允许官网域名（alwayscontrol.com.cn / staging 域名）</td></tr>
-<tr><td>速率限制</td><td>表单提交接口：同 IP 每分钟最多 5 次</td></tr>
-<tr><td>输入校验</td><td>所有输入字段服务端校验，不依赖前端校验</td></tr>
-<tr><td>XSS</td><td>富文本内容存储前经 DOMPurify 过滤</td></tr>
-<tr><td>SQL 注入</td><td>使用 ORM（TypeORM / Knex），不拼接 SQL 字符串</td></tr>
-<tr><td>文件类型</td><td>上传前检查 Magic Bytes，不只信任扩展名</td></tr>
-<tr><td>敏感日志</td><td>日志中不输出邮件地址、手机号等 PII</td></tr>
-<tr><td>HTTPS</td><td>所有接口强制 HTTPS，HSTS 头部</td></tr>
+<tr><td>Bucket 权限</td><td>私有写 / 公开读</td></tr>
+<tr><td>自定义域名</td><td><code>cdn.alwayscontrol.com.cn</code>（CNAME 绑定 OSS）</td></tr>
+<tr><td>Upload Provider</td><td><code>@strapi/provider-upload-aws-s3</code>（兼容 OSS S3 接口）</td></tr>
+<tr><td>OSS Endpoint</td><td><code>oss-cn-shenzhen.aliyuncs.com</code></td></tr>
+</tbody>
+</table>
+
+<p><strong>Strapi 上传插件配置</strong>（<code>config/plugins.js</code>）：</p>
+<pre><code>// config/plugins.js
+module.exports = ({ env }) =&gt; ({
+  upload: {
+    config: {
+      provider: '@strapi/provider-upload-aws-s3',
+      providerOptions: {
+        accessKeyId: env('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: env('AWS_ACCESS_SECRET'),
+        region: env('AWS_REGION'),          // oss-cn-shenzhen
+        params: {
+          Bucket: env('AWS_BUCKET'),
+        },
+        endpoint: env('AWS_ENDPOINT'),      // https://oss-cn-shenzhen.aliyuncs.com
+        s3ForcePathStyle: true,
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      },
+    },
+  },
+});</code></pre>
+
+<h3 id="s6-3">6.3 图片处理规范</h3>
+
+<table>
+<thead><tr><th>用途</th><th>推荐尺寸</th><th>格式</th><th>最大体积</th><th>备注</th></tr></thead>
+<tbody>
+<tr><td>Hero 背景图</td><td>1920 × 1080</td><td>WebP</td><td>500KB</td><td>首页/场景页 Banner</td></tr>
+<tr><td>产品封面图</td><td>800 × 600</td><td>WebP</td><td>200KB</td><td>产品列表卡片</td></tr>
+<tr><td>产品 Gallery</td><td>1200 × 900</td><td>WebP</td><td>300KB</td><td>产品详情页图集</td></tr>
+<tr><td>新闻封面图</td><td>1200 × 630</td><td>WebP</td><td>200KB</td><td>同时用作 OG 图片</td></tr>
+<tr><td>品牌 Logo</td><td>200 × 100</td><td>PNG</td><td>50KB</td><td>必须透明背景</td></tr>
+<tr><td>案例图</td><td>1200 × 800</td><td>WebP</td><td>300KB</td><td>客户案例配图</td></tr>
+</tbody>
+</table>
+
+<h3 id="s6-4">6.4 文件类型限制</h3>
+
+<table>
+<thead><tr><th>文件类型</th><th>允许格式</th><th>最大大小</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>图片</td><td>jpg / png / webp / gif</td><td>10MB</td><td>推荐统一使用 WebP</td></tr>
+<tr><td>文档</td><td>pdf</td><td>50MB</td><td>产品手册 / 白皮书</td></tr>
+<tr><td>视频</td><td>—</td><td>—</td><td><strong>禁止直传</strong>，使用外链（YouTube / B 站）</td></tr>
 </tbody>
 </table>
 
 <hr>
 
-<h2>七、环境变量</h2>
+<!-- ============================================================ -->
+<!-- 七、联系表单处理 -->
+<!-- ============================================================ -->
+<h2 id="ch7">七、联系表单处理</h2>
 
-<pre><code class="language-bash">
-# 数据库
-DATABASE_URL=postgresql://user:pass@host:5432/xuheng
+<h3 id="s7-1">7.1 提交流程</h3>
 
-# OSS / CDN
-OSS_ACCESS_KEY_ID=
-OSS_ACCESS_KEY_SECRET=
-OSS_BUCKET=
-OSS_REGION=
-CDN_BASE_URL=https://cdn.alwayscontrol.com.cn
+<div class="arch-diagram">用户填写联系表单（EP-08 联系我们）
+          │
+          ▼
+Next.js /api/contact 接收 POST 请求
+          │
+          ▼
+① 验证 Turnstile Token（防机器人）
+② 输入验证（必填项 / 格式 / 防 XSS）
+③ 检查 Honeypot 字段（机器人陷阱）
+          │
+          ▼
+写入 Strapi leads Collection（持久化）
+          │
+          ▼
+并行发送通知：
+├── 企业微信 Webhook → 销售群实时通知
+└── SMTP 邮件 → 内部通知邮件
+          │
+          ▼
+返回成功响应 → 前端显示"提交成功"</div>
 
-# 邮件
-SMTP_HOST=
-SMTP_PORT=587
-SMTP_USER=
-SMTP_PASS=
-SMTP_FROM=noreply@alwayscontrol.com.cn
+<h3 id="s7-2">7.2 Next.js API Route（联系表单 + 企微通知）</h3>
 
-# 机器翻译 API
-TRANSLATION_API_KEY=
-TRANSLATION_API_PROVIDER=deepl  # deepl | google | azure
+<pre><code>// app/api/contact/route.ts
+import { NextRequest, NextResponse } from 'next/server';
 
-# 企业微信（Webhook 存数据库，此处为加密 Salt）
-WECHAT_WEBHOOK_ENCRYPT_KEY=
-</code></pre>
+const STRAPI_URL = process.env.STRAPI_URL!;
+const STRAPI_TOKEN = process.env.STRAPI_ADMIN_TOKEN!;
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const { name, email, company, country, message, subject, turnstileToken, _honey } = body;
+
+  // 1. Honeypot 检查（隐藏字段应为空）
+  if (_honey) {
+    return NextResponse.json({ success: true }); // 假装成功，不处理
+  }
+
+  // 2. Turnstile 验证
+  const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      response: turnstileToken,
+    }),
+  });
+  const turnstileData = await turnstileRes.json();
+  if (!turnstileData.success) {
+    return NextResponse.json({ error: '验证失败，请重试' }, { status: 400 });
+  }
+
+  // 3. 基础验证
+  if (!name || !email || !message) {
+    return NextResponse.json({ error: '缺少必填字段' }, { status: 400 });
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return NextResponse.json({ error: '邮箱格式不正确' }, { status: 400 });
+  }
+
+  // 4. 写入 Strapi
+  const strapiRes = await fetch(`${STRAPI_URL}/api/leads`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${STRAPI_TOKEN}`,
+    },
+    body: JSON.stringify({
+      data: {
+        name, email, company, country, message, subject,
+        source: req.headers.get('referer') || '',
+        status: 'new',
+      },
+    }),
+  });
+
+  if (!strapiRes.ok) {
+    console.error('[Contact] Strapi write failed:', await strapiRes.text());
+    return NextResponse.json({ error: '提交失败，请稍后再试' }, { status: 500 });
+  }
+
+  // 5. 企微 Webhook 通知（异步，不阻塞响应）
+  fetch(process.env.WECOM_WEBHOOK_URL!, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      msgtype: 'markdown',
+      markdown: {
+        content: [
+          '## 🔔 新客户线索',
+          `**姓名**：${name}`,
+          `**邮箱**：${email}`,
+          company ? `**公司**：${company}` : '',
+          country ? `**国家**：${country}` : '',
+          subject ? `**主题**：${subject}` : '',
+          `**留言**：${message.substring(0, 200)}${message.length &gt; 200 ? '...' : ''}`,
+          `**来源**：${req.headers.get('referer') || '未知'}`,
+        ].filter(Boolean).join('\n'),
+      },
+    }),
+  }).catch(err =&gt; console.error('[WeCom] Webhook failed:', err));
+
+  return NextResponse.json({ success: true });
+}</code></pre>
+
+<h3 id="s7-3">7.3 邮件通知</h3>
+
+<p>在表单提交成功后，通过 SMTP 发送内部通知邮件：</p>
+<pre><code>// lib/email.ts
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,     // smtp.aliyun.com
+  port: Number(process.env.SMTP_PORT), // 465
+  secure: true,                    // SSL
+  auth: {
+    user: process.env.SMTP_USER,   // noreply@alwayscontrol.com.cn
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+export async function sendLeadNotification(lead: {
+  name: string; email: string; company?: string;
+  country?: string; subject?: string; message: string;
+}) {
+  await transporter.sendMail({
+    from: `"AlwaysControl" &lt;${process.env.SMTP_USER}&gt;`,
+    to: process.env.INTERNAL_NOTIFY_EMAIL, // 内部销售邮箱
+    subject: `[新线索] ${lead.company || lead.name} - ${lead.subject || '咨询'}`,
+    html: `
+      &lt;h2&gt;新客户线索&lt;/h2&gt;
+      &lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;strong&gt;姓名&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;${lead.name}&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;strong&gt;邮箱&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;${lead.email}&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;strong&gt;公司&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;${lead.company || '-'}&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;strong&gt;国家&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;${lead.country || '-'}&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;strong&gt;留言&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;${lead.message}&lt;/td&gt;&lt;/tr&gt;
+      &lt;/table&gt;
+    `,
+  });
+}</code></pre>
+
+<h3 id="s7-4">7.4 防垃圾策略</h3>
+
+<table>
+<thead><tr><th>策略</th><th>实现方式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>Turnstile 验证码</td><td>Cloudflare Turnstile（前端组件 + 服务端验证）</td><td>免费，无感验证，用户体验好</td></tr>
+<tr><td>Rate Limiting</td><td>同一 IP 每小时最多 5 次提交</td><td>在 Next.js API Route 层实现</td></tr>
+<tr><td>Honeypot 字段</td><td>表单中隐藏 <code>&lt;input name="_honey" style="display:none"&gt;</code></td><td>机器人会自动填入，人类不会</td></tr>
+<tr><td>输入长度限制</td><td>name ≤ 100，email ≤ 255，message ≤ 2000</td><td>防止超长内容攻击</td></tr>
+<tr><td>XSS 过滤</td><td>服务端对所有文本输入进行 HTML 转义</td><td>Strapi 内置 Sanitize</td></tr>
+</tbody>
+</table>
 
 <hr>
 
-<h2>八、部署要求</h2>
+<!-- ============================================================ -->
+<!-- 八、安全规范 -->
+<!-- ============================================================ -->
+<h2 id="ch8">八、安全规范</h2>
+
+<h3 id="s8-1">8.1 Strapi API Token 管理</h3>
+
+<table>
+<thead><tr><th>Token 类型</th><th>权限</th><th>使用场景</th><th>存储位置</th></tr></thead>
+<tbody>
+<tr><td><strong>只读 Token</strong></td><td><code>find</code> / <code>findOne</code></td><td>Next.js ISR 拉取数据</td><td>Vercel 环境变量</td></tr>
+<tr><td><strong>写入 Token</strong></td><td><code>create</code>（仅 leads / repair-tickets）</td><td>Next.js 表单提交写入</td><td>Vercel 环境变量</td></tr>
+<tr><td><strong>管理 Token</strong></td><td>完全权限</td><td>Strapi Admin Panel 内部</td><td>服务器环境变量，不对外</td></tr>
+</tbody>
+</table>
 
 <ul>
-<li>Node.js 进程由 PM2 守护，崩溃自动重启</li>
-<li>数据库连接池大小：生产 ≥ 10，Staging ≥ 3</li>
-<li>日志输出到文件，保留 30 天，ERROR 级别触发告警</li>
-<li>生产数据库每日自动备份，保留 7 天</li>
-<li>Staging 数据库可一键从生产快照恢复（用于测试数据同步）</li>
+<li>所有 Token 通过<strong>环境变量</strong>管理，<strong>禁止写入代码库</strong></li>
+<li>Token 每 <strong>90 天</strong>轮换一次</li>
+<li>Strapi Admin Panel 配置：Settings → API Tokens → 创建/管理</li>
+</ul>
+
+<h3 id="s8-2">8.2 CORS 配置</h3>
+
+<pre><code>// config/middlewares.js
+module.exports = [
+  'strapi::errors',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'img-src': ["'self'", 'data:', 'cdn.alwayscontrol.com.cn'],
+        },
+      },
+    },
+  },
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: [
+        'https://alwayscontrol.com.cn',
+        'https://www.alwayscontrol.com.cn',
+        'https://staging.alwayscontrol.com.cn',
+        'https://*.vercel.app',  // Vercel Preview 部署
+      ],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization'],
+      keepHeaderOnError: true,
+    },
+  },
+  'strapi::poweredBy',
+  'strapi::logger',
+  'strapi::query',
+  'strapi::body',
+  'strapi::session',
+  'strapi::favicon',
+  'strapi::public',
+];</code></pre>
+
+<h3 id="s8-3">8.3 Rate Limiting</h3>
+
+<table>
+<thead><tr><th>层级</th><th>限制规则</th><th>实现方式</th></tr></thead>
+<tbody>
+<tr><td>Strapi 全局</td><td>100 次/分钟/IP</td><td><code>strapi-plugin-rate-limiter</code> 插件</td></tr>
+<tr><td>表单端点（leads / repair-tickets）</td><td>5 次/小时/IP</td><td>Next.js API Route 层自定义限制</td></tr>
+<tr><td>Revalidate 端点</td><td>10 次/分钟/IP</td><td>仅允许 Strapi 服务器 IP</td></tr>
+<tr><td>Vercel Edge</td><td>可配置 WAF 规则</td><td>Vercel Dashboard 配置</td></tr>
+</tbody>
+</table>
+
+<h3 id="s8-4">8.4 输入验证</h3>
+
+<ul>
+<li>所有 POST 数据必须<strong>服务端验证</strong>，不依赖前端校验</li>
+<li>Strapi 内置验证器：必填、类型、长度、格式</li>
+<li>富文本内容禁止 <code>&lt;script&gt;</code> 标签（Strapi 自动 Sanitize）</li>
+<li>文件上传：<strong>类型白名单</strong> + <strong>大小限制</strong>（参见第六章）</li>
+<li>SQL 注入：Strapi 使用 Knex.js ORM，自动参数化查询</li>
+<li>所有接口强制 <strong>HTTPS</strong>，配置 HSTS 头部</li>
+</ul>
+
+<h3 id="s8-5">8.5 Staging 隔离</h3>
+
+<table>
+<thead><tr><th>隔离项</th><th>Production</th><th>Staging</th></tr></thead>
+<tbody>
+<tr><td>数据库</td><td><code>xuanheng_prod</code></td><td><code>xuanheng_staging</code>（独立实例）</td></tr>
+<tr><td>OSS Bucket</td><td><code>xuanheng-prod</code></td><td><code>xuanheng-staging</code></td></tr>
+<tr><td>API 域名</td><td><code>api.alwayscontrol.com.cn</code></td><td><code>staging-api.alwayscontrol.com.cn</code></td></tr>
+<tr><td>前端域名</td><td><code>alwayscontrol.com.cn</code></td><td><code>staging.alwayscontrol.com.cn</code></td></tr>
+<tr><td>API Token</td><td>独立 Token</td><td>独立 Token</td></tr>
+<tr><td>企微 Webhook</td><td>生产销售群</td><td>测试群</td></tr>
+<tr><td>robots.txt</td><td>正常索引</td><td><code>Disallow: /</code> + 所有页面 <code>noindex</code></td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- 九、环境变量规范 -->
+<!-- ============================================================ -->
+<h2 id="ch9">九、环境变量规范</h2>
+
+<h3 id="s9-1">9.1 完整变量清单</h3>
+
+<table>
+<thead><tr><th>变量名</th><th>说明</th><th>Production 示例</th><th>Staging 示例</th></tr></thead>
+<tbody>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🗄 数据库</td></tr>
+<tr><td><code>DATABASE_CLIENT</code></td><td>数据库类型</td><td><code>postgresql</code></td><td><code>postgresql</code></td></tr>
+<tr><td><code>DATABASE_HOST</code></td><td>数据库主机</td><td>生产 DB 内网 IP</td><td>测试 DB 内网 IP</td></tr>
+<tr><td><code>DATABASE_PORT</code></td><td>数据库端口</td><td><code>5432</code></td><td><code>5432</code></td></tr>
+<tr><td><code>DATABASE_NAME</code></td><td>数据库名</td><td><code>xuanheng_prod</code></td><td><code>xuanheng_staging</code></td></tr>
+<tr><td><code>DATABASE_USERNAME</code></td><td>DB 用户名</td><td>各自独立</td><td>各自独立</td></tr>
+<tr><td><code>DATABASE_PASSWORD</code></td><td>DB 密码</td><td>各自独立</td><td>各自独立</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🔐 Strapi 安全密钥</td></tr>
+<tr><td><code>APP_KEYS</code></td><td>Strapi 签名密钥（4 个逗号分隔）</td><td>随机生成</td><td>随机生成</td></tr>
+<tr><td><code>API_TOKEN_SALT</code></td><td>API Token 加盐</td><td>随机</td><td>随机</td></tr>
+<tr><td><code>ADMIN_JWT_SECRET</code></td><td>管理后台 JWT 密钥</td><td>随机</td><td>随机</td></tr>
+<tr><td><code>JWT_SECRET</code></td><td>用户 JWT 密钥</td><td>随机</td><td>随机</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">☁️ 阿里云 OSS</td></tr>
+<tr><td><code>AWS_ACCESS_KEY_ID</code></td><td>OSS AccessKey ID</td><td>生产密钥</td><td>测试密钥</td></tr>
+<tr><td><code>AWS_ACCESS_SECRET</code></td><td>OSS AccessKey Secret</td><td>生产密钥</td><td>测试密钥</td></tr>
+<tr><td><code>AWS_REGION</code></td><td>OSS 区域</td><td><code>oss-cn-shenzhen</code></td><td><code>oss-cn-shenzhen</code></td></tr>
+<tr><td><code>AWS_BUCKET</code></td><td>OSS Bucket 名</td><td><code>xuanheng-prod</code></td><td><code>xuanheng-staging</code></td></tr>
+<tr><td><code>AWS_ENDPOINT</code></td><td>OSS Endpoint</td><td><code>https://oss-cn-shenzhen.aliyuncs.com</code></td><td>同左</td></tr>
+<tr><td><code>CDN_URL</code></td><td>CDN 域名</td><td><code>https://cdn.alwayscontrol.com.cn</code></td><td><code>https://staging-cdn.alwayscontrol.com.cn</code></td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">📧 邮件服务</td></tr>
+<tr><td><code>SMTP_HOST</code></td><td>邮件服务器</td><td><code>smtp.aliyun.com</code></td><td><code>smtp.aliyun.com</code></td></tr>
+<tr><td><code>SMTP_PORT</code></td><td>邮件端口</td><td><code>465</code></td><td><code>465</code></td></tr>
+<tr><td><code>SMTP_USER</code></td><td>发件邮箱</td><td><code>noreply@alwayscontrol.com.cn</code></td><td><code>test@alwayscontrol.com.cn</code></td></tr>
+<tr><td><code>SMTP_PASS</code></td><td>邮件密码</td><td>生产密码</td><td>测试密码</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🔔 通知 &amp; ISR</td></tr>
+<tr><td><code>WECOM_WEBHOOK_URL</code></td><td>企业微信 Webhook 地址</td><td>生产销售群</td><td>测试群</td></tr>
+<tr><td><code>REVALIDATE_SECRET</code></td><td>ISR 触发密钥</td><td>随机 32 位</td><td>随机 32 位</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🛡 防垃圾</td></tr>
+<tr><td><code>TURNSTILE_SITE_KEY</code></td><td>Cloudflare Turnstile 站点密钥</td><td>生产密钥</td><td>测试密钥</td></tr>
+<tr><td><code>TURNSTILE_SECRET_KEY</code></td><td>Cloudflare Turnstile 服务端密钥</td><td>生产密钥</td><td>测试密钥</td></tr>
+</tbody>
+</table>
+
+<h3 id="s9-2">9.2 密钥生成方式</h3>
+
+<pre><code># 生成随机密钥
+openssl rand -hex 32          # 64 字符十六进制
+openssl rand -base64 32       # 44 字符 Base64
+
+# 生成 APP_KEYS（4 个逗号分隔）
+echo "$(openssl rand -base64 32),$(openssl rand -base64 32),$(openssl rand -base64 32),$(openssl rand -base64 32)"</code></pre>
+
+<p><strong>安全要求</strong>：</p>
+<ul>
+<li>所有密钥禁止写入代码库（<code>.env</code> 文件已加入 <code>.gitignore</code>）</li>
+<li>Production 和 Staging 使用<strong>完全不同</strong>的密钥</li>
+<li>密钥每 90 天轮换</li>
 </ul>
 
 <hr>
 
-<h2>九、数据流通设计</h2>
+<!-- ============================================================ -->
+<!-- 十、部署与运维 -->
+<!-- ============================================================ -->
+<h2 id="ch10">十、部署与运维</h2>
 
-<h3>表单提交流（联系我们 / 在线报修）</h3>
-<pre><code class="language-">
-① 用户提交表单
-    ↓
-② POST /api/v1/leads（或 /api/v1/repair-requests）
-    ↓  服务端校验（必填字段 + 格式 + rate limit）
-    ↓  写入数据库（leads 表）
-    ↓  立即返回 201 成功响应（不阻塞后续通知）
-    ↓
-③ 异步队列并行触发（最长5分钟内完成）：
-    ├─ A. 企微 Webhook
-    │     根据 lead.type 从 notification_configs 查对应 webhook_url
-    │     POST Webhook → 企微「对应群」
-    │
-    ├─ B. 内部通知邮件
-    │     根据 lead.type 查对应内部邮箱列表
-    │     发送邮件（含完整表单数据）
-    │
-    └─ C. 用户回执邮件
-          根据 lead.locale 选择邮件模板
-          发送至 lead.email
+<h3 id="s10-1">10.1 Docker Compose 配置</h3>
 
-④ 任意通知失败：重试3次（指数退避），失败写 error log
-   不影响已返回的 201 响应（用户侧无感知）
-</code></pre>
+<pre><code># docker-compose.yml
+version: '3.8'
 
-<h3>CMS 内容发布流（内容更新 → 前端生效）</h3>
-<pre><code class="language-">
-① 运营在 CMS 后台修改内容并点击「发布」
-    ↓
-② CMS 触发 Webhook（配置在 CMS 后台）
-    POST /api/v1/revalidate
-    Header: Authorization: Bearer {REVALIDATE_SECRET}
-    Body: { "type": "product", "slug": "neuron-ii", "locale": "zh-CN" }
-    ↓
-③ Next.js ISR 缓存刷新
-    revalidateTag(type)  或  revalidatePath(path)
-    ↓
-④ CDN 边缘节点缓存失效
-    ↓
-⑤ 下次用户请求时，服务端重新从 CMS 拉取最新数据渲染页面
+services:
+  strapi:
+    image: node:18-alpine
+    working_dir: /app
+    command: yarn start
+    environment:
+      - NODE_ENV=production
+      - DATABASE_CLIENT=postgresql
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - APP_KEYS=${APP_KEYS}
+      - API_TOKEN_SALT=${API_TOKEN_SALT}
+      - ADMIN_JWT_SECRET=${ADMIN_JWT_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_ACCESS_SECRET=${AWS_ACCESS_SECRET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_BUCKET=${AWS_BUCKET}
+      - AWS_ENDPOINT=${AWS_ENDPOINT}
+      - CDN_URL=${CDN_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./strapi:/app
+      - strapi_uploads:/app/public/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:1337/_health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
-规则：
-- 全量刷新（type=all）仅在 CMS 后台「缓存管理」手动触发，不自动全量
-- 每次发布精确传入 type + slug，避免不必要的全量缓存失效
-- REVALIDATE_SECRET 通过环境变量注入，不写入代码库
-</code></pre>
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-</div>
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - strapi
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  strapi_uploads:
+    driver: local</code></pre>
+
+<h3 id="s10-2">10.2 健康检查</h3>
+
+<table>
+<thead><tr><th>组件</th><th>检查方式</th><th>预期结果</th><th>检查频率</th></tr></thead>
+<tbody>
+<tr><td>Strapi</td><td><code>GET /_health</code></td><td>HTTP 200 + <code>{"status":"ok"}</code></td><td>每 30 秒（Docker）</td></tr>
+<tr><td>PostgreSQL</td><td><code>pg_isready</code> 命令</td><td>Exit code 0</td><td>每 10 秒（Docker）</td></tr>
+<tr><td>外部监控</td><td>UptimeRobot ping <code>https://api.alwayscontrol.com.cn/_health</code></td><td>HTTP 200</td><td>每 5 分钟</td></tr>
+<tr><td>Nginx</td><td>端口 80/443 可访问</td><td>HTTP 301/200</td><td>每 5 分钟</td></tr>
+</tbody>
+</table>
+
+<h3 id="s10-3">10.3 备份策略</h3>
+
+<h4>PostgreSQL 备份</h4>
+<pre><code>#!/bin/bash
+# backup.sh - 每日自动备份（cron: 0 3 * * *）
+BACKUP_DIR="/backups/postgres"
+DATE=$(date +%Y%m%d_%H%M%S)
+FILENAME="xuanheng_${DATE}.sql.gz"
+
+# 导出并压缩
+docker exec postgres pg_dump -U ${DATABASE_USERNAME} ${DATABASE_NAME} \
+  | gzip &gt; "${BACKUP_DIR}/${FILENAME}"
+
+# 上传至 OSS
+ossutil cp "${BACKUP_DIR}/${FILENAME}" \
+  oss://${AWS_BUCKET}/backups/postgres/${FILENAME}
+
+# 清理 30 天前的本地备份
+find ${BACKUP_DIR} -name "*.sql.gz" -mtime +30 -delete
+
+echo "[$(date)] Backup complete: ${FILENAME}"</code></pre>
+
+<table>
+<thead><tr><th>备份项</th><th>频率</th><th>保留时长</th><th>存储位置</th></tr></thead>
+<tbody>
+<tr><td>PostgreSQL 全量备份</td><td>每日 03:00</td><td>30 天</td><td>本地 + 阿里云 OSS</td></tr>
+<tr><td>备份还原测试</td><td>每周日 06:00</td><td>—</td><td>自动在 Staging 验证</td></tr>
+<tr><td>OSS 文件</td><td>实时</td><td>—</td><td>Bucket 开启版本控制</td></tr>
+</tbody>
+</table>
+
+<h3 id="s10-4">10.4 日志规范</h3>
+
+<table>
+<thead><tr><th>配置项</th><th>值</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>日志格式</td><td>JSON</td><td>便于 ELK / CloudWatch 采集</td></tr>
+<tr><td>输出目标</td><td>文件 + 控制台</td><td>文件路径：<code>/var/log/strapi/</code></td></tr>
+<tr><td>日志级别</td><td><code>error</code> &gt; <code>warn</code> &gt; <code>info</code> &gt; <code>debug</code></td><td>Production 默认 <code>info</code>，Staging 可用 <code>debug</code></td></tr>
+<tr><td>保留时长</td><td>30 天</td><td>自动轮转清理</td></tr>
+<tr><td>敏感信息</td><td>禁止记录</td><td>密码、Token、完整邮箱等 PII 不得出现在日志中</td></tr>
+</tbody>
+</table>
+
+<p><strong>Strapi 日志配置</strong>（<code>config/logger.js</code>）：</p>
+<pre><code>// config/logger.js
+const { winston } = require('@strapi/logger');
+
+module.exports = {
+  transports: [
+    new winston.transports.Console({
+      level: process.env.LOG_LEVEL || 'info',
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
+      ),
+    }),
+    new winston.transports.File({
+      filename: '/var/log/strapi/error.log',
+      level: 'error',
+      maxsize: 10 * 1024 * 1024,  // 10MB
+      maxFiles: 30,
+    }),
+    new winston.transports.File({
+      filename: '/var/log/strapi/combined.log',
+      maxsize: 10 * 1024 * 1024,
+      maxFiles: 30,
+    }),
+  ],
+};</code></pre>
+
+<hr>
+
+<p style="text-align:center;color:var(--muted);font-size:12px;margin-top:40px;">
+  后端技术规范 v2.0 · 2026-03-13 · AlwaysControl Technology · 旭衡电子官网重构项目
+</p>
+
+</div><!-- /.md-body -->
+</div><!-- /.page-wrapper -->
+
 </body>
 </html>
