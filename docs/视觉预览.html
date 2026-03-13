@@ -339,6 +339,35 @@
       color: var(--gray-400);
     }
 
+    /* ===== TRUST STATS ===== */
+    .trust-stats {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 48px 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+    }
+    .trust-stat {
+      flex: 1;
+      max-width: 280px;
+      text-align: center;
+      padding: 0 48px;
+    }
+    .trust-stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .trust-stat-num sup { font-size: 26px; color: var(--green); vertical-align: super; }
+    .trust-stat-label { font-size: 14px; font-weight: 600; color: var(--gray-600); margin-top: 8px; }
+    .trust-stat-warn { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+    .trust-divider { width: 1px; height: 56px; background: var(--gray-200); flex-shrink: 0; }
+
     /* ===== ACCESS ===== */
     .access-section {
       background: var(--gray-50);
@@ -811,32 +840,35 @@
         <span class="eyebrow-dot"></span>
         能源资产管理平台 · Energy Asset Management Platform
       </div>
-      <h1>无缝聚合<br><span class="gradient-text">全场景能源资产</span></h1>
+      <h1><span class="gradient-text">跨品牌能源管理解决方案</span><br>的优质选择</h1>
       <p class="hero-sub">云端直连或网关接入，打破跨品牌协议壁垒<br>从家庭储能到 VPP 电网调度，统一平台管控每一度电</p>
       <div class="hero-cta">
         <button class="btn-primary">查看解决方案</button>
-        <button class="btn-ghost">开发者中心<span class="badge-soon">SOON</span></button>
         <button class="btn-outline">联系我们</button>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">XX<sup>+</sup></div>
-        <div class="hero-stat-label">兼容品牌</div>
-        <div class="hero-stat-warn">⚠️ 数字待确认</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">XX<sup>+</sup></div>
-        <div class="hero-stat-label">覆盖国家</div>
-        <div class="hero-stat-warn">⚠️ 数字待确认</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">XX<sup>+</sup></div>
-        <div class="hero-stat-label">已交付项目</div>
-        <div class="hero-stat-warn">⚠️ 数字待确认</div>
-      </div>
-    </div>
   </section>
+
+  <!-- TRUST STATS -->
+  <div class="trust-stats">
+    <div class="trust-stat">
+      <div class="trust-stat-num">XX<sup>+</sup></div>
+      <div class="trust-stat-label">兼容品牌</div>
+      <div class="trust-stat-warn">⚠️ 数字待确认</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-stat">
+      <div class="trust-stat-num">XX<sup>+</sup></div>
+      <div class="trust-stat-label">覆盖国家</div>
+      <div class="trust-stat-warn">⚠️ 数字待确认</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-stat">
+      <div class="trust-stat-num">XX<sup>+</sup></div>
+      <div class="trust-stat-label">已交付项目</div>
+      <div class="trust-stat-warn">⚠️ 数字待确认</div>
+    </div>
+  </div>
 
   <!-- ACCESS -->
   <section class="access-section">
