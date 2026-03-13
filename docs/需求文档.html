@@ -119,7 +119,16 @@
             <li><a href="#cms22" class="sub">CMS-22 后台账号管理</a></li>
           </ul>
         </li>
-        <li><a href="#s4">四、全局功能</a></li>
+        <li><a href="#s4">四、全局功能</a>
+          <ul>
+            <li><a href="#gf01" class="sub">GF-01 全局多语言路由与字典</a></li>
+            <li><a href="#gf02" class="sub">GF-02 全局联合搜索</a></li>
+            <li><a href="#gf03" class="sub">GF-03 表单统一通知</a></li>
+            <li><a href="#gf04" class="sub">GF-04 SEO 基础规格</a></li>
+            <li><a href="#gf05" class="sub">GF-05 隐私合规</a></li>
+            <li><a href="#gf06" class="sub">GF-06 SSO / 访问控制（P1 预留）</a></li>
+          </ul>
+        </li>
         <li><a href="#s5">五、非功能性需求</a></li>
       </ul>
     </div>
@@ -141,7 +150,7 @@
         </tbody>
       </table>
 
-      <h3>前台页面明细（23 个固定模板）</h3>
+      <h3>前台页面明细（24 个固定模板）</h3>
       <table>
         <thead><tr><th>导航入口</th><th>页面数</th><th>页面清单</th></tr></thead>
         <tbody>
@@ -1131,42 +1140,127 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
     <div class="section" id="s4">
       <h2>四、全局功能需求</h2>
 
-      <div class="epic">EP-09 多语言</div>
+      <div class="epic" id="gf01">GF-01 全局多语言路由与字典</div>
+      <div class="note">📌 P0 必须实现 zh-CN + en-US + zh-TW 三套；de/fr/pt/es/ru 五种机器翻译辅助语言同步上线，路由机制相同。</div>
+      <h4>语言策略</h4>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <thead><tr><th>语言</th><th>代码</th><th>维护方式</th><th>P0 状态</th></tr></thead>
         <tbody>
-          <tr><td>zh-CN / en-US 双语全量覆盖</td><td>核心维护语言</td></tr>
-          <tr><td>zh-TW 自动繁简转换</td><td>由 zh-CN 自动生成</td></tr>
-          <tr><td>Header 语言切换器</td><td>仅显示已发布语言</td></tr>
-          <tr><td>URL 多语言结构（/zh-CN/... /en-US/...）</td><td>SEO 独立索引</td></tr>
-          <tr><td>de / fr / pt / es / ru 机器翻译辅助</td><td>以 en-US 为源，机器翻译 + 人工校对</td></tr>
-          <tr><td>内容回退机制</td><td>未翻译内容按链回退，不显示空白</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">切换语言后 URL 变更，页面内容正确切换，SEO 元数据同步更新。</div>
-
-      <div class="epic" style="margin-top:20px">EP-10 全局搜索</div>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>Header 常驻搜索框</td><td>跨 FAQ / 兼容品牌 / 产品 / 文档全站索引</td></tr>
-          <tr><td>跨全站索引范围</td><td>FAQ / API 文档段落 / 兼容品牌 / 固件版本 / 产品页</td></tr>
-          <tr><td>CMS 内容发布后自动更新索引</td><td>内容发布触发索引刷新，无需手动触发</td></tr>
+          <tr><td>简体中文</td><td>zh-CN</td><td>人工维护（主语言）</td><td>✅ 必须</td></tr>
+          <tr><td>英文</td><td>en-US</td><td>人工维护</td><td>✅ 必须</td></tr>
+          <tr><td>繁体中文</td><td>zh-TW</td><td>由 zh-CN 自动繁简转换</td><td>✅ 必须</td></tr>
+          <tr><td>德文</td><td>de</td><td>机器翻译辅助（DeepL/Google）</td><td>✅ P0 上线</td></tr>
+          <tr><td>法文</td><td>fr</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
+          <tr><td>葡萄牙文</td><td>pt</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
+          <tr><td>西班牙文</td><td>es</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
+          <tr><td>俄文</td><td>ru</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
         </tbody>
       </table>
 
-      <div class="epic" style="margin-top:20px">EP-11 表单通知</div>
+      <h4>路由规则</h4>
+      <pre>URL 结构：/{lang-code}/{path}
+示例：
+  /zh-CN/products/neuron-ii
+  /en-US/products/neuron-ii
+  /zh-TW/products/neuron-ii
+  /de/products/neuron-ii
+
+首次访问：根据浏览器 Accept-Language 自动跳转对应语言；
+         无匹配语言时降级至 zh-CN。
+语言切换：Header 语言切换器，切换后跳转当前页对应语言版本。
+降级策略：CMS 某语言内容未填写时，降级显示 zh-CN 内容，
+         前端标注"待翻译"视觉标记（开发环境可见），
+         严禁白屏或乱码。</pre>
+
+      <h4>功能清单</h4>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>企业微信群机器人通知（按意向分类路由）</td><td>Webhook URL 在 CMS 通知配置后台维护</td></tr>
-          <tr><td>内部邮件通知（按意向分类路由至指定邮箱）</td><td>收件邮箱在 CMS 后台配置</td></tr>
-          <tr><td>用户侧确认回执邮件</td><td>邮件模板在 CMS 后台编辑，支持多语言</td></tr>
+          <tr><td>8 种语言路由</td><td>全部 8 种语言的 URL 路径独立存在，SEO 可索引</td></tr>
+          <tr><td>hreflang 标签</td><td>每页 HTML &lt;head&gt; 输出全部 8 种语言的 hreflang，供搜索引擎识别</td></tr>
+          <tr><td>UI 字典动态加载</td><td>所有静态文案（「查看更多」「联系我们」等）从 CMS-15 多语言字典 API 加载，禁止前端组件硬编码</td></tr>
+          <tr><td>zh-TW 自动转换</td><td>服务端渲染时由 zh-CN 内容自动转换，无需 CMS 单独维护</td></tr>
+          <tr><td>机器翻译流水线</td><td>de/fr/pt/es/ru 内容由机器翻译预生成并写入 CMS，人工可后期修订</td></tr>
+          <tr><td>语言切换器</td><td>Header 常驻，下拉展示全部 8 种语言，切换后跳转当前路径对应语言版本</td></tr>
         </tbody>
       </table>
-      <div class="ac">表单提交 5 分钟内，企微群和指定邮箱均收到通知；用户邮箱收到确认邮件。</div>
+      <div class="ac">全部 8 种语言的首页 URL 可正常访问，内容正确渲染，无白屏。</div>
+      <div class="ac">hreflang 标签在页面源码中正确输出，覆盖全部 8 种语言。</div>
+      <div class="ac">语言切换后跳转至当前页对应语言版本（非首页）。</div>
+      <div class="ac">某语言内容缺失时降级显示 zh-CN，不出现白屏或乱码。</div>
 
-      <div class="epic" style="margin-top:20px">EP-12 SEO 基础</div>
+      <div class="epic" id="gf02" style="margin-top:20px">GF-02 全局联合搜索</div>
+      <div class="note">📌 P0 全内容公开，搜索结果无权限过滤。P1 接入 SSO 后再加权限过滤逻辑。</div>
+      <h4>搜索索引范围</h4>
+      <table>
+        <thead><tr><th>内容类型</th><th>索引字段</th><th>P0 状态</th></tr></thead>
+        <tbody>
+          <tr><td>FAQ 条目</td><td>问题标题 + 答案正文</td><td>✅</td></tr>
+          <tr><td>产品页</td><td>产品名称 + 定位描述 + 规格参数</td><td>✅</td></tr>
+          <tr><td>解决方案页</td><td>场景名称 + 痛点描述 + 方案描述</td><td>✅</td></tr>
+          <tr><td>兼容品牌</td><td>品牌名称 + 能力标签</td><td>✅</td></tr>
+          <tr><td>文件资产</td><td>文件名称 + 产品型号 + 版本号</td><td>✅</td></tr>
+          <tr><td>新闻动态</td><td>标题 + 摘要</td><td>✅</td></tr>
+          <tr><td>案例</td><td>案例名称 + 摘要</td><td>✅</td></tr>
+        </tbody>
+      </table>
+
+      <h4>功能清单</h4>
+      <table>
+        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>Header 常驻搜索框</td><td>所有页面顶部均可触发搜索</td></tr>
+          <tr><td>中文分词支持</td><td>建议接入 Algolia 或 Typesense，降低自研成本；技术选型详见技术选型备忘.html</td></tr>
+          <tr><td>多语言搜索</td><td>当前语言环境下的索引内容优先返回；支持跨语言匹配</td></tr>
+          <tr><td>搜索结果分类展示</td><td>结果按内容类型分组展示（产品 / 解决方案 / FAQ / 文件 / 新闻）</td></tr>
+          <tr><td>索引自动更新</td><td>CMS 内容发布后自动触发搜索索引更新，无需手动操作</td></tr>
+          <tr><td>空结果引导</td><td>无结果时展示「联系我们」入口引导用户</td></tr>
+        </tbody>
+      </table>
+      <div class="ac">在搜索框输入产品关键词，结果页正确返回对应产品/FAQ/文件条目。</div>
+      <div class="ac">CMS 发布新内容后，5 分钟内该内容可被搜索到。</div>
+      <div class="ac">中文搜索不因分词问题漏掉相关结果（如搜「储能」能找到「储能系统」相关内容）。</div>
+
+      <div class="epic" id="gf03" style="margin-top:20px">GF-03 表单统一通知</div>
+      <div class="note">📌 全站所有表单（联系我们 / 在线报修）提交后触发三路通知。Webhook URL 和收件邮箱全部在 CMS-16 通知配置模块维护，严禁硬编码。</div>
+      <h4>通知流程</h4>
+      <pre>用户提交表单
+    │
+    ├──① 企业微信群机器人
+    │      按「意向分类」路由至对应群：
+    │      整套方案咨询 → 销售群
+    │      纯硬件采购   → 国内/海外销售群
+    │      VPP/定制开发 → 产品群
+    │      API 接入需求 → 技术群
+    │      渠道合作     → 商务群
+    │      在线报修     → 技术支持群
+    │
+    ├──② 内部邮件通知
+    │      按意向分类发送至对应负责人邮箱
+    │      邮箱在 CMS-16 后台配置，不硬编码
+    │
+    └──③ 用户确认回执邮件
+           发送至用户填写的邮箱
+           邮件模板在 CMS-16 后台编辑，支持多语言</pre>
+
+      <h4>功能清单</h4>
+      <table>
+        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>企微 Webhook 路由</td><td>按意向分类精准路由，6 条路由规则，URL 在 CMS-16 配置</td></tr>
+          <tr><td>内部邮件通知</td><td>收件邮箱在 CMS-16 配置，不硬编码</td></tr>
+          <tr><td>用户回执邮件</td><td>多语言模板，模板内容在 CMS-16 编辑</td></tr>
+          <tr><td>提交前合规校验</td><td>表单提交前必须校验「数据处理同意声明」勾选状态，未勾选则阻断提交</td></tr>
+          <tr><td>5 分钟送达 SLA</td><td>企微和邮件通知须在提交后 5 分钟内到达</td></tr>
+          <tr><td>失败重试</td><td>Webhook 失败后自动重试 3 次，最终失败写入错误日志</td></tr>
+        </tbody>
+      </table>
+      <div class="ac">联系我们表单提交后，对应企微群 5 分钟内收到通知。</div>
+      <div class="ac">用户邮箱 5 分钟内收到多语言确认回执。</div>
+      <div class="ac">未勾选同意声明时，提交按钮被阻断，表单不发送。</div>
+      <div class="ac">修改 CMS-16 中的 Webhook URL 后，下一条提交即生效，无需代码部署。</div>
+
+      <div class="epic" id="gf04" style="margin-top:20px">GF-04 SEO 基础规格</div>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
         <tbody>
@@ -1177,10 +1271,10 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
         </tbody>
       </table>
 
-      <div class="epic" style="margin-top:20px">EP-13 隐私合规</div>
+      <div class="epic" id="gf05" style="margin-top:20px">GF-05 隐私合规（Cookie 横幅 + 隐私政策页）</div>
       <div class="note">📌 两件独立的事：① Cookie 同意横幅（UI组件，非页面）② 隐私政策页（独立文本页，EP-09）。两者需配合工作，但开发和内容准备可分开进行。</div>
 
-      <h4>EP-13A · Cookie 同意横幅（UI 组件）</h4>
+      <h4>GF-05A · Cookie 同意横幅（UI 组件）</h4>
       <div class="arch-box">触发时机：用户首次访问任意页面时，页面底部弹出横幅
 
 横幅内容：
@@ -1198,7 +1292,7 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
 
 适用法规：GDPR（欧盟）/ LGPD（巴西）/ PIPL（中国）</div>
 
-      <h4>EP-13B · Cookie 同意横幅功能清单</h4>
+      <h4>GF-05B · Cookie 同意横幅功能清单</h4>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
         <tbody>
@@ -1214,7 +1308,7 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
       <div class="ac">点击「了解更多」正确跳转隐私政策页对应语言版本。</div>
       <div class="ac">点击「拒绝」后，第三方分析脚本不加载（Network 面板可验证）。</div>
 
-      <h4>EP-13C · 隐私政策页说明（→ 详见 EP-09）</h4>
+      <h4>GF-05C · 隐私政策页说明（→ 详见 EP-09）</h4>
       <table>
         <thead><tr><th>项目</th><th>说明</th></tr></thead>
         <tbody>
@@ -1226,7 +1320,7 @@ Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
         </tbody>
       </table>
 
-      <div class="epic" style="margin-top:20px">EP-14 SSO / 访问控制</div>
+      <div class="epic" id="gf06" style="margin-top:20px">GF-06 SSO / 访问控制（P1 预留）</div>
       <div class="note">📌 初版上线时所有内容公开，无登录入口。SSO 及权限体系后续迭代接入。</div>
       <table>
         <thead><tr><th>功能点</th><th>说明</th></tr></thead>
