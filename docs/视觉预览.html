@@ -201,56 +201,76 @@
       font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none;
     }
 
-    /* ========== 5. PRODUCTS (Dark) ========== */
-    .products { background: var(--dark); padding: 96px 24px; }
-    .products .section-header { text-align: center; margin-bottom: 64px; }
+    /* ========== 5. PRODUCTS ========== */
+    .products { background: var(--white); padding: 96px 0; }
+    .products .section-header { text-align: center; margin-bottom: 64px; padding: 0 24px; }
     .products .section-header h2 {
       font-size: clamp(28px,3.5vw,40px); font-weight: 800;
-      color: var(--white); letter-spacing: -1px; margin-bottom: 16px;
+      color: var(--text); letter-spacing: -1px; margin-bottom: 16px;
     }
-    .products .section-header p { font-size: 16px; color: rgba(255,255,255,.5); }
-    .prod-columns {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-      max-width: var(--max-w); margin: 0 auto;
+    .products .section-header p { font-size: 16px; color: var(--text-sub); }
+
+    /* Hardware carousel */
+    .hw-carousel-wrap {
+      position: relative; max-width: var(--max-w); margin: 0 auto; padding: 0 64px;
     }
-    .prod-col-title {
-      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--brand); margin-bottom: 24px;
+    .hw-carousel {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
     }
-    .prod-card {
-      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius); padding: 28px 24px; margin-bottom: 16px;
-      transition: border-color .2s, background .2s; cursor: pointer;
+    .hw-card {
+      background: var(--gray-bg); border-radius: 20px;
+      padding: 48px 32px 32px; text-align: center;
+      cursor: pointer; transition: box-shadow .25s, transform .25s;
+      border: 1px solid transparent;
     }
-    .prod-card:hover { border-color: var(--brand); background: rgba(56,196,232,.06); }
-    .prod-card h3 {
-      font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+    .hw-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,.08);
+      transform: translateY(-4px);
+      border-color: rgba(56,196,232,.2);
     }
-    .prod-card p {
-      font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6;
+    .hw-card-img {
+      width: 200px; height: 160px; margin: 0 auto 32px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .prod-card .prod-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-    .prod-spec {
-      font-size: 11px; font-weight: 600; color: rgba(255,255,255,.35);
-      border: 1px solid rgba(255,255,255,.1); padding: 4px 10px;
-      border-radius: 4px; font-family: 'Inter', monospace;
+    .hw-card-name {
+      font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px;
     }
-    .sw-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.06);
-      transition: padding-left .2s; cursor: pointer;
+    .hw-card-desc {
+      font-size: 13px; color: var(--text-sub); line-height: 1.6; margin-bottom: 20px;
     }
-    .sw-item:hover { padding-left: 8px; }
-    .sw-item:last-child { border-bottom: none; }
-    .sw-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex-shrink: 0;
+    .hw-card-specs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .hw-spec {
+      font-size: 11px; font-weight: 600; color: var(--text-sub);
+      background: #fff; border: 1px solid var(--border);
+      padding: 4px 10px; border-radius: 4px;
     }
-    .sw-item h3 {
-      font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 2px;
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #fff; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: box-shadow .2s, border-color .2s;
+      color: var(--text);
     }
-    .sw-item p {
-      font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.5;
+    .carousel-arrow:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); border-color: var(--brand); color: var(--brand); }
+    .carousel-arrow.prev { left: 8px; }
+    .carousel-arrow.next { right: 8px; }
+
+    /* Software list */
+    .sw-grid {
+      display: grid; grid-template-columns: repeat(5,1fr); gap: 0;
+      max-width: var(--max-w); margin: 64px auto 0;
+      border-top: 1px solid var(--border); border-left: 1px solid var(--border);
     }
+    .sw-grid-item {
+      padding: 32px 24px; border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background .2s; cursor: pointer;
+    }
+    .sw-grid-item:hover { background: var(--gray-bg); }
+    .sw-grid-icon { color: var(--brand); margin-bottom: 16px; }
+    .sw-grid-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .sw-grid-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
 
     /* ========== 6. BRANDS ========== */
     .brands { background: var(--white); padding: 96px 24px; }
@@ -333,103 +353,6 @@
     .footer-icp { font-size: 12px; color: rgba(255,255,255,.2); }
 
 
-    /* ========== PRODUCTS BENTO ========== */
-    .prod-label {
-      max-width: var(--max-w); margin: 0 auto 20px;
-      font-size: 12px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--brand);
-    }
-    .bento-hw {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 16px;
-      max-width: var(--max-w); margin: 0 auto;
-    }
-    .bento-card { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
-    .bento-hero {
-      grid-row: span 2;
-      min-height: 420px;
-      background-size: cover; background-position: center;
-      transition: transform .3s;
-    }
-    .bento-hero:hover { transform: scale(1.01); }
-    .bento-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
-    }
-    .bento-hero-body {
-      position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;
-    }
-    .bento-tag {
-      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--brand);
-      background: rgba(56,196,232,.15); border: 1px solid rgba(56,196,232,.3);
-      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
-    }
-    .bento-hero-body h3 {
-      font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 10px;
-    }
-    .bento-hero-body p {
-      font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 16px;
-    }
-    .bento-link {
-      font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none;
-    }
-    .bento-sm {
-      padding: 28px; border: 1px solid rgba(255,255,255,.06);
-      border-radius: 16px;
-      transition: border-color .2s, transform .2s;
-    }
-    .bento-sm:hover { border-color: rgba(56,196,232,.3); transform: translateY(-2px); }
-    .bento-sm-icon { margin-bottom: 16px; }
-    .bento-sm h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .bento-sm p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
-
-    /* Software bento */
-    .bento-sw {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
-      max-width: var(--max-w); margin: 0 auto;
-    }
-    .bento-sw-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-top: 2px solid var(--brand);
-      border-radius: 16px; padding: 28px 24px;
-      transition: border-color .2s, transform .2s, background .2s;
-      cursor: pointer; position: relative; overflow: hidden;
-    }
-    .bento-sw-card::before {
-      content: attr(data-num);
-      position: absolute; top: -8px; right: 12px;
-      font-size: 72px; font-weight: 800;
-      color: rgba(255,255,255,.04);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      line-height: 1; pointer-events: none; user-select: none;
-    }
-    .bento-sw-card:hover {
-      background: rgba(56,196,232,.07);
-      border-color: var(--brand);
-      transform: translateY(-4px);
-    }
-    .sw-icon { margin-bottom: 16px; color: var(--brand); }
-    .sw-badge {
-      display: none;
-    }
-    .bento-sw-card h3 {
-      font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .bento-sw-card p { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; }
-
-    @media (max-width: 1024px) {
-      .bento-hw { grid-template-columns: 1fr; }
-      .bento-hero { grid-row: span 1; min-height: 300px; }
-      .bento-sw { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .bento-sw { grid-template-columns: 1fr 1fr; }
-    }
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -576,97 +499,122 @@
     </div>
   </section>
 
-  <!-- ===== 5. PRODUCTS (Dark) ===== -->
+  <!-- ===== 5. PRODUCTS ===== -->
   <section class="products">
     <div class="section-header">
       <h2>产品矩阵</h2>
       <p>从边缘到云端，模块化覆盖全场景需求</p>
     </div>
 
-    <!-- Hardware row: Bento grid -->
-    <div class="prod-label">硬件 · Hardware</div>
-    <div class="bento-hw">
-      <!-- Featured: Neuron III -->
-      <div class="bento-card bento-hero" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop')">
-        <div class="bento-hero-overlay"></div>
-        <div class="bento-hero-body">
-          <div class="bento-tag">Flagship</div>
-          <h3>Neuron III</h3>
-          <p>高性能边缘计算网关，100+ 设备并发接入，内置本地策略引擎，断网自治</p>
-          <div class="prod-specs">
-            <span class="prod-spec">RS485 × 4</span>
-            <span class="prod-spec">4G / WiFi</span>
-            <span class="prod-spec">Modbus / MQTT</span>
-            <span class="prod-spec">边缘计算</span>
+    <!-- Hardware Carousel -->
+    <div class="hw-carousel-wrap">
+      <button class="carousel-arrow prev" aria-label="上一个">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="hw-carousel">
+        <!-- Neuron III -->
+        <div class="hw-card">
+          <div class="hw-card-img">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:144px">
+              <rect x="30" y="20" width="140" height="100" rx="12" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="1.5"/>
+              <rect x="45" y="35" width="110" height="70" rx="8" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1"/>
+              <circle cx="100" cy="70" r="18" fill="#fff" stroke="#C8D0DA" stroke-width="1.5"/>
+              <circle cx="100" cy="70" r="8" fill="#38C4E8" opacity=".8"/>
+              <rect x="50" y="128" width="100" height="8" rx="4" fill="#E8EDF2"/>
+              <rect x="60" y="136" width="80" height="4" rx="2" fill="#DDE3EC"/>
+              <circle cx="60" cy="55" r="4" fill="#38C4E8" opacity=".5"/>
+              <circle cx="75" cy="55" r="4" fill="#38C4E8" opacity=".3"/>
+              <circle cx="140" cy="55" r="4" fill="#C8D0DA"/>
+            </svg>
           </div>
-          <a href="#" class="bento-link">查看规格 →</a>
+          <div class="hw-card-name">Neuron III</div>
+          <div class="hw-card-desc">高性能边缘网关，100+ 设备并发接入，支持边缘计算</div>
+          <div class="hw-card-specs">
+            <span class="hw-spec">RS485 ×4</span>
+            <span class="hw-spec">4G/WiFi</span>
+            <span class="hw-spec">MQTT</span>
+          </div>
+        </div>
+        <!-- Neuron II -->
+        <div class="hw-card">
+          <div class="hw-card-img">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:144px">
+              <rect x="45" y="25" width="110" height="90" rx="12" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="1.5"/>
+              <rect x="58" y="38" width="84" height="64" rx="6" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1"/>
+              <circle cx="100" cy="70" r="14" fill="#fff" stroke="#C8D0DA" stroke-width="1.5"/>
+              <circle cx="100" cy="70" r="6" fill="#38C4E8" opacity=".7"/>
+              <rect x="55" y="122" width="90" height="6" rx="3" fill="#E8EDF2"/>
+              <rect x="65" y="130" width="70" height="4" rx="2" fill="#DDE3EC"/>
+            </svg>
+          </div>
+          <div class="hw-card-name">Neuron II</div>
+          <div class="hw-card-desc">经济型边缘网关，户用场景首选，即插即用</div>
+          <div class="hw-card-specs">
+            <span class="hw-spec">RS485</span>
+            <span class="hw-spec">WiFi</span>
+            <span class="hw-spec">Modbus</span>
+          </div>
+        </div>
+        <!-- Neuron III Lite -->
+        <div class="hw-card">
+          <div class="hw-card-img">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:144px">
+              <rect x="35" y="22" width="130" height="96" rx="12" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="1.5"/>
+              <rect x="50" y="36" width="100" height="68" rx="6" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1"/>
+              <circle cx="100" cy="70" r="16" fill="#fff" stroke="#C8D0DA" stroke-width="1.5"/>
+              <circle cx="100" cy="70" r="7" fill="#38C4E8" opacity=".6"/>
+              <circle cx="100" cy="70" r="3" fill="#38C4E8"/>
+              <rect x="50" y="125" width="100" height="7" rx="3.5" fill="#E8EDF2"/>
+              <rect x="60" y="133" width="80" height="4" rx="2" fill="#DDE3EC"/>
+              <rect x="56" y="45" width="6" height="6" rx="1" fill="#38C4E8" opacity=".4"/>
+              <rect x="56" y="56" width="6" height="6" rx="1" fill="#38C4E8" opacity=".3"/>
+            </svg>
+          </div>
+          <div class="hw-card-name">Neuron III Lite</div>
+          <div class="hw-card-desc">精简版网关，中小工商业最佳性价比方案</div>
+          <div class="hw-card-specs">
+            <span class="hw-spec">RS485</span>
+            <span class="hw-spec">4G</span>
+            <span class="hw-spec">Modbus</span>
+          </div>
         </div>
       </div>
-      <!-- Neuron II -->
-      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0f2035 0%,#0c3050 100%)">
-        <div class="bento-sm-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3>Neuron II</h3>
-        <p>经济型网关，户用场景首选</p>
-        <div class="prod-specs" style="margin-top:12px">
-          <span class="prod-spec">RS485</span>
-          <span class="prod-spec">WiFi</span>
-          <span class="prod-spec">Modbus</span>
-        </div>
-      </div>
-      <!-- Neuron III Lite -->
-      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0d1f10 0%,#0c3020 100%)">
-        <div class="bento-sm-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="2" fill="#38C4E8" stroke="none"/></svg>
-        </div>
-        <h3>Neuron III Lite</h3>
-        <p>精简版，中小工商业最佳性价比</p>
-        <div class="prod-specs" style="margin-top:12px">
-          <span class="prod-spec">RS485</span>
-          <span class="prod-spec">4G</span>
-          <span class="prod-spec">Modbus</span>
-        </div>
-      </div>
+      <button class="carousel-arrow next" aria-label="下一个">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
 
-    <!-- Software row: 5-card bento -->
-    <div class="prod-label" style="margin-top:48px">软件 · Software</div>
-    <div class="bento-sw">
-      <div class="bento-sw-card" data-num="01">
-        <div class="sw-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div class="sw-badge">居家</div>
-        <h3>HEMS Cloud</h3>
-        <p>家庭能源管理，光储充一体，白标 SaaS 快速交付</p>
+    <!-- Software Grid -->
+    <div class="sw-grid" style="padding:0 24px;max-width:calc(var(--max-w) + 48px)">
+      <div class="sw-grid-item">
+        <div class="sw-grid-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="sw-grid-name">HEMS Cloud</div>
+        <div class="sw-grid-desc">家庭能源管理，光储充一体，白标 SaaS</div>
       </div>
-      <div class="bento-sw-card" data-num="02">
-        <div class="sw-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
-        <div class="sw-badge">工商</div>
-        <h3>ESS Cloud</h3>
-        <p>工商业储能平台，峰谷套利，多站点统一监控告警</p>
+      <div class="sw-grid-item">
+        <div class="sw-grid-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
+        <div class="sw-grid-name">ESS Cloud</div>
+        <div class="sw-grid-desc">工商储能，峰谷套利，多站点监控</div>
       </div>
-      <div class="bento-sw-card" data-num="03">
-        <div class="sw-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="sw-badge">充电</div>
-        <h3>EVCMS</h3>
-        <p>充电站管理，多桩负载均衡，OCPP 兼容，防跳闸</p>
+      <div class="sw-grid-item">
+        <div class="sw-grid-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="sw-grid-name">EVCMS</div>
+        <div class="sw-grid-desc">充电站管理，多桩负载均衡，防跳闸</div>
       </div>
-      <div class="bento-sw-card" data-num="04">
-        <div class="sw-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="sw-badge">电能</div>
-        <h3>PQMS</h3>
-        <p>电能质量监测与治理，谐波分析，实时告警</p>
+      <div class="sw-grid-item">
+        <div class="sw-grid-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="sw-grid-name">PQMS</div>
+        <div class="sw-grid-desc">电能质量监测，谐波分析，实时告警</div>
       </div>
-      <div class="bento-sw-card" data-num="05">
-        <div class="sw-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-        <div class="sw-badge">电网</div>
-        <h3>VPP Platform</h3>
-        <p>虚拟电厂，分布式聚合调度，接入辅助服务电力市场</p>
+      <div class="sw-grid-item">
+        <div class="sw-grid-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div class="sw-grid-name">VPP Platform</div>
+        <div class="sw-grid-desc">虚拟电厂，分布式聚合，接入电力市场</div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 6. BRANDS ===== -->
+    <!-- ===== 6. BRANDS ===== -->
   <section class="brands">
     <div class="section-header">
       <h2>兼容 80+ 主流品牌</h2>
