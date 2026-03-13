@@ -223,10 +223,10 @@
 
     /* Software switcher */
     .sw-switcher { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-    .sw-image-wrap { width: 100%; border-radius: 16px; overflow: hidden; aspect-ratio: 16/7; background: var(--gray-bg); }
+    .sw-image-wrap { width: 100%; border-radius: 12px 12px 0 0; overflow: hidden; aspect-ratio: 16/7; background: var(--gray-bg); border: 1.5px solid var(--border); border-bottom: none; }
     .sw-image-wrap .sw-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .sw-tabs { display: flex; border-top: 2px solid var(--border); margin-top: 0; }
-    .sw-tab { flex: 1; padding: 20px 16px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; text-align: left; border-top: 3px solid transparent; margin-top: -2px; transition: color .2s, border-color .2s, background .2s; background: none; border-bottom: none; border-left: none; border-right: none; font-family: 'Inter', sans-serif; }
+    .sw-tabs { display: flex; background: #fff; border: 1.5px solid var(--border); border-radius: 0 0 12px 12px; margin-top: 0; }
+    .sw-tab { flex: 1; padding: 20px 16px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; text-align: left; border-top: 3px solid transparent; transition: color .2s, border-color .2s, background .2s; background: none; border: none; font-family: 'Inter', sans-serif; border-right: 1px solid var(--border); }
     .sw-tab:hover { color: var(--text); background: var(--gray-bg); }
     .sw-tab.active { color: var(--brand); border-top-color: var(--brand); }
     .sw-tab-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
@@ -543,7 +543,7 @@
     <!-- Software: 1 big image + tabs + description -->
     <div class="sw-switcher">
       <div class="sw-image-wrap">
-        <img class="sw-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&auto=format&fit=crop" alt="Software">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" alt="Software">
       </div>
       <div class="sw-tabs">
         <button class="sw-tab active" data-idx="0"><div class="sw-tab-name">HEMS Cloud</div><div class="sw-tab-sub">家庭能源管理平台</div></button>
