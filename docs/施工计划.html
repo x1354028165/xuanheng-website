@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>施工计划 · 旭衡电子</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --accent-light: #d6eaf8;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --purple: #8e44ad;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #dde3ea;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --code-bg: #1e2d3d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .doc-header { background: linear-gradient(135deg, #0f2940, #1a6fa0); color: white; padding: 48px 0 36px; text-align: center; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .doc-header .sub { opacity: .7; font-size: 14px; margin-bottom: 24px; }
+  .meta-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .meta-tag { background: rgba(255,255,255,.15); padding: 4px 14px; border-radius: 20px; font-size: 13px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .layout-wrapper { display: flex; gap: 32px; align-items: flex-start; margin-top: 24px; }
+
+  .sidebar {
+    position: sticky;
+    top: 68px;
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 15px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-left: 8px; border-bottom: none; }
+  .sidebar ul { list-style: none; padding: 0; margin: 0; }
+  .sidebar li { margin: 4px 0; }
+  .sidebar a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .sidebar a:hover { background: #f0f7ff; color: var(--accent); }
+
+  .main-content { flex: 1; min-width: 0; }
+
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    scroll-margin-top: 72px;
+  }
+  .section-label { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  h2 { font-size: 22px; color: var(--primary); margin-bottom: 22px; padding-bottom: 12px; border-bottom: 2px solid var(--accent-light); }
+  h3 { font-size: 18px; color: var(--primary); margin: 28px 0 14px; font-weight: 600; }
+  h4 { font-size: 15px; color: var(--text); margin: 20px 0 10px; font-weight: 700; }
+  p { margin: 10px 0; }
+
+  .highlight { background: var(--accent-light); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; font-size: 15px; line-height: 1.7; }
+
+  pre { background: var(--code-bg); color: #a8d8f0; border-radius: 10px; padding: 20px 24px; overflow-x: auto; font-family: 'JetBrains Mono','Courier New',monospace; font-size: 13px; line-height: 1.7; margin: 16px 0; }
+  code { background: #e8f4fd; color: #1a6fa0; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono',monospace; font-size: 13px; }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: var(--primary); color: white; padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid var(--primary); }
+  td { padding: 12px 16px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafc; }
+
+  .main-content ul, .main-content ol { padding-left: 24px; margin: 12px 0; }
+  .main-content li { margin-bottom: 6px; }
+  strong { color: var(--text); }
+
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+  .badge-orange { background: #fff3e0; color: #e65100; }
+  .badge-gray { background: #f0f0f0; color: var(--muted); }
+  .badge-green { background: #eafaf1; color: var(--success); }
+
+  .arch-box-success { background: #f0fdf4; border: 2px solid var(--success); border-radius: 12px; padding: 20px 24px; margin: 14px 0; line-height: 1.8; }
+  .arch-box-success strong { color: var(--success); }
+
+  .task-list { list-style: none; padding-left: 0 !important; }
+  .task-list li { margin-bottom: 8px; padding: 6px 0; }
+  .task-list li::before { content: none; }
+  .task-id { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .checkbox { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; vertical-align: middle; margin-right: 8px; text-align: center; line-height: 14px; font-size: 12px; }
+
+  @media(max-width:960px){
+    .layout-wrapper { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; top: 0; max-height: none; }
+    .section { padding: 24px 20px; }
+  }
+
+  .doc-footer { text-align: center; padding: 32px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<!-- Top Nav -->
+<div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
+    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
+    <span style="color:#3d6080;font-size:12px">|</span>
+    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
+    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="PROJECT.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂️ 项目总纲</a>
+    <a href="施工计划.html" style="color:white;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0;background:rgba(255,255,255,.15)">🏗️ 施工计划</a>
+  </div>
+</div>
+
+<!-- Doc Header -->
+<div class="doc-header">
+  <div class="container">
+    <h1>🏗️ 施工计划（8阶段）</h1>
+    <div class="sub">旭衡电子官网重构 — Phase 0~7 任务拆分，门控推进</div>
+    <div class="meta-tags">
+      <span class="meta-tag">8 个阶段</span>
+      <span class="meta-tag">210+ 测试用例</span>
+      <span class="meta-tag">测试驱动门控</span>
+      <span class="meta-tag">2026-03-14 更新</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Layout -->
+<div class="container layout-wrapper">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>阶段导航</h2>
+    <ul>
+      <li><a href="#overview">阶段总览</a></li>
+      <li><a href="#phase0">Phase 0 · 项目初始化</a></li>
+      <li><a href="#phase1">Phase 1 · 前台页面</a></li>
+      <li><a href="#phase2">Phase 2 · 全局功能</a></li>
+      <li><a href="#phase3">Phase 3 · SEO</a></li>
+      <li><a href="#phase4">Phase 4 · CMS后台</a></li>
+      <li><a href="#phase5">Phase 5 · 表单通知</a></li>
+      <li><a href="#phase6">Phase 6 · 性能优化</a></li>
+      <li><a href="#phase7">Phase 7 · 安全加固</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="highlight" style="margin-bottom:28px;">
+      <strong>📌 规则：</strong>完成当前 Phase 所有任务 → 跑对应测试用例 → 全部通过 → 才能进入下一 Phase。
+    </div>
+
+    <!-- 阶段总览 -->
+    <div class="section" id="overview">
+      <div class="section-label">OVERVIEW</div>
+      <h2>阶段总览</h2>
+      <table>
+        <tr><th>Phase</th><th>名称</th><th>测试用例</th><th>状态</th></tr>
+        <tr><td>0</td><td>项目初始化 + 基础架构</td><td>基础架构验证</td><td>⬜ 未开始</td></tr>
+        <tr><td>1</td><td>前台页面开发</td><td><span class="task-id">TC-F01~F60</span>（60条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>2</td><td>全局功能</td><td><span class="task-id">TC-G01~G30</span>（30条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>3</td><td>SEO / Metadata</td><td><span class="task-id">TC-S01~S20</span>（20条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>4</td><td>CMS 后台</td><td><span class="task-id">TC-C01~C40</span>（40条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>5</td><td>表单与通知</td><td><span class="task-id">TC-N01~N15</span>（15条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>6</td><td>性能优化</td><td><span class="task-id">TC-P01~P10</span>（10条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>7</td><td>安全加固</td><td><span class="task-id">TC-T01~T15</span>（15条）</td><td>⬜ 未开始</td></tr>
+      </table>
+    </div>
+
+    <!-- Phase 0 -->
+    <div class="section" id="phase0">
+      <div class="section-label">PHASE 0</div>
+      <h2>Phase 0 — 项目初始化 + 基础架构 <span class="badge badge-blue">高优先级</span></h2>
+      <p><strong>前置条件：</strong>无（首个阶段） · <strong>测试用例：</strong>基础架构验证</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-1</span> 初始化 Next.js 14 项目（App Router）<br>
+          <code>npx create-next-app@latest frontend --typescript --tailwind --app --src-dir</code>，确认 <code>src/app/</code> 结构存在</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-2</span> 配置 Tailwind CSS + 字体<br>
+          引入 Google Fonts：Plus Jakarta Sans + Inter，配置 <code>tailwind.config.ts</code> 字体变量</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-3</span> 配置 next-intl 多语言<br>
+          支持 locale：<code>zh-CN</code>（默认）、<code>en-US</code>，目录：<code>src/messages/zh-CN.json</code>、<code>src/messages/en-US.json</code>，路由：<code>/[locale]/...</code></li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-4</span> 配置 Strapi v4<br>
+          初始化至 <code>cms/</code>，数据库：PostgreSQL（本地开发用 SQLite），创建 API Token</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-5</span> 基础布局组件<br>
+          <code>Header.tsx</code>（导航透明浮层） + <code>Footer.tsx</code> + 根布局 <code>layout.tsx</code></li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-6</span> 视觉基础变量<br>
+          主色：#16A34A（翠绿），深色区：Navy #07090D，参考视觉规范</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-7</span> Git 结构确认<br>
+          <code>frontend/</code> + <code>cms/</code> 均有 <code>.gitignore</code>，初始 commit 推送到 main</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><code>npm run dev</code> 启动无报错，首页可访问，导航 + Footer 渲染正常，多语言路由 <code>/zh-CN/</code> <code>/en-US/</code> 均响应。
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="section" id="phase1">
+      <div class="section-label">PHASE 1</div>
+      <h2>Phase 1 — 前台页面开发 <span class="badge badge-blue">高优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 0 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-F01~F60</span>（60条）</p>
+      <p><strong>参考文档：</strong><a href="需求文档.html">需求文档</a>（EP-01~EP-09）、<a href="视觉规范.html">视觉规范</a></p>
+
+      <h4>EP-01 首页</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-01</span> Hero 区块 — 背景 #07090D + 绿色光晕 + 80px网格纹理</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-02</span> 数字统计区（待主人确认具体数字）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-03</span> 解决方案概览卡片（5场景）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-04</span> 产品概览卡片（8产品）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-05</span> 兼容品牌 Logo 墙（从 CMS 读取）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-06</span> 信任背书（3项）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-07</span> 新闻动态列表（最新3条，从 CMS）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-08</span> CTA 底部区块</li>
+      </ul>
+
+      <h4>EP-02 解决方案（5场景页）</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-09</span> 场景页模板（微电网/户用/充电站/工商储/光储一体）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-10</span> 场景详情：适用场景描述 + 产品推荐 + 方案优势</li>
+      </ul>
+
+      <h4>EP-03 兼容生态</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-11</span> 品牌 Logo 墙（分品类筛选，CMS）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-12</span> 搜索/筛选功能</li>
+      </ul>
+
+      <h4>EP-04 帮助中心</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-13</span> 文档资料下载列表（CMS，P0全部公开）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-14</span> 版本兼容矩阵表格</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-15</span> FAQ 手风琴展开</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-16</span> 在线报修表单（→ Phase 5 对接通知）</li>
+      </ul>
+
+      <h4>EP-05 开发者中心</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-17</span> Tooltip「即将上线，欢迎留资」+ 联系我们跳转</li>
+      </ul>
+
+      <h4>EP-06 产品中心（8个产品页）</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-18</span> 产品列表页</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-19</span> 产品详情页模板（8个复用同一模板，数据从 CMS）</li>
+      </ul>
+
+      <h4>EP-07 关于我们</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-20</span> 公司介绍页</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-21</span> 新闻列表页（分页，CMS）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-22</span> 新闻详情页（动态路由）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-23</span> 加入我们（招聘岗位列表，CMS）</li>
+      </ul>
+
+      <h4>EP-08 联系我们</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-24</span> 联系信息 + 地图</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">F-25</span> 联系表单（→ Phase 5 对接通知）</li>
+      </ul>
+
+      <h4>EP-09 隐私政策页</h4>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">F-26</span> 隐私政策页面（框架完成，内容占位）</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-F01~F60</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §一）
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="section" id="phase2">
+      <div class="section-label">PHASE 2</div>
+      <h2>Phase 2 — 全局功能 <span class="badge badge-blue">高优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 1 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-G01~G30</span>（30条）</p>
+      <p><strong>参考文档：</strong><a href="需求文档.html">需求文档</a>（EP-10~EP-14）</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言切换 — 语言切换器（Header 右上角），zh-CN / en-US 人工翻译，zh-TW 自动繁简转换</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-02</span> 全局搜索（前台内容全文检索）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-03</span> Cookie 横幅 — 首次访问显示，接受后存 localStorage，关联隐私政策页</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-04</span> 404 错误页（<code>src/app/not-found.tsx</code>）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-05</span> 500 错误页（<code>src/app/error.tsx</code>）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-06</span> 响应式适配 — Mobile(&lt;768px) / Tablet(768~1024px) / Desktop(&gt;1024px)，Header Hamburger</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-G01~G30</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §二）
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="section" id="phase3">
+      <div class="section-label">PHASE 3</div>
+      <h2>Phase 3 — SEO / Metadata <span class="badge badge-orange">中优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 2 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-S01~S20</span>（20条）</p>
+      <p><strong>参考文档：</strong><a href="前端技术规范.html">前端技术规范</a>（SEO 章节）</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">S-01</span> 每页 <code>generateMetadata()</code> — title / description / og:image</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-02</span> <code>robots.txt</code> 生成（<code>src/app/robots.ts</code>）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-03</span> <code>sitemap.xml</code> 动态生成（含 CMS 动态页面）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-04</span> 结构化数据 JSON-LD（Organization + Product schema）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-05</span> Open Graph / Twitter Card meta tags</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-06</span> hreflang 多语言标签</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">S-07</span> canonical URL 配置</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-S01~S20</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §三）
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="section" id="phase4">
+      <div class="section-label">PHASE 4</div>
+      <h2>Phase 4 — CMS 后台 <span class="badge badge-orange">中优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 3 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-C01~C40</span>（40条）</p>
+      <p><strong>参考文档：</strong><a href="架构设计文档.html">架构设计文档</a>（CMS 模块章节）、<a href="需求文档.html">需求文档</a></p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">C-01</span> 新闻动态（CMS-01）— title/slug/cover/content/publishedAt/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-02</span> FAQ（CMS-02）— question/answer/category/sort/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-03</span> 案例管理（CMS-03）— title/client/industry/cover/content/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-04</span> 招聘岗位（CMS-04）— title/department/location/type/description/active</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-05</span> 媒体库配置（CMS-05）— 上传规范/尺寸限制</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-06</span> 页面内容（CMS-06）— key/value/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-07</span> 产品内容（CMS-07）— name/slug/category/cover/specs/downloads/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-08</span> 解决方案内容（CMS-08）— scene/title/description/products/locale</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-09</span> 文件资产（CMS-09）— name/file/category/version/public</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-10</span> 兼容品牌（CMS-10）— name/logo/category/sort</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-11</span> 产品关联配置（CMS-11）— product → compatibleBrands 多对多</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-12</span> 客户线索（CMS-12）— name/company/email/phone/message/source/status</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-13</span> 报修工单（CMS-13）— orderNo/product/issue/contact/status/assignee</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-14</span> 多语言字典（CMS-14）— key/zh-CN/en-US</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-15</span> 通知配置（CMS-15）— 企微Webhook / 邮件地址 / 回执模板</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-16</span> SEO 配置（CMS-16）— 各页面 title/description/og-image</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-17</span> 操作日志（CMS-17）— 自动记录增删改操作</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-18</span> 缓存管理（CMS-18）— 手动触发 ISR Revalidate</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-19</span> 页面健康检查（CMS-19）— 检测前台关键页面 HTTP 状态</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-20</span> Sitemap 触发（CMS-20）— 内容发布后自动刷新</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-C01~C40</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §四）
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="section" id="phase5">
+      <div class="section-label">PHASE 5</div>
+      <h2>Phase 5 — 表单与通知 <span class="badge badge-orange">中优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 4 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-N01~N15</span>（15条）</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">N-01</span> 联系表单提交 → 写入 Strapi 客户线索（CMS-12）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-02</span> 报修表单提交 → 写入 Strapi 报修工单（CMS-13）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-03</span> 企微 Webhook 通知（新线索/新工单触发）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-04</span> 内部邮件通知（收件人在 CMS-15 配置）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-05</span> 用户回执邮件（提交人邮箱，模板在 CMS-15）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-06</span> 表单防刷（rate limiting，IP + 时间窗口）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">N-07</span> 表单验证（前端 + 后端双重校验）</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-N01~N15</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §五）
+      </div>
+    </div>
+
+    <!-- Phase 6 -->
+    <div class="section" id="phase6">
+      <div class="section-label">PHASE 6</div>
+      <h2>Phase 6 — 性能优化 <span class="badge badge-gray">低优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 5 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-P01~P10</span>（10条）</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">P-01</span> Lighthouse 评分 ≥ 90（Performance / Accessibility / SEO）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-02</span> 图片全部使用 Next.js <code>&lt;Image&gt;</code> + WebP 格式</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-03</span> 首屏 LCP ≤ 2.5s（移动端 4G 网络）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-04</span> ISR 缓存配置（静态页面 revalidate: 3600）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-05</span> 字体预加载（preload + display: swap）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-06</span> Bundle 分析（<code>@next/bundle-analyzer</code>），移除无用依赖</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P-07</span> CDN 配置（Vercel Edge Network，静态资源缓存头）</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-P01~P10</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §六）
+      </div>
+    </div>
+
+    <!-- Phase 7 -->
+    <div class="section" id="phase7">
+      <div class="section-label">PHASE 7</div>
+      <h2>Phase 7 — 安全加固 <span class="badge badge-gray">低优先级</span></h2>
+      <p><strong>前置条件：</strong>Phase 6 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-T01~T15</span>（15条）</p>
+
+      <h3>任务清单</h3>
+      <ul class="task-list">
+        <li><span class="checkbox">☐</span> <span class="task-id">T-01</span> HTTP 安全响应头（CSP / X-Frame-Options / HSTS）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-02</span> Strapi API 权限收紧（仅公开必要端点）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-03</span> API Token 权限最小化（前台只读，CMS 写 token 不暴露前端）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-04</span> 表单输入过滤（XSS / SQL injection 防护）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-05</span> 文件上传类型限制（仅 jpg/png/webp/pdf/mp4）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-06</span> Rate limiting（API 端点防刷）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-07</span> 依赖漏洞扫描（<code>npm audit</code>，高危必修）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">T-08</span> 环境变量审计（所有 secret 不允许 commit）</li>
+      </ul>
+
+      <h3>通过条件</h3>
+      <div class="arch-box-success">
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-T01~T15</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §七）
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="doc-footer">旭衡电子官网重构 · 施工计划 · 最后更新：2026-03-14 · 维护人：MOSS</div>
+
+</body>
+</html>
