@@ -745,6 +745,99 @@ fontSize: {
         <tr><td>Footer 高度</td><td>Auto，最小 160px</td></tr>
       </tbody>
     </table>
+
+    <h3 style="margin-top:28px;">响应式组件规则 Responsive Component Rules</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">每个核心组件在三个断点下的布局行为规范，开发必须完整实现。</p>
+
+    <h4>Nav 导航栏</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>横向导航链接 + 地球图标 + 联系我们按钮</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>隐藏部分链接，保留 Logo + 核心 CTA + 汉堡菜单</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>Logo + 汉堡菜单，点击展开全屏遮罩菜单</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Hero 首屏</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>100vh；居中大标题 <code>clamp(40px, 4.2vw, 80px)</code>；双按钮并排各 280px</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>100vh；标题略小</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td><code>min-height: 100svh</code>；标题 <code>clamp(32px, 8vw, 48px)</code>；按钮全宽堆叠</td></tr>
+      </tbody>
+    </table>
+
+    <h4>统计区（3卡）</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>3列 grid <code>repeat(3, 1fr)</code></td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>3列（保持）</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>1列堆叠，每卡全宽</td></tr>
+      </tbody>
+    </table>
+
+    <h4>解决方案手风琴</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>5卡横排，hover 展开</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>5卡横排，hover 展开</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>垂直堆叠，点击展开，默认展示第一个</td></tr>
+      </tbody>
+    </table>
+
+    <h4>硬件（3卡）</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>3列 grid <code>repeat(3, 1fr)</code>，gap 20px</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>3列（保持，卡片等比缩小）</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>1列堆叠，全宽</td></tr>
+      </tbody>
+    </table>
+
+    <h4>软件（大图 + 5列）</h4>
+    <table>
+      <thead><tr><th>断点</th><th>图片比例</th><th>列表布局</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td><code>aspect-ratio: 16/7</code></td><td>5列横排</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td><code>aspect-ratio: 16/9</code></td><td>3列横排（其余2项隐藏或横向滚动）</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td><code>aspect-ratio: 4/3</code></td><td>2列 × 3行 grid</td></tr>
+      </tbody>
+    </table>
+
+    <h4>品牌墙</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>4×3 grid（12品牌）</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>4×3（保持）</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>3×4 grid</td></tr>
+      </tbody>
+    </table>
+
+    <h4>新闻卡</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>3列</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>2列</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>1列堆叠</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Footer</h4>
+    <table>
+      <thead><tr><th>断点</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>Desktop (&gt;1024px)</td><td>4列</td></tr>
+        <tr><td>Tablet (768–1024px)</td><td>2×2</td></tr>
+        <tr><td>Mobile (&lt;768px)</td><td>1列堆叠，列间距 24px</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- ===== 十二、图标 ===== -->

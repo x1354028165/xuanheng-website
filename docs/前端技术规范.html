@@ -1447,6 +1447,185 @@ export async function POST(request: NextRequest) {
 
 
 
+    <!-- ============================================================ -->
+    <!-- 十一、测试规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s11">
+      <div class="section-label">SECTION 11</div>
+      <h2>十一、测试规范 Testing Strategy</h2>
+
+      <h3>11.1 工具栈</h3>
+      <table>
+        <thead>
+          <tr><th>工具</th><th>用途</th><th>覆盖范围</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Playwright</strong></td><td>E2E 测试 + 视觉回归（截图对比）</td><td>全页面跨浏览器 / 跨 viewport</td></tr>
+          <tr><td><strong>Jest + React Testing Library</strong></td><td>单元测试 / 组件测试</td><td>纯逻辑函数、UI 组件行为</td></tr>
+          <tr><td><strong>Lighthouse CI</strong></td><td>性能监控</td><td>Performance / Accessibility / SEO 评分</td></tr>
+        </tbody>
+      </table>
+
+      <h3>11.2 Playwright 配置</h3>
+      <p>三个核心 viewport project，覆盖桌面端、平板端、移动端。</p>
+
+<pre><code>// playwright.config.ts
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  use: {
+    screenshot: 'only-on-failure',   // 失败时自动截图
+    video: 'retain-on-failure',
+  },
+  projects: [
+    {
+      name: 'Desktop Chrome',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 720 } },
+    },
+    {
+      name: 'Tablet',
+      use: { viewport: { width: 768, height: 1024 } },
+    },
+    {
+      name: 'Mobile iPhone',
+      use: { ...devices['iPhone 13'], viewport: { width: 375, height: 812 }, isMobile: true },
+    },
+  ],
+});</code></pre>
+
+      <h3>11.3 视觉回归测试（截图对比）</h3>
+      <p>第一次运行时生成基准图，后续每次运行自动与基准对比。基准图存放于 <code>frontend/tests/snapshots/</code>。</p>
+
+<pre><code>// tests/visual/homepage.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('homepage visual — full page', async ({ page }) => {
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+
+  // 全页截图，允许最多 2% 像素差异
+  await expect(page).toHaveScreenshot('homepage.png', {
+    maxDiffPixelRatio: 0.02,
+  });
+});
+
+test('products section visual', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.products')).toHaveScreenshot('products-section.png', {
+    maxDiffPixelRatio: 0.02,
+  });
+});
+
+// 三个 viewport 各自截图（由 playwright.config.ts projects 驱动）
+// 运行后将在 snapshots/ 下生成：
+//   homepage-Desktop-Chrome.png
+//   homepage-Tablet.png
+//   homepage-Mobile-iPhone.png</code></pre>
+
+      <h3>11.4 布局结构断言</h3>
+      <p>不依赖像素匹配，通过元素位置、宽度、可见性检测布局是否正确。</p>
+
+<pre><code>// tests/layout/responsive.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('硬件区块 — 3列检测（Desktop）', async ({ page }) => {
+  await page.goto('/');
+  const cards = page.locator('.hw-card');
+  await expect(cards).toHaveCount(3);
+
+  // 三张卡同行（top 坐标误差 ≤ 5px）
+  const boxes = await cards.evaluateAll(els =>
+    els.map(el => el.getBoundingClientRect())
+  );
+  expect(boxes[0].top).toBeCloseTo(boxes[1].top, 5);
+  expect(boxes[1].top).toBeCloseTo(boxes[2].top, 5);
+});
+
+test('Nav — 滚动后切换样式', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => window.scrollTo(0, window.innerHeight + 1));
+  await expect(page.locator('.nav')).toHaveClass(/scrolled/);
+});
+
+test('硬件区块 — 移动端不溢出（Mobile 375px）', async ({ page }) => {
+  await page.goto('/');
+  const el = await page.locator('.hw-cards').boundingBox();
+  expect(el!.width).toBeLessThanOrEqual(375);
+});</code></pre>
+
+      <h3>11.5 响应式专项测试矩阵</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>组件</th>
+            <th>375px（Mobile）</th>
+            <th>768px（Tablet）</th>
+            <th>1280px（Desktop）</th>
+            <th>1920px（Wide）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nav</strong></td>
+            <td>汉堡菜单可见，导航链接隐藏</td>
+            <td>汉堡菜单可见，核心 CTA 保留</td>
+            <td>全部链接横排可见</td>
+            <td>全部链接横排可见，内容居中</td>
+          </tr>
+          <tr>
+            <td><strong>Hero</strong></td>
+            <td>min-height 100svh，按钮全宽</td>
+            <td>100vh，标题略小</td>
+            <td>100vh，双按钮并排</td>
+            <td>100vh，内容最大宽 1280px 居中</td>
+          </tr>
+          <tr>
+            <td><strong>硬件（3卡）</strong></td>
+            <td>1列堆叠，全宽</td>
+            <td>3列（等比缩小）</td>
+            <td>3列 repeat(3,1fr) gap 20px</td>
+            <td>3列，居中最大宽 1280px</td>
+          </tr>
+          <tr>
+            <td><strong>软件（大图+列）</strong></td>
+            <td>图 4/3，2列×3行</td>
+            <td>图 16/9，3列横排</td>
+            <td>图 16/7，5列横排</td>
+            <td>图 16/7，5列，居中</td>
+          </tr>
+          <tr>
+            <td><strong>Footer</strong></td>
+            <td>1列堆叠，间距 24px</td>
+            <td>2×2 grid</td>
+            <td>4列横排</td>
+            <td>4列，居中最大宽 1280px</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>11.6 执行命令</h3>
+
+<pre><code>npx playwright test                      # 全量运行（所有 project）
+npx playwright test --project=mobile     # 仅移动端（Mobile iPhone）
+npx playwright test homepage.spec.ts     # 运行单个 spec 文件
+npx playwright show-report               # 在浏览器中查看 HTML 报告
+npx playwright test --update-snapshots   # ⚠️ 仅在主动更新基准图时使用，需人工 review</code></pre>
+
+      <h3>11.7 Claude Code 执行约束（强制）</h3>
+      <div class="highlight" style="border-left-color: #e74c3c; background: #fdecea;">
+        <strong style="color:#c0392b;">⚠️ 以下约束适用于所有 Claude Code 自动编码任务，不得绕过：</strong>
+        <ul style="margin-top:12px; line-height:2;">
+          <li>每个前端模块（Nav / Hero / 硬件 / 软件 / Footer 等）完成开发后，必须立即运行对应 spec 文件，<strong>不得跳过</strong>。</li>
+          <li>视觉回归基准图统一存放于 <code>frontend/tests/snapshots/</code>，路径不得更改。</li>
+          <li>截图对比失败时，必须输出 diff 图供人工 review，<strong>不允许</strong>直接执行 <code>--update-snapshots</code> 跳过问题。</li>
+          <li><strong>移动端 375px 必须通过</strong>，不允许"只测桌面端"提交代码。三个 viewport 同步验证。</li>
+        </ul>
+      </div>
+    </div>
+
+
+
     <!-- Footer -->
     <div class="doc-footer">
       <p>© 2026 旭衡电子 AlwaysControl Technology · 前端技术规范 v2.0</p>
