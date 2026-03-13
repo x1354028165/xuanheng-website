@@ -63,7 +63,7 @@
     <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
     <a href="后端技术规范.html" style="color:#fff;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;background:rgba(255,255,255,.15)">🗄 后端规范</a>
     <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
-    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+
   </div>
 </div>
 
@@ -119,6 +119,12 @@
   <a href="#s10-2" class="l2">10.2 健康检查</a>
   <a href="#s10-3" class="l2">10.3 备份策略</a>
   <a href="#s10-4" class="l2">10.4 日志规范</a>
+  <a href="#ch11" class="l1">十一、技术选型决策</a>
+  <a href="#s11-1" class="l2">11.1 CMS 框架</a>
+  <a href="#s11-2" class="l2">11.2 后端语言/框架</a>
+  <a href="#s11-3" class="l2">11.3 API 文档渲染</a>
+  <a href="#s11-4" class="l2">11.4 文件下载安全</a>
+  <a href="#s11-5" class="l2">11.5 SSO 接口</a>
 </nav>
 
 <!-- Main Content -->
@@ -1276,6 +1282,83 @@ module.exports = {
     }),
   ],
 };</code></pre>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- 十一、技术选型决策（备忘） -->
+<!-- ============================================================ -->
+<h2 id="ch11">十一、技术选型决策（备忘）</h2>
+
+<blockquote>以下内容迁移自「技术选型备忘」文档，记录项目技术选型的候选对比与决策过程。</blockquote>
+
+<h3 id="s11-1">11.1 CMS 框架（Strapi vs Directus）</h3>
+
+<table>
+<thead><tr><th>候选</th><th>优势</th><th>劣势</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td><strong>Strapi（Node.js）</strong></td><td>自带 RBAC 权限管理、文件资产管理，2-4 周内可完成核心业务逻辑配置，社区活跃</td><td>需后端有 Node.js 基础；复杂自定义逻辑需二次开发</td><td>🔄 推荐评估</td></tr>
+<tr><td><strong>Directus（Node.js）</strong></td><td>数据模型完全自定义，适合 BMS 告警字典等复杂结构，自带 REST + GraphQL API</td><td>上手曲线稍陡</td><td>🔄 推荐评估</td></tr>
+<tr><td><strong>完全自研</strong></td><td>最灵活，无外部依赖</td><td>工期 3–6 个月，当前阶段过重</td><td>❌ 不推荐</td></tr>
+<tr><td><strong>SaaS CMS（Contentful / Sanity）</strong></td><td>上手快</td><td>多语言字典管理等自定义逻辑受限，长期按量计费</td><td>❌ 不推荐</td></tr>
+</tbody>
+</table>
+
+<p><strong>决策关键点：</strong> 确认后端团队 Node.js 熟练程度。Strapi 适合快速上线，Directus 适合数据模型复杂场景。</p>
+
+<h3 id="s11-2">11.2 后端语言 / 框架</h3>
+
+<table>
+<thead><tr><th>候选</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>Node.js（配合 Strapi/Directus）</td><td>⬜ 待确认</td></tr>
+<tr><td>Python（FastAPI / Django）</td><td>⬜ 待确认</td></tr>
+<tr><td>Go</td><td>⬜ 待确认</td></tr>
+</tbody>
+</table>
+
+<p><strong>决策关键点：</strong> 若 CMS 选 Strapi/Directus，Node.js 是自然选择。自研后端则视团队技术栈决定。</p>
+
+<h3 id="s11-3">11.3 API 文档渲染（开发者中心，后续 P1）</h3>
+
+<blockquote>开发者中心本期暂缓，以下为后续启动时的技术方案参考。</blockquote>
+
+<ul>
+<li><strong>推荐方案：</strong> OpenAPI Spec（YAML）描述 API，使用 Redoc 或 Swagger UI 自动渲染</li>
+<li><strong>后端维护：</strong> 后端维护 <code>.yaml</code> spec 文件，前端不需要手动写文档页</li>
+<li><strong>权限控制：</strong> 在 API 网关层实现，无权限的端点返回 403，不在前端做伪隐藏</li>
+</ul>
+
+<h3 id="s11-4">11.4 文件下载安全</h3>
+
+<p><strong>需求（来自 PRD §8）：</strong></p>
+<ul>
+<li>权限受控文件不能直接暴露 CDN 链接</li>
+<li>防止链接外泄后被无限次使用</li>
+</ul>
+
+<p><strong>推荐方案：</strong> 对象存储签名临时链接（Pre-signed URL），有效期 5 分钟</p>
+<ul>
+<li>阿里云 OSS / 腾讯云 COS 均支持此功能</li>
+<li>用户点击下载时，后端实时生成签名链接并返回，不存储静态链接</li>
+</ul>
+
+<h3 id="s11-5">11.5 SSO 接口（待对接）</h3>
+
+<p><strong>需求（来自 PRD §8）：</strong></p>
+<ul>
+<li>官网客户端登录复用爱尚管理后台账号体系</li>
+<li>登录后携带 token，官网服务端校验获取用户标签</li>
+</ul>
+
+<p><strong>待确认（需与爱尚团队对接）：</strong></p>
+<ul>
+<li>[ ] 授权流程：OAuth2 授权码流程 还是 JWT 直接验证？</li>
+<li>[ ] Token 有效期 / 刷新机制</li>
+<li>[ ] 用户标签（产品线权限）读取方式：JWT Claims 还是单独 API？</li>
+<li>[ ] 接口地址 / 文档</li>
+<li>[ ] 爱尚侧对接负责人</li>
+</ul>
 
 <hr>
 

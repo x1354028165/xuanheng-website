@@ -143,7 +143,7 @@
     <a href="前端技术规范.html" style="color:white;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0;background:rgba(255,255,255,.15)" onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">🖥 前端规范</a>
     <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
     <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
-    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+
   </div>
 </div>
 
@@ -179,6 +179,7 @@
       <li><a href="#s8">八、性能规范</a></li>
       <li><a href="#s9">九、环境变量规范</a></li>
       <li><a href="#s10">十、错误处理规范</a></li>
+      <li><a href="#s11">十一、技术选型决策（备忘）</a></li>
     </ul>
   </aside>
 
@@ -1400,6 +1401,71 @@ export async function POST(request: NextRequest) {
   }
 }</code></pre>
 
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 十一、技术选型决策（备忘） -->
+    <!-- ============================================================ -->
+    <div class="section" id="s11">
+      <div class="section-label">SECTION 11</div>
+      <h2>十一、技术选型决策（备忘）</h2>
+
+      <div class="highlight">
+        <strong>📌 说明：</strong>以下内容迁移自「技术选型备忘」文档，记录项目技术选型的候选对比与决策过程。
+      </div>
+
+      <h3>11.1 前端框架（Next.js vs Nuxt.js）</h3>
+
+      <table>
+        <thead><tr><th>候选</th><th>优势</th><th>劣势</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Next.js（React）</strong></td><td>生态最强，ISR 缓存策略适合新闻/品牌页毫秒级访问，SSR + SEO 成熟，国内外 CDN 分离方案案例丰富</td><td>团队需有 React 基础</td><td>⬜ 待确认</td></tr>
+          <tr><td><strong>Nuxt.js（Vue）</strong></td><td>若现有云平台前端大量使用 Vue，团队认知切换成本低</td><td>部分企业级方案不如 Next.js 成熟</td><td>⬜ 待确认</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>决策关键点：</strong> 确认现有开发团队（AU-03 项目等）主要使用 React 还是 Vue。</p>
+
+      <h3>11.2 CDN 服务商</h3>
+
+      <p><strong>需求（来自 PRD §7.11）：</strong></p>
+      <ul>
+        <li>国内用户走国内加速节点</li>
+        <li>海外用户走境外加速节点</li>
+        <li>支持按地理位置智能路由</li>
+        <li>ICP 备案在国内节点完成后方可上线</li>
+      </ul>
+
+      <table>
+        <thead><tr><th>候选</th><th>适用场景</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>阿里云 CDN + 阿里云海外节点</strong></td><td>国内覆盖好，海外节点一般</td><td>⬜ 待评估</td></tr>
+          <tr><td><strong>腾讯云 CDN</strong></td><td>与阿里云类似</td><td>⬜ 待评估</td></tr>
+          <tr><td><strong>阿里云（国内）+ Cloudflare（海外）</strong></td><td>国内外分别最优，但需双平台维护</td><td>⬜ 待评估</td></tr>
+          <tr><td><strong>单一全球 CDN（Cloudflare）</strong></td><td>管理简单，但国内速度受限，ICP 备案需额外配置</td><td>❌ 不推荐（ICP 合规风险）</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>备注：</strong> 对象存储（OSS 等）选型随 CDN 服务商确定，建议同一厂商减少跨平台传输成本。</p>
+
+      <h3>11.3 机器翻译 API</h3>
+
+      <p><strong>需求（来自 PRD §7.3）：</strong></p>
+      <ul>
+        <li>以 en-US 为源，生成 de/fr/pt/es/ru 五种语言初稿</li>
+        <li>人工校对后发布</li>
+        <li>CMS 后台一键触发翻译</li>
+      </ul>
+
+      <table>
+        <thead><tr><th>候选</th><th>质量</th><th>价格</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DeepL API</strong></td><td>欧洲语言质量最佳</td><td>按字符计费，有免费额度</td><td>🔄 推荐</td></tr>
+          <tr><td><strong>Google Cloud Translation</strong></td><td>覆盖语种最广</td><td>按字符计费</td><td>⬜ 备选</td></tr>
+          <tr><td><strong>Azure Cognitive Services</strong></td><td>质量一般，价格低</td><td>按字符计费</td><td>⬜ 备选</td></tr>
+        </tbody>
+      </table>
     </div>
 
 
