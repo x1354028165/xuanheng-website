@@ -2627,6 +2627,59 @@
   </div>
 </div>
 
+<h3 id="sec-api-cms">8.21 ~ 8.23 CMS 内容同步测试</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-A-16</span><span class="tc-card-name">CMS 发布内容 → 前端同步验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi 和 Next.js 均在运行；<code>TEST_ARTICLE_ID</code> 环境变量已配置；Webhook 已配置并指向 <code>/api/revalidate</code></div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol>
+        <li>通过 Strapi REST API（<code>PUT /api/articles/:id</code>）修改文章标题，写入带时间戳的唯一标识</li>
+        <li>调用 <code>POST /api/articles/:id/actions/publish</code> 发布文章，触发 Webhook → ISR revalidate</li>
+        <li>等待 3 秒（ISR 处理时间）</li>
+        <li>访问前端新闻列表页 <code>/zh-CN/news</code></li>
+      </ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前端页面显示更新后的文章标题，与 Strapi 中的内容一致；从发布到前端可见不超过 10 秒</div>
+    <div class="tc-field"><div class="tc-label">自动化</div>Playwright；文件 <code>tests/integration/cms-sync.spec.ts</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-A-17</span><span class="tc-card-name">草稿保护 → 撤回后前端不可见</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>TC-A-16 已通过（文章已发布且在前端可见）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol>
+        <li>调用 <code>POST /api/articles/:id/actions/unpublish</code> 撤回发布</li>
+        <li>等待 3 秒（ISR 处理时间）</li>
+        <li>访问前端新闻列表页 <code>/zh-CN/news</code></li>
+        <li>直接访问文章详情 URL</li>
+      </ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>该文章在前端列表页完全不可见；直接访问文章详情 URL 返回 404；绝不出现草稿内容泄露</div>
+    <div class="tc-field"><div class="tc-label">自动化</div>Playwright；文件 <code>tests/integration/cms-sync.spec.ts</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-A-18</span><span class="tc-card-name">Strapi 不可用时前端 ISR 降级展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>前端已有缓存页面（至少访问过一次）；本地可停止 Strapi 服务</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol>
+        <li>确认当前前端页面可正常显示（有 ISR 缓存）</li>
+        <li>停止 Strapi 后端服务</li>
+        <li>访问前端已缓存的页面（如 <code>/zh-CN/news</code>）</li>
+        <li>检查页面响应内容与状态</li>
+      </ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前端展示上一次 ISR 缓存的内容，页面正常渲染，不报错，不白屏；符合降级策略（宁可显示旧内容，也不白屏）</div>
+    <div class="tc-field"><div class="tc-label">自动化</div>手动测试（需停止服务，不适合全自动化）</div>
+  </div>
+</div>
+
 <hr>
 
 <!-- ==================== 附：上线前回归清单 ==================== -->

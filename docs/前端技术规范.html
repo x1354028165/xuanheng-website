@@ -426,6 +426,59 @@
           <tr><td><code>public/</code></td><td>静态资源，直接通过 URL 访问</td><td>大图通过 Strapi 媒体库管理，此处仅放 favicon 等</td></tr>
         </tbody>
       </table>
+
+      <h3 id="s2-3">2.3 代码约束规则（强制）</h3>
+
+      <div class="highlight" style="border-left-color: #e74c3c; background: #fdecea;">
+        <strong style="color:#c0392b;">⚠️ 以下规则为强制执行规范，CI/代码审查中若发现违规必须阻断合并：</strong>
+      </div>
+
+      <h4>TypeScript 强制规则</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th><th>示例</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>tsconfig.json</code> 必须开启 <code>"strict": true</code></td><td>启用严格模式，涵盖 strictNullChecks、noImplicitAny 等</td><td><code>{ "compilerOptions": { "strict": true } }</code></td></tr>
+          <tr><td>禁止使用 <code>any</code></td><td>用 <code>unknown</code> + 类型守卫代替；绝不用 <code>as any</code> 绕过类型检查</td><td>❌ <code>const data: any = ...</code> → ✅ <code>const data: unknown = ...</code></td></tr>
+          <tr><td>所有 API 响应必须有明确 interface/type 定义</td><td>在 <code>types/strapi.ts</code> 中定义，不允许裸 <code>JSON.parse</code> 无类型使用</td><td>✅ <code>const res: StrapiResponse&lt;Product[]&gt; = await fetchStrapi(...)</code></td></tr>
+          <tr><td>组件 props 必须有类型标注，禁止 implicit any</td><td>所有组件必须显式定义 Props interface 或 type</td><td>✅ <code>interface CardProps { title: string; image: string }</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>文案规则</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>禁止在 JSX 中硬编码中文字符串</td><td>所有展示文案必须通过 <code>next-intl</code> 的 <code>t()</code> 函数引用翻译 key</td></tr>
+          <tr><td colspan="2">❌ <code>&lt;h1&gt;产品中心&lt;/h1&gt;</code> → ✅ <code>&lt;h1&gt;{t('nav.products')}&lt;/h1&gt;</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>图片规则</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>禁止裸 <code>&lt;img&gt;</code> 标签</td><td>必须使用 <code>next/image</code> 的 <code>&lt;Image&gt;</code> 组件，享受自动 WebP 转换与懒加载</td></tr>
+          <tr><td>所有图片必须有非空 <code>alt</code> 属性</td><td>SEO + 无障碍要求，装饰性图片使用 <code>alt=""</code> 并加 <code>role="presentation"</code></td></tr>
+          <tr><td colspan="2">❌ <code>&lt;img src="..." /&gt;</code> → ✅ <code>&lt;Image src="..." alt="产品图" width={400} height={300} /&gt;</code></td></tr>
+        </tbody>
+      </table>
+
+      <h4>API 调用规则</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>禁止在页面组件（<code>page.tsx</code>）或 UI 组件中直接 <code>fetch()</code></td><td>所有 Strapi API 调用统一封装在 <code>src/lib/api/</code> 目录下，页面通过 import 使用</td></tr>
+          <tr><td colspan="2">❌ 页面中 <code>fetch('/api/products')</code> → ✅ <code>import { getProducts } from '@/lib/api/products'</code></td></tr>
+        </tbody>
+      </table>
     </div>
 
 
@@ -1622,6 +1675,90 @@ npx playwright test --update-snapshots   # ⚠️ 仅在主动更新基准图时
           <li><strong>移动端 375px 必须通过</strong>，不允许"只测桌面端"提交代码。三个 viewport 同步验证。</li>
         </ul>
       </div>
+
+      <h3 id="s11-8">11.8 内容同步规范（CMS ↔ 前端）</h3>
+
+      <h4>Strapi Webhook 配置</h4>
+      <table>
+        <thead>
+          <tr><th>配置项</th><th>值</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>触发事件</td><td><code>entry.publish</code> / <code>entry.unpublish</code> / <code>entry.update</code></td></tr>
+          <tr><td>Webhook URL</td><td><code>${NEXT_PUBLIC_SITE_URL}/api/revalidate</code></td></tr>
+          <tr><td>密钥验证</td><td><code>x-webhook-secret</code> header，值来自环境变量 <code>STRAPI_WEBHOOK_SECRET</code></td></tr>
+          <tr><td>配置位置</td><td>Strapi Admin → Settings → Webhooks</td></tr>
+        </tbody>
+      </table>
+
+      <h4>ISR 刷新时限规范</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>最迟 <strong>10秒</strong> 内更新</td><td>内容发布后，前端页面最迟10秒内更新；<code>revalidate</code> 由 Webhook 主动触发，非时间轮询</td></tr>
+          <tr><td>静态页面降级</td><td>Strapi 不可用时，展示上一次缓存版本，不报错，不白屏</td></tr>
+          <tr><td>兜底配置</td><td><code>export const revalidate = 3600</code>（兜底轮询）+ Webhook 主动触发（即时刷新）双保险</td></tr>
+        </tbody>
+      </table>
+
+      <h4>草稿保护规则</h4>
+      <div class="highlight" style="border-left-color: #e74c3c; background: #fdecea;">
+        <strong style="color:#c0392b;">⚠️ 草稿内容绝对不能出现在前端，违规视为严重 Bug：</strong>
+        <ul style="margin-top:10px; line-height:2;">
+          <li>Strapi <code>published_at = null</code> 的内容，Next.js API 层必须过滤，<strong>绝对不能出现在前端</strong></li>
+          <li>所有 API 请求统一加 <code>filters[publishedAt][$notNull]=true</code> 参数</li>
+          <li>测试验证：发布后可见 → 撤回后不可见，两个状态都必须验证（对应测试用例 TC-A-16 / TC-A-17）</li>
+        </ul>
+      </div>
+
+      <h4>多语言发布规则</h4>
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>同步 revalidate</td><td>发布 zh-CN 内容 → 其他语言 locale 的页面同步 revalidate，确保多语言页面一致更新</td></tr>
+          <tr><td>未翻译内容降级</td><td>若某语言版本尚未翻译，回退展示 zh-CN 内容（不报错、不404）</td></tr>
+        </tbody>
+      </table>
+
+      <h4>完整集成测试示例</h4>
+<pre><code>// tests/integration/cms-sync.spec.ts
+test('CMS发布 → 前端同步', async ({ page }) => {
+  const timestamp = Date.now()
+  // 1. 通过 Strapi API 更新内容
+  const res = await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: { title: `集成测试_${timestamp}` } })
+  })
+  // 2. 发布 → 触发 Webhook → ISR revalidate
+  await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}/actions/publish`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}` }
+  })
+  // 3. 等待 ISR（最多5秒）
+  await page.waitForTimeout(3000)
+  // 4. 验证前端已更新
+  await page.goto('/zh-CN/news')
+  await expect(page.locator(`[data-article-id="${TEST_ARTICLE_ID}"] h3`))
+    .toContainText(`集成测试_${timestamp}`)
+})
+
+test('草稿保护：撤回发布 → 前端不可见', async ({ page }) => {
+  await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}/actions/unpublish`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}` }
+  })
+  await page.waitForTimeout(3000)
+  await page.goto('/zh-CN/news')
+  await expect(page.locator(`[data-article-id="${TEST_ARTICLE_ID}"]`)).not.toBeVisible()
+})</code></pre>
     </div>
 
 
