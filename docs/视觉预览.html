@@ -345,6 +345,17 @@
 <body>
 
   <!-- ===== 1. NAV ===== -->
+  <!-- Dev Reference Banner -->
+  <div id="dev-banner" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#0C1829;border:1px solid rgba(56,196,232,.4);border-radius:12px;padding:14px 20px;max-width:320px;box-shadow:0 8px 32px rgba(0,0,0,.4);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:#38C4E8;text-transform:uppercase;margin-bottom:6px">📐 开发参考基准</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.75);line-height:1.6">本页为视觉预览，开发实现应达到或超越此效果。<br>设计规范：<a href="视觉规范.html" style="color:#38C4E8;text-decoration:none">视觉规范.html</a></div>
+      </div>
+      <button onclick="document.getElementById('dev-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:18px;line-height:1;padding:0;flex-shrink:0">×</button>
+    </div>
+  </div>
+
   <nav class="nav">
     <div class="container">
       <a href="index.html" class="nav-logo">
