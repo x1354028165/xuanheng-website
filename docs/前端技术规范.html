@@ -585,23 +585,23 @@ export async function generateStaticParams() {
       <h3>4.2 语言配置（8 种）</h3>
 
       <div class="highlight">
-        <strong>架构策略：Day 1 全量定义，Phase 0 只开放 3 个路由。</strong><br>
-        <code>locales</code> 数组从第一天起包含全部 8 个 locale（避免后期改表结构）。<code>activeLocales</code> 控制 Phase 0 实际对外开放的路由，其余重定向至 <code>en-US</code>。de/fr/pt/es/ru 由市场战略决定激活时间（Phase N）。
+        <strong>架构策略：8语言全量，Day 1 全部激活，无分阶段开放。</strong><br>
+        <code>locales</code> 数组定义全部 8 个 locale。语言列表从 Strapi 动态获取，用于前台语言切换器（<code>GET /api/i18n/locales</code>）。加新语言无需改代码：Strapi 后台添加 → DeepSeek 批量翻译 → 前台立即出现。
       </div>
 
       <table>
         <thead>
-          <tr><th>语言</th><th>locale 标识</th><th>翻译方式</th><th>Phase 0 路由</th><th>备注</th></tr>
+          <tr><th>语言</th><th>locale 标识</th><th>翻译方式</th><th>Day 1 路由</th><th>备注</th></tr>
         </thead>
         <tbody>
-          <tr><td>中文简体</td><td><code>zh-CN</code></td><td>原文，人工维护</td><td><span class="badge badge-red">✅ 开放</span></td><td>基准语言，所有内容首先以此撰写</td></tr>
-          <tr><td>英文</td><td><code>en-US</code></td><td>DeepSeek 一键翻译 + 核心页人工校对</td><td><span class="badge badge-red">✅ 开放</span></td><td>海外市场主力语言，服务端调用 DeepSeek API</td></tr>
-          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>OpenCC 本地转换（零 API 调用）</td><td><span class="badge badge-red">✅ 开放</span></td><td>构建时自动从 zh-CN 生成，不从 Strapi 取数据</td></tr>
-          <tr><td>德语</td><td><code>de</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>欧洲核心市场，代码已预留</td></tr>
-          <tr><td>法语</td><td><code>fr</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>欧洲 + 非洲市场，代码已预留</td></tr>
-          <tr><td>葡萄牙语</td><td><code>pt</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>巴西市场，代码已预留</td></tr>
-          <tr><td>西班牙语</td><td><code>es</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>拉美 + 欧洲市场，代码已预留</td></tr>
-          <tr><td>俄语</td><td><code>ru</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>独联体市场，代码已预留</td></tr>
+          <tr><td>中文简体</td><td><code>zh-CN</code></td><td>人工维护</td><td><span class="badge badge-red">✅ 激活</span></td><td>原文，核心语言</td></tr>
+          <tr><td>英文</td><td><code>en-US</code></td><td>人工维护</td><td><span class="badge badge-red">✅ 激活</span></td><td>核心语言，人工校对</td></tr>
+          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>OpenCC 本地转换（零 API 调用）</td><td><span class="badge badge-red">✅ 激活</span></td><td>构建时自动从 zh-CN 转换</td></tr>
+          <tr><td>德语</td><td><code>de</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
+          <tr><td>法语</td><td><code>fr</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
+          <tr><td>葡萄牙语</td><td><code>pt</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
+          <tr><td>西班牙语</td><td><code>es</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
+          <tr><td>俄语</td><td><code>ru</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
         </tbody>
       </table>
 
@@ -610,70 +610,63 @@ export async function generateStaticParams() {
       <h4>i18n.config.ts — 全量语言定义</h4>
 
 <pre><code>// i18n.config.ts
-// next-intl 完整配置（Day 1全量定义，Phase 0只开放3个）
+// next-intl 配置 — 8语言全量，Day 1 全部激活
 export const locales = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'] as const
 export type Locale = typeof locales[number]
 export const defaultLocale = 'zh-CN'
 
-// Phase 0 激活的路由（其余重定向至 en-US）
-// de/fr/pt/es/ru 由市场战略决定激活时间，通过环境变量或此配置开关控制
-export const activeLocales: Locale[] = ['zh-CN', 'en-US', 'zh-TW']
+// 语言列表从 Strapi 动态获取（不写死），用于前台语言切换器
+// GET /api/i18n/locales → 返回当前激活的语言列表
 
-// zh-TW 特殊处理：不从 Strapi 取数据，而是 OpenCC 转换 zh-CN 内容
-// import { Converter } from 'opencc-js'
-// const converter = Converter({ from: 'cn', to: 'tw' })</code></pre>
+// zh-TW 特殊处理：OpenCC 本地转换，零 API 调用
+import { Converter } from 'opencc-js'
+const twConverter = Converter({ from: 'cn', to: 'twp' })
 
-      <h4>middleware.ts — 语言检测与重定向</h4>
+// UI字符串从 Strapi CMS-14 动态获取（非静态JSON文件）
+// ISR revalidate + Webhook 触发刷新</code></pre>
+
+      <h4>middleware.ts — 语言检测与路由</h4>
 
 <pre><code>// middleware.ts
 import createMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale, activeLocales } from './i18n.config';
+import { locales, defaultLocale } from './i18n.config';
 
 export default createMiddleware({
-  locales,                            // 全量 8 个 locale（代码底座完整）
+  locales,                            // 全量 8 个 locale，Day 1 全部激活
   defaultLocale,
   localeDetection: true,              // 自动检测 Accept-Language header
   localePrefix: 'always',             // URL 始终包含 locale 前缀
 });
 
-// 注意：de/fr/pt/es/ru 路由存在于代码中但 Phase 0 不对外开放
-// 通过 activeLocales 配置控制语言切换器显示，未开放语言访问时重定向至 en-US
-// 激活新语言只需将其加入 activeLocales 数组，无需改表结构
+// 所有语言 Day 1 全部激活，无重定向逻辑
+// 加新语言：Strapi 后台操作 → DeepSeek 批量翻译 → 前台立即出现，无需改代码
 
 export const config = {
   // 匹配所有路径（排除 api / _next / 静态资源）
   matcher: ['/((?!api|_next|.*\\..*).*)'],
 };</code></pre>
 
-      <h4>翻译文件结构</h4>
+      <h4>UI 字符串获取方式（CMS-14 动态获取）</h4>
 
-<pre><code>// messages/zh-CN.json（按页面分 namespace）
-{
-  "common": {
-    "nav": {
-      "home": "首页",
-      "products": "产品中心",
-      "solutions": "解决方案",
-      "ecosystem": "兼容生态",
-      "support": "帮助中心",
-      "about": "关于我们",
-      "contact": "联系我们"
-    },
-    "cta": {
-      "learnMore": "了解更多",
-      "contactUs": "联系我们",
-      "getStarted": "立即开始"
-    },
-    "footer": {
-      "copyright": "© 2026 旭衡电子 AlwaysControl Technology"
+      <div class="highlight">
+        <strong>UI 字符串不使用静态 JSON 文件，而是从 Strapi CMS-14（多语言字典）动态获取。</strong><br>
+        通过 ISR 缓存（revalidate），Webhook 触发刷新，修改词条后5秒内前台生效，无需重新部署。
+      </div>
+
+<pre><code>// lib/i18n-client.ts — 从 Strapi CMS-14 获取 UI 词条
+export async function getI18nMessages(locale: string) {
+  const res = await fetch(
+    `${process.env.STRAPI_URL}/api/i18n-keys?locale=${locale}&pagination[limit]=-1`,
+    {
+      next: { revalidate: 60, tags: ['i18n-keys'] }, // ISR + Webhook tag
     }
-  },
-  "home": {
-    "hero": {
-      "title": "跨品牌能源管理解决方案",
-      "subtitle": "..."
-    }
-  }
+  )
+  const data = await res.json()
+  // 将 Strapi 返回的词条转换为 next-intl 格式的 messages 对象
+  return data.data.reduce((acc: Record&lt;string, string&gt;, item: any) =&gt; {
+    acc[item.key] = item.value
+    return acc
+  }, {})
 }</code></pre>
 
       <h3>4.4 降级策略</h3>

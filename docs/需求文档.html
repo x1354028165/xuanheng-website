@@ -1795,68 +1795,69 @@ API Key 管理页：
       <h4>7.2 SEO 可配置</h4>
       <p>每个页面的 SEO 元数据（标题、描述、关键词、社交分享图）必须通过 CMS 独立配置。站点地图随内容变化自动更新，不能是静态文件。</p>
 
-      <h4>7.3 多语言完整覆盖</h4>
+      <h4>7.3 多语言策略（最终版）</h4>
 
       <div class="highlight">
-        <strong>架构策略：技术底座 Day 1 全量配置，Phase 0 只开放 3 个路由。</strong><br>
-        next-intl 路由 + Strapi i18n 字段从 Phase 0 起按 8 种语言完整预留（避免后期改表结构）。Phase 0 仅开放 zh-CN / en-US / zh-TW 路由，其余语言路由存在于代码中但重定向至 en-US。de/fr/pt/es/ru 由市场战略决定开放时间（Phase N），不依赖流量数据触发。
+        <strong>架构策略：8种语言 Day 1 全量配置，无分阶段开放。</strong><br>
+        加新语言：Strapi 后台操作 → DeepSeek 批量翻译所有现有内容 → 前台立即出现该语言选项，无需修改代码。发布触发：编辑点「发布」时自动翻译所有语言，保存草稿不触发。
       </div>
 
-      <p>官网支持 8 种语言，分三个层级管理，<strong>维护成本不均等</strong>：</p>
+      <p>官网支持 8 种语言，Day 1 全部激活，维护成本通过自动化工具最小化：</p>
 
       <table>
         <thead>
-          <tr><th>层级</th><th>语言代码</th><th>语言</th><th>目标市场</th><th>维护方式</th><th>路由开放</th></tr>
+          <tr><th>语言代码</th><th>语言</th><th>维护方式</th><th>说明</th></tr>
         </thead>
         <tbody>
-          <tr><td rowspan="2"><strong>第一层<br>核心维护</strong></td><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td>✏️ 原文，人工全量维护</td><td><span class="badge badge-p0">Phase 0</span></td></tr>
-          <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td>🤖 DeepSeek 一键翻译 + 核心静态页人工校对</td><td><span class="badge badge-p0">Phase 0</span></td></tr>
-          <tr><td><strong>第二层<br>自动转换</strong></td><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td>🔄 OpenCC 本地转换（零 API 调用，构建时自动处理）</td><td><span class="badge badge-p0">Phase 0</span></td></tr>
-          <tr><td rowspan="5"><strong>第三层<br>DeepSeek 翻译</strong></td><td><code>de</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 DeepSeek 一键翻译生成初稿</td><td><span class="badge badge-p1">Phase N</span></td></tr>
-          <tr><td><code>fr</code></td><td>法文</td><td>法国及法语区</td><td>🤖 DeepSeek 一键翻译生成初稿</td><td><span class="badge badge-p1">Phase N</span></td></tr>
-          <tr><td><code>pt</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 DeepSeek 一键翻译生成初稿</td><td><span class="badge badge-p1">Phase N</span></td></tr>
-          <tr><td><code>es</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 DeepSeek 一键翻译生成初稿</td><td><span class="badge badge-p1">Phase N</span></td></tr>
-          <tr><td><code>ru</code></td><td>俄文</td><td>俄罗斯及独联体</td><td>🤖 DeepSeek 一键翻译生成初稿</td><td><span class="badge badge-p1">Phase N</span></td></tr>
+          <tr><td><code>zh-CN</code></td><td>简体中文</td><td>✏️ 人工维护</td><td>原文，核心语言，所有内容首先以此撰写</td></tr>
+          <tr><td><code>en-US</code></td><td>英文</td><td>✏️ 人工维护</td><td>核心语言，人工校对</td></tr>
+          <tr><td><code>zh-TW</code></td><td>繁体中文</td><td>🔄 OpenCC 自动</td><td>本地转换，零 API 调用，构建时自动处理</td></tr>
+          <tr><td><code>de</code></td><td>德文</td><td>🤖 DeepSeek 自动</td><td>发布时自动翻译，支持人工覆盖</td></tr>
+          <tr><td><code>fr</code></td><td>法文</td><td>🤖 DeepSeek 自动</td><td>发布时自动翻译，支持人工覆盖</td></tr>
+          <tr><td><code>pt</code></td><td>葡萄牙文</td><td>🤖 DeepSeek 自动</td><td>发布时自动翻译，支持人工覆盖</td></tr>
+          <tr><td><code>es</code></td><td>西班牙文</td><td>🤖 DeepSeek 自动</td><td>发布时自动翻译，支持人工覆盖</td></tr>
+          <tr><td><code>ru</code></td><td>俄文</td><td>🤖 DeepSeek 自动</td><td>发布时自动翻译，支持人工覆盖</td></tr>
         </tbody>
       </table>
 
-      <div class="highlight">
-        <strong>核心设计原则：1套原文 + 1套 AI 翻译 + 1套自动转换 + 5套按需开放，不是 8套独立维护。</strong><br>
-        日常只需维护 zh-CN。zh-TW 由 OpenCC 构建时自动生成，零 API 调用。en-US 动态内容通过 Strapi 后台「一键翻译」（DeepSeek API，服务端调用，不受国内网络限制）；核心静态页（首页 / 解决方案）人工校对后存入 Strapi 单页模型。de/fr/pt/es/ru 由市场战略决定开放时间，代码底座已预留，随时可激活。
-      </div>
-
-      <p><strong>翻译策略详细说明：</strong></p>
+      <p><strong>翻译策略：</strong></p>
       <ul>
-        <li><strong>zh-TW</strong>：OpenCC 本地转换（繁简转换，零 API 调用，构建时自动处理）</li>
-        <li><strong>en-US UI 字符串</strong>：Phase 2 由 AI 一次性生成 <code>messages/en-US.json</code> 文件，提交 git</li>
-        <li><strong>en-US 动态内容（新闻/产品）</strong>：Strapi 后台「一键翻译」按钮（DeepSeek API，服务端调用）</li>
-        <li><strong>核心静态页（首页/解决方案）英文版</strong>：一次性人工校对，存入 Strapi 单页模型</li>
-        <li><strong>de/fr/pt/es/ru</strong>：Phase N 开放时，通过 DeepSeek 一键翻译生成初稿</li>
+        <li><strong>zh-TW</strong>：OpenCC 本地转换（零 API 调用，构建时自动处理）</li>
+        <li><strong>zh-CN / en-US</strong>：人工维护（核心语言）</li>
+        <li><strong>de / fr / pt / es / ru</strong>：DeepSeek API 自动翻译 + 支持人工覆盖（充¥10用3年）</li>
       </ul>
 
-      <p><strong>回退链：</strong> 某语言内容未翻译或未发布时，按以下顺序回退：</p>
+      <p><strong>CMS-14 多语言字典：</strong></p>
       <ul>
-        <li>zh-TW → 回退至 zh-CN</li>
-        <li>de / fr / pt / es / ru → 先回退至 en-US，en-US 也缺失时回退至 zh-CN</li>
-        <li>不允许显示空内容或乱码；回退内容在 CMS 中自动标记「使用回退语言」</li>
+        <li>存储所有 UI 公共词条（按钮/导航/标签/提示文字）</li>
+        <li>修改词条后通过 ISR+Webhook 实时生效，无需重新部署</li>
+        <li>支持批量导入/导出 CSV，方便翻译人员处理</li>
+        <li>翻译状态管理：已翻译 / 待翻译 / 机翻待校对</li>
+        <li>支持在 Strapi 后台手动修改机翻结果</li>
+      </ul>
+
+      <p><strong>草稿模式规则：</strong></p>
+      <ul>
+        <li><strong>内容型 Content Type</strong>（新闻/产品/解决方案/首页）：必须开启 draftAndPublish，编辑点「发布」时触发自动翻译</li>
+        <li><strong>配置型</strong>（导航结构/页脚/联系信息）：无需草稿，保存即生效</li>
+        <li>无语言级别发布开关：加了语言就直接在前台可见</li>
       </ul>
 
       <p><strong>前台语言切换器行为：</strong></p>
       <ul>
-        <li>Header 右上角固定展示语言切换下拉，仅显示已开放路由的语言（Phase 0 为 zh-CN / en-US / zh-TW）</li>
+        <li>Header 右上角固定展示语言切换下拉，语言列表从 Strapi 动态获取（<code>GET /api/i18n/locales</code>），无需改代码</li>
         <li>默认语言根据访客 IP 地理位置自动判断：IP 地区语言 → 浏览器语言 → zh-CN</li>
         <li>用户手动切换后记录偏好（localStorage），下次访问直接使用上次选择</li>
         <li>URL 结构：<code>/zh-CN/solutions/hems</code>、<code>/en-US/solutions/hems</code>，各语言独立 URL，支持 SEO 独立索引</li>
-        <li>未开放语言（de/fr/pt/es/ru）访问时重定向至 <code>/en-US/...</code></li>
       </ul>
 
       <p><strong>翻译工作流：</strong></p>
       <ul>
-        <li>zh-CN 内容录入 → Strapi 后台点击「一键翻译」→ DeepSeek API 服务端调用生成 en-US 初稿（自动填入对应 locale 字段）</li>
-        <li>zh-TW 构建时由 OpenCC 自动从 zh-CN 生成，无需人工介入</li>
-        <li>核心静态页 en-US 版本一次性人工校对确认后发布</li>
-        <li>Phase N 语言开放时：激活路由配置 → DeepSeek 批量翻译 → 人工抽查发布</li>
-        <li>每条内容显示翻译状态：✅ 已发布 / ⚠️ 待校对 / 🔄 使用回退</li>
+        <li>zh-CN 内容录入 → 点「发布」→ Strapi Lifecycle Hook（afterPublish）自动触发 DeepSeek 翻译所有激活语言</li>
+        <li>zh-TW 由 OpenCC 自动从 zh-CN 生成，无需人工介入，无 API 调用</li>
+        <li>Strapi 后台支持人工修改机翻结果（字段级覆盖）</li>
+        <li>新增语言时：Strapi 后台操作 → 批量翻译所有现有内容 → 前台立即出现新语言选项</li>
+        <li>每条内容显示翻译状态：✅ 已翻译 / ⏳ 待翻译 / 🤖 机翻待校对</li>
       </ul>
 
       <h4>7.4 文件下载可靠性</h4>

@@ -264,15 +264,17 @@
           <code>npx shadcn-ui@latest init</code>，配置主题色：<code>--primary: #1A3FAD</code>，<code>--accent: #38C4E8</code></li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-9</span> 配置 Ant Design（CMS 插件目录）<br>
           <code>cd cms && npm install antd</code></li>
-        <li><span class="checkbox">☐</span> <span class="task-id">P0-X</span> DeepSeek 翻译插件（Strapi 服务端）<br>
-          创建 <code>cms/src/api/translate/</code> 自定义 API；Controller 调用 DeepSeek API（model: deepseek-chat）；Strapi Admin Extension 注入「一键翻译」按钮；配置 <code>DEEPSEEK_API_KEY</code> 环境变量；测试：输入中文 → 返回英文，专业术语正确</li>
-        <li><span class="checkbox">☐</span> <span class="task-id">P0-Y</span> next-intl 全量配置（8语言底座，3语言激活）<br>
-          <code>i18n.config.ts</code> 定义全部8个locale；<code>middleware.ts</code> 只对 zh-CN/en-US/zh-TW 放行，其余重定向至 en-US；zh-TW 路由接入 OpenCC（<code>opencc-js</code>）处理；<code>messages/zh-CN.json</code> 建立完整key结构（Phase 2 填充翻译）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-X</span> i18n 底座（next-intl 8语言全量配置）<br>
+          <code>i18n.config.ts</code> 定义全部8个locale；middleware.ts 路由处理（8语言全部激活）；前台语言切换器从 Strapi 动态获取语言列表；zh-TW 路由接入 OpenCC（<code>opencc-js</code>）本地转换</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-Y</span> DeepSeek 翻译服务（Strapi 服务端）<br>
+          创建 <code>cms/src/api/translate/</code> 自定义 API；<code>translateText()</code> 工具函数（调 DeepSeek API）；Lifecycle Hook：afterPublish → 自动触发翻译；批量翻译 API（新增语言时用）；配置 <code>DEEPSEEK_API_KEY</code> 环境变量（成本估算：充¥10用3年）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-Z</span> CMS-14 多语言字典初始化<br>
+          创建 i18n-keys Collection Type（含全部字段定义：key/zh_CN/zh_TW/en_US/de/fr/pt/es/ru/status）；语言管理界面（Strapi Admin Extension）；批量导入/导出 CSV API；OpenCC 自动生成 zh-TW 词条；ISR + Webhook：字典修改后前台5秒内生效</li>
       </ul>
 
       <h3>通过条件</h3>
       <div class="arch-box-success">
-        <strong>✅ 验收标准：</strong><code>npm run dev</code> 启动无报错，首页可访问，导航 + Footer 渲染正常，多语言路由 <code>/zh-CN/</code> <code>/en-US/</code> <code>/zh-TW/</code> 均响应，<code>/de/</code> 重定向至 <code>/en-US/</code>，DeepSeek 翻译插件 <code>/api/translate</code> 接口测试通过。
+        <strong>✅ 验收标准：</strong><code>npm run dev</code> 启动无报错，首页可访问，导航 + Footer 渲染正常，8语言路由全部响应（<code>/zh-CN/</code> <code>/en-US/</code> <code>/zh-TW/</code> <code>/de/</code> <code>/fr/</code> <code>/pt/</code> <code>/es/</code> <code>/ru/</code>），DeepSeek 翻译服务 <code>/api/translate</code> 接口测试通过，CMS-14 词条可在 Strapi 后台增删改，Webhook 触发前台5秒内刷新。
       </div>
     </div>
 
@@ -361,7 +363,7 @@
 
       <h3>任务清单</h3>
       <ul class="task-list">
-        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言切换（Phase 2 完善）— 语言切换器（Header 右上角，仅显示已激活路由）；AI 生成 <code>messages/en-US.json</code>（全部 UI 字符串）；OpenCC 自动生成 <code>messages/zh-TW.json</code>；de/fr/pt/es/ru JSON 文件创建占位结构（内容 Phase N 填充）；zh-TW 路由从 OpenCC 转换 zh-CN 内容，不从 Strapi 取独立数据</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言字典内容录入（Phase 2）— 录入所有 UI 词条（zh-CN / en-US）到 Strapi CMS-14；DeepSeek 批量翻译 de/fr/pt/es/ru 初稿；OpenCC 生成 zh-TW 全量词条；语言切换器组件（Header 右上角，从 Strapi 动态获取语言列表）；验证：8语言切换正常，词条实时生效</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-02</span> 全局搜索（前台内容全文检索）</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-03</span> Cookie 横幅 — 首次访问显示，接受后存 localStorage，关联隐私政策页</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-04</span> 404 错误页（<code>src/app/not-found.tsx</code>）</li>

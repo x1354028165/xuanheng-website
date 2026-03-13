@@ -74,21 +74,30 @@ APP_KEYS=<生成>
 JWT_SECRET=<生成>
 ```
 
-## 多语言策略
+## 多语言策略（最终版）
 
-**架构**：next-intl 8语言全量配置，Phase 0 只开放 3 个路由
+8种语言 Day 1 全量配置，无分阶段开放。
 
-| 语言 | Phase 0 | 翻译方式 |
-|------|---------|---------|
-| zh-CN | ✅ 开放 | 原文 |
-| en-US | ✅ 开放 | DeepSeek一键翻译 + 人工校对核心页 |
-| zh-TW | ✅ 开放 | OpenCC本地转换（不调API）|
-| de/fr/pt/es/ru | ❌ 重定向至en-US | Phase N 由市场战略决定 |
+| 语言 | 维护方式 | 说明 |
+|------|---------|------|
+| zh-CN | 人工 | 原文，核心语言 |
+| en-US | 人工 | 核心语言 |
+| zh-TW | OpenCC 自动 | 本地转换，零 API |
+| de/fr/pt/es/ru | DeepSeek 自动 | 充¥10用3年 |
 
-**DeepSeek翻译插件**：`cms/src/api/translate/` — Strapi编辑后台「一键翻译」按钮，服务端调用，不受国内网络限制
+**触发规则**：
+- 点「发布」→ 自动翻译所有语言
+- 保存草稿 → 不触发翻译
+- 新增语言 → 批量翻译所有现有内容 → 前台立即出现
+
+**UI词条**：存 Strapi CMS-14，ISR+Webhook 实时生效，不用重新部署
+
+**draftAndPublish 必须开启**：articles / products / solutions / case-studies / page-configs
+
+**DeepSeek 插件**：`cms/src/api/translate/` — 服务端调用，国内无网络限制
 
 ## 当前进度
 - [x] 文档套件完整（需求/执行/视觉/前端规范/后端规范/测试用例/施工计划）
 - [x] 视觉预览页 `docs/preview.html` 确认
-- [x] i18n 最终方案确认（8语言底座/3语言Phase0开放/DeepSeek翻译插件/zh-TW OpenCC）
+- [x] i18n 最终方案确认（8语言Day1全量/DeepSeek自动翻译/CMS-14字典/发布触发/无语言开关）
 - [ ] Phase 0 — 项目初始化（待开始）
