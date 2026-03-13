@@ -171,7 +171,11 @@
     <h2>目录导航</h2>
     <ul>
       <li><a href="#s1">一、技术选型决策</a></li>
+      <li style="padding-left:16px;font-size:13px"><a href="#s1-1" style="color:var(--muted)">└ 1.1 前端框架：Next.js</a></li>
+      <li style="padding-left:16px;font-size:13px"><a href="#s1-2" style="color:var(--muted)">└ 1.2 CMS 方案：Strapi v4</a></li>
+      <li style="padding-left:16px;font-size:13px"><a href="#s1-3" style="color:var(--muted)">└ 1.3 样式方案：Tailwind CSS</a></li>
       <li style="padding-left:16px;font-size:13px"><a href="#s1" style="color:var(--muted)">└ 1.4 shadcn/ui 组件库</a></li>
+      <li style="padding-left:16px;font-size:13px"><a href="#s1-5" style="color:var(--muted)">└ 1.5 CMS组件库：Ant Design</a></li>
       <li><a href="#s2">二、项目目录结构</a></li>
       <li><a href="#s3">三、路由设计</a></li>
       <li><a href="#s4">四、多语言实现规范</a></li>
@@ -181,7 +185,6 @@
       <li><a href="#s8">八、性能规范</a></li>
       <li><a href="#s9">九、环境变量规范</a></li>
       <li><a href="#s10">十、错误处理规范</a></li>
-      <li><a href="#s11">十一、技术选型决策（备忘）</a></li>
     </ul>
   </aside>
 
@@ -200,7 +203,7 @@
       <div class="section-label">SECTION 01</div>
       <h2>一、技术选型决策</h2>
 
-      <h3>1.1 前端框架：Next.js vs Nuxt.js</h3>
+      <h3 id="s1-1">1.1 前端框架：Next.js vs Nuxt.js</h3>
 
       <table>
         <thead>
@@ -221,7 +224,7 @@
         <strong>选型结论：Next.js 14+（App Router）。</strong>Next.js 在 ISR 成熟度、React Server Components、CMS 集成生态以及 AI 辅助开发质量方面均具有显著优势。作为 Vercel 的第一方产品，部署链路零摩擦。React 生态的绝对规模意味着更丰富的组件库、更快的问题排查和更稳定的长期维护。对于本项目以 SEO 为核心、以 CMS 驱动内容、以 Claude 辅助开发的技术约束，Next.js 是唯一合理选择。
       </div>
 
-      <h3>1.2 CMS 方案：Strapi v4 vs Directus</h3>
+      <h3 id="s1-2">1.2 CMS 方案：Strapi v4 vs Directus</h3>
 
       <table>
         <thead>
@@ -242,7 +245,7 @@
         <strong>选型结论：Strapi v4。</strong>Strapi 的 i18n 原生支持直接满足本项目 8 语言需求，无需额外建模。其 Content-Type Builder 的可视化程度更高，适合非技术运营人员独立维护内容。65k+ Stars 的社区规模意味着更完善的文档和更快的问题解决。Webhook 内置支持使得 ISR 触发链路开箱即用，与 Next.js 的 revalidate 机制无缝对接。
       </div>
 
-      <h3>1.3 样式方案：Tailwind CSS</h3>
+      <h3 id="s1-3">1.3 样式方案：Tailwind CSS</h3>
 
       <p><strong>选择理由：</strong></p>
       <ul>
@@ -279,7 +282,22 @@
   }
 }</code></pre>
 
-      <h3>1.5 部署平台：Vercel</h3>
+      <h3 id="s1-5">1.5 CMS 管理后台组件库：Ant Design</h3>
+
+      <p>Strapi CMS 自定义插件/扩展层使用 <strong>Ant Design（antd v5）</strong>。</p>
+
+      <p><strong>使用场景：</strong></p>
+      <ul>
+        <li>Strapi Admin 自定义页面（仪表盘 Widget、自定义字段）</li>
+        <li>CMS 扩展插件 UI（报修工单跟进、线索看板等）</li>
+      </ul>
+
+      <p><strong>安装（在 cms/ 目录下）：</strong></p>
+      <pre><code>npm install antd</code></pre>
+
+      <p><strong>注意：</strong>Ant Design 仅用于 CMS 后台扩展，不引入前台 Next.js 项目，避免 bundle 增大。</p>
+
+      <h3>1.6 部署平台：Vercel</h3>
 
       <p><strong>选择理由：</strong></p>
       <ul>
@@ -1431,70 +1449,6 @@ export async function POST(request: NextRequest) {
 
     </div>
 
-
-    <!-- ============================================================ -->
-    <!-- 十一、技术选型决策（备忘） -->
-    <!-- ============================================================ -->
-    <div class="section" id="s11">
-      <div class="section-label">SECTION 11</div>
-      <h2>十一、技术选型决策（备忘）</h2>
-
-      <div class="highlight">
-        <strong>📌 说明：</strong>以下内容迁移自「技术选型备忘」文档，记录项目技术选型的候选对比与决策过程。
-      </div>
-
-      <h3>11.1 前端框架（Next.js vs Nuxt.js）</h3>
-
-      <table>
-        <thead><tr><th>候选</th><th>优势</th><th>劣势</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Next.js（React）</strong></td><td>生态最强，ISR 缓存策略适合新闻/品牌页毫秒级访问，SSR + SEO 成熟，国内外 CDN 分离方案案例丰富</td><td>团队需有 React 基础</td><td>⬜ 待确认</td></tr>
-          <tr><td><strong>Nuxt.js（Vue）</strong></td><td>若现有云平台前端大量使用 Vue，团队认知切换成本低</td><td>部分企业级方案不如 Next.js 成熟</td><td>⬜ 待确认</td></tr>
-        </tbody>
-      </table>
-
-      <p><strong>决策关键点：</strong> 确认现有开发团队（AU-03 项目等）主要使用 React 还是 Vue。</p>
-
-      <h3>11.2 CDN 服务商</h3>
-
-      <p><strong>需求（来自 PRD §7.11）：</strong></p>
-      <ul>
-        <li>国内用户走国内加速节点</li>
-        <li>海外用户走境外加速节点</li>
-        <li>支持按地理位置智能路由</li>
-        <li>ICP 备案在国内节点完成后方可上线</li>
-      </ul>
-
-      <table>
-        <thead><tr><th>候选</th><th>适用场景</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr><td><strong>阿里云 CDN + 阿里云海外节点</strong></td><td>国内覆盖好，海外节点一般</td><td>⬜ 待评估</td></tr>
-          <tr><td><strong>腾讯云 CDN</strong></td><td>与阿里云类似</td><td>⬜ 待评估</td></tr>
-          <tr><td><strong>阿里云（国内）+ Cloudflare（海外）</strong></td><td>国内外分别最优，但需双平台维护</td><td>⬜ 待评估</td></tr>
-          <tr><td><strong>单一全球 CDN（Cloudflare）</strong></td><td>管理简单，但国内速度受限，ICP 备案需额外配置</td><td>❌ 不推荐（ICP 合规风险）</td></tr>
-        </tbody>
-      </table>
-
-      <p><strong>备注：</strong> 对象存储（OSS 等）选型随 CDN 服务商确定，建议同一厂商减少跨平台传输成本。</p>
-
-      <h3>11.3 机器翻译 API</h3>
-
-      <p><strong>需求（来自 PRD §7.3）：</strong></p>
-      <ul>
-        <li>以 en-US 为源，生成 de/fr/pt/es/ru 五种语言初稿</li>
-        <li>人工校对后发布</li>
-        <li>CMS 后台一键触发翻译</li>
-      </ul>
-
-      <table>
-        <thead><tr><th>候选</th><th>质量</th><th>价格</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr><td><strong>DeepL API</strong></td><td>欧洲语言质量最佳</td><td>按字符计费，有免费额度</td><td>🔄 推荐</td></tr>
-          <tr><td><strong>Google Cloud Translation</strong></td><td>覆盖语种最广</td><td>按字符计费</td><td>⬜ 备选</td></tr>
-          <tr><td><strong>Azure Cognitive Services</strong></td><td>质量一般，价格低</td><td>按字符计费</td><td>⬜ 备选</td></tr>
-        </tbody>
-      </table>
-    </div>
 
 
     <!-- Footer -->
