@@ -114,11 +114,6 @@
 
     /* ===== HERO ===== */
     .hero {
-      background-color: #0C1829;
-      background-image:
-        url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=85&fit=crop');
-      background-size: cover;
-      background-position: center;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -127,100 +122,72 @@
       padding: 0;
       position: relative;
       overflow: hidden;
+      background: #07090D;
     }
-    .hero-glow {
+    .hero-bg-gradient {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(16,185,129,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(20,184,166,.08) 0%, transparent 50%),
+        #07090D;
     }
-    .hero-glow-left {
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(22,163,74,.12) 0%, transparent 70%);
+    .hero-bg-grid {
       position: absolute;
-      bottom: -200px;
-      left: -100px;
-    }
-    .hero-glow-right {
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(20,184,166,.08) 0%, transparent 70%);
-      position: absolute;
-      top: -200px;
-      right: -100px;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 80px 80px;
     }
     .hero-content {
       position: relative;
       z-index: 1;
       text-align: center;
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
-      padding-top: 30vh;
+      padding-top: 28vh;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--green-lt);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+    .hero-brand {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,.45);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-    .eyebrow-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green-lt);
-      box-shadow: 0 0 8px var(--green-lt);
+      margin-bottom: 24px;
     }
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(36px, 5vw, 64px);
+      font-size: clamp(40px, 5.5vw, 72px);
       font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -2px;
+      line-height: 1.08;
+      letter-spacing: -2.5px;
       color: #fff;
-      margin-bottom: 0;
-      text-shadow: 0 2px 16px rgba(0,0,0,.3);
+      margin-bottom: 28px;
+      text-align: center;
     }
     .gradient-text {
-      background: linear-gradient(90deg, #4ADE80 0%, #2DD4BF 100%);
+      background: linear-gradient(90deg, #34D399 0%, #2DD4BF 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-sub {
-      font-size: 18px;
-      line-height: 1.8;
-      color: rgba(255,255,255,.55);
-      max-width: 560px;
-      margin: 0 auto 48px;
-      font-weight: 400;
-    }
-    .hero-brand {
-      font-size: 16px;
-      font-weight: 400;
-      color: rgba(255,255,255,.9);
-      margin-bottom: 8px;
-      letter-spacing: .5px;
-    }
     .hero-desc {
       font-size: 15px;
-      line-height: 1.8;
-      color: rgba(255,255,255,.75);
-      max-width: 720px;
-      margin: 24px auto 0;
+      color: rgba(255,255,255,.45);
+      line-height: 1.75;
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
       font-weight: 400;
-      text-shadow: 0 1px 8px rgba(0,0,0,.4);
     }
     .hero-cta {
       position: relative;
@@ -228,116 +195,30 @@
       display: flex;
       justify-content: center;
       gap: 12px;
-      padding: 32px 48px 48px;
+      padding: 32px 48px 52px;
       width: 100%;
     }
     .btn-tesla {
-      background: rgba(255,255,255,0.85);
-      color: #111;
+      background: rgba(255,255,255,.9);
+      color: #07090D;
       border: none;
-      padding: 14px 0;
-      width: 240px;
+      padding: 13px 0;
+      width: 220px;
       border-radius: 4px;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      backdrop-filter: blur(8px);
-      transition: background .15s;
-      letter-spacing: .3px;
-    }
-    .btn-tesla:hover { background: rgba(255,255,255,1); }
-    .btn-primary {
-      background: #16A34A;
-      color: #fff;
-      padding: 14px 32px;
-      border: none;
-      border-radius: 4px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
+      letter-spacing: .3px;
       transition: background .15s;
     }
-    .btn-primary:hover { background: #15803d; }
-    .btn-ghost {
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.8);
-      border: 1px solid rgba(255,255,255,.15);
-      padding: 14px 28px;
-      border-radius: 4px;
-      font-size: 15px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      position: relative;
-      transition: border-color .15s;
+    .btn-tesla:hover { background: #fff; }
+    .btn-tesla-outline {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.2);
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.3); }
-    .btn-ghost .badge-soon {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #F59E0B;
-      color: #fff;
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 2px;
-      letter-spacing: .5px;
-    }
-    .btn-outline {
-      background: transparent;
-      color: rgba(255,255,255,.6);
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 14px 28px;
-      border-radius: 4px;
-      font-size: 15px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: border-color .15s, color .15s;
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.8); }
-
-    .hero-stats {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 40px 0;
-    }
-    .hero-stat {
-      flex: 1;
-      max-width: 220px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,.08);
-      padding: 0 32px;
-    }
-    .hero-stat:last-child { border-right: none; }
-    .hero-stat-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 44px;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1;
-      letter-spacing: -1px;
-    }
-    .hero-stat-num sup {
-      font-size: 24px;
-      color: #4ADE80;
-      vertical-align: super;
-    }
-    .hero-stat-label {
-      font-size: 13px;
-      color: rgba(255,255,255,.45);
-      margin-top: 8px;
-      font-weight: 500;
-    }
-    .hero-stat-warn {
-      font-size: 10px;
-      color: rgba(255,255,255,.25);
-      margin-top: 4px;
-    }
+    .btn-tesla-outline:hover { background: rgba(255,255,255,.14); }
 
     /* ===== BRANDS ===== */
     .brands-section {
@@ -871,18 +752,17 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-glow">
-      <div class="hero-glow-left"></div>
-      <div class="hero-glow-right"></div>
-    </div>
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-bg-grid"></div>
+    <div style="position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:800px; height:600px; border-radius:50%; background:radial-gradient(circle, rgba(16,185,129,.15) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
     <div class="hero-content">
-      <p class="hero-brand">AlwaysControl</p>
-      <h1>跨品牌能源管理解决方案<br>的优质选择</h1>
-      <p class="hero-desc">旭衡电子（深圳）有限公司（Always-control Technology Co.,Ltd）拥有成熟、稳定的开发能力。<br>优秀的专业研发团队致力研究 EMS + 边缘计算智能网关、新能源智慧管理云平台，<br>为您提供完整、多场景全面产品解决方案，适用于微电网、户用、充电站、工商储等各种场景的能源管理。</p>
+      <p class="hero-brand">AlwaysControl Technology</p>
+      <h1>跨品牌能源管理<br><span class="gradient-text">解决方案的优质选择</span></h1>
+      <p class="hero-desc">旭衡电子（深圳）有限公司 · EMS + 边缘计算智能网关 · 新能源智慧管理云平台<br>适用于微电网、户用、充电站、工商储等全场景能源管理</p>
     </div>
     <div class="hero-cta">
       <button class="btn-tesla">查看解决方案</button>
-      <button class="btn-tesla">联系我们</button>
+      <button class="btn-tesla btn-tesla-outline">联系我们</button>
     </div>
   </section>
 
