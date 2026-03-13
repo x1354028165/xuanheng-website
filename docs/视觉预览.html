@@ -332,6 +332,85 @@
     .footer-copy { font-size: 13px; color: rgba(255,255,255,.25); }
     .footer-icp { font-size: 12px; color: rgba(255,255,255,.2); }
 
+
+    /* ========== PRODUCTS BENTO ========== */
+    .prod-label {
+      max-width: var(--max-w); margin: 0 auto 20px;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--brand);
+    }
+    .bento-hw {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .bento-card { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+    .bento-hero {
+      grid-row: span 2;
+      min-height: 420px;
+      background-size: cover; background-position: center;
+      transition: transform .3s;
+    }
+    .bento-hero:hover { transform: scale(1.01); }
+    .bento-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
+    }
+    .bento-hero-body {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;
+    }
+    .bento-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brand);
+      background: rgba(56,196,232,.15); border: 1px solid rgba(56,196,232,.3);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .bento-hero-body h3 {
+      font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 10px;
+    }
+    .bento-hero-body p {
+      font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 16px;
+    }
+    .bento-link {
+      font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none;
+    }
+    .bento-sm {
+      padding: 28px; border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      transition: border-color .2s, transform .2s;
+    }
+    .bento-sm:hover { border-color: rgba(56,196,232,.3); transform: translateY(-2px); }
+    .bento-sm-icon { margin-bottom: 16px; }
+    .bento-sm h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .bento-sm p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    /* Software bento */
+    .bento-sw {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .bento-sw-card {
+      border: 1px solid transparent; border-radius: 16px; padding: 24px 20px;
+      transition: transform .2s, box-shadow .2s; cursor: pointer;
+    }
+    .bento-sw-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+    .sw-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 10px; margin-bottom: 14px; letter-spacing: .5px;
+    }
+    .bento-sw-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .bento-sw-card p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .bento-hw { grid-template-columns: 1fr; }
+      .bento-hero { grid-row: span 1; min-height: 300px; }
+      .bento-sw { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .bento-sw { grid-template-columns: 1fr 1fr; }
+    }
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -484,75 +563,81 @@
       <h2>产品矩阵</h2>
       <p>从边缘到云端，模块化覆盖全场景需求</p>
     </div>
-    <div class="prod-columns">
-      <div>
-        <div class="prod-col-title">硬件 · Hardware</div>
-        <div class="prod-card">
-          <h3>Neuron II</h3>
-          <p>经济型边缘网关，适合小型户用场景，Modbus/RS485 接入</p>
-          <div class="prod-specs">
-            <span class="prod-spec">RS485</span>
-            <span class="prod-spec">WiFi</span>
-            <span class="prod-spec">Modbus</span>
-          </div>
-        </div>
-        <div class="prod-card">
+
+    <!-- Hardware row: Bento grid -->
+    <div class="prod-label">硬件 · Hardware</div>
+    <div class="bento-hw">
+      <!-- Featured: Neuron III -->
+      <div class="bento-card bento-hero" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop')">
+        <div class="bento-hero-overlay"></div>
+        <div class="bento-hero-body">
+          <div class="bento-tag">Flagship</div>
           <h3>Neuron III</h3>
-          <p>高性能边缘网关，100+ 设备并发接入，支持边缘计算与本地策略执行</p>
+          <p>高性能边缘计算网关，100+ 设备并发接入，内置本地策略引擎，断网自治</p>
           <div class="prod-specs">
-            <span class="prod-spec">RS485</span>
-            <span class="prod-spec">4G/WiFi</span>
-            <span class="prod-spec">Modbus</span>
-            <span class="prod-spec">MQTT</span>
+            <span class="prod-spec">RS485 × 4</span>
+            <span class="prod-spec">4G / WiFi</span>
+            <span class="prod-spec">Modbus / MQTT</span>
+            <span class="prod-spec">边缘计算</span>
           </div>
-        </div>
-        <div class="prod-card">
-          <h3>Neuron III Lite</h3>
-          <p>精简版网关，面向中小型工商业场景，兼顾成本与性能</p>
-          <div class="prod-specs">
-            <span class="prod-spec">RS485</span>
-            <span class="prod-spec">4G</span>
-            <span class="prod-spec">Modbus</span>
-          </div>
+          <a href="#" class="bento-link">查看规格 →</a>
         </div>
       </div>
-      <div>
-        <div class="prod-col-title">软件 · Software</div>
-        <div class="sw-item">
-          <div class="sw-dot"></div>
-          <div>
-            <h3>HEMS Cloud</h3>
-            <p>家庭能源管理平台，自发自用/经济模式，白标 SaaS</p>
-          </div>
+      <!-- Neuron II -->
+      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0f2035 0%,#0c3050 100%)">
+        <div class="bento-sm-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <div class="sw-item">
-          <div class="sw-dot"></div>
-          <div>
-            <h3>ESS Cloud</h3>
-            <p>工商业储能管理平台，峰谷套利，多站点统一监控</p>
-          </div>
+        <h3>Neuron II</h3>
+        <p>经济型网关，户用场景首选</p>
+        <div class="prod-specs" style="margin-top:12px">
+          <span class="prod-spec">RS485</span>
+          <span class="prod-spec">WiFi</span>
+          <span class="prod-spec">Modbus</span>
         </div>
-        <div class="sw-item">
-          <div class="sw-dot"></div>
-          <div>
-            <h3>EVCMS</h3>
-            <p>充电站管理系统，多桩协同，负载均衡调度</p>
-          </div>
+      </div>
+      <!-- Neuron III Lite -->
+      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0d1f10 0%,#0c3020 100%)">
+        <div class="bento-sm-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="2" fill="#38C4E8" stroke="none"/></svg>
         </div>
-        <div class="sw-item">
-          <div class="sw-dot"></div>
-          <div>
-            <h3>PQMS</h3>
-            <p>电能质量管理系统，实时监测与治理</p>
-          </div>
+        <h3>Neuron III Lite</h3>
+        <p>精简版，中小工商业最佳性价比</p>
+        <div class="prod-specs" style="margin-top:12px">
+          <span class="prod-spec">RS485</span>
+          <span class="prod-spec">4G</span>
+          <span class="prod-spec">Modbus</span>
         </div>
-        <div class="sw-item">
-          <div class="sw-dot"></div>
-          <div>
-            <h3>VPP Platform</h3>
-            <p>虚拟电厂平台，分布式聚合调度，参与电力市场</p>
-          </div>
-        </div>
+      </div>
+    </div>
+
+    <!-- Software row: 5-card bento -->
+    <div class="prod-label" style="margin-top:48px">软件 · Software</div>
+    <div class="bento-sw">
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(56,196,232,.12) 0%,rgba(56,196,232,.03) 100%);border-color:rgba(56,196,232,.25)">
+        <div class="sw-badge" style="background:rgba(56,196,232,.15);color:#38C4E8">居家</div>
+        <h3>HEMS Cloud</h3>
+        <p>家庭能源管理，光储充一体，白标 SaaS 快速交付</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(26,63,173,.2) 0%,rgba(26,63,173,.05) 100%);border-color:rgba(26,63,173,.35)">
+        <div class="sw-badge" style="background:rgba(26,63,173,.2);color:#7896F5">工商</div>
+        <h3>ESS Cloud</h3>
+        <p>工商业储能平台，峰谷套利，多站点统一监控告警</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(16,185,129,.12) 0%,rgba(16,185,129,.03) 100%);border-color:rgba(16,185,129,.2)">
+        <div class="sw-badge" style="background:rgba(16,185,129,.15);color:#34D399">充电</div>
+        <h3>EVCMS</h3>
+        <p>充电站管理，多桩负载均衡，OCPP 兼容，防跳闸</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(245,158,11,.1) 0%,rgba(245,158,11,.02) 100%);border-color:rgba(245,158,11,.2)">
+        <div class="sw-badge" style="background:rgba(245,158,11,.15);color:#FBBF24">电能</div>
+        <h3>PQMS</h3>
+        <p>电能质量监测与治理，谐波分析，实时告警</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(168,85,247,.12) 0%,rgba(168,85,247,.03) 100%);border-color:rgba(168,85,247,.2)">
+        <div class="sw-badge" style="background:rgba(168,85,247,.15);color:#C084FC">电网</div>
+        <h3>VPP Platform</h3>
+        <p>虚拟电厂，分布式聚合调度，接入辅助服务电力市场</p>
       </div>
     </div>
   </section>
