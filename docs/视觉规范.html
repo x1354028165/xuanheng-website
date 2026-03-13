@@ -92,10 +92,13 @@
 
   /* Buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 22px;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 200ms ease-out;font-family:'Inter',sans-serif;}
-  .btn-primary{background:var(--primary-700);color:#fff;}
-  .btn-primary:hover{background:var(--primary-800);box-shadow:var(--shadow-brand);}
-  .btn-primary:active{background:#17748D;transform:scale(0.98);}
+  .btn-primary{background:#38C4E8;color:#fff;}
+  .btn-primary:hover{background:#2BADD0;box-shadow:var(--shadow-brand);}
+  .btn-primary:active{background:#1E96B5;transform:scale(0.98);}
   .btn-primary.disabled{opacity:0.5;cursor:not-allowed;pointer-events:none;}
+  .btn-dark{background:#0F172A;color:#fff;}
+  .btn-dark:hover{background:#1E293B;box-shadow:var(--shadow-lg);}
+  .btn-dark:active{background:#0F172A;transform:scale(0.98);}
   .btn-secondary{background:transparent;color:var(--primary-700);border:1.5px solid var(--primary-200);;}
   .btn-secondary:hover{background:var(--primary-50);border-color:var(--primary-400);}
   .btn-ghost{background:transparent;color:var(--text-secondary);border:1.5px solid var(--border);}
@@ -184,6 +187,7 @@
 <!-- Sidebar TOC -->
 <nav class="sidebar">
   <div class="sidebar-title">目录 Contents</div>
+  <a href="#design-philosophy">零、设计哲学</a>
   <a href="#color-system">一、色彩系统</a>
   <a href="#color-scale">二、色阶体系</a>
   <a href="#typography">三、字体规范</a>
@@ -197,6 +201,7 @@
   <a href="#layout">十一、页面布局</a>
   <a href="#icons">十二、图标规范</a>
   <a href="#images">十三、图片规范</a>
+  <a href="#references">十四、参考案例</a>
 </nav>
 
 <div class="main-content">
@@ -207,6 +212,26 @@
 </div>
 
 <div class="container">
+
+  <!-- ===== 零、设计哲学 ===== -->
+  <div class="section" id="design-philosophy">
+    <h2>零、设计哲学 Design Philosophy</h2>
+    <p style="font-size:14px;color:var(--text);margin-bottom:20px;line-height:1.7">
+      旭衡电子官网设计哲学：借鉴阳光电源(Sungrow)、Tesla等能源行业头部企业的极简大气风格。
+    </p>
+
+    <h3>核心原则</h3>
+    <table>
+      <thead><tr><th>原则</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><strong>① 克制用色</strong></td><td>页面90%以白/浅灰/深色为基底，品牌青蓝 <code>#38C4E8</code> 仅用于CTA按钮、关键链接、数字统计强调，不做大面积背景色</td></tr>
+        <tr><td><strong>② 图片优先</strong></td><td>用高质量能源场景图（光伏电站、储能系统、智慧能源）传递品牌价值，而非靠颜色</td></tr>
+        <tr><td><strong>③ 留白即设计</strong></td><td>大 margin / padding，不填满，给用户呼吸感</td></tr>
+        <tr><td><strong>④ 一个强调色</strong></td><td>全站只有 <code>#38C4E8</code> 一个强调色，辅色 <code>#1A3FAD</code> 只用于深色区块背景，不做按钮色</td></tr>
+        <tr><td><strong>⑤ 字体做层次</strong></td><td>靠字号、字重、颜色深浅区分信息层级，不靠色块堆砌</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- ===== 一、色彩系统 ===== -->
   <div class="section" id="color-system">
@@ -225,7 +250,7 @@
       </div>
       <div class="swatch">
         <div class="swatch-color" style="background:linear-gradient(135deg,#38C4E8,#1A3FAD)"></div>
-        <div class="swatch-info"><div class="swatch-name">Gradient 渐变</div><div class="swatch-hex">#38C4E8 → #1A3FAD</div><div class="swatch-usage">Hero/Banner 背景渐变</div></div>
+        <div class="swatch-info"><div class="swatch-name">Gradient 渐变</div><div class="swatch-hex">#1A3FAD → #0C1829</div><div class="swatch-usage">仅深色区块背景渐变（Hero用实景图+遮罩）</div></div>
       </div>
       <div class="swatch">
         <div class="swatch-color" style="background:#0C1829"></div>
@@ -258,6 +283,23 @@
       <div class="swatch"><div class="swatch-color" style="background:#475569"></div><div class="swatch-info"><div class="swatch-name">Secondary</div><div class="swatch-hex">#475569</div></div></div>
       <div class="swatch"><div class="swatch-color" style="background:#94A3B8"></div><div class="swatch-info"><div class="swatch-name">Muted</div><div class="swatch-hex">#94A3B8</div></div></div>
     </div>
+
+    <h3>用色频率规范 Color Usage Ratio</h3>
+    <table style="margin-bottom:16px">
+      <thead><tr><th>颜色</th><th>色值</th><th>占比</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>白色</td><td><code>#FFFFFF</code></td><td>~70%</td><td>背景主色</td></tr>
+        <tr><td>浅灰</td><td><code>#F8FAFC</code></td><td>~15%</td><td>次级背景（卡片底 / Section 间隔）</td></tr>
+        <tr><td>深色文字</td><td><code>#0F172A</code></td><td>—</td><td>主要文字</td></tr>
+        <tr><td>中灰文字</td><td><code>#64748B</code></td><td>—</td><td>次要文字 / 描述</td></tr>
+        <tr><td>品牌青蓝</td><td><code>#38C4E8</code></td><td>~5%</td><td>CTA按钮、强调数字、关键链接</td></tr>
+        <tr><td>深宝蓝</td><td><code>#1A3FAD</code></td><td>~10%</td><td>深色区块背景（产品展示区 / Footer）</td></tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-danger" style="margin-bottom:8px"><strong>禁止：</strong>将 #38C4E8 用作 Section 背景色</div>
+    <div class="alert alert-danger" style="margin-bottom:8px"><strong>禁止：</strong>多色渐变背景（只允许深色区用 #1A3FAD → #0C1829 渐变）</div>
+    <div class="alert alert-danger"><strong>禁止：</strong>超过2种品牌色同时出现在同一视区</div>
   </div>
 
   <!-- ===== 二、色阶体系 ===== -->
@@ -509,6 +551,11 @@ fontSize: {
       <button class="btn btn-primary btn-lg">Request Demo</button>
     </div>
     <div class="comp-row">
+      <div class="comp-label">Dark · 深色背景区按钮</div>
+      <button class="btn btn-dark">Learn More</button>
+      <button class="btn btn-dark btn-sm">View Products</button>
+    </div>
+    <div class="comp-row">
       <div class="comp-label">Secondary · 次要操作</div>
       <button class="btn btn-secondary">Learn More</button>
       <button class="btn btn-secondary btn-sm">View Details</button>
@@ -538,6 +585,13 @@ fontSize: {
           <td><code>bg:#38C4E8</code> <code>text:#FFF</code></td>
           <td><code>bg:#2BADD0</code> <code>shadow-brand</code></td>
           <td><code>bg:#1E96B5</code> <code>scale(0.98)</code></td>
+          <td><code>opacity:0.5</code></td>
+        </tr>
+        <tr>
+          <td><strong>Dark</strong></td>
+          <td><code>bg:#0F172A</code> <code>text:#FFF</code></td>
+          <td><code>bg:#1E293B</code> <code>shadow-lg</code></td>
+          <td><code>bg:#0F172A</code> <code>scale(0.98)</code></td>
           <td><code>opacity:0.5</code></td>
         </tr>
         <tr>
@@ -592,6 +646,24 @@ fontSize: {
         <tr><td>Destructive 按钮需二次确认</td><td>删除/下线等不可逆操作必须弹窗确认</td></tr>
         <tr><td>按钮文字简洁</td><td>英文 ≤ 3 words，中文 ≤ 8 个字</td></tr>
         <tr><td>禁用态统一 opacity: 0.5</td><td>不改变颜色，仅降低透明度</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Hero / Banner 按钮规范</h3>
+    <div style="background:#0C1829;border-radius:var(--radius-lg);padding:32px;margin-bottom:16px;background-image:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45));text-align:center">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:36px;font-weight:700;color:#fff;margin-bottom:8px">Powering Every Watt</div>
+      <div style="font-size:15px;color:rgba(255,255,255,.7);margin-bottom:24px">高质量全幅实景图 + 深色遮罩 rgba(0,0,0,0.45)</div>
+      <button class="btn" style="background:#fff;color:#0F172A;margin-right:12px;font-weight:700">Get Started</button>
+      <button class="btn" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)">Learn More</button>
+    </div>
+    <table>
+      <thead><tr><th>Hero 元素</th><th>规范</th></tr></thead>
+      <tbody>
+        <tr><td>背景</td><td>高质量全幅实景图（光伏电站/储能系统），图上叠深色遮罩 <code>rgba(0,0,0,0.45)</code></td></tr>
+        <tr><td>文字</td><td>纯白色，Plus Jakarta Sans，主标题 48~60px</td></tr>
+        <tr><td>主 CTA 按钮</td><td>纯白底深字（<code>bg:#FFF text:#0F172A</code>）</td></tr>
+        <tr><td>次 CTA 按钮</td><td>白色描边透明底（<code>border:1.5px solid rgba(255,255,255,.6)</code>）</td></tr>
+        <tr><td>禁止</td><td>不用渐变色背景替代真实图片</td></tr>
       </tbody>
     </table>
   </div>
@@ -729,6 +801,29 @@ fontSize: {
     </table>
     <div class="alert alert-warning"><strong>Note:</strong> 禁止使用 GIF 动图——如需动画效果，使用 Lottie 替代（体积更小、可交互、支持矢量缩放）。</div>
     <div class="alert alert-info"><strong>Info:</strong> 所有图片上传至媒体库时，系统自动转换为 WebP 格式并压缩，无需手动处理。</div>
+  </div>
+
+  <!-- ===== 十四、参考案例 ===== -->
+  <div class="section" id="references">
+    <h2>十四、参考案例 Design References</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">以下企业官网在设计理念上与旭衡电子目标风格高度一致，可作为设计/开发参考。</p>
+
+    <table style="margin-bottom:20px">
+      <thead><tr><th>企业</th><th>网站</th><th>参考要点</th></tr></thead>
+      <tbody>
+        <tr><td><strong>阳光电源 Sungrow</strong></td><td>sungrowpower.com</td><td>极简克制、黑白基底、单一强调色</td></tr>
+        <tr><td><strong>Tesla</strong></td><td>tesla.com</td><td>大图全屏 Hero、简洁导航、留白充足</td></tr>
+        <tr><td><strong>华为智能光伏</strong></td><td>solar.huawei.com</td><td>B2B 企业感、清晰信息架构</td></tr>
+      </tbody>
+    </table>
+
+    <h3>共同特征</h3>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div style="flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center;font-size:13px;font-weight:600;color:var(--text)">白底 / 深色背景二选一</div>
+      <div style="flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center;font-size:13px;font-weight:600;color:var(--text)">高质量产品实景图</div>
+      <div style="flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center;font-size:13px;font-weight:600;color:var(--text)">克制的品牌色使用</div>
+      <div style="flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center;font-size:13px;font-weight:600;color:var(--text)">大字体标题</div>
+    </div>
   </div>
 
 </div>
