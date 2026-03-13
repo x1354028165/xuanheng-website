@@ -392,13 +392,22 @@
       max-width: var(--max-w); margin: 0 auto;
     }
     .bento-sw-card {
-      border: 1px solid transparent; border-radius: 16px; padding: 24px 20px;
-      transition: transform .2s, box-shadow .2s; cursor: pointer;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 16px; padding: 24px 20px;
+      transition: border-color .2s, transform .2s;
+      cursor: pointer;
     }
-    .bento-sw-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+    .bento-sw-card:hover {
+      border-color: rgba(56,196,232,.35);
+      transform: translateY(-3px);
+    }
     .sw-badge {
       display: inline-block; font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: 10px; margin-bottom: 14px; letter-spacing: .5px;
+      padding: 3px 10px; border-radius: 10px; margin-bottom: 14px;
+      letter-spacing: .5px;
+      background: rgba(56,196,232,.12);
+      color: var(--brand);
     }
     .bento-sw-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
     .bento-sw-card p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
@@ -614,28 +623,28 @@
     <!-- Software row: 5-card bento -->
     <div class="prod-label" style="margin-top:48px">软件 · Software</div>
     <div class="bento-sw">
-      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(56,196,232,.12) 0%,rgba(56,196,232,.03) 100%);border-color:rgba(56,196,232,.25)">
-        <div class="sw-badge" style="background:rgba(56,196,232,.15);color:#38C4E8">居家</div>
+      <div class="bento-sw-card">
+        <div class="sw-badge">居家</div>
         <h3>HEMS Cloud</h3>
         <p>家庭能源管理，光储充一体，白标 SaaS 快速交付</p>
       </div>
-      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(26,63,173,.2) 0%,rgba(26,63,173,.05) 100%);border-color:rgba(26,63,173,.35)">
-        <div class="sw-badge" style="background:rgba(26,63,173,.2);color:#7896F5">工商</div>
+      <div class="bento-sw-card">
+        <div class="sw-badge">工商</div>
         <h3>ESS Cloud</h3>
         <p>工商业储能平台，峰谷套利，多站点统一监控告警</p>
       </div>
-      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(16,185,129,.12) 0%,rgba(16,185,129,.03) 100%);border-color:rgba(16,185,129,.2)">
-        <div class="sw-badge" style="background:rgba(16,185,129,.15);color:#34D399">充电</div>
+      <div class="bento-sw-card">
+        <div class="sw-badge">充电</div>
         <h3>EVCMS</h3>
         <p>充电站管理，多桩负载均衡，OCPP 兼容，防跳闸</p>
       </div>
-      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(245,158,11,.1) 0%,rgba(245,158,11,.02) 100%);border-color:rgba(245,158,11,.2)">
-        <div class="sw-badge" style="background:rgba(245,158,11,.15);color:#FBBF24">电能</div>
+      <div class="bento-sw-card">
+        <div class="sw-badge">电能</div>
         <h3>PQMS</h3>
         <p>电能质量监测与治理，谐波分析，实时告警</p>
       </div>
-      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(168,85,247,.12) 0%,rgba(168,85,247,.03) 100%);border-color:rgba(168,85,247,.2)">
-        <div class="sw-badge" style="background:rgba(168,85,247,.15);color:#C084FC">电网</div>
+      <div class="bento-sw-card">
+        <div class="sw-badge">电网</div>
         <h3>VPP Platform</h3>
         <p>虚拟电厂，分布式聚合调度，接入辅助服务电力市场</p>
       </div>
