@@ -359,6 +359,208 @@
 </tbody>
 </table>
 
+
+<h4>faqs（常见问题）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>question</code></td><td>String</td><td>✅</td><td>✅</td><td>问题标题</td></tr>
+<tr><td><code>answer</code></td><td>RichText</td><td>✅</td><td>✅</td><td>答案内容（Slate.js）</td></tr>
+<tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>product</code> | <code>service</code> | <code>warranty</code> | <code>general</code></td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重，默认 0</td></tr>
+</tbody>
+</table>
+
+<h4>case-studies（客户案例）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>title</code></td><td>String</td><td>✅</td><td>✅</td><td>案例标题</td></tr>
+<tr><td><code>slug</code></td><td>UID（基于 title）</td><td>❌</td><td>✅</td><td>URL 标识</td></tr>
+<tr><td><code>client</code></td><td>String</td><td>✅</td><td>❌</td><td>客户名称</td></tr>
+<tr><td><code>industry</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>residential</code> | <code>commercial</code> | <code>industrial</code> | <code>utility</code></td></tr>
+<tr><td><code>summary</code></td><td>Text</td><td>✅</td><td>✅</td><td>案例摘要</td></tr>
+<tr><td><code>content</code></td><td>RichText</td><td>✅</td><td>✅</td><td>案例正文（Slate.js）</td></tr>
+<tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>案例封面图</td></tr>
+<tr><td><code>relatedProducts</code></td><td>Relation（M2M → products）</td><td>❌</td><td>❌</td><td>关联产品</td></tr>
+<tr><td><code>relatedSolutions</code></td><td>Relation（M2M → solutions）</td><td>❌</td><td>❌</td><td>关联解决方案</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>job-openings（招聘职位）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>title</code></td><td>String</td><td>✅</td><td>✅</td><td>职位名称</td></tr>
+<tr><td><code>department</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>engineering</code> | <code>sales</code> | <code>marketing</code> | <code>operations</code> | <code>finance</code></td></tr>
+<tr><td><code>location</code></td><td>String</td><td>✅</td><td>✅</td><td>工作地点</td></tr>
+<tr><td><code>type</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>full-time</code> | <code>part-time</code> | <code>contract</code> | <code>internship</code></td></tr>
+<tr><td><code>description</code></td><td>RichText</td><td>✅</td><td>✅</td><td>职位描述</td></tr>
+<tr><td><code>responsibilities</code></td><td>RichText</td><td>✅</td><td>❌</td><td>岗位职责</td></tr>
+<tr><td><code>requirements</code></td><td>RichText</td><td>✅</td><td>❌</td><td>任职要求</td></tr>
+<tr><td><code>status</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>open</code> | <code>paused</code> | <code>closed</code>，默认 <code>open</code></td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>media-config（媒体配置，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>cdnBaseUrl</code></td><td>String</td><td>✅</td><td>CDN 基础 URL，如 <code>https://cdn.alwayscontrol.com.cn</code></td></tr>
+<tr><td><code>maxUploadSizeMb</code></td><td>Integer</td><td>❌</td><td>最大上传文件大小（MB），默认 10</td></tr>
+<tr><td><code>allowedFormats</code></td><td>JSON</td><td>❌</td><td>允许上传的扩展名列表，如 <code>["jpg","png","webp","pdf"]</code></td></tr>
+<tr><td><code>imageQuality</code></td><td>Integer</td><td>❌</td><td>WebP 自动压缩质量 0-100，默认 80</td></tr>
+<tr><td><code>thumbnailSizes</code></td><td>JSON</td><td>❌</td><td>缩略图尺寸配置，如 <code>[{"name":"thumb","width":300}]</code></td></tr>
+</tbody>
+</table>
+
+<h4>file-assets（可下载文件资产）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>文件显示名称</td></tr>
+<tr><td><code>file</code></td><td>Media（单文件）</td><td>✅</td><td>文件附件（PDF / Word / Excel 等）</td></tr>
+<tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td><code>datasheet</code> | <code>manual</code> | <code>certificate</code> | <code>whitepaper</code> | <code>other</code></td></tr>
+<tr><td><code>relatedProducts</code></td><td>Relation（M2M → products）</td><td>❌</td><td>关联产品</td></tr>
+<tr><td><code>downloadCount</code></td><td>Integer</td><td>❌</td><td>累计下载次数，默认 0</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>product-relations（产品关联关系）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>sourceProduct</code></td><td>Relation（M2O → products）</td><td>✅</td><td>来源产品</td></tr>
+<tr><td><code>targetProduct</code></td><td>Relation（M2O → products）</td><td>✅</td><td>目标产品</td></tr>
+<tr><td><code>relationType</code></td><td>Enumeration</td><td>✅</td><td><code>accessory</code> | <code>replacement</code> | <code>upgrade</code> | <code>bundle</code></td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>排序权重</td></tr>
+</tbody>
+</table>
+
+<h4>repair-tickets（报修工单）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>ticketNo</code></td><td>String</td><td>✅</td><td>工单编号，系统自动生成，全局唯一</td></tr>
+<tr><td><code>name</code></td><td>String</td><td>✅</td><td>报修人姓名</td></tr>
+<tr><td><code>email</code></td><td>Email</td><td>✅</td><td>联系邮箱</td></tr>
+<tr><td><code>phone</code></td><td>String</td><td>❌</td><td>联系电话</td></tr>
+<tr><td><code>company</code></td><td>String</td><td>❌</td><td>所在单位</td></tr>
+<tr><td><code>productName</code></td><td>String</td><td>✅</td><td>产品型号名称</td></tr>
+<tr><td><code>serialNumber</code></td><td>String</td><td>❌</td><td>设备序列号</td></tr>
+<tr><td><code>purchaseDate</code></td><td>Date</td><td>❌</td><td>购买日期</td></tr>
+<tr><td><code>issueDescription</code></td><td>Text</td><td>✅</td><td>故障现象描述</td></tr>
+<tr><td><code>attachments</code></td><td>Media（多文件）</td><td>❌</td><td>故障图片 / 视频附件</td></tr>
+<tr><td><code>status</code></td><td>Enumeration</td><td>❌</td><td><code>pending</code> | <code>processing</code> | <code>resolved</code> | <code>closed</code>，默认 <code>pending</code></td></tr>
+<tr><td><code>assignedTo</code></td><td>String</td><td>❌</td><td>处理人</td></tr>
+<tr><td><code>resolution</code></td><td>Text</td><td>❌</td><td>处理结果描述</td></tr>
+</tbody>
+</table>
+
+<h4>i18n-keys（UI 多语言词条字典）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>key</code></td><td>String</td><td>❌</td><td>✅</td><td>词条键名，如 <code>nav.home</code> / <code>btn.submit</code></td></tr>
+<tr><td><code>value</code></td><td>Text</td><td>✅</td><td>✅</td><td>对应语言的译文</td></tr>
+<tr><td><code>namespace</code></td><td>String</td><td>❌</td><td>❌</td><td>命名空间，如 <code>common</code> / <code>nav</code> / <code>form</code></td></tr>
+<tr><td><code>description</code></td><td>String</td><td>❌</td><td>❌</td><td>词条说明，供翻译人员参考</td></tr>
+</tbody>
+</table>
+
+<h4>notification-configs（通知配置，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>emailEnabled</code></td><td>Boolean</td><td>❌</td><td>邮件通知总开关，默认 true</td></tr>
+<tr><td><code>notifyEmails</code></td><td>JSON</td><td>❌</td><td>接收通知的邮箱列表（JSON 数组）</td></tr>
+<tr><td><code>leadNotifyTemplate</code></td><td>Text</td><td>❌</td><td>线索提交通知邮件 HTML 模板</td></tr>
+<tr><td><code>repairNotifyTemplate</code></td><td>Text</td><td>❌</td><td>报修工单通知邮件 HTML 模板</td></tr>
+<tr><td><code>smtpHost</code></td><td>String</td><td>❌</td><td>SMTP 服务器地址</td></tr>
+<tr><td><code>smtpPort</code></td><td>Integer</td><td>❌</td><td>SMTP 端口，默认 587</td></tr>
+<tr><td><code>smtpUser</code></td><td>String</td><td>❌</td><td>SMTP 用户名（实际密码存环境变量）</td></tr>
+</tbody>
+</table>
+
+<h4>audit-logs（操作审计日志）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>action</code></td><td>Enumeration</td><td>✅</td><td><code>create</code> | <code>update</code> | <code>delete</code> | <code>publish</code> | <code>login</code></td></tr>
+<tr><td><code>model</code></td><td>String</td><td>✅</td><td>被操作的内容类型名称</td></tr>
+<tr><td><code>entityId</code></td><td>Integer</td><td>❌</td><td>被操作记录的 ID</td></tr>
+<tr><td><code>userId</code></td><td>Integer</td><td>❌</td><td>操作人（admin_users.id）</td></tr>
+<tr><td><code>userEmail</code></td><td>String</td><td>❌</td><td>操作人邮箱（冗余存储，防止级联丢失）</td></tr>
+<tr><td><code>payload</code></td><td>JSON</td><td>❌</td><td>操作载荷（变更前后 diff）</td></tr>
+<tr><td><code>ip</code></td><td>String</td><td>❌</td><td>操作者客户端 IP</td></tr>
+</tbody>
+</table>
+
+<h4>cache-management（缓存管理，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>lastPurgedAt</code></td><td>DateTime</td><td>❌</td><td>最后一次清除缓存的时间</td></tr>
+<tr><td><code>purgeStatus</code></td><td>Enumeration</td><td>❌</td><td><code>idle</code> | <code>running</code> | <code>done</code> | <code>failed</code></td></tr>
+<tr><td><code>purgeLog</code></td><td>JSON</td><td>❌</td><td>最近一次清除操作的日志详情</td></tr>
+<tr><td><code>autoInvalidate</code></td><td>Boolean</td><td>❌</td><td>内容发布后自动触发 ISR，默认 true</td></tr>
+</tbody>
+</table>
+
+<h4>page-health（页面健康度，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>lastCheckedAt</code></td><td>DateTime</td><td>❌</td><td>最后一次检测时间</td></tr>
+<tr><td><code>totalPages</code></td><td>Integer</td><td>❌</td><td>检测页面总数</td></tr>
+<tr><td><code>healthyPages</code></td><td>Integer</td><td>❌</td><td>状态正常的页面数</td></tr>
+<tr><td><code>errorPages</code></td><td>Integer</td><td>❌</td><td>返回错误状态码的页面数</td></tr>
+<tr><td><code>report</code></td><td>JSON</td><td>❌</td><td>详细检测报告（页面列表 + 状态码 + 耗时）</td></tr>
+</tbody>
+</table>
+
+<h4>sitemap-trigger（Sitemap 生成触发，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>lastGeneratedAt</code></td><td>DateTime</td><td>❌</td><td>最后一次生成 Sitemap 的时间</td></tr>
+<tr><td><code>status</code></td><td>Enumeration</td><td>❌</td><td><code>idle</code> | <code>running</code> | <code>done</code> | <code>failed</code></td></tr>
+<tr><td><code>sitemapUrl</code></td><td>String</td><td>❌</td><td>生成的 Sitemap 文件 URL</td></tr>
+<tr><td><code>totalUrls</code></td><td>Integer</td><td>❌</td><td>Sitemap 中包含的 URL 总数</td></tr>
+<tr><td><code>autoGenerate</code></td><td>Boolean</td><td>❌</td><td>内容变更后自动重新生成，默认 true</td></tr>
+</tbody>
+</table>
+
+<h4>dashboard（后台仪表盘配置，Single Type）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>welcomeMessage</code></td><td>String</td><td>❌</td><td>后台首页欢迎语</td></tr>
+<tr><td><code>statsConfig</code></td><td>JSON</td><td>❌</td><td>统计卡片配置（显示哪些统计项及顺序）</td></tr>
+<tr><td><code>quickLinks</code></td><td>JSON</td><td>❌</td><td>快速跳转链接列表</td></tr>
+<tr><td><code>maintenanceMode</code></td><td>Boolean</td><td>❌</td><td>网站维护模式开关，默认 false</td></tr>
+<tr><td><code>maintenanceMessage</code></td><td>Text</td><td>❌</td><td>维护期间前台显示的提示信息</td></tr>
+</tbody>
+</table>
+
+<h4>admin-users（管理员账户，Strapi 内置）</h4>
+<table>
+<thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><code>firstname</code></td><td>String</td><td>✅</td><td>名字</td></tr>
+<tr><td><code>lastname</code></td><td>String</td><td>❌</td><td>姓氏</td></tr>
+<tr><td><code>email</code></td><td>Email</td><td>✅</td><td>登录邮箱，全局唯一</td></tr>
+<tr><td><code>password</code></td><td>Password</td><td>✅</td><td>bcrypt 哈希密码，不通过 API 返回</td></tr>
+<tr><td><code>isActive</code></td><td>Boolean</td><td>❌</td><td>账户激活状态，默认 true</td></tr>
+<tr><td><code>blocked</code></td><td>Boolean</td><td>❌</td><td>是否封禁，默认 false</td></tr>
+<tr><td><code>roles</code></td><td>Relation（M2M → admin_roles）</td><td>❌</td><td>管理员角色（Super Admin / Editor / Viewer）</td></tr>
+<tr><td><code>lastLoginAt</code></td><td>DateTime</td><td>❌</td><td>最后登录时间</td></tr>
+</tbody>
+</table>
+
 <hr>
 
 <!-- ============================================================ -->
@@ -604,6 +806,405 @@ CREATE TABLE products_localizations_links (
   product_id    INTEGER REFERENCES products(id) ON DELETE CASCADE,
   inv_product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
   product_order DOUBLE PRECISION
+);</code></pre>
+
+<h4>articles 表</h4>
+<pre><code>CREATE TABLE articles (
+  id            SERIAL PRIMARY KEY,
+  title         VARCHAR(255),
+  slug          VARCHAR(255) UNIQUE,
+  excerpt       TEXT,
+  content       JSONB,               -- Slate.js 富文本 JSON
+  category      VARCHAR(50),         -- news | announcement | industry
+  sort_order    INTEGER DEFAULT 0,
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_articles_slug ON articles(slug);
+CREATE INDEX idx_articles_locale ON articles(locale);
+CREATE INDEX idx_articles_published_at ON articles(published_at DESC);</code></pre>
+
+<h4>faqs 表</h4>
+<pre><code>CREATE TABLE faqs (
+  id            SERIAL PRIMARY KEY,
+  question      VARCHAR(500),
+  answer        JSONB,               -- Slate.js 富文本 JSON
+  category      VARCHAR(50),         -- product | service | warranty | general
+  sort_order    INTEGER DEFAULT 0,
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_faqs_locale ON faqs(locale);
+CREATE INDEX idx_faqs_category ON faqs(category);</code></pre>
+
+<h4>case_studies 表</h4>
+<pre><code>CREATE TABLE case_studies (
+  id            SERIAL PRIMARY KEY,
+  title         VARCHAR(255),
+  slug          VARCHAR(255) UNIQUE,
+  client        VARCHAR(200),
+  industry      VARCHAR(50),         -- residential | commercial | industrial | utility
+  summary       TEXT,
+  content       JSONB,               -- Slate.js 富文本 JSON
+  sort_order    INTEGER DEFAULT 0,
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_case_studies_slug ON case_studies(slug);
+CREATE INDEX idx_case_studies_locale ON case_studies(locale);</code></pre>
+
+<h4>job_openings 表</h4>
+<pre><code>CREATE TABLE job_openings (
+  id            SERIAL PRIMARY KEY,
+  title         VARCHAR(255),
+  department    VARCHAR(50),         -- engineering | sales | marketing | operations | finance
+  location      VARCHAR(200),
+  type          VARCHAR(20),         -- full-time | part-time | contract | internship
+  description   JSONB,               -- Slate.js 富文本 JSON
+  responsibilities JSONB,
+  requirements  JSONB,
+  status        VARCHAR(20) DEFAULT 'open',
+                                     -- open | paused | closed
+  sort_order    INTEGER DEFAULT 0,
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_job_openings_status ON job_openings(status);
+CREATE INDEX idx_job_openings_locale ON job_openings(locale);</code></pre>
+
+<h4>page_contents 表</h4>
+<pre><code>CREATE TABLE page_contents (
+  id            SERIAL PRIMARY KEY,
+  page_key      VARCHAR(100),        -- hero_title | trust_stats | cta_text 等
+  value         JSONB,               -- 结构化内容（灵活 JSON 格式）
+  description   VARCHAR(500),
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE UNIQUE INDEX idx_page_contents_key_locale ON page_contents(page_key, locale);</code></pre>
+
+<h4>compatible_brands 表</h4>
+<pre><code>CREATE TABLE compatible_brands (
+  id            SERIAL PRIMARY KEY,
+  name          VARCHAR(100) NOT NULL,
+  website       VARCHAR(500),
+  sort_order    INTEGER DEFAULT 0,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_compatible_brands_sort ON compatible_brands(sort_order);</code></pre>
+
+<h4>file_assets 表</h4>
+<pre><code>CREATE TABLE file_assets (
+  id             SERIAL PRIMARY KEY,
+  name           VARCHAR(255) NOT NULL,
+  category       VARCHAR(50),        -- datasheet | manual | certificate | whitepaper | other
+  download_count INTEGER DEFAULT 0,
+  sort_order     INTEGER DEFAULT 0,
+  created_at     TIMESTAMP DEFAULT NOW(),
+  updated_at     TIMESTAMP DEFAULT NOW(),
+  created_by_id  INTEGER REFERENCES admin_users(id),
+  updated_by_id  INTEGER REFERENCES admin_users(id)
+);
+
+CREATE INDEX idx_file_assets_category ON file_assets(category);</code></pre>
+
+<h4>product_relations 表</h4>
+<pre><code>CREATE TABLE product_relations (
+  id                SERIAL PRIMARY KEY,
+  source_product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  target_product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  relation_type     VARCHAR(30) NOT NULL,
+                                     -- accessory | replacement | upgrade | bundle
+  sort_order        INTEGER DEFAULT 0,
+  created_at        TIMESTAMP DEFAULT NOW(),
+  updated_at        TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_product_relations_source ON product_relations(source_product_id);
+CREATE INDEX idx_product_relations_type ON product_relations(relation_type);</code></pre>
+
+<h4>repair_tickets 表</h4>
+<pre><code>CREATE TABLE repair_tickets (
+  id                  SERIAL PRIMARY KEY,
+  ticket_no           VARCHAR(50) UNIQUE NOT NULL, -- 系统自动生成，如 RT-20240101-001
+  name                VARCHAR(100) NOT NULL,
+  email               VARCHAR(255) NOT NULL,
+  phone               VARCHAR(50),
+  company             VARCHAR(200),
+  product_name        VARCHAR(200) NOT NULL,
+  serial_number       VARCHAR(100),
+  purchase_date       DATE,
+  issue_description   TEXT NOT NULL,
+  status              VARCHAR(20) DEFAULT 'pending',
+                                     -- pending | processing | resolved | closed
+  assigned_to         VARCHAR(100),
+  resolution          TEXT,
+  created_at          TIMESTAMP DEFAULT NOW(),
+  updated_at          TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_repair_tickets_status ON repair_tickets(status);
+CREATE INDEX idx_repair_tickets_email ON repair_tickets(email);
+CREATE INDEX idx_repair_tickets_created_at ON repair_tickets(created_at DESC);</code></pre>
+
+<h4>i18n_keys 表</h4>
+<pre><code>CREATE TABLE i18n_keys (
+  id            SERIAL PRIMARY KEY,
+  key           VARCHAR(200) NOT NULL, -- nav.home | btn.submit 等
+  value         TEXT NOT NULL,
+  namespace     VARCHAR(100),          -- common | nav | form 等
+  description   VARCHAR(500),
+  locale        VARCHAR(20) DEFAULT 'zh-CN',
+  published_at  TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW(),
+  created_by_id INTEGER REFERENCES admin_users(id),
+  updated_by_id INTEGER REFERENCES admin_users(id)
+);
+
+CREATE UNIQUE INDEX idx_i18n_keys_key_locale ON i18n_keys(key, locale);
+CREATE INDEX idx_i18n_keys_namespace ON i18n_keys(namespace);</code></pre>
+
+<h4>seo_configs 表</h4>
+<pre><code>CREATE TABLE seo_configs (
+  id               SERIAL PRIMARY KEY,
+  page_key         VARCHAR(100) NOT NULL, -- home | products | solutions 等
+  meta_title       VARCHAR(255),
+  meta_description TEXT,
+  canonical_url    VARCHAR(500),
+  locale           VARCHAR(20) DEFAULT 'zh-CN',
+  published_at     TIMESTAMP,
+  created_at       TIMESTAMP DEFAULT NOW(),
+  updated_at       TIMESTAMP DEFAULT NOW(),
+  created_by_id    INTEGER REFERENCES admin_users(id),
+  updated_by_id    INTEGER REFERENCES admin_users(id)
+);
+
+CREATE UNIQUE INDEX idx_seo_configs_key_locale ON seo_configs(page_key, locale);</code></pre>
+
+<h4>audit_logs 表</h4>
+<pre><code>CREATE TABLE audit_logs (
+  id          BIGSERIAL PRIMARY KEY,
+  action      VARCHAR(30) NOT NULL,  -- create | update | delete | publish | login
+  model       VARCHAR(100) NOT NULL,
+  entity_id   INTEGER,
+  user_id     INTEGER,               -- 不做外键约束，防止管理员删除后日志丢失
+  user_email  VARCHAR(255),
+  payload     JSONB,                 -- 变更前后 diff
+  ip          VARCHAR(64),
+  created_at  TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_audit_logs_model ON audit_logs(model);
+CREATE INDEX idx_audit_logs_user_id ON audit_logs(user_id);
+CREATE INDEX idx_audit_logs_created_at ON audit_logs(created_at DESC);</code></pre>
+
+<h4>Single Type 配置表（media_config / notification_configs / cache_management / page_health / sitemap_trigger / dashboard）</h4>
+<pre><code>-- Single Type 在 Strapi 中每张表只有一行，id 恒为 1
+
+CREATE TABLE media_config (
+  id                SERIAL PRIMARY KEY,
+  cdn_base_url      VARCHAR(500),
+  max_upload_size_mb INTEGER DEFAULT 10,
+  allowed_formats   JSONB,           -- ["jpg","png","webp","pdf"]
+  image_quality     INTEGER DEFAULT 80,
+  thumbnail_sizes   JSONB,           -- [{"name":"thumb","width":300}]
+  created_at        TIMESTAMP DEFAULT NOW(),
+  updated_at        TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE notification_configs (
+  id                      SERIAL PRIMARY KEY,
+  email_enabled           BOOLEAN DEFAULT TRUE,
+  notify_emails           JSONB,     -- ["admin@example.com"]
+  lead_notify_template    TEXT,
+  repair_notify_template  TEXT,
+  smtp_host               VARCHAR(255),
+  smtp_port               INTEGER DEFAULT 587,
+  smtp_user               VARCHAR(255),
+  created_at              TIMESTAMP DEFAULT NOW(),
+  updated_at              TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE cache_management (
+  id              SERIAL PRIMARY KEY,
+  last_purged_at  TIMESTAMP,
+  purge_status    VARCHAR(20) DEFAULT 'idle', -- idle | running | done | failed
+  purge_log       JSONB,
+  auto_invalidate BOOLEAN DEFAULT TRUE,
+  created_at      TIMESTAMP DEFAULT NOW(),
+  updated_at      TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE page_health (
+  id              SERIAL PRIMARY KEY,
+  last_checked_at TIMESTAMP,
+  total_pages     INTEGER DEFAULT 0,
+  healthy_pages   INTEGER DEFAULT 0,
+  error_pages     INTEGER DEFAULT 0,
+  report          JSONB,
+  created_at      TIMESTAMP DEFAULT NOW(),
+  updated_at      TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE sitemap_trigger (
+  id                SERIAL PRIMARY KEY,
+  last_generated_at TIMESTAMP,
+  status            VARCHAR(20) DEFAULT 'idle', -- idle | running | done | failed
+  sitemap_url       VARCHAR(500),
+  total_urls        INTEGER DEFAULT 0,
+  auto_generate     BOOLEAN DEFAULT TRUE,
+  created_at        TIMESTAMP DEFAULT NOW(),
+  updated_at        TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE dashboard (
+  id                  SERIAL PRIMARY KEY,
+  welcome_message     VARCHAR(500),
+  stats_config        JSONB,
+  quick_links         JSONB,
+  maintenance_mode    BOOLEAN DEFAULT FALSE,
+  maintenance_message TEXT,
+  created_at          TIMESTAMP DEFAULT NOW(),
+  updated_at          TIMESTAMP DEFAULT NOW()
+);</code></pre>
+
+<h4>admin_users 表（Strapi 内置，参考结构）</h4>
+<pre><code>-- Strapi 内置表，此处仅展示关键字段供外键引用
+CREATE TABLE admin_users (
+  id            SERIAL PRIMARY KEY,
+  firstname     VARCHAR(100) NOT NULL,
+  lastname      VARCHAR(100),
+  email         VARCHAR(255) UNIQUE NOT NULL,
+  password      VARCHAR(255),        -- bcrypt 哈希
+  is_active     BOOLEAN DEFAULT TRUE,
+  blocked       BOOLEAN DEFAULT FALSE,
+  last_login_at TIMESTAMP,
+  created_at    TIMESTAMP DEFAULT NOW(),
+  updated_at    TIMESTAMP DEFAULT NOW()
+);
+
+CREATE UNIQUE INDEX idx_admin_users_email ON admin_users(email);</code></pre>
+
+<h4>其余关系中间表（Strapi 自动生成）</h4>
+<pre><code>-- articles i18n 关联
+CREATE TABLE articles_localizations_links (
+  id                SERIAL PRIMARY KEY,
+  article_id        INTEGER REFERENCES articles(id) ON DELETE CASCADE,
+  inv_article_id    INTEGER REFERENCES articles(id) ON DELETE CASCADE,
+  article_order     DOUBLE PRECISION
+);
+
+-- faqs i18n 关联
+CREATE TABLE faqs_localizations_links (
+  id            SERIAL PRIMARY KEY,
+  faq_id        INTEGER REFERENCES faqs(id) ON DELETE CASCADE,
+  inv_faq_id    INTEGER REFERENCES faqs(id) ON DELETE CASCADE,
+  faq_order     DOUBLE PRECISION
+);
+
+-- case_studies i18n 关联
+CREATE TABLE case_studies_localizations_links (
+  id                  SERIAL PRIMARY KEY,
+  case_study_id       INTEGER REFERENCES case_studies(id) ON DELETE CASCADE,
+  inv_case_study_id   INTEGER REFERENCES case_studies(id) ON DELETE CASCADE,
+  case_study_order    DOUBLE PRECISION
+);
+
+-- job_openings i18n 关联
+CREATE TABLE job_openings_localizations_links (
+  id                SERIAL PRIMARY KEY,
+  job_opening_id    INTEGER REFERENCES job_openings(id) ON DELETE CASCADE,
+  inv_job_opening_id INTEGER REFERENCES job_openings(id) ON DELETE CASCADE,
+  job_opening_order DOUBLE PRECISION
+);
+
+-- page_contents i18n 关联
+CREATE TABLE page_contents_localizations_links (
+  id                  SERIAL PRIMARY KEY,
+  page_content_id     INTEGER REFERENCES page_contents(id) ON DELETE CASCADE,
+  inv_page_content_id INTEGER REFERENCES page_contents(id) ON DELETE CASCADE,
+  page_content_order  DOUBLE PRECISION
+);
+
+-- i18n_keys i18n 关联
+CREATE TABLE i18n_keys_localizations_links (
+  id              SERIAL PRIMARY KEY,
+  i18n_key_id     INTEGER REFERENCES i18n_keys(id) ON DELETE CASCADE,
+  inv_i18n_key_id INTEGER REFERENCES i18n_keys(id) ON DELETE CASCADE,
+  i18n_key_order  DOUBLE PRECISION
+);
+
+-- seo_configs i18n 关联
+CREATE TABLE seo_configs_localizations_links (
+  id                SERIAL PRIMARY KEY,
+  seo_config_id     INTEGER REFERENCES seo_configs(id) ON DELETE CASCADE,
+  inv_seo_config_id INTEGER REFERENCES seo_configs(id) ON DELETE CASCADE,
+  seo_config_order  DOUBLE PRECISION
+);
+
+-- case_studies ↔ products 多对多
+CREATE TABLE case_studies_products_links (
+  id                SERIAL PRIMARY KEY,
+  case_study_id     INTEGER REFERENCES case_studies(id) ON DELETE CASCADE,
+  product_id        INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  case_study_order  DOUBLE PRECISION,
+  product_order     DOUBLE PRECISION
+);
+
+-- case_studies ↔ solutions 多对多
+CREATE TABLE case_studies_solutions_links (
+  id                SERIAL PRIMARY KEY,
+  case_study_id     INTEGER REFERENCES case_studies(id) ON DELETE CASCADE,
+  solution_id       INTEGER REFERENCES solutions(id) ON DELETE CASCADE,
+  case_study_order  DOUBLE PRECISION,
+  solution_order    DOUBLE PRECISION
+);
+
+-- file_assets ↔ products 多对多
+CREATE TABLE file_assets_products_links (
+  id              SERIAL PRIMARY KEY,
+  file_asset_id   INTEGER REFERENCES file_assets(id) ON DELETE CASCADE,
+  product_id      INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  file_asset_order DOUBLE PRECISION,
+  product_order   DOUBLE PRECISION
+);
+
+-- solutions_localizations_links（已在上方关系表中体现）
+CREATE TABLE solutions_localizations_links (
+  id              SERIAL PRIMARY KEY,
+  solution_id     INTEGER REFERENCES solutions(id) ON DELETE CASCADE,
+  inv_solution_id INTEGER REFERENCES solutions(id) ON DELETE CASCADE,
+  solution_order  DOUBLE PRECISION
 );</code></pre>
 
 <h3 id="s4-3">4.3 多语言扩展模式</h3>
