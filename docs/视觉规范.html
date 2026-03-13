@@ -240,15 +240,15 @@
     <h2>一、色彩系统 Color System</h2>
 
     <h3>品牌主色</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Logo 色值：主色 #38C4E8（品牌青蓝）· 辅色 #1A3FAD（深宝蓝）· 渐变 linear-gradient(135deg, #38C4E8 0%, #1A3FAD 100%) · 深色背景 #0C1829</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Logo 色值：品牌青蓝 #38C4E8 · 深宝蓝 #1A3FAD · 渐变 linear-gradient(135deg, #38C4E8 0%, #1A3FAD 100%) · 深色背景 #0C1829</p><p style="font-size:12px;color:#e74c3c;margin-bottom:14px;background:#fff3f0;padding:8px 12px;border-radius:6px;border-left:3px solid #e74c3c">⚠️ <strong>CSS变量命名说明：</strong>前端代码中 <code>--primary: #1A3FAD</code>（深宝蓝），<code>--accent: #38C4E8</code>（品牌青蓝）。与视觉稿中"主色/辅色"标签相反，请以CSS变量定义为准。</p>
     <div class="grid grid-4" style="margin-bottom:20px">
       <div class="swatch">
         <div class="swatch-color" style="background:#38C4E8"></div>
-        <div class="swatch-info"><div class="swatch-name">Primary 主色</div><div class="swatch-hex">#38C4E8</div><div class="swatch-usage">导航栏、标题、主按钮、CTA</div></div>
+        <div class="swatch-info"><div class="swatch-name">Brand 品牌青蓝</div><div class="swatch-hex">#38C4E8</div><div class="swatch-usage">CTA按钮、强调数字、关键链接、图标高亮（CSS: --accent）</div></div>
       </div>
       <div class="swatch">
         <div class="swatch-color" style="background:#1A3FAD"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent 辅色</div><div class="swatch-hex">#1A3FAD</div><div class="swatch-usage">链接、强调色、图标高亮</div></div>
+        <div class="swatch-info"><div class="swatch-name">Primary 主色 / UI主色</div><div class="swatch-hex">#1A3FAD</div><div class="swatch-usage">深色区块背景、按钮底色（CSS: --primary）</div></div>
       </div>
       <div class="swatch">
         <div class="swatch-color" style="background:linear-gradient(135deg,#38C4E8,#1A3FAD)"></div>
@@ -294,8 +294,8 @@
         <tr><td>浅灰</td><td><code>#F8FAFC</code></td><td>~15%</td><td>次级背景（卡片底 / Section 间隔）</td></tr>
         <tr><td>深色文字</td><td><code>#0F172A</code></td><td>—</td><td>主要文字</td></tr>
         <tr><td>中灰文字</td><td><code>#64748B</code></td><td>—</td><td>次要文字 / 描述</td></tr>
-        <tr><td>品牌青蓝</td><td><code>#38C4E8</code></td><td>~5%</td><td>CTA按钮、强调数字、关键链接</td></tr>
-        <tr><td>深宝蓝</td><td><code>#1A3FAD</code></td><td>~10%</td><td>深色区块背景（产品展示区 / Footer）</td></tr>
+        <tr><td>品牌青蓝（Brand）</td><td><code>#38C4E8</code></td><td>~5%</td><td>CTA按钮、强调数字、关键链接（CSS变量：--accent）</td></tr>
+        <tr><td>深宝蓝（Primary）</td><td><code>#1A3FAD</code></td><td>~10%</td><td>深色区块背景（产品展示区 / Footer）（CSS变量：--primary）</td></tr>
       </tbody>
     </table>
 

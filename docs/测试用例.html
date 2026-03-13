@@ -2630,7 +2630,7 @@
 <h3 id="sec-api-cms">8.21 ~ 8.23 CMS 内容同步测试</h3>
 
 <div class="tc-card">
-  <div class="tc-card-header"><span class="tc-card-id">TC-A-16</span><span class="tc-card-name">CMS 发布内容 → 前端同步验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-header"><span class="tc-card-id">TC-A21</span><span class="tc-card-name">CMS 发布内容 → 前端同步验证</span><span class="badge badge-p0">P0</span></div>
   <div class="tc-card-body">
     <div class="tc-field"><div class="tc-label">前置条件</div>Strapi 和 Next.js 均在运行；<code>TEST_ARTICLE_ID</code> 环境变量已配置；Webhook 已配置并指向 <code>/api/revalidate</code></div>
     <div class="tc-field"><div class="tc-label">操作步骤</div>
@@ -2647,9 +2647,9 @@
 </div>
 
 <div class="tc-card">
-  <div class="tc-card-header"><span class="tc-card-id">TC-A-17</span><span class="tc-card-name">草稿保护 → 撤回后前端不可见</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-header"><span class="tc-card-id">TC-A22</span><span class="tc-card-name">草稿保护 → 撤回后前端不可见</span><span class="badge badge-p0">P0</span></div>
   <div class="tc-card-body">
-    <div class="tc-field"><div class="tc-label">前置条件</div>TC-A-16 已通过（文章已发布且在前端可见）</div>
+    <div class="tc-field"><div class="tc-label">前置条件</div>TC-A21 已通过（文章已发布且在前端可见）</div>
     <div class="tc-field"><div class="tc-label">操作步骤</div>
       <ol>
         <li>调用 <code>POST /api/articles/:id/actions/unpublish</code> 撤回发布</li>
@@ -2664,7 +2664,7 @@
 </div>
 
 <div class="tc-card">
-  <div class="tc-card-header"><span class="tc-card-id">TC-A-18</span><span class="tc-card-name">Strapi 不可用时前端 ISR 降级展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-header"><span class="tc-card-id">TC-A23</span><span class="tc-card-name">Strapi 不可用时前端 ISR 降级展示</span><span class="badge badge-p1">P1</span></div>
   <div class="tc-card-body">
     <div class="tc-field"><div class="tc-label">前置条件</div>前端已有缓存页面（至少访问过一次）；本地可停止 Strapi 服务</div>
     <div class="tc-field"><div class="tc-label">操作步骤</div>
