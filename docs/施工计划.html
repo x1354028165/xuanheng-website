@@ -191,8 +191,8 @@
         <tr><td>1</td><td>前台页面开发</td><td><span class="task-id">TC-F01~F60</span>（60条）</td><td>⬜ 未开始</td></tr>
         <tr><td>2</td><td>全局功能</td><td><span class="task-id">TC-G01~G30</span>（30条）</td><td>⬜ 未开始</td></tr>
         <tr><td>3</td><td>SEO / Metadata</td><td><span class="task-id">TC-S01~S20</span>（20条）</td><td>⬜ 未开始</td></tr>
-        <tr><td>4</td><td>CMS 后台</td><td><span class="task-id">TC-C01~C40</span>（40条）</td><td>⬜ 未开始</td></tr>
-        <tr><td>5</td><td>表单与通知</td><td><span class="task-id">TC-N01~N15</span>（15条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>4</td><td>CMS 后台</td><td><span class="task-id">TC-C01~C42</span>（42条）</td><td>⬜ 未开始</td></tr>
+        <tr><td>5</td><td>表单与通知</td><td><span class="task-id">TC-N01~N15</span>（15条）+ <span class="task-id">TC-A01~A20</span>（20条，API集成测试）</td><td>⬜ 未开始</td></tr>
         <tr><td>6</td><td>性能优化</td><td><span class="task-id">TC-P01~P10</span>（10条）</td><td>⬜ 未开始</td></tr>
         <tr><td>7</td><td>安全加固</td><td><span class="task-id">TC-T01~T15</span>（15条）</td><td>⬜ 未开始</td></tr>
       </table>
@@ -354,7 +354,7 @@
     <div class="section" id="phase4">
       <div class="section-label">PHASE 4</div>
       <h2>Phase 4 — CMS 后台 <span class="badge badge-orange">中优先级</span></h2>
-      <p><strong>前置条件：</strong>Phase 3 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-C01~C40</span>（40条）</p>
+      <p><strong>前置条件：</strong>Phase 3 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-C01~C42</span>（42条）</p>
       <p><strong>参考文档：</strong><a href="架构设计文档.html">架构设计文档</a>（CMS 模块章节）、<a href="需求文档.html">需求文档</a></p>
 
       <h3>任务清单</h3>
@@ -379,11 +379,13 @@
         <li><span class="checkbox">☐</span> <span class="task-id">C-18</span> 缓存管理（CMS-18）— 手动触发 ISR Revalidate</li>
         <li><span class="checkbox">☐</span> <span class="task-id">C-19</span> 页面健康检查（CMS-19）— 检测前台关键页面 HTTP 状态</li>
         <li><span class="checkbox">☐</span> <span class="task-id">C-20</span> Sitemap 触发（CMS-20）— 内容发布后自动刷新</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-21</span> 仪表盘（CMS-21）— 定制待办汇总：新线索数/未处理工单数/待发布内容数，数据聚合API</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">C-22</span> 账号管理（CMS-22）— 超管专用：创建/停用后台账号，分配角色权限</li>
       </ul>
 
       <h3>通过条件</h3>
       <div class="arch-box-success">
-        <strong>✅ 验收标准：</strong><span class="task-id">TC-C01~C40</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §四）
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-C01~C42</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §四）
       </div>
     </div>
 
@@ -391,7 +393,7 @@
     <div class="section" id="phase5">
       <div class="section-label">PHASE 5</div>
       <h2>Phase 5 — 表单与通知 <span class="badge badge-orange">中优先级</span></h2>
-      <p><strong>前置条件：</strong>Phase 4 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-N01~N15</span>（15条）</p>
+      <p><strong>前置条件：</strong>Phase 4 所有测试用例通过 · <strong>测试用例：</strong><span class="task-id">TC-N01~N15</span>（15条）+ <span class="task-id">TC-A01~A20</span>（20条，API集成测试）</p>
 
       <h3>任务清单</h3>
       <ul class="task-list">
@@ -406,7 +408,10 @@
 
       <h3>通过条件</h3>
       <div class="arch-box-success">
-        <strong>✅ 验收标准：</strong><span class="task-id">TC-N01~N15</span> 全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §五）
+        <strong>✅ 验收标准：</strong><span class="task-id">TC-N01~N15</span> + <span class="task-id">TC-A01~A20</span>（API集成测试）全部通过（测试用例详见 <a href="测试用例.html">测试用例</a> §五）
+      </div>
+      <div class="highlight">
+        <strong>📌 注：TC-A（API接口测试，20条）</strong> 作为集成测试，在Phase 5完成后统一执行，覆盖所有已开发的API端点。
       </div>
     </div>
 

@@ -231,18 +231,28 @@
 <table>
 <thead><tr><th>类型名</th><th>Strapi 集合名</th><th>对应 CMS 模块</th><th>i18n</th><th>类型</th><th>说明</th></tr></thead>
 <tbody>
-<tr><td>产品内容</td><td><code>products</code></td><td>CMS-07</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>8 个产品，含参数表/手册/视频</td></tr>
-<tr><td>解决方案</td><td><code>solutions</code></td><td>CMS-08</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>5 个场景，含功能点/适用产品</td></tr>
 <tr><td>新闻动态</td><td><code>articles</code></td><td>CMS-01</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>新闻/公告，含封面图、发布时间</td></tr>
 <tr><td>FAQ</td><td><code>faqs</code></td><td>CMS-02</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>问题 + 答案，按分类分组</td></tr>
 <tr><td>案例管理</td><td><code>case-studies</code></td><td>CMS-03</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>客户案例，含场景/产品关联</td></tr>
 <tr><td>招聘岗位</td><td><code>job-openings</code></td><td>CMS-04</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>职位名、描述、要求、状态</td></tr>
+<tr><td>媒体库配置</td><td><code>media-config</code></td><td>CMS-05</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>媒体库上传策略、OSS 对接配置</td></tr>
 <tr><td>页面内容</td><td><code>page-contents</code></td><td>CMS-06</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>首页 Hero/统计数字等可编辑内容</td></tr>
+<tr><td>产品内容</td><td><code>products</code></td><td>CMS-07</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>8 个产品，含参数表/手册/视频</td></tr>
+<tr><td>解决方案内容</td><td><code>solutions</code></td><td>CMS-08</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>5 个场景，含功能点/适用产品</td></tr>
+<tr><td>文件资产</td><td><code>file-assets</code></td><td>CMS-09</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>文档/手册/白皮书等可下载文件管理</td></tr>
 <tr><td>兼容品牌</td><td><code>compatible-brands</code></td><td>CMS-10</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>品牌名 + Logo，排序权重</td></tr>
+<tr><td>产品关联配置</td><td><code>product-relations</code></td><td>CMS-11</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>产品与解决方案/案例的关联映射</td></tr>
 <tr><td>客户线索</td><td><code>leads</code></td><td>CMS-12</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>表单提交，含状态追踪</td></tr>
 <tr><td>报修工单</td><td><code>repair-tickets</code></td><td>CMS-13</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>报修申请，含处理流程</td></tr>
-<tr><td>多语言词条</td><td><code>i18n-keys</code></td><td>CMS-14</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>UI 文案词条（非内容型）</td></tr>
+<tr><td>多语言字典</td><td><code>i18n-keys</code></td><td>CMS-14</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>UI 文案词条（非内容型）</td></tr>
+<tr><td>通知配置</td><td><code>notification-configs</code></td><td>CMS-15</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>邮件/钉钉通知模板与触发规则</td></tr>
 <tr><td>SEO 配置</td><td><code>seo-configs</code></td><td>CMS-16</td><td><span class="badge badge-yes">✅ 是</span></td><td>Collection</td><td>每页 title/description/OG 图</td></tr>
+<tr><td>操作日志</td><td><code>audit-logs</code></td><td>CMS-17</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>后台操作记录，含操作人/时间/变更</td></tr>
+<tr><td>缓存管理</td><td><code>cache-management</code></td><td>CMS-18</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>CDN/ISR 缓存清除与刷新控制</td></tr>
+<tr><td>页面健康检查</td><td><code>page-health</code></td><td>CMS-19</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>页面可用性与性能监测配置</td></tr>
+<tr><td>Sitemap 触发</td><td><code>sitemap-trigger</code></td><td>CMS-20</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>Sitemap 生成与搜索引擎提交触发</td></tr>
+<tr><td>仪表盘</td><td><code>dashboard</code></td><td>CMS-21</td><td><span class="badge badge-no">❌ 否</span></td><td>Single</td><td>后台首页数据概览与统计面板</td></tr>
+<tr><td>账号管理</td><td><code>admin-users</code></td><td>CMS-22</td><td><span class="badge badge-no">❌ 否</span></td><td>Collection</td><td>后台管理员账号与角色权限管理</td></tr>
 </tbody>
 </table>
 

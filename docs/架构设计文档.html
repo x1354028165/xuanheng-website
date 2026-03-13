@@ -1470,14 +1470,14 @@ API Key 管理页：
         <p style="font-size:13px;color:var(--muted)"><strong>为什么需要字典管理？</strong><br>官网 §7.3 要求支持 8 种语言，除了页面内容需要多语言维护，UI 界面上的公共固定文案（如"查看更多"、"联系我们"、"暂无数据"等）也需要各语言版本。如果这些词条写死在代码里，每次调整措辞或新增语言都要走代码发布流程。字典管理让运营人员直接在后台修改、新增语言，无需开发介入。</p>
         <div class="highlight" style="margin-top:12px;">
           <strong>核心能力：后台添加语言 → 前台自动支持</strong><br>
-          在「语言管理」中新增一种语言（如 <code>de-DE</code>），系统自动：① 在前台语言切换器中出现该语言选项（发布后可见）；② 在 CMS 所有内容编辑界面增加该语言的编辑 Tab；③ 导出待翻译词条清单。整个过程不需要修改任何代码。
+          在「语言管理」中新增一种语言（如 <code>de</code>），系统自动：① 在前台语言切换器中出现该语言选项（发布后可见）；② 在 CMS 所有内容编辑界面增加该语言的编辑 Tab；③ 导出待翻译词条清单。整个过程不需要修改任何代码。
         </div>
         
         <p><strong>核心需求：</strong></p>
         <ul>
           <li>支持管理官网所有语言的 UI 公共词条（按 key-value 对维护）</li>
-          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；zh-TW 由 zh-CN 自动转换；de-DE / fr-FR / pt-BR / es-ES / ru-RU 由 en-US 机器翻译初稿，支持人工校对覆盖</li>
-          <li>支持新增语言：当官网需要扩展新语言时（如 de-DE），在后台添加语言后即可开始维护词条，无需修改代码结构</li>
+          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；zh-TW 由 zh-CN 自动转换；de / fr / pt / es / ru 由 en-US 机器翻译初稿，支持人工校对覆盖</li>
+          <li>支持新增语言：当官网需要扩展新语言时（如 de），在后台添加语言后即可开始维护词条，无需修改代码结构</li>
           <li>支持批量导入/导出（Excel/CSV），方便交给翻译人员处理后批量回填</li>
           <li>词条修改后官网实时生效，无需重新部署</li>
           <li>支持搜索词条 key 或内容，快速定位需要修改的词条</li>
@@ -1498,7 +1498,7 @@ API Key 管理页：
 <pre>后台操作界面：
 多语言字典
   ├── 语言管理    — 查看/新增官网支持的语言列表
-  │   当前：zh-CN / zh-TW / en-US / de-DE / fr-FR / pt-BR / es-ES / ru-RU
+  │   当前：zh-CN / zh-TW / en-US / de / fr / pt / es / ru
   │   [+ 新增语言]  ← 新增后前台语言选择器自动出现该选项（需设为"已发布"）
   │
   └── 词条管理    — 按语言 Tab 切换，批量编辑各语言词条
@@ -1804,11 +1804,11 @@ API Key 管理页：
           <tr><td rowspan="2"><strong>第一层<br>核心维护</strong></td><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
           <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
           <tr><td><strong>第二层<br>自动转换</strong></td><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td>🔄 由 zh-CN 自动繁简转换，人工校对关键词</td><td><span class="badge badge-p0">P0</span></td></tr>
-          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de-DE</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，机器翻译生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>fr-FR</code></td><td>法文</td><td>法国及法语区</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>pt-BR</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>es-ES</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
-          <tr><td><code>ru-RU</code></td><td>俄文</td><td>俄罗斯及独联体</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，机器翻译生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>fr</code></td><td>法文</td><td>法国及法语区</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>pt</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>es</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>ru</code></td><td>俄文</td><td>俄罗斯及独联体</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
         </tbody>
       </table>
 

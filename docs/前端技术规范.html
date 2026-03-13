@@ -1029,8 +1029,8 @@ export default async function HomePage({ params }: PageProps) {
 
   // 并行请求所有数据，减少瀑布式延迟
   const [heroData, brandsData, solutionsData, productsData] = await Promise.all([
-    fetchStrapi(`/home-page?populate=*&amp;locale=${locale}`),
-    fetchStrapi('/compatible-brands?filters[visible][$eq]=true&amp;populate=logo&amp;sort=order:asc'),
+    fetchStrapi(`/api/page-contents?filters[pageKey][$eq]=home&amp;populate=*&amp;locale=${locale}`),
+    fetchStrapi('/compatible-brands?populate=logo&amp;sort=sortOrder:asc'),
     fetchStrapi(`/solutions?populate=icon,cover&amp;locale=${locale}`),
     fetchStrapi(`/products?populate=thumbnail&amp;locale=${locale}`),
   ]);
@@ -1371,7 +1371,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 1. 存入 Strapi
-    await fetchStrapi('/contact-submissions', {
+    await fetchStrapi('/api/leads', {
       method: 'POST',
       body: JSON.stringify({ data: { name, email, company, message } }),
       revalidate: 0,
