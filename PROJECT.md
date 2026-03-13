@@ -28,6 +28,8 @@
 | 部署-前端 | Vercel | 自动 CI/CD |
 | 部署-CMS | AWS ECS + Docker | 稳定托管 |
 | 数据库 | PostgreSQL（Strapi 默认） | |
+| 前台组件库 | shadcn/ui（基于Radix UI + Tailwind） | 官网前台页面 |
+| CMS组件库 | Ant Design v5 | Strapi自定义插件/扩展 |
 | 多语言 | next-intl | zh-CN/en-US 人工维护，zh-TW 自动转换，de/fr/pt/es/ru 机器翻译，共8种 |
 | 字体 | Plus Jakarta Sans（标题）+ Inter（正文） | Google Fonts |
 

@@ -170,6 +170,7 @@
     <h2>目录导航</h2>
     <ul>
       <li><a href="#s1">一、技术选型决策</a></li>
+      <li style="padding-left:16px;font-size:13px"><a href="#s1" style="color:var(--muted)">└ 1.4 shadcn/ui 组件库</a></li>
       <li><a href="#s2">二、项目目录结构</a></li>
       <li><a href="#s3">三、路由设计</a></li>
       <li><a href="#s4">四、多语言实现规范</a></li>
@@ -251,7 +252,33 @@
         <li><strong>设计系统一致性</strong>：通过 <code>tailwind.config.js</code> 统一定义颜色/字体/间距，确保全站视觉一致</li>
       </ul>
 
-      <h3>1.4 部署平台：Vercel</h3>
+      <h3>1.4 前台组件库：shadcn/ui</h3>
+
+      <p>官网前台使用 <strong>shadcn/ui</strong>（基于 Radix UI + Tailwind CSS）作为核心组件库。</p>
+
+      <p><strong>安装方式：</strong></p>
+      <pre><code>npx shadcn-ui@latest init</code></pre>
+
+      <p><strong>使用原则：</strong></p>
+      <ul>
+        <li>优先使用 shadcn/ui 提供的组件：Button / Card / Dialog / Form / Input / Select / Tabs / Sheet / Dropdown Menu 等，不重复造轮子</li>
+        <li>shadcn/ui 组件代码直接复制到项目 <code>src/components/ui/</code> 目录，可按需定制，不引入黑盒依赖</li>
+        <li>底层基于 Radix UI Primitives，天然支持无障碍（a11y）和键盘交互</li>
+        <li>样式完全基于 Tailwind CSS，与项目样式体系无缝融合</li>
+      </ul>
+
+      <p><strong>主题配置（品牌色）：</strong></p>
+      <p>在 <code>globals.css</code> 中将品牌色配置进 shadcn/ui 的 CSS 变量：</p>
+      <pre><code>@layer base {
+  :root {
+    --primary: 226 75% 39%;       /* #1A3FAD 深宝蓝 */
+    --primary-foreground: 0 0% 100%;
+    --accent: 193 78% 56%;        /* #38C4E8 亮青蓝 */
+    --accent-foreground: 226 75% 39%;
+  }
+}</code></pre>
+
+      <h3>1.5 部署平台：Vercel</h3>
 
       <p><strong>选择理由：</strong></p>
       <ul>

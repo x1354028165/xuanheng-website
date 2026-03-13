@@ -5,8 +5,8 @@
 <title>旭衡电子官网 视觉规范</title>
 <style>
   :root {
-    --primary:#1a3a5c; --primary-light:#2a5a8c; --primary-dark:#0f2035;
-    --accent:#2980b9; --accent-light:#d6eaf8; --accent-hover:#1f6391;
+    --primary:#1A3FAD; --primary-light:#38C4E8; --primary-dark:#0C1829;
+    --accent:#38C4E8; --accent-light:#e0f5fc; --accent-hover:#1A3FAD;
     --success:#27ae60; --danger:#e74c3c; --warning:#f39c12; --purple:#8e44ad;
     --bg:#f5f7fa; --card:#fff; --border:#dde3ea;
     --text:#2c3e50; --text-secondary:#5d6d7e; --muted:#7f8c8d;
@@ -14,7 +14,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.7;}
-  .header{background:var(--primary);color:#fff;padding:40px;background-image:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);}
+  .header{background:var(--primary);color:#fff;padding:40px;background-image:linear-gradient(135deg,#38C4E8 0%,#1A3FAD 100%);}
   .header h1{font-size:26px;font-weight:700;letter-spacing:.5px;}
   .header p{opacity:.7;margin-top:6px;font-size:13px;}
   .container{max-width:1040px;margin:0 auto;padding:32px 24px;}
@@ -74,14 +74,14 @@
   .form-group{margin-bottom:16px;}
   .form-label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
   .form-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text);outline:none;transition:.2s;}
-  .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(41,128,185,.15);}
+  .form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,63,173,.15);}
   .form-input.error{border-color:var(--danger);}
   .form-hint{font-size:11px;color:var(--muted);margin-top:4px;}
   .form-error{font-size:11px;color:var(--danger);margin-top:4px;}
 </style>
 </head>
 <body>
-<div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
+<div style="background:#0C1829;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
     <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
     <span style="color:#3d6080;font-size:12px">|</span>
@@ -98,7 +98,7 @@
 
 <div class="header">
   <h1>旭衡电子官网 · 视觉规范</h1>
-  <p>Design System v1.0 &nbsp;·&nbsp; 2026-03-12 &nbsp;·&nbsp; alwayscontrol.com.cn</p>
+  <p>Design System v1.1 &nbsp;·&nbsp; 2026-03-13 &nbsp;·&nbsp; alwayscontrol.com.cn</p>
 </div>
 
 <div class="container">
@@ -108,18 +108,23 @@
     <h2>一、色彩系统 Color System</h2>
 
     <h3>品牌主色</h3>
-    <div class="grid grid-3" style="margin-bottom:20px">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Logo 色值：主色 #1A3FAD（深宝蓝，Control字体色）· 辅色 #38C4E8（亮青蓝，Always/Technology字体色）· 渐变 #38C4E8 → #1A3FAD · 深色背景 #0C1829（Navy）</p>
+    <div class="grid grid-4" style="margin-bottom:20px">
       <div class="swatch">
-        <div class="swatch-color" style="background:#1a3a5c"></div>
-        <div class="swatch-info"><div class="swatch-name">Primary</div><div class="swatch-hex">#1A3A5C</div><div class="swatch-usage">导航栏、标题、重要文字</div></div>
+        <div class="swatch-color" style="background:#1A3FAD"></div>
+        <div class="swatch-info"><div class="swatch-name">Primary 主色</div><div class="swatch-hex">#1A3FAD</div><div class="swatch-usage">导航栏、标题、主按钮、CTA</div></div>
       </div>
       <div class="swatch">
-        <div class="swatch-color" style="background:#2980b9"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent Blue</div><div class="swatch-hex">#2980B9</div><div class="swatch-usage">主按钮、链接、强调色</div></div>
+        <div class="swatch-color" style="background:#38C4E8"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent 辅色</div><div class="swatch-hex">#38C4E8</div><div class="swatch-usage">链接、强调色、图标高亮</div></div>
       </div>
       <div class="swatch">
-        <div class="swatch-color" style="background:#d6eaf8"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent Light</div><div class="swatch-hex">#D6EAF8</div><div class="swatch-usage">背景高亮、选中态</div></div>
+        <div class="swatch-color" style="background:linear-gradient(135deg,#38C4E8,#1A3FAD)"></div>
+        <div class="swatch-info"><div class="swatch-name">Gradient 渐变</div><div class="swatch-hex">#38C4E8 → #1A3FAD</div><div class="swatch-usage">Hero/Banner 背景渐变</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0C1829"></div>
+        <div class="swatch-info"><div class="swatch-name">Navy 深色背景</div><div class="swatch-hex">#0C1829</div><div class="swatch-usage">产品区、Footer、深色区块</div></div>
       </div>
     </div>
 
