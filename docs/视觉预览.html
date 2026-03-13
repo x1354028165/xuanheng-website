@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XuanHeng — Energy Management Platform · Visual Preview v5</title>
+  <title>旭衡电子 XuanHeng Electronics — 视觉预览 v6</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,812 +22,1277 @@
       --gray-900: #111827;
     }
 
-    html { font-family: 'Inter', sans-serif; color: var(--gray-900); background: #fff; }
-    body { min-height: 100vh; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-900);
+      background: #fff;
+      line-height: 1.6;
+    }
 
     /* ─── NAV ─── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.85);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--gray-200);
     }
     .nav-inner {
-      max-width: 1200px; margin: 0 auto;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 0 48px;
       height: 64px;
-      display: flex; align-items: center; gap: 40px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
     }
     .nav-logo {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 20px;
-      letter-spacing: -0.5px; flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
     }
-    .nav-logo .xuan { color: var(--navy); }
-    .nav-logo .heng { color: var(--green); }
-    .nav-links {
-      display: flex; gap: 32px; flex: 1; justify-content: center;
+    .nav-logo svg {
+      width: 36px;
+      height: 36px;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-logo-cn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--navy);
+    }
+    .nav-logo-en {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--gray-400);
+      text-transform: uppercase;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      justify-content: center;
       list-style: none;
     }
-    .nav-links a {
-      font-size: 14px; font-weight: 500; color: var(--gray-600);
-      text-decoration: none; transition: color .15s;
+    .nav-menu a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color .15s;
     }
-    .nav-links a:hover { color: var(--gray-900); }
-    .nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .btn-login {
-      font-size: 14px; font-weight: 500; color: var(--gray-600);
-      background: none; border: none; cursor: pointer; padding: 8px 12px;
-      border-radius: 8px; transition: background .15s, color .15s;
+    .nav-menu a:hover { color: var(--gray-900); }
+    .nav-cta {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 20px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
     }
-    .btn-login:hover { background: var(--gray-100); color: var(--gray-900); }
-    .btn-contact {
-      font-size: 14px; font-weight: 600; color: #fff;
-      background: var(--green); border: none; cursor: pointer;
-      padding: 9px 20px; border-radius: 8px; transition: background .15s;
-    }
-    .btn-contact:hover { background: #15803D; }
+    .nav-cta:hover { background: #15803D; }
 
     /* ─── HERO ─── */
-    .hero-section {
+    .hero {
       background: #fff;
-      padding: 0;
     }
     .hero-grid {
-      max-width: 1200px; margin: 0 auto;
-      padding: 100px 48px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
       align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 48px;
     }
-
-    /* Left col */
     .hero-eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
     .hero-eyebrow-line {
-      width: 32px; height: 2px; background: var(--green);
+      width: 32px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
     }
     .hero-eyebrow-text {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--green);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
     }
     .hero-h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 52px; line-height: 1.1;
-      letter-spacing: -1.5px; margin-bottom: 24px;
-      color: var(--navy);
+      font-weight: 800;
+      font-size: 52px;
+      line-height: 1.15;
+      color: var(--gray-900);
+      margin-bottom: 20px;
     }
-    .hero-h1 .gradient-line {
-      background: linear-gradient(90deg, #16A34A 0%, #0EA5E9 100%);
+    .hero-h1-gradient {
+      background: linear-gradient(135deg, #16A34A, #0891B2);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-sub {
-      font-size: 18px; line-height: 1.6; color: var(--gray-600);
-      margin-bottom: 40px; max-width: 440px;
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--gray-600);
+      margin-bottom: 36px;
+      line-height: 1.7;
     }
-    .hero-btns {
-      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px;
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .btn-primary-dark {
-      font-size: 15px; font-weight: 600; color: #fff;
-      background: var(--navy); border: 2px solid var(--navy);
-      padding: 13px 28px; border-radius: 10px; cursor: pointer;
-      transition: background .15s;
+    .btn-navy {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .15s;
     }
-    .btn-primary-dark:hover { background: #162236; }
-    .btn-secondary {
-      font-size: 15px; font-weight: 600; color: var(--navy);
-      background: #fff; border: 2px solid var(--gray-200);
-      padding: 13px 28px; border-radius: 10px; cursor: pointer;
+    .btn-navy:hover { opacity: .85; }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--gray-900);
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
       transition: border-color .15s;
     }
-    .btn-secondary:hover { border-color: var(--gray-400); }
-    .hero-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--gray-200);
-      padding-top: 32px; gap: 0;
+    .btn-outline:hover { border-color: var(--gray-400); }
+    .btn-green {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
     }
-    .stat-item { padding-right: 20px; }
-    .stat-item + .stat-item { border-left: 1px solid var(--gray-200); padding-left: 20px; padding-right: 20px; }
-    .stat-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 28px; color: var(--navy);
-      letter-spacing: -0.5px;
+    .btn-green:hover { background: #15803D; }
+    .badge-soon {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      background: #FFF7ED;
+      color: #EA580C;
+      border: 1px solid #FED7AA;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
     }
-    .stat-label { font-size: 12px; font-weight: 500; color: var(--gray-400); margin-top: 4px; }
 
-    /* Right col — Dashboard */
+    /* Dashboard Mock */
     .dashboard-wrap {
-      background: linear-gradient(135deg, #F0FDF4 0%, #E0F2FE 100%);
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #F0FDF4, #E0F2FE);
+      padding: 24px;
     }
     .dashboard-card {
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,.07), 0 10px 40px -4px rgba(0,0,0,.12);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.08);
       overflow: hidden;
     }
-    .dash-header {
-      padding: 20px 24px 16px;
-      display: flex; align-items: center; justify-content: space-between;
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--gray-100);
     }
-    .dash-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 16px; color: var(--navy);
+    .dashboard-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gray-900);
+      letter-spacing: .02em;
     }
-    .dash-badge {
-      display: flex; align-items: center; gap: 6px;
-      background: var(--green-bg); border: 1px solid var(--green-br);
-      border-radius: 20px; padding: 4px 12px;
-      font-size: 11px; font-weight: 700; color: var(--green);
-      letter-spacing: 0.08em; text-transform: uppercase;
+    .online-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: var(--green-bg);
+      color: var(--green);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
     }
-    .dash-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-lt); }
-    .dash-metrics {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      padding: 16px 24px; gap: 0;
-      border-bottom: 1px solid var(--gray-100);
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green-lt);
+      border-radius: 50%;
     }
-    .dash-metric + .dash-metric { border-left: 1px solid var(--gray-100); padding-left: 16px; }
-    .metric-label { font-size: 11px; font-weight: 500; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-    .metric-value { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px; color: var(--navy); margin-bottom: 8px; }
-    .progress-track { height: 4px; background: var(--gray-100); border-radius: 99px; }
-    .progress-fill { height: 100%; border-radius: 99px; background: var(--green); }
-    .dash-devices { padding: 12px 24px 16px; }
-    .devices-label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
-    .device-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid var(--gray-50);
-    }
-    .device-row:last-child { border-bottom: none; }
-    .device-name { font-size: 13px; font-weight: 500; color: var(--gray-900); }
-    .device-status {
-      font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 20px;
-    }
-    .status-active { background: var(--green-bg); color: var(--green); }
-    .status-warning { background: #FFF7ED; color: #C2410C; }
-
-    /* ─── BRAND BAR ─── */
-    .brand-bar {
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      padding: 28px 0;
-    }
-    .brand-bar-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
-    .brand-bar-label {
-      font-size: 11px; font-weight: 600; color: var(--gray-400);
-      text-transform: uppercase; letter-spacing: 0.12em;
-      text-align: center; margin-bottom: 16px;
-    }
-    .brand-scroll {
-      display: flex; gap: 0; align-items: center;
-      overflow-x: auto; scrollbar-width: none;
-    }
-    .brand-scroll::-webkit-scrollbar { display: none; }
-    .brand-item {
-      flex-shrink: 0;
-      font-size: 13px; font-weight: 600; color: var(--gray-400);
-      padding: 6px 20px;
-      border-right: 1px solid var(--gray-200);
-      white-space: nowrap;
-      transition: color .15s;
-    }
-    .brand-item:last-child { border-right: none; }
-    .brand-item:hover { color: var(--gray-600); }
-    .brand-more { color: var(--green); font-weight: 700; }
-
-    /* ─── SOLUTIONS ─── */
-    .solutions-section { padding: 100px 0; background: #fff; }
-    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
-    .section-eyebrow {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-    }
-    .section-eyebrow-line { width: 24px; height: 2px; background: var(--green); }
-    .section-eyebrow-text {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--green);
-    }
-    .section-h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 40px; letter-spacing: -1px;
-      color: var(--navy); margin-bottom: 16px; line-height: 1.15;
-    }
-    .section-sub {
-      font-size: 17px; color: var(--gray-600); line-height: 1.6;
-      max-width: 560px; margin-bottom: 56px;
-    }
-
-    /* Solutions grid — border method */
-    .solutions-grid {
+    .dashboard-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
+    }
+    .metric-card {
+      padding: 16px 20px;
+      border-right: 1px solid var(--gray-100);
+    }
+    .metric-card:last-child { border-right: none; }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+    .metric-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+    .metric-value span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+    .progress-track {
+      height: 4px;
+      background: var(--gray-100);
+      border-radius: 4px;
       overflow: hidden;
     }
-    .sol-card {
-      padding: 36px 32px;
-      border-right: 1px solid var(--gray-200);
-      border-bottom: 1px solid var(--gray-200);
-      display: flex; flex-direction: column;
-      transition: background .15s;
+    .progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--green);
     }
-    .sol-card:hover { background: var(--gray-50); }
-    /* Remove right border for last in each row */
-    .sol-card:nth-child(3n) { border-right: none; }
-    /* Remove bottom border for last row (cards 4,5,6) */
-    .sol-card:nth-child(n+4) { border-bottom: none; }
-
-    .sol-number {
-      font-size: 11px; font-weight: 700; color: var(--gray-400);
-      letter-spacing: 0.1em; margin-bottom: 20px;
+    .progress-bar.blue { background: #0891B2; }
+    .progress-bar.amber { background: #F59E0B; }
+    .device-list {
+      padding: 8px 0 4px;
     }
-    .sol-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 18px; color: var(--navy);
-      margin-bottom: 12px; line-height: 1.3;
-    }
-    .sol-desc { font-size: 14px; color: var(--gray-600); line-height: 1.65; flex: 1; }
-    .sol-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 24px; padding-top: 20px;
+    .device-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
       border-top: 1px solid var(--gray-100);
     }
-    .sol-tag {
-      font-size: 11px; font-weight: 600; color: var(--green);
-      background: var(--green-bg); padding: 3px 10px; border-radius: 20px;
+    .device-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-900);
     }
-    .sol-arrow { font-size: 16px; color: var(--gray-400); }
-    .sol-card:hover .sol-arrow { color: var(--green); }
-
-    /* Card 6 — custom */
-    .sol-card-custom {
-      background: var(--gray-50);
-      display: flex; flex-direction: column; align-items: flex-start;
-      justify-content: center;
+    .device-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
     }
-    .sol-card-custom .sol-title { color: var(--gray-600); font-size: 16px; }
-    .sol-card-custom .sol-desc { color: var(--gray-400); font-size: 13px; }
-    .btn-outline-sm {
-      margin-top: 20px;
-      font-size: 13px; font-weight: 600; color: var(--navy);
-      background: #fff; border: 1.5px solid var(--gray-200);
-      padding: 9px 18px; border-radius: 8px; cursor: pointer;
-      transition: border-color .15s;
+    .status-active {
+      background: var(--green-bg);
+      color: var(--green);
     }
-    .btn-outline-sm:hover { border-color: var(--gray-400); }
-
-    /* ─── PRODUCTS ─── */
-    .products-section {
-      background: var(--navy);
-      padding: 100px 0;
-    }
-    .products-section .section-eyebrow-text { color: var(--green-lt); }
-    .products-section .section-eyebrow-line { background: var(--green-lt); }
-    .products-section .section-h2 { color: #fff; }
-    .products-section .section-sub { color: rgba(255,255,255,0.55); }
-    .products-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    }
-    .product-card {
-      background: rgba(255,255,255,0.06);
-      border: 1.5px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 32px 28px;
-      display: flex; flex-direction: column;
-      transition: border-color .2s, background .2s;
-      cursor: pointer;
-    }
-    .product-card:hover {
-      border-color: var(--green-lt);
-      background: rgba(34,197,94,0.07);
-    }
-    .prod-type {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--green-lt);
-      margin-bottom: 16px;
-    }
-    .prod-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 20px; color: #fff;
-      line-height: 1.25; margin-bottom: 12px;
-    }
-    .prod-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; flex: 1; }
-    .prod-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
-    .prod-tag {
-      font-size: 11px; font-weight: 600;
-      color: rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 3px 10px; border-radius: 20px;
+    .status-warning {
+      background: #FFFBEB;
+      color: #D97706;
     }
 
-    /* ─── CTA ─── */
-    .cta-section {
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
       background: var(--gray-50);
       border-top: 1px solid var(--gray-200);
       border-bottom: 1px solid var(--gray-200);
-      padding: 100px 0; text-align: center;
+      padding: 40px 48px;
     }
-    .cta-h2 {
+    .trust-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 24px;
+    }
+    .trust-item {
+      text-align: center;
+    }
+    .trust-number {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 44px; color: var(--navy);
-      letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px;
+      font-weight: 800;
+      font-size: 42px;
+      color: var(--navy);
+      line-height: 1;
     }
-    .cta-sub {
-      font-size: 18px; color: var(--gray-600); max-width: 520px;
-      margin: 0 auto 40px; line-height: 1.6;
+    .trust-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-top: 6px;
     }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; }
-    .btn-primary-green {
-      font-size: 15px; font-weight: 600; color: #fff;
-      background: var(--green); border: 2px solid var(--green);
-      padding: 13px 28px; border-radius: 10px; cursor: pointer;
-      transition: background .15s;
+    .trust-note {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-top: 4px;
     }
-    .btn-primary-green:hover { background: #15803D; border-color: #15803D; }
-    .btn-outline-white {
-      font-size: 15px; font-weight: 600; color: var(--navy);
-      background: #fff; border: 2px solid var(--gray-200);
-      padding: 13px 28px; border-radius: 10px; cursor: pointer;
-      transition: border-color .15s;
+    .trust-divider {
+      width: 1px;
+      height: 56px;
+      background: var(--gray-200);
     }
-    .btn-outline-white:hover { border-color: var(--gray-400); }
 
-    /* ─── DESIGN SYSTEM ─── */
-    .ds-section { padding: 80px 0; background: #fff; }
-    .ds-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px;
+    /* ─── SECTION COMMON ─── */
+    .section {
+      padding: 96px 48px;
     }
-    .ds-block { margin-bottom: 48px; }
-    .ds-swatches { display: flex; gap: 12px; flex-wrap: wrap; }
-    .swatch {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .swatch-block {
-      width: 72px; height: 48px; border-radius: 10px;
-      border: 1px solid rgba(0,0,0,.06);
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
     }
-    .swatch-name { font-size: 11px; font-weight: 600; color: var(--gray-600); }
-    .swatch-hex { font-size: 10px; color: var(--gray-400); font-family: monospace; }
-    .ds-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .btn-danger {
-      font-size: 14px; font-weight: 600; color: #fff;
-      background: #DC2626; border: 2px solid #DC2626;
-      padding: 10px 22px; border-radius: 8px; cursor: pointer;
+    .section-eyebrow-line {
+      width: 24px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
     }
-    .btn-ghost-green {
-      font-size: 14px; font-weight: 600; color: var(--green);
-      background: var(--green-bg); border: 2px solid var(--green-br);
-      padding: 10px 22px; border-radius: 8px; cursor: pointer;
+    .section-eyebrow-text {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
     }
-    .ds-badges { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .badge {
-      font-size: 12px; font-weight: 600; padding: 4px 14px;
-      border-radius: 20px; display: inline-flex; align-items: center; gap: 6px;
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 40px;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      line-height: 1.2;
     }
-    .badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-br); }
-    .badge-blue { background: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE; }
-    .badge-orange { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
-    .badge-gray { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
-    .badge-purple { background: #F5F3FF; color: #7C3AED; border: 1px solid #DDD6FE; }
-    .badge-red { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; }
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--gray-600);
+      max-width: 560px;
+    }
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    /* ─── ACCESS MODE ─── */
+    .access-section {
+      background: #fff;
+      padding: 96px 48px;
+    }
+    .access-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .access-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .access-header .section-subtitle {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .access-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .access-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 36px;
+      background: #fff;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .access-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,.07);
+      border-color: var(--green-br);
+    }
+    .access-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .access-card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+    .access-card-desc {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .access-apply {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+    .access-apply strong {
+      color: var(--gray-600);
+      font-weight: 600;
+    }
+    .access-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .access-tag {
+      padding: 4px 12px;
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-br);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .access-cta-wrap {
+      text-align: center;
+    }
+    .link-green {
+      color: var(--green);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .link-green:hover { text-decoration: underline; }
+
+    /* ─── SOLUTIONS ─── */
+    .solutions-section {
+      background: var(--gray-50);
+      padding: 96px 48px;
+    }
+    .solutions-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .solutions-grid-top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .solutions-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .solution-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .solution-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,.07);
+      border-color: var(--green-br);
+    }
+    .solution-icon { font-size: 36px; }
+    .solution-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--gray-900);
+    }
+    .solution-desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .solution-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .solution-tag {
+      padding: 3px 10px;
+      background: var(--green-bg);
+      color: var(--green);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    .solution-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      text-decoration: none;
+    }
+    .solution-link:hover { text-decoration: underline; }
+
+    /* ─── PRODUCTS ─── */
+    .products-section {
+      background: #fff;
+      padding: 96px 48px;
+    }
+    .products-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #fff;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,.07);
+      border-color: var(--gray-400);
+    }
+    .product-type-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      align-self: flex-start;
+    }
+    .badge-gateway {
+      background: #EFF6FF;
+      color: #2563EB;
+      border: 1px solid #BFDBFE;
+    }
+    .badge-cloud {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-br);
+    }
+    .product-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--gray-900);
+    }
+    .product-desc {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .product-tag {
+      padding: 3px 8px;
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'Inter', monospace;
+    }
+
+    /* ─── LOGO WALL ─── */
+    .logo-wall {
+      background: #fff;
+      border-top: 1px solid var(--gray-200);
+      padding: 72px 48px;
+    }
+    .logo-wall-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo-wall-title {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 32px;
+    }
+    .logo-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .logo-pill {
+      padding: 8px 20px;
+      background: #fff;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-600);
+      white-space: nowrap;
+      transition: border-color .15s, color .15s;
+    }
+    .logo-pill:hover {
+      border-color: var(--green-br);
+      color: var(--gray-900);
+    }
+    .logo-pill.more {
+      background: var(--gray-50);
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+    .logo-wall-cta {
+      text-align: center;
+    }
+
+    /* ─── BOTTOM CTA ─── */
+    .bottom-cta {
+      background: var(--navy);
+      padding: 96px 48px;
+    }
+    .bottom-cta-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .bottom-cta-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 40px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .bottom-cta-subtitle {
+      text-align: center;
+      color: #94A3B8;
+      font-size: 16px;
+      margin-bottom: 56px;
+    }
+    .bottom-cta-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cta-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .cta-card-icon { font-size: 32px; }
+    .cta-card-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+    }
+    .cta-card-desc {
+      font-size: 14px;
+      color: #94A3B8;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .cta-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: opacity .15s;
+    }
+    .cta-card-btn:hover { opacity: .85; }
+    .cta-btn-green { background: var(--green); color: #fff; }
+    .cta-btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.25); }
+    .cta-btn-white { background: #fff; color: var(--navy); }
 
     /* ─── FOOTER ─── */
     footer {
       background: var(--navy);
-      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 32px 48px;
     }
     .footer-inner {
-      max-width: 1200px; margin: 0 auto;
-      padding: 0 48px;
-      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .footer-logo {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800; font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .footer-logo .xuan { color: #fff; }
-    .footer-logo .heng { color: var(--green-lt); }
-    .footer-copy { font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .footer-logo-cn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #fff;
+    }
+    .footer-logo-en {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      color: #64748B;
+      text-transform: uppercase;
+    }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: #64748B;
+    }
+    .footer-domain {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94A3B8;
+    }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo"><span class="xuan">Xuan</span><span class="heng">Heng</span></div>
-    <ul class="nav-links">
-      <li><a href="#">Products</a></li>
-      <li><a href="#">Solutions</a></li>
-      <li><a href="#">Compatibility</a></li>
-      <li><a href="#">Help Center</a></li>
-      <li><a href="#">About</a></li>
+    <a href="#" class="nav-logo">
+      <!-- Inline SVG Logomark: rounded square + lightning bolt -->
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="8" fill="#16A34A"/>
+        <path d="M20.5 6L13 19.5H18.5L15.5 30L24 16.5H18L20.5 6Z" fill="white"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="nav-logo-cn">旭衡</span>
+        <span class="nav-logo-en">XUANHENG</span>
+      </div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="#">产品中心</a></li>
+      <li><a href="#">解决方案</a></li>
+      <li><a href="#">兼容生态</a></li>
+      <li><a href="#">帮助中心</a></li>
+      <li><a href="#">开发者中心</a></li>
+      <li><a href="#">关于我们</a></li>
     </ul>
-    <div class="nav-actions">
-      <button class="btn-login">Log in</button>
-      <button class="btn-contact">Contact Sales</button>
-    </div>
+    <a href="#" class="nav-cta">联系我们</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════ HERO ═══════════════════════ -->
-<section class="hero-section">
-  <div class="hero-grid">
 
+<!-- ══════════════════════════════════════════
+     1. HERO
+══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid">
     <!-- Left: Copy -->
-    <div class="hero-left">
+    <div>
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-line"></div>
-        <span class="hero-eyebrow-text">Energy Management Platform</span>
+        <span class="hero-eyebrow-text">跨品牌能源资产管理平台</span>
       </div>
       <h1 class="hero-h1">
-        Unify every energy asset.<br>
-        <span class="gradient-line">Reshape distributed value.</span>
+        无缝聚合全场景<br>
+        <span class="hero-h1-gradient">能源资产，重塑价值</span>
       </h1>
-      <p class="hero-sub">
-        One platform to monitor, control and optimise every battery, inverter and EV charger — across any brand, any site, any scale.
+      <p class="hero-subtitle">
+        云端直连或网关接入，打破设备协议壁垒，让每一度电都被精准管理。
       </p>
-      <div class="hero-btns">
-        <button class="btn-primary-dark">Start Free Trial</button>
-        <button class="btn-secondary">View Compatibility →</button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-value">200+</div>
-          <div class="stat-label">Compatible Brands</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">30+</div>
-          <div class="stat-label">Countries</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">1,000+</div>
-          <div class="stat-label">Active Projects</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">8</div>
-          <div class="stat-label">Languages</div>
-        </div>
+      <div class="hero-ctas">
+        <a href="#" class="btn-navy">查看解决方案</a>
+        <a href="#" class="btn-outline">
+          开发者中心
+          <span class="badge-soon">即将上线</span>
+        </a>
+        <a href="#" class="btn-green">联系我们</a>
       </div>
     </div>
 
     <!-- Right: Dashboard Mock -->
-    <div class="hero-right">
+    <div>
       <div class="dashboard-wrap">
         <div class="dashboard-card">
-
-          <div class="dash-header">
-            <span class="dash-title">Live Dashboard</span>
-            <span class="dash-badge">
-              <span class="dash-badge-dot"></span>
+          <!-- Header -->
+          <div class="dashboard-header">
+            <span class="dashboard-title">Live Dashboard</span>
+            <span class="online-badge">
+              <span class="online-dot"></span>
               ONLINE
             </span>
           </div>
 
-          <div class="dash-metrics">
-            <div class="dash-metric">
-              <div class="metric-label">SOC</div>
-              <div class="metric-value">98%</div>
+          <!-- Metrics -->
+          <div class="dashboard-metrics">
+            <div class="metric-card">
+              <div class="metric-label">SOC Avg</div>
+              <div class="metric-value">98<span>%</span></div>
               <div class="progress-track">
-                <div class="progress-fill" style="width:98%"></div>
+                <div class="progress-bar" style="width:98%"></div>
               </div>
             </div>
-            <div class="dash-metric" style="padding-left:16px">
+            <div class="metric-card">
               <div class="metric-label">Devices</div>
-              <div class="metric-value">47</div>
+              <div class="metric-value">47<span></span></div>
               <div class="progress-track">
-                <div class="progress-fill" style="width:78%; background:#0EA5E9;"></div>
+                <div class="progress-bar blue" style="width:78%"></div>
               </div>
             </div>
-            <div class="dash-metric" style="padding-left:16px">
+            <div class="metric-card">
               <div class="metric-label">Power</div>
-              <div class="metric-value">12kW</div>
+              <div class="metric-value">12<span>kW</span></div>
               <div class="progress-track">
-                <div class="progress-fill" style="width:55%; background:#8B5CF6;"></div>
+                <div class="progress-bar amber" style="width:60%"></div>
               </div>
             </div>
           </div>
 
-          <div class="dash-devices">
-            <div class="devices-label">Connected Devices</div>
+          <!-- Device List -->
+          <div class="device-list">
             <div class="device-row">
               <span class="device-name">BYD Battery Box</span>
-              <span class="device-status status-active">Active</span>
+              <span class="device-status status-active">● Active</span>
             </div>
             <div class="device-row">
               <span class="device-name">Growatt SPH</span>
-              <span class="device-status status-active">Active</span>
+              <span class="device-status status-active">● Active</span>
             </div>
             <div class="device-row">
               <span class="device-name">Tesla Powerwall</span>
-              <span class="device-status status-warning">Warning</span>
+              <span class="device-status status-warning">⚠ Warning</span>
             </div>
             <div class="device-row">
               <span class="device-name">Victron MPPT</span>
-              <span class="device-status status-active">Active</span>
+              <span class="device-status status-active">● Active</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ═══════════════════════ BRAND BAR ═══════════════════════ -->
-<div class="brand-bar">
-  <div class="brand-bar-inner">
-    <div class="brand-bar-label">Trusted integrations with leading brands</div>
-    <div class="brand-scroll">
-      <div class="brand-item">BYD</div>
-      <div class="brand-item">CATL</div>
-      <div class="brand-item">Growatt</div>
-      <div class="brand-item">SolarEdge</div>
-      <div class="brand-item">Victron Energy</div>
-      <div class="brand-item">Tesla Energy</div>
-      <div class="brand-item">Deye</div>
-      <div class="brand-item">Sungrow</div>
-      <div class="brand-item">Fronius</div>
-      <div class="brand-item">SMA</div>
-      <div class="brand-item">GoodWe</div>
-      <div class="brand-item brand-more">+ 180 more</div>
+
+<!-- ══════════════════════════════════════════
+     2. TRUST BAR
+══════════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-number">XX+</div>
+      <div class="trust-label">兼容品牌</div>
+      <div class="trust-note">⚠️ 数字待确认</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-number">XX+</div>
+      <div class="trust-label">覆盖国家</div>
+      <div class="trust-note">⚠️ 数字待确认</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-number">XX+</div>
+      <div class="trust-label">已交付项目</div>
+      <div class="trust-note">⚠️ 数字待确认</div>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <div class="trust-number">8</div>
+      <div class="trust-label">语言支持</div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════ SOLUTIONS ═══════════════════════ -->
-<section class="solutions-section">
-  <div class="section-inner">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-line"></div>
-      <span class="section-eyebrow-text">Solutions</span>
+
+<!-- ══════════════════════════════════════════
+     3. ACCESS MODE
+══════════════════════════════════════════ -->
+<section class="access-section">
+  <div class="access-inner">
+    <div class="access-header">
+      <h2 class="section-title">接入方式由你决定</h2>
+      <p class="section-subtitle">无论你的设备是否支持云端，都有对应接入路径</p>
     </div>
-    <h2 class="section-h2">Every use case, one platform.</h2>
-    <p class="section-sub">From residential installs to utility-scale virtual power plants — XuanHeng adapts to your business model.</p>
 
-    <div class="solutions-grid">
-
-      <!-- 01 -->
-      <div class="sol-card">
-        <div class="sol-number">01</div>
-        <div class="sol-title">Residential Energy Storage</div>
-        <div class="sol-desc">Monitor and optimise home battery systems from any brand. Give homeowners real-time visibility and automated energy shifting.</div>
-        <div class="sol-footer">
-          <span class="sol-tag">EMS Core</span>
-          <span class="sol-arrow">→</span>
+    <div class="access-cards">
+      <!-- Cloud Direct -->
+      <div class="access-card">
+        <span class="access-icon">☁️</span>
+        <div class="access-card-title">云端直连（无需网关）</div>
+        <p class="access-card-desc">
+          设备支持 SaaS 云端协议，直接与旭衡云平台通信，零硬件部署。快速接入，无需现场施工，开箱即用。
+        </p>
+        <p class="access-apply">
+          <strong>适用：</strong>支持云端协议的逆变器、储能系统
+        </p>
+        <div class="access-tags">
+          <span class="access-tag">免硬件</span>
+          <span class="access-tag">即插即用</span>
+          <span class="access-tag">适合 SaaS 部署</span>
         </div>
       </div>
 
-      <!-- 02 -->
-      <div class="sol-card">
-        <div class="sol-number">02</div>
-        <div class="sol-title">Commercial &amp; Industrial</div>
-        <div class="sol-desc">Reduce peak demand charges and maximise self-consumption across multi-site C&amp;I portfolios with rule-based automation.</div>
-        <div class="sol-footer">
-          <span class="sol-tag">Fleet Manager</span>
-          <span class="sol-arrow">→</span>
+      <!-- Gateway LAN -->
+      <div class="access-card">
+        <span class="access-icon">🔗</span>
+        <div class="access-card-title">网关局域网接入</div>
+        <p class="access-card-desc">
+          通过 Neuron 网关做协议转换，设备无需改造，支持 RS485/Modbus 等私有协议，兼容范围最广。
+        </p>
+        <p class="access-apply">
+          <strong>适用：</strong>不支持云端、仅有本地接口的设备
+        </p>
+        <div class="access-tags">
+          <span class="access-tag">兼容最广</span>
+          <span class="access-tag">无需改设备</span>
+          <span class="access-tag">边缘计算</span>
         </div>
       </div>
+    </div>
 
-      <!-- 03 -->
-      <div class="sol-card">
-        <div class="sol-number">03</div>
-        <div class="sol-title">Virtual Power Plant</div>
-        <div class="sol-desc">Aggregate distributed assets into a single dispatchable resource. Participate in grid services and ancillary markets at scale.</div>
-        <div class="sol-footer">
-          <span class="sol-tag">VPP Suite</span>
-          <span class="sol-arrow">→</span>
-        </div>
-      </div>
-
-      <!-- 04 -->
-      <div class="sol-card">
-        <div class="sol-number">04</div>
-        <div class="sol-title">EV Charging Networks</div>
-        <div class="sol-desc">Integrate OCPP-compliant chargers with storage and solar. Enable smart charging schedules and load-balancing across sites.</div>
-        <div class="sol-footer">
-          <span class="sol-tag">EV Connect</span>
-          <span class="sol-arrow">→</span>
-        </div>
-      </div>
-
-      <!-- 05 -->
-      <div class="sol-card">
-        <div class="sol-number">05</div>
-        <div class="sol-title">Installer &amp; Integrator Tools</div>
-        <div class="sol-desc">White-label dashboards, commissioning wizards and API access so integrators can build branded client portals in days.</div>
-        <div class="sol-footer">
-          <span class="sol-tag">Partner API</span>
-          <span class="sol-arrow">→</span>
-        </div>
-      </div>
-
-      <!-- 06 Custom -->
-      <div class="sol-card sol-card-custom">
-        <div class="sol-number" style="color:var(--gray-300)">06</div>
-        <div class="sol-title">Need a Custom Solution?</div>
-        <div class="sol-desc">Our engineering team can tailor integrations, reporting and automation workflows to your exact requirements.</div>
-        <button class="btn-outline-sm">Talk to an Engineer →</button>
-      </div>
-
+    <div class="access-cta-wrap">
+      <a href="#" class="link-green">查看兼容品牌与接入方式 →</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ PRODUCTS ═══════════════════════ -->
-<section class="products-section">
-  <div class="section-inner">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-line"></div>
-      <span class="section-eyebrow-text">Products</span>
+
+<!-- ══════════════════════════════════════════
+     4. SOLUTIONS
+══════════════════════════════════════════ -->
+<section class="solutions-section">
+  <div class="solutions-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="section-eyebrow-text">解决方案</span>
+      </div>
+      <h2 class="section-title">覆盖全场景能源管理需求</h2>
+      <p class="section-subtitle">从家庭户用到大型虚拟电厂，旭衡平台为每个场景提供专属解决方案。</p>
     </div>
-    <h2 class="section-h2">The full platform stack.</h2>
-    <p class="section-sub">Purpose-built modules that work independently or as an integrated whole.</p>
+
+    <!-- Row 1: 3 cards -->
+    <div class="solutions-grid-top">
+      <div class="solution-card">
+        <div class="solution-icon">🏠</div>
+        <div class="solution-title">户用家庭储能</div>
+        <p class="solution-desc">统一接入家庭全部能源设备，自发自用/经济/应急模式一键切换，实现家庭能源自主。</p>
+        <div class="solution-footer">
+          <span class="solution-tag">HEMS</span>
+          <a href="#" class="solution-link">查看方案 →</a>
+        </div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">🏭</div>
+        <div class="solution-title">工商业储能</div>
+        <p class="solution-desc">跨站点统一监控、峰谷自动套利、告警分级，有效降低工商业用电成本。</p>
+        <div class="solution-footer">
+          <span class="solution-tag">ESS</span>
+          <a href="#" class="solution-link">查看方案 →</a>
+        </div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">⚡</div>
+        <div class="solution-title">充电站负载管理</div>
+        <p class="solution-desc">不扩容主线，多桩协同，动态功率分配，最大化充电站运营效率。</p>
+        <div class="solution-footer">
+          <span class="solution-tag">EVCMS</span>
+          <a href="#" class="solution-link">查看方案 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 cards centered -->
+    <div class="solutions-grid-bottom">
+      <div class="solution-card">
+        <div class="solution-icon">🌐</div>
+        <div class="solution-title">VPP 虚拟电厂</div>
+        <p class="solution-desc">聚合分布式资产参与电网调度，支持澳洲 FCAS 市场，释放资产收益潜力。</p>
+        <div class="solution-footer">
+          <span class="solution-tag">VPP</span>
+          <a href="#" class="solution-link">查看方案 →</a>
+        </div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">📊</div>
+        <div class="solution-title">电能质量管理</div>
+        <p class="solution-desc">实时谐波监测，地图化站点健康，异常自动预警，保障电网安全稳定运行。</p>
+        <div class="solution-footer">
+          <span class="solution-tag">PQMS</span>
+          <a href="#" class="solution-link">查看方案 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     5. PRODUCTS
+══════════════════════════════════════════ -->
+<section class="products-section">
+  <div class="products-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="section-eyebrow-text">产品概览</span>
+      </div>
+      <h2 class="section-title">硬件网关 × 云端平台，全栈覆盖</h2>
+      <p class="section-subtitle">3款边缘网关 + 5款云平台，满足从设备接入到数据决策的全链路需求。</p>
+    </div>
 
     <div class="products-grid">
-
+      <!-- Gateway 3 -->
       <div class="product-card">
-        <div class="prod-type">Cloud Platform</div>
-        <div class="prod-name">XH Cloud EMS</div>
-        <div class="prod-desc">SaaS energy management system with real-time telemetry, AI-driven dispatch and multi-tenant architecture.</div>
-        <div class="prod-tags">
-          <span class="prod-tag">MQTT</span>
-          <span class="prod-tag">REST API</span>
-          <span class="prod-tag">Multi-tenant</span>
+        <span class="product-type-badge badge-gateway">网关</span>
+        <div class="product-name">Neuron III</div>
+        <p class="product-desc">高性能边缘网关，支持 100+ 设备并发接入，适合大型工商业及多站点部署。</p>
+        <div class="product-tags">
+          <span class="product-tag">RS485</span>
+          <span class="product-tag">4G</span>
+          <span class="product-tag">WiFi</span>
+          <span class="product-tag">Modbus</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-type-badge badge-gateway">网关</span>
+        <div class="product-name">Neuron II</div>
+        <p class="product-desc">经济型网关，专为家庭及小型商业场景设计，部署简单，性价比高。</p>
+        <div class="product-tags">
+          <span class="product-tag">RS485</span>
+          <span class="product-tag">WiFi</span>
+          <span class="product-tag">MQTT</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-type-badge badge-gateway">网关</span>
+        <div class="product-name">Neuron I</div>
+        <p class="product-desc">入门款，单品接入，适合快速验证与概念验证（PoC）项目。</p>
+        <div class="product-tags">
+          <span class="product-tag">WiFi</span>
+          <span class="product-tag">HTTP</span>
         </div>
       </div>
 
+      <!-- Cloud 5 -->
       <div class="product-card">
-        <div class="prod-type">Edge Gateway</div>
-        <div class="prod-name">XH Edge Pro</div>
-        <div class="prod-desc">On-premise gateway with local control, offline fallback and protocol bridging for Modbus, CAN, RS485 and Ethernet.</div>
-        <div class="prod-tags">
-          <span class="prod-tag">Modbus RTU</span>
-          <span class="prod-tag">CAN Bus</span>
-          <span class="prod-tag">Local AI</span>
+        <span class="product-type-badge badge-cloud">云平台</span>
+        <div class="product-name">HEMS Cloud</div>
+        <p class="product-desc">家庭能源管理云平台，可视化能源流，智能调度，降低家庭电费。</p>
+        <div class="product-tags">
+          <span class="product-tag">SaaS</span>
+          <span class="product-tag">REST API</span>
         </div>
       </div>
-
       <div class="product-card">
-        <div class="prod-type">Analytics</div>
-        <div class="prod-name">XH Insight</div>
-        <div class="prod-desc">Advanced analytics and reporting suite with custom dashboards, anomaly detection and ROI modelling tools.</div>
-        <div class="prod-tags">
-          <span class="prod-tag">AI Anomaly</span>
-          <span class="prod-tag">CSV Export</span>
-          <span class="prod-tag">White-label</span>
+        <span class="product-type-badge badge-cloud">云平台</span>
+        <div class="product-name">ESS Cloud</div>
+        <p class="product-desc">工商业储能平台，峰谷套利自动化，支持多租户架构。</p>
+        <div class="product-tags">
+          <span class="product-tag">SaaS</span>
+          <span class="product-tag">Multi-tenant</span>
         </div>
       </div>
-
       <div class="product-card">
-        <div class="prod-type">Developer</div>
-        <div class="prod-name">XH OpenAPI</div>
-        <div class="prod-desc">Full REST and WebSocket API for building custom integrations, third-party apps and automated workflows.</div>
-        <div class="prod-tags">
-          <span class="prod-tag">OAuth 2.0</span>
-          <span class="prod-tag">Webhooks</span>
-          <span class="prod-tag">SDKs</span>
+        <span class="product-type-badge badge-cloud">云平台</span>
+        <div class="product-name">EVCMS</div>
+        <p class="product-desc">充电站负载管理平台，兼容 OCPP 协议，支持多桩动态功率调度。</p>
+        <div class="product-tags">
+          <span class="product-tag">SaaS</span>
+          <span class="product-tag">OCPP</span>
         </div>
       </div>
-
+      <div class="product-card">
+        <span class="product-type-badge badge-cloud">云平台</span>
+        <div class="product-name">VPP Platform</div>
+        <p class="product-desc">VPP 聚合调度层，实时响应电网信号，支持澳洲 FCAS 与 NEM 市场。</p>
+        <div class="product-tags">
+          <span class="product-tag">WebSocket</span>
+          <span class="product-tag">FCAS</span>
+          <span class="product-tag">NEM</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <span class="product-type-badge badge-cloud">云平台</span>
+        <div class="product-name">PQMS</div>
+        <p class="product-desc">电能质量监测平台，实时谐波分析，API 对接第三方系统。</p>
+        <div class="product-tags">
+          <span class="product-tag">SaaS</span>
+          <span class="product-tag">API</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ CTA ═══════════════════════ -->
-<section class="cta-section">
-  <div class="section-inner">
-    <h2 class="cta-h2">Ready to unify your energy fleet?</h2>
-    <p class="cta-sub">Start a free 30-day trial. No credit card required. Full API access from day one.</p>
-    <div class="cta-btns">
-      <button class="btn-primary-green">Start Free Trial</button>
-      <button class="btn-outline-white">Book a Demo</button>
+
+<!-- ══════════════════════════════════════════
+     6. LOGO WALL
+══════════════════════════════════════════ -->
+<div class="logo-wall">
+  <div class="logo-wall-inner">
+    <p class="logo-wall-title">Compatible with 200+ brands</p>
+    <div class="logo-pills">
+      <span class="logo-pill">BYD</span>
+      <span class="logo-pill">CATL</span>
+      <span class="logo-pill">Growatt</span>
+      <span class="logo-pill">SolarEdge</span>
+      <span class="logo-pill">Victron Energy</span>
+      <span class="logo-pill">Tesla Energy</span>
+      <span class="logo-pill">Deye</span>
+      <span class="logo-pill">Sungrow</span>
+      <span class="logo-pill">Fronius</span>
+      <span class="logo-pill">SMA</span>
+      <span class="logo-pill">GoodWe</span>
+      <span class="logo-pill">Sofar Solar</span>
+      <span class="logo-pill more">+ 180 more</span>
+    </div>
+    <div class="logo-wall-cta">
+      <a href="#" class="link-green">查看完整兼容品牌列表 →</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     7. BOTTOM CTA
+══════════════════════════════════════════ -->
+<section class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2 class="bottom-cta-title">准备好开始了吗？</h2>
+    <p class="bottom-cta-subtitle">选择最适合你的起点，我们随时准备就绪。</p>
+
+    <div class="bottom-cta-cards">
+      <!-- Demo -->
+      <div class="cta-card">
+        <span class="cta-card-icon">📋</span>
+        <div class="cta-card-title">申请 Demo</div>
+        <p class="cta-card-desc">亲身体验旭衡平台的全貌，我们的解决方案顾问将为你量身演示。</p>
+        <a href="#" class="cta-card-btn cta-btn-green">预约产品演示</a>
+      </div>
+
+      <!-- API Docs -->
+      <div class="cta-card">
+        <span class="cta-card-icon">📚</span>
+        <div class="cta-card-title">API 文档</div>
+        <p class="cta-card-desc">完整的开发者文档、SDK 与集成指南，快速接入旭衡平台生态。</p>
+        <a href="#" class="cta-card-btn cta-btn-outline">
+          查看开发者文档
+          <span class="badge-soon">即将上线</span>
+        </a>
+      </div>
+
+      <!-- Contact -->
+      <div class="cta-card">
+        <span class="cta-card-icon">💬</span>
+        <div class="cta-card-title">联系商务</div>
+        <p class="cta-card-desc">有采购、集成或合作需求？我们的商务团队将在 24 小时内回复。</p>
+        <a href="#" class="cta-card-btn cta-btn-white">立即联系</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ DESIGN SYSTEM ═══════════════════════ -->
-<section class="ds-section">
-  <div class="section-inner">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-line"></div>
-      <span class="section-eyebrow-text">Design System</span>
-    </div>
-    <h2 class="section-h2" style="margin-bottom:48px">Tokens &amp; Components</h2>
 
-    <!-- Colour Swatches -->
-    <div class="ds-block">
-      <div class="ds-label">Colour Palette</div>
-      <div class="ds-swatches">
-        <div class="swatch">
-          <div class="swatch-block" style="background:#0C1829"></div>
-          <div class="swatch-name">Navy</div>
-          <div class="swatch-hex">#0C1829</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#16A34A"></div>
-          <div class="swatch-name">Green</div>
-          <div class="swatch-hex">#16A34A</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#22C55E"></div>
-          <div class="swatch-name">Green Lt</div>
-          <div class="swatch-hex">#22C55E</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#F0FDF4"></div>
-          <div class="swatch-name">Green BG</div>
-          <div class="swatch-hex">#F0FDF4</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#BBF7D0"></div>
-          <div class="swatch-name">Green BR</div>
-          <div class="swatch-hex">#BBF7D0</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#F9FAFB"></div>
-          <div class="swatch-name">Gray 50</div>
-          <div class="swatch-hex">#F9FAFB</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#E5E7EB"></div>
-          <div class="swatch-name">Gray 200</div>
-          <div class="swatch-hex">#E5E7EB</div>
-        </div>
-        <div class="swatch">
-          <div class="swatch-block" style="background:#111827"></div>
-          <div class="swatch-name">Gray 900</div>
-          <div class="swatch-hex">#111827</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Buttons -->
-    <div class="ds-block">
-      <div class="ds-label">Button Variants</div>
-      <div class="ds-btns">
-        <button class="btn-primary-dark" style="font-size:14px;padding:10px 22px">Primary Dark</button>
-        <button class="btn-primary-green" style="font-size:14px;padding:10px 22px">Primary Green</button>
-        <button class="btn-secondary" style="font-size:14px;padding:10px 22px">Secondary</button>
-        <button class="btn-ghost-green">Ghost Green</button>
-        <button class="btn-danger">Danger</button>
-      </div>
-    </div>
-
-    <!-- Badges -->
-    <div class="ds-block">
-      <div class="ds-label">Status Badges</div>
-      <div class="ds-badges">
-        <span class="badge badge-green">● Active</span>
-        <span class="badge badge-blue">● Syncing</span>
-        <span class="badge badge-orange">⚠ Warning</span>
-        <span class="badge badge-gray">○ Offline</span>
-        <span class="badge badge-purple">★ Beta</span>
-        <span class="badge badge-red">✕ Error</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo"><span class="xuan">Xuan</span><span class="heng">Heng</span></div>
-    <div class="footer-copy">© 2026 XuanHeng Electronics Co., Ltd. All rights reserved.</div>
+    <div class="footer-logo">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+        <rect width="36" height="36" rx="8" fill="#16A34A"/>
+        <path d="M20.5 6L13 19.5H18.5L15.5 30L24 16.5H18L20.5 6Z" fill="white"/>
+      </svg>
+      <div class="footer-logo-text">
+        <span class="footer-logo-cn">旭衡电子</span>
+        <span class="footer-logo-en">XUANHENG ELECTRONICS</span>
+      </div>
+    </div>
+    <div class="footer-right">
+      <span class="footer-copy">© 2025 旭衡电子 XuanHeng Electronics. All rights reserved.</span>
+      <span class="footer-domain">alwayscontrol.com.cn</span>
+    </div>
   </div>
 </footer>
 
