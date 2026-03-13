@@ -113,7 +113,12 @@
 
     /* ===== HERO ===== */
     .hero {
-      background: var(--navy);
+      background-color: var(--navy);
+      background-image:
+        linear-gradient(135deg, rgba(12,24,41,0.88) 0%, rgba(12,24,41,0.75) 100%),
+        url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1800&q=85&fit=crop');
+      background-size: cover;
+      background-position: center;
       min-height: 88vh;
       display: flex;
       flex-direction: column;
@@ -478,9 +483,28 @@
       max-width: 66.666%;
       margin: 0 auto;
     }
+    .sol-card-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .sol-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .sol-card:hover .sol-card-img img {
+      transform: scale(1.04);
+    }
+    .sol-card-body {
+      padding: 32px;
+    }
     .sol-card {
       background: var(--white);
-      padding: 40px 32px;
+      padding: 0;
       border-right: 1px solid var(--gray-200);
       border-bottom: 1px solid var(--gray-200);
       transition: background .2s;
@@ -845,6 +869,10 @@
         <h2>接入方式<br>由你决定</h2>
         <p>无论你是云端 SaaS 直连，还是通过网关在局域网内接入设备，旭衡平台都提供标准化的接口与协议转换能力，帮助你快速上线。</p>
         <a href="#" class="access-link">查看兼容品牌与接入方式 →</a>
+        <div style="margin-top:32px; border-radius:4px; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=360&fit=crop&q=80"
+               alt="Energy Integration" style="width:100%; height:240px; object-fit:cover; display:block;">
+        </div>
       </div>
       <div class="access-cards">
         <div class="access-card">
@@ -884,50 +912,75 @@
       <div class="sol-grid-wrap">
         <div class="sol-row-3">
           <div class="sol-card">
-            <div class="sol-num">01</div>
-            <h3>户用家庭储能</h3>
-            <p>统一接入家庭全部能源设备，自发自用/经济/应急模式一键切换</p>
-            <div class="sol-bottom">
-              <span class="sol-badge">HEMS</span>
-              <span class="sol-arrow">→</span>
+            <div class="sol-card-img">
+              <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop&q=80" alt="Residential Storage">
+            </div>
+            <div class="sol-card-body">
+              <div class="sol-num">01</div>
+              <h3>户用家庭储能</h3>
+              <p>统一接入家庭全部能源设备，自发自用/经济/应急模式一键切换</p>
+              <div class="sol-bottom">
+                <span class="sol-badge">HEMS</span>
+                <span class="sol-arrow">→</span>
+              </div>
             </div>
           </div>
           <div class="sol-card">
-            <div class="sol-num">02</div>
-            <h3>工商业储能</h3>
-            <p>跨站点统一监控、峰谷自动套利、告警分级管理，降低用电成本</p>
-            <div class="sol-bottom">
-              <span class="sol-badge">ESS</span>
-              <span class="sol-arrow">→</span>
+            <div class="sol-card-img">
+              <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop&q=80" alt="Commercial Storage">
+            </div>
+            <div class="sol-card-body">
+              <div class="sol-num">02</div>
+              <h3>工商业储能</h3>
+              <p>跨站点统一监控、峰谷自动套利、告警分级管理，降低用电成本</p>
+              <div class="sol-bottom">
+                <span class="sol-badge">ESS</span>
+                <span class="sol-arrow">→</span>
+              </div>
             </div>
           </div>
           <div class="sol-card">
-            <div class="sol-num">03</div>
-            <h3>充电站负载管理</h3>
-            <p>不扩容主线，多桩协同充电，实时动态功率分配</p>
-            <div class="sol-bottom">
-              <span class="sol-badge">EVCMS</span>
-              <span class="sol-arrow">→</span>
+            <div class="sol-card-img">
+              <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&h=400&fit=crop&q=80" alt="EV Charging">
+            </div>
+            <div class="sol-card-body">
+              <div class="sol-num">03</div>
+              <h3>充电站负载管理</h3>
+              <p>不扩容主线，多桩协同充电，实时动态功率分配</p>
+              <div class="sol-bottom">
+                <span class="sol-badge">EVCMS</span>
+                <span class="sol-arrow">→</span>
+              </div>
             </div>
           </div>
         </div>
         <div class="sol-row-2">
           <div class="sol-card">
-            <div class="sol-num">04</div>
-            <h3>VPP 虚拟电厂</h3>
-            <p>聚合分布式储能资产参与电网调度，秒级指令下发，支持澳洲 FCAS</p>
-            <div class="sol-bottom">
-              <span class="sol-badge">VPP</span>
-              <span class="sol-arrow">→</span>
+            <div class="sol-card-img">
+              <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop&q=80" alt="Power Grid">
+            </div>
+            <div class="sol-card-body">
+              <div class="sol-num">04</div>
+              <h3>VPP 虚拟电厂</h3>
+              <p>聚合分布式储能资产参与电网调度，秒级指令下发，支持澳洲 FCAS</p>
+              <div class="sol-bottom">
+                <span class="sol-badge">VPP</span>
+                <span class="sol-arrow">→</span>
+              </div>
             </div>
           </div>
           <div class="sol-card">
-            <div class="sol-num">05</div>
-            <h3>电能质量管理</h3>
-            <p>实时采集电压电流谐波，地图化展示站点健康状态，异常自动预警</p>
-            <div class="sol-bottom">
-              <span class="sol-badge">PQMS</span>
-              <span class="sol-arrow">→</span>
+            <div class="sol-card-img">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop&q=80" alt="Power Quality">
+            </div>
+            <div class="sol-card-body">
+              <div class="sol-num">05</div>
+              <h3>电能质量管理</h3>
+              <p>实时采集电压电流谐波，地图化展示站点健康状态，异常自动预警</p>
+              <div class="sol-bottom">
+                <span class="sol-badge">PQMS</span>
+                <span class="sol-arrow">→</span>
+              </div>
             </div>
           </div>
         </div>
