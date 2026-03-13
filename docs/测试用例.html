@@ -9,7 +9,6 @@
   :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
-  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
   h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
   h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
   h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
@@ -17,7 +16,7 @@
   p{margin-bottom:12px;color:var(--text);}
   ul,ol{padding-left:22px;margin-bottom:12px;}
   li{margin-bottom:4px;}
-  a{color:var(--accent);}
+  a{color:var(--accent);text-decoration:none;}
   code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;color:#c0392b;}
   pre{background:#1e2d3d;color:#e8eaf0;padding:18px 20px;border-radius:8px;overflow-x:auto;margin:14px 0;font-size:12px;line-height:1.6;}
   pre code{background:none;color:inherit;padding:0;font-size:12px;}
@@ -28,12 +27,56 @@
   blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
   hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
   strong{color:var(--text);}
+
+  /* Layout: sidebar + main */
+  .page-layout{display:flex;max-width:1400px;margin:0 auto;min-height:100vh;}
+  .sidebar{width:260px;min-width:260px;background:#fff;border-right:1px solid var(--border);padding:20px 0;position:sticky;top:44px;height:calc(100vh - 44px);overflow-y:auto;font-size:12px;}
+  .sidebar .nav-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:8px 20px 4px;margin-top:12px;}
+  .sidebar .nav-title:first-child{margin-top:0;}
+  .sidebar a{display:block;padding:4px 20px 4px 28px;color:var(--text);font-size:12px;line-height:1.6;border-left:3px solid transparent;transition:all .15s;}
+  .sidebar a:hover{color:var(--accent);background:var(--accent-light);border-left-color:var(--accent);}
+  .sidebar a.l2{padding-left:40px;font-size:11px;color:var(--muted);}
+  .main-content{flex:1;min-width:0;padding:32px 40px 80px;background:var(--card);}
+
+  /* Priority badges */
+  .badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:700;color:#fff;vertical-align:middle;}
+  .badge-p0{background:var(--danger);}
+  .badge-p1{background:var(--warning);}
+  .badge-p2{background:var(--muted);}
+
+  /* Test case card */
+  .tc-card{border:1px solid var(--border);border-radius:8px;margin:12px 0;overflow:hidden;background:#fff;}
+  .tc-card-header{display:flex;align-items:center;gap:10px;padding:10px 16px;background:#f8fafc;border-bottom:1px solid var(--border);}
+  .tc-card-id{font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;font-weight:700;color:var(--primary);min-width:70px;}
+  .tc-card-name{font-weight:600;font-size:13px;flex:1;}
+  .tc-card-body{padding:12px 16px;font-size:13px;}
+  .tc-card-body .tc-field{margin-bottom:8px;}
+  .tc-card-body .tc-label{font-weight:700;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px;}
+  .tc-card-body ol{padding-left:18px;margin:2px 0 0;}
+  .tc-card-body ol li{margin-bottom:2px;font-size:13px;}
+
+  /* Checklist */
+  .checklist{list-style:none;padding-left:0;}
+  .checklist li{padding:6px 0 6px 28px;position:relative;font-size:13px;border-bottom:1px solid #f0f2f5;}
+  .checklist li::before{content:"☐";position:absolute;left:4px;top:6px;font-size:15px;color:var(--accent);}
+  .checklist-title{font-weight:700;color:var(--primary);font-size:14px;margin:20px 0 8px;padding:6px 12px;background:var(--accent-light);border-radius:6px;}
+
+  /* Stats bar */
+  .stats-bar{display:flex;gap:16px;margin:16px 0;flex-wrap:wrap;}
+  .stat-item{padding:8px 16px;background:#f8fafc;border-radius:8px;border:1px solid var(--border);font-size:12px;}
+  .stat-item strong{font-size:18px;color:var(--primary);display:block;}
+
+  @media(max-width:900px){
+    .sidebar{display:none;}
+    .main-content{padding:20px 16px 60px;}
+  }
 </style>
 
 </head>
 <body>
+<!-- Top Nav -->
 <div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
-  <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
+  <div style="max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
     <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
     <span style="color:#3d6080;font-size:12px">|</span>
     <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
@@ -41,237 +84,1428 @@
     <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
     <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
     <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
-    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="测试用例.html" style="color:#fff;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;background:rgba(255,255,255,.15)">✅ 测试用例</a>
     <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
   </div>
 </div>
-<div class="md-body">
+
+<div class="page-layout">
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="nav-title">一、前台功能测试</div>
+  <a href="#sec-f-home">1.1 首页 EP-01</a>
+  <a href="#sec-f-solutions">1.2 解决方案 EP-02</a>
+  <a href="#sec-f-compat">1.3 兼容生态 EP-03</a>
+  <a href="#sec-f-help">1.4 帮助中心 EP-04</a>
+  <a href="#sec-f-products">1.5 产品中心 EP-06</a>
+  <a href="#sec-f-about">1.6 关于我们 EP-07</a>
+  <a href="#sec-f-contact">1.7 联系我们 EP-08</a>
+
+  <div class="nav-title">二、全局功能测试</div>
+  <a href="#sec-g-nav">2.1 导航与 Footer</a>
+  <a href="#sec-g-i18n">2.2 多语言切换</a>
+  <a href="#sec-g-responsive">2.3 响应式/移动端</a>
+  <a href="#sec-g-error">2.4 错误页面</a>
+
+  <div class="nav-title">三、SEO 与 Metadata</div>
+  <a href="#sec-seo">3.1 ~ 3.5 SEO 测试</a>
+
+  <div class="nav-title">四、CMS 后台测试</div>
+  <a href="#sec-c-content">4.1 内容管理</a>
+  <a href="#sec-c-media">4.2 媒体库上传</a>
+  <a href="#sec-c-leads">4.3 线索管理</a>
+  <a href="#sec-c-isr">4.4 ISR Webhook</a>
+  <a href="#sec-c-i18n">4.5 多语言内容</a>
+
+  <div class="nav-title">五、表单与通知</div>
+  <a href="#sec-n">5.1 ~ 5.4 表单通知</a>
+
+  <div class="nav-title">六、性能测试</div>
+  <a href="#sec-perf">6.1 ~ 6.3 性能指标</a>
+
+  <div class="nav-title">七、安全测试</div>
+  <a href="#sec-sec">7.1 ~ 7.4 安全验证</a>
+
+  <div class="nav-title">附录</div>
+  <a href="#sec-checklist">上线前回归清单</a>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+
 <h1>测试用例</h1>
 
-<blockquote>版本 v1.0 · 2026-03-12 · 旭衡电子官网重构</blockquote>
-<blockquote>优先级：🔴 P0 上线前必测 / 🟡 P1 / 🟢 P2</blockquote>
+<blockquote>版本 v2.0 · 2026-03-13 · 旭衡电子（AlwaysControl Technology）官网重构<br>
+前台：Next.js 14 + Strapi v4 | 部署：Vercel + 阿里云 ECS Docker | 语言：8 种</blockquote>
+
+<div class="stats-bar">
+  <div class="stat-item"><strong>~120</strong>测试用例总计</div>
+  <div class="stat-item"><strong>7</strong>测试模块</div>
+  <div class="stat-item"><strong><span class="badge badge-p0">P0</span></strong>上线阻断</div>
+  <div class="stat-item"><strong><span class="badge badge-p1">P1</span></strong>重要功能</div>
+  <div class="stat-item"><strong><span class="badge badge-p2">P2</span></strong>一般验证</div>
+</div>
 
 <hr>
 
-<h2>一、前台功能测试</h2>
+<!-- ==================== 一、前台功能测试 ==================== -->
+<h2 id="sec-f">一、前台功能测试（TC-F01 ~ TC-F60）</h2>
 
-<h3>TC-01 首页</h3>
+<!-- 1.1 首页 -->
+<h3 id="sec-f-home">1.1 首页（EP-01）</h3>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-01-01</td><td>首页正常加载</td><td>访问 <code>/zh-CN</code></td><td>页面在 3s 内完整渲染，Hero 文案正确显示</td><td>🔴</td></tr>
-<tr><td>TC-01-02</td><td>语言切换</td><td>点击 Header 语言切换器，选择 en-US</td><td>URL 变为 <code>/en-US</code>，页面内容切换为英文</td><td>🔴</td></tr>
-<tr><td>TC-01-03</td><td>三路分流 CTA</td><td>点击「查看解决方案」</td><td>跳转至 <code>/zh-CN/solutions</code></td><td>🔴</td></tr>
-<tr><td>TC-01-04</td><td>开发者中心 CTA</td><td>点击「开发者中心」</td><td>跳转至占位页，显示「正在开发中」</td><td>🔴</td></tr>
-<tr><td>TC-01-05</td><td>解决方案卡片跳转</td><td>点击任意解决方案卡片</td><td>跳转至对应场景页</td><td>🔴</td></tr>
-<tr><td>TC-01-06</td><td>产品卡片跳转</td><td>点击任意产品卡片</td><td>跳转至对应产品页</td><td>🔴</td></tr>
-<tr><td>TC-01-07</td><td>兼容品牌展示</td><td>首页加载完成</td><td>品牌 Logo 墙显示（数量与 CMS 一致）</td><td>🔴</td></tr>
-<tr><td>TC-01-08</td><td>移动端首页</td><td>用 iPhone 375px 宽度访问</td><td>导航折叠为 Hamburger，内容无横向溢出</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F01</span><span class="tc-card-name">Hero Banner 正常显示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>站点已部署，CMS Hero 数据已发布</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/zh-CN</code> 首页</li><li>观察 Hero 区域</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>Hero 背景图/视频正常加载；主标题、描述文案显示；「查看解决方案」和「联系我们」两个 CTA 按钮可见</div>
+  </div>
+</div>
 
-<h3>TC-02 解决方案页</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F02</span><span class="tc-card-name">信任数字统计区展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 统计数据已配置（至少 3 项）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>首页滚动到信任数字区域</li><li>检查各统计项数值</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>3 项统计指标正常展示；若数据为 XX+（待填入），显示占位符而非空白</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-02-01</td><td>5个场景页可访问</td><td>逐一访问 5 个场景 URL</td><td>每页正常加载，内容来自 CMS</td><td>🔴</td></tr>
-<tr><td>TC-02-02</td><td>产品跳转卡片</td><td>点击「本方案使用的产品」卡片</td><td>跳转至对应产品页</td><td>🔴</td></tr>
-<tr><td>TC-02-03</td><td>应用案例区块（无案例）</td><td>访问未关联案例的场景页</td><td>应用案例区块不显示（自动隐藏）</td><td>🔴</td></tr>
-<tr><td>TC-02-04</td><td>多语言内容</td><td>切换为 en-US 后访问场景页</td><td>所有内容（标题/描述/亮点）均为英文</td><td>🔴</td></tr>
-<tr><td>TC-02-05</td><td>回退机制</td><td>访问某 zh-TW 未翻译的页面</td><td>内容显示 zh-CN 版本，无空白</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F03</span><span class="tc-card-name">「查看解决方案」按钮跳转</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击 Hero 区「查看解决方案」按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>跳转至 <code>/zh-CN/solutions</code> 页面，页面正常加载</div>
+  </div>
+</div>
 
-<h3>TC-03 产品页</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F04</span><span class="tc-card-name">「联系我们」按钮跳转</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击 Hero 区「联系我们」按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>跳转至 <code>/zh-CN/contact</code> 页面，页面正常加载</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-03-01</td><td>8个产品页可访问</td><td>逐一访问 8 个产品 URL</td><td>每页正常加载</td><td>🔴</td></tr>
-<tr><td>TC-03-02</td><td>硬件参数表展示</td><td>访问 Neuron II 页面</td><td>参数表字段完整（接口/协议/温度/防护等级）</td><td>🔴</td></tr>
-<tr><td>TC-03-03</td><td>应用场景跳转</td><td>点击「应用场景」跳转卡片</td><td>跳转至对应解决方案场景页</td><td>🔴</td></tr>
-<tr><td>TC-03-04</td><td>文件下载（P0 全公开）</td><td>点击任意文件下载按钮</td><td>文件正常下载，无需登录</td><td>🔴</td></tr>
-<tr><td>TC-03-05</td><td>产品主图显示</td><td>访问产品页</td><td>主图正常显示（非破图/占位图）</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F05</span><span class="tc-card-name">接入方式区展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 接入方式内容已发布</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到接入方式区域</li><li>检查「云端直连」和「网关接入」两种方式</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>两种接入方式卡片正常展示，图标/标题/描述完整，布局无错位</div>
+  </div>
+</div>
 
-<h3>TC-04 兼容生态页</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F06</span><span class="tc-card-name">解决方案卡片展示与跳转</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 5 个解决方案场景</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到解决方案卡片区域</li><li>确认展示 5 个场景卡片</li><li>逐一点击每个卡片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>5 个场景卡片（HEMS/ESS/EVCMS/VPP/PQMS）均展示；点击后跳转至对应场景详情页 <code>/solutions/[slug]</code></div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-04-01</td><td>品牌列表加载</td><td>访问兼容生态页</td><td>品牌卡片完整显示，Logo 无破图</td><td>🔴</td></tr>
-<tr><td>TC-04-02</td><td>筛选功能</td><td>选择「云端直连」筛选项</td><td>列表更新为仅显示云端直连品牌</td><td>🔴</td></tr>
-<tr><td>TC-04-03</td><td>多选筛选</td><td>同时选择「云端直连」+「已支持」</td><td>列表显示同时满足两个条件的品牌</td><td>🔴</td></tr>
-<tr><td>TC-04-04</td><td>清空筛选</td><td>点击「清空筛选」</td><td>恢复全量展示</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F07</span><span class="tc-card-name">产品概览区展示与跳转</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布至少 8 个产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到产品概览区域</li><li>确认展示 8 个产品卡片</li><li>点击任意产品卡片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>8 个产品卡片展示，包含产品图/名称/一句话描述；点击后跳转至对应产品详情页 <code>/products/[slug]</code></div>
+  </div>
+</div>
 
-<h3>TC-05 帮助中心</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F08</span><span class="tc-card-name">兼容品牌 Logo 墙展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已配置兼容品牌数据</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到兼容品牌区域</li><li>检查 Logo 图片加载状态</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>品牌 Logo 全部正常加载（无破图），数量与 CMS 配置一致</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-05-01</td><td>FAQ 列表加载</td><td>访问帮助中心 FAQ</td><td>显示来自 CMS 的真实问答（≥10条，非占位）</td><td>🔴</td></tr>
-<tr><td>TC-05-02</td><td>FAQ 展开/收起</td><td>点击 FAQ 条目</td><td>答案展开；再次点击收起</td><td>🔴</td></tr>
-<tr><td>TC-05-03</td><td>文件下载列表</td><td>切换产品型号筛选</td><td>文件列表按型号正确过滤</td><td>🔴</td></tr>
-<tr><td>TC-05-04</td><td>报修表单提交</td><td>填写完整表单并提交</td><td>企微群收到通知；提交者邮箱收到确认邮件</td><td>🔴</td></tr>
-<tr><td>TC-05-05</td><td>报修表单校验</td><td>提交空表单</td><td>必填字段显示错误提示，不发送请求</td><td>🔴</td></tr>
-<tr><td>TC-05-06</td><td>报修表单邮箱格式</td><td>填写错误邮箱格式并提交</td><td>显示「邮箱格式不正确」错误</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F09</span><span class="tc-card-name">底部 CTA Banner 展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到页面底部 CTA 区域</li><li>点击 CTA 按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>CTA Banner 显示标题和按钮；按钮跳转至联系我们或解决方案页</div>
+  </div>
+</div>
 
-<h3>TC-06 联系我们</h3>
+<!-- 1.2 解决方案 -->
+<h3 id="sec-f-solutions">1.2 解决方案（EP-02）</h3>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-06-01</td><td>商务咨询表单提交</td><td>完整填写并选择意向分类，提交</td><td>对应企微群收到通知；内部邮件收到；用户收到回执邮件</td><td>🔴</td></tr>
-<tr><td>TC-06-02</td><td>通知路由（国内销售）</td><td>选择「国内业务咨询」提交</td><td>国内销售对应邮箱/群收到，而非海外销售</td><td>🔴</td></tr>
-<tr><td>TC-06-03</td><td>通知路由（海外销售）</td><td>选择「海外业务咨询」提交</td><td>海外销售对应邮箱/群收到</td><td>🔴</td></tr>
-<tr><td>TC-06-04</td><td>联系人信息展示</td><td>访问联系我们页面</td><td>显示真实联系人（非占位信息）</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F10</span><span class="tc-card-name">HEMS 场景页正常加载</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 HEMS 场景内容</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/zh-CN/solutions/hems</code></li><li>检查 Hero 图、标题、描述、亮点列表</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>页面正常加载；Hero 图显示；场景标题/描述/功能亮点完整展示</div>
+  </div>
+</div>
 
-<h3>TC-07 多语言全局</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F11</span><span class="tc-card-name">ESS / EVCMS / VPP / PQMS 场景页</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布所有场景内容</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>分别访问 <code>/solutions/ess</code>、<code>/solutions/evcms</code>、<code>/solutions/vpp</code>、<code>/solutions/pqms</code></li><li>逐一检查页面完整性</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>4 个场景页均正常加载，Hero 图 / 标题 / 功能亮点 / 描述完整</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-07-01</td><td>语言偏好记忆</td><td>切换为 en-US，关闭标签页，重新打开</td><td>默认展示 en-US</td><td>🔴</td></tr>
-<tr><td>TC-07-02</td><td>zh-TW 自动转换</td><td>访问 <code>/zh-TW/</code> 任意页面</td><td>显示繁体中文，无简体字符混入</td><td>🔴</td></tr>
-<tr><td>TC-07-03</td><td>未发布语言不显示</td><td>在 CMS 将某语言设为「未发布」</td><td>语言切换器不显示该语言选项</td><td>🔴</td></tr>
-<tr><td>TC-07-04</td><td>回退链完整</td><td>删除某 en-US 内容翻译</td><td>访问该 en-US 页面显示 zh-CN 内容，非空白</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F12</span><span class="tc-card-name">相关产品推荐展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>场景在 CMS 中关联了推荐产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问任意场景页</li><li>滚动到「推荐产品」区域</li><li>点击推荐产品卡片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>推荐产品卡片展示（名称/图片），点击跳转到对应产品详情页</div>
+  </div>
+</div>
 
-<h3>TC-08 SEO 基础</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F13</span><span class="tc-card-name">场景 Hero 图加载</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已上传场景 Hero 图</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>依次访问 5 个场景页</li><li>检查 Hero 背景图是否加载完成</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>5 个场景页 Hero 图均正常显示，无破图或占位灰底</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-08-01</td><td>页面 title 正确</td><td>打开任意产品页，查看浏览器 tab</td><td>title 格式：「产品名 \</td><td>旭衡电子」</td><td>🔴</td></tr>
-<tr><td>TC-08-02</td><td>hreflang 标签</td><td>查看任意页面 <code><head></code></td><td>包含所有已发布语言的 hreflang link 标签</td><td>🔴</td></tr>
-<tr><td>TC-08-03</td><td>Sitemap 可访问</td><td>访问 <code>/sitemap.xml</code></td><td>返回 XML，包含所有已发布页面 URL</td><td>🔴</td></tr>
-<tr><td>TC-08-04</td><td>Staging noindex</td><td>访问 Staging 任意页面，查看响应头</td><td>包含 <code>X-Robots-Tag: noindex</code></td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F14</span><span class="tc-card-name">场景页多语言内容</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 en-US 翻译版本</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>切换语言为 en-US</li><li>访问任意场景页</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>页面标题/描述/亮点全部为英文内容</div>
+  </div>
+</div>
 
-<h3>TC-09 隐私合规</h3>
+<!-- 1.3 兼容生态 -->
+<h3 id="sec-f-compat">1.3 兼容生态（EP-03）</h3>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-09-01</td><td>Cookie 弹窗首次展示</td><td>清除 cookies 后访问首页</td><td>Cookie 授权弹窗出现</td><td>🔴</td></tr>
-<tr><td>TC-09-02</td><td>Cookie 弹窗多语言</td><td>en-US 环境下触发弹窗</td><td>弹窗内容为英文</td><td>🔴</td></tr>
-<tr><td>TC-09-03</td><td>隐私政策页可访问</td><td>访问 <code>/zh-CN/privacy</code></td><td>页面正常加载，内容为法务确认版本（非模板）</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F15</span><span class="tc-card-name">品牌分类筛选</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已配置品牌分类数据</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问兼容生态页</li><li>选择「云端直连」分类筛选</li><li>选择「网关接入」分类筛选</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>列表按分类正确过滤，仅展示对应类别品牌</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F16</span><span class="tc-card-name">品牌 Logo 墙展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已上传品牌 Logo 图片</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问兼容生态页</li><li>检查所有品牌 Logo 是否正常显示</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>所有品牌 Logo 正常加载，无破图，排列整齐</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F17</span><span class="tc-card-name">兼容型号搜索</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>兼容生态页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在搜索框输入已知品牌名称</li><li>观察筛选结果</li><li>输入不存在的品牌名</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>输入已知品牌：列表过滤匹配结果；输入不存在品牌：显示空状态提示</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F18</span><span class="tc-card-name">清空筛选恢复全量</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>已选择分类筛选或搜索</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击「清空筛选」或清除搜索框</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>恢复全量品牌展示</div>
+  </div>
+</div>
+
+<!-- 1.4 帮助中心 -->
+<h3 id="sec-f-help">1.4 帮助中心（EP-04）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F19</span><span class="tc-card-name">文档资料下载</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已上传产品文档/手册</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问帮助中心 → 文档资料</li><li>点击任意文档下载按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>文件正常下载（PDF），无需登录，文件可正常打开</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F20</span><span class="tc-card-name">FAQ 列表展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 ≥10 条 FAQ</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问帮助中心 → FAQ</li><li>检查 FAQ 列表条目数量</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>FAQ 条目 ≥10 条显示，每条包含问题标题</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F21</span><span class="tc-card-name">FAQ 展开/收起交互</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>FAQ 列表已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击 FAQ 条目标题</li><li>再次点击同一条目</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>首次点击：展开答案内容；再次点击：收起答案</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F22</span><span class="tc-card-name">FAQ 搜索/筛选</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>FAQ 列表已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在搜索框输入关键词</li><li>观察筛选结果</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>FAQ 列表过滤为匹配关键词的条目</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F23</span><span class="tc-card-name">在线报修表单提交</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>帮助中心报修页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>填写完整报修表单（姓名/邮箱/产品型号/问题描述）</li><li>点击提交</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>提交成功提示；Strapi repair-tickets 出现新记录；企微群收到通知</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F24</span><span class="tc-card-name">版本兼容矩阵展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已配置兼容矩阵数据</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问帮助中心 → 版本兼容</li><li>检查矩阵表格展示</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>兼容矩阵表格正常展示，数据与 CMS 一致；移动端可横向滚动</div>
+  </div>
+</div>
+
+<!-- 1.5 产品中心 -->
+<h3 id="sec-f-products">1.5 产品中心（EP-06）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F25</span><span class="tc-card-name">产品列表页展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 ≥8 个产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/zh-CN/products</code></li><li>检查产品卡片数量和内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>产品列表页展示所有已发布产品；每个卡片含图片/名称/一句话描述</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F26</span><span class="tc-card-name">产品详情页 — 参数表</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已完整填写产品参数</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击产品卡片进入详情页</li><li>查看硬件参数表</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>参数表完整展示（接口/协议/温度/防护等级等），数据与 CMS 一致</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F27</span><span class="tc-card-name">产品详情页 — 图片展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已上传产品图片</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>进入产品详情页</li><li>检查产品主图和附图</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>产品主图正常显示（非破图），图片清晰</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F28</span><span class="tc-card-name">手册 PDF 下载</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已上传产品手册 PDF</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在产品详情页找到手册下载按钮</li><li>点击下载</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>PDF 文件正常下载，无需登录，可正常打开</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F29</span><span class="tc-card-name">关联解决方案展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>产品在 CMS 中已关联解决方案</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在产品详情页滚动到「应用场景」区域</li><li>点击关联的解决方案卡片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>关联场景卡片展示，点击跳转到对应场景页</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F30</span><span class="tc-card-name">产品间导航</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>产品详情页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在产品详情页找到「上一产品/下一产品」或面包屑导航</li><li>点击切换产品</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>可在产品间顺畅切换，或通过面包屑返回产品列表</div>
+  </div>
+</div>
+
+<!-- 1.6 关于我们 -->
+<h3 id="sec-f-about">1.6 关于我们（EP-07）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F31</span><span class="tc-card-name">公司介绍展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布公司介绍内容</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/zh-CN/about</code></li><li>检查公司介绍区域</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>公司介绍文案完整展示，无占位文字（"待填入"/"示例"）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F32</span><span class="tc-card-name">新闻列表展示与分页</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布多条新闻</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问关于我们页新闻区域</li><li>检查新闻列表</li><li>若新闻 &gt; 每页条数，点击分页</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>新闻列表正常展示（标题/日期/摘要）；分页切换正常，无重复/遗漏</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F33</span><span class="tc-card-name">新闻详情页</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布新闻详情内容</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击新闻标题进入详情页</li><li>检查标题/日期/正文/图片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>新闻详情页正常加载，富文本内容正确渲染（图片/段落/列表）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F34</span><span class="tc-card-name">加入我们 — 职位列表</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布在招职位</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问关于我们 → 加入我们</li><li>检查职位列表</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>职位列表正常展示（职位名/地点/类型）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F35</span><span class="tc-card-name">加入我们 — 空状态</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 无在招职位</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问关于我们 → 加入我们</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示空状态提示（如「暂无在招职位」），而非空白页面</div>
+  </div>
+</div>
+
+<!-- 1.7 联系我们 -->
+<h3 id="sec-f-contact">1.7 联系我们（EP-08）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F36</span><span class="tc-card-name">表单必填字段验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系我们页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>不填写任何字段</li><li>点击提交按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>必填字段（姓名/邮箱/公司/留言）显示红色错误提示，表单不提交</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F37</span><span class="tc-card-name">邮箱格式验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系我们页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在邮箱字段输入 <code>invalid-email</code></li><li>点击提交</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示「邮箱格式不正确」错误提示</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F38</span><span class="tc-card-name">成功提交流程</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系我们页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>填写所有必填字段（合法数据）</li><li>点击提交</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示提交成功提示；表单清空；Strapi leads 中出现新记录</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F39</span><span class="tc-card-name">多语言表单标签</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系我们页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>切换语言为 en-US</li><li>检查表单所有标签/按钮/placeholder</li><li>切换语言为 de</li><li>再次检查</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>各语言版本表单标签、占位文字、按钮文案均为对应语言</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F40</span><span class="tc-card-name">重复提交 Rate Limit</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系我们页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>连续提交 6 次表单（1 小时内同 IP）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前 5 次正常提交；第 6 次返回 429 Too Many Requests</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-F41</span><span class="tc-card-name">联系信息展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已填写真实联系信息</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问联系我们页</li><li>检查地址/电话/邮箱信息</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示真实联系信息，非占位数据（"400-888-8888"）</div>
+  </div>
+</div>
 
 <hr>
 
-<h2>二、CMS 后台功能测试</h2>
+<!-- ==================== 二、全局功能测试 ==================== -->
+<h2 id="sec-g">二、全局功能测试（TC-G01 ~ TC-G30）</h2>
 
-<h3>TC-10 媒体库</h3>
+<!-- 2.1 导航 -->
+<h3 id="sec-g-nav">2.1 导航与 Footer</h3>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-10-01</td><td>图片上传</td><td>上传一张 PNG 图片</td><td>上传成功，自动生成 CDN URL；同时生成 WebP 版本</td><td>🔴</td></tr>
-<tr><td>TC-10-02</td><td>超大文件上传</td><td>上传 20MB 图片</td><td>提示文件超限，不允许上传</td><td>🔴</td></tr>
-<tr><td>TC-10-03</td><td>图片替换覆盖</td><td>替换已使用的图片</td><td>选择「覆盖原链接」后，引用该图的页面自动更新</td><td>🔴</td></tr>
-<tr><td>TC-10-04</td><td>删除引用中的图片</td><td>对正在被引用的图片点删除</td><td>提示「此图片正被 N 个内容引用，无法删除」</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G01</span><span class="tc-card-name">首页导航透明浮层</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>观察首页顶部导航栏样式</li><li>向下滚动页面</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>首页导航初始为透明浮层（Hero 通屏效果）；滚动后导航变为白底固定</div>
+  </div>
+</div>
 
-<h3>TC-11 产品内容管理</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G02</span><span class="tc-card-name">非首页导航固定白底</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>非首页页面（如产品页）已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/zh-CN/products</code></li><li>观察导航栏样式</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>导航为固定白底样式，非透明</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-11-01</td><td>编辑产品定位一句话</td><td>修改 Neuron II 的定位描述，保存发布</td><td>前台产品页实时更新（5分钟内）</td><td>🔴</td></tr>
-<tr><td>TC-11-02</td><td>草稿保存</td><td>修改内容后点「保存草稿」</td><td>前台不更新；后台显示「草稿」状态</td><td>🔴</td></tr>
-<tr><td>TC-11-03</td><td>多语言独立编辑</td><td>切换到 en-US 标签，修改英文内容</td><td>英文版内容更新，中文版不受影响</td><td>🔴</td></tr>
-<tr><td>TC-11-04</td><td>产品下线</td><td>将某产品状态改为「已下线」</td><td>前台该产品页 404；首页/其他页面不再显示该产品卡片</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G03</span><span class="tc-card-name">导航链接跳转正确</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>逐一点击导航栏所有链接（首页/解决方案/产品/兼容生态/帮助中心/关于我们/联系我们）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>所有导航链接跳转至对应页面，无 404 或错误</div>
+  </div>
+</div>
 
-<h3>TC-12 线索管理</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G04</span><span class="tc-card-name">Logo 点击返回首页</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>当前在非首页页面</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击导航栏 Logo</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>跳转至当前语言首页 <code>/[locale]</code></div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-12-01</td><td>查看新线索</td><td>前台提交商务咨询表单后，查看后台</td><td>线索出现在「待处理」列表，信息完整</td><td>🔴</td></tr>
-<tr><td>TC-12-02</td><td>状态流转</td><td>将线索状态改为「跟进中」</td><td>状态更新，显示操作人和时间</td><td>🔴</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G05</span><span class="tc-card-name">移动端汉堡菜单</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>使用移动端视口（375px）访问</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击汉堡菜单图标</li><li>检查菜单展开</li><li>点击任意链接</li><li>再次点击汉堡图标</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>菜单正常展开/收起；所有导航项可见并可点击；点击链接后菜单自动收起</div>
+  </div>
+</div>
 
-<h3>TC-13 通知配置</h3>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G06</span><span class="tc-card-name">Footer 链接与内容</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>滚动到页面底部 Footer</li><li>检查所有 Footer 链接</li><li>检查版权信息</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>Footer 链接全部可点击跳转正确；版权年份正确；隐私政策链接可用</div>
+  </div>
+</div>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>操作</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>TC-13-01</td><td>配置企微 Webhook</td><td>填写企微群机器人 Webhook URL，保存</td><td>提交对应类型表单后，该群收到通知</td><td>🔴</td></tr>
-<tr><td>TC-13-02</td><td>更换企微群</td><td>修改 Webhook URL 为新的群</td><td>更换后，通知发送到新群</td><td>🔴</td></tr>
-<tr><td>TC-13-03</td><td>邮件模板编辑</td><td>修改用户回执邮件中文模板</td><td>下次表单提交后，用户收到的邮件为新版模板</td><td>🔴</td></tr>
-</tbody>
-</table>
+<!-- 2.2 多语言 -->
+<h3 id="sec-g-i18n">2.2 多语言切换</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G07</span><span class="tc-card-name">语言切换器展示 8 种语言</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>点击/悬停语言切换器</li><li>检查语言选项列表</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>展示 8 种语言选项：zh-CN / zh-TW / en-US / de / fr / pt / es / ru</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G08</span><span class="tc-card-name">切换语言 URL 前缀变化</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>当前为 <code>/zh-CN/products</code></div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>切换语言为 de</li><li>检查浏览器地址栏</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>URL 变为 <code>/de/products</code>，路径部分保持不变</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G09</span><span class="tc-card-name">切换后页面内容语言更新</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布 en-US 翻译</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 zh-CN 页面切换为 en-US</li><li>检查页面标题/导航/正文内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>所有可见文本切换为英文（导航、标题、正文、按钮、Footer）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G10</span><span class="tc-card-name">无效 locale 自动重定向</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>无</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>/invalid-locale/products</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>自动 301/302 重定向至 <code>/zh-CN/products</code>（或浏览器偏好语言）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G11</span><span class="tc-card-name">Accept-Language 自动检测</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>清除所有 cookies（首次访问状态）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>设置浏览器语言偏好为 <code>en-US</code></li><li>访问根路径 <code>/</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>自动重定向至 <code>/en-US</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G12</span><span class="tc-card-name">zh-TW 繁体转换验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>zh-TW 内容已发布</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>切换语言为 zh-TW</li><li>在页面中搜索简体字（Ctrl+F 搜索常见简体字如「产品/关于/联系」）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>页面内容全部为繁体中文，无简体字符混入（產品/關於/聯繫）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G13</span><span class="tc-card-name">机器翻译语言内容非空</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>de/fr/pt/es/ru 版本内容已发布</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>分别切换至 de / fr / pt / es / ru</li><li>检查首页和产品页内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>各语言页面内容非空，标题/描述均为对应语言文本</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G14</span><span class="tc-card-name">语言切换后 hreflang 更新</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 zh-CN 页面查看源码中 hreflang 标签</li><li>切换至 en-US</li><li>再次查看 hreflang 标签</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>hreflang 标签在两个语言版本中均存在且指向正确 URL</div>
+  </div>
+</div>
+
+<!-- 2.3 响应式 -->
+<h3 id="sec-g-responsive">2.3 响应式/移动端</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G15</span><span class="tc-card-name">移动端（375px）Hero 布局</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Chrome DevTools 模拟 iPhone SE（375px）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问首页</li><li>检查 Hero 区域布局</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>Hero 标题/描述/按钮正常显示，无文字溢出，按钮可点击</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G16</span><span class="tc-card-name">平板（768px）导航折叠</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Chrome DevTools 模拟 iPad（768px）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问任意页面</li><li>检查导航栏</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>导航折叠为汉堡菜单</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G17</span><span class="tc-card-name">桌面（1440px）最大宽度</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>桌面浏览器窗口 ≥ 1440px</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问首页</li><li>检查内容容器是否居中</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>内容容器最大宽度限制，居中显示，两侧留白</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G18</span><span class="tc-card-name">图片各断点响应</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面含图片元素</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 375px / 768px / 1440px 三个断点分别检查产品图片</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>图片自适应容器宽度，不变形、不溢出</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G19</span><span class="tc-card-name">移动端表格横向滚动</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>移动端（375px）访问含参数表的页面</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问产品详情页（含参数表格）</li><li>尝试横向滑动表格</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>表格可横向滚动，页面整体不产生横向滚动条</div>
+  </div>
+</div>
+
+<!-- 2.4 错误页面 -->
+<h3 id="sec-g-error">2.4 错误页面（404/500）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G20</span><span class="tc-card-name">404 页面展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>无</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问不存在的 URL（如 <code>/zh-CN/nonexistent-page</code>）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示自定义 404 页面，含导航和 Footer；提供「返回首页」按钮</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G21</span><span class="tc-card-name">500 错误页展示</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>模拟服务端错误（或访问 <code>/_error</code> 测试页）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>触发 500 错误</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示自定义 500 页面，含「重试」按钮</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-G22</span><span class="tc-card-name">404 HTTP 状态码验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>无</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl -o /dev/null -s -w "%{http_code}" https://domain.com/zh-CN/nonexistent</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 HTTP 状态码 <code>404</code>（不是 200）</div>
+  </div>
+</div>
 
 <hr>
 
-<h2>三、性能测试</h2>
+<!-- ==================== 三、SEO 与 Metadata 测试 ==================== -->
+<h2 id="sec-seo">三、SEO 与 Metadata 测试（TC-S01 ~ TC-S20）</h2>
 
-<table>
-<thead><tr><th>ID</th><th>指标</th><th>测试方法</th><th>通过标准</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>PT-01</td><td>首页 LCP</td><td>Lighthouse / WebPageTest</td><td>< 2.5s（P75）</td><td>🔴</td></tr>
-<tr><td>PT-02</td><td>首页 CLS</td><td>Lighthouse</td><td>< 0.1</td><td>🔴</td></tr>
-<tr><td>PT-03</td><td>产品页加载</td><td>WebPageTest（国内节点）</td><td>首字节 < 300ms</td><td>🔴</td></tr>
-<tr><td>PT-04</td><td>文件下载链接响应</td><td>curl 测试响应时间</td><td>下载链接生成 < 500ms</td><td>🟡</td></tr>
-<tr><td>PT-05</td><td>并发表单提交</td><td>k6 并发 50</td><td>无 5xx 错误，响应 < 2s</td><td>🟡</td></tr>
-</tbody>
-</table>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S01</span><span class="tc-card-name">首页 title 包含品牌名</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看页面源码：<code>curl https://domain.com/zh-CN | grep '&lt;title&gt;'</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div><code>&lt;title&gt;</code> 包含「旭衡电子」或「AlwaysControl」</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S02</span><span class="tc-card-name">每页 meta description 非空且不重复</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>所有页面已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>对每个主页面执行 <code>curl URL | grep 'meta name="description"'</code></li><li>对比各页面 description 内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>每页 meta description 非空；各页面 description 不完全相同</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S03</span><span class="tc-card-name">8 种语言 hreflang 标签</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl https://domain.com/zh-CN | grep hreflang</code></li><li>确认 8 个 hreflang 标签</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>页面源码含 8 个 <code>&lt;link rel="alternate" hreflang="xx"&gt;</code> 标签，对应 zh-CN/zh-TW/en-US/de/fr/pt/es/ru</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S04</span><span class="tc-card-name">canonical URL 正确</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看页面源码 <code>&lt;link rel="canonical"&gt;</code></li><li>检查 URL 是否有 trailing slash 不一致</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>canonical 指向当前页面正确 URL，无 trailing slash 问题</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S05</span><span class="tc-card-name">Open Graph 标签验证</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看源码中 <code>og:title</code>、<code>og:description</code>、<code>og:image</code></li><li>或使用 Facebook Sharing Debugger 验证</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>OG title / description / image 均存在且内容正确</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S06</span><span class="tc-card-name">Staging 环境 noindex</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Staging 环境已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 Staging 任意页面</li><li>查看源码：<code>curl staging-url | grep 'noindex'</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>含 <code>&lt;meta name="robots" content="noindex"&gt;</code> 或响应头 <code>X-Robots-Tag: noindex</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S07</span><span class="tc-card-name">Production robots.txt 允许爬取</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Production 已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>https://domain.com/robots.txt</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>robots.txt 允许主要爬虫抓取，包含 Sitemap 引用</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S08</span><span class="tc-card-name">Sitemap 返回 200</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>站点已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>访问 <code>https://domain.com/sitemap.xml</code></li><li>检查内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 200；XML 包含所有 8 种语言版本 URL</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S09</span><span class="tc-card-name">动态页面在 Sitemap 中存在</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CMS 已发布产品和新闻</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 sitemap.xml 中搜索产品 slug 和新闻 slug</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>所有已发布产品页和新闻详情页 URL 均出现在 Sitemap 中</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-S10</span><span class="tc-card-name">结构化数据 Organization Schema</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>首页已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看首页源码 <code>&lt;script type="application/ld+json"&gt;</code></li><li>或使用 Google Rich Results Test</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>首页含 Organization 类型结构化数据，包含 name / url / logo</div>
+  </div>
+</div>
 
 <hr>
 
-<h2>四、安全测试</h2>
+<!-- ==================== 四、CMS 后台测试 ==================== -->
+<h2 id="sec-c">四、CMS 后台测试（TC-C01 ~ TC-C40）</h2>
 
-<table>
-<thead><tr><th>ID</th><th>用例</th><th>预期结果</th><th>优先级</th></tr></thead>
-<tbody>
-<tr><td>SEC-01</td><td>XSS 注入（表单）</td><td>在表单字段输入 <code><script>alert(1)</script></code> 并提交</td><td>内容被转义，不执行脚本</td><td>🔴</td></tr>
-<tr><td>SEC-02</td><td>速率限制</td><td>同一 IP 1分钟内提交表单 6 次</td><td>第 6 次返回 429 Too Many Requests</td><td>🔴</td></tr>
-<tr><td>SEC-03</td><td>非法文件上传</td><td>上传 <code>.php</code> / <code>.exe</code> 伪装为图片</td><td>后端拒绝，返回错误</td><td>🔴</td></tr>
-<tr><td>SEC-04</td><td>CORS 检查</td><td>从非白名单域名调用 CMS API</td><td>返回 CORS 错误，请求被拒绝</td><td>🔴</td></tr>
-<tr><td>SEC-05</td><td>Staging 隔离</td><td>用 Google 搜索 Staging 域名内容</td><td>无结果（noindex 生效）</td><td>🔴</td></tr>
-</tbody>
-</table>
+<!-- 4.1 内容管理 -->
+<h3 id="sec-c-content">4.1 内容管理（产品/解决方案/新闻/FAQ）</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C01</span><span class="tc-card-name">创建新产品 → 前台展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi Admin 已登录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 Strapi 创建新产品（填写名称/描述/图片/参数）</li><li>点击发布</li><li>等待 ISR 触发（约 60 秒）</li><li>访问前台产品列表页</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前台产品列表出现新产品卡片；产品详情页 <code>/products/[slug]</code> 可访问</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C02</span><span class="tc-card-name">更新产品名称 → 前台更新</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>已有已发布产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 Strapi 修改产品名称</li><li>保存并发布</li><li>等待 Webhook 触发 ISR</li><li>刷新前台产品页</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前台页面显示更新后的产品名称</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C03</span><span class="tc-card-name">删除产品 → 前台 404</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>已有已发布产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 Strapi 删除该产品</li><li>等待 ISR 触发</li><li>访问该产品的前台 URL</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前台访问该产品页返回 404</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C04</span><span class="tc-card-name">多语言内容独立发布</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi Admin 已登录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>创建 zh-CN 文章并发布</li><li>添加 en-US 翻译版本并发布</li><li>分别访问两种语言的页面</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>zh-CN 页面显示中文内容；en-US 页面显示英文内容；两者互不干扰</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C05</span><span class="tc-card-name">图片上传到媒体库 → CDN URL</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi Admin 已登录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>上传图片到 Strapi 媒体库</li><li>复制图片 URL</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>图片上传成功；URL 为 OSS CDN 域名（非 Strapi 本地路径）</div>
+  </div>
+</div>
+
+<!-- 4.2 媒体库 -->
+<h3 id="sec-c-media">4.2 媒体库上传</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C06</span><span class="tc-card-name">超大文件上传拒绝</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi Admin 已登录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>上传一个 20MB 的图片文件</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>提示文件超限，拒绝上传</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C07</span><span class="tc-card-name">非法文件类型上传拒绝</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi Admin 已登录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>上传 <code>.php</code> 或 <code>.exe</code> 文件（伪装为图片后缀）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>后端拒绝上传，返回错误提示</div>
+  </div>
+</div>
+
+<!-- 4.3 线索管理 -->
+<h3 id="sec-c-leads">4.3 线索管理</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C08</span><span class="tc-card-name">表单提交 → 线索记录创建</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单可提交</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>前台提交联系表单</li><li>登录 Strapi 查看 leads 集合</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>leads 列表出现新记录；status 为 <code>new</code>；信息完整（姓名/邮箱/公司/留言）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C09</span><span class="tc-card-name">线索状态流转</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi leads 中已有记录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>将线索状态改为 <code>contacted</code></li><li>访问前台相关页面</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>状态更新成功；前台无影响（内部状态不对外暴露）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C10</span><span class="tc-card-name">线索列表按时间倒序</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi leads 中有多条记录</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看 Strapi leads 列表默认排序</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>列表按创建时间倒序排列（最新在最前）</div>
+  </div>
+</div>
+
+<!-- 4.4 ISR Webhook -->
+<h3 id="sec-c-isr">4.4 ISR Webhook 触发</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C11</span><span class="tc-card-name">手动触发 Webhook 成功</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>REVALIDATE_SECRET 已配置</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl -X POST https://domain.com/api/revalidate -H "Content-Type: application/json" -d '{"secret":"正确secret","path":"/zh-CN/products"}'</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 <code>{"revalidated": true}</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C12</span><span class="tc-card-name">错误 Secret → 401</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>无</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl -X POST https://domain.com/api/revalidate -d '{"secret":"wrong-secret"}'</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 HTTP 401 Unauthorized</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C13</span><span class="tc-card-name">ISR 生效时间验证</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>已有已发布产品</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 Strapi 更新产品描述并发布</li><li>记录时间</li><li>每 10 秒刷新前台页面，检查内容是否更新</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>60 秒内前台页面内容更新为最新版本</div>
+  </div>
+</div>
+
+<!-- 4.5 多语言内容 -->
+<h3 id="sec-c-i18n">4.5 多语言内容发布</h3>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C14</span><span class="tc-card-name">仅发布 zh-CN → 降级显示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>某内容仅发布 zh-CN 版本，无 en-US 翻译</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>切换语言为 en-US</li><li>访问该内容页面</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>页面降级显示 zh-CN 内容（不白屏、不 404）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C15</span><span class="tc-card-name">8 种语言全部发布</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>某内容 8 种语言版本全部发布</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>逐一切换 8 种语言访问该页面</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>各语言页面显示对应语言内容，互不干扰</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-C16</span><span class="tc-card-name">草稿内容不对外展示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>某内容保存为草稿（未发布）</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>通过 API 或前台尝试访问该内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前台不展示草稿内容；API 不返回草稿数据</div>
+  </div>
+</div>
 
 <hr>
 
-<h2>五、上线前回归测试清单</h2>
+<!-- ==================== 五、表单与通知测试 ==================== -->
+<h2 id="sec-n">五、表单与通知测试（TC-N01 ~ TC-N15）</h2>
 
-<p>上线前必须完成全量回归，以下为最小化验证集：</p>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N01</span><span class="tc-card-name">必填字段为空提交</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>不填写任何字段</li><li>点击提交按钮</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>每个必填字段下方显示红色错误提示；表单不发送请求</div>
+  </div>
+</div>
 
-<ul>
-<li>[ ] TC-01-01 首页加载</li>
-<li>[ ] TC-01-02 语言切换</li>
-<li>[ ] TC-02-01 解决方案 5 个场景页全部可访问</li>
-<li>[ ] TC-03-01 产品 8 个页面全部可访问</li>
-<li>[ ] TC-03-04 文件下载可用</li>
-<li>[ ] TC-05-04 报修表单（企微+邮件+回执三路通知）</li>
-<li>[ ] TC-06-01 商务咨询表单（三路通知）</li>
-<li>[ ] TC-07-01 语言偏好记忆</li>
-<li>[ ] TC-08-03 Sitemap 可访问</li>
-<li>[ ] TC-09-01 Cookie 弹窗</li>
-<li>[ ] TC-09-03 隐私政策页（法务确认版本）</li>
-<li>[ ] PT-01 首页 LCP &lt; 2.5s</li>
-<li>[ ] SEC-01 XSS 防护</li>
-<li>[ ] 所有页面无 placeholder 文字残留（"400-888-8888" / "待填入" / "示例"）</li>
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N02</span><span class="tc-card-name">邮箱格式错误提示</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在邮箱字段输入 <code>abc@</code></li><li>点击提交</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>提示「邮箱格式不正确」</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N03</span><span class="tc-card-name">正常提交成功流程</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>填写完整合法数据（姓名/邮箱/公司/留言）</li><li>点击提交</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>显示提交成功提示消息；表单所有字段清空；页面不跳转</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N04</span><span class="tc-card-name">企微 Webhook 通知送达</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>企微 Webhook URL 已配置</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>前台提交联系表单</li><li>检查企微群消息</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>企微群收到通知消息，包含：姓名 / 邮箱 / 公司 / 留言内容</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N05</span><span class="tc-card-name">Rate Limit（同 IP 频率限制）</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>1 小时内同 IP 连续提交 6 次表单</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前 5 次正常提交；第 6 次返回 <code>429 Too Many Requests</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N06</span><span class="tc-card-name">Honeypot 反垃圾</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单含隐藏 Honeypot 字段</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>通过 DevTools 向 Honeypot 隐藏字段填入内容</li><li>提交表单</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>请求被静默丢弃（200 但不创建记录）；Strapi 中无新 lead</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N07</span><span class="tc-card-name">报修表单提交 → 工单创建</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>帮助中心报修页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>填写报修表单（产品型号/问题描述/联系邮箱）</li><li>提交</li><li>检查 Strapi repair-tickets 集合</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>repair-tickets 出现新记录；企微群收到报修通知</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-N08</span><span class="tc-card-name">表单提交防重复点击</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>表单已填写完毕</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>快速连续点击提交按钮 3 次</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>仅创建 1 条记录（按钮提交后禁用或 debounce）</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 六、性能测试 ==================== -->
+<h2 id="sec-perf">六、性能测试（TC-P01 ~ TC-P10）</h2>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P01</span><span class="tc-card-name">首页 Lighthouse Performance ≥ 80</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Production 已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>Chrome DevTools → Lighthouse → 选择 Mobile</li><li>运行 Performance 审计</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>Performance 得分 ≥ 80（移动端）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P02</span><span class="tc-card-name">首页 LCP &lt; 2.5s</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Production 已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>Vercel Analytics 或 Chrome DevTools Performance 面板</li><li>检查 LCP 指标</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>LCP（Largest Contentful Paint）&lt; 2.5 秒</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P03</span><span class="tc-card-name">首页 CLS &lt; 0.1</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Production 已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>Chrome DevTools → Performance → 检查 CLS</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>CLS（Cumulative Layout Shift）&lt; 0.1</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P04</span><span class="tc-card-name">产品详情页 TTFB &lt; 800ms</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>产品详情页已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl -o /dev/null -s -w "TTFB: %{time_starttransfer}s\n" https://domain.com/zh-CN/products/neuron-ii</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>TTFB &lt; 800ms</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P05</span><span class="tc-card-name">图片格式验证（WebP）</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面含图片元素</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>Chrome DevTools → Network 面板</li><li>筛选 Img 类型</li><li>检查图片响应 Content-Type</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>图片响应为 <code>image/webp</code> 格式</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P06</span><span class="tc-card-name">字体自托管（无外部请求）</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>页面已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>Chrome DevTools → Network 面板</li><li>搜索 <code>fonts.googleapis.com</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>无任何请求发送到 <code>fonts.googleapis.com</code>；字体通过 <code>next/font</code> 自托管</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-P07</span><span class="tc-card-name">多语言页面加载无明显延迟</span><span class="badge badge-p2">P2</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>8 种语言页面均已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>依次访问 8 种语言首页</li><li>记录各页面加载时间</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>各语言页面加载时间差异 &lt; 500ms，无明显延迟</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 七、安全测试 ==================== -->
+<h2 id="sec-sec">七、安全测试（TC-T01 ~ TC-T15）</h2>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T01</span><span class="tc-card-name">Strapi Admin 需要登录</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>未登录状态</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>直接访问 <code>https://strapi-domain.com/admin</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>重定向至登录页面，需输入用户名密码</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T02</span><span class="tc-card-name">公开 API 无需 Token</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>Strapi API 权限已配置</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl https://strapi-domain.com/api/products</code>（不带 Token）</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回产品列表数据（200），只读接口公开可访问</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T03</span><span class="tc-card-name">只读 Token 无法删除</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>已有只读 API Token</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>执行 <code>curl -X DELETE https://strapi-domain.com/api/products/1 -H "Authorization: Bearer READ_ONLY_TOKEN"</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 <code>403 Forbidden</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T04</span><span class="tc-card-name">XSS 注入防护</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单页已加载</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在 message 字段输入 <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></li><li>提交表单</li><li>在 Strapi 后台查看存储内容</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>内容被 Sanitize/转义存储；前台展示时不执行脚本</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T05</span><span class="tc-card-name">CORS 跨域限制</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>CORS 白名单已配置</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>从未授权域名（如 <code>https://evil.com</code>）发起 AJAX 请求到 Strapi API</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>浏览器拒绝请求（CORS 错误），响应不含 <code>Access-Control-Allow-Origin: https://evil.com</code></div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T06</span><span class="tc-card-name">Revalidate API Rate Limit</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>无</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>用错误 secret 连续请求 <code>/api/revalidate</code> 100 次</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>达到阈值后返回 <code>429 Too Many Requests</code>，暴力请求被限制</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T07</span><span class="tc-card-name">SQL 注入防护</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>联系表单可提交</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>在表单字段输入 <code>' OR 1=1 --</code></li><li>提交表单</li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>请求正常处理（Strapi ORM 参数化查询），不触发 SQL 错误或数据泄露</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-T08</span><span class="tc-card-name">企微 Webhook URL 不暴露</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>前台已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol><li>查看前端 JS bundle（DevTools Sources 面板）</li><li>搜索 <code>qyapi.weixin.qq.com</code></li></ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>前端代码中不包含企微 Webhook URL（仅存在于后端环境变量）</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 附：上线前回归清单 ==================== -->
+<h2 id="sec-checklist">附：上线前回归清单（Checklist）</h2>
+
+<blockquote>上线前必须完成以下所有检查项，全部通过后方可发布 Production</blockquote>
+
+<div class="checklist-title">📦 内容完整性</div>
+<ul class="checklist">
+  <li>所有产品页内容填写完整（名称/描述/图片/参数）</li>
+  <li>5 个解决方案场景页内容完整</li>
+  <li>FAQ 至少 10 条</li>
+  <li>关于我们 — 公司介绍填写完整</li>
+  <li>联系方式（地址/电话/邮箱）真实数据已填入</li>
+  <li>隐私政策文本已通过法务审核</li>
 </ul>
 
-</div>
+<div class="checklist-title">🔧 技术验收</div>
+<ul class="checklist">
+  <li>所有页面 Lighthouse Performance ≥ 80（移动端）</li>
+  <li>8 种语言全部测试通过</li>
+  <li>hreflang 标签验证（Search Console Inspect URL）</li>
+  <li>Sitemap 提交 Google Search Console</li>
+  <li>Staging noindex 验证通过</li>
+  <li>Production robots.txt 正确</li>
+</ul>
+
+<div class="checklist-title">🔒 安全验收</div>
+<ul class="checklist">
+  <li>Strapi Admin 强密码（≥16 位）</li>
+  <li>API Token 已设置为只读</li>
+  <li>REVALIDATE_SECRET 已设置（≥32 位随机）</li>
+  <li>企微 Webhook URL 不暴露在前端代码</li>
+  <li>OSS Bucket 非公开写</li>
+</ul>
+
+<div class="checklist-title">⚙️ 运维验收</div>
+<ul class="checklist">
+  <li>PostgreSQL 每日备份已配置</li>
+  <li>UptimeRobot 健康检查监控已配置</li>
+  <li>Vercel Analytics 已开启</li>
+  <li>错误通知（500 错误）已配置告警</li>
+</ul>
+
+</div><!-- /.main-content -->
+</div><!-- /.page-layout -->
 </body>
 </html>
