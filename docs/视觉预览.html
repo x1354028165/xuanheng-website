@@ -68,22 +68,18 @@
       gap: 8px;
       text-decoration: none;
     }
-    .nav-logo-zh {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-      transition: color .3s;
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
     }
-    .nav-logo-en {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: rgba(255,255,255,.7);
-      transition: color .3s;
+    .nav.scrolled .nav-logo-white { display: none !important; }
+    .nav.scrolled .nav-logo-dark { display: block !important; }
+    .nav-contact {
+      color: rgba(255,255,255,.85) !important;
+      font-weight: 600 !important;
     }
-    .nav.scrolled .nav-logo-zh { color: var(--text); }
-    .nav.scrolled .nav-logo-en { color: var(--brand); }
+    .nav.scrolled .nav-contact { color: var(--brand) !important; }
     .nav-links {
       display: flex;
       align-items: center;
@@ -658,19 +654,26 @@
   <nav class="nav">
     <div class="container">
       <a href="index.html" class="nav-logo">
-        <span class="nav-logo-zh">旭衡电子</span>
-        <span class="nav-logo-en">AlwaysControl</span>
+        <img src="assets/logo-white.png" alt="AlwaysControl" class="nav-logo-img nav-logo-white">
+        <img src="assets/logo.jpg" alt="AlwaysControl" class="nav-logo-img nav-logo-dark" style="display:none;">
       </a>
       <ul class="nav-links">
-        <li><a href="#">解决方案</a></li>
+        <li><a href="#">首页</a></li>
         <li><a href="#">产品中心</a></li>
+        <li><a href="#">解决方案</a></li>
         <li><a href="#">兼容生态</a></li>
         <li><a href="#">帮助中心</a></li>
         <li><a href="#">关于我们</a></li>
+        <li><a href="#" class="nav-contact">联系我们</a></li>
       </ul>
       <div class="nav-right">
-        <button class="nav-lang">EN / 中</button>
-        <button class="btn-cta">联系我们</button>
+        <button class="nav-lang" aria-label="语言切换">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </button>
         <button class="nav-toggle" aria-label="菜单">
           <span></span><span></span><span></span>
         </button>
