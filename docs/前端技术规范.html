@@ -4,290 +4,1432 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>前端技术规范 · 旭衡电子</title>
-
 <style>
-  :root{--primary:#1a3a5c;--accent:#2980b9;--accent-light:#d6eaf8;--success:#27ae60;--warning:#f39c12;--danger:#e74c3c;--bg:#f5f7fa;--card:#fff;--border:#dde3ea;--text:#2c3e50;--muted:#7f8c8d;}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.8;}
-  .md-body{max-width:860px;margin:0 auto;padding:40px 32px 80px;background:var(--card);min-height:100vh;}
-  h1{font-size:26px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent-light);padding-bottom:12px;margin-bottom:24px;margin-top:32px;}
-  h2{font-size:19px;font-weight:700;color:var(--primary);margin:36px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-  h3{font-size:15px;font-weight:700;color:var(--text);margin:24px 0 10px;}
-  h4{font-size:13px;font-weight:700;color:var(--muted);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;}
-  p{margin-bottom:12px;color:var(--text);}
-  ul,ol{padding-left:22px;margin-bottom:12px;}
-  li{margin-bottom:4px;}
-  a{color:var(--accent);}
-  code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;color:#c0392b;}
-  pre{background:#1e2d3d;color:#e8eaf0;padding:18px 20px;border-radius:8px;overflow-x:auto;margin:14px 0;font-size:12px;line-height:1.6;}
-  pre code{background:none;color:inherit;padding:0;font-size:12px;}
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
-  th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600;}
-  td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
-  tr:nth-child(even) td{background:#f9fbfd;}
-  blockquote{border-left:4px solid var(--accent);background:var(--accent-light);padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0;color:var(--primary);}
-  hr{border:none;border-top:1px solid var(--border);margin:28px 0;}
-  strong{color:var(--text);}
-</style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --accent-light: #d6eaf8;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --purple: #8e44ad;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #dde3ea;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --code-bg: #1e2d3d;
+  }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* Header */
+  .doc-header { background: linear-gradient(135deg, #0f2940, #1a6fa0); color: white; padding: 48px 0 36px; text-align: center; }
+  .doc-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .doc-header .sub { opacity: .7; font-size: 14px; margin-bottom: 24px; }
+  .meta-tags { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .meta-tag { background: rgba(255,255,255,.15); padding: 4px 14px; border-radius: 20px; font-size: 13px; }
+
+  /* Container */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Layout */
+  .layout-wrapper { display: flex; gap: 32px; align-items: flex-start; margin-top: 24px; }
+
+  /* Sidebar */
+  .sidebar {
+    position: sticky;
+    top: 68px;
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 15px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-left: 8px; border-bottom: none; }
+  .sidebar ul { list-style: none; padding: 0; margin: 0; }
+  .sidebar li { margin: 4px 0; }
+  .sidebar a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .sidebar a:hover { background: #f0f7ff; color: var(--accent); }
+  .sidebar a.active { background: var(--accent-light); color: var(--accent); font-weight: 700; }
+
+  /* Main Content */
+  .main-content { flex: 1; min-width: 0; }
+
+  /* Section */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    scroll-margin-top: 72px;
+  }
+  .section-label { font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  h2 { font-size: 22px; color: var(--primary); margin-bottom: 22px; padding-bottom: 12px; border-bottom: 2px solid var(--accent-light); }
+  h3 { font-size: 18px; color: var(--primary); margin: 28px 0 14px; font-weight: 600; }
+  h4 { font-size: 15px; color: var(--text); margin: 20px 0 10px; font-weight: 700; }
+  p { margin: 10px 0; }
+
+  /* Highlights */
+  .highlight { background: var(--accent-light); border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0; font-size: 15px; line-height: 1.7; }
+  .gray-box { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+
+  /* Code & Tables */
+  pre { background: var(--code-bg); color: #a8d8f0; border-radius: 10px; padding: 20px 24px; overflow-x: auto; font-family: 'JetBrains Mono','Courier New',monospace; font-size: 13px; line-height: 1.7; margin: 16px 0; }
+  code { background: #e8f4fd; color: #1a6fa0; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono',monospace; font-size: 13px; }
+  pre code { background: none; color: inherit; padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: var(--primary); color: white; padding: 12px 16px; text-align: left; font-weight: 600; border: 1px solid var(--primary); }
+  td { padding: 12px 16px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafc; }
+
+  .main-content ul, .main-content ol { padding-left: 24px; margin: 12px 0; }
+  .main-content li { margin-bottom: 6px; }
+  strong { color: var(--text); }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: var(--success); }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+  .badge-red { background: #fdecea; color: var(--danger); }
+  .badge-yellow { background: #fef9e7; color: var(--warning); }
+
+  /* Flow diagram */
+  .flow-box { background: #111827; color: #e2e8f0; border-radius: 12px; padding: 28px; font-family: 'JetBrains Mono',monospace; font-size: 13px; line-height: 2; overflow-x: auto; white-space: pre; margin: 16px 0; }
+
+  /* Responsive */
+  @media(max-width:960px){
+    .layout-wrapper { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; top: 0; max-height: none; }
+    .section { padding: 24px 20px; }
+  }
+
+  .doc-footer { text-align: center; padding: 32px; color: var(--muted); font-size: 13px; }
+</style>
 </head>
 <body>
+
+<!-- Top Nav -->
 <div style="background:#1a3a5c;padding:0;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.2)">
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
-    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
+    <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
     <span style="color:#3d6080;font-size:12px">|</span>
-    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
-    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
-    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
-    <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
-    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
-    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
-    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
+    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 需求文档</a>
+    <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
+    <a href="前端技术规范.html" style="color:white;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0;background:rgba(255,255,255,.15)" onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">🖥 前端规范</a>
+    <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
+    <a href="测试用例.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">✅ 测试用例</a>
+    <a href="技术选型备忘.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🔍 技术选型</a>
   </div>
 </div>
-<div class="md-body">
-<h1>前端技术规范</h1>
 
-<blockquote>版本 v1.0 · 2026-03-12 · 旭衡电子官网重构</blockquote>
-<blockquote>技术选型最终确认后更新，当前为规范框架。</blockquote>
+<!-- Doc Header -->
+<div class="doc-header">
+  <div class="container">
+    <h1>🖥 前端技术规范</h1>
+    <div class="sub">AlwaysControl Technology — Official Website Frontend Specification</div>
+    <div class="meta-tags">
+      <span class="meta-tag">v2.0 完整版</span>
+      <span class="meta-tag">Next.js 14+ App Router</span>
+      <span class="meta-tag">Strapi v4 CMS</span>
+      <span class="meta-tag">Tailwind CSS</span>
+      <span class="meta-tag">TypeScript</span>
+    </div>
+  </div>
+</div>
 
-<hr>
+<!-- Main Layout -->
+<div class="container layout-wrapper">
 
-<h2>一、技术栈要求</h2>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>目录导航</h2>
+    <ul>
+      <li><a href="#s1">一、技术选型决策</a></li>
+      <li><a href="#s2">二、项目目录结构</a></li>
+      <li><a href="#s3">三、路由设计</a></li>
+      <li><a href="#s4">四、多语言实现规范</a></li>
+      <li><a href="#s5">五、SEO 规范</a></li>
+      <li><a href="#s6">六、组件规范</a></li>
+      <li><a href="#s7">七、CMS 数据获取规范</a></li>
+      <li><a href="#s8">八、性能规范</a></li>
+      <li><a href="#s9">九、环境变量规范</a></li>
+      <li><a href="#s10">十、错误处理规范</a></li>
+    </ul>
+  </aside>
 
-<table>
-<thead><tr><th>层级</th><th>要求</th><th>备注</th></tr></thead>
-<tbody>
-<tr><td>框架</td><td>Next.js（React）或 Nuxt.js（Vue），<strong>必须 SSR</strong></td><td>待团队确认，见技术选型备忘.html</td></tr>
-<tr><td>语言</td><td>TypeScript（强制）</td><td>不允许 <code>.js</code> 文件，全部 <code>.ts</code> / <code>.tsx</code></td></tr>
-<tr><td>样式</td><td>Tailwind CSS 或 CSS Modules</td><td>不使用全局裸 CSS，不使用内联 style</td></tr>
-<tr><td>包管理</td><td>pnpm</td><td>不使用 npm / yarn</td></tr>
-<tr><td>代码规范</td><td>ESLint + Prettier，提交前强制通过</td><td><code>pre-commit</code> hook 检查</td></tr>
-</tbody>
-</table>
+  <!-- Main Content -->
+  <main class="main-content">
 
-<hr>
+    <div class="highlight" style="margin-bottom:28px;">
+      <strong>📌 文档定位：</strong>本文档为旭衡电子（AlwaysControl Technology）官网重构项目的前端开发权威规范，面向海外市场 B2B 能源科技公司官网。所有前端开发（含 Claude AI 辅助开发）必须严格遵循本文档。技术选型已最终确认，不可更改。
+    </div>
 
-<h2>二、目录结构（Next.js 示例）</h2>
 
-<pre><code class="language-">
-src/
-├── app/                    # App Router 页面
-│   ├── [locale]/           # 多语言路由根节点
-│   │   ├── page.tsx        # 首页
-│   │   ├── solutions/
-│   │   │   └── [slug]/     # 解决方案场景页
+    <!-- ============================================================ -->
+    <!-- 一、技术选型决策 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s1">
+      <div class="section-label">SECTION 01</div>
+      <h2>一、技术选型决策</h2>
+
+      <h3>1.1 前端框架：Next.js vs Nuxt.js</h3>
+
+      <table>
+        <thead>
+          <tr><th>对比维度</th><th>Next.js 14+ (React)</th><th>Nuxt.js 3 (Vue)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>SSR / SSG / ISR 支持</strong></td><td>✅ 三者原生支持，ISR 成熟稳定，revalidate 粒度到页面级</td><td>✅ SSR/SSG 支持良好，ISR 通过 routeRules 配置，成熟度稍逊</td></tr>
+          <tr><td><strong>多语言路由（hreflang）</strong></td><td>✅ next-intl 生态成熟，[locale] 动态路由 + generateMetadata 原生支持 hreflang</td><td>✅ @nuxtjs/i18n 可用，但配置复杂度较高</td></tr>
+          <tr><td><strong>CMS 集成生态</strong></td><td>✅ Strapi/Contentful/Sanity 官方均提供 Next.js Starter，文档完善</td><td>⚠️ 集成方案存在但官方模板较少</td></tr>
+          <tr><td><strong>Claude AI 代码生成质量</strong></td><td>✅ React/Next.js 训练数据量极大，生成代码质量高、一致性好</td><td>⚠️ Vue/Nuxt 训练数据量较少，生成代码偶需手动修正</td></tr>
+          <tr><td><strong>React Server Components</strong></td><td>✅ 原生支持 RSC，默认零 JS bundle，SEO 友好</td><td>❌ 不支持（Vue 无此概念）</td></tr>
+          <tr><td><strong>生态规模（npm 周下载量）</strong></td><td>✅ ~600 万/周，React 生态 Top 1 元框架</td><td>⚠️ ~50 万/周，Vue 生态主力但规模差距明显</td></tr>
+          <tr><td><strong>部署平台原生支持</strong></td><td>✅ Vercel 原生支持（同公司产品），零配置部署</td><td>⚠️ 需额外配置 Nitro 预设</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <strong>选型结论：Next.js 14+（App Router）。</strong>Next.js 在 ISR 成熟度、React Server Components、CMS 集成生态以及 AI 辅助开发质量方面均具有显著优势。作为 Vercel 的第一方产品，部署链路零摩擦。React 生态的绝对规模意味着更丰富的组件库、更快的问题排查和更稳定的长期维护。对于本项目以 SEO 为核心、以 CMS 驱动内容、以 Claude 辅助开发的技术约束，Next.js 是唯一合理选择。
+      </div>
+
+      <h3>1.2 CMS 方案：Strapi v4 vs Directus</h3>
+
+      <table>
+        <thead>
+          <tr><th>对比维度</th><th>Strapi v4</th><th>Directus</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>内容建模可视化</strong></td><td>✅ Content-Type Builder GUI，非技术人员可直接操作，字段拖拽创建</td><td>✅ 可视化建模，但基于数据库表映射，概念门槛稍高</td></tr>
+          <tr><td><strong>原生多语言字段</strong></td><td>✅ i18n 插件原生支持，每个 Content Type 可独立启用多语言</td><td>⚠️ 通过 Translations M2M 关系实现，配置复杂度较高</td></tr>
+          <tr><td><strong>REST + GraphQL 双协议</strong></td><td>✅ REST 默认启用，GraphQL 通过官方插件一键启用</td><td>✅ REST + GraphQL 均原生支持</td></tr>
+          <tr><td><strong>媒体库管理</strong></td><td>✅ 内置媒体库，支持图片裁剪/格式转换/响应式断点</td><td>✅ 内置 DAM，功能完善</td></tr>
+          <tr><td><strong>Webhook 支持（ISR 触发）</strong></td><td>✅ 内置 Webhook，支持 entry.create/update/delete 等粒度事件</td><td>✅ 支持 Webhook，事件类型丰富</td></tr>
+          <tr><td><strong>社区规模（GitHub Stars）</strong></td><td>✅ 65k+ Stars，npm 插件生态丰富</td><td>⚠️ 29k+ Stars，社区活跃但规模较小</td></tr>
+          <tr><td><strong>自托管成本</strong></td><td>✅ Node.js + SQLite/PostgreSQL，轻量可控</td><td>✅ Node.js + 任意 SQL 数据库</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <strong>选型结论：Strapi v4。</strong>Strapi 的 i18n 原生支持直接满足本项目 8 语言需求，无需额外建模。其 Content-Type Builder 的可视化程度更高，适合非技术运营人员独立维护内容。65k+ Stars 的社区规模意味着更完善的文档和更快的问题解决。Webhook 内置支持使得 ISR 触发链路开箱即用，与 Next.js 的 revalidate 机制无缝对接。
+      </div>
+
+      <h3>1.3 样式方案：Tailwind CSS</h3>
+
+      <p><strong>选择理由：</strong></p>
+      <ul>
+        <li><strong>原子化 CSS</strong>：无需命名 CSS 类，直接在 JSX 中用 utility class 描述样式，消除样式文件维护成本</li>
+        <li><strong>与 Next.js 无缝集成</strong>：<code>create-next-app</code> 官方模板默认集成 Tailwind CSS，零配置启动</li>
+        <li><strong>JIT 模式按需生成</strong>：仅生成实际使用的 CSS，生产构建体积极小（通常 &lt; 10KB gzip）</li>
+        <li><strong>适合 AI 代码生成</strong>：Tailwind 的声明式语法与 Claude 的代码生成模式高度契合，减少样式相关的生成错误</li>
+        <li><strong>设计系统一致性</strong>：通过 <code>tailwind.config.js</code> 统一定义颜色/字体/间距，确保全站视觉一致</li>
+      </ul>
+
+      <h3>1.4 部署平台：Vercel</h3>
+
+      <p><strong>选择理由：</strong></p>
+      <ul>
+        <li><strong>Next.js 原生部署平台</strong>：Vercel 是 Next.js 的开发商，ISR / Middleware / Edge Functions 等高级特性在 Vercel 上获得第一时间支持和最佳性能</li>
+        <li><strong>全球 Edge Network CDN</strong>：静态资源和 ISR 页面通过全球边缘节点分发，海外用户访问延迟极低</li>
+        <li><strong>Preview 部署</strong>：每个 Git 分支自动生成独立预览 URL，支持设计评审和 QA 验收</li>
+        <li><strong>环境变量管理</strong>：Production / Preview / Development 三套环境隔离，敏感变量安全存储</li>
+        <li><strong>零配置 CI/CD</strong>：推送 Git 即触发构建部署，无需维护额外的 CI 管道</li>
+      </ul>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 二、项目目录结构 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s2">
+      <div class="section-label">SECTION 02</div>
+      <h2>二、项目目录结构</h2>
+
+      <h3>2.1 完整目录树</h3>
+
+<pre><code>xuanheng-website/
+├── app/                              # Next.js App Router（页面路由）
+│   ├── [locale]/                     # 多语言根路由（动态参数）
+│   │   ├── layout.tsx                # 根布局：导航栏 + Footer + 多语言 Provider
+│   │   ├── page.tsx                  # EP-01 首页
+│   │   ├── error.tsx                 # 全局错误边界
+│   │   ├── not-found.tsx             # 404 页面
 │   │   ├── products/
-│   │   │   └── [slug]/     # 产品页
-│   │   ├── ecosystem/      # 兼容生态页
-│   │   ├── help/           # 帮助中心
-│   │   ├── contact/        # 联系我们
-│   │   ├── about/          # 关于我们
-│   │   └── developers/     # 开发者中心（占位页）
-├── components/
-│   ├── ui/                 # 原子组件（Button / Input / Badge）
-│   ├── layout/             # Header / Footer / Sidebar
-│   ├── blocks/             # 页面区块组件（Hero / ProductCard）
-│   └── forms/              # 表单组件
-├── lib/
-│   ├── cms/                # CMS API 封装
-│   ├── i18n/               # 多语言工具
-│   └── utils/              # 工具函数
-├── types/                  # TypeScript 类型定义
-└── styles/                 # 全局样式变量
+│   │   │   ├── page.tsx              # EP-06 产品中心列表页
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx          # EP-06 单个产品详情页
+│   │   ├── solutions/
+│   │   │   ├── page.tsx              # EP-02 解决方案列表页
+│   │   │   └── [scenario]/
+│   │   │       └── page.tsx          # EP-02 场景页（hems/ess/evcms/vpp/pqms）
+│   │   ├── ecosystem/
+│   │   │   └── page.tsx              # EP-03 兼容生态页
+│   │   ├── support/
+│   │   │   └── page.tsx              # EP-04 帮助中心
+│   │   ├── about/
+│   │   │   ├── page.tsx              # EP-07 关于我们
+│   │   │   ├── news/
+│   │   │   │   ├── page.tsx          # EP-07 新闻列表
+│   │   │   │   └── [slug]/
+│   │   │   │       └── page.tsx      # EP-07 新闻详情
+│   │   │   └── careers/
+│   │   │       └── page.tsx          # EP-07 加入我们
+│   │   ├── contact/
+│   │   │   └── page.tsx              # EP-08 联系我们（含表单）
+│   │   └── privacy/
+│   │       └── page.tsx              # EP-09 隐私政策
+│   ├── api/
+│   │   ├── revalidate/
+│   │   │   └── route.ts              # ISR Webhook 触发端点
+│   │   └── contact/
+│   │       └── route.ts              # 联系表单提交 API
+│   └── sitemap.ts                    # 自动生成 Sitemap
+│
+├── components/                       # 可复用组件库
+│   ├── layout/                       # 布局组件
+│   │   ├── Header.tsx                # 顶部导航栏
+│   │   ├── Footer.tsx                # 页脚
+│   │   └── Navigation.tsx            # 导航菜单（含移动端汉堡菜单）
+│   ├── home/                         # 首页专用组件
+│   │   ├── Hero.tsx                  # 首屏大图 + CTA
+│   │   ├── TrustStats.tsx            # 信任数据条
+│   │   ├── AccessMethod.tsx          # 接入方式展示
+│   │   ├── SolutionCards.tsx         # 解决方案卡片
+│   │   ├── ProductOverview.tsx       # 产品一览
+│   │   ├── BrandLogoWall.tsx         # 兼容品牌墙
+│   │   └── CtaBanner.tsx             # 底部 CTA 横幅
+│   ├── shared/                       # 跨页面复用组件
+│   │   ├── Button.tsx                # 通用按钮
+│   │   ├── Badge.tsx                 # 标签/徽章
+│   │   ├── SectionHeader.tsx         # 区块标题
+│   │   └── LanguageSwitcher.tsx      # 语言切换器
+│   └── ui/                           # 原子级 UI 组件
+│       ├── Input.tsx
+│       ├── Select.tsx
+│       ├── Modal.tsx
+│       └── Skeleton.tsx              # 加载骨架屏
+│
+├── lib/                              # 工具库 & 业务逻辑
+│   ├── strapi.ts                     # Strapi API 客户端封装
+│   ├── i18n.ts                       # 多语言配置 & 工具函数
+│   └── seo.ts                        # SEO 元数据生成工具
+│
+├── messages/                         # 多语言翻译文件（UI 静态文案）
+│   ├── zh-CN.json                    # 简体中文（基准语言）
+│   ├── en-US.json                    # 英文
+│   ├── zh-TW.json                    # 繁体中文（OpenCC 自动转换）
+│   ├── de.json                       # 德语
+│   ├── fr.json                       # 法语
+│   ├── pt.json                       # 葡萄牙语
+│   ├── es.json                       # 西班牙语
+│   └── ru.json                       # 俄语
+│
+├── public/                           # 静态资源（不经过构建处理）
+│   ├── images/                       # 图片资源
+│   ├── icons/                        # 图标 / favicon
+│   └── robots.txt
+│
+├── types/                            # TypeScript 全局类型定义
+│   ├── strapi.ts                     # Strapi 响应数据类型
+│   └── common.ts                     # 通用业务类型
+│
+├── middleware.ts                      # 语言检测 + 重定向中间件
+├── next.config.js                     # Next.js 配置
+├── tailwind.config.js                 # Tailwind CSS 配置（设计令牌）
+├── tsconfig.json                      # TypeScript 配置
+├── .env.local                         # 本地环境变量（不提交 Git）
+├── .env.staging                       # Staging 环境变量
+└── package.json
 </code></pre>
 
-<hr>
+      <h3>2.2 各目录说明</h3>
 
-<h2>三、多语言实现规范</h2>
+      <table>
+        <thead>
+          <tr><th>目录</th><th>职责</th><th>关键约束</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>app/[locale]/</code></td><td>所有前台页面路由，通过动态 locale 参数实现多语言</td><td>禁止在此目录外创建页面路由</td></tr>
+          <tr><td><code>app/api/</code></td><td>API Route Handler，处理服务端逻辑</td><td>仅用于 Webhook 和表单提交，不做 BFF 代理</td></tr>
+          <tr><td><code>components/</code></td><td>所有可复用 React 组件，按用途分子目录</td><td>组件不直接调用 Strapi API，数据通过 Props 传入</td></tr>
+          <tr><td><code>lib/</code></td><td>业务逻辑封装：API 客户端、i18n、SEO 工具</td><td>纯函数为主，不含 React 组件</td></tr>
+          <tr><td><code>messages/</code></td><td>UI 静态翻译文件（按钮/导航/提示语等）</td><td>按页面分 namespace，zh-CN 为基准</td></tr>
+          <tr><td><code>types/</code></td><td>TypeScript 类型定义</td><td>禁止使用 <code>any</code>，Strapi 响应必须强类型</td></tr>
+          <tr><td><code>public/</code></td><td>静态资源，直接通过 URL 访问</td><td>大图通过 Strapi 媒体库管理，此处仅放 favicon 等</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-<h3>URL 结构</h3>
-<pre><code class="language-">
-/zh-CN/           首页（简体中文）
-/en-US/           首页（英文）
-/zh-TW/           首页（繁体，自动生成）
-/zh-CN/solutions/hems
-/en-US/products/neuron-ii
-</code></pre>
 
-<h3>语言配置</h3>
-<ul>
-<li>语言列表从 CMS「语言管理」API 动态拉取，不硬编码</li>
-<li>默认语言检测顺序：URL 路径 → 用户偏好（localStorage） → IP 地理位置 → zh-CN</li>
-<li>切换语言时保持当前页面路径，仅替换 locale 前缀</li>
-</ul>
+    <!-- ============================================================ -->
+    <!-- 三、路由设计 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s3">
+      <div class="section-label">SECTION 03</div>
+      <h2>三、路由设计</h2>
 
-<h3>i18n 实现</h3>
-<ul>
-<li>UI 固定词条（按钮/导航/错误提示）通过 CMS 多语言字典 API 获取</li>
-<li>页面内容（产品描述/解决方案文案）通过各内容 API 直接返回对应语言版本</li>
-<li>未翻译内容按回退链处理：zh-TW → zh-CN；de/fr/pt/es/ru → en-US → zh-CN</li>
-</ul>
+      <h3>3.1 页面路由清单</h3>
 
-<hr>
+      <table>
+        <thead>
+          <tr><th>路由路径</th><th>需求文档</th><th>渲染模式</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/[locale]</code></td><td>EP-01</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>首页，Hero / 信任数据 / 方案卡片均 CMS 驱动</td></tr>
+          <tr><td><code>/[locale]/products</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>产品中心列表页</td></tr>
+          <tr><td><code>/[locale]/products/[slug]</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>单产品详情页（动态路由）</td></tr>
+          <tr><td><code>/[locale]/solutions</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>解决方案列表页</td></tr>
+          <tr><td><code>/[locale]/solutions/[scenario]</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>5 个场景页：hems / ess / evcms / vpp / pqms</td></tr>
+          <tr><td><code>/[locale]/ecosystem</code></td><td>EP-03</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>兼容生态，品牌列表 + 筛选</td></tr>
+          <tr><td><code>/[locale]/support</code></td><td>EP-04</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>帮助中心（FAQ / 文档下载）</td></tr>
+          <tr><td><code>/[locale]/about</code></td><td>EP-07</td><td><span class="badge badge-green">SSG</span></td><td>关于我们（公司介绍）</td></tr>
+          <tr><td><code>/[locale]/about/news</code></td><td>EP-07</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>新闻列表</td></tr>
+          <tr><td><code>/[locale]/about/news/[slug]</code></td><td>EP-07</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>新闻详情（动态路由）</td></tr>
+          <tr><td><code>/[locale]/about/careers</code></td><td>EP-07</td><td><span class="badge badge-green">SSG</span></td><td>加入我们</td></tr>
+          <tr><td><code>/[locale]/contact</code></td><td>EP-08</td><td><span class="badge badge-green">SSG</span></td><td>联系我们（含表单，表单提交走 API Route）</td></tr>
+          <tr><td><code>/[locale]/privacy</code></td><td>EP-09</td><td><span class="badge badge-green">SSG</span></td><td>隐私政策</td></tr>
+        </tbody>
+      </table>
 
-<h2>四、SEO 规范</h2>
+      <h3>3.2 渲染模式说明</h3>
 
-<h3>每页必须包含</h3>
-<pre><code class="language-typescript">
-// 每个页面组件导出 generateMetadata
-export async function generateMetadata({ params }): Promise&lt;Metadata&gt; {
-  return {
-    title: '产品名称 | 旭衡电子',
-    description: '页面描述，100-160字符',
-    openGraph: {
-      title: '...',
-      description: '...',
-      images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+      <table>
+        <thead>
+          <tr><th>模式</th><th>全称</th><th>适用场景</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>ISR</strong></td><td>Incremental Static Regeneration</td><td>内容 CMS 驱动、需频繁更新的页面</td><td>构建时生成静态页面，过期后下次请求触发后台重新生成。兼顾 SEO 与内容实时性。默认 <code>revalidate: 3600</code>（1 小时），可通过 Webhook 即时刷新。</td></tr>
+          <tr><td><strong>SSG</strong></td><td>Static Site Generation</td><td>内容极少变化的页面</td><td>构建时一次性生成，不设 revalidate。变更需重新部署。</td></tr>
+          <tr><td><strong>SSR</strong></td><td>Server-Side Rendering</td><td>本项目暂无此需求</td><td>每次请求都在服务端渲染。TTFB 较高，仅在需要请求时实时数据时使用。</td></tr>
+        </tbody>
+      </table>
+
+      <h3>3.3 动态路由与 generateStaticParams</h3>
+
+      <p>所有动态路由（<code>[slug]</code> / <code>[scenario]</code>）必须实现 <code>generateStaticParams</code>，确保构建时预生成所有已知路径：</p>
+
+<pre><code>// app/[locale]/products/[slug]/page.tsx
+export async function generateStaticParams() {
+  const products = await fetchStrapi&lt;StrapiResponse&lt;Product[]&gt;&gt;(
+    '/products?fields[0]=slug'
+  );
+  const locales = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'];
+
+  return locales.flatMap(locale =&gt;
+    products.data.map(p =&gt; ({
+      locale,
+      slug: p.attributes.slug,
+    }))
+  );
+}</code></pre>
+
+      <h3>3.4 路由命名规范</h3>
+
+      <ul>
+        <li>路径段使用 <strong>小写英文 + 连字符</strong>（kebab-case）：<code>/about/news</code>，禁止驼峰或下划线</li>
+        <li>动态参数使用 <strong>语义化名称</strong>：<code>[slug]</code>（通用）、<code>[scenario]</code>（场景）、<code>[locale]</code>（语言）</li>
+        <li>禁止使用数字 ID 作为 URL 路径（如 <code>/products/123</code>），必须使用 slug</li>
+      </ul>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 四、多语言实现规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s4">
+      <div class="section-label">SECTION 04</div>
+      <h2>四、多语言实现规范</h2>
+
+      <h3>4.1 URL 结构</h3>
+
+      <p>采用 <strong>路径前缀方案</strong>（<code>/[locale]/...</code>），不使用子域名或查询参数：</p>
+
+      <table>
+        <thead>
+          <tr><th>URL 示例</th><th>语言</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>alwayscontrol.com.cn/zh-CN/</code></td><td>中文简体</td></tr>
+          <tr><td><code>alwayscontrol.com.cn/en-US/</code></td><td>英文</td></tr>
+          <tr><td><code>alwayscontrol.com.cn/zh-TW/</code></td><td>中文繁体</td></tr>
+          <tr><td><code>alwayscontrol.com.cn/de/products</code></td><td>德语 · 产品页</td></tr>
+          <tr><td><code>alwayscontrol.com.cn/fr/solutions/hems</code></td><td>法语 · HEMS 方案页</td></tr>
+        </tbody>
+      </table>
+
+      <div class="gray-box">
+        <strong>为什么不用子域名？</strong> 子域名（如 <code>de.alwayscontrol.com.cn</code>）需要独立 DNS 配置和 SSL 证书管理，增加运维复杂度。路径前缀方案在单域名下通过 Next.js middleware 实现，SEO 权重集中，维护成本最低。
+      </div>
+
+      <h3>4.2 语言配置（8 种）</h3>
+
+      <table>
+        <thead>
+          <tr><th>语言</th><th>locale 标识</th><th>内容来源</th><th>优先级</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>中文简体</td><td><code>zh-CN</code></td><td>手动翻译</td><td><span class="badge badge-red">P0</span></td><td>基准语言，所有内容首先以此撰写</td></tr>
+          <tr><td>英文</td><td><code>en-US</code></td><td>手动翻译</td><td><span class="badge badge-red">P0</span></td><td>海外市场主力语言</td></tr>
+          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>自动繁简转换（OpenCC）</td><td><span class="badge badge-red">P0</span></td><td>基于 zh-CN 自动生成</td></tr>
+          <tr><td>德语</td><td><code>de</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>欧洲核心市场</td></tr>
+          <tr><td>法语</td><td><code>fr</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>欧洲 + 非洲市场</td></tr>
+          <tr><td>葡萄牙语</td><td><code>pt</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>巴西市场</td></tr>
+          <tr><td>西班牙语</td><td><code>es</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>拉美 + 欧洲市场</td></tr>
+          <tr><td>俄语</td><td><code>ru</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>独联体市场</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.3 next-intl 实现方案</h3>
+
+      <h4>middleware.ts — 语言检测与重定向</h4>
+
+<pre><code>// middleware.ts
+import createMiddleware from 'next-intl/middleware';
+
+export default createMiddleware({
+  locales: ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'],
+  defaultLocale: 'zh-CN',
+  localeDetection: true,  // 自动检测 Accept-Language header
+  localePrefix: 'always', // URL 始终包含 locale 前缀
+});
+
+export const config = {
+  // 匹配所有路径（排除 api / _next / 静态资源）
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
+};</code></pre>
+
+      <h4>翻译文件结构</h4>
+
+<pre><code>// messages/zh-CN.json（按页面分 namespace）
+{
+  "common": {
+    "nav": {
+      "home": "首页",
+      "products": "产品中心",
+      "solutions": "解决方案",
+      "ecosystem": "兼容生态",
+      "support": "帮助中心",
+      "about": "关于我们",
+      "contact": "联系我们"
     },
-    alternates: {
-      canonical: 'https://alwayscontrol.com.cn/zh-CN/...',
-      languages: {
-        'zh-CN': 'https://alwayscontrol.com.cn/zh-CN/...',
-        'en-US': 'https://alwayscontrol.com.cn/en-US/...',
-      },
+    "cta": {
+      "learnMore": "了解更多",
+      "contactUs": "联系我们",
+      "getStarted": "立即开始"
     },
+    "footer": {
+      "copyright": "© 2026 旭衡电子 AlwaysControl Technology"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "跨品牌能源管理解决方案",
+      "subtitle": "..."
+    }
+  }
+}</code></pre>
+
+      <h3>4.4 降级策略</h3>
+
+      <div class="highlight">
+        <strong>核心原则：宁可显示降级内容，也不允许白屏。</strong>
+      </div>
+
+<pre><code>// lib/i18n.ts
+import { notFound } from 'next/navigation';
+
+const SUPPORTED_LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'] as const;
+type SupportedLocale = typeof SUPPORTED_LOCALES[number];
+
+export function isValidLocale(locale: string): locale is SupportedLocale {
+  return SUPPORTED_LOCALES.includes(locale as SupportedLocale);
+}
+
+export async function getMessages(locale: string) {
+  // 验证 locale 合法性
+  if (!isValidLocale(locale)) {
+    notFound();
+  }
+
+  try {
+    return (await import(`../messages/${locale}.json`)).default;
+  } catch {
+    // 降级链：任意语言 → zh-CN，绝不抛错
+    console.warn(`[i18n] Missing messages for locale: ${locale}, falling back to zh-CN`);
+    return (await import('../messages/zh-CN.json')).default;
   }
 }
-</code></pre>
 
-<h3>禁止事项</h3>
-<ul>
-<li>❌ 不使用客户端渲染（CSR）展示 SEO 关键内容</li>
-<li>❌ 不在 <code>&lt;head&gt;</code> 外放置 <code>&lt;meta&gt;</code> 标签</li>
-<li>❌ 不使用 <code>noindex</code> 在生产环境（Staging 需要）</li>
-</ul>
+// CMS 内容降级：Strapi 多语言字段为空时的降级
+export function getLocalizedField&lt;T&gt;(
+  data: Record&lt;string, T&gt;,
+  locale: string,
+  fallbackLocale: string = 'zh-CN'
+): T | undefined {
+  return data[locale] ?? data[fallbackLocale] ?? Object.values(data)[0];
+}</code></pre>
+    </div>
 
-<hr>
 
-<h2>五、性能规范</h2>
+    <!-- ============================================================ -->
+    <!-- 五、SEO 规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s5">
+      <div class="section-label">SECTION 05</div>
+      <h2>五、SEO 规范</h2>
 
-<table>
-<thead><tr><th>指标</th><th>目标</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>LCP（最大内容绘制）</td><td>< 2.5s</td><td>Core Web Vitals P75</td></tr>
-<tr><td>FID / INP</td><td>< 100ms</td><td>交互响应</td></tr>
-<tr><td>CLS（累积布局偏移）</td><td>< 0.1</td><td>避免内容跳动</td></tr>
-<tr><td>首屏图片</td><td>WebP + 懒加载</td><td>Hero 图使用 priority 预加载</td></tr>
-<tr><td>JS Bundle（首屏）</td><td>< 200KB gzip</td><td>Tree-shake 未使用代码</td></tr>
-</tbody>
-</table>
+      <h3>5.1 每页必须包含的元数据</h3>
 
-<h3>图片处理</h3>
-<pre><code class="language-tsx">
-// 使用框架内置 Image 组件（自动优化）
-import Image from 'next/image'
-&lt;Image src={url} width={800} height={600} alt="产品图" loading="lazy" /&gt;
+      <p>每个页面文件必须导出 <code>generateMetadata</code> 函数，包含以下必选字段：</p>
 
-// Hero 图使用 priority
-&lt;Image src={heroUrl} ... priority /&gt;
-</code></pre>
+<pre><code>// app/[locale]/page.tsx
+import { Metadata } from 'next';
 
-<hr>
+interface PageProps {
+  params: { locale: string };
+}
 
-<h2>六、组件规范</h2>
+export async function generateMetadata({ params }: PageProps): Promise&lt;Metadata&gt; {
+  const { locale } = params;
+  const t = await getMessages(locale);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alwayscontrol.com.cn';
+  const isProduction = process.env.NEXT_PUBLIC_ENV === 'production';
 
-<h3>命名规则</h3>
-<ul>
-<li>组件文件：<code>PascalCase.tsx</code>（如 <code>ProductCard.tsx</code>）</li>
-<li>工具函数：<code>camelCase.ts</code>（如 <code>formatDate.ts</code>）</li>
-<li>CSS Module：<code>ComponentName.module.css</code></li>
-<li>常量：<code>UPPER_SNAKE_CASE</code></li>
-</ul>
+  return {
+    title: `${t.home.hero.title} | AlwaysControl`,
+    description: t.home.meta.description,  // 100-160 字符
 
-<h3>Props 规范</h3>
-<pre><code class="language-typescript">
-// 每个组件必须定义 Props 类型
+    // hreflang 多语言替代链接
+    alternates: {
+      canonical: `${siteUrl}/${locale}`,
+      languages: {
+        'zh-CN': `${siteUrl}/zh-CN`,
+        'en-US': `${siteUrl}/en-US`,
+        'zh-TW': `${siteUrl}/zh-TW`,
+        'de': `${siteUrl}/de`,
+        'fr': `${siteUrl}/fr`,
+        'pt': `${siteUrl}/pt`,
+        'es': `${siteUrl}/es`,
+        'ru': `${siteUrl}/ru`,
+        'x-default': `${siteUrl}/en-US`,
+      },
+    },
+
+    // Open Graph
+    openGraph: {
+      title: `${t.home.hero.title} | AlwaysControl`,
+      description: t.home.meta.description,
+      url: `${siteUrl}/${locale}`,
+      siteName: 'AlwaysControl',
+      images: [{
+        url: `${siteUrl}/images/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'AlwaysControl Energy Management',
+      }],
+      locale: locale,
+      type: 'website',
+    },
+
+    // Robots：Staging 环境强制 noindex
+    robots: isProduction ? 'index,follow' : 'noindex,nofollow',
+  };
+}</code></pre>
+
+      <h3>5.2 hreflang 实现</h3>
+
+      <p>Next.js 14 的 <code>alternates.languages</code> 会自动在 <code>&lt;head&gt;</code> 中生成 <code>&lt;link rel="alternate" hreflang="..."&gt;</code> 标签。关键规则：</p>
+
+      <ul>
+        <li>每个页面必须声明所有 8 种语言 + <code>x-default</code>（指向 <code>en-US</code>）</li>
+        <li><code>canonical</code> 指向当前语言版本的绝对 URL</li>
+        <li>动态页面（产品/新闻）的 hreflang URL 必须包含对应的 slug</li>
+      </ul>
+
+      <h3>5.3 Sitemap 自动生成</h3>
+
+<pre><code>// app/sitemap.ts
+import { MetadataRoute } from 'next';
+import { fetchStrapi } from '@/lib/strapi';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://alwayscontrol.com.cn';
+const LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'];
+
+export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
+  // 静态页面
+  const staticPages = ['', '/products', '/solutions', '/ecosystem',
+    '/support', '/about', '/about/careers', '/contact', '/privacy'];
+
+  const staticEntries = staticPages.flatMap(page =&gt;
+    LOCALES.map(locale =&gt; ({
+      url: `${SITE_URL}/${locale}${page}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: page === '' ? 1.0 : 0.8,
+      alternates: {
+        languages: Object.fromEntries(
+          LOCALES.map(l =&gt; [l, `${SITE_URL}/${l}${page}`])
+        ),
+      },
+    }))
+  );
+
+  // 动态页面：产品
+  const products = await fetchStrapi&lt;any&gt;('/products?fields[0]=slug&amp;fields[1]=updatedAt');
+  const productEntries = products.data.flatMap((p: any) =&gt;
+    LOCALES.map(locale =&gt; ({
+      url: `${SITE_URL}/${locale}/products/${p.attributes.slug}`,
+      lastModified: new Date(p.attributes.updatedAt),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  );
+
+  // 动态页面：新闻
+  const news = await fetchStrapi&lt;any&gt;('/articles?fields[0]=slug&amp;fields[1]=updatedAt');
+  const newsEntries = news.data.flatMap((n: any) =&gt;
+    LOCALES.map(locale =&gt; ({
+      url: `${SITE_URL}/${locale}/about/news/${n.attributes.slug}`,
+      lastModified: new Date(n.attributes.updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    }))
+  );
+
+  return [...staticEntries, ...productEntries, ...newsEntries];
+}</code></pre>
+
+      <h3>5.4 SEO 禁止事项</h3>
+
+      <table>
+        <thead>
+          <tr><th>禁止行为</th><th>原因</th><th>检查方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>❌ 客户端渲染 SEO 关键内容</td><td>搜索引擎爬虫无法执行 JS，CSR 内容不被索引</td><td>所有包含 title/description/正文 的组件必须是 Server Component</td></tr>
+          <tr><td>❌ <code>display:none</code> 隐藏关键文本</td><td>被搜索引擎视为 SEO 作弊，可能导致降权</td><td>Code Review 强制检查</td></tr>
+          <tr><td>❌ 重复 canonical URL</td><td>导致搜索引擎索引混乱</td><td>每个页面的 canonical 必须唯一指向自身</td></tr>
+          <tr><td>❌ Staging 域名未设 noindex</td><td>Staging 内容被索引会稀释生产环境 SEO 权重</td><td><code>NEXT_PUBLIC_ENV !== 'production'</code> 时强制 <code>noindex,nofollow</code></td></tr>
+          <tr><td>❌ 缺少 <code>alt</code> 属性的图片</td><td>影响图片 SEO 和无障碍访问</td><td>ESLint jsx-a11y 规则强制检查</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 六、组件规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s6">
+      <div class="section-label">SECTION 06</div>
+      <h2>六、组件规范</h2>
+
+      <h3>6.1 目录与命名</h3>
+
+      <table>
+        <thead>
+          <tr><th>类别</th><th>规范</th><th>示例</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>组件文件</td><td>PascalCase，<code>.tsx</code> 后缀</td><td><code>Hero.tsx</code>、<code>ProductCard.tsx</code></td></tr>
+          <tr><td>工具函数</td><td>camelCase，<code>.ts</code> 后缀</td><td><code>formatDate.ts</code>、<code>slugify.ts</code></td></tr>
+          <tr><td>Props 接口</td><td><code>{ComponentName}Props</code></td><td><code>HeroProps</code>、<code>ProductCardProps</code></td></tr>
+          <tr><td>CSS 类</td><td>Tailwind 原子类为主，不写自定义 CSS</td><td><code>className="bg-white px-6 py-4"</code></td></tr>
+          <tr><td>常量</td><td>UPPER_SNAKE_CASE</td><td><code>MAX_PRODUCTS_PER_PAGE</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>6.2 Props 规范</h3>
+
+<pre><code>// ✅ 正确：明确类型定义
 interface ProductCardProps {
-  product: Product        // 明确类型，不用 any
-  locale: SupportedLocale // 多语言必传
-  className?: string      // 可选样式扩展
-}
-</code></pre>
-
-<h3>禁止事项</h3>
-<ul>
-<li>❌ 不使用 <code>any</code> 类型</li>
-<li>❌ 不在组件内直接调用 CMS API（通过 lib/cms 封装）</li>
-<li>❌ 不使用 <code>document</code> / <code>window</code>（SSR 不可用）</li>
-<li>❌ 不内联样式（<code>style={{ color: 'red' }}</code>）</li>
-</ul>
-
-<hr>
-
-<h2>七、CMS 数据获取</h2>
-
-<pre><code class="language-typescript">
-// lib/cms/index.ts 统一封装
-export async function getProducts(locale: string): Promise&lt;Product[]&gt; {
-  const res = await fetch(`${CMS_API}/products?locale=${locale}`, {
-    next: { revalidate: 300 }, // ISR：5分钟缓存
-  })
-  if (!res.ok) throw new Error('Failed to fetch products')
-  return res.json()
+  product: Product;           // 强类型，不用 any
+  locale: SupportedLocale;    // 多语言 locale 必传
+  className?: string;         // 可选样式扩展
+  priority?: boolean;         // 图片是否预加载
 }
 
-// 静态生成页面（产品/解决方案）
-export async function generateStaticParams() {
-  const products = await getProducts('zh-CN')
-  return products.map(p =&gt; ({ slug: p.slug }))
-}
-</code></pre>
-
-<h3>缓存策略</h3>
-<table>
-<thead><tr><th>内容类型</th><th>revalidate</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>产品页 / 解决方案页</td><td>300s（5分钟）</td><td>ISR，内容更新后自动刷新</td></tr>
-<tr><td>首页</td><td>60s</td><td>更新频率较高</td></tr>
-<tr><td>FAQ</td><td>600s</td><td>更新不频繁</td></tr>
-<tr><td>新闻</td><td>120s</td><td>发布后较快可见</td></tr>
-<tr><td>兼容品牌</td><td>3600s</td><td>变化极少</td></tr>
-</tbody>
-</table>
-
-<hr>
-
-<h2>八、错误处理</h2>
-
-<pre><code class="language-typescript">
-// 全局 Error Boundary
-// app/[locale]/error.tsx
-
-export default function Error({ error, reset }) {
+export function ProductCard({ product, locale, className, priority = false }: ProductCardProps) {
   return (
-    &lt;div&gt;
-      &lt;h2&gt;出现了一些问题&lt;/h2&gt;
-      &lt;button onClick={() =&gt; reset()}&gt;重试&lt;/button&gt;
-    &lt;/div&gt;
-  )
+    &lt;article className={`rounded-lg border border-gray-200 p-6 ${className ?? ''}`}&gt;
+      {/* ... */}
+    &lt;/article&gt;
+  );
 }
 
-// 404 页面
-// app/[locale]/not-found.tsx
-</code></pre>
+// ❌ 禁止
+export function ProductCard(props: any) { ... }       // 不允许 any
+export function ProductCard({ data }: { data: any }) { ... }  // 不允许 any</code></pre>
 
-<hr>
+      <h3>6.3 Server vs Client Component 原则</h3>
 
-<h2>九、环境变量</h2>
+      <table>
+        <thead>
+          <tr><th>场景</th><th>组件类型</th><th>原因</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>数据展示、SEO 关键内容</td><td><span class="badge badge-green">Server Component</span></td><td>默认选择。零 JS bundle，HTML 直出，SEO 友好</td></tr>
+          <tr><td>交互行为（点击/hover/表单输入）</td><td><span class="badge badge-yellow">Client Component</span></td><td>需要事件处理器和浏览器 API，标记 <code>'use client'</code></td></tr>
+          <tr><td>导航高亮、当前路由判断</td><td><span class="badge badge-yellow">Client Component</span></td><td>需要 <code>usePathname()</code> hook</td></tr>
+          <tr><td>语言切换器</td><td><span class="badge badge-yellow">Client Component</span></td><td>需要 <code>useRouter()</code> + 用户交互</td></tr>
+          <tr><td>静态文案展示（无交互）</td><td><span class="badge badge-green">Server Component</span></td><td>无需发送 JS 到客户端</td></tr>
+          <tr><td>动画效果（滚动触发/Hover）</td><td><span class="badge badge-yellow">Client Component</span></td><td>需要 IntersectionObserver 等浏览器 API</td></tr>
+        </tbody>
+      </table>
 
-<pre><code class="language-bash">
-# .env.local（本地，不提交 git）
-NEXT_PUBLIC_CMS_API_URL=http://localhost:1337/api
+      <div class="highlight">
+        <strong>最小化 Client 边界原则：</strong>将 <code>'use client'</code> 标记推到尽可能小的组件上。例如，产品详情页整体是 Server Component，仅「联系我们」按钮的弹窗交互是 Client Component。
+      </div>
+
+      <h4>组件示例</h4>
+
+<pre><code>// components/home/TrustStats.tsx — Server Component（默认）
+interface TrustStatsProps {
+  brands: number;
+  countries: number;
+  projects: number;
+}
+
+export function TrustStats({ brands, countries, projects }: TrustStatsProps) {
+  const stats = [
+    { value: `${brands}+`, label: '兼容品牌' },
+    { value: `${countries}+`, label: '服务国家' },
+    { value: `${projects}+`, label: '落地项目' },
+  ];
+
+  return (
+    &lt;section className="bg-white border-b border-gray-200 py-12"&gt;
+      &lt;div className="max-w-6xl mx-auto px-6 grid grid-cols-3 gap-8 text-center"&gt;
+        {stats.map(stat =&gt; (
+          &lt;div key={stat.label}&gt;
+            &lt;p className="text-4xl font-bold text-primary"&gt;{stat.value}&lt;/p&gt;
+            &lt;p className="text-sm text-gray-500 mt-2"&gt;{stat.label}&lt;/p&gt;
+          &lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+
+<pre><code>// components/shared/LanguageSwitcher.tsx — Client Component
+'use client';
+
+import { useRouter, usePathname } from 'next/navigation';
+
+interface LanguageSwitcherProps {
+  currentLocale: string;
+  locales: string[];
+}
+
+export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  function handleChange(newLocale: string) {
+    // 替换 URL 中的 locale 前缀
+    const newPath = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
+    router.push(newPath);
+  }
+
+  return (
+    &lt;select
+      value={currentLocale}
+      onChange={e =&gt; handleChange(e.target.value)}
+      className="text-sm border border-gray-300 rounded px-2 py-1"
+    &gt;
+      {locales.map(locale =&gt; (
+        &lt;option key={locale} value={locale}&gt;{locale}&lt;/option&gt;
+      ))}
+    &lt;/select&gt;
+  );
+}</code></pre>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 七、CMS 数据获取规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s7">
+      <div class="section-label">SECTION 07</div>
+      <h2>七、CMS 数据获取规范</h2>
+
+      <h3>7.1 数据获取模式选择原则</h3>
+
+      <table>
+        <thead>
+          <tr><th>页面类型</th><th>推荐模式</th><th>revalidate</th><th>理由</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>首页</td><td>ISR</td><td>3600s</td><td>Hero / 数据统计 / 品牌墙由 CMS 驱动，需定期刷新</td></tr>
+          <tr><td>产品列表 / 详情</td><td>ISR</td><td>3600s</td><td>产品信息通过 CMS 维护，更新后 Webhook 即时触发</td></tr>
+          <tr><td>解决方案场景页</td><td>ISR</td><td>3600s</td><td>内容较稳定，Webhook 触发刷新即可</td></tr>
+          <tr><td>新闻列表 / 详情</td><td>ISR</td><td>3600s</td><td>新闻发布后需较快可见</td></tr>
+          <tr><td>兼容生态</td><td>ISR</td><td>3600s</td><td>品牌列表由 CMS 维护</td></tr>
+          <tr><td>关于我们 / 隐私政策</td><td>SSG</td><td>—</td><td>内容极少变化，构建时生成</td></tr>
+          <tr><td>联系我们</td><td>SSG</td><td>—</td><td>页面模板固定，表单提交走 API Route</td></tr>
+        </tbody>
+      </table>
+
+      <h3>7.2 ISR 触发机制（Strapi Webhook → Next.js revalidate）</h3>
+
+      <div class="flow-box">Strapi 后台发布/更新内容
+        ↓
+Strapi Webhook POST → https://your-site.vercel.app/api/revalidate
+        ↓  (携带 secret + 变更的 content type + entry id)
+Next.js API Route 验证 secret → 调用 revalidatePath() / revalidateTag()
+        ↓
+下次用户访问该页面时，Vercel 在后台生成新版本静态页面
+        ↓
+新页面即时生效（用户无感知）</div>
+
+      <h4>Webhook 端点实现</h4>
+
+<pre><code>// app/api/revalidate/route.ts
+import { revalidatePath } from 'next/cache';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(request: NextRequest) {
+  const secret = request.nextUrl.searchParams.get('secret');
+
+  // 验证 Webhook 密钥
+  if (secret !== process.env.REVALIDATE_SECRET) {
+    return NextResponse.json({ message: 'Invalid secret' }, { status: 401 });
+  }
+
+  try {
+    const body = await request.json();
+    const { model, entry } = body;
+
+    // 根据内容类型刷新对应页面
+    const locales = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'];
+
+    switch (model) {
+      case 'product':
+        locales.forEach(locale =&gt; {
+          revalidatePath(`/${locale}/products`);
+          if (entry?.slug) {
+            revalidatePath(`/${locale}/products/${entry.slug}`);
+          }
+        });
+        break;
+      case 'article':
+        locales.forEach(locale =&gt; {
+          revalidatePath(`/${locale}/about/news`);
+          if (entry?.slug) {
+            revalidatePath(`/${locale}/about/news/${entry.slug}`);
+          }
+        });
+        break;
+      case 'solution':
+        locales.forEach(locale =&gt; {
+          revalidatePath(`/${locale}/solutions`);
+        });
+        break;
+      case 'home-page':
+        locales.forEach(locale =&gt; revalidatePath(`/${locale}`));
+        break;
+      default:
+        // 未知类型：刷新所有页面
+        revalidatePath('/', 'layout');
+    }
+
+    return NextResponse.json({ revalidated: true, model });
+  } catch (err) {
+    return NextResponse.json({ message: 'Error revalidating' }, { status: 500 });
+  }
+}</code></pre>
+
+      <h3>7.3 Strapi API 客户端封装</h3>
+
+<pre><code>// lib/strapi.ts
+const STRAPI_URL = process.env.STRAPI_API_URL;
+const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
+
+if (!STRAPI_URL) throw new Error('Missing STRAPI_API_URL env variable');
+if (!STRAPI_TOKEN) throw new Error('Missing STRAPI_API_TOKEN env variable');
+
+interface StrapiResponse&lt;T&gt; {
+  data: T;
+  meta: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
+export async function fetchStrapi&lt;T&gt;(
+  path: string,
+  options?: RequestInit &amp; { revalidate?: number }
+): Promise&lt;StrapiResponse&lt;T&gt;&gt; {
+  const { revalidate = 3600, ...fetchOptions } = options ?? {};
+
+  const res = await fetch(`${STRAPI_URL}/api${path}`, {
+    headers: {
+      Authorization: `Bearer ${STRAPI_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    next: { revalidate },  // ISR 缓存时间
+    ...fetchOptions,
+  });
+
+  if (!res.ok) {
+    throw new Error(
+      `Strapi fetch failed: ${res.status} ${res.statusText} — path: ${path}`
+    );
+  }
+
+  return res.json();
+}</code></pre>
+
+      <h3>7.4 数据获取示例（首页）</h3>
+
+<pre><code>// app/[locale]/page.tsx
+import { fetchStrapi } from '@/lib/strapi';
+import { Hero } from '@/components/home/Hero';
+import { TrustStats } from '@/components/home/TrustStats';
+import { SolutionCards } from '@/components/home/SolutionCards';
+import { ProductOverview } from '@/components/home/ProductOverview';
+import { BrandLogoWall } from '@/components/home/BrandLogoWall';
+import { CtaBanner } from '@/components/home/CtaBanner';
+
+interface PageProps {
+  params: { locale: string };
+}
+
+export default async function HomePage({ params }: PageProps) {
+  const { locale } = params;
+
+  // 并行请求所有数据，减少瀑布式延迟
+  const [heroData, brandsData, solutionsData, productsData] = await Promise.all([
+    fetchStrapi(`/home-page?populate=*&amp;locale=${locale}`),
+    fetchStrapi('/compatible-brands?filters[visible][$eq]=true&amp;populate=logo&amp;sort=order:asc'),
+    fetchStrapi(`/solutions?populate=icon,cover&amp;locale=${locale}`),
+    fetchStrapi(`/products?populate=thumbnail&amp;locale=${locale}`),
+  ]);
+
+  return (
+    &lt;&gt;
+      &lt;Hero data={heroData.data} /&gt;
+      &lt;TrustStats
+        brands={heroData.data.attributes.brandCount}
+        countries={heroData.data.attributes.countryCount}
+        projects={heroData.data.attributes.projectCount}
+      /&gt;
+      &lt;SolutionCards solutions={solutionsData.data} locale={locale} /&gt;
+      &lt;ProductOverview products={productsData.data} locale={locale} /&gt;
+      &lt;BrandLogoWall brands={brandsData.data} /&gt;
+      &lt;CtaBanner locale={locale} /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 八、性能规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s8">
+      <div class="section-label">SECTION 08</div>
+      <h2>八、性能规范</h2>
+
+      <h3>8.1 Core Web Vitals 目标</h3>
+
+      <table>
+        <thead>
+          <tr><th>指标</th><th>全称</th><th>目标值</th><th>测量工具</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>LCP</strong></td><td>Largest Contentful Paint</td><td>&lt; 2.5s</td><td>Vercel Analytics / PageSpeed Insights</td></tr>
+          <tr><td><strong>INP</strong></td><td>Interaction to Next Paint</td><td>&lt; 100ms</td><td>Vercel Analytics / Chrome DevTools</td></tr>
+          <tr><td><strong>CLS</strong></td><td>Cumulative Layout Shift</td><td>&lt; 0.1</td><td>Vercel Analytics / Lighthouse</td></tr>
+          <tr><td><strong>TTFB</strong></td><td>Time to First Byte</td><td>&lt; 800ms</td><td>WebPageTest / Vercel Analytics</td></tr>
+          <tr><td><strong>FCP</strong></td><td>First Contentful Paint</td><td>&lt; 1.8s</td><td>Lighthouse</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <strong>达标标准：</strong>以上指标均基于 P75（75th percentile）统计，需在全球主要市场（欧洲/北美/亚太）均达标。Vercel Analytics 提供按地区分布的性能数据。
+      </div>
+
+      <h3>8.2 图片规范（next/image）</h3>
+
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>全部使用 <code>next/image</code></strong></td><td>禁止裸 <code>&lt;img&gt;</code> 标签。<code>next/image</code> 自动处理：WebP/AVIF 格式转换、响应式 srcset、懒加载</td></tr>
+          <tr><td><strong>格式优先级</strong></td><td>WebP 优先，AVIF 可选（浏览器支持度更低但压缩率更高）</td></tr>
+          <tr><td><strong>sizes 属性必须设置</strong></td><td>告知浏览器图片的预期显示宽度，避免加载过大图片</td></tr>
+          <tr><td><strong>Hero 图预加载</strong></td><td>首屏 Hero 图设置 <code>priority={true}</code>，触发预加载</td></tr>
+          <tr><td><strong>其他图片懒加载</strong></td><td>默认行为，无需额外配置</td></tr>
+          <tr><td><strong>宽高必须声明</strong></td><td>防止 CLS（布局偏移），<code>width</code> 和 <code>height</code> 属性必填</td></tr>
+          <tr><td><strong>alt 文本必填</strong></td><td>SEO + 无障碍要求，描述图片内容</td></tr>
+        </tbody>
+      </table>
+
+<pre><code>// ✅ 正确用法
+import Image from 'next/image';
+
+// Hero 图：预加载
+&lt;Image
+  src={hero.imageUrl}
+  alt="AlwaysControl 能源管理系统架构图"
+  width={1200}
+  height={600}
+  sizes="100vw"
+  priority
+  className="w-full h-auto"
+/&gt;
+
+// 产品卡片图：懒加载
+&lt;Image
+  src={product.thumbnail}
+  alt={product.name}
+  width={400}
+  height={300}
+  sizes="(max-width: 768px) 100vw, 33vw"
+  className="rounded-lg"
+/&gt;
+
+// ❌ 禁止
+&lt;img src={url} /&gt;                    // 裸 img 标签
+&lt;Image src={url} alt="" /&gt;            // 空 alt（除装饰性图片外）
+&lt;Image src={url} width={0} height={0} /&gt;  // 无效尺寸</code></pre>
+
+      <h3>8.3 字体加载</h3>
+
+<pre><code>// app/[locale]/layout.tsx
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+
+// 正文字体
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',        // 防止 FOIT（Flash of Invisible Text）
+  variable: '--font-inter',
+});
+
+// 标题字体
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  display: 'swap',
+  variable: '--font-jakarta',
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html className={`${inter.variable} ${jakarta.variable}`}&gt;
+      &lt;body className="font-sans"&gt;
+        {children}
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+
+      <div class="gray-box">
+        <strong>字体策略：</strong><code>next/font</code> 在构建时下载字体文件并自托管（inline 到 CSS），完全避免运行时对 Google Fonts CDN 的请求。这对中国大陆用户尤其关键（Google 域名不稳定）。
+      </div>
+
+      <h3>8.4 Bundle 优化</h3>
+
+      <table>
+        <thead>
+          <tr><th>优化手段</th><th>实施方式</th><th>预期效果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>动态 import</strong></td><td>非首屏组件（如弹窗/图表）使用 <code>next/dynamic</code> 懒加载</td><td>减少首屏 JS 体积 30-50%</td></tr>
+          <tr><td><strong>Tree Shaking</strong></td><td>不引入整个 lodash，按需导入：<code>import debounce from 'lodash/debounce'</code></td><td>避免引入未使用代码</td></tr>
+          <tr><td><strong>图标按需导入</strong></td><td>Lucide React 按需导入：<code>import { ArrowRight } from 'lucide-react'</code></td><td>避免全量引入图标库（~200KB）</td></tr>
+          <tr><td><strong>Server Component 优先</strong></td><td>默认使用 Server Component，仅在必要时标记 <code>'use client'</code></td><td>零 JS bundle 发送到客户端</td></tr>
+          <tr><td><strong>首屏 JS 预算</strong></td><td>首屏 JS Bundle &lt; 200KB gzip</td><td>Lighthouse Performance Score &gt; 90</td></tr>
+        </tbody>
+      </table>
+
+<pre><code>// 动态 import 示例：联系表单弹窗
+import dynamic from 'next/dynamic';
+
+const ContactModal = dynamic(() =&gt; import('@/components/shared/ContactModal'), {
+  loading: () =&gt; &lt;div className="animate-pulse bg-gray-200 h-96 rounded-lg" /&gt;,
+  ssr: false,  // 仅客户端加载
+});</code></pre>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!-- 九、环境变量规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s9">
+      <div class="section-label">SECTION 09</div>
+      <h2>九、环境变量规范</h2>
+
+      <h3>9.1 变量清单</h3>
+
+      <table>
+        <thead>
+          <tr><th>变量名</th><th>示例值</th><th>说明</th><th>客户端可见</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>STRAPI_API_URL</code></td><td><code>https://cms.alwayscontrol.com.cn</code></td><td>Strapi 服务地址</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>STRAPI_API_TOKEN</code></td><td><code>xxxxxxxx</code></td><td>Strapi API 只读 Token</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>REVALIDATE_SECRET</code></td><td><code>xxxxxxxx</code></td><td>ISR Webhook 验签密钥</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>NEXT_PUBLIC_SITE_URL</code></td><td><code>https://alwayscontrol.com.cn</code></td><td>站点域名（用于 SEO canonical）</td><td>✅ 公开</td></tr>
+          <tr><td><code>NEXT_PUBLIC_ENV</code></td><td><code>production</code> / <code>staging</code></td><td>环境标识（控制 robots noindex）</td><td>✅ 公开</td></tr>
+          <tr><td><code>WECOM_WEBHOOK_URL</code></td><td><code>https://qyapi.weixin.qq.com/...</code></td><td>企微 Webhook（联系表单通知）</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>SMTP_HOST</code></td><td><code>smtp.example.com</code></td><td>邮件服务器</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>SMTP_USER</code></td><td><code>noreply@alwayscontrol.com.cn</code></td><td>发件人地址</td><td>❌ 仅服务端</td></tr>
+          <tr><td><code>SMTP_PASS</code></td><td><code>xxxxxxxx</code></td><td>邮件密码</td><td>❌ 仅服务端</td></tr>
+        </tbody>
+      </table>
+
+      <h3>9.2 环境变量管理规则</h3>
+
+      <table>
+        <thead>
+          <tr><th>规则</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong><code>NEXT_PUBLIC_</code> 前缀</strong></td><td>带此前缀的变量会被编译进客户端 JS bundle，<strong>绝对禁止</strong>用于存放密钥、Token 等敏感信息</td></tr>
+          <tr><td><strong>Staging 隔离</strong></td><td>Staging 环境使用独立变量文件 <code>.env.staging</code>，Strapi 指向独立 Staging 实例，避免脏数据污染生产</td></tr>
+          <tr><td><strong>密钥存储</strong></td><td>所有密钥类变量通过 Vercel Dashboard → Settings → Environment Variables 配置，<strong>不写入代码库</strong></td></tr>
+          <tr><td><strong>.env.local 不提交</strong></td><td><code>.gitignore</code> 中必须包含 <code>.env.local</code>，本地开发变量不进入版本控制</td></tr>
+          <tr><td><strong>环境区分</strong></td><td>Vercel 支持 Production / Preview / Development 三套环境变量独立配置</td></tr>
+        </tbody>
+      </table>
+
+<pre><code>// .env.local（本地开发，不提交 Git）
+STRAPI_API_URL=http://localhost:1337
+STRAPI_API_TOKEN=local-dev-token
+REVALIDATE_SECRET=dev-secret
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_ENV=development
 
-# .env.production（生产）
-NEXT_PUBLIC_CMS_API_URL=https://cms.alwayscontrol.com.cn/api
-NEXT_PUBLIC_SITE_URL=https://alwayscontrol.com.cn
-</code></pre>
+// .env.staging（Staging 环境）
+STRAPI_API_URL=https://cms-staging.alwayscontrol.com.cn
+NEXT_PUBLIC_SITE_URL=https://staging.alwayscontrol.com.cn
+NEXT_PUBLIC_ENV=staging</code></pre>
+    </div>
 
-<p><strong>规则：</strong></p>
-<ul>
-<li>含有 <code>NEXT_PUBLIC_</code> 前缀的变量会暴露到客户端，不放敏感信息</li>
-<li>真实密钥（邮件/企微/翻译API）只放服务端环境变量，不加 <code>NEXT_PUBLIC_</code> 前缀</li>
-<li>敏感变量不提交 git，通过部署平台（CI/CD）注入</li>
-</ul>
 
+    <!-- ============================================================ -->
+    <!-- 十、错误处理规范 -->
+    <!-- ============================================================ -->
+    <div class="section" id="s10">
+      <div class="section-label">SECTION 10</div>
+      <h2>十、错误处理规范</h2>
+
+      <h3>10.1 全局错误边界</h3>
+
+<pre><code>// app/[locale]/error.tsx
+'use client';  // Error 组件必须是 Client Component
+
+interface ErrorProps {
+  error: Error &amp; { digest?: string };
+  reset: () =&gt; void;
+}
+
+export default function Error({ error, reset }: ErrorProps) {
+  // 上报错误日志（可接入 Sentry）
+  console.error('[GlobalError]', error);
+
+  return (
+    &lt;div className="min-h-[60vh] flex flex-col items-center justify-center px-4"&gt;
+      &lt;div className="text-6xl mb-6"&gt;⚠️&lt;/div&gt;
+      &lt;h2 className="text-2xl font-bold text-gray-800 mb-4"&gt;
+        页面加载出错
+      &lt;/h2&gt;
+      &lt;p className="text-gray-500 mb-8 text-center max-w-md"&gt;
+        我们正在处理这个问题。请稍后重试，或返回首页。
+      &lt;/p&gt;
+      &lt;div className="flex gap-4"&gt;
+        &lt;button
+          onClick={reset}
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        &gt;
+          重试
+        &lt;/button&gt;
+        &lt;a
+          href="/"
+          className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+        &gt;
+          返回首页
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+      <h3>10.2 404 页面</h3>
+
+<pre><code>// app/[locale]/not-found.tsx
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    &lt;div className="min-h-[60vh] flex flex-col items-center justify-center px-4"&gt;
+      &lt;div className="text-8xl font-bold text-gray-200 mb-4"&gt;404&lt;/div&gt;
+      &lt;h2 className="text-2xl font-bold text-gray-800 mb-4"&gt;
+        页面未找到
+      &lt;/h2&gt;
+      &lt;p className="text-gray-500 mb-8 text-center max-w-md"&gt;
+        您访问的页面不存在或已被移除。
+      &lt;/p&gt;
+      &lt;Link
+        href="/"
+        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+      &gt;
+        返回首页
+      &lt;/Link&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 注意：
+// - 保持导航栏和 Footer（由 layout.tsx 提供）
+// - Next.js 自动返回 404 HTTP 状态码
+// - 不需要额外配置</code></pre>
+
+      <h3>10.3 API 错误处理原则</h3>
+
+      <table>
+        <thead>
+          <tr><th>场景</th><th>处理方式</th><th>用户体验</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Strapi 请求失败</strong></td><td>try/catch 捕获，显示空状态或降级内容，<strong>不崩溃</strong></td><td>用户看到「暂无内容」而非白屏</td></tr>
+          <tr><td><strong>联系表单提交失败</strong></td><td>显示错误提示，提示用户稍后重试，记录错误日志</td><td>用户可重试，不丢失已填内容</td></tr>
+          <tr><td><strong>图片加载失败</strong></td><td>设置 fallback 图片（占位图）</td><td>不出现破碎图片图标</td></tr>
+          <tr><td><strong>多语言翻译缺失</strong></td><td>降级到 zh-CN 基准语言</td><td>显示中文而非空白</td></tr>
+        </tbody>
+      </table>
+
+      <h4>安全的数据获取封装</h4>
+
+<pre><code>// lib/strapi.ts — 增加 safeFetch 封装
+export async function safeFetchStrapi&lt;T&gt;(
+  path: string,
+  fallback: T,
+  options?: RequestInit &amp; { revalidate?: number }
+): Promise&lt;T&gt; {
+  try {
+    const result = await fetchStrapi&lt;T&gt;(path, options);
+    return result.data ?? fallback;
+  } catch (error) {
+    console.error(`[Strapi] Failed to fetch ${path}:`, error);
+    return fallback;
+  }
+}
+
+// 使用示例
+const products = await safeFetchStrapi('/products?populate=*', []);
+// products 要么是真实数据，要么是空数组——永远不会抛错崩溃</code></pre>
+
+      <h4>联系表单提交</h4>
+
+<pre><code>// app/api/contact/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { name, email, company, message } = body;
+
+    // 基础校验
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: '必填字段缺失' },
+        { status: 400 }
+      );
+    }
+
+    // 1. 存入 Strapi
+    await fetchStrapi('/contact-submissions', {
+      method: 'POST',
+      body: JSON.stringify({ data: { name, email, company, message } }),
+      revalidate: 0,
+    });
+
+    // 2. 企微通知
+    if (process.env.WECOM_WEBHOOK_URL) {
+      await fetch(process.env.WECOM_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          msgtype: 'markdown',
+          markdown: {
+            content: `**新询盘**\n&gt;姓名: ${name}\n&gt;邮箱: ${email}\n&gt;公司: ${company}\n&gt;留言: ${message}`,
+          },
+        }),
+      });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('[Contact API Error]', error);
+    return NextResponse.json(
+      { error: '提交失败，请稍后重试' },
+      { status: 500 }
+    );
+  }
+}</code></pre>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="doc-footer">
+      <p>© 2026 旭衡电子 AlwaysControl Technology · 前端技术规范 v2.0</p>
+      <p style="margin-top:4px;">本文档为前端开发权威指引，所有技术实现必须遵循此规范。</p>
+    </div>
+
+  </main>
 </div>
+
+<!-- Sidebar Active State Script -->
+<script>
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const id = entry.target.id;
+        const activeLink = document.querySelector(`.sidebar a[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
 </body>
 </html>
