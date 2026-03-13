@@ -217,21 +217,17 @@
     }
     .hw-card {
       background: var(--gray-bg); border-radius: 20px;
-      padding: 40px 28px 32px; text-align: center;
+      padding: 40px 28px 28px; text-align: center;
       cursor: pointer; transition: box-shadow .25s, transform .25s;
       border: 1.5px solid transparent;
     }
     .hw-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-6px); border-color: rgba(56,196,232,.3); }
-    .hw-card-badge {
-      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--brand); background: rgba(56,196,232,.1);
-      padding: 4px 12px; border-radius: 20px; margin-bottom: 28px;
-    }
+    .hw-card-badge { display: none; }
     .hw-card-img { width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; min-height: 180px; }
     .hw-card-img svg { width: 75%; height: auto; }
-    .hw-card-name { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 10px; }
-    .hw-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 20px; }
-    .hw-card-specs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .hw-card-name { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 0; padding-bottom: 4px; }
+    .hw-card-desc { display: none; }
+    .hw-card-specs { display: none; }
     .hw-spec { font-size: 11px; font-weight: 600; color: var(--text-sub); background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; }
         /* Software image switcher */
     .sw-switcher { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
