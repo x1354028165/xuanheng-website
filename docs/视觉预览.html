@@ -1,375 +1,605 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>旭衡电子 · 三色方案对比</title>
+<title>XuanHeng · Visual Direction v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#F1F5F9; color:#1a2332; }
+:root {
+  --black:    #07090D;
+  --navy:     #0C1829;
+  --green:    #16A34A;
+  --green-lt: #22C55E;
+  --green-bg: #F0FDF4;
+  --green-br: #BBF7D0;
+  --gray-50:  #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-400: #9CA3AF;
+  --gray-600: #4B5563;
+  --gray-900: #111827;
+  --white:    #FFFFFF;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--gray-900);
+  -webkit-font-smoothing: antialiased;
+}
 
-/* ══ 页面标题 ══ */
-.page-header { background:#0A1628; padding:32px 48px; text-align:center; }
-.page-header h1 { color:#fff; font-size:22px; font-weight:700; margin-bottom:6px; }
-.page-header p { color:rgba(255,255,255,.55); font-size:14px; }
-.tab-row { display:flex; justify-content:center; gap:12px; margin-top:20px; }
-.tab { padding:8px 24px; border-radius:24px; font-size:13px; font-weight:600; cursor:pointer; border:none; }
-.tab-a { background:#059669; color:#fff; }
-.tab-b { background:#0D7A4E; color:#fff; }
-.tab-c { background:#0D7377; color:#fff; }
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+nav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 48px;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px; font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--green); }
+.nav-menu { display: flex; gap: 32px; align-items: center; }
+.nav-menu a {
+  font-size: 14px; font-weight: 500;
+  color: var(--gray-600); text-decoration: none;
+  transition: color .15s;
+}
+.nav-menu a:hover { color: var(--gray-900); }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.btn-ghost-sm {
+  font-size: 14px; font-weight: 500;
+  color: var(--gray-900);
+  background: none; border: none; cursor: pointer;
+  padding: 8px 14px;
+}
+.btn-primary {
+  font-size: 14px; font-weight: 600;
+  color: var(--white);
+  background: var(--green);
+  border: none; cursor: pointer;
+  padding: 9px 18px; border-radius: 8px;
+  transition: background .15s, transform .1s;
+}
+.btn-primary:hover { background: #15803D; }
 
-/* ══ 对比布局 ══ */
-.compare { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:1440px; margin:0 auto; }
-.col { background:#fff; border-right:1px solid #E2E8F0; }
-.col:last-child { border-right:none; }
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  padding: 120px 48px 100px;
+  max-width: 1200px; margin: 0 auto;
+  position: relative;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 24px; height: 2px;
+  background: var(--green);
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--navy);
+  max-width: 780px;
+  margin-bottom: 28px;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, var(--green) 0%, #14B8A6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 18px; font-weight: 400; line-height: 1.7;
+  color: var(--gray-600);
+  max-width: 520px; margin-bottom: 44px;
+}
+.hero-cta { display: flex; gap: 12px; align-items: center; margin-bottom: 80px; }
+.btn-lg {
+  font-size: 15px; font-weight: 600; color: var(--white);
+  background: var(--navy); border: none; cursor: pointer;
+  padding: 14px 28px; border-radius: 10px;
+  transition: background .15s;
+}
+.btn-lg:hover { background: #0f2240; }
+.btn-lg-outline {
+  font-size: 15px; font-weight: 500; color: var(--gray-900);
+  background: var(--white); border: 1.5px solid var(--gray-200); cursor: pointer;
+  padding: 14px 28px; border-radius: 10px;
+  transition: border-color .15s;
+}
+.btn-lg-outline:hover { border-color: var(--gray-400); }
 
-/* ══ 方案标签 ══ */
-.col-label { padding:16px 24px; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:10px; }
-.dot { width:14px; height:14px; border-radius:50%; }
+/* Hero 数字 */
+.hero-metrics {
+  display: flex; gap: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gray-200);
+}
+.metric-item {}
+.metric-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 40px; font-weight: 800;
+  color: var(--navy); letter-spacing: -1px;
+  line-height: 1;
+}
+.metric-num span { color: var(--green); font-size: 28px; }
+.metric-label { font-size: 13px; color: var(--gray-400); margin-top: 6px; font-weight: 500; }
 
-/* ══ 导航 ══ */
-.mini-nav { height:52px; background:#0A1628; display:flex; align-items:center; padding:0 20px; justify-content:space-between; }
-.nav-logo { color:#fff; font-size:14px; font-weight:700; }
-.nav-links-m { display:flex; gap:16px; }
-.nav-links-m span { color:rgba(255,255,255,.65); font-size:12px; }
+/* Hero 装饰 - 右侧抽象图形 */
+.hero-visual-abs {
+  position: absolute; right: 0; top: 80px;
+  width: 480px; height: 480px; pointer-events: none;
+  overflow: hidden; border-radius: 24px;
+}
+.hero-bg-shape {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #F0FDF4 0%, #E0F2FE 50%, #F0FDF4 100%);
+  border-radius: 24px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--gray-200);
+}
+.dashboard-mock {
+  width: 380px; background: #fff; border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.08);
+  padding: 20px; border: 1px solid var(--gray-200);
+}
+.dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.dash-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.dash-badge { background: var(--green-bg); color: var(--green); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+.dash-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.dash-card { background: var(--gray-50); border-radius: 8px; padding: 12px; border: 1px solid var(--gray-200); }
+.dash-val { font-size: 20px; font-weight: 800; color: var(--navy); }
+.dash-lbl { font-size: 10px; color: var(--gray-400); margin-top: 2px; }
+.dash-bar { height: 6px; background: var(--gray-200); border-radius: 3px; margin-top: 10px; }
+.dash-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--green), var(--green-lt)); }
+.dash-list { display: flex; flex-direction: column; gap: 8px; }
+.dash-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-200); }
+.dash-row:last-child { border-bottom: none; }
+.dash-device { font-size: 11px; font-weight: 600; color: var(--gray-900); }
+.dash-status { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+.status-on { background: var(--green-bg); color: var(--green); }
+.status-warn { background: #FEF9C3; color: #A16207; }
 
-/* ══ Hero ══ */
-.mini-hero { padding:36px 24px 28px; border-bottom:1px solid #F1F5F9; }
-.hero-badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700; margin-bottom:12px; }
-.mini-hero h2 { font-size:22px; font-weight:800; color:#0A1628; line-height:1.25; margin-bottom:10px; }
-.mini-hero h2 em { font-style:normal; }
-.mini-hero p { font-size:12px; color:#6B7280; line-height:1.6; margin-bottom:18px; }
-.btn-main { border:none; padding:10px 20px; border-radius:7px; font-size:13px; font-weight:700; cursor:pointer; color:#fff; margin-right:8px; }
-.btn-sec { background:#fff; border:1.5px solid #D1D5DB; padding:10px 20px; border-radius:7px; font-size:13px; color:#374151; cursor:pointer; }
+/* ══════════════════════════════════════
+   LOGO MARQUEE
+══════════════════════════════════════ */
+.marquee-section {
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 20px 0; overflow: hidden;
+  background: var(--gray-50);
+}
+.marquee-label {
+  text-align: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gray-400);
+  margin-bottom: 16px;
+}
+.marquee-track {
+  display: flex; gap: 48px; align-items: center;
+  padding: 0 48px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.brand-logo {
+  font-size: 13px; font-weight: 700; color: var(--gray-400);
+  white-space: nowrap; letter-spacing: .5px;
+  padding: 6px 0;
+  flex-shrink: 0;
+}
 
-/* ══ 统计条 ══ */
-.stats { background:#F8FAFC; padding:16px 24px; display:flex; gap:24px; border-bottom:1px solid #E8EDF2; }
-.stat { text-align:center; }
-.stat-n { font-size:22px; font-weight:800; color:#0A1628; }
-.stat-n sup { font-size:13px; }
-.stat-l { font-size:11px; color:#9CA3AF; }
+/* ══════════════════════════════════════
+   SOLUTIONS
+══════════════════════════════════════ */
+.section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.section-eyebrow::before { content:''; display:block; width:20px; height:2px; background:var(--green); }
+.section h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(28px, 3vw, 44px); font-weight: 800;
+  color: var(--navy); letter-spacing: -1px;
+  line-height: 1.15; margin-bottom: 16px;
+  max-width: 560px;
+}
+.section-sub { font-size: 16px; color: var(--gray-600); max-width: 480px; line-height: 1.7; margin-bottom: 56px; }
 
-/* ══ 卡片区 ══ */
-.cards { padding:24px; background:#F8FAFC; border-bottom:1px solid #E8EDF2; }
-.cards-title { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
-.card-item { background:#fff; border:1px solid #E8EDF2; border-radius:10px; padding:16px; margin-bottom:10px; transition:border-color .2s; cursor:pointer; }
-.card-item:hover { }
-.card-icon-sm { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; margin-bottom:10px; }
-.card-item h4 { font-size:13px; font-weight:700; color:#0A1628; margin-bottom:4px; }
-.card-item p { font-size:12px; color:#9CA3AF; line-height:1.5; }
-.card-link-sm { font-size:12px; font-weight:600; margin-top:8px; display:block; }
+.sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; }
+.sol-item {
+  background: var(--white); padding: 32px;
+  transition: background .2s;
+  cursor: pointer;
+}
+.sol-item:hover { background: var(--gray-50); }
+.sol-item:hover .sol-arrow { color: var(--green); transform: translateX(4px); }
+.sol-num { font-size: 11px; font-weight: 700; color: var(--gray-400); letter-spacing: 1px; margin-bottom: 16px; }
+.sol-item h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.sol-item p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+.sol-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+.sol-tag { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-bg); padding: 3px 8px; border-radius: 4px; }
+.sol-arrow { font-size: 16px; color: var(--gray-400); transition: color .2s, transform .2s; }
 
-/* ══ 产品卡 ══ */
-.prods { padding:24px; border-bottom:1px solid #E8EDF2; }
-.prod-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.prod-mini { border:1.5px solid #E8EDF2; border-radius:8px; padding:14px; cursor:pointer; transition:border-color .2s; }
-.prod-type-sm { font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px; }
-.prod-name-sm { font-size:14px; font-weight:800; color:#0A1628; }
-.prod-spec-sm { font-size:10px; color:#9CA3AF; margin-top:4px; }
+/* ══════════════════════════════════════
+   PRODUCTS — DARK SECTION
+══════════════════════════════════════ */
+.dark-band {
+  background: var(--navy);
+  padding: 100px 48px;
+}
+.dark-inner { max-width: 1200px; margin: 0 auto; }
+.dark-band .section-eyebrow { color: var(--green-lt); }
+.dark-band .section-eyebrow::before { background: var(--green-lt); }
+.dark-band h2 { color: var(--white); }
+.dark-band .section-sub { color: rgba(255,255,255,.5); }
 
-/* ══ 徽章 ══ */
-.badges { padding:20px 24px; display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid #E8EDF2; }
-.badge { padding:3px 10px; border-radius:12px; font-size:11px; font-weight:600; }
+.prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.prod-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 28px;
+  transition: background .2s, border-color .2s;
+  cursor: pointer;
+}
+.prod-card:hover {
+  background: rgba(22,163,74,.08);
+  border-color: rgba(22,163,74,.3);
+}
+.prod-category {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--green-lt);
+  margin-bottom: 14px;
+}
+.prod-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px; font-weight: 800;
+  color: var(--white); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.prod-desc { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.65; }
+.prod-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.prod-tag {
+  font-size: 10px; font-weight: 600; font-family: 'Inter', monospace;
+  color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 3px 8px; border-radius: 4px;
+}
 
-/* ══ CTA条 ══ */
-.cta-strip { padding:24px; background:#0A1628; text-align:center; }
-.cta-strip h3 { color:#fff; font-size:15px; font-weight:700; margin-bottom:8px; }
-.cta-strip p { color:rgba(255,255,255,.5); font-size:12px; margin-bottom:14px; }
-.cta-btn-w { background:#fff; color:#0A1628; border:none; padding:9px 20px; border-radius:7px; font-size:13px; font-weight:700; cursor:pointer; margin-right:6px; }
-.cta-btn-o { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.3); padding:9px 20px; border-radius:7px; font-size:13px; cursor:pointer; }
+/* ══════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════ */
+.cta-section {
+  padding: 100px 48px;
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+}
+.cta-inner {
+  max-width: 700px; margin: 0 auto; text-align: center;
+}
+.cta-inner h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(28px, 3vw, 44px); font-weight: 800;
+  color: var(--navy); letter-spacing: -1px; margin-bottom: 16px;
+}
+.cta-inner p { font-size: 17px; color: var(--gray-600); margin-bottom: 36px; line-height: 1.65; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; }
+.btn-cta-green {
+  background: var(--green); color: var(--white);
+  border: none; padding: 14px 32px; border-radius: 10px;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .15s;
+}
+.btn-cta-green:hover { background: #15803D; }
+.btn-cta-plain {
+  background: var(--white); color: var(--gray-900);
+  border: 1.5px solid var(--gray-200); padding: 14px 28px; border-radius: 10px;
+  font-size: 15px; font-weight: 500; cursor: pointer;
+}
 
-/* ══ 色板 ══ */
-.palette { padding:20px 24px; border-bottom:1px solid #E8EDF2; }
-.pal-title { font-size:11px; color:#9CA3AF; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
-.pal-row { display:flex; gap:8px; }
-.pal-swatch { }
-.pal-block { width:40px; height:28px; border-radius:5px; }
-.pal-hex { font-size:9px; color:#9CA3AF; font-family:monospace; margin-top:3px; text-align:center; }
+/* ══════════════════════════════════════
+   DESIGN SYSTEM PREVIEW
+══════════════════════════════════════ */
+.ds-section { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
+.ds-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; }
+.palette-strip { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+.sw { }
+.sw-block { width: 80px; height: 52px; border-radius: 8px; }
+.sw-name { font-size: 11px; font-weight: 600; color: var(--gray-900); margin-top: 6px; }
+.sw-hex { font-size: 11px; color: var(--gray-400); font-family: monospace; }
+.btn-showcase { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+.badges-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.b-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-br); }
+.b-gray  { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+.b-dark  { background: var(--navy); color: #fff; }
 
-/* ══ 方案A：翠绿 Emerald #059669 ══ */
-.a .col-label { color:#059669; border-top:3px solid #059669; }
-.a .hero-badge { background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; }
-.a .mini-hero h2 em { color:#059669; }
-.a .btn-main { background:#059669; }
-.a .stat-n sup { color:#059669; }
-.a .cards-title { color:#059669; }
-.a .card-icon-sm { background:#ECFDF5; }
-.a .card-link-sm { color:#059669; }
-.a .prod-type-sm { color:#059669; }
-.a .prod-mini:hover { border-color:#059669; }
-.a .badge.primary { background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; }
-.a .badge.sec { background:#F8FAFC; color:#374151; border:1px solid #E8EDF2; }
-.a .nav-btn-a { background:#059669; }
-.a .cta-btn-accent { background:#059669; color:#fff; border:none; padding:9px 20px; border-radius:7px; font-size:13px; font-weight:700; cursor:pointer; margin-right:6px; }
-
-/* ══ 方案B：深绿 Forest #0D7A4E ══ */
-.b .col-label { color:#0D7A4E; border-top:3px solid #0D7A4E; }
-.b .hero-badge { background:#F0FDF4; color:#0D7A4E; border:1px solid #BBF7D0; }
-.b .mini-hero h2 em { color:#0D7A4E; }
-.b .btn-main { background:#0D7A4E; }
-.b .stat-n sup { color:#0D7A4E; }
-.b .cards-title { color:#0D7A4E; }
-.b .card-icon-sm { background:#F0FDF4; }
-.b .card-link-sm { color:#0D7A4E; }
-.b .prod-type-sm { color:#0D7A4E; }
-.b .prod-mini:hover { border-color:#0D7A4E; }
-.b .badge.primary { background:#F0FDF4; color:#0D7A4E; border:1px solid #BBF7D0; }
-.b .badge.sec { background:#F8FAFC; color:#374151; border:1px solid #E8EDF2; }
-
-/* ══ 方案C：蓝绿 Teal #0D7377 ══ */
-.c .col-label { color:#0D7377; border-top:3px solid #0D7377; }
-.c .hero-badge { background:#F0FDFA; color:#0D7377; border:1px solid #99F6E4; }
-.c .mini-hero h2 em { color:#0D7377; }
-.c .btn-main { background:#0D7377; }
-.c .stat-n sup { color:#0D7377; }
-.c .cards-title { color:#0D7377; }
-.c .card-icon-sm { background:#F0FDFA; }
-.c .card-link-sm { color:#0D7377; }
-.c .prod-type-sm { color:#0D7377; }
-.c .prod-mini:hover { border-color:#0D7377; }
-.c .badge.primary { background:#F0FDFA; color:#0D7377; border:1px solid #99F6E4; }
-.c .badge.sec { background:#F8FAFC; color:#374151; border:1px solid #E8EDF2; }
+/* FOOTER */
+footer {
+  background: var(--navy); padding: 40px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .f-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: #fff; }
+footer .f-logo span { color: var(--green); }
+footer p { font-size: 13px; color: rgba(255,255,255,.35); }
 </style>
 </head>
 <body>
 
-<div class="page-header">
-  <h1>三种品牌主色方案对比</h1>
-  <p>导航栏深色（#0A1628）固定不变，仅主色不同，从左到右对比选择</p>
-  <div class="tab-row">
-    <div class="tab tab-a">A · 翠绿 #059669</div>
-    <div class="tab tab-b">B · 深绿 #0D7A4E</div>
-    <div class="tab tab-c">C · 蓝绿 #0D7377</div>
+<!-- NAV -->
+<nav>
+  <div class="logo">Xuan<span>Heng</span></div>
+  <div class="nav-menu">
+    <a href="#">Products</a>
+    <a href="#">Solutions</a>
+    <a href="#">Compatibility</a>
+    <a href="#">Help Center</a>
+    <a href="#">About</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-ghost-sm">Log in</button>
+    <button class="btn-primary">Contact Sales</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative; overflow:hidden;">
+  <div class="hero">
+    <div class="hero-eyebrow">Energy Management Platform</div>
+    <h1>Unify every energy asset.<br><span class="highlight">Reshape distributed value.</span></h1>
+    <p class="hero-sub">Cloud API or edge gateway — break protocol barriers across brands, and manage every watt with precision.</p>
+    <div class="hero-cta">
+      <button class="btn-lg">Explore Solutions</button>
+      <button class="btn-lg-outline">Talk to Sales →</button>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-num">200<span>+</span></div>
+        <div class="metric-label">Compatible Brands</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">30<span>+</span></div>
+        <div class="metric-label">Countries</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">1,000<span>+</span></div>
+        <div class="metric-label">Projects Delivered</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">8</div>
+        <div class="metric-label">Languages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧 Dashboard Mock -->
+  <div class="hero-visual-abs">
+    <div class="hero-bg-shape">
+      <div class="dashboard-mock">
+        <div class="dash-header">
+          <div class="dash-title">Live Dashboard</div>
+          <div class="dash-badge">● ONLINE</div>
+        </div>
+        <div class="dash-cards">
+          <div class="dash-card">
+            <div class="dash-val">98<span style="font-size:12px;color:var(--gray-400)">%</span></div>
+            <div class="dash-lbl">SOC Avg</div>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width:98%"></div></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val">47</div>
+            <div class="dash-lbl">Devices</div>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width:70%"></div></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val">12<span style="font-size:12px;color:var(--gray-400)">kW</span></div>
+            <div class="dash-lbl">Power</div>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width:55%"></div></div>
+          </div>
+        </div>
+        <div class="dash-list">
+          <div class="dash-row">
+            <div class="dash-device">BYD Battery Box</div>
+            <div class="dash-status status-on">Active</div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-device">Growatt SPH 6000</div>
+            <div class="dash-status status-on">Active</div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-device">Tesla Powerwall</div>
+            <div class="dash-status status-warn">Warning</div>
+          </div>
+          <div class="dash-row">
+            <div class="dash-device">Victron MPPT</div>
+            <div class="dash-status status-on">Active</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="compare">
-
-  <!-- ══ 方案 A ══ -->
-  <div class="col a">
-    <div class="col-label"><div class="dot" style="background:#059669"></div>方案 A · 翠绿 Emerald · #059669</div>
-    <div class="mini-nav">
-      <div class="nav-logo">XuanHeng</div>
-      <div class="nav-links-m"><span>产品</span><span>方案</span><span>关于</span></div>
-      <button class="btn-main" style="padding:6px 14px;font-size:12px;border-radius:5px;background:#059669">联系我们</button>
-    </div>
-    <div class="mini-hero">
-      <div class="hero-badge">⚡ 能源资产管理平台</div>
-      <h2>无缝聚合全场景<br>能源资产，<em>重塑</em>价值</h2>
-      <p>云端直连或网关接入，打破设备协议壁垒</p>
-      <button class="btn-main">查看解决方案</button>
-      <button class="btn-sec">联系商务</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n">200<sup>+</sup></div><div class="stat-l">兼容品牌</div></div>
-      <div class="stat"><div class="stat-n">30<sup>+</sup></div><div class="stat-l">覆盖国家</div></div>
-      <div class="stat"><div class="stat-n">1000<sup>+</sup></div><div class="stat-l">交付项目</div></div>
-    </div>
-    <div class="cards">
-      <div class="cards-title">解决方案</div>
-      <div class="card-item">
-        <div class="card-icon-sm">🏠</div>
-        <h4>户用家庭储能</h4>
-        <p>统一接入家庭全部能源设备，智能调度</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-      <div class="card-item">
-        <div class="card-icon-sm">⚡</div>
-        <h4>充电站负载管理</h4>
-        <p>不扩容主线，多桩协同智能分配</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-    </div>
-    <div class="prods">
-      <div class="prod-row">
-        <div class="prod-mini">
-          <div class="prod-type-sm">硬件网关</div>
-          <div class="prod-name-sm">Neuron III</div>
-          <div class="prod-spec-sm">RS485 · 4G · WiFi</div>
-        </div>
-        <div class="prod-mini">
-          <div class="prod-type-sm">云平台</div>
-          <div class="prod-name-sm">ESS Cloud</div>
-          <div class="prod-spec-sm">SaaS · API</div>
-        </div>
-      </div>
-    </div>
-    <div class="badges">
-      <span class="badge primary">储能</span>
-      <span class="badge primary">API接入</span>
-      <span class="badge sec">RS485</span>
-      <span class="badge sec">Modbus</span>
-    </div>
-    <div class="palette">
-      <div class="pal-title">色板</div>
-      <div class="pal-row">
-        <div class="pal-swatch"><div class="pal-block" style="background:#0A1628"></div><div class="pal-hex">#0A1628</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#059669"></div><div class="pal-hex">#059669</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#34D399"></div><div class="pal-hex">#34D399</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#ECFDF5;border:1px solid #A7F3D0"></div><div class="pal-hex">#ECFDF5</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#F8FAFC;border:1px solid #E8EDF2"></div><div class="pal-hex">#F8FAFC</div></div>
-      </div>
-    </div>
-    <div class="cta-strip">
-      <h3>准备好接入了吗？</h3>
-      <p>联系我们获取定制方案</p>
-      <button class="cta-btn-accent" style="background:#059669;color:#fff;border:none;padding:9px 20px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px;">联系商务</button>
-      <button class="cta-btn-o">查看文档</button>
-    </div>
+<!-- BRAND MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-label">Trusted integrations with leading brands</div>
+  <div class="marquee-track">
+    <span class="brand-logo">BYD</span>
+    <span class="brand-logo">CATL</span>
+    <span class="brand-logo">Growatt</span>
+    <span class="brand-logo">SolarEdge</span>
+    <span class="brand-logo">Victron Energy</span>
+    <span class="brand-logo">Tesla Energy</span>
+    <span class="brand-logo">Deye</span>
+    <span class="brand-logo">Sungrow</span>
+    <span class="brand-logo">Fronius</span>
+    <span class="brand-logo">SMA</span>
+    <span class="brand-logo">Huawei FusionSolar</span>
+    <span class="brand-logo">GoodWe</span>
+    <span class="brand-logo">Sofar Solar</span>
+    <span class="brand-logo">+ 180 more</span>
   </div>
-
-  <!-- ══ 方案 B ══ -->
-  <div class="col b">
-    <div class="col-label"><div class="dot" style="background:#0D7A4E"></div>方案 B · 深绿 Forest · #0D7A4E</div>
-    <div class="mini-nav">
-      <div class="nav-logo">XuanHeng</div>
-      <div class="nav-links-m"><span>产品</span><span>方案</span><span>关于</span></div>
-      <button class="btn-main" style="padding:6px 14px;font-size:12px;border-radius:5px;background:#0D7A4E">联系我们</button>
-    </div>
-    <div class="mini-hero">
-      <div class="hero-badge">⚡ 能源资产管理平台</div>
-      <h2>无缝聚合全场景<br>能源资产，<em>重塑</em>价值</h2>
-      <p>云端直连或网关接入，打破设备协议壁垒</p>
-      <button class="btn-main">查看解决方案</button>
-      <button class="btn-sec">联系商务</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n">200<sup>+</sup></div><div class="stat-l">兼容品牌</div></div>
-      <div class="stat"><div class="stat-n">30<sup>+</sup></div><div class="stat-l">覆盖国家</div></div>
-      <div class="stat"><div class="stat-n">1000<sup>+</sup></div><div class="stat-l">交付项目</div></div>
-    </div>
-    <div class="cards">
-      <div class="cards-title">解决方案</div>
-      <div class="card-item">
-        <div class="card-icon-sm">🏠</div>
-        <h4>户用家庭储能</h4>
-        <p>统一接入家庭全部能源设备，智能调度</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-      <div class="card-item">
-        <div class="card-icon-sm">⚡</div>
-        <h4>充电站负载管理</h4>
-        <p>不扩容主线，多桩协同智能分配</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-    </div>
-    <div class="prods">
-      <div class="prod-row">
-        <div class="prod-mini">
-          <div class="prod-type-sm">硬件网关</div>
-          <div class="prod-name-sm">Neuron III</div>
-          <div class="prod-spec-sm">RS485 · 4G · WiFi</div>
-        </div>
-        <div class="prod-mini">
-          <div class="prod-type-sm">云平台</div>
-          <div class="prod-name-sm">ESS Cloud</div>
-          <div class="prod-spec-sm">SaaS · API</div>
-        </div>
-      </div>
-    </div>
-    <div class="badges">
-      <span class="badge primary">储能</span>
-      <span class="badge primary">API接入</span>
-      <span class="badge sec">RS485</span>
-      <span class="badge sec">Modbus</span>
-    </div>
-    <div class="palette">
-      <div class="pal-title">色板</div>
-      <div class="pal-row">
-        <div class="pal-swatch"><div class="pal-block" style="background:#0A1628"></div><div class="pal-hex">#0A1628</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#0D7A4E"></div><div class="pal-hex">#0D7A4E</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#22C55E"></div><div class="pal-hex">#22C55E</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#F0FDF4;border:1px solid #BBF7D0"></div><div class="pal-hex">#F0FDF4</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#F8FAFC;border:1px solid #E8EDF2"></div><div class="pal-hex">#F8FAFC</div></div>
-      </div>
-    </div>
-    <div class="cta-strip">
-      <h3>准备好接入了吗？</h3>
-      <p>联系我们获取定制方案</p>
-      <button style="background:#0D7A4E;color:#fff;border:none;padding:9px 20px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px;">联系商务</button>
-      <button class="cta-btn-o">查看文档</button>
-    </div>
-  </div>
-
-  <!-- ══ 方案 C ══ -->
-  <div class="col c">
-    <div class="col-label"><div class="dot" style="background:#0D7377"></div>方案 C · 蓝绿 Teal · #0D7377</div>
-    <div class="mini-nav">
-      <div class="nav-logo">XuanHeng</div>
-      <div class="nav-links-m"><span>产品</span><span>方案</span><span>关于</span></div>
-      <button class="btn-main" style="padding:6px 14px;font-size:12px;border-radius:5px;background:#0D7377">联系我们</button>
-    </div>
-    <div class="mini-hero">
-      <div class="hero-badge">⚡ 能源资产管理平台</div>
-      <h2>无缝聚合全场景<br>能源资产，<em>重塑</em>价值</h2>
-      <p>云端直连或网关接入，打破设备协议壁垒</p>
-      <button class="btn-main">查看解决方案</button>
-      <button class="btn-sec">联系商务</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n">200<sup>+</sup></div><div class="stat-l">兼容品牌</div></div>
-      <div class="stat"><div class="stat-n">30<sup>+</sup></div><div class="stat-l">覆盖国家</div></div>
-      <div class="stat"><div class="stat-n">1000<sup>+</sup></div><div class="stat-l">交付项目</div></div>
-    </div>
-    <div class="cards">
-      <div class="cards-title">解决方案</div>
-      <div class="card-item">
-        <div class="card-icon-sm">🏠</div>
-        <h4>户用家庭储能</h4>
-        <p>统一接入家庭全部能源设备，智能调度</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-      <div class="card-item">
-        <div class="card-icon-sm">⚡</div>
-        <h4>充电站负载管理</h4>
-        <p>不扩容主线，多桩协同智能分配</p>
-        <span class="card-link-sm">查看方案 →</span>
-      </div>
-    </div>
-    <div class="prods">
-      <div class="prod-row">
-        <div class="prod-mini">
-          <div class="prod-type-sm">硬件网关</div>
-          <div class="prod-name-sm">Neuron III</div>
-          <div class="prod-spec-sm">RS485 · 4G · WiFi</div>
-        </div>
-        <div class="prod-mini">
-          <div class="prod-type-sm">云平台</div>
-          <div class="prod-name-sm">ESS Cloud</div>
-          <div class="prod-spec-sm">SaaS · API</div>
-        </div>
-      </div>
-    </div>
-    <div class="badges">
-      <span class="badge primary">储能</span>
-      <span class="badge primary">API接入</span>
-      <span class="badge sec">RS485</span>
-      <span class="badge sec">Modbus</span>
-    </div>
-    <div class="palette">
-      <div class="pal-title">色板</div>
-      <div class="pal-row">
-        <div class="pal-swatch"><div class="pal-block" style="background:#0A1628"></div><div class="pal-hex">#0A1628</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#0D7377"></div><div class="pal-hex">#0D7377</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#14B8A6"></div><div class="pal-hex">#14B8A6</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#F0FDFA;border:1px solid #99F6E4"></div><div class="pal-hex">#F0FDFA</div></div>
-        <div class="pal-swatch"><div class="pal-block" style="background:#F8FAFC;border:1px solid #E8EDF2"></div><div class="pal-hex">#F8FAFC</div></div>
-      </div>
-    </div>
-    <div class="cta-strip">
-      <h3>准备好接入了吗？</h3>
-      <p>联系我们获取定制方案</p>
-      <button style="background:#0D7377;color:#fff;border:none;padding:9px 20px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px;">联系商务</button>
-      <button class="cta-btn-o">查看文档</button>
-    </div>
-  </div>
-
 </div>
 
-<!-- 底部说明 -->
-<div style="background:#0A1628;padding:24px 48px;text-align:center;">
-  <p style="color:rgba(255,255,255,.4);font-size:13px;">三栏完全相同的版式，只有主色不同 · 选定后写入视觉规范</p>
+<!-- SOLUTIONS -->
+<div style="background:#fff; border-bottom:1px solid var(--gray-200);">
+  <div class="section">
+    <div class="section-eyebrow">Use Cases</div>
+    <h2>Every energy scenario, one unified platform</h2>
+    <p class="section-sub">From residential storage to grid-scale VPP, XuanHeng handles the complexity so you don't have to.</p>
+    <div class="sol-grid">
+      <div class="sol-item">
+        <div class="sol-num">01</div>
+        <h3>Residential Storage</h3>
+        <p>Unify all home energy devices. Self-consumption, time-of-use, emergency — one-tap mode switching.</p>
+        <div class="sol-footer"><span class="sol-tag">HEMS</span><span class="sol-arrow">→</span></div>
+      </div>
+      <div class="sol-item">
+        <div class="sol-num">02</div>
+        <h3>C&I Energy Storage</h3>
+        <p>Multi-site monitoring, peak-valley arbitrage, demand response. Cut your energy cost without complexity.</p>
+        <div class="sol-footer"><span class="sol-tag">ESS</span><span class="sol-arrow">→</span></div>
+      </div>
+      <div class="sol-item">
+        <div class="sol-num">03</div>
+        <h3>EV Charging Management</h3>
+        <p>Dynamic load balancing across multiple chargers without grid upgrades. Priority, queue, or VIP mode.</p>
+        <div class="sol-footer"><span class="sol-tag">EVCMS</span><span class="sol-arrow">→</span></div>
+      </div>
+      <div class="sol-item">
+        <div class="sol-num">04</div>
+        <h3>Virtual Power Plant</h3>
+        <p>Aggregate distributed assets and dispatch in seconds. Built for FCAS, NEM, and emerging VPP markets.</p>
+        <div class="sol-footer"><span class="sol-tag">VPP</span><span class="sol-arrow">→</span></div>
+      </div>
+      <div class="sol-item">
+        <div class="sol-num">05</div>
+        <h3>Power Quality Management</h3>
+        <p>Real-time harmonic monitoring, geo-mapped site health, auto-alert. Remote OTA firmware updates included.</p>
+        <div class="sol-footer"><span class="sol-tag">PQMS</span><span class="sol-arrow">→</span></div>
+      </div>
+      <div class="sol-item" style="background:var(--gray-50); display:flex; flex-direction:column; justify-content:center;">
+        <div class="sol-num">—</div>
+        <h3 style="color:var(--gray-600)">Need a custom fit?</h3>
+        <p>VPP platform customization, BMS dictionary integration, white-label systems — let's talk directly.</p>
+        <div class="sol-footer"><span></span><span class="sol-arrow" style="color:var(--green);">Contact us →</span></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- PRODUCTS DARK -->
+<div class="dark-band">
+  <div class="dark-inner">
+    <div class="section-eyebrow">Product Line</div>
+    <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,3vw,44px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.15;margin-bottom:16px;max-width:560px;">Hardware gateways meet cloud platforms</h2>
+    <p class="section-sub" style="margin-bottom:48px;">Edge intelligence or cloud-native — choose the architecture that fits your deployment.</p>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-category">Edge Gateway</div>
+        <div class="prod-name">Neuron III</div>
+        <div class="prod-desc">High-performance gateway for 100+ concurrent device connections at the site level.</div>
+        <div class="prod-tags"><span class="prod-tag">RS485</span><span class="prod-tag">4G</span><span class="prod-tag">WiFi</span><span class="prod-tag">Modbus</span></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-category">Edge Gateway</div>
+        <div class="prod-name">Neuron II</div>
+        <div class="prod-desc">Compact gateway for residential and small commercial deployments.</div>
+        <div class="prod-tags"><span class="prod-tag">RS485</span><span class="prod-tag">WiFi</span><span class="prod-tag">MQTT</span></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-category">Cloud Platform</div>
+        <div class="prod-name">ESS Cloud</div>
+        <div class="prod-desc">Multi-site C&I storage platform with peak-valley arbitrage and real-time dispatch.</div>
+        <div class="prod-tags"><span class="prod-tag">SaaS</span><span class="prod-tag">REST API</span><span class="prod-tag">Multi-tenant</span></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-category">Cloud Platform</div>
+        <div class="prod-name">VPP Platform</div>
+        <div class="prod-desc">Aggregation and dispatch layer for VPP operators. Real battery dispatch, not simulation.</div>
+        <div class="prod-tags"><span class="prod-tag">WebSocket</span><span class="prod-tag">FCAS</span><span class="prod-tag">NEM</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to integrate?</h2>
+    <p>Talk to our solutions team and get a tailored integration plan — hardware, cloud, or API-only.</p>
+    <div class="cta-btns">
+      <button class="btn-cta-green">Contact Sales</button>
+      <button class="btn-cta-plain">View Documentation</button>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN SYSTEM -->
+<div class="ds-section">
+  <div class="ds-label">Design System · Color Palette</div>
+  <div class="palette-strip">
+    <div class="sw"><div class="sw-block" style="background:#07090D"></div><div class="sw-name">Black</div><div class="sw-hex">#07090D</div></div>
+    <div class="sw"><div class="sw-block" style="background:#0C1829"></div><div class="sw-name">Navy</div><div class="sw-hex">#0C1829</div></div>
+    <div class="sw"><div class="sw-block" style="background:#16A34A"></div><div class="sw-name">Green</div><div class="sw-hex">#16A34A</div></div>
+    <div class="sw"><div class="sw-block" style="background:#22C55E"></div><div class="sw-name">Green Lt</div><div class="sw-hex">#22C55E</div></div>
+    <div class="sw"><div class="sw-block" style="background:#F0FDF4;border:1px solid #BBF7D0"></div><div class="sw-name">Green Bg</div><div class="sw-hex">#F0FDF4</div></div>
+    <div class="sw"><div class="sw-block" style="background:#F9FAFB;border:1px solid #E5E7EB"></div><div class="sw-name">Surface</div><div class="sw-hex">#F9FAFB</div></div>
+    <div class="sw"><div class="sw-block" style="background:#4B5563"></div><div class="sw-name">Gray 600</div><div class="sw-hex">#4B5563</div></div>
+    <div class="sw"><div class="sw-block" style="background:#E5E7EB"></div><div class="sw-name">Border</div><div class="sw-hex">#E5E7EB</div></div>
+  </div>
+
+  <div class="ds-label">Design System · Buttons</div>
+  <div class="btn-showcase">
+    <button style="background:#0C1829;color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;">Primary Dark</button>
+    <button style="background:#16A34A;color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;">Primary Green</button>
+    <button style="background:#fff;color:#111827;border:1.5px solid #E5E7EB;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;">Secondary</button>
+    <button style="background:#F0FDF4;color:#16A34A;border:1.5px solid #BBF7D0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;">Ghost Green</button>
+    <button style="background:#FEF2F2;color:#DC2626;border:1.5px solid #FECACA;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;">Danger</button>
+  </div>
+
+  <div class="ds-label">Design System · Badges</div>
+  <div class="badges-row">
+    <span class="badge b-green">Energy Storage</span>
+    <span class="badge b-green">API Ready</span>
+    <span class="badge b-green">VPP Compatible</span>
+    <span class="badge b-gray">RS485</span>
+    <span class="badge b-gray">Modbus RTU</span>
+    <span class="badge b-dark">Edge Gateway</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Xuan<span>Heng</span></div>
+  <p>© 2025 XuanHeng Electronics · alwayscontrol.com.cn</p>
+</footer>
 
 </body>
 </html>
