@@ -161,16 +161,16 @@
       background-position: center 60%;
       padding: 0 24px 80px;
     }
-    /* Deep overlay for image contrast */
+    /* Tesla-style overlay: light top, darker at bottom for buttons */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(7,12,25,.75) 0%,
-        rgba(7,12,25,.55) 40%,
-        rgba(7,12,25,.80) 100%
+        rgba(0,0,0,.25) 0%,
+        rgba(0,0,0,.10) 45%,
+        rgba(0,0,0,.55) 100%
       );
       pointer-events: none;
     }
@@ -188,64 +188,68 @@
       pointer-events: none;
     }
     .hero-content {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 1;
       text-align: center;
-      max-width: 800px;
+      width: 100%;
+      padding: 0 24px;
     }
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 72px);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
-      text-shadow: 0 2px 40px rgba(0,0,0,.4);
-    }
-    .hero-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,.75);
-      line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto 40px;
-    }
-    .hero-buttons {
+    .hero-bottom {
+      position: absolute;
+      bottom: 80px;
+      left: 0;
+      right: 0;
+      z-index: 2;
       display: flex;
       justify-content: center;
       gap: 16px;
-      margin-bottom: 80px;
-      position: relative;
-      z-index: 1;
+      padding: 0 24px;
     }
-    .btn-hero-primary {
-      background: var(--white);
-      color: var(--dark);
-      border: none;
-      padding: 14px 36px;
-      border-radius: var(--radius);
-      font-size: 15px;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      transition: opacity .2s ease-out;
-    }
-    .btn-hero-primary:hover { opacity: .9; }
-    .btn-hero-outline {
-      background: transparent;
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
       color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.45);
-      padding: 14px 36px;
-      border-radius: var(--radius);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 0;
+      text-shadow: 0 1px 20px rgba(0,0,0,.3);
+    }
+    .hero-desc {
+      display: none;
+    }
+
+    .btn-hero-primary {
+      background: rgba(255,255,255,.92);
+      color: #0f172a;
+      border: none;
+      padding: 14px 0;
+      width: 280px;
+      border-radius: 4px;
       font-size: 15px;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
-      transition: background .2s ease-out, border-color .2s ease-out;
+      transition: background .2s ease-out;
     }
-    .btn-hero-outline:hover {
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.5);
+    .btn-hero-primary:hover { background: #fff; }
+    .btn-hero-outline {
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.6);
+      padding: 14px 0;
+      width: 280px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background .2s ease-out;
+      backdrop-filter: blur(8px);
     }
+    .btn-hero-outline:hover { background: rgba(255,255,255,.22); }
     .hero-stats {
       position: relative;
       z-index: 1;
@@ -677,16 +681,12 @@
   <!-- ===== 2. HERO ===== -->
   <section class="hero">
     <div class="hero-content">
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(56,196,232,.15);border:1px solid rgba(56,196,232,.3);border-radius:20px;padding:6px 16px;margin-bottom:24px;">
-        <span style="width:6px;height:6px;background:#38C4E8;border-radius:50%;display:inline-block;"></span>
-        <span style="color:#38C4E8;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">AlwaysControl Technology</span>
-      </div>
+      <p style="color:rgba(255,255,255,.85);font-size:15px;font-weight:500;margin-bottom:8px;letter-spacing:.5px;">AlwaysControl Technology</p>
       <h1>跨品牌能源管理<br>解决方案的优质选择</h1>
-      <p class="hero-desc">旭衡电子（深圳）有限公司 — EMS + 边缘计算智能网关 + 新能源智慧管理云平台，覆盖全场景能源资产管理</p>
-      <div class="hero-buttons">
-        <button class="btn-hero-primary">查看解决方案</button>
-        <button class="btn-hero-outline">联系我们</button>
-      </div>
+    </div>
+    <div class="hero-bottom">
+      <button class="btn-hero-primary">查看解决方案</button>
+      <button class="btn-hero-outline">联系我们</button>
     </div>
 
     <div style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5;animation:bounce 2s infinite;">
