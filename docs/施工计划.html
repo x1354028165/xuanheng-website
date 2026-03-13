@@ -178,8 +178,24 @@
   <!-- Main Content -->
   <main class="main-content">
 
-    <div class="highlight" style="margin-bottom:28px;">
-      <strong>📌 规则：</strong>完成当前 Phase 所有任务 → 跑对应测试用例 → 全部通过 → 才能进入下一 Phase。
+    <div class="highlight" style="margin-bottom:8px;">
+      <strong>⚙️ 施工原则 — 双级门控</strong>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;">
+      <div class="highlight" style="border-left:4px solid #38C4E8;margin:0;">
+        <strong>🔹 任务级门控（每个子任务）</strong><br>
+        <span style="color:#475569;font-size:14px;line-height:1.7;">
+          完成子任务 → 本地验证通过（无报错、功能符合预期）→ 开始下一子任务<br>
+          <strong style="color:#dc2626;">⚠️ 验证失败必须当场修复，不允许带着问题继续</strong>
+        </span>
+      </div>
+      <div class="highlight" style="border-left:4px solid #1A3FAD;margin:0;">
+        <strong>🔷 阶段级门控（每个 Phase）</strong><br>
+        <span style="color:#475569;font-size:14px;line-height:1.7;">
+          完成当前 Phase 所有子任务 → 跑对应全部测试用例 → 全部通过 → 进入下一 Phase<br>
+          <strong style="color:#dc2626;">⚠️ 存在未通过用例，禁止开启下一 Phase</strong>
+        </span>
+      </div>
     </div>
 
     <!-- 阶段总览 -->
@@ -187,7 +203,7 @@
       <div class="section-label">OVERVIEW</div>
       <h2>阶段总览</h2>
       <table>
-        <tr><th>Phase</th><th>名称</th><th>测试用例</th><th>状态</th></tr>
+        <tr><th>Phase</th><th>名称</th><th>子任务数</th><th>测试用例</th><th>状态</th></tr>
         <tr><td>0</td><td>项目初始化 + 基础架构</td><td>基础架构验证</td><td>⬜ 未开始</td></tr>
         <tr><td>1</td><td>前台页面开发</td><td><span class="task-id">TC-F01~F60</span>（60条）</td><td>⬜ 未开始</td></tr>
         <tr><td>2</td><td>全局功能</td><td><span class="task-id">TC-G01~G30</span>（30条）</td><td>⬜ 未开始</td></tr>
