@@ -1665,6 +1665,42 @@ npx playwright test homepage.spec.ts     # 运行单个 spec 文件
 npx playwright show-report               # 在浏览器中查看 HTML 报告
 npx playwright test --update-snapshots   # ⚠️ 仅在主动更新基准图时使用，需人工 review</code></pre>
 
+      <h3>11.6.1 Spec 文件命名规范</h3>
+      <p>所有 Playwright 测试文件按以下约定存放，确保 CI 可按目录分层执行：</p>
+      <table>
+        <thead>
+          <tr>
+            <th>测试类型</th>
+            <th>文件路径</th>
+            <th>对应TC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>首页功能</td><td><code>tests/e2e/homepage.spec.ts</code></td><td>TC-F01~F10</td></tr>
+          <tr><td>解决方案页</td><td><code>tests/e2e/solutions.spec.ts</code></td><td>TC-F11~F20</td></tr>
+          <tr><td>产品页</td><td><code>tests/e2e/products.spec.ts</code></td><td>TC-F21~F30</td></tr>
+          <tr><td>关于/联系页</td><td><code>tests/e2e/about-contact.spec.ts</code></td><td>TC-F31~F45</td></tr>
+          <tr><td>全局功能（多语言/搜索）</td><td><code>tests/e2e/global.spec.ts</code></td><td>TC-G01~G30</td></tr>
+          <tr><td>SEO</td><td><code>tests/e2e/seo.spec.ts</code></td><td>TC-S01~S20</td></tr>
+          <tr><td>CMS管理后台</td><td><code>tests/e2e/cms.spec.ts</code></td><td>TC-C01~C42</td></tr>
+          <tr><td>表单与通知</td><td><code>tests/e2e/forms.spec.ts</code></td><td>TC-N01~N15</td></tr>
+          <tr><td>API集成（含CMS同步）</td><td><code>tests/integration/api.spec.ts</code></td><td>TC-A01~A23</td></tr>
+          <tr><td>性能</td><td><code>tests/performance/lighthouse.spec.ts</code></td><td>TC-P01~P10</td></tr>
+          <tr><td>安全</td><td><code>tests/security/security.spec.ts</code></td><td>TC-T01~T15</td></tr>
+          <tr><td>视觉回归基准图</td><td><code>tests/snapshots/</code></td><td>所有页面</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight" style="margin-top:12px;">
+        <strong>目录职责说明：</strong>
+        <ul style="margin-top:8px; line-height:2;">
+          <li><code>tests/e2e/</code> — 用户行为模拟</li>
+          <li><code>tests/integration/</code> — 跨服务集成（CMS+前端）</li>
+          <li><code>tests/performance/</code> — Lighthouse 性能评分</li>
+          <li><code>tests/security/</code> — 安全头/注入防护</li>
+          <li><code>tests/snapshots/</code> — 视觉基准截图（git 跟踪，<strong>禁止随意更新</strong>）</li>
+        </ul>
+      </div>
+
       <h3>11.7 Claude Code 执行约束（强制）</h3>
       <div class="highlight" style="border-left-color: #e74c3c; background: #fdecea;">
         <strong style="color:#c0392b;">⚠️ 以下约束适用于所有 Claude Code 自动编码任务，不得绕过：</strong>

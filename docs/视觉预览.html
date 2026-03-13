@@ -318,27 +318,68 @@
 
 
     /* ========== RESPONSIVE ========== */
-    @media (max-width: 1024px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .accordion { height: 400px; }
-      .prod-columns { grid-template-columns: 1fr; }
-      .brands-grid { grid-template-columns: repeat(3, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 1023px) {
+      /* 软件：5列 → 3列（后2项隐藏） */
+      .sw-row { grid-template-columns: repeat(3, 1fr); }
+      .sw-item:nth-child(4), .sw-item:nth-child(5) { display: none; }
+
+      /* 新闻：3列 → 2列 */
+      .news-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Footer：4列 → 2列 */
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
+      /* Nav：隐藏链接，显示汉堡图标 */
       .nav-links { display: none; }
-      .hero h1 { font-size: clamp(22px,2vw,32px); }
-      .hero-bottom { flex-direction: column; align-items: center; }
-      .btn-hero-primary, .btn-hero-outline { width: 260px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .accordion { flex-direction: column; height: auto; }
-      .accordion-item { height: 120px; }
-      .accordion-item:hover { flex: none; height: 320px; }
-      .accordion-label { writing-mode: horizontal-tb; bottom: 20px; left: 24px; transform: none; }
-      .news-grid { grid-template-columns: 1fr; }
-      .brands-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-hamburger { display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: inherit; padding: 8px; }
+      .nav.scrolled .nav-hamburger { color: var(--text); }
+
+      /* Hero：标题缩小，按钮堆叠全宽 */
+      .hero h1 { font-size: clamp(28px, 8vw, 44px); }
+      .hero-tagline { font-size: 13px; }
+      .hero-bottom { flex-direction: column; align-items: center; gap: 12px; padding: 0 20px; }
+      .btn-hero-primary, .btn-hero-outline { width: 100%; max-width: 340px; }
+
+      /* 统计：3列 → 1列 */
+      .stats-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+
+      /* 解决方案手风琴：横排 → 纵向堆叠 */
+      .accordion { flex-direction: column; height: auto; min-height: auto; }
+      .accordion-item { min-width: 100%; flex: none !important; height: 72px; }
+      .accordion-item:hover, .accordion-item.active { height: 280px; }
+      .accordion-label { bottom: 16px; left: 16px; }
+
+      /* 硬件：3列 → 1列 */
+      .hw-cards { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; padding: 0 20px; }
+
+      /* 软件：图片比例+列数变化 */
+      .sw-image-box { aspect-ratio: 4/3; }
+      .sw-row { grid-template-columns: repeat(2, 1fr); }
+      .sw-item:nth-child(4), .sw-item:nth-child(5) { display: none; }
+      .sw-item-title { font-size: 14px; }
+
+      /* 品牌墙：4列 → 3列 */
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+
+      /* 新闻：3列 → 1列 */
+      .news-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+      /* Footer：4列 → 1列 */
+      .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+      /* 产品区 section padding 减小 */
+      .products { padding: 64px 0 48px; }
+      .products-header { margin-bottom: 40px; }
+      .prod-cat-label { padding: 0 20px; }
+      .sw-switcher { padding: 0 20px; }
+
+      /* 各section padding */
+      .stats { padding: 64px 16px; }
+      .solutions { padding: 64px 16px; }
+      .brands { padding: 64px 16px; }
+      .news { padding: 64px 16px; }
     }
   </style>
 </head>
@@ -376,6 +417,11 @@
           <circle cx="12" cy="12" r="10"/>
           <line x1="2" y1="12" x2="22" y2="12"/>
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+      <button class="nav-hamburger" aria-label="菜单">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
     </div>
