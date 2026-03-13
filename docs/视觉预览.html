@@ -256,27 +256,46 @@
     .carousel-arrow.prev { left: 8px; }
     .carousel-arrow.next { right: 8px; }
 
-    /* Software cards: image top, text bottom */
-    .sw-grid {
-      display: grid; grid-template-columns: repeat(5,1fr); gap: 24px;
-      max-width: var(--max-w); margin: 72px auto 0; padding: 0 24px;
-      border: none;
+    /* Software image switcher */
+    .sw-switcher { max-width: var(--max-w); margin: 72px auto 0; padding: 0 24px; }
+    .sw-image-wrap {
+      position: relative; width: 100%; border-radius: 16px; overflow: hidden;
+      aspect-ratio: 16/7; background: var(--gray-bg);
     }
-    .sw-grid-item {
-      cursor: pointer; transition: transform .25s;
-      border: none; padding: 0; background: none;
+    .sw-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0;
+      transition: opacity .5s ease;
     }
-    .sw-grid-item:hover { transform: translateY(-4px); }
-    .sw-grid-img {
-      width: 100%; aspect-ratio: 4/3; border-radius: 12px;
-      object-fit: cover; display: block; margin-bottom: 20px;
-      background: var(--gray-bg);
+    .sw-img.active { opacity: 1; }
+    .sw-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,.55) 0%, rgba(0,0,0,.1) 60%, transparent 100%);
+      pointer-events: none;
     }
-    .sw-grid-name {
-      font-size: 15px; font-weight: 700; color: var(--text);
-      margin-bottom: 8px; line-height: 1.3;
+    .sw-text-overlay {
+      position: absolute; bottom: 40px; left: 48px; color: #fff;
+      max-width: 400px;
     }
-    .sw-grid-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+    .sw-text-panel { display: none; }
+    .sw-text-panel.active { display: block; }
+    .sw-text-panel h3 {
+      font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.2;
+    }
+    .sw-text-panel p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.7; }
+    .sw-tabs {
+      display: flex; gap: 0; margin-top: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sw-tab {
+      padding: 20px 28px; font-size: 14px; font-weight: 600;
+      color: var(--text-sub); cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color .2s, border-color .2s; background: none; border-top: none;
+      border-left: none; border-right: none; font-family: 'Inter', sans-serif;
+    }
+    .sw-tab:hover { color: var(--text); }
+    .sw-tab.active { color: var(--brand); border-bottom-color: var(--brand); }
 
     /* ========== 6. BRANDS ========== */
     .brands { background: var(--white); padding: 96px 24px; }
@@ -590,32 +609,46 @@
       </button>
     </div>
 
-    <!-- Software Grid: image top, text bottom -->
-    <div class="sw-grid">
-      <div class="sw-grid-item">
-        <img class="sw-grid-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop" alt="HEMS Cloud">
-        <div class="sw-grid-name">HEMS Cloud</div>
-        <div class="sw-grid-desc">家庭能源管理平台，光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</div>
+    <!-- Software Switcher -->
+    <div class="sw-switcher">
+      <!-- Tabs -->
+      <div class="sw-tabs">
+        <button class="sw-tab active" data-idx="0">HEMS Cloud</button>
+        <button class="sw-tab" data-idx="1">ESS Cloud</button>
+        <button class="sw-tab" data-idx="2">EVCMS</button>
+        <button class="sw-tab" data-idx="3">PQMS</button>
+        <button class="sw-tab" data-idx="4">VPP Platform</button>
       </div>
-      <div class="sw-grid-item">
-        <img class="sw-grid-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&q=80&auto=format&fit=crop" alt="ESS Cloud">
-        <div class="sw-grid-name">ESS Cloud</div>
-        <div class="sw-grid-desc">工商业储能管理，峰谷套利，多站点统一监控，告警分级管理</div>
-      </div>
-      <div class="sw-grid-item">
-        <img class="sw-grid-img" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80&auto=format&fit=crop" alt="EVCMS">
-        <div class="sw-grid-name">EVCMS</div>
-        <div class="sw-grid-desc">充电站管理系统，多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</div>
-      </div>
-      <div class="sw-grid-item">
-        <img class="sw-grid-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80&auto=format&fit=crop" alt="PQMS">
-        <div class="sw-grid-name">PQMS</div>
-        <div class="sw-grid-desc">电能质量监测与治理，谐波分析，实时告警，合规报告一键导出</div>
-      </div>
-      <div class="sw-grid-item">
-        <img class="sw-grid-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80&auto=format&fit=crop" alt="VPP Platform">
-        <div class="sw-grid-name">VPP Platform</div>
-        <div class="sw-grid-desc">虚拟电厂平台，分布式资产聚合调度，接入辅助服务电力市场</div>
+      <!-- Big image -->
+      <div class="sw-image-wrap">
+        <img class="sw-img active" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80&auto=format&fit=crop" alt="HEMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&auto=format&fit=crop" alt="ESS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80&auto=format&fit=crop" alt="EVCMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80&auto=format&fit=crop" alt="PQMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&q=80&auto=format&fit=crop" alt="VPP">
+        <div class="sw-img-overlay"></div>
+        <div class="sw-text-overlay">
+          <div class="sw-text-panel active">
+            <h3>HEMS Cloud</h3>
+            <p>家庭能源管理平台，光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</p>
+          </div>
+          <div class="sw-text-panel">
+            <h3>ESS Cloud</h3>
+            <p>工商业储能管理，峰谷套利，多站点统一监控，告警分级管理</p>
+          </div>
+          <div class="sw-text-panel">
+            <h3>EVCMS</h3>
+            <p>充电站管理，多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</p>
+          </div>
+          <div class="sw-text-panel">
+            <h3>PQMS</h3>
+            <p>电能质量监测与治理，谐波分析，实时告警，合规报告一键导出</p>
+          </div>
+          <div class="sw-text-panel">
+            <h3>VPP Platform</h3>
+            <p>虚拟电厂平台，分布式资产聚合调度，接入辅助服务电力市场</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -728,6 +761,22 @@
     const nav = document.querySelector(".nav");
     window.addEventListener("scroll", () => {
       nav.classList.toggle("scrolled", window.scrollY > 20);
+    });
+
+    // Software image switcher
+    const tabs = document.querySelectorAll(".sw-tab");
+    const imgs = document.querySelectorAll(".sw-img");
+    const panels = document.querySelectorAll(".sw-text-panel");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const idx = +tab.dataset.idx;
+        tabs.forEach(t => t.classList.remove("active"));
+        imgs.forEach(i => i.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+        tab.classList.add("active");
+        imgs[idx].classList.add("active");
+        panels[idx].classList.add("active");
+      });
     });
   </script>
 </body>
