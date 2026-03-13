@@ -51,7 +51,7 @@
       border-bottom-color: var(--border);
       box-shadow: 0 1px 8px rgba(0,0,0,.04);
     }
-    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; overflow: visible; }
 
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo-img { height: 36px; width: auto; object-fit: contain; }
@@ -59,7 +59,7 @@
     .nav.scrolled .nav-logo-white { display: none !important; }
     .nav.scrolled .nav-logo-dark { display: block !important; }
 
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; white-space: nowrap; }
     .nav-links a {
       font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85);
       text-decoration: none; transition: color .2s; padding-bottom: 4px;
@@ -281,7 +281,7 @@
     .hw-panel.active { display: grid; }
 
     /* Software image switcher */
-    .sw-switcher { max-width: var(--max-w); margin: 72px auto 0; padding: 0 24px; }
+    .sw-switcher { max-width: var(--max-w); margin: 48px auto 0; padding: 0 24px; }
     .sw-image-wrap {
       position: relative; width: 100%; border-radius: 20px; overflow: hidden;
       aspect-ratio: 16/7; background: var(--gray-bg); margin-bottom: 0;
@@ -663,6 +663,11 @@
           <a href="#" class="hw-cta">查看规格详情 →</a>
         </div>
       </div>
+    </div>
+    <!-- Software label + Showcase -->
+    <div style="max-width:var(--max-w);margin:64px auto 0;padding:0 24px;border-top:1px solid var(--border);padding-top:48px;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brand);margin-bottom:8px;">软件 · Software</div>
+      <div style="font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:40px;">云端平台产品矩阵</div>
     </div>
     <!-- Software Showcase: one big image, tabs below change text -->
     <div class="sw-switcher">
