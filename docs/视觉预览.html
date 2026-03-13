@@ -308,18 +308,21 @@
     .sw-text-panel p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.75; }
     /* Tabs below image */
     .sw-tabs {
-      display: flex; border-top: 1px solid var(--border);
+      display: flex; border-top: 2px solid var(--border);
     }
     .sw-tab {
-      flex: 1; padding: 24px 16px; font-size: 14px; font-weight: 600;
-      color: var(--text-sub); cursor: pointer; text-align: center;
-      border-top: 2px solid transparent; margin-top: -1px;
+      flex: 1; padding: 20px 16px 20px; font-size: 14px; font-weight: 700;
+      color: var(--text-sub); cursor: pointer; text-align: left;
+      border-top: 3px solid transparent; margin-top: -2px;
       transition: color .2s, border-color .2s, background .2s;
       background: none; border-bottom: none; border-left: none; border-right: none;
       font-family: 'Inter', sans-serif;
     }
     .sw-tab:hover { color: var(--text); background: var(--gray-bg); }
-    .sw-tab.active { color: var(--brand); border-top-color: var(--brand); background: var(--gray-bg); }
+    .sw-tab.active { color: var(--brand); border-top-color: var(--brand); }
+    .sw-tab-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .sw-tab-sub { font-size: 12px; font-weight: 400; color: var(--text-sub); line-height: 1.4; }
+    .sw-tab.active .sw-tab-sub { color: rgba(56,196,232,.7); }
 
     /* ========== 6. BRANDS ========== */
     .brands { background: var(--white); padding: 96px 24px; }
@@ -692,11 +695,26 @@
       </div>
       <!-- Tabs below -->
       <div class="sw-tabs">
-        <button class="sw-tab active" data-idx="0">HEMS Cloud</button>
-        <button class="sw-tab" data-idx="1">ESS Cloud</button>
-        <button class="sw-tab" data-idx="2">EVCMS</button>
-        <button class="sw-tab" data-idx="3">PQMS</button>
-        <button class="sw-tab" data-idx="4">VPP Platform</button>
+        <button class="sw-tab active" data-idx="0">
+          <div class="sw-tab-name">HEMS Cloud</div>
+          <div class="sw-tab-sub">家庭能源管理平台</div>
+        </button>
+        <button class="sw-tab" data-idx="1">
+          <div class="sw-tab-name">ESS Cloud</div>
+          <div class="sw-tab-sub">工商业储能管理</div>
+        </button>
+        <button class="sw-tab" data-idx="2">
+          <div class="sw-tab-name">EVCMS</div>
+          <div class="sw-tab-sub">充电站管理系统</div>
+        </button>
+        <button class="sw-tab" data-idx="3">
+          <div class="sw-tab-name">PQMS</div>
+          <div class="sw-tab-sub">电能质量监测</div>
+        </button>
+        <button class="sw-tab" data-idx="4">
+          <div class="sw-tab-name">VPP Platform</div>
+          <div class="sw-tab-sub">虚拟电厂平台</div>
+        </button>
       </div>
     </div>
 
