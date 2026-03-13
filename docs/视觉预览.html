@@ -706,10 +706,13 @@
 
   <script>
     const nav = document.querySelector(".nav");
+    const hero = document.querySelector(".hero");
+    // Switch nav as soon as hero bottom edge passes the nav bar
     function updateNav() {
-      nav.classList.toggle("scrolled", window.scrollY > window.innerHeight - 80);
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      nav.classList.toggle("scrolled", heroBottom <= 72);
     }
-    window.addEventListener("scroll", updateNav);
+    window.addEventListener("scroll", updateNav, { passive: true });
     updateNav();
 
     // Hardware product switcher
