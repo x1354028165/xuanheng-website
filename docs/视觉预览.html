@@ -292,56 +292,14 @@
       margin: 0 auto;
       line-height: 1.6;
     }
-    .sol-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-    .sol-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      transition: transform .2s ease-out, border-color .2s ease-out, box-shadow .2s ease-out;
-      cursor: pointer;
-    }
-    .sol-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--brand);
-      box-shadow: 0 8px 30px rgba(56,196,232,.1);
-    }
-    .sol-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius);
-      background: var(--gray-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      color: var(--brand);
-    }
+
+
+
+
     .sol-icon svg { width: 24px; height: 24px; }
-    .sol-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .sol-card p {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .sol-arrow {
-      font-size: 18px;
-      color: var(--text-sub);
-      transition: color .2s ease-out, transform .2s ease-out;
-      display: inline-block;
-    }
+
+
+
     .sol-card:hover .sol-arrow {
       color: var(--brand);
       transform: translateX(4px);
@@ -610,7 +568,7 @@
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
-      .sol-grid { grid-template-columns: repeat(3, 1fr); }
+  
       .data-grid { grid-template-columns: repeat(2, 1fr); }
       .prod-grid { grid-template-columns: repeat(2, 1fr); }
       .brands-grid { grid-template-columns: repeat(4, 1fr); }
@@ -628,7 +586,7 @@
       .hero-buttons { flex-direction: column; align-items: center; }
       .hero-stats { flex-direction: column; gap: 32px; }
 
-      .sol-grid { grid-template-columns: 1fr 1fr; }
+  
       .data-grid { grid-template-columns: 1fr 1fr; }
       .prod-grid { grid-template-columns: 1fr; }
       .news-grid { grid-template-columns: 1fr; }
@@ -642,7 +600,729 @@
     }
 
     @media (max-width: 480px) {
-      .sol-grid { grid-template-columns: 1fr; }
+  
+      .data-grid { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 1. TOP NAV ===== -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo-white.png" alt="AlwaysControl" class="nav-logo-img nav-logo-white">
+        <img src="assets/logo.jpg" alt="AlwaysControl" class="nav-logo-img nav-logo-dark" style="display:none;">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">产品中心</a></li>
+        <li><a href="#">解决方案</a></li>
+        <li><a href="#">兼容生态</a></li>
+        <li><a href="#">帮助中心</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#" class="nav-contact">联系我们</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-lang" aria-label="语言切换">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 2. HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <p style="color:rgba(255,255,255,.85);font-size:15px;font-weight:500;margin-bottom:8px;letter-spacing:.5px;">AlwaysControl Technology</p>
+      <h1>跨品牌能源管理<br>解决方案的优质选择</h1>
+    </div>
+    <div class="hero-bottom">
+      <button class="btn-hero-primary">查看解决方案</button>
+      <button class="btn-hero-outline">联系我们</button>
+    </div>
+
+    <div style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5;animation:bounce 2s infinite;">
+      <span style="color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Scroll</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><rect x="6" y="0" width="4" height="8" rx="2" fill="white" opacity=".7"/><line x1="8" y1="12" x2="8" y2="20" stroke="white" stroke-width="1.5" opacity=".5"/><path d="M4 16 L8 20 L12 16" stroke="white" stroke-width="1.5" fill="none" opacity=".5"/></svg>
+    </div>
+    <style>@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}</style>
+  </section>
+
+  <!-- ===== 3. SOLUTIONS ===== -->
+  <section class="solutions">
+    <div class="section-header">
+      <h2>五大核心应用场景</h2>
+      <p>从家庭到电网，覆盖能源资产全生命周期的管理与调度</p>
+    </div>
+    <div class="sol-accordion">
+      <!-- 户用储能 -->
+      <div class="sol-panel">
+        <div class="sol-panel-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="sol-panel-overlay"></div>
+        <div class="sol-panel-content">
+          <div class="sol-panel-tag">Residential</div>
+          <div class="sol-panel-title">户用储能</div>
+          <div class="sol-panel-desc">光储充一体，电费优化30%+。多品牌逆变器/电池统一接入，一个App全控。</div>
+          <div class="sol-panel-arrow">了解方案 <span>→</span></div>
+        </div>
+      </div>
+      <!-- 工商业储能 -->
+      <div class="sol-panel">
+        <div class="sol-panel-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="sol-panel-overlay"></div>
+        <div class="sol-panel-content">
+          <div class="sol-panel-tag">Commercial & Industrial</div>
+          <div class="sol-panel-title">工商储能</div>
+          <div class="sol-panel-desc">峰谷套利，动态增容，备用电源。支持100+设备并发，策略引擎本地执行。</div>
+          <div class="sol-panel-arrow">了解方案 <span>→</span></div>
+        </div>
+      </div>
+      <!-- 充电站 -->
+      <div class="sol-panel">
+        <div class="sol-panel-bg" style="background-image:url('https://images.unsplash.com/photo-1593941707882-a5bba53cd0ba?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="sol-panel-overlay"></div>
+        <div class="sol-panel-content">
+          <div class="sol-panel-tag">EV Charging</div>
+          <div class="sol-panel-title">充电站</div>
+          <div class="sol-panel-desc">多桩负载均衡，防跳闸。兼容OCPP及私有协议，20个桩同时在线不扩容。</div>
+          <div class="sol-panel-arrow">了解方案 <span>→</span></div>
+        </div>
+      </div>
+      <!-- VPP -->
+      <div class="sol-panel">
+        <div class="sol-panel-bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="sol-panel-overlay"></div>
+        <div class="sol-panel-content">
+          <div class="sol-panel-tag">Virtual Power Plant</div>
+          <div class="sol-panel-title">VPP虚拟电厂</div>
+          <div class="sol-panel-desc">分布式资产聚合调度，参与电网辅助服务。标准平台服务，快速接入电力市场。</div>
+          <div class="sol-panel-arrow">了解方案 <span>→</span></div>
+        </div>
+      </div>
+      <!-- 微电网 -->
+      <div class="sol-panel">
+        <div class="sol-panel-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="sol-panel-overlay"></div>
+        <div class="sol-panel-content">
+          <div class="sol-panel-tag">Microgrid</div>
+          <div class="sol-panel-title">微电网</div>
+          <div class="sol-panel-desc">离网并网无缝切换，多源协同调度。适用于工业园区、海岛、偏远地区供电。</div>
+          <div class="sol-panel-arrow">了解方案 <span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </section>tml>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>旭衡电子 AlwaysControl — 视觉预览</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========== DESIGN TOKENS ========== */
+    :root {
+      --brand:     #38C4E8;
+      --brand-dark:#2BA8C8;
+      --navy:      #1A3FAD;
+      --dark:      #0C1829;
+      --white:     #FFFFFF;
+      --gray-bg:   #F8FAFC;
+      --text:      #0F172A;
+      --text-sub:  #64748B;
+      --border:    #E2E8F0;
+      --radius:    8px;
+      --max-w:     1200px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ========== 1. TOP NAV ========== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 72px;
+      background: transparent;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      transition: background .3s ease, border-color .3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav.scrolled .nav-logo-white { display: none !important; }
+    .nav.scrolled .nav-logo-dark { display: block !important; }
+    .nav-contact {
+      color: rgba(255,255,255,.85) !important;
+      font-weight: 600 !important;
+    }
+    .nav.scrolled .nav-contact { color: var(--brand) !important; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-sub);
+      text-decoration: none;
+      transition: color .2s ease-out;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-lang {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-sub);
+      cursor: pointer;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      background: transparent;
+      transition: border-color .2s ease-out;
+    }
+    .nav-lang:hover { border-color: var(--brand); }
+    .btn-cta {
+      background: var(--brand);
+      color: var(--white);
+      border: none;
+      padding: 10px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background .2s ease-out;
+    }
+    .btn-cta:hover { background: var(--brand-dark); }
+
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: .2s;
+    }
+
+    /* ========== 2. HERO ========== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark);
+      background-image: url(\'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop\');
+      background-size: cover;
+      background-position: center 60%;
+      padding: 0 24px 80px;
+    }
+    /* Tesla-style overlay: light top, darker at bottom for buttons */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.25) 0%,
+        rgba(0,0,0,.10) 45%,
+        rgba(0,0,0,.55) 100%
+      );
+      pointer-events: none;
+    }
+    /* Brand cyan glow at top */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,196,232,.2) 0%, rgba(56,196,232,.05) 40%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      text-align: center;
+      width: 100%;
+      padding: 0 24px;
+    }
+    .hero-bottom {
+      position: absolute;
+      bottom: 80px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding: 0 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 0;
+      text-shadow: 0 1px 20px rgba(0,0,0,.3);
+    }
+    .hero-desc {
+      display: none;
+    }
+
+    .btn-hero-primary {
+      background: rgba(255,255,255,.92);
+      color: #0f172a;
+      border: none;
+      padding: 14px 0;
+      width: 280px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background .2s ease-out;
+    }
+    .btn-hero-primary:hover { background: #fff; }
+    .btn-hero-outline {
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.6);
+      padding: 14px 0;
+      width: 280px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background .2s ease-out;
+      backdrop-filter: blur(8px);
+    }
+    .btn-hero-outline:hover { background: rgba(255,255,255,.22); }
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-stat-num span { color: var(--brand); }
+    .hero-stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,.45);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ========== 3. SOLUTIONS ========== */
+    .solutions {
+      background: var(--white);
+      padding: 120px 24px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header h2 {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-sub);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+
+
+
+    .sol-icon svg { width: 24px; height: 24px; }
+
+
+
+    .sol-card:hover .sol-arrow {
+      color: var(--brand);
+      transform: translateX(4px);
+    }
+
+    /* ========== 4. CORE DATA ========== */
+    .core-data {
+      background: var(--gray-bg);
+      padding: 100px 24px;
+    }
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .data-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .data-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--brand);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .data-num span {
+      font-size: 28px;
+      color: var(--brand);
+    }
+    .data-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 12px;
+    }
+    .data-sub {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* ========== 5. PRODUCTS (DARK) ========== */
+    .products {
+      background: var(--dark);
+      padding: 120px 24px;
+    }
+    .products .section-header h2 { color: var(--white); }
+    .products .section-header p { color: rgba(255,255,255,.5); }
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .prod-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      transition: border-color .2s ease-out, background .2s ease-out;
+      cursor: pointer;
+    }
+    .prod-card:hover {
+      border-color: var(--brand);
+      background: rgba(56,196,232,.06);
+    }
+    .prod-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 16px;
+    }
+    .prod-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .prod-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,.45);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .prod-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .prod-spec {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: 'Inter', monospace;
+    }
+
+    /* ========== 6. BRAND WALL ========== */
+    .brands {
+      background: var(--white);
+      padding: 100px 24px;
+    }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .brand-box {
+      aspect-ratio: 2 / 1;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-sub);
+      transition: all .2s ease-out;
+      letter-spacing: 0.5px;
+    }
+    .brand-box:hover { border-color: var(--brand); box-shadow: 0 4px 12px rgba(56,196,232,.15); transform: translateY(-2px); }
+
+    /* ========== 7. NEWS ========== */
+    .news {
+      background: var(--white);
+      padding: 100px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .news-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow .2s ease-out, transform .2s ease-out;
+      cursor: pointer;
+    }
+    .news-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      transform: translateY(-2px);
+    }
+    .news-img {
+      width: 100%;
+      height: 200px;
+      background: var(--gray-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+    .news-body { padding: 24px; }
+    .news-date {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+    .news-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .news-card .news-excerpt {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .news-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--brand);
+      text-decoration: none;
+      transition: color .2s ease-out;
+    }
+    .news-link:hover { color: var(--brand-dark); }
+
+    /* ========== 8. FOOTER ========== */
+    .footer {
+      background: var(--dark);
+      padding: 80px 24px 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-brand .nav-logo-zh {
+      color: var(--white);
+      font-size: 18px;
+    }
+    .footer-brand .nav-logo-en {
+      color: var(--brand);
+      font-size: 12px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.6;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a {
+      font-size: 14px;
+      color: rgba(255,255,255,.4);
+      text-decoration: none;
+      transition: color .2s ease-out;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid var(--brand);
+      opacity: .3;
+      max-width: var(--max-w);
+      margin: 48px auto 24px;
+    }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,.25);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+  
+      .data-grid { grid-template-columns: repeat(2, 1fr); }
+      .prod-grid { grid-template-columns: repeat(2, 1fr); }
+      .brands-grid { grid-template-columns: repeat(4, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-right .nav-lang { display: none; }
+
+      .hero { padding: 100px 24px 60px; min-height: auto; }
+      .hero h1 { font-size: 32px; letter-spacing: -1px; }
+      .hero-desc { font-size: 15px; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-stats { flex-direction: column; gap: 32px; }
+
+  
+      .data-grid { grid-template-columns: 1fr 1fr; }
+      .prod-grid { grid-template-columns: 1fr; }
+      .news-grid { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+      .section-header { margin-bottom: 40px; }
+      .solutions, .products { padding: 80px 24px; }
+      .core-data, .brands, .news { padding: 64px 24px; }
+    }
+
+    @media (max-width: 480px) {
+  
       .data-grid { grid-template-columns: 1fr; }
       .brands-grid { grid-template-columns: repeat(2, 1fr); }
     }
