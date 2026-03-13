@@ -38,16 +38,23 @@
 
     /* ========== 1. TOP NAV ========== */
     .nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
       height: 72px;
-      background: rgba(255,255,255,.82);
+      background: transparent;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      transition: background .3s ease, border-color .3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,.92);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
     }
     .nav .container {
       display: flex;
@@ -65,14 +72,18 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 20px;
       font-weight: 800;
-      color: var(--text);
+      color: #fff;
+      transition: color .3s;
     }
     .nav-logo-en {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      color: var(--brand);
+      color: rgba(255,255,255,.7);
+      transition: color .3s;
     }
+    .nav.scrolled .nav-logo-zh { color: var(--text); }
+    .nav.scrolled .nav-logo-en { color: var(--brand); }
     .nav-links {
       display: flex;
       align-items: center;
@@ -137,7 +148,7 @@
 
     /* ========== 2. HERO ========== */
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -148,7 +159,7 @@
       background-image: url(\'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop\');
       background-size: cover;
       background-position: center 60%;
-      padding: 120px 24px 80px;
+      padding: 0 24px 80px;
     }
     /* Deep overlay for image contrast */
     .hero::before {
@@ -913,5 +924,11 @@
     </div>
   </footer>
 
+  <script>
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
 </body>
 </html>
