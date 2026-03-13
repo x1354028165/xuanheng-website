@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>旭衡电子 AlwaysControl — 视觉预览</title>
+  <!-- v3.1 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========== DESIGN TOKENS ========== */
+    :root {
+      --brand:     #38C4E8;
+      --brand-dark:#2BA8C8;
+      --navy:      #1A3FAD;
+      --dark:      #0C1829;
+      --white:     #FFFFFF;
+      --gray-bg:   #F8FAFC;
+      --text:      #0F172A;
+      --text-sub:  #64748B;
+      --border:    #E2E8F0;
+      --radius:    8px;
+      --radius-lg: 16px;
+      --max-w:     1200px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ========== 1. NAV ========== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 72px; background: transparent;
+      display: flex; align-items: center;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,.04);
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo-img { height: 36px; width: auto; object-fit: contain; }
+    .nav-logo-dark { display: none !important; }
+    .nav.scrolled .nav-logo-white { display: none !important; }
+    .nav.scrolled .nav-logo-dark { display: block !important; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: rgba(255,255,255,.85);
+      text-decoration: none; transition: color .2s; padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: var(--brand); font-weight: 600; border-bottom-color: var(--brand); }
+    .nav.scrolled .nav-links a { color: var(--text); }
+    .nav.scrolled .nav-links a:hover { color: var(--brand); }
+    .nav.scrolled .nav-links a.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+    .nav-lang {
+      background: none; border: none; padding: 4px; cursor: pointer;
+      color: rgba(255,255,255,.85); display: flex; align-items: center; transition: color .2s;
+    }
+    .nav-lang:hover { color: #fff; }
+    .nav.scrolled .nav-lang { color: var(--text); }
+    .nav.scrolled .nav-lang:hover { color: var(--brand); }
+
+    /* ========== 2. HERO ========== */
+    .hero {
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      position: relative; overflow: hidden; background: var(--dark);
+      background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop');
+      background-size: cover; background-position: center 60%;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.10) 45%, rgba(0,0,0,.55) 100%);
+    }
+    .hero::after {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 500px; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(56,196,232,.2) 0%, rgba(56,196,232,.05) 40%, transparent 65%);
+    }
+    .hero-content {
+      position: relative; z-index: 1; text-align: center; padding: 0 24px;
+    }
+    .hero-tagline {
+      color: rgba(255,255,255,.85); font-size: 15px; font-weight: 500;
+      margin-bottom: 12px; letter-spacing: .5px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 700; color: var(--white);
+      line-height: 1.15; letter-spacing: -1px; text-shadow: 0 1px 20px rgba(0,0,0,.3);
+    }
+    .hero-bottom {
+      position: absolute; bottom: 80px; left: 0; right: 0; z-index: 2;
+      display: flex; justify-content: center; gap: 16px; padding: 0 24px;
+    }
+    .btn-hero-primary {
+      background: rgba(255,255,255,.92); color: #0f172a; border: none;
+      padding: 14px 0; width: 280px; border-radius: 4px;
+      font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-hero-primary:hover { background: #fff; }
+    .btn-hero-outline {
+      background: rgba(255,255,255,.12); color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.6);
+      padding: 14px 0; width: 280px; border-radius: 4px;
+      font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: background .2s; backdrop-filter: blur(8px);
+    }
+    .btn-hero-outline:hover { background: rgba(255,255,255,.22); }
+
+    /* ========== 3. STATS ========== */
+    .stats { background: var(--white); padding: 96px 24px; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 40px 24px; text-align: center;
+    }
+    .stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 48px; font-weight: 800; color: var(--brand);
+      line-height: 1; letter-spacing: -2px;
+    }
+    .stat-num span { font-size: 28px; }
+    .stat-label { font-size: 15px; font-weight: 600; color: var(--text); margin-top: 12px; }
+
+    /* ========== 4. SOLUTIONS — Sungrow Accordion ========== */
+    .solutions { background: var(--white); padding: 96px 24px; }
+    .solutions .section-title {
+      text-align: center; font-size: clamp(28px,3.5vw,40px); font-weight: 800;
+      color: var(--text); letter-spacing: -1px; margin-bottom: 64px;
+    }
+    .accordion {
+      display: flex; gap: 8px; max-width: var(--max-w); margin: 0 auto;
+      height: 500px; min-height: 500px; overflow: hidden; border-radius: var(--radius-lg);
+    }
+    .accordion-item {
+      flex: 1; min-width: 60px; position: relative; overflow: hidden; cursor: pointer;
+      transition: flex .5s cubic-bezier(.4,0,.2,1);
+      border-radius: var(--radius-lg);
+      background: #1a2a3a;
+    }
+    .accordion-item:hover { flex: 4; }
+    .accordion-bg {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      width: 100%; height: 100%;
+    }
+    .accordion-item:hover .accordion-bg { transform: scale(1.05); }
+    .accordion-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.3) 100%);
+    }
+    .accordion-label {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      writing-mode: vertical-rl; text-orientation: mixed;
+      color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 700; white-space: nowrap;
+      transition: opacity .3s .1s;
+    }
+    .accordion-item:hover .accordion-label { opacity: 0; transition: opacity .2s; }
+    .accordion-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px; color: var(--white);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .4s .15s, transform .4s .15s;
+    }
+    .accordion-item:hover .accordion-content { opacity: 1; transform: translateY(0); }
+    .accordion-content .tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brand); margin-bottom: 8px;
+    }
+    .accordion-content h3 {
+      font-size: 24px; font-weight: 800; margin-bottom: 10px; line-height: 1.2;
+    }
+    .accordion-content p {
+      font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.6; margin-bottom: 16px;
+    }
+    .accordion-content .link {
+      font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none;
+    }
+
+    /* ========== 5. PRODUCTS (Dark) ========== */
+    .products { background: var(--dark); padding: 96px 24px; }
+    .products .section-header { text-align: center; margin-bottom: 64px; }
+    .products .section-header h2 {
+      font-size: clamp(28px,3.5vw,40px); font-weight: 800;
+      color: var(--white); letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .products .section-header p { font-size: 16px; color: rgba(255,255,255,.5); }
+    .prod-columns {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .prod-col-title {
+      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brand); margin-bottom: 24px;
+    }
+    .prod-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius); padding: 28px 24px; margin-bottom: 16px;
+      transition: border-color .2s, background .2s; cursor: pointer;
+    }
+    .prod-card:hover { border-color: var(--brand); background: rgba(56,196,232,.06); }
+    .prod-card h3 {
+      font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+    }
+    .prod-card p {
+      font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6;
+    }
+    .prod-card .prod-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .prod-spec {
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.1); padding: 4px 10px;
+      border-radius: 4px; font-family: 'Inter', monospace;
+    }
+    .sw-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: padding-left .2s; cursor: pointer;
+    }
+    .sw-item:hover { padding-left: 8px; }
+    .sw-item:last-child { border-bottom: none; }
+    .sw-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex-shrink: 0;
+    }
+    .sw-item h3 {
+      font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 2px;
+    }
+    .sw-item p {
+      font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.5;
+    }
+
+    /* ========== 6. BRANDS ========== */
+    .brands { background: var(--white); padding: 96px 24px; }
+    .brands .section-header { text-align: center; margin-bottom: 64px; }
+    .brands .section-header h2 {
+      font-size: clamp(28px,3.5vw,40px); font-weight: 800;
+      color: var(--text); letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .brands .section-header p { font-size: 16px; color: var(--text-sub); }
+    .brands-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      max-width: 800px; margin: 0 auto;
+    }
+    .brand-box {
+      aspect-ratio: 2.2 / 1; background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); display: flex; align-items: center;
+      justify-content: center; font-size: 15px; font-weight: 700;
+      letter-spacing: .5px; transition: all .2s; cursor: pointer;
+    }
+    .brand-box:hover {
+      border-color: var(--brand); box-shadow: 0 4px 12px rgba(56,196,232,.15);
+      transform: translateY(-2px);
+    }
+
+    /* ========== 7. NEWS ========== */
+    .news { background: var(--gray-bg); padding: 96px 24px; }
+    .news .section-header { text-align: center; margin-bottom: 64px; }
+    .news .section-header h2 {
+      font-size: clamp(28px,3.5vw,40px); font-weight: 800;
+      color: var(--text); letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .news .section-header p { font-size: 16px; color: var(--text-sub); }
+    .news-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .news-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      transition: box-shadow .2s, transform .2s; cursor: pointer;
+    }
+    .news-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.06); transform: translateY(-2px); }
+    .news-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .news-body { padding: 24px; }
+    .news-date { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; }
+    .news-card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+    .news-excerpt { font-size: 14px; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; }
+    .news-link { font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none; }
+    .news-link:hover { color: var(--brand-dark); }
+
+    /* ========== 8. FOOTER ========== */
+    .footer { background: var(--dark); padding: 80px 24px 40px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .footer-brand-name { font-size: 18px; font-weight: 700; color: var(--white); }
+    .footer-brand-sub { font-size: 12px; color: var(--brand); display: block; margin-top: 4px; }
+    .footer-brand p {
+      font-size: 14px; color: rgba(255,255,255,.4); line-height: 1.6;
+      margin-top: 16px; max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,.6);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { font-size: 14px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-divider {
+      border: none; border-top: 1px solid rgba(56,196,232,.3);
+      max-width: var(--max-w); margin: 48px auto 24px;
+    }
+    .footer-bottom {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.25); }
+    .footer-icp { font-size: 12px; color: rgba(255,255,255,.2); }
+
+
+    /* ========== PRODUCTS BENTO ========== */
+    .prod-label {
+      max-width: var(--max-w); margin: 0 auto 20px;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--brand);
+    }
+    .bento-hw {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .bento-card { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+    .bento-hero {
+      grid-row: span 2;
+      min-height: 420px;
+      background-size: cover; background-position: center;
+      transition: transform .3s;
+    }
+    .bento-hero:hover { transform: scale(1.01); }
+    .bento-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
+    }
+    .bento-hero-body {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;
+    }
+    .bento-tag {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brand);
+      background: rgba(56,196,232,.15); border: 1px solid rgba(56,196,232,.3);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .bento-hero-body h3 {
+      font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 10px;
+    }
+    .bento-hero-body p {
+      font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 16px;
+    }
+    .bento-link {
+      font-size: 14px; font-weight: 600; color: var(--brand); text-decoration: none;
+    }
+    .bento-sm {
+      padding: 28px; border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      transition: border-color .2s, transform .2s;
+    }
+    .bento-sm:hover { border-color: rgba(56,196,232,.3); transform: translateY(-2px); }
+    .bento-sm-icon { margin-bottom: 16px; }
+    .bento-sm h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .bento-sm p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    /* Software bento */
+    .bento-sw {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .bento-sw-card {
+      border: 1px solid transparent; border-radius: 16px; padding: 24px 20px;
+      transition: transform .2s, box-shadow .2s; cursor: pointer;
+    }
+    .bento-sw-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.3); }
+    .sw-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 10px; margin-bottom: 14px; letter-spacing: .5px;
+    }
+    .bento-sw-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .bento-sw-card p { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .bento-hw { grid-template-columns: 1fr; }
+      .bento-hero { grid-row: span 1; min-height: 300px; }
+      .bento-sw { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .bento-sw { grid-template-columns: 1fr 1fr; }
+    }
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .accordion { height: 400px; }
+      .prod-columns { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 28px; }
+      .hero-bottom { flex-direction: column; align-items: center; }
+      .btn-hero-primary, .btn-hero-outline { width: 260px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .accordion { flex-direction: column; height: auto; }
+      .accordion-item { height: 120px; }
+      .accordion-item:hover { flex: none; height: 320px; }
+      .accordion-label { writing-mode: horizontal-tb; bottom: 20px; left: 24px; transform: none; }
+      .news-grid { grid-template-columns: 1fr; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 1. NAV ===== -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo-white.png" alt="AlwaysControl" class="nav-logo-img nav-logo-white">
+        <img src="assets/logo.jpg" alt="AlwaysControl" class="nav-logo-img nav-logo-dark">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="active">首页</a></li>
+        <li><a href="#">产品中心</a></li>
+        <li><a href="#">解决方案</a></li>
+        <li><a href="#">兼容生态</a></li>
+        <li><a href="#">帮助中心</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">联系我们</a></li>
+      </ul>
+      <button class="nav-lang" aria-label="语言切换">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== 2. HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tagline">AlwaysControl Technology</p>
+      <h1>跨品牌能源管理<br>解决方案的优质选择</h1>
+    </div>
+    <div class="hero-bottom">
+      <button class="btn-hero-primary">查看解决方案</button>
+      <button class="btn-hero-outline">联系我们</button>
+    </div>
+  </section>
+
+  <!-- ===== 3. STATS ===== -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">80<span>+</span></div>
+        <div class="stat-label">兼容品牌</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">30<span>+</span></div>
+        <div class="stat-label">覆盖国家</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">500<span>+</span></div>
+        <div class="stat-label">已交付项目</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 4. SOLUTIONS — Sungrow Accordion ===== -->
+  <section class="solutions">
+    <h2 class="section-title">五大核心应用场景</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop')"></div>
+        <div class="accordion-overlay"></div>
+        <div class="accordion-label">户用储能</div>
+        <div class="accordion-content">
+          <div class="tag">Residential ESS</div>
+          <h3>户用储能</h3>
+          <p>光储充一体，电费优化30%+，自发自用与经济模式智能切换</p>
+          <a href="#" class="link">了解方案 →</a>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&q=80&auto=format&fit=crop')"></div>
+        <div class="accordion-overlay"></div>
+        <div class="accordion-label">工商储能</div>
+        <div class="accordion-content">
+          <div class="tag">Commercial & Industrial</div>
+          <h3>工商储能</h3>
+          <p>峰谷套利，动态增容备电，多站点统一监控与告警分级管理</p>
+          <a href="#" class="link">了解方案 →</a>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-bg" style="background-image:url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80&auto=format&fit=crop')"></div>
+        <div class="accordion-overlay"></div>
+        <div class="accordion-label">充电站</div>
+        <div class="accordion-content">
+          <div class="tag">EV Charging</div>
+          <h3>充电站</h3>
+          <p>多桩负载均衡，防跳闸，实时动态功率分配，不扩容主线</p>
+          <a href="#" class="link">了解方案 →</a>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80&auto=format&fit=crop')"></div>
+        <div class="accordion-overlay"></div>
+        <div class="accordion-label">VPP虚拟电厂</div>
+        <div class="accordion-content">
+          <div class="tag">Virtual Power Plant</div>
+          <h3>VPP虚拟电厂</h3>
+          <p>分布式聚合调度，参与辅助服务市场，提升资产利用率</p>
+          <a href="#" class="link">了解方案 →</a>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80&auto=format&fit=crop')"></div>
+        <div class="accordion-overlay"></div>
+        <div class="accordion-label">微电网</div>
+        <div class="accordion-content">
+          <div class="tag">Microgrid</div>
+          <h3>微电网</h3>
+          <p>离网并网无缝切换，多源协同，分布式能源聚合管理</p>
+          <a href="#" class="link">了解方案 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. PRODUCTS (Dark) ===== -->
+  <section class="products">
+    <div class="section-header">
+      <h2>产品矩阵</h2>
+      <p>从边缘到云端，模块化覆盖全场景需求</p>
+    </div>
+
+    <!-- Hardware row: Bento grid -->
+    <div class="prod-label">硬件 · Hardware</div>
+    <div class="bento-hw">
+      <!-- Featured: Neuron III -->
+      <div class="bento-card bento-hero" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80&auto=format&fit=crop')">
+        <div class="bento-hero-overlay"></div>
+        <div class="bento-hero-body">
+          <div class="bento-tag">Flagship</div>
+          <h3>Neuron III</h3>
+          <p>高性能边缘计算网关，100+ 设备并发接入，内置本地策略引擎，断网自治</p>
+          <div class="prod-specs">
+            <span class="prod-spec">RS485 × 4</span>
+            <span class="prod-spec">4G / WiFi</span>
+            <span class="prod-spec">Modbus / MQTT</span>
+            <span class="prod-spec">边缘计算</span>
+          </div>
+          <a href="#" class="bento-link">查看规格 →</a>
+        </div>
+      </div>
+      <!-- Neuron II -->
+      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0f2035 0%,#0c3050 100%)">
+        <div class="bento-sm-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Neuron II</h3>
+        <p>经济型网关，户用场景首选</p>
+        <div class="prod-specs" style="margin-top:12px">
+          <span class="prod-spec">RS485</span>
+          <span class="prod-spec">WiFi</span>
+          <span class="prod-spec">Modbus</span>
+        </div>
+      </div>
+      <!-- Neuron III Lite -->
+      <div class="bento-card bento-sm" style="background:linear-gradient(135deg,#0d1f10 0%,#0c3020 100%)">
+        <div class="bento-sm-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38C4E8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="2" fill="#38C4E8" stroke="none"/></svg>
+        </div>
+        <h3>Neuron III Lite</h3>
+        <p>精简版，中小工商业最佳性价比</p>
+        <div class="prod-specs" style="margin-top:12px">
+          <span class="prod-spec">RS485</span>
+          <span class="prod-spec">4G</span>
+          <span class="prod-spec">Modbus</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Software row: 5-card bento -->
+    <div class="prod-label" style="margin-top:48px">软件 · Software</div>
+    <div class="bento-sw">
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(56,196,232,.12) 0%,rgba(56,196,232,.03) 100%);border-color:rgba(56,196,232,.25)">
+        <div class="sw-badge" style="background:rgba(56,196,232,.15);color:#38C4E8">居家</div>
+        <h3>HEMS Cloud</h3>
+        <p>家庭能源管理，光储充一体，白标 SaaS 快速交付</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(26,63,173,.2) 0%,rgba(26,63,173,.05) 100%);border-color:rgba(26,63,173,.35)">
+        <div class="sw-badge" style="background:rgba(26,63,173,.2);color:#7896F5">工商</div>
+        <h3>ESS Cloud</h3>
+        <p>工商业储能平台，峰谷套利，多站点统一监控告警</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(16,185,129,.12) 0%,rgba(16,185,129,.03) 100%);border-color:rgba(16,185,129,.2)">
+        <div class="sw-badge" style="background:rgba(16,185,129,.15);color:#34D399">充电</div>
+        <h3>EVCMS</h3>
+        <p>充电站管理，多桩负载均衡，OCPP 兼容，防跳闸</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(245,158,11,.1) 0%,rgba(245,158,11,.02) 100%);border-color:rgba(245,158,11,.2)">
+        <div class="sw-badge" style="background:rgba(245,158,11,.15);color:#FBBF24">电能</div>
+        <h3>PQMS</h3>
+        <p>电能质量监测与治理，谐波分析，实时告警</p>
+      </div>
+      <div class="bento-sw-card" style="background:linear-gradient(135deg,rgba(168,85,247,.12) 0%,rgba(168,85,247,.03) 100%);border-color:rgba(168,85,247,.2)">
+        <div class="sw-badge" style="background:rgba(168,85,247,.15);color:#C084FC">电网</div>
+        <h3>VPP Platform</h3>
+        <p>虚拟电厂，分布式聚合调度，接入辅助服务电力市场</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. BRANDS ===== -->
+  <section class="brands">
+    <div class="section-header">
+      <h2>兼容 80+ 主流品牌</h2>
+      <p>逆变器、电池、充电桩，跨品牌无缝接入</p>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-box" style="color:#1464A0">BYD</div>
+      <div class="brand-box" style="color:#0066CC">CATL</div>
+      <div class="brand-box" style="color:#FF6B00">Growatt</div>
+      <div class="brand-box" style="color:#E31837">SolarEdge</div>
+      <div class="brand-box" style="color:#1B5EA3">Victron</div>
+      <div class="brand-box" style="color:#CC0000">Tesla</div>
+      <div class="brand-box" style="color:#0059A8">Deye</div>
+      <div class="brand-box" style="color:#FF7900">Sungrow</div>
+      <div class="brand-box" style="color:#E2000F">Fronius</div>
+      <div class="brand-box" style="color:#5A873D">SMA</div>
+      <div class="brand-box" style="color:#003F87">GoodWe</div>
+      <div class="brand-box" style="color:#0086CF">Sofar</div>
+    </div>
+  </section>
+
+  <!-- ===== 7. NEWS ===== -->
+  <section class="news">
+    <div class="section-header">
+      <h2>新闻动态</h2>
+      <p>了解旭衡电子最新资讯与行业洞察</p>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-03-10</div>
+          <h3>旭衡电子发布 Neuron III 边缘网关</h3>
+          <p class="news-excerpt">全新一代高性能边缘计算网关，支持 100+ 设备并发接入，内置本地策略引擎...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-02-28</div>
+          <h3>HEMS Cloud 平台新增白标 SaaS 支持</h3>
+          <p class="news-excerpt">面向渠道合作伙伴提供完整白标方案，品牌定制 + 独立部署，快速上线...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-02-15</div>
+          <h3>兼容生态突破 80+ 品牌里程碑</h3>
+          <p class="news-excerpt">覆盖全球主流逆变器、电池与充电桩品牌，持续扩展跨品牌兼容能力...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8. FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-brand-name">旭衡电子</span>
+        <span class="footer-brand-sub">AlwaysControl</span>
+        <p>打破协议壁垒，让每一度电都被精准管理。跨品牌能源管理解决方案提供商。</p>
+      </div>
+      <div class="footer-col">
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="#">户用储能</a></li>
+          <li><a href="#">工商储能</a></li>
+          <li><a href="#">充电站</a></li>
+          <li><a href="#">VPP虚拟电厂</a></li>
+          <li><a href="#">微电网</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">Neuron III 网关</a></li>
+          <li><a href="#">HEMS Cloud</a></li>
+          <li><a href="#">ESS Cloud</a></li>
+          <li><a href="#">EVCMS</a></li>
+          <li><a href="#">VPP Platform</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系我们</h4>
+        <ul>
+          <li><a href="#">商务合作</a></li>
+          <li><a href="#">技术支持</a></li>
+          <li><a href="#">申请 Demo</a></li>
+          <li><a href="#">alwayscontrol.com.cn</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 旭衡电子 Xuheng Electronics. All rights reserved.</div>
+      <div class="footer-icp">沪ICP备XXXXXXXX号</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector(".nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 20);
+    });
+  </script>
+</body>
+</html>
