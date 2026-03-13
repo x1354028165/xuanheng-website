@@ -94,18 +94,44 @@
       transition: color .15s;
     }
     .nav-menu a:hover { color: var(--gray-900); }
-    .nav-cta {
-      flex-shrink: 0;
-      display: inline-flex;
+    .nav-right {
+      display: flex;
       align-items: center;
-      padding: 9px 20px;
-      background: var(--green);
-      color: #fff;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background .15s;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    /* 图标按钮（帮助/语言/登录） */
+    .nav-icon-btn {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      color: var(--gray-600);
+      background: none; border: none; cursor: pointer;
+      transition: background .15s, color .15s;
+      position: relative;
+    }
+    .nav-icon-btn:hover { background: var(--gray-100); color: var(--gray-900); }
+    .nav-icon-btn svg { width: 18px; height: 18px; }
+    /* 登录按钮加 P1 小圆点 */
+    .nav-icon-btn .p1-dot {
+      position: absolute; top: 4px; right: 4px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #F59E0B;
+    }
+    /* 分隔线 */
+    .nav-divider {
+      width: 1px; height: 20px;
+      background: var(--gray-200);
+      margin: 0 8px;
+    }
+    /* 联系我们按钮 */
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      padding: 8px 16px;
+      background: var(--green); color: #fff;
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background .15s;
+      margin-left: 4px;
     }
     .nav-cta:hover { background: #15803D; }
 
@@ -858,7 +884,34 @@
       <li><a href="#">开发者中心</a></li>
       <li><a href="#">关于我们</a></li>
     </ul>
-    <a href="#" class="nav-cta">联系我们</a>
+    <div class="nav-right">
+      <!-- 帮助 / FAQ -->
+      <button class="nav-icon-btn" title="帮助中心">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </button>
+      <!-- 语言切换 -->
+      <button class="nav-icon-btn" title="切换语言 / Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+      <!-- 登录（P1，即将上线）-->
+      <button class="nav-icon-btn" title="登录（即将上线）">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="p1-dot"></span>
+      </button>
+      <div class="nav-divider"></div>
+      <a href="#" class="nav-cta">联系我们</a>
+    </div>
   </div>
 </nav>
 
