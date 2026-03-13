@@ -221,39 +221,20 @@
     .hw-card-img svg { width: 85%; height: auto; }
     .hw-card-name { font-size: clamp(20px,1.5vw,28px); font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
 
-    /* Software switcher — Sungrow style */
-    .sw-switcher { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-    .sw-image-wrap {
-      width: 100%; border-radius: 12px; overflow: hidden;
-      aspect-ratio: 16/7; background: var(--gray-bg);
-    }
-    .sw-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    /* 5-col text row below image */
-    .sw-cols {
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      margin-top: 36px; border-top: 2px solid var(--border);
-    }
-    .sw-col {
-      padding: 32px 28px 28px; cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: border-color .2s, background .2s;
-      border-right: 1px solid var(--border);
-    }
-    .sw-col:last-child { border-right: none; }
-    .sw-col:hover { background: var(--gray-bg); }
-    .sw-col.active { border-left-color: var(--brand); }
-    .sw-col-title {
-      font-size: clamp(18px,1.3vw,24px); font-weight: 800; color: var(--text);
-      margin-bottom: 14px; line-height: 1.3;
-    }
-    .sw-col-sub {
-      font-size: clamp(12px,0.8vw,14px); font-weight: 700; letter-spacing: 1px;
-      color: var(--brand); margin-bottom: 12px; text-transform: uppercase;
-    }
-    .sw-col.active .sw-col-title { color: var(--text); }
-    .sw-col-desc {
-      font-size: clamp(13px,0.9vw,16px); color: var(--text-sub); line-height: 1.75;
-    }
+    /* Software — 1:1 Sungrow style */
+    .sw-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .sw-image-box { width: 100%; border-radius: 12px; overflow: hidden; aspect-ratio: 16/7; background: var(--gray-bg); position: relative; }
+    .sw-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease; }
+    .sw-slide.active { opacity: 1; }
+    .sw-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sw-row { display: grid; grid-template-columns: repeat(5,1fr); border-top: 1px solid var(--border); margin-top: 0; }
+    .sw-item { padding: 24px 24px 32px 0; border-top: 3px solid transparent; margin-top: -1px; cursor: pointer; transition: border-color .2s; }
+    .sw-item.active { border-top-color: var(--text); }
+    .sw-item:hover:not(.active) { border-top-color: #bbb; }
+    .sw-item-title { font-size: clamp(16px,1.1vw,20px); font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 12px; }
+    .sw-item-desc { font-size: clamp(13px,0.85vw,15px); color: #666; line-height: 1.75; }
+    .sw-item:not(.active) .sw-item-title { color: #888; }
+
 
         /* ========== 6. BRANDS ========== */
     .brands { background: var(--white); padding: 96px 24px; }
@@ -557,40 +538,37 @@
     <div class="prod-cat-label" style="margin-top:72px;border-top:1px solid var(--border);padding-top:48px;">软件 · Software</div>
 
     <!-- Software: 1 big image + tabs + description -->
-    <div class="sw-switcher">
-      <!-- Big image — static -->
-      <div class="sw-image-wrap">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" alt="Software Platform">
+    <div class="sw-wrap">
+      <div class="sw-image-box">
+        <div class="sw-slide active"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&auto=format&fit=crop" alt="HEMS"></div>
+        <div class="sw-slide"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&q=80&auto=format&fit=crop" alt="ESS"></div>
+        <div class="sw-slide"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=1600&q=80&auto=format&fit=crop" alt="EV"></div>
+        <div class="sw-slide"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" alt="PQ"></div>
+        <div class="sw-slide"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&auto=format&fit=crop" alt="VPP"></div>
       </div>
-      <!-- 5-col row below -->
-      <div class="sw-cols">
-        <div class="sw-col active" data-idx="0">
-          <div class="sw-col-sub">HEMS Cloud</div>
-          <div class="sw-col-title">家庭能源<br>智慧管理</div>
-          <div class="sw-col-desc">光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</div>
+      <div class="sw-row">
+        <div class="sw-item active" data-idx="0">
+          <div class="sw-item-title">家庭能源智慧管理</div>
+          <div class="sw-item-desc">光储充一体协同，自发自用策略自动执行，白标 SaaS 快速交付</div>
         </div>
-        <div class="sw-col" data-idx="1">
-          <div class="sw-col-sub">ESS Cloud</div>
-          <div class="sw-col-title">工商业储能<br>峰谷套利</div>
-          <div class="sw-col-desc">多站点统一监控，告警分级管理，收益可视化</div>
+        <div class="sw-item" data-idx="1">
+          <div class="sw-item-title">工商业储能套利</div>
+          <div class="sw-item-desc">峰谷套利最大化，多站点统一监控，告警分级管理</div>
         </div>
-        <div class="sw-col" data-idx="2">
-          <div class="sw-col-sub">EVCMS</div>
-          <div class="sw-col-title">充电站<br>智能调度</div>
-          <div class="sw-col-desc">多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</div>
+        <div class="sw-item" data-idx="2">
+          <div class="sw-item-title">充电站智能调度</div>
+          <div class="sw-item-desc">多桩负载均衡，OCPP 全兼容，动态功率分配防跳闸</div>
         </div>
-        <div class="sw-col" data-idx="3">
-          <div class="sw-col-sub">PQMS</div>
-          <div class="sw-col-title">电能质量<br>监测治理</div>
-          <div class="sw-col-desc">谐波分析，实时告警，合规报告一键导出</div>
+        <div class="sw-item" data-idx="3">
+          <div class="sw-item-title">电能质量监测治理</div>
+          <div class="sw-item-desc">谐波实时分析，多级告警推送，合规报告一键导出</div>
         </div>
-        <div class="sw-col" data-idx="4">
-          <div class="sw-col-sub">VPP Platform</div>
-          <div class="sw-col-title">虚拟电厂<br>聚合调度</div>
-          <div class="sw-col-desc">分布式资产聚合，接入辅助服务电力市场</div>
+        <div class="sw-item" data-idx="4">
+          <div class="sw-item-title">虚拟电厂聚合调度</div>
+          <div class="sw-item-desc">分布式资产聚合，辅助服务市场接入，收益可视化</div>
         </div>
       </div>
-    </div>    </div>
+    </div>
   </section>
 
       <!-- ===== 6. BRANDS ===== -->
@@ -721,12 +699,16 @@
       });
     });
 
-    // Software col switcher
-    const swCols = document.querySelectorAll(".sw-col");
-    swCols.forEach(col => {
-      col.addEventListener("click", () => {
-        swCols.forEach(c => c.classList.remove("active"));
-        col.classList.add("active");
+    // Software — Sungrow: click item → cross-fade image
+    const swItems = document.querySelectorAll(".sw-item");
+    const swSlides = document.querySelectorAll(".sw-slide");
+    swItems.forEach(item => {
+      item.addEventListener("click", () => {
+        const idx = +item.dataset.idx;
+        swItems.forEach(i => i.classList.remove("active"));
+        swSlides.forEach(s => s.classList.remove("active"));
+        item.classList.add("active");
+        swSlides[idx].classList.add("active");
       });
     });
   </script>
