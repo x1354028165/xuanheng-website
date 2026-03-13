@@ -6,51 +6,149 @@
 <title>旭衡电子官网 需求文档</title>
 <style>
   :root {
-    --primary: #1a3a5c; --accent: #2980b9; --accent-light: #d6eaf8;
-    --success: #27ae60; --danger: #e74c3c; --warning: #f39c12;
-    --bg: #f5f7fa; --card: #fff; --border: #dde3ea;
-    --text: #2c3e50; --muted: #7f8c8d; --code-bg: #1e2d3d;
+    --primary: #1a3a5c;
+    --accent: #2980b9;
+    --accent-light: #d6eaf8;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --purple: #8e44ad;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #dde3ea;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --code-bg: #1e2d3d;
   }
+  
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.7; }
-  .header { background: var(--primary); color: #fff; padding: 32px 40px; }
-  .header h1 { font-size: 24px; font-weight: 700; }
-  .header .meta { opacity: .7; font-size: 13px; margin-top: 6px; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body { 
+    font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif; 
+    background:var(--bg); 
+    color:var(--text); 
+    font-size:15px; 
+    line-height:1.8; 
+  }
+
+  /* Header */
+  .doc-header { background:linear-gradient(135deg,#0f2940,#1a6fa0); color:white; padding:48px 0 36px; text-align:center; }
+  .doc-header h1 { font-size:28px; font-weight:700; margin-bottom:8px; }
+  .doc-header .sub { opacity:.7; font-size:14px; margin-bottom:24px; }
+  .meta-tags { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .meta-tag { background:rgba(255,255,255,.15); padding:4px 14px; border-radius:20px; font-size:13px; }
+
+  /* Container */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Layout Wrapper for Sidebar */
+  .layout-wrapper { display: flex; gap: 32px; align-items: flex-start; margin-top: 24px; }
+  
+  /* Sidebar Navigation */
+  .sidebar {
+    position: sticky;
+    top: 24px;
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 15px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; padding-left: 8px; border-bottom: none; }
+  .sidebar ul { list-style: none; padding: 0; margin: 0; }
+  .sidebar li { margin: 4px 0; }
+  .sidebar a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  .sidebar a:hover { background: #f0f7ff; color: var(--accent); }
+  .sidebar a.active { background: var(--accent-light); color: var(--accent); font-weight: 700; }
+
+  /* Main Content Area */
+  .main-content { flex: 1; min-width: 0; }
+
+  /* Section */
+  .section { 
+    background:var(--card); 
+    border:1px solid var(--border); 
+    border-radius:12px; 
+    padding:36px 40px; 
+    margin-bottom:28px; 
+    box-shadow:0 2px 8px rgba(0,0,0,.06); 
+    scroll-margin-top: 24px;
+  }
+  .section-label { font-size:12px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px; }
+  h2 { font-size:22px; color:var(--primary); margin-bottom:22px; padding-bottom:12px; border-bottom:2px solid var(--accent-light); }
+  h3 { font-size:18px; color:var(--primary); margin:28px 0 14px; font-weight:600; }
+  h4 { font-size:15px; color:var(--text); margin:20px 0 10px; font-weight:700; }
+  p { margin:10px 0; }
+
+  /* Highlights & Boxes */
+  .highlight { background:var(--accent-light); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:16px 20px; margin:18px 0; font-size:15px; line-height:1.7; }
+  .gray-box { background:#f8f9fa; border:1px solid var(--border); border-radius:8px; padding:16px 20px; margin:16px 0; }
+  .arch-box { background:#111827; color:#e2e8f0; border-radius:12px; padding:28px; font-family:'JetBrains Mono',monospace; font-size:13px; line-height:2; overflow-x:auto; white-space:pre; margin: 16px 0; }
+
+  /* Code & Tables */
+  pre:not(.arch-box) { background:var(--code-bg); color:#a8d8f0; border-radius:10px; padding:20px 24px; overflow-x:auto; font-family:'JetBrains Mono','Courier New',monospace; font-size:13px; line-height:1.7; margin:16px 0; }
+  code { background:#e8f4fd; color:#1a6fa0; padding:2px 7px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:13px; }
+  pre code { background:none; color:inherit; padding:0; }
+
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:14px; }
+  th { background:var(--primary); color:white; padding:12px 16px; text-align:left; font-weight:600; border:1px solid var(--primary); }
+  td { padding:12px 16px; border:1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background:#f8fafc; }
+
+  .main-content ul, .main-content ol { padding-left: 24px; margin: 12px 0; }
+  .main-content li { margin-bottom: 6px; }
 
   /* Layout */
-  .page-wrapper { display:flex; max-width:1280px; margin:0 auto; padding:24px; gap:28px; align-items:flex-start; }
-  .main-content { flex:1; min-width:0; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:16px 0; }
+  
+  /* Use Case Cards */
+  .usecase-group { margin:20px 0; }
+  .usecase-group-title { font-size:13px; font-weight:700; color:white; padding:6px 14px; border-radius:6px 6px 0 0; }
+  .usecase-group-title.optimize { background:#27ae60; }
+  .usecase-group-title.api { background:var(--purple); }
+  .usecase-group-title.resilience { background:#e67e22; }
+  .usecase-group-title.custom { background:#c0392b; }
+  .usecase-items { border:1px solid var(--border); border-top:none; border-radius:0 0 8px 8px; padding:4px 0; }
+  .usecase-item { display:flex; align-items:flex-start; gap:14px; padding:12px 18px; border-bottom:1px solid #f0f0f0; }
+  .usecase-item:last-child { border-bottom:none; }
+  .usecase-num { font-size:18px; flex-shrink:0; }
+  .usecase-name { font-weight:700; color:var(--primary); font-size:14px; }
+  .usecase-desc { font-size:13px; color:var(--muted); margin-top: 4px; }
 
-  /* Sidebar */
-  .sidebar { width:220px; flex-shrink:0; position:sticky; top:68px; max-height:calc(100vh - 90px); overflow-y:auto; }
-  .sidebar-inner { background:#fff; border:1px solid var(--border); border-radius:10px; padding:18px; }
-  .sidebar h3 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:12px; }
-  .sidebar ul { list-style:none; }
-  .sidebar li { margin:3px 0; }
-  .sidebar a { display:block; padding:5px 8px; border-radius:5px; text-decoration:none; font-size:12px; color:var(--text); transition:all 0.2s; }
-  .sidebar a:hover { background:var(--accent-light); color:var(--accent); }
-  .sidebar a.sub { padding-left:16px; color:var(--muted); font-size:11px; }
-  .sidebar::-webkit-scrollbar { width:4px; }
-  .sidebar::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+  /* Priority Blocks */
+  .priority-block { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 16px 0; }
+  .priority-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .priority-row:last-child { border-bottom: none; }
+  .priority-badge-col { flex-shrink: 0; padding-top: 2px; }
+  .badge { display:inline-block; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:700; text-align:center; min-width:48px; }
+  .badge-p0 { background:#fdecea; color:var(--danger); }
+  .badge-p1 { background:#fef9e7; color:var(--warning); }
+  .badge-p2 { background:#eafaf1; color:var(--success); }
 
-  /* Sections */
-  .section { background: var(--card); border-radius: 10px; padding: 28px 32px; margin-bottom: 24px; border: 1px solid var(--border); }
-  h2 { font-size: 18px; color: var(--primary); border-bottom: 2px solid var(--accent-light); padding-bottom: 10px; margin-bottom: 20px; }
-  h3 { font-size: 15px; color: var(--primary); margin: 20px 0 10px; }
-  h4 { font-size: 13px; font-weight: 700; margin: 14px 0 6px; color: var(--text); }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
-  th { background: var(--primary); color: #fff; padding: 8px 12px; text-align: left; font-weight: 600; }
-  td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  tr:nth-child(even) td { background: #f9fbfd; }
-  .ac { background: #e8f8f0; border-left: 3px solid var(--success); padding: 8px 14px; margin: 6px 0; border-radius: 0 6px 6px 0; font-size: 12px; }
-  .ac::before { content: "✅ 验收标准："; font-weight: 700; color: var(--success); }
-  .note { background: #fff8e6; border-left: 4px solid var(--warning); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 13px; margin: 8px 0; }
-  .epic { font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
-
-  /* Code blocks */
-  .arch-box { background:#111827; color:#e2e8f0; border-radius:12px; padding:24px 28px; font-family:'JetBrains Mono','Courier New',monospace; font-size:13px; line-height:2; overflow-x:auto; white-space:pre; margin:14px 0; }
-  pre { background:var(--code-bg); color:#a8d8f0; border-radius:10px; padding:18px 22px; overflow-x:auto; font-family:'JetBrains Mono','Courier New',monospace; font-size:13px; line-height:1.7; margin:12px 0 16px; white-space:pre; }
-  code { background:#e8f4fd; color:#1a6fa0; padding:2px 7px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:13px; }
+  /* Responsive Design */
+  @media(max-width:960px){ 
+    .layout-wrapper { flex-direction: column; }
+    .sidebar { position: relative; width: 100%; top: 0; max-height: none; margin-bottom: 0px; }
+    .two-col { grid-template-columns:1fr; } 
+    .section { padding:24px 20px; } 
+    .priority-row { flex-direction: column; } 
+  }
+  
+  .doc-footer { text-align:center; padding:32px; color:var(--muted); font-size:13px; }
 </style>
 </head>
 <body>
@@ -58,8 +156,8 @@
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:6px;height:44px;overflow-x:auto;white-space:nowrap">
     <a href="index.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗂 文档中心</a>
     <span style="color:#3d6080;font-size:12px">|</span>
-    <a href="架构设计文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 架构设计</a>
-    <a href="需求文档.html" style="color:#fff;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0;background:rgba(255,255,255,.15)">📋 需求文档</a>
+    <a href="需求文档.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🏛 需求文档</a>
+    <a href="执行文件.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">📋 执行文件</a>
     <a href="视觉规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🎨 视觉规范</a>
     <a href="前端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🖥 前端规范</a>
     <a href="后端技术规范.html" style="color:#a8c4e0;text-decoration:none;font-size:12px;padding:6px 10px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">🗄 后端规范</a>
@@ -69,126 +167,311 @@
   </div>
 </div>
 
-<div class="header">
-  <h1>旭衡电子官网 · 需求文档</h1>
-  <div class="meta">版本 v2.1 &nbsp;·&nbsp; 2026-03-12 &nbsp;·&nbsp; 详细化页面功能规格 &nbsp;·&nbsp; alwayscontrol.com.cn</div>
+
+<div class="doc-header">
+  <div class="container">
+    <h1>⚡ 旭衡电子官网 · 需求文档</h1>
+    <div class="sub">Official Website & Full-Stack CMS Blueprint</div>
+    <div class="meta-tags">
+      <span class="meta-tag">v3.1 补充修订版</span>
+      <span class="meta-tag">架构对齐版</span>
+      <span class="meta-tag">多语言扩展</span>
+      <span class="meta-tag">产品×解决方案互通</span>
+    </div>
+  </div>
 </div>
 
-<div class="page-wrapper">
+<div class="container layout-wrapper">
+
   <aside class="sidebar">
-    <div class="sidebar-inner">
-      <h3>目录</h3>
-      <ul>
-        <li><a href="#s0">说明</a></li>
-        <li><a href="#s1">一、导航结构</a></li>
-        <li><a href="#s2">二、前台页面规格</a>
-          <ul>
-            <li><a href="#ep01" class="sub">EP-01 首页</a></li>
-            <li><a href="#ep02" class="sub">EP-02 解决方案</a></li>
-            <li><a href="#ep03" class="sub">EP-03 兼容生态</a></li>
-            <li><a href="#ep04" class="sub">EP-04 开发者中心</a></li>
-            <li><a href="#ep05" class="sub">EP-05 帮助中心</a></li>
-            <li><a href="#ep06" class="sub">EP-06 产品中心</a></li>
-            <li><a href="#ep07" class="sub">EP-07 关于我们</a></li>
-            <li><a href="#ep08" class="sub">EP-08 联系我们</a></li>
-            <li><a href="#ep09" class="sub">EP-09 隐私政策页</a></li>
-          </ul>
-        </li>
-        <li><a href="#s3">三、CMS 后台</a>
-          <ul>
-            <li><a href="#cms01" class="sub">CMS-01 仪表盘</a></li>
-            <li><a href="#cms02" class="sub">CMS-02 新闻动态</a></li>
-            <li><a href="#cms03" class="sub">CMS-03 FAQ</a></li>
-            <li><a href="#cms04" class="sub">CMS-04 案例管理</a></li>
-            <li><a href="#cms05" class="sub">CMS-05 招聘岗位</a></li>
-            <li><a href="#cms06" class="sub">CMS-06 媒体库</a></li>
-            <li><a href="#cms07" class="sub">CMS-07 页面内容</a></li>
-            <li><a href="#cms08" class="sub">CMS-08 产品内容</a></li>
-            <li><a href="#cms09" class="sub">CMS-09 解决方案内容</a></li>
-            <li><a href="#cms10" class="sub">CMS-10 文件资产</a></li>
-            <li><a href="#cms11" class="sub">CMS-11 兼容品牌</a></li>
-            <li><a href="#cms12" class="sub">CMS-12 产品关联配置</a></li>
-            <li><a href="#cms13" class="sub">CMS-13 客户线索</a></li>
-            <li><a href="#cms14" class="sub">CMS-14 报修工单</a></li>
-            <li><a href="#cms15" class="sub">CMS-15 多语言字典</a></li>
-            <li><a href="#cms16" class="sub">CMS-16 通知配置</a></li>
-            <li><a href="#cms17" class="sub">CMS-17 SEO 配置</a></li>
-            <li><a href="#cms18" class="sub">CMS-18 操作日志</a></li>
-            <li><a href="#cms19" class="sub">CMS-19 缓存管理</a></li>
-            <li><a href="#cms20" class="sub">CMS-20 页面健康检查</a></li>
-            <li><a href="#cms21" class="sub">CMS-21 Sitemap</a></li>
-            <li><a href="#cms22" class="sub">CMS-22 后台账号管理</a></li>
-          </ul>
-        </li>
-        <li><a href="#s4">四、全局功能</a>
-          <ul>
-            <li><a href="#gf01" class="sub">GF-01 全局多语言路由与字典</a></li>
-            <li><a href="#gf02" class="sub">GF-02 全局联合搜索</a></li>
-            <li><a href="#gf03" class="sub">GF-03 表单统一通知</a></li>
-            <li><a href="#gf04" class="sub">GF-04 SEO 基础规格</a></li>
-            <li><a href="#gf05" class="sub">GF-05 隐私合规</a></li>
-            <li><a href="#gf06" class="sub">GF-06 SSO / 访问控制（P1 预留）</a></li>
-          </ul>
-        </li>
-        <li><a href="#s5">五、非功能性需求</a></li>
-      </ul>
-    </div>
+    <h2>目录导航</h2>
+    <ul id="nav-list">
+      <li><a href="#s1" class="active">一、现有官网诊断</a></li>
+      <li><a href="#s2">二、官网定位升级</a></li>
+      <li><a href="#s3">三、信息架构 IA</a></li>
+      <li><a href="#s4">四、各页面内容规划</a></li>
+      <li><a href="#s5">五、CMS 内容管理需求</a></li>
+      <li><a href="#s6">六、CMS 能力清单</a></li>
+      <li><a href="#s7">七、非功能性需求</a></li>
+      <li><a href="#s8">八、访问控制与权限体系</a></li>
+      <li><a href="#s9">九、前台内容 CMS 覆盖审计</a></li>
+      <li><a href="#s10">十、上线前必须完成清单</a></li>
+    </ul>
   </aside>
+
   <main class="main-content">
+    
+    <div class="section" id="s1">
+      <h2>一、现有官网诊断</h2>
 
-    <!-- ── 说明 ──────────────────────────────────────────── -->
-    <div class="section" id="s0">
-      <h2>说明</h2>
-      <p>本文档为功能需求清单，列出官网所有页面及 CMS 模块的详细功能规格与验收标准，供开发团队确认范围使用。每个页面/模块按以下格式描述：区块结构（布局图）、功能清单表格、验收标准（绿色框）。</p>
+      <h3>1.1 官网的战略定位与角色</h3>
+      <h4>官网服务两类用户</h4>
+      <p>旭衡官网需要同时服务两类用户，在不同阶段扮演不同角色：</p>
+      
+      <div class="two-col">
+        <div class="gray-box" style="margin:0;">
+          <div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:8px">面向潜在客户：销售漏斗的顶层入口</div>
+<div style="background:transparent; padding:0; color:inherit; margin:0; font-family:inherit;">陌生访客进入官网
+  ↓ 快速理解旭衡是谁、能解决什么问题（品牌建立信任）
+  ↓ 找到与自己场景匹配的解决方案（精准分流）
+  ↓ 产生咨询/申请意向，进入销售流程（线索转化）</div>
+          <p style="font-size:12px; color:var(--muted); margin-top:8px;">旭衡目标客户差异大（集成商、研发型企业、VPP运营商），诉求各不相同，官网必须能够精准分流，而不是让所有人看同一套内容。</p>
+        </div>
+        <div class="gray-box" style="margin:0">
+          <div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:8px">面向已有客户：服务自助的统一入口</div>
+<div style="background:transparent; padding:0; color:inherit; margin:0; font-family:inherit;">客户成交后
+  ↓ 官网作为持续服务门户：文档下载、API接入、固件更新、故障报修
+  ↓ 减少人工支持成本，提升客户自助效率</div>
+        </div>
+      </div>
 
-      <h3>范围总览</h3>
+      <h4>现有定位语与三个主张</h4>
+      <p>现有官网的定位语是：</p>
+      <div class="highlight">
+        <strong>"跨品牌能源管理解决方案的优质选择"</strong><br>
+        旭衡电子（深圳）有限公司拥有成熟、稳定的开发能力。优秀的专业研发团队致力研究 EMS + 边缘计算智能网关、新能源智慧管理云平台，为您提供完整、多场景全面产品解决方案，适用于微电网、户用、充电站、工商储等各种场景的能源管理。
+      </div>
+      <p>这段定位语传达了三个核心主张，本身是准确的：</p>
       <table>
-        <thead><tr><th>类型</th><th>数量</th><th>说明</th></tr></thead>
+        <thead>
+          <tr><th>主张</th><th>原文对应</th></tr>
+        </thead>
         <tbody>
-          <tr><td><strong>前台固定页面</strong></td><td><strong>24 个</strong></td><td>不含动态生成的新闻详情页</td></tr>
-          <tr><td>前台动态页面</td><td>动态</td><td>新闻动态详情 /news/{slug}，由 CMS 内容数量决定</td></tr>
-          <tr><td><strong>CMS 后台模块</strong></td><td><strong>22 个</strong></td><td>含仪表盘（定制待办汇总）和后台账号管理，共 22 个</td></tr>
+          <tr><td><strong>跨品牌</strong></td><td>"跨品牌能源管理解决方案"</td></tr>
+          <tr><td><strong>软硬一体</strong></td><td>"EMS + 边缘计算智能网关 + 云平台"</td></tr>
+          <tr><td><strong>多场景覆盖</strong></td><td>"微电网、户用、充电站、工商储"</td></tr>
         </tbody>
       </table>
 
-      <h3>前台页面明细（24 个固定模板）</h3>
+      <h4>五大核心职责（评判标准）</h4>
+      <p>将两类用户的需求与三个定位主张结合，官网需要履行五大核心职责。以下诊断将以此为标准：</p>
       <table>
-        <thead><tr><th>导航入口</th><th>页面数</th><th>页面清单</th></tr></thead>
+        <thead>
+          <tr><th>职责</th><th>说明</th><th>当前状态</th></tr>
+        </thead>
         <tbody>
-          <tr><td>首页</td><td>1</td><td>首页 /</td></tr>
-          <tr><td>产品中心</td><td>8</td><td>Neuron II / Neuron III / Neuron III Lite / HEMS / ESS / EVCMS / PQMS / VPP</td></tr>
-          <tr><td>解决方案</td><td>5</td><td>户用家庭储能 / 工商业储能 / 充电站管理 / VPP 虚拟电厂 / 电能质量管理</td></tr>
-          <tr><td>兼容生态</td><td>1</td><td>兼容品牌列表页</td></tr>
-          <tr><td>开发者中心</td><td>0</td><td>无独立页面，导航按钮显示 Tooltip 提示</td></tr>
-          <tr><td>帮助中心</td><td>4</td><td>文档资料（含3 Tab）/ 版本兼容矩阵 / FAQ / 在线报修</td></tr>
-          <tr><td>关于我们</td><td>3</td><td>公司介绍 / 最新动态列表 / 加入我们</td></tr>
-          <tr><td>联系我们</td><td>1</td><td>联系表单页</td></tr>
-          <tr><td>隐私政策页</td><td>1</td><td>⚠️ 法务审核后上线，CMS 维护多语言内容</td></tr>
+          <tr><td><strong>品牌背书</strong></td><td>专业形象建立，让初次接触的客户建立信任</td><td>⚠️ 内容陈旧，合作品牌展示关闭</td></tr>
+          <tr><td><strong>客户分流</strong></td><td>不同类型访客找到各自的路径和转化动作</td><td>❌ 无分流设计，所有人看同一套内容</td></tr>
+          <tr><td><strong>技术能力证明</strong></td><td>让客户快速判断"你们能解决我的问题"</td><td>⚠️ 能力描述不清晰，关键差异化主张缺失</td></tr>
+          <tr><td><strong>客户服务自助</strong></td><td>已客户自助完成文档、API、固件、报修等需求</td><td>❌ 文档杂乱，无权限体系，FAQ 近乎空白</td></tr>
+          <tr><td><strong>内容运营阵地</strong></td><td>新闻、案例、FAQ 持续积累，辅助 SEO 和销售</td><td>❌ 内容硬编码，运营无法独立维护</td></tr>
         </tbody>
       </table>
 
-      <h3>CMS 后台模块明细（22 个）</h3>
+      <h3>1.2 现有官网问题诊断</h3>
+      <p>以五大职责为框架，逐一诊断现有官网的具体问题：</p>
+
+      <h4>❌ 品牌背书——定位主张无法兑现</h4>
+      <p>官网声称"跨品牌"，但内容无法证明：</p>
+      <ul>
+        <li><strong>无兼容品牌列表页</strong>，客户无从知晓实际接入了哪些品牌</li>
+        <li><strong>合作伙伴 Logo 墙被关闭</strong>，首页品牌展示区域代码已注释，客户看不到</li>
+        <li>解决方案页文案以 Neuron 网关为主角，给人"你们家自己的设备"的感知，跨品牌能力感知不到</li>
+      </ul>
+      <p>官网声称"多场景覆盖"，但场景不完整：</p>
+      <ul>
+        <li>VPP 虚拟电厂 — 产品中心有，解决方案导航里找不到</li>
+        <li>PQMS 电能质量 — 产品中心有，解决方案场景页没有</li>
+        <li>微电网 — 定位语里有，页面里无任何内容</li>
+      </ul>
+      <p><strong>结果：</strong> 最核心的竞争力，客户感知不到；相关场景客户看不到价值主张，无法转化。</p>
+
+      <h4>❌ 客户分流——无分流设计，一套内容给所有人</h4>
+      <ul>
+        <li>首页无任何针对不同客户类型的路径引导，所有人进入后看同一套内容</li>
+        <li>集成商、研发型企业、VPP 运营商诉求完全不同，但官网没有分流入口</li>
+        <li>没有独立的开发者中心，研发型客户无处找 API 接入信息</li>
+      </ul>
+
+      <h4>❌ 技术能力证明——关键差异化主张完全缺失</h4>
+      <p>官网从未向客户说清楚一个关键事实：<strong>网关是可选的</strong>。</p>
+      <ul>
+        <li>云端直连同样可以接入多品牌设备，但官网只呈现了"买网关"这一条路</li>
+        <li>纯云端客户认为自己不在目标客户范围内，直接流失</li>
+        <li>有"数据不上云"需求的工业客户找不到本地化方案描述，流失</li>
+        <li>产品与解决方案边界模糊：产品页在说解决方案的事，解决方案页在卖产品，客户不清楚该看哪个</li>
+      </ul>
+
+      <h4>❌ 客户服务自助——帮助中心形式大于内容</h4>
+      <ul>
+        <li>FAQ 页面已建立，但 Footer 入口链接被注释，用户根本找不到</li>
+        <li>FAQ 仅有 3 条占位示例，对实际用户毫无帮助</li>
+        <li>文档分类粗糙，技术文档与软件下载混在一起，找文件效率低</li>
+        <li>无任何权限体系，客户专属内容与公开内容无法区分</li>
+        <li>联系方式为占位内容（400-888-8888），无法实际使用</li>
+      </ul>
+
+      <h4>❌ 内容运营阵地——内容硬编码，运营无法独立维护</h4>
+      <ul>
+        <li>所有页面文案、FAQ、新闻动态全部硬编码在代码文件中，每次修改需开发介入、走 CI/CD 流程</li>
+        <li>新闻动态只有 1 条（广交会，2025-05-05），内容严重落后</li>
+        <li>合作品牌信息更新困难，干脆关闭展示模块</li>
+        <li>SEO 元数据硬编码，运营无法独立配置；sitemap 为静态文件，新增页面后无法自动更新</li>
+      </ul>
+
+      <h3>1.3 重构的本质锚点</h3>
+      <p>现有定位语没有错，问题是<strong>没有用正确的内容结构去支撑它</strong>。重构不是推翻定位，而是把三个主张真正兑现在每一个页面上，同时补全官网缺失的商业骨架：</p>
       <table>
-        <thead><tr><th>分组</th><th>模块数</th><th>包含模块</th></tr></thead>
+        <thead>
+          <tr><th>问题</th><th>重构方向</th></tr>
+        </thead>
         <tbody>
-          <tr><td>🏠 仪表盘</td><td>1</td><td>今日待办汇总（新线索 / 未处理工单 / 待发布内容）</td></tr>
-          <tr><td>📝 内容管理</td><td>4</td><td>CMS-02 新闻动态 / CMS-03 FAQ / CMS-04 案例管理 / CMS-05 招聘岗位</td></tr>
-          <tr><td>🖼️ 内容与页面</td><td>4</td><td>CMS-06 媒体库 / CMS-07 页面内容 / CMS-08 产品内容 / CMS-09 解决方案内容</td></tr>
-          <tr><td>📦 资产管理</td><td>3</td><td>CMS-10 文件资产 / CMS-11 兼容品牌 / CMS-12 产品关联配置</td></tr>
-          <tr><td>📋 线索与工单</td><td>2</td><td>CMS-13 客户线索管理 / CMS-14 报修工单管理</td></tr>
-          <tr><td>⚙️ 系统配置</td><td>4</td><td>CMS-15 多语言字典 / CMS-16 通知配置 / CMS-17 SEO 配置 / CMS-18 操作日志</td></tr>
-          <tr><td>🔧 运维工具</td><td>3</td><td>CMS-19 缓存管理 / CMS-20 页面健康检查 / CMS-21 Sitemap 管理</td></tr>
-          <tr><td>👤 账号管理</td><td>1</td><td>后台账号管理（超级管理员专用）：创建/停用账号，分配角色</td></tr>
+          <tr><td>跨品牌无法证明</td><td>建立兼容生态页；恢复 Logo 墙；全站文案突出"品牌无关"</td></tr>
+          <tr><td>软硬一体没说清</td><td>明确"网关可选"：云端直连 or 网关局域网，两种路径并列呈现</td></tr>
+          <tr><td>场景不完整</td><td>补全 VPP / 电能质量场景页；产品说"能力"，解决方案说"场景+问题+方案"</td></tr>
+          <tr><td>无客户分流</td><td>首页三路分流 CTA；新增开发者中心；联系表单按意向类型分发</td></tr>
+          <tr><td>自助能力缺失</td><td>重建帮助中心；建立权限体系；个人中心</td></tr>
+          <tr><td>内容无法运营</td><td>全站内容 CMS 化；SEO 可配置；sitemap 自动更新</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         一、导航结构
-    ══════════════════════════════════════════════════════ -->
-    <div class="section" id="s1">
-      <h2>一、导航结构</h2>
-      <div class="arch-box">旭衡电子官网 (alwayscontrol.com.cn)
+    <div class="section" id="s2">
+      <h2>二、官网定位升级</h2>
+
+      <h3>2.1 定位演进：继承 + 补全</h3>
+      <p>旧定位并没有错，它准确描述了旭衡的技术能力与产品覆盖范围。问题是它是一个<strong>以产品为视角的自我描述</strong>，缺少两个维度：一是"谁是目标客户"，二是"通过什么商业路径触达他们"。</p>
+    <pre>旧定位（产品视角，仍然成立）：
+  跨品牌能源管理解决方案的优质选择
+  EMS + 边缘计算网关 + 云平台
+  覆盖微电网、户用、充电站、工商储
+
+↓ 在此基础上补全
+
+新定位（增加客户视角与商业路径）：
+  在原有跨品牌、多场景能力基础上，
+  面向四类目标客户，提供清晰的商业路径与分流入口：
+  集成商拿整套方案 / 研发企业调 API / 硬件集成商做本地接入 / 有定制需求的客户做 VPP/BMS 定制</pre>
+      <p>旧定位是官网的<strong>内容基础</strong>，新增的是<strong>商业骨架</strong>。两者共同构成重构后的完整定位。</p>
+
+      <h3>2.2 完整定位表述</h3>
+      <div class="highlight">
+        <strong>跨品牌能源管理解决方案的优质选择。</strong><br>
+        提供从整套 EMS 系统、云端 API 接入到定制化 VPP 平台的多路径服务，云端直连与网关接入灵活选择，覆盖户用、工商储、充电站、虚拟电厂全场景。
+      </div>
+
+      <h3>2.3 四类目标客户 × 核心诉求 × 官网路径</h3>
+      <p>旭衡面向四类目标客户，每类客户的诉求和进入路径不同：</p>
+      
+      <div class="usecase-group">
+        <div class="usecase-group-title optimize">① 集成商 / 项目方</div>
+        <div class="usecase-items">
+          <div class="usecase-item">
+            <div>
+              <div class="usecase-name">核心诉求：整套解决方案、Demo 账号、系统报价</div>
+              <div class="usecase-desc">进入路径：首页 → 解决方案 &nbsp;|&nbsp; 转化动作：申请 Demo / 联系商务</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="usecase-group">
+        <div class="usecase-group-title api">② 研发型能源企业</div>
+        <div class="usecase-items">
+          <div class="usecase-item">
+            <div>
+              <div class="usecase-name">核心诉求：API 接口文档、协议适配、测试环境</div>
+              <div class="usecase-desc">进入路径：首页 → 开发者中心 &nbsp;|&nbsp; 转化动作：申请 API Key</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="usecase-group">
+        <div class="usecase-group-title resilience">③ 硬件集成商 / 工业项目方</div>
+        <div class="usecase-items">
+          <div class="usecase-item">
+            <div>
+              <div class="usecase-name">核心诉求：网关产品采购、本地 API 对接、上位机开发</div>
+              <div class="usecase-desc">进入路径：首页 → 产品中心 → 网关产品页 &nbsp;|&nbsp; 转化动作：联系商务采购</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="usecase-group">
+        <div class="usecase-group-title custom">④ VPP / BMS 定制需求方</div>
+        <div class="usecase-items">
+          <div class="usecase-item">
+            <div>
+              <div class="usecase-name">核心诉求：定制化 VPP 平台、BMS 字典接入、白标系统</div>
+              <div class="usecase-desc">进入路径：首页 → 联系我们（定制服务直接沟通） &nbsp;|&nbsp; 转化动作：联系我们</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--muted)"><strong>说明：</strong> VPP/BMS 定制需求方的路径不经过 VPP 解决方案场景页。VPP 场景页面向的是"采购标准 VPP 调度平台服务"的客户（VPP 运营商、能源聚合商）；而 VPP/BMS 定制是需要深度定制开发的服务，属于单独的商业线，由商务直接跟进，不适合通过标准场景页转化。</p>
+
+      <h3>2.4 四大商业线 × 官网模块映射</h3>
+      <table>
+        <thead>
+          <tr><th>商业线</th><th>核心受众</th><th>官网承载模块</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>成套系统解决方案</td><td>集成商</td><td>解决方案（HEMS / ESS / EVCMS / VPP 场景页）</td></tr>
+          <tr><td>云端 API 开放平台</td><td>研发型企业</td><td>开发者中心（新建）</td></tr>
+          <tr><td>纯硬件 + 本地工具</td><td>工业局域网项目、硬件集成商</td><td>产品中心 → 网关产品页 → 文档下载</td></tr>
+          <tr><td>VPP / BMS 定制开发</td><td>设备厂商、代理商、有定制需求的企业</td><td>联系我们（意向分类：VPP/BMS 定制化开发）</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--muted)"><strong>说明：</strong> VPP/BMS 定制开发不在解决方案场景页承载，因为定制服务需要一对一沟通需求，标准场景页无法有效转化。官网在「联系我们」表单中提供「VPP / BMS 定制化开发」意向选项，由产品团队直接跟进。</p>
+
+      <h3>2.5 关键差异化主张（全站需贯穿）</h3>
+      <div class="gray-box" style="border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+        <strong>接入方式由你决定，没有绑定关系。</strong>
+      </div>
+      <p>两种接入模式，适合不同客户诉求：</p>
+      <table>
+        <thead>
+          <tr><th>接入方式</th><th>适合谁</th><th>核心价值</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>☁️ 云端直连</strong>（无需网关，API 对接）</td><td>研发型企业、VPP 运营商、能源聚合商</td><td>无硬件成本，快速接入，适合纯软件平台和远程调度场景</td></tr>
+          <tr><td><strong>🔗 网关局域网</strong>（Neuron 网关部署现场）</td><td>硬件集成商、工业项目方、对数据安全敏感的客户</td><td>数据不上云，本地实时控制，适合工业局域网和隐私敏感场景</td></tr>
+        </tbody>
+      </table>
+      <p>集成商 / 项目方两种模式均可按项目需求选择，也可混合使用。<br>这一主张在现有官网完全缺失，是重构最重要的内容补充。全站所有页面（首页、解决方案、产品页）在介绍接入能力时，都应以此为基础展开，而非默认"客户需要买网关"。</p>
+    </div>
+
+    <div class="section" id="s3">
+      <h2>三、信息架构 IA</h2>
+
+      <h3>3.1 产品 vs 解决方案：分层逻辑</h3>
+      <p>在展开导航结构之前，先明确两个频道的内容职责，这是本次重构中最重要的结构性决策。</p>
+      
+      <div class="two-col">
+        <div class="gray-box" style="margin:0">
+          <div style="font-size:15px;font-weight:700;color:var(--primary);margin-bottom:8px">产品中心 — 回答"旭衡卖什么"</div>
+          <p style="font-size:13px; margin-bottom:6px">以旭衡为主语，描述产品本身的能力、规格与功能。<br><strong>目标读者：</strong>已有明确采购意向、正在做技术评估的人（采购经理、研发工程师）。<br><strong>核心内容：</strong>功能列表、产品规格、截图、接口文档、下载手册。</p>
+        </div>
+        <div class="gray-box" style="margin:0">
+          <div style="font-size:15px;font-weight:700;color:var(--primary);margin-bottom:8px">解决方案 — 回答"客户的问题是什么、我们怎么解决"</div>
+          <p style="font-size:13px; margin-bottom:6px">以客户业务场景为主语，描述客户面临的处境与痛点，再给出产品组合方案。<br><strong>目标读者：</strong>仍在探索阶段、需要判断"你们能解决我的问题吗"的业务决策者。<br><strong>核心内容：</strong>场景描述、痛点提炼、方案架构图、产品组合（以方案为主角，产品作为手段出现）、成功案例。</p>
+        </div>
+      </div>
+
+      <h4>两个频道的核心差异：</h4>
+      <table>
+        <thead>
+          <tr><th>维度</th><th>产品中心</th><th>解决方案</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>主语</td><td>这个产品</td><td>这类客户 / 这个场景</td></tr>
+          <tr><td>核心问题</td><td>它能做什么？规格是什么？</td><td>我的问题能被解决吗？怎么解决？</td></tr>
+          <tr><td>产品出现方式</td><td>产品本身是主角</td><td>产品是解决手段，按需组合</td></tr>
+          <tr><td>CTA</td><td>下载手册、查看参数、申请 Demo</td><td>联系我们、获取方案报价</td></tr>
+        </tbody>
+      </table>
+
+      <h4>同一能力在两个频道的表达方式示例：</h4>
+    <pre>产品中心（EVCMS 云平台产品页）：
+  "支持静态负载均衡与动态负载均衡两种调度模式，
+   可同时管理多品牌充电桩，兼容 OCPP、私有协议等主流协议。"
+
+解决方案（充电站场景页）：
+  "停车场主线容量有限，装了 20 个充电桩却经常跳闸？
+   Neuron III 网关实时检测总负载，EVCMS 智能分配各桩功率，
+   不扩容、不跳闸，20 个桩全部可用。"</pre>
+
+      <h3>3.2 导航结构</h3>
+    <div class="arch-box">旭衡电子官网 (alwayscontrol.com.cn)
 │
 ├── 首页 /
 │   └── 三路分流：[查看解决方案] [开发者中心] [联系我们]
@@ -196,35 +479,40 @@
 ├── 🔍 全局搜索（Header 常驻）
 │   └── 跨全站索引：FAQ / API 文档段落 / 兼容品牌 / 固件版本 / 产品页
 │
-├── 产品中心 /products
+├── 产品中心 /products                ← 卖什么（以产品为主角）
+│   │
 │   ├── 智能网关（硬件）
-│   │   ├── Neuron II — 通用多协议网关（4G/WiFi/RS485/CAN）
-│   │   ├── Neuron III — 充电站专用控制器（内置电表+DLB）
+│   │   ├── Neuron II     — 通用多协议网关（4G/WiFi/RS485/CAN）
+│   │   ├── Neuron III    — 充电站专用控制器（内置电表+DLB）
 │   │   └── Neuron III Lite — 防跳闸控制器（配套 ATP III）
+│   │
 │   └── 云平台（软件）
-│       ├── HEMS — 家庭能源管理系统
-│       ├── ESS — 工商储能柜管理系统
+│       ├── HEMS  — 家庭能源管理系统
+│       ├── ESS   — 工商储能柜管理系统
 │       ├── EVCMS — 充电站管理平台
-│       ├── PQMS — 电能质量监控系统
-│       └── VPP — 定制化虚拟电厂平台
+│       ├── PQMS  — 电能质量监控系统
+│       └── VPP   — 定制化虚拟电厂平台
 │
-├── 解决方案 /solutions
-│   ├── 户用家庭储能 — 光储充一体，电费优化
-│   ├── 工商业储能 — 峰谷套利，备用电源，动态增容
-│   ├── 充电站管理 — 多桩负载均衡，防跳闸
-│   ├── VPP 虚拟电厂 — 设备聚合，参与电网调度
-│   └── 电能质量管理 — 谐波治理，远程监控，参数优化
+├── 解决方案 /solutions               ← 解决什么问题（以场景为主角）
+│   ├── 户用家庭储能   — 光储充一体，电费优化
+│   ├── 工商业储能     — 峰谷套利，备用电源，动态增容
+│   ├── 充电站管理     — 多桩负载均衡，防跳闸
+│   ├── VPP 虚拟电厂   — 设备聚合，参与电网调度（标准平台服务）
+│   └── 电能质量管理   — 谐波治理，远程监控，参数优化
 │
-├── 兼容生态 /ecosystem
-│   └── 已接入品牌（储能/逆变器/充电桩，按接入方式/能力筛选）
+├── 兼容生态 /ecosystem               ← 新增，CMS 驱动
+│   └── 已接入品牌（储能/逆变器/充电桩，按接入方式筛选）
 │
-├── 开发者中心（无独立页面）
-│   └── 导航按钮悬停 Tooltip：「即将上线，欢迎留资」+ [联系我们] 跳转
+├── 开发者中心 /developers            ← 菜单保留，本期显示「正在开发中」占位页
+│   ├── 快速开始
+│   ├── 云端 API 文档（REST / MQTT / WebSocket）
+│   ├── 网关本地 API 文档（HTTP / Modbus TCP）[Neuron-Dev]
+│   └── 申请接入
 │
 ├── 帮助中心 /support
-│   ├── 文档资料（文档/软件/固件 三Tab）
-│   ├── 版本兼容性矩阵
-│   ├── FAQ（分类+搜索）
+│   ├── 文档资料（按产品型号分类）
+│   ├── 软件下载（工控软件 + App）
+│   ├── 常见问题 FAQ（CMS 驱动）
 │   └── 在线报修
 │
 ├── 关于我们
@@ -233,1128 +521,1916 @@
 │   └── 加入我们
 │
 └── 联系我们 /contact
-    ├── 意向分类表单（按意向类型路由至对应企微群）
-    └── 定制服务入口</div>
+    ├── 意向分类表单（按客户类型自动分发至企业微信对应业务群）
+    └── 定制服务入口（VPP 平台定制 / BMS 字典接入 / 白标系统）← 定制需求直接沟通，不经过场景页</div>
+
+      <h3>3.3 首页区块结构</h3>
+    <div class="arch-box">┌─────────────────────────────────────────────────┐
+│  [Hero]                                          │
+│  主标语 + 副标语                                   │
+│  三路分流 CTA                                     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐          │
+│  │查看解决方案│ │开发者中心 │ │ 联系我们  │          │
+│  └──────────┘ └──────────┘ └──────────┘          │
+├─────────────────────────────────────────────────┤
+│  [信任背书] XX+ 兼容品牌 | XX+ 覆盖国家 | XX+ 项目  │
+│  ⚠️ 数字待填入：需与实际数据核实后替换              │
+├─────────────────────────────────────────────────┤
+│  [核心差异化] 接入方式由你决定                       │
+│  ☁️ 云端直连（无需网关）  ←→  🔗 网关局域网           │
+├─────────────────────────────────────────────────┤
+│  [场景解决方案] 户用 / 工商储 / 充电站 / VPP / 电能质量│
+├─────────────────────────────────────────────────┤
+│  [产品概览] 网关三款 + 云平台截图                    │
+├─────────────────────────────────────────────────┤
+│  [兼容生态 Logo 墙] CMS 驱动，品牌 Logo 展示         │
+├─────────────────────────────────────────────────┤
+│  [底部 CTA] 申请 Demo / API 文档 / 联系商务          │
+└─────────────────────────────────────────────────┘</div>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         二、前台页面规格
-    ══════════════════════════════════════════════════════ -->
-    <div class="section" id="s2">
-      <h2>二、前台页面规格</h2>
+    <div class="section" id="s4">
+      <h2>四、各页面内容规划</h2>
 
-      <!-- EP-01 首页 -->
-      <div class="epic" id="ep01">EP-01 首页</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">┌─────────────────────────────────────────┐
-│  [Hero] 主标语 + 副标语                  │
-│  [查看解决方案] [开发者中心] [联系我们]    │
-├─────────────────────────────────────────┤
-│  [信任背书] XX+ 兼容品牌 | XX+ 覆盖国家   │
-│  | XX+ 交付项目  ⚠️ 数字待填入           │
-├─────────────────────────────────────────┤
-│  [核心差异化] 接入方式由你决定             │
-│  ☁️ 云端直连（无需网关）/ 🔗 网关局域网   │
-│  [查看兼容品牌与接入方式 →]               │
-├─────────────────────────────────────────┤
-│  [场景解决方案] 5个场景卡片               │
-│  户用/工商储/充电站/VPP/电能质量          │
-├─────────────────────────────────────────┤
-│  [产品概览] 网关3款 + 云平台5款           │
-├─────────────────────────────────────────┤
-│  [兼容品牌 Logo 墙] CMS 驱动             │
-├─────────────────────────────────────────┤
-│  [底部 CTA] 申请 Demo / API 文档 / 联系商务│
-└─────────────────────────────────────────┘</div>
-
-      <h4>功能清单</h4>
+      <h3>4.1 首页</h3>
+      <h4>Hero 区</h4>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <thead>
+          <tr><th>项目</th><th>现有</th><th>重构后</th></tr>
+        </thead>
         <tbody>
-          <tr><td>Hero 区块（主标语/副标语/三路 CTA）</td><td>文案全部由 CMS 配置，支持多语言</td></tr>
-          <tr><td>信任背书数字区（兼容品牌数/覆盖国家数/交付项目数）</td><td>⚠️ 数字待业务方确认后填写，不可使用估算值</td></tr>
-          <tr><td>接入方式差异化区块（云端直连 vs 网关局域网）</td><td>文字+图标说明两种接入模式，含跳转兼容生态页 CTA</td></tr>
-          <tr><td>解决方案场景卡片（5个）</td><td>每卡：场景名称+一句话痛点+[查看解决方案→]，从 CMS 拉取</td></tr>
-          <tr><td>产品概览卡片（8个）</td><td>每卡：产品名+一句话定位+[查看产品→]，从 CMS 拉取</td></tr>
-          <tr><td>兼容品牌 Logo 墙</td><td>仅展示状态「已支持」且设为可见的品牌，数据从 CMS 兼容品牌模块拉取</td></tr>
-          <tr><td>底部三路 CTA</td><td>申请 Demo / 查看 API 文档 / 联系商务</td></tr>
+          <tr><td>主标语</td><td>跨品牌能源管理解决方案的优质选择</td><td>无缝聚合全场景能源资产，重塑分布式能源价值</td></tr>
+          <tr><td>副标语</td><td>研究 EMS+边缘计算智能网关…（功能描述）</td><td>云端直连或网关接入，成套系统或纯 API 调用，打破设备协议壁垒</td></tr>
+          <tr><td>CTA</td><td>无</td><td>[查看方案] [开发者文档] [联系商务] 三路分流</td></tr>
         </tbody>
       </table>
-      <div class="ac">Hero 内容在 CMS 后台修改后实时生效，无需代码发布。</div>
-      <div class="ac">三路 CTA 中「开发者中心」按钮点击后不跳转页面，显示 Tooltip 提示「即将上线，欢迎留资」，并提供 [联系我们] 跳转链接。</div>
-      <div class="ac">Logo 墙数据与 CMS 兼容品牌模块一致。</div>
 
-      <!-- EP-02 解决方案 -->
-      <div class="epic" id="ep02" style="margin-top:24px">EP-02 解决方案（5个场景页）</div>
-      <h4>每个场景页通用区块结构</h4>
-      <div class="arch-box">┌──────────────────────────────────────────┐
-│  [Banner] 场景名称 + 一句话定位            │
-├──────────────────────────────────────────┤
-│  [痛点] 3个核心痛点卡片                    │
-├──────────────────────────────────────────┤
-│  [方案描述] 文字 + 架构示意图              │
-├──────────────────────────────────────────┤
-│  [接入方式] 云端直连 / 网关局域网（按场景）  │
-├──────────────────────────────────────────┤
-│  [本方案使用的产品] 产品跳转卡片            │
-│  ┌──────────┐  ┌──────────┐              │
-│  │ 云平台    │  │ 网关（可选）│             │
-│  │[查看产品→]│  │[查看产品→]│              │
-│  └──────────┘  └──────────┘              │
-├──────────────────────────────────────────┤
-│  [应用案例] 案例卡片（无案例时自动隐藏）     │
-└──────────────────────────────────────────┘</div>
+      <h4>新增区块：核心差异化（接入方式）</h4>
+      <p>这是整个重构最重要的新增内容，解决"网关是可选项"这个认知缺失：</p>
+    <pre>标题：接入方式，完全由你决定
 
-      <h4>5个场景对应产品关联</h4>
+☁️ 云端直连
+  无需采购网关硬件
+  设备支持云端 API 的直接接入
+  适合：VPP 调度、远程监控平台
+  
+🔗 网关局域网
+  Neuron 网关部署在项目现场
+  数据在本地处理，满足"数据不上云"要求
+  适合：工业局域网、大型工厂、对数据安全敏感的场景
+
+[查看兼容品牌与接入方式 →]</pre>
+
+      <h4>新增：合作伙伴 Logo 墙</h4>
+      <p>首页底部新增品牌展示区块，数据由 CMS 维护，运营人员自助增删品牌 Logo 与排序，无需发布代码。Logo 墙与"兼容生态页"共用同一份品牌数据源，仅展示状态为「已支持」且设置为可见的品牌。</p>
+
+      <h3>4.2 解决方案页（5个场景）</h3>
+      <p>解决方案板块以客户业务场景为核心，每个场景页面完整覆盖：场景背景与痛点 → 方案架构与接入方式 → 核心能力 → 应用案例。产品作为解决手段出现，而非主角。</p>
+      <p>重构后官网共规划 <strong>5 个场景页</strong>：</p>
+
+      <div class="gray-box">
+        <h4>场景一：户用家庭储能</h4>
+        <p><strong>场景背景：</strong><br>家庭用户已安装光伏 + 储能系统，但各设备品牌不同、协议各异，缺乏统一的监控与调度入口；峰谷电价政策复杂，手动管理无法最大化节电收益。</p>
+        <p><strong>核心痛点：</strong></p>
+        <ul>
+          <li>品牌各用各的 App，信息分散，无法全局掌控</li>
+          <li>充电桩、储能、光伏协同调度依赖人工，效率低</li>
+          <li>无法根据实时电价自动切换用电策略</li>
+        </ul>
+        <p><strong>方案描述：</strong><br>通过云平台或 Neuron 网关统一接入家庭全部能源设备，实现自发自用、经济模式、应急模式一键切换，结合 App 提供实时能流可视化与电费报告。</p>
+        <p><strong>接入方式：</strong> 云端直连（品牌云 API 直接对接）/ Neuron 网关局域网（品牌不支持云 API 时）</p>
+        <p><strong>案例方向：</strong> 中国台湾别墅小区；澳洲家庭储能用户（结合当地电价结构）</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>场景二：工商业储能</h4>
+        <p><strong>场景背景：</strong><br>工厂、商业楼宇、园区面临峰谷电价差大、用电成本高的压力，储能系统作为核心降本手段，但分布式多站点管理复杂、跨品牌设备接入难。</p>
+        <p><strong>核心痛点：</strong></p>
+        <ul>
+          <li>分布式站点各自孤立，无统一监控中心</li>
+          <li>不同品牌 PCS、BMS 协议不统一，集成成本极高</li>
+          <li>峰谷套利策略依赖人工设置，无法动态响应电价波动</li>
+        </ul>
+        <p><strong>方案描述：</strong><br>通过 Neuron 网关或云端 API 接入多品牌储能设备，ESS 云平台实现跨站点统一监控、峰谷自动套利、告警分级管理、能效报告。</p>
+        <p><strong>接入方式：</strong> Neuron 网关（现场设备协议转换）/ 云端直连（品牌云 API 对接）</p>
+        <p><strong>案例方向：</strong> 深圳龙华分布式储能项目（5 天完成云平台搭建，10 天完成跨品牌设备接入）</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>场景三：充电站负载管理</h4>
+        <p><strong>场景背景：</strong><br>停车场、办公楼、企业园区需要部署多台充电桩，但主线电容有限，多桩同时快充极易触发主断路器跳闸；充电桩品牌混杂，协议不一，统一管理困难。</p>
+        <p><strong>核心痛点：</strong></p>
+        <ul>
+          <li>受限于主线容量，充电桩无法满功率使用</li>
+          <li>多品牌充电桩各自独立，缺乏整体调度</li>
+          <li>无法按优先级智能分配充电功率（如 VIP 优先）</li>
+        </ul>
+        <p><strong>方案描述：</strong><br>Neuron III 网关实时检测主线总负载，配合 EVCMS 云平台动态分配各桩可用功率，实现在不扩容主线的前提下多桩协同充电，支持平均模式、排队模式、VIP 模式。</p>
+        <p><strong>接入方式：</strong> Neuron III 网关（PLC/RS485 本地控制，实时毫秒级响应）</p>
+        <p><strong>案例方向：</strong> 深圳罗湖办公楼停车场；马来西亚充电站项目</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>场景四：VPP 虚拟电厂调度</h4>
+        <p><strong>场景背景（结合澳洲市场）：</strong><br>澳大利亚等地屋顶光伏与家庭储能渗透率全球领先，但分散的能源资产无法单独参与电网调度。VPP 通过聚合大量分布式电池，将其统一协调为一座"虚拟电厂"，在电网用电高峰时集中放电，在低谷时集中储能，VPP 运营商可从电力现货市场、需求响应机制（FCAS）中获取收益，并将收益部分返还给资产所有者。<br>
+        澳洲主流 VPP 模式（Origin、AGL、Tesla Energy 等）的核心技术逻辑是：通过接入各品牌家庭储能设备的云端 API，实时获取电池 SOC（荷电状态）、可用功率，并下发充放电指令，整个调度链路完全在云端完成，无需现场硬件介入。</p>
+        <p><strong>旭衡的 VPP 定位：</strong><br>提供面向 VPP 运营商的底层调度平台。核心能力是**通过接入第三方品牌储能设备的云端 API，统一实现对多品牌真实电池的充放电调度**，而非模拟仿真。旭衡不做电力交易，聚焦设备侧的协议接入与调度执行层。</p>
+        <p><strong>核心痛点：</strong></p>
+        <ul>
+          <li>不同品牌储能系统 API 协议各异（Modbus、私有 REST、MQTT），接入成本极高</li>
+          <li>自研调度平台技术门槛高、周期长，难以快速进入市场</li>
+          <li>需要支持实时响应（秒级调度指令下发），可靠性要求高</li>
+        </ul>
+        <p><strong>方案描述：</strong><br>旭衡 VPP 平台已打通多个主流品牌储能设备的云端 API，VPP 运营商只需对接旭衡统一调度接口，即可向目标设备发出充放电指令、查询实时 SOC、订阅告警事件。平台支持批量设备同时调度，可对接上游电网信号或自定义调度策略。</p>
+        <p><strong>技术亮点：</strong></p>
+        <ul>
+          <li>多品牌云 API 适配层：已接入 X 个品牌储能设备</li>
+          <li>统一调度指令集：标准化充电 / 放电 / 待机 / 紧急停止指令</li>
+          <li>实时状态订阅：SOC、功率、告警状态毫秒级推送</li>
+          <li>调度记录与审计：完整的指令下发与执行记录</li>
+        </ul>
+        <p><strong>接入方式：</strong> 云端直连（主要模式，通过品牌 API 调度实际电池）</p>
+        <p><strong>适用客户方向：</strong> VPP 运营商、能源聚合商、参与需求响应项目的能源服务公司</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>场景五：电能质量远程监控</h4>
+        <p><strong>场景背景：</strong><br>工业园区、数据中心、医院、商业综合体对电能质量要求严苛，谐波污染、电压骤降、三相不平衡等问题直接影响设备寿命与生产安全，但传统人工巡检模式响应慢、覆盖不全。</p>
+        <p><strong>核心痛点：</strong></p>
+        <ul>
+          <li>谐波问题隐蔽，设备异常时才发现，损失已经发生</li>
+          <li>多个监测点数据分散，无统一分析中心</li>
+          <li>补偿设备（SVG、APF）参数调整依赖现场工程师，无法远程操作</li>
+        </ul>
+        <p><strong>方案描述：</strong><br>通过 PQMS 平台实时采集各监测点的电压、电流、谐波、功率因数等指标，地图化展示站点健康状态，异常自动预警并推送通知，支持远程调整补偿参数，并提供历史分析报告帮助客户定位电能质量劣化根因。同时支持远程 OTA 升级现场设备固件，无需现场运维。</p>
+        <p><strong>接入方式：</strong> Neuron 网关（本地采集，支持 Modbus / RS485 仪表接入）/ 支持品牌云 API 直接对接</p>
+        <p><strong>案例方向：</strong> 工业园区谐波治理；数据中心电能质量管控</p>
+      </div>
+
+      <h4>各场景页统一需补充的内容</h4>
       <table>
-        <thead><tr><th>场景</th><th>对应云平台</th><th>对应硬件</th></tr></thead>
+        <thead>
+          <tr><th>场景</th><th>需补充内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>户用家庭储能</td><td>两种接入方式适用场景对比；澳洲案例</td></tr>
+          <tr><td>工商业储能</td><td>深圳龙华案例文字详情</td></tr>
+          <tr><td>充电站管理</td><td>马来西亚案例详情；"充电站"统一使用中文，不使用 ChargingStation</td></tr>
+          <tr><td>VPP 虚拟电厂</td><td>完整场景页规划详见场景四</td></tr>
+          <tr><td>电能质量管理</td><td>完整场景页规划详见场景五</td></tr>
+        </tbody>
+      </table>
+
+      <h4>各场景页统一结构：云平台跳转卡片</h4>
+      <p>每个解决方案场景页底部，须展示该场景涉及的云平台产品跳转卡片，引导用户从"了解场景"自然跳转到"查看对应产品"。</p>
+    <div class="arch-box">┌──────────────────────────────────────┐
+│  本方案使用的产品                       │
+│                                      │
+│  ┌──────────┐  ┌──────────┐          │
+│  │ [产品图标] │  │ [产品图标] │          │
+│  │  HEMS    │  │ Neuron II │          │
+│  │ 家庭能源   │  │ 智能网关   │          │
+│  │ 管理系统   │  │          │          │
+│  │ [查看产品→]│  │[查看产品→]│          │
+│  └──────────┘  └──────────┘          │
+└──────────────────────────────────────┘</div>
+      <table>
+        <thead>
+          <tr><th>场景</th><th>涉及云平台</th><th>涉及硬件</th></tr>
+        </thead>
         <tbody>
           <tr><td>户用家庭储能</td><td>HEMS</td><td>Neuron II（可选）</td></tr>
-          <tr><td>工商业储能</td><td>ESS</td><td>Neuron II（可选）</td></tr>
+          <tr><td>工商业储能</td><td>ESS</td><td>Neuron II（可选）或 Neuron III</td></tr>
           <tr><td>充电站管理</td><td>EVCMS</td><td>Neuron III</td></tr>
-          <tr><td>VPP 虚拟电厂</td><td>VPP</td><td>无（纯云端调度）</td></tr>
+          <tr><td>VPP 虚拟电厂</td><td>VPP</td><td>无（纯云端）</td></tr>
           <tr><td>电能质量管理</td><td>PQMS</td><td>Neuron II</td></tr>
         </tbody>
       </table>
 
-      <h4>功能清单</h4>
+      <h3>4.3 兼容生态页</h3>
+      <p>这是展示技术壁垒、建立客户信任的核心差异化页面。</p>
+
+      <div class="highlight">
+        <strong>设计背景说明（为什么要做能力标签）：</strong><br>
+        在能源 IoT 领域，「接入」不等于「全功能控制」。很多品牌的云端 API 只开放<strong>遥测（Telemetry）</strong>权限，即设备状态数据的只读上报，不开放充放电控制（调度指令下发）权限。<br>
+        集成商如果只看"是否已接入"，签了合同才发现某品牌只能看数据、无法控制充放电，会产生严重客诉和返工成本。<br>
+        因此，兼容生态页必须在品牌展示中明确区分：<br>
+        - <strong>遥测（只读）</strong>：可实时读取设备 SOC、功率、温度等状态数据<br>
+        - <strong>充放电控制（调度）</strong>：可下发充电 / 放电 / 待机等控制指令<br>
+        - <strong>历史数据导出</strong>：可查询并导出历史运行数据<br>
+        这一信息在客户选型阶段就明确传达，能大幅减少预期差异和售后纠纷。
+      </div>
+
+    <pre>页面设计：
+筛选栏：
+  [设备类型 ▼]   [接入方式 ▼]   [能力 ▼]   [状态 ▼]
+  
+  设备类型选项：全部 / 储能电池 / 光伏逆变器 / 充电桩 / 智能电表
+  接入方式选项：全部 / 仅云端直连 / 仅网关接入 / 两者均支持
+  能力选项：全部 / 支持充放电控制 / 仅实时读取
+  状态选项：全部 / 已支持 / 开发中
+
+品牌卡片网格：
+  ┌───────────────────────┐
+  │  [品牌 Logo]          │
+  │  品牌名称             │
+  │  储能电池 / 逆变器...  │  ← 设备类型 Tag
+  │  ✅ 云端直连           │  ← 接入方式
+  │  ✅ 网关接入           │
+  │  ✅ 实时数据读取（遥测）│  ← 能力标签
+  │  ✅ 充放电控制（调度）  │
+  │  ✅ 历史数据导出        │
+  │  状态：已支持          │
+  └───────────────────────┘
+
+  ⚠️ 能力标签说明（卡片右上角 ? 图标展开）：
+  「接入方式」说明物理连接路径；
+  「能力」说明该品牌 API 实际开放的功能范围。
+  部分品牌 API 仅开放只读权限，不支持充放电控制，
+  请在选型前确认所需能力。
+
+底部 CTA：
+  "没有找到您的品牌？联系我们，快速接入"</pre>
+      <p><strong>数据全部从 CMS 动态拉取，运营自助维护。</strong></p>
+
+      <h3>4.4 开发者中心</h3>
+
+      <div class="gray-box" style="border-left: 4px solid var(--warning); border-radius: 0 8px 8px 0; margin-bottom: 20px;">
+        <strong>⏸ 当前阶段：不建独立页面，仅显示 Tooltip 提示</strong><br>
+        开发者中心本期不实现任何独立页面。导航菜单和首页 Hero CTA 保留「开发者中心」入口，但点击/悬停后仅显示 Tooltip 气泡，引导用户前往联系我们留资。以下为完整功能规划，待后续阶段启动时执行。
+        <br><br>
+        <strong>Tooltip 交互规格：</strong>
+        <ul style="margin-top:8px; padding-left:20px;">
+          <li>触发方式：PC 端悬停 300ms，移动端点击</li>
+          <li>内容：「🚀 开发者中心即将上线 · API 文档 / SDK 正在准备中」+ [立即留资，优先获取通知 →]</li>
+          <li>点击 [立即留资]：跳转联系我们（意向分类预填「API 接口接入需求」）</li>
+          <li>无独立 URL，/developers 路径不存在</li>
+          <li>文案通过多语言字典管理</li>
+        </ul>
+      </div>
+
+      <h4>访问控制说明（完整规划，待后续实现）：</h4>
+      <p>开发者中心采用分层开放策略：入口页和概览介绍对外公开，具体 API 文档按客户持有的产品线标签解锁对应模块。</p>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <thead>
+          <tr><th>内容</th><th>最低权限要求</th></tr>
+        </thead>
         <tbody>
-          <tr><td>场景页通用布局（Banner/痛点/方案/接入方式/产品卡片）</td><td>全量内容由 CMS 配置，支持多语言</td></tr>
-          <tr><td>「本方案使用的产品」跳转卡片</td><td>从 CMS 产品-解决方案关联配置自动展示，一次配置双向生效</td></tr>
-          <tr><td>应用案例区块</td><td>从 CMS 案例库关联，无案例数据时自动隐藏（不显示空白占位）</td></tr>
-          <tr><td>导航菜单高亮</td><td>进入场景页后，导航「解决方案」菜单自动高亮当前场景</td></tr>
+          <tr><td>开发者中心入口页（概览/接入介绍）</td><td><code>[公开]</code> — 无需登录</td></tr>
+          <tr><td>快速开始（基础示例）</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>云端 API 文档 — 鉴权 / 设备管理 / 基础数据</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>云端 API 文档 — HEMS 相关接口</td><td><code>[HEMS]</code></td></tr>
+          <tr><td>云端 API 文档 — ESS 相关接口</td><td><code>[ESS]</code></td></tr>
+          <tr><td>云端 API 文档 — EVCMS 相关接口</td><td><code>[EVCMS]</code></td></tr>
+          <tr><td>云端 API 文档 — VPP 相关接口</td><td><code>[VPP]</code></td></tr>
+          <tr><td>云端 API 文档 — PQMS 相关接口</td><td><code>[PQMS]</code></td></tr>
+          <tr><td>网关本地 API 文档 — Neuron II / III</td><td><code>[Neuron-Dev]</code></td></tr>
         </tbody>
       </table>
+      <p>未登录用户可以看到开发者中心的能力介绍和申请入口，但无法访问任何文档内容，需引导至对应路径后开通。</p>
 
-      <h4>产品跳转卡片交互规格</h4>
-      <div class="arch-box">卡片内容（每张）：
-  ┌─────────────────────────────┐
-  │  [产品图标]                  │
-  │  产品名称（如：HEMS）         │
-  │  一句话定位描述               │
-  │  [查看产品 →]                │
-  └─────────────────────────────┘
-
-点击行为：当前标签页内跳转（非新窗口）
-跳转目标：/zh-CN/products/{slug}
-Hover 状态：卡片整体轻微上浮（box-shadow 加深），光标变为 pointer
-卡片数量：按 CMS 关联配置动态生成，通常 1~2 张（云平台 + 硬件各一）</div>
-
-      <div class="ac">5个场景页独立 URL（/zh-CN/solutions/{slug}）。</div>
-      <div class="ac">产品跳转卡片点击后在当前页跳转对应产品页（/zh-CN/products/{slug}）。</div>
-      <div class="ac">卡片展示：产品图标 + 产品名称 + 一句话描述 + [查看产品 →] 按钮，内容由 CMS 产品字段自动填充。</div>
-      <div class="ac">无案例时案例区块不显示。</div>
-
-      <!-- EP-03 兼容生态页 -->
-      <div class="epic" id="ep03" style="margin-top:24px">EP-03 兼容生态页</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">筛选栏：
-[设备类型 ▼]  [接入方式 ▼]  [能力 ▼]  [状态 ▼]
-
-品牌卡片（每张）：
-┌────────────────────────────────┐
-│  [品牌 Logo]                    │
-│  品牌名称                       │
-│  设备类型：储能电池               │
-│  接入方式：🔗 网关局域网          │
-│  支持能力：                      │
-│    ✅ 实时数据读取（遥测）         │
-│    ✅ 充放电控制（调度）           │
-│    ✅ 历史数据导出                │
-│  状态：已支持                    │
-└────────────────────────────────┘
-
-页面底部 CTA：
-"没有找到您的品牌？联系我们，快速接入"</div>
-
-      <h4>功能清单</h4>
+      <h4>访问引导策略：</h4>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <thead>
+          <tr><th>用户状态</th><th>引导内容</th><th>动作</th></tr>
+        </thead>
         <tbody>
-          <tr><td>筛选栏（设备类型/接入方式/能力/状态）</td><td>设备类型：储能电池/光伏逆变器/充电桩/智能电表；接入方式：云端直连/网关局域网；状态：已支持/开发中/规划中</td></tr>
-          <tr><td>能力标签体系</td><td>遥测（只读，可读取设备状态数据）/ 充放电控制（调度，可下发控制指令）/ 历史数据导出</td></tr>
-          <tr><td>品牌卡片信息</td><td>Logo / 品牌名 / 设备类型 / 接入方式 / 能力标签 / 状态</td></tr>
-          <tr><td>底部引导 CTA</td><td>「没有找到您的品牌？联系我们」→ 跳转联系我们</td></tr>
-          <tr><td>数据来源</td><td>全部由 CMS 兼容品牌模块维护，无需代码修改</td></tr>
+          <tr><td>未登录，已是客户</td><td>「已有账号？直接登录查看文档」</td><td>[立即登录] → SSO 登录后返回当前页</td></tr>
+          <tr><td>未登录，想评估</td><td>「申请 Demo 账号，快速体验 API 能力」</td><td>[联系我们获取 Demo 账号] → 联系我们表单（意向分类预填「API 接口接入需求」）</td></tr>
+          <tr><td>已登录，权限不足</td><td>「此文档需要开通对应服务权限」</td><td>[联系商务开通] → 联系我们表单</td></tr>
+          <tr><td>已登录，权限满足</td><td>正常展示文档内容</td><td>—</td></tr>
         </tbody>
       </table>
-      <div class="ac">筛选后结果与 CMS 数据一致。</div>
-      <div class="ac">能力标签正确展示在品牌卡片上。</div>
+      <p><strong>Demo 账号说明：</strong> Demo 账号是商务跟进后为潜在客户开通的临时测试账号，具备 <code>[客户基础]</code> 标签，可访问通用 API 文档及基础接口调试，有效期由商务协商确定。Demo 账号不是自助注册的，需通过联系我们申请。</p>
 
-      <!-- EP-04 开发者中心 -->
-      <div class="epic" id="ep04" style="margin-top:24px">EP-04 开发者中心（Tooltip 提示，无独立页面）</div>
-      <div class="note">📌 初版不建独立页面。导航入口和 Hero CTA 保留，点击/悬停后显示 Tooltip，引导用户前往联系我们留资。完整功能（API 文档 / 权限控制 / SDK）后续迭代启动。</div>
+      <div class="gray-box">
+        <h4>系统状态页（status.alwayscontrol.com.cn）</h4>
+        <p><strong>什么是系统状态页？</strong><br>
+        当开发者接入旭衡 API 后，一旦遇到调用失败，第一反应是"是我的代码有问题，还是你们的服务挂了？"。系统状态页就是回答这个问题的地方——实时展示旭衡各 API 服务的在线率和历史故障记录。Stripe、Twilio 等主流 API 平台都有这个页面，是 PaaS 平台专业度的基础标配。实现成本极低，可直接用 Statuspage.io 等第三方工具搭建。</p>
+        <p>作为提供 API 开放平台的 PaaS 服务商，需向开发者公开展示系统可用性，建立技术信任。</p>
+    <pre>展示内容：
+  — 各服务实时状态：REST API / MQTT 代理 / WebSocket / 文件下载
+  — 当前 30 天可用率（SLA）
+  — 历史故障记录与处理时间轴
+  — 维护通知（计划维护提前公告）
 
-      <h4>交互规格</h4>
-      <div class="arch-box">触发方式：
-  - 导航栏「开发者中心」按钮：悬停（PC）或点击（移动端）
-  - 首页 Hero「开发者中心」CTA 按钮：点击
+入口位置：
+  — 开发者中心概览页底部
+  — 全站 Footer（「系统状态」链接）
 
-Tooltip 内容：
-  ┌──────────────────────────────┐
-  │  🚀 开发者中心即将上线         │
-  │  API 文档 / SDK 正在准备中     │
-  │  [立即留资，优先获取通知 →]    │
-  └──────────────────────────────┘
+实现建议：
+  可采用 Statuspage.io、UptimeRobot 等第三方工具快速搭建，
+  无需自研，成本低，对研发型大客户说服力强</pre>
+        <p><em>> 系统状态页列为 P2，开发者中心上线后补充。</em></p>
+      </div>
 
-点击 [立即留资]：
-  跳转联系我们页面（/zh-CN/contact）
-  意向分类自动预填「API 接口接入需求」
+      <h4>页面结构</h4>
+    <pre>一级导航：
+  概览 | 快速开始 | API 文档 | 申请接入
 
-样式要求：
-  背景深色（#1a3a5c），白色文字
-  圆角卡片，带小三角指向触发元素
-  PC：悬停 300ms 后出现，鼠标移出后消失
-  移动端：点击出现，点击页面其他区域消失</div>
+概览页（公开）：
+面向潜在开发者的能力介绍：
+  - 支持的接入协议
+      云端：REST / MQTT / WebSocket
+      网关本地：HTTP / Modbus TCP
+  - 覆盖产品线（HEMS / ESS / EVCMS / VPP / PQMS）
+  - 覆盖硬件（Neuron II / Neuron III 网关本地 API）
+  - 典型使用场景（VPP 调度 / 设备监控 / 数据采集 / 网关二次开发）
 
-      <h4>功能清单</h4>
+  双路引导 CTA（始终可见，不论登录状态）：
+  ┌─────────────────────┐  ┌─────────────────────┐
+  │  已是客户？          │  │  想先体验？          │
+  │  [登录查看文档]      │  │  [联系我们获取Demo]  │
+  └─────────────────────┘  └─────────────────────┘
+
+快速开始页（需登录）：
+# 5 分钟接入示例：发送一条充电控制指令
+
+## 第一步：申请 API Key
+→ 联系商务，开通客户账号后在个人中心获取 API Key
+
+## 第二步：获取访问令牌
+POST https://api.alwayscontrol.com.cn/auth/token
+{
+  "client_id": "your_client_id",
+  "client_secret": "your_secret"
+}
+
+## 第三步：查询设备列表
+GET /v1/devices
+
+## 第四步：发送控制指令
+POST /v1/devices/{device_id}/commands
+{
+  "command": "charge",
+  "params": { "power_kw": 7.4 }
+}
+
+支持语言示例：curl | Python | JavaScript | Java
+
+API 文档结构：
+━━ 云端 API（互联网调用 api.alwayscontrol.com.cn）━━
+接入协议：REST API / MQTT / WebSocket
+核心模块（按权限标签分组展示，无权限模块显示锁定状态）：
+  [客户基础] Authentication    鉴权与密钥管理
+  [客户基础] Device Management 设备注册、查询、分组
+  [客户基础] Historical Data   历史数据查询与导出
+  [HEMS]     HEMS API          家庭能源管理相关接口
+  [ESS]      ESS API           工商储能相关接口
+  [EVCMS]    Dispatch Control  充放电控制、负载均衡
+  [VPP]      VPP API           虚拟电厂调度相关接口（高敏感）
+  [PQMS]     PQMS API          电能质量监控相关接口
+  [客户基础] Alarm Dictionary  BMS 告警字典（按品牌查询翻译）
+  [对应产品] OTA Management    固件版本查询与推送
+
+━━ 网关本地 API（局域网调用，访问网关 IP）━━
+接入协议：HTTP REST / Modbus TCP
+核心模块（按权限标签分组展示）：
+  [Neuron-Dev] Neuron II 本地 API    设备状态、端口配置、数据读写
+  [Neuron-Dev] Neuron III 本地 API   充电站控制、DLB 参数、负载查询
+  [Neuron-Dev] 上位机配置工具协议     配合 Neuron 配置工具的本地通信协议
+适用场景：工业局域网环境 / 与第三方 PLC, SCADA 集成 / 二次开发
+鉴权方式：设备级 Token（在 Neuron 配置工具中生成），与云端账号体系独立
+
+渲染方案：API 文档工具自动渲染（具体方案详见技术选型文档）
+           后端维护结构化 API 描述文件，前端不需要手动写文档
+           权限控制在 API 网关层实现，无权限的端点返回 403
+
+申请接入表单字段（公开页，未登录可提交）：
+公司名称（必填）/ 联系人姓名（必填）/ 联系电话（必填）/ 邮箱（必填）
+使用场景描述（必填）：
+  ○ VPP 调度平台  ○ 设备监控系统  ○ 数据采集与分析  ○ 其他
+预计月调用量（选填）
+→ 提交后推送至企业微信「技术商务群」，商务跟进后开通账号</pre>
+
+      <h3>4.5 帮助中心</h3>
+
+      <h4>访问控制说明：</h4>
+      <div class="gray-box" style="border-left:4px solid var(--warning);border-radius:0 8px 8px 0;margin-bottom:16px">
+        <strong>⏸ P0 阶段：所有文件全部公开下载，无需登录</strong><br>
+        P1 阶段接入 SSO 后，再按下表启用分层权限控制。
+      </div>
+      <p>帮助中心内容分层开放策略（<strong>P1 启用</strong>）：</p>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
+        <thead>
+          <tr><th>内容类型</th><th>P0 阶段</th><th>P1 阶段（权限控制上线后）</th></tr>
+        </thead>
         <tbody>
-          <tr><td>导航栏 Tooltip</td><td>PC 悬停 / 移动端点击触发，不跳转页面</td></tr>
-          <tr><td>Hero CTA Tooltip</td><td>点击触发，行为与导航栏一致</td></tr>
-          <tr><td>Tooltip 文案</td><td>多语言支持，通过多语言字典配置</td></tr>
-          <tr><td>[立即留资] 跳转</td><td>跳转联系我们，意向分类自动预填「API 接口接入需求」</td></tr>
-          <tr><td>无独立 URL</td><td>/developers 路径不存在，无需创建页面文件</td></tr>
+          <tr><td>FAQ（通用）</td><td>✅ 公开</td><td>✅ 公开</td></tr>
+          <tr><td>产品文档（基础说明手册）</td><td>✅ 公开下载</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>产品文档（高级技术文档）</td><td>✅ 公开下载</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
+          <tr><td>软件下载</td><td>✅ 公开下载</td><td><code>[客户基础]</code> — 登录即可</td></tr>
+          <tr><td>固件下载</td><td>✅ 公开下载</td><td><code>[对应产品线标签]</code> — 按购买产品解锁</td></tr>
         </tbody>
       </table>
-      <div class="ac">点击「开发者中心」按钮后，Tooltip 正确弹出，不发生页面跳转。</div>
-      <div class="ac">Tooltip 内 [立即留资] 点击后跳转联系我们，意向分类自动预填。</div>
-      <div class="ac">移动端点击页面其他区域后 Tooltip 消失。</div>
+      <p style="font-size:12px;color:var(--muted)">P1 阶段权限体系上线后，未登录用户访问受限资源时跳转至登录页，登录后自动返回原页面；权限不足时引导至联系我们。</p>
 
-      <!-- EP-05 帮助中心 -->
-      <div class="epic" id="ep05" style="margin-top:24px">EP-05 帮助中心</div>
+    <pre>文档资料页（优化现有）：
+分类维度调整：
+  一级 Tab：文档 / 软件 / 固件
+  
+  文档 Tab 二级筛选：
+    [全部] [Neuron II] [Neuron III] [Neuron III Lite] [云平台] [App]
+  
+  列表字段：
+    文件名 | 版本 | 更新日期 | 文件大小 | 格式 | 权限要求 | [下载]
+  
+  权限说明：
+    无权限文件显示锁图标 🔒，点击后提示「请联系商务开通权限」
+    有权限文件正常显示下载按钮
+  
+  数据来源：统一接 CMS API，废弃 JSON 字典的静态示例
 
-      <h4>文档资料页（三 Tab）区块结构</h4>
-      <div class="arch-box">Tab 1 - 文档：
-  二级筛选：[全部] [Neuron II] [Neuron III] [Neuron III Lite] [云平台] [App]
-  列表字段：文件名 | 版本 | 更新日期 | 文件大小 | 格式 | [下载]
-
-Tab 2 - 软件：
+软件下载 Tab（从文档页拆分）：
   工控桌面软件：
     Neuron 配置工具 v2.x
     ├─ [Windows x64 .exe 下载]
     ├─ [macOS Intel .dmg 下载]
     └─ [macOS ARM .dmg 下载]
-
+  
   移动端 App：
     Neuron HEMS App
     ├─ [Google Play 下载] + QR 码
     └─ [App Store 下载] + QR 码
 
-Tab 3 - 固件：
-  按网关型号分组：[Neuron II] [Neuron III] [Neuron III Lite]
-  列表字段：固件版本 | 发布日期 | Changelog 摘要 | [下载]
-  点击[下载]时展示版本兼容提示弹窗：
-    ⚠️ 此固件需配合 EVCMS v1.5+ 及配置工具 v3.0+ 使用，
-       请确认云平台版本后再升级</div>
+固件 Tab：
+  按网关型号分组，展示最新固件版本 + Changelog
+  权限要求：需具备对应产品线标签（如 [Neuron II] 客户才能下载 Neuron II 固件）</pre>
 
-      <h4>版本兼容性矩阵区块结构</h4>
-      <div class="arch-box">一级筛选：[Neuron II ▼]
+      <div class="gray-box">
+        <h4>版本兼容性矩阵（新增）：</h4>
+        <p><strong>为什么需要这个？</strong><br>
+        IoT 硬件的固件版本、云平台版本、配置工具版本之间存在依赖关系。客户如果只看到一个固件下载列表，不知道该版本是否兼容自己当前的云平台，极易刷错固件导致设备无法启动（俗称"变砖"），引发大量售后投诉。版本兼容性矩阵是 IoT 行业帮助中心的标准配置，在同类产品中普遍存在。</p>
+        <p>IoT 设备固件与软件之间存在版本依赖关系，客户下载固件前必须能快速确认版本兼容性，避免刷错固件导致设备异常。</p>
+    <pre>版本兼容性矩阵页面设计：
+一级筛选：选择硬件型号（Neuron II / Neuron III / Neuron III Lite）
+二级展示：该型号各固件版本的依赖关系表
 
-矩阵表格：
-固件版本 | 云平台最低版本 | 配置工具最低版本 | 备注
-v2.1    | EVCMS v1.5+   | 工具 v3.0+      | 当前推荐
-v2.0    | EVCMS v1.4+   | 工具 v2.8+      |
-v1.9    | EVCMS v1.3+   | 工具 v2.5+      | 即将停止维护</div>
+示例（Neuron III）：
+┌──────────┬──────────────┬──────────────┬─────────────────┐
+│ 固件版本  │ EVCMS 最低版本 │ 配置工具最低版本 │ 备注           │
+├──────────┼──────────────┼──────────────┼─────────────────┤
+│ v2.1     │ v1.5+        │ v3.0+        │ 当前推荐版本    │
+│ v2.0     │ v1.4+        │ v2.8+        │                 │
+│ v1.9     │ v1.3+        │ v2.5+        │ 即将停止维护    │
+└──────────┴──────────────┴──────────────┴─────────────────┘
 
-      <h4>FAQ 页区块结构</h4>
-      <pre>顶部关键词搜索框
+下载页面联动提示：
+  用户在固件 Tab 点击某版本下载时，
+  自动展示该固件的依赖版本要求提示：
+  ⚠️「此固件需配合 EVCMS v1.5+ 及配置工具 v3.0+ 使用，
+     请确认云平台版本后再升级」</pre>
+        <p>矩阵数据由 CMS 文件资产模块统一维护，每次发布新固件时同步填写依赖关系。</p>
+      </div>
 
-分类 Tab：
-[全部] [账号与权限] [设备接入] [网关配置] [云平台使用] [App使用] [故障排查]
+    <pre>FAQ 页（AI 问答 + 内容库双轨）：
+FAQ 页升级为 AI 问答入口，同时保留人工维护的 FAQ 内容库作为知识底座。
 
-FAQ 列表展示：
-  Q：问题描述
-  A：答案（支持 Markdown 渲染）
-  关联产品标签：[Neuron III]</pre>
+AI 问答区（页面顶部，核心交互）：
+┌─────────────────────────────────────────────────────┐
+│  💬 有问题？直接问我                                   │
+│  ┌─────────────────────────────────────┐  [发送]    │
+│  │ 例如：Neuron III 如何配置 DLB 参数？  │            │
+│  └─────────────────────────────────────┘            │
+│                                                     │
+│  [回答内容展示区]                                     │
+│  AI 基于官网文档、FAQ 库、产品说明内容回答              │
+│  答案末尾附参考来源（可点击跳转对应页面）                │
+│                                                     │
+│  找不到答案时：                                       │
+│  「这个问题我暂时无法回答，建议联系人工支持」             │
+│  [提交在线报修] / [联系我们]                           │
+└─────────────────────────────────────────────────────┘
+AI 知识来源（检索范围）：
+- CMS 维护的 FAQ 条目库（全量）
+- 帮助中心已公开的产品文档内容
+- 官网产品页、解决方案页的内容
 
-      <h4>在线报修表单区块结构</h4>
-      <pre>字段：
-  姓名（必填）
-  联系电话（必填）
-  设备型号（必填，下拉选择）
-  故障描述（必填，文本域）
-  故障截图（可选，最多5张）
-  [提交报修]</pre>
+FAQ 内容库（页面下方，分类浏览）：
+分类：账号与权限 | 设备接入 | 网关配置 | 云平台使用 | App 使用 | 故障排查
+形式：分类 Tab + 手风琴展开
+内容：全部从 CMS 管理，运营人员直接维护
 
-      <h4>功能清单</h4>
+实现建议：
+AI 问答可接入 RAG（检索增强生成）方案，以官网内容作为知识库，基于大语言模型回答问题。
+AI 问答为 P2 能力，优先上线 FAQ 内容库，AI 问答在内容积累到一定程度后再接入。
+
+在线报修表单（修复 + 增强）：
+新增字段：
+  产品型号（必填）：
+    ○ Neuron II  ○ Neuron III  ○ Neuron III Lite
+    ○ 云平台     ○ App
+
+修复：
+  联系电话从 "400-888-8888" 改为真实技术支持电话
+  邮件从 "support@alwayscontrol.com.cn" 确认真实可用性
+
+表单提交后：
+  → 推送到企业微信技术支持群（包含产品型号信息，便于分配）
+  → 自动回复邮件（确认收到）</pre>
+
+      <h3>4.6 产品中心</h3>
+      <p>产品中心以产品本身为主角，目标读者是已有明确采购意向、正在做技术评估的采购经理和研发工程师。每个产品页结构统一，内容从 CMS 管理。</p>
+
+      <h4>硬件产品页通用结构（Neuron II / III / III Lite）</h4>
+    <pre>① 产品定位一句话
+   — 明确这款网关适合什么场景，不适合什么场景
+② 核心参数表
+   — 通信接口（RS485 / CAN / 4G / WiFi / Ethernet）
+   — 支持协议（Modbus / OCPP / 私有协议等）
+   — 供电规格 / 工作温度 / 防护等级 / 认证
+③ 接入方式说明
+   — 云端直连 vs 网关局域网，该型号支持哪种
+④ 与云平台的配合关系
+   — 配合哪些云平台产品使用（链接至对应云平台页）
+⑤ 【新增】应用场景跳转卡片
+   — 展示本产品参与解决的业务场景，点击跳转对应解决方案详情页
+   — 卡片内容：场景名称 + 一句话描述 + [查看解决方案 →]
+   — 示例（Neuron III）：
+     ┌─────────────────────────────────────┐
+     │  本产品适用的解决方案               │
+     │  ┌──────────────┐ ┌──────────────┐ │
+     │  │ 充电站负载管理 │ │ 工商业储能   │ │
+     │  │ 多桩防跳闸，  │ │ 峰谷套利，   │ │
+     │  │ 功率智能分配  │ │ 多站点监控   │ │
+     │  │[查看解决方案→]│ │[查看解决方案→]│ │
+     │  └──────────────┘ └──────────────┘ │
+     └─────────────────────────────────────┘
+   — 数据来源：CMS「产品-解决方案关联」配置（详见 §5.11）
+⑥ 资源下载（权限控制）
+   — 产品手册 [客户基础]
+   — 快速配置指南 [客户基础]
+   — 高级配置文档 [Neuron II] / [Neuron III]
+   — 固件下载 [Neuron II] / [Neuron III]
+   — 本地 API 文档 [Neuron-Dev]
+⑦ CTA
+   — [联系商务采购] / [查看兼容品牌]</pre>
+
+      <p><strong>三款硬件产品差异对照：</strong></p>
       <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>文档/软件/固件三 Tab</td><td>共用同一页面，Tab 参数反映在 URL 中（?tab=docs / ?tab=software / ?tab=firmware）</td></tr>
-          <tr><td>文件数据来源</td><td>全部来自 CMS 文件资产模块</td></tr>
-          <tr><td>固件下载版本兼容提示</td><td>点击下载前弹出兼容性说明弹窗</td></tr>
-          <tr><td>版本兼容性矩阵</td><td>数据由 CMS 文件资产模块维护（固件版本依赖关系字段）</td></tr>
-          <tr><td>FAQ 搜索</td><td>关键词全文搜索</td></tr>
-          <tr><td>FAQ 分类</td><td>6个分类 Tab 切换</td></tr>
-          <tr><td>报修表单三路通知</td><td>提交后：企微「技术支持群」收到通知 + 用户邮箱收到回执</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">Tab 切换正常，URL 同步变化（?tab=firmware 等）。</div>
-      <div class="ac">固件下载前版本兼容提示弹窗正确显示。</div>
-      <div class="ac">报修表单提交后企微收到通知，用户邮箱收到确认邮件。</div>
-
-      <!-- EP-06 产品中心 -->
-      <div class="epic" id="ep06" style="margin-top:24px">EP-06 产品中心</div>
-      <h4>硬件产品页通用结构（3款）</h4>
-      <pre>① 产品定位一句话
-② 三款硬件差异对比表
-③ 核心规格参数表（接口/协议/功耗/尺寸/工作温度）
-④ 接入方式说明
-⑤ 应用场景跳转卡片（→ 解决方案页）
-⑥ 资源下载列表：文件名 | 版本 | 格式 | [下载]
-⑦ CTA：[联系商务采购] [查看兼容品牌]</pre>
-
-      <h4>三款硬件差异对比</h4>
-      <table>
-        <thead><tr><th>项目</th><th>Neuron II</th><th>Neuron III</th><th>Neuron III Lite</th></tr></thead>
+        <thead>
+          <tr><th>项目</th><th>Neuron II</th><th>Neuron III</th><th>Neuron III Lite</th></tr>
+        </thead>
         <tbody>
           <tr><td>定位</td><td>通用多协议网关</td><td>充电站专用控制器</td><td>防跳闸轻量控制器</td></tr>
           <tr><td>内置电表</td><td>无</td><td>有</td><td>无</td></tr>
           <tr><td>DLB 能力</td><td>基础</td><td>完整（毫秒级响应）</td><td>基础</td></tr>
           <tr><td>典型场景</td><td>储能/光伏/通用接入</td><td>多桩充电站负载管理</td><td>小型场景防跳闸</td></tr>
-          <tr><td>配套云平台</td><td>HEMS/ESS/PQMS</td><td>EVCMS</td><td>EVCMS</td></tr>
+          <tr><td>配套云平台</td><td>HEMS / ESS / PQMS</td><td>EVCMS</td><td>EVCMS</td></tr>
         </tbody>
       </table>
 
-      <h4>云平台产品页通用结构（5款）</h4>
-      <pre>① 产品定位一句话
-② 核心功能模块（3~5个，附截图/示意图占位）
-③ 接入方式（是否需要网关）
-④ 技术规格表（设备上限/数据刷新频率/历史数据保留/支持协议）
-⑤ 应用场景跳转卡片（→ 解决方案页）
-⑥ 资源下载（产品手册/API 文档跳转）
-⑦ CTA：[申请 Demo 体验] [联系商务]</pre>
+      <h4>云平台产品页通用结构（HEMS / ESS / EVCMS / PQMS / VPP）</h4>
+    <pre>① 产品定位一句话
+   — 这个云平台解决什么核心问题
+② 核心功能列表（图文并茂）
+   — 3~5 个核心功能模块，每个附截图或示意图
+③ 接入方式
+   — 云端直连 / 网关接入，该平台支持哪种
+④ 技术规格
+   — 支持设备数量上限 / 数据刷新频率 / 历史数据保留周期 / 支持协议
+⑤ 【新增】应用场景跳转卡片
+   — 展示本云平台对应的业务场景，点击跳转对应解决方案详情页
+   — 卡片内容：场景名称 + 一句话痛点 + [查看解决方案 →]
+   — 示例（HEMS）：
+     ┌─────────────────────────────────────┐
+     │  本产品适用的解决方案               │
+     │  ┌──────────────────────────────┐   │
+     │  │ 户用家庭储能                 │   │
+     │  │ 统一管理光伏+储能+充电桩，    │   │
+     │  │ 自动峰谷套利                 │   │
+     │  │        [查看解决方案 →]       │   │
+     │  └──────────────────────────────┘   │
+     └─────────────────────────────────────┘
+   — 数据来源：CMS「产品-解决方案关联」配置（详见 §5.11）
+⑥ 资源下载（权限控制）
+   — 产品介绍手册 [客户基础]
+   — API 集成文档 → 跳转开发者中心对应模块 [对应产品线标签]
+⑦ CTA
+   — [申请 Demo 体验] / [联系商务]</pre>
 
-      <h4>五款云平台对比</h4>
+      <p><strong>五款云平台产品差异对照：</strong></p>
       <table>
-        <thead><tr><th>产品</th><th>核心场景</th><th>主要受众</th><th>是否需要网关</th></tr></thead>
+        <thead>
+          <tr><th>产品</th><th>核心场景</th><th>主要受众</th><th>是否需要网关</th></tr>
+        </thead>
         <tbody>
           <tr><td>HEMS</td><td>家庭光储充统一管理</td><td>集成商、家庭用户</td><td>可选</td></tr>
           <tr><td>ESS</td><td>工商业储能多站点监控</td><td>工商业项目方</td><td>可选</td></tr>
           <tr><td>EVCMS</td><td>充电站多桩负载均衡</td><td>充电站运营商</td><td>推荐 Neuron III</td></tr>
           <tr><td>PQMS</td><td>电能质量远程监控</td><td>工业园区、数据中心</td><td>推荐 Neuron II</td></tr>
-          <tr><td>VPP</td><td>虚拟电厂调度（定制）</td><td>VPP 运营商、能源聚合商</td><td>不需要（纯云端）</td></tr>
+          <tr><td>VPP</td><td>虚拟电厂调度平台（定制）</td><td>VPP 运营商、能源聚合商</td><td>不需要（纯云端）</td></tr>
         </tbody>
       </table>
 
-      <h4>应用场景跳转卡片交互规格</h4>
-      <div class="arch-box">卡片内容（每张）：
-  ┌─────────────────────────────┐
-  │  场景名称（如：充电站管理）    │
-  │  一句话痛点描述               │
-  │  [查看解决方案 →]            │
-  └─────────────────────────────┘
+      <h3>4.7 关于我们</h3>
 
-点击行为：当前标签页内跳转（非新窗口）
-跳转目标：/zh-CN/solutions/{slug}
-Hover 状态：卡片整体轻微上浮（box-shadow 加深），光标变为 pointer
-卡片数量：按 CMS 产品-解决方案关联配置动态生成</div>
-
-      <div class="ac">8个产品页独立 URL（/zh-CN/products/{slug}）。</div>
-      <div class="ac">参数表字段完整，文件下载链接有效。</div>
-      <div class="ac">应用场景跳转卡片点击后在当前页跳转对应解决方案页（/zh-CN/solutions/{slug}）。</div>
-      <div class="ac">卡片展示：场景名称 + 一句话痛点 + [查看解决方案 →] 按钮，内容由 CMS 解决方案字段自动填充。</div>
-
-      <!-- EP-07 关于我们 -->
-      <div class="epic" id="ep07" style="margin-top:24px">EP-07 关于我们</div>
-      <h4>公司介绍页区块结构</h4>
-      <pre>① 公司简介（200字以内，突出「跨品牌 EMS 专家」定位）
-② 核心数字展示（与首页信任背书一致）
-   ⚠️ 数字待业务方确认，不可使用估算值或占位数字
-③ 核心能力（软硬一体/跨品牌接入/多场景覆盖）
-④ 发展历程时间轴（关键里程碑）
+      <h4>公司介绍页</h4>
+    <pre>① 公司简介（200字以内）
+   — 成立时间、所在地、核心业务方向
+   — 避免套话，突出"跨品牌 EMS 专家"定位
+② 核心数字展示 ⚠️ 待填入真实数据
+   — 与首页信任背书数字保持完全一致
+   — 建议展示：兼容品牌数 / 覆盖国家数 / 已交付项目数
+   — 数字需经内部确认，不可使用估算值或夸大值
+③ 核心能力说明
+   — 软硬一体：从边缘网关到云平台的完整技术栈
+   — 跨品牌接入：协议适配能力
+   — 多场景覆盖：户用 / 工商储 / 充电站 / VPP / 电能质量
+④ 发展历程（时间轴，选填）
+   — 关键里程碑：产品发布、重要市场进入、重大项目
 ⑤ 联系地址 + 地图嵌入</pre>
+      
+      <p><strong>CMS 管理范围说明：</strong>公司介绍页内容纳入 CMS 管理，但因更新频率低，列为 P2（上线后迁入）。P0 阶段内容硬编码上线，确保准确性优先。</p>
+      <table>
+        <thead>
+          <tr><th>字段</th><th>是否接 CMS</th><th>理由</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>公司简介文字</td><td>✅ P2</td><td>偶尔调整措辞，运营应能自行修改</td></tr>
+          <tr><td>核心数字（品牌/项目数）</td><td>✅ P2</td><td>随业务增长需定期更新，必须能快速改</td></tr>
+          <tr><td>核心能力说明</td><td>✅ P2</td><td>产品线调整时需同步更新</td></tr>
+          <tr><td>发展历程时间轴</td><td>✅ P2</td><td>有新里程碑时需追加条目</td></tr>
+          <tr><td>联系地址文字</td><td>✅ P2</td><td>搬迁或增加办公室时需修改</td></tr>
+          <tr><td>地图嵌入</td><td>❌ 不接</td><td>地图为代码嵌入，地址变更时走代码修改即可</td></tr>
+        </tbody>
+      </table>
 
-      <h4>最新动态页区块结构</h4>
-      <pre>文章列表：
-  封面图 | 标题 | 摘要（2行截断）| 分类标签 | 发布日期
-  分类筛选：[全部] [行业动态] [产品更新] [公司新闻] [展会活动]
-  分页加载
-
+      <h4>最新动态页 & 加入我们页</h4>
+    <pre>最新动态页：
+文章列表：
+  — 封面图 + 标题 + 摘要 + 发布日期
+  — 支持分类筛选：行业动态 / 产品更新 / 公司新闻 / 展会活动
+  — 分页加载
 文章详情页：
-  富文本内容（图文混排）
-  发布时间 + 作者（可选）
-  相关文章推荐（同分类最新3篇）</pre>
+  — 富文本内容（图文混排）
+  — 发布时间 + 作者（可选）
+  — 相关文章推荐（同分类最新 3 篇）
+全部内容由 CMS 管理，运营自助发布。
 
-      <h4>加入我们页区块结构</h4>
-      <pre>① 团队文化简述（3~4句话）
-② 岗位列表：岗位名称 | 工作地点 | 岗位类型（全职/实习）
-   点击展开：职责描述 + 岗位要求 + 薪资范围（选填）
-   [立即投递] → 招聘邮件或平台链接
-③ 兜底 CTA：「没有找到合适岗位？发送简历至 hr@[domain]」</pre>
+加入我们页：
+定位：展示企业文化 + 招聘信息入口
+① 团队文化简述（3~4 句话）
+   — 技术驱动、快速迭代、扁平协作
+② 岗位列表（CMS 管理）
+   — 岗位名称 / 工作地点 / 岗位类型（全职/实习）
+   — 点击展开岗位详情：职责、要求、薪资范围（选填）
+   — [立即投递] → 跳转邮件 or 招聘平台链接
+③ 无合适岗位时的兜底
+   — "没有找到合适的岗位？发送简历至 hr@alwayscontrol.com.cn"
+招聘信息支持 CMS 自助发布和下架，不需要开发介入。</pre>
 
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>公司介绍内容</td><td>初版直接写死在页面，后续迁入 CMS</td></tr>
-          <tr><td>最新动态</td><td>全量由 CMS 新闻动态模块管理，支持草稿/定时发布</td></tr>
-          <tr><td>文章详情独立 URL</td><td>/zh-CN/news/{slug}，SEO 可索引</td></tr>
-          <tr><td>招聘岗位</td><td>由 CMS 管理，可自助上线/下架</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">新闻文章详情页 URL 独立，SEO 可索引。</div>
-      <div class="ac">分类筛选正确过滤文章列表。</div>
+      <h3>4.8 个人中心（已登录客户）</h3>
+      <p>个人中心是已登录客户的自助门户，整合权限查看、API Key 管理、下载记录等功能。访问条件： 需登录，所有已认证客户均可进入基础页面。</p>
+    <pre>导航结构：
+  账号信息 | 我的权限 | API Key 管理 | 下载记录
 
-      <!-- EP-08 联系我们 -->
-      <div class="epic" id="ep08" style="margin-top:24px">EP-08 联系我们</div>
-      <h4>表单区块结构</h4>
-      <pre>字段：
-  姓名（必填）
-  公司名称（必填）
-  邮箱（必填）
-  联系电话（选填）
-  意向分类（必填，单选）：
-    ○ 整套系统解决方案咨询
-    ○ API 接口接入需求
-    ○ 纯硬件采购（Neuron 网关）
-    ○ VPP / BMS 定制化开发
-    ○ 渠道合作 / OEM
-  需求描述（选填，文本域）
-  [提交]
+账号信息页：
+— 显示姓名、公司、邮箱（从统一账号系统同步，只读）
+— 显示账号类型（客户）
+— 最近登录时间
+— [修改密码] → 跳转统一账号系统（如：爱尚管理后台）
 
-自动路由规则：
-  整套方案 / 渠道合作    → 企微「销售群」
-  API 接入 / 定制开发    → 企微「技术商务群」
-  纯硬件采购            → 企微「渠道销售群」</pre>
+我的权限页：
+— 列出当前账号已开通的产品线标签
+  示例：
+    ✅ 客户基础权限
+    ✅ HEMS — 家庭能源管理系统
+    ✅ Neuron II — 网关固件与文档
+    🔒 ESS — 未开通（[联系商务开通]）
+    🔒 VPP — 未开通（[联系商务开通]）
+— 每个已开通权限显示开通日期
+— 未开通权限显示锁定状态 + 联系商务按钮
 
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>意向分类（必填）</td><td>控制路由精准度，用户必须选择后才可提交</td></tr>
-          <tr><td>自动路由企微群</td><td>按意向分类推送对应 Webhook，Webhook URL 在 CMS 通知配置维护</td></tr>
-          <tr><td>用户回执邮件</td><td>提交后自动发送确认邮件，邮件模板在 CMS 后台配置</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">不同意向分类提交后路由到正确企微群。</div>
-      <div class="ac">用户邮箱 5 分钟内收到确认邮件。</div>
+API Key 管理页：
+— 显示当前账号的 API Key 列表
+  字段：Key 名称 / 创建时间 / 最后使用时间 / 日调用配额 / 状态
+— 支持操作：
+  [查看 Key]（带遮罩，点击显示完整 Key）
+  [复制]
+  [重置]（旧 Key 立即失效，生成新 Key）
+  [删除]
+— 配额使用情况：
+  今日已调用 XX 次 / 配额 YY 次
+— 说明：
+  Key 权限范围与账号已开通的产品线标签一致
 
-      <!-- EP-09 隐私政策页 -->
-      <div class="epic" id="ep09" style="margin-top:24px">EP-09 隐私政策页</div>
-      <div class="note">⚠️ 页面内容须经法务审核后方可上线，不使用模板占位内容。上线前 Checklist 中必须包含此项。</div>
-      <h4>区块结构</h4>
-      <pre>① 隐私政策正文（富文本，多语言独立维护）
-   涵盖：数据收集范围 / 使用目的 / 存储期限 /
-         用户权利（查阅/删除/更正）/ 数据出境说明
-② Cookie 政策正文（富文本，多语言独立维护）
-③ 最后更新日期（自动显示 CMS 发布时间）
-④ 联系数据控制方（邮件地址，不硬编码）</pre>
+下载记录页：
+— 列出历史下载记录
+  字段：文件名 / 版本 / 下载时间 / 文件大小
+— 支持重新下载（重新生成临时链接）
+— 按产品筛选</pre>
 
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>独立 URL</td><td>/zh-CN/privacy-policy，SEO 可索引，多语言各有独立路径</td></tr>
-          <tr><td>内容由 CMS 管理</td><td>隐私政策正文 + Cookie 政策正文均在 CMS 页面内容模块（CMS-07）维护</td></tr>
-          <tr><td>多语言</td><td>zh-CN / en-US 各自独立维护，不可互相翻译替代</td></tr>
-          <tr><td>Footer 入口</td><td>所有页面 Footer 提供隐私政策链接</td></tr>
-          <tr><td>Cookie 弹窗关联</td><td>首次访问的 Cookie 授权弹窗中，「了解更多」链接至本页</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">隐私政策页内容经法务确认签字后方可发布上线。</div>
-      <div class="ac">Footer 中隐私政策链接可正常跳转，多语言环境下链接跳转至对应语言版本。</div>
-      <div class="ac">Cookie 弹窗「了解更多」点击后正确跳转至隐私政策页。</div>
+      <h3>4.9 联系我们（增强分流能力）</h3>
+      <p><strong>注：</strong> 联系我们同时作为未登录访客的转化入口和已登录客户反馈渠道，所有人均可访问。</p>
+    <pre>新增意向分类字段（必填）：
+  ○ 整套系统解决方案咨询
+  ○ API 接口接入需求
+  ○ 纯硬件采购（Neuron 网关）
+  ○ VPP / BMS 定制化开发
+  ○ 渠道合作 / OEM
+
+自动分发规则：
+  整套方案 / 渠道合作    → 企业微信「销售群」
+  API 接口接入          → 企业微信「技术商务群」
+  纯硬件采购            → 企业微信「国内销售群」或「海外销售群」（按来源语言）
+  VPP / BMS 定制开发   → 企业微信「产品群」
+
+联系人信息展示（现有，保留整理）：
+  Rory Chen（国内销售）：[联系方式详见内部通讯录]
+  Julie Chen（海外销售）：[联系方式详见内部通讯录]
+  Alan King（技术支持）：[联系方式详见内部通讯录]
+  
+  ⚠️ 真实联系方式不在 PRD 中记录，避免文档外流时信息泄露</pre>
     </div>
 
-    <!-- ══════════════════════════════════════════════════════
-         三、CMS 后台模块规格
-    ══════════════════════════════════════════════════════ -->
-    <div class="section" id="s3">
-      <h2>三、CMS 后台模块规格</h2>
-
-      <!-- ── 🏠 仪表盘 ──────────────────────────────────── -->
-      <div class="epic" id="cms01">CMS-01 仪表盘</div>
-      <div class="note">📌 仪表盘展示跨模块聚合数据，需定制开发，非框架默认页面。P0 阶段移除「待审 API 申请」（开发者中心未上线）。所有角色登录后均可看到仪表盘，但数据按角色过滤。</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">┌─────────────────────────────────────────────────────┐
-│  🏠 今日待办汇总                         [刷新]      │
-├──────────────┬──────────────┬────────────────────┤
-│  新线索       │  未处理工单   │  待发布内容          │
-│    N 条      │    N 条      │    N 篇             │
-│  [查看全部]  │  [查看全部]  │  [查看全部]         │
-└──────────────┴──────────────┴────────────────────┘
-
-最近活动 Feed：
-┌───────────────────────────────────────────────────┐
-│  时间        操作人    操作类型     操作对象          │
-│  10:32      运营A     发布文章     《XX新闻》        │
-│  09:15      销售B     跟进线索     #线索-0312-01     │
-│  08:50      技术C     关闭工单     #工单-0312-05     │
-└───────────────────────────────────────────────────┘</div>
-
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>新线索统计</td><td>显示 CMS-13 客户线索中状态为「未处理」的条目数</td></tr>
-          <tr><td>未处理工单统计</td><td>显示 CMS-14 报修工单中状态为「待处理」的条目数</td></tr>
-          <tr><td>待发布内容统计</td><td>显示所有内容模块中状态为「草稿」的条目总数</td></tr>
-          <tr><td>数据按角色过滤</td><td>销售只看线索；技术支持只看工单；内容运营只看待发布内容；超管看全部</td></tr>
-          <tr><td>最近活动 Feed</td><td>展示最近 20 条后台操作记录（来源：CMS-18 操作日志）</td></tr>
-          <tr><td>[查看全部] 跳转</td><td>点击各卡片「查看全部」直接跳转对应模块列表页</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">仪表盘数据与对应模块列表实时一致，刷新后数字准确。</div>
-      <div class="ac">不同角色登录后，仪表盘仅展示其有权访问的待办数据。</div>
-
-      <!-- ── 📝 内容管理 ──────────────────────────────────── -->
-      <h3>📝 内容管理</h3>
-
-      <!-- CMS-02 新闻动态管理 -->
-      <div class="epic" id="cms02">CMS-02 新闻动态管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新建文章]，右侧：搜索框 + 分类筛选 + 状态筛选（草稿/已发布/定时发布）
-
-文章列表表格：
-封面图 | 标题 | 分类 | 状态 | 发布时间 | 操作（编辑/预览/删除）
-
-新增/编辑弹窗字段：
-  基本信息：
-    标题（必填，多语言）
-    Slug（必填，自动从标题生成，可手动修改）
-    封面图（必填，从媒体库选取）
-    摘要（必填，2行以内，多语言）
-    分类（必填，单选）：行业动态 / 产品更新 / 公司新闻 / 展会活动
-  内容：
-    正文（必填，富文本编辑器，支持图文混排）
-    作者（选填）
-  发布设置：
-    状态（草稿 / 立即发布 / 定时发布）
-    定时发布时间（状态为「定时发布」时必填）
-  SEO：
-    页面 title（多语言）
-    meta description（多语言）</pre>
-      <div class="ac">定时发布文章在设定时间自动上线，无需手动操作。</div>
-      <div class="ac">文章详情页 URL：/zh-CN/news/{slug}，SEO 可独立索引。</div>
-
-      <!-- CMS-03 FAQ 管理 -->
-      <div class="epic" id="cms03" style="margin-top:24px">CMS-03 FAQ 管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增 FAQ]，右侧：关键词搜索 + 分类筛选
-
-FAQ 列表表格：
-问题摘要 | 分类 | 关联产品 | 最后更新 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  分类（必填，单选）：
-    账号与权限 / 设备接入 / 网关配置 / 云平台使用 / App使用 / 故障排查
-  关联产品型号（选填，多选）
-  多语言内容 Tab（zh-CN 必填，en-US 必填）：
-    问题（必填）
-    答案（必填，Markdown 编辑器）
-  排序权重</pre>
-
-      <!-- CMS-04 案例管理 -->
-      <div class="epic" id="cms04" style="margin-top:24px">CMS-04 案例管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增案例]，右侧：搜索框 + 状态筛选（草稿/已发布）
-
-案例列表表格：
-案例名称 | 关联场景 | 关联产品 | 状态 | 最后更新 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  案例名称（必填，多语言）
-  封面图（必填，从媒体库选取）
-  摘要（必填，2行以内，多语言）
-  正文（必填，富文本，多语言）
-  关联解决方案场景（多选）
-  关联产品（多选）
-  状态（草稿 / 已发布）</pre>
-      <div class="ac">案例发布后，关联的解决方案页/产品页「应用案例区块」自动展示。</div>
-
-      <!-- CMS-05 招聘岗位管理 -->
-      <div class="epic" id="cms05" style="margin-top:24px">CMS-05 招聘岗位管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增岗位]，右侧：搜索框 + 状态筛选（招募中/已关闭）
-
-岗位列表表格：
-岗位名称 | 工作地点 | 岗位类型 | 状态 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  岗位名称（必填，多语言）
-  工作地点（必填）
-  岗位类型（必填，单选）：全职 / 实习
-  职责描述（必填，富文本，多语言）
-  岗位要求（必填，富文本，多语言）
-  薪资范围（选填）
-  投递方式（必填）：邮件地址 或 外部链接
-  状态（必填）：招募中 / 已关闭</pre>
-      <div class="ac">岗位状态改为「已关闭」后，加入我们页面自动隐藏该岗位。</div>
-
-      <!-- ── 🖼️ 内容与页面 ──────────────────────────────────── -->
-      <h3>🖼️ 内容与页面</h3>
-
-      <!-- CMS-06 媒体库 -->
-      <div class="epic" id="cms06">CMS-06 媒体库</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：[上传图片/文件]  右侧：关键词搜索框
-
-网格/列表视图切换
-
-列表字段（列表模式）：
-缩略图 | 文件名 | 尺寸/大小 | 上传日期 | 引用次数 | 操作（下载/删除）
-
-上传说明：
-  支持格式：jpg / png / webp / svg，单文件 ≤ 10MB
-  替换图片：上传同名文件后原链接自动更新（保持相同 URL）
-  引用追踪：显示该图片被哪些内容引用
-  删除前二次确认弹窗</pre>
-
-      <!-- CMS-07 页面内容（首页/Banner/CTA） -->
-      <div class="epic" id="cms07" style="margin-top:24px">CMS-07 页面内容（首页/Banner/CTA）</div>
-      <h4>区块结构</h4>
-      <pre>页面列表：
-  ├── 首页（固定，不可删除）
-  └── 通用 Banner（可新增）
-
-首页编辑区块：
-  Hero 区块：
-    主标语（必填，多语言）
-    副标语（必填，多语言）
-    背景图（从媒体库选取）
-    三路 CTA 文案（查看解决方案/开发者中心/联系我们，多语言）
-  信任背书数字：
-    兼容品牌数（必填，数字）
-    覆盖国家数（必填，数字）
-    已交付项目数（必填，数字）
-    ⚠️ 所有数字待业务方确认后填写，不可填写估算值
-  底部 CTA 文案（多语言）
-  [保存草稿] [预览] [发布]</pre>
-      <div class="ac">Hero 文案修改发布后，官网首页通过 ISR 自动刷新，无需代码部署。</div>
-
-      <!-- CMS-08 产品内容管理 -->
-      <div class="epic" id="cms08" style="margin-top:24px">CMS-08 产品内容管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增产品]，右侧：搜索框 + 产品类型筛选（硬件/云平台）
-
-产品列表表格：
-产品名称 | 类型 | Slug | 多语言状态 | 最后更新 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  基本信息：
-    产品名称（必填）
-    Slug（必填，URL 友好格式，如 neuron-ii）
-    产品类型（必填，单选）：硬件网关 / 云平台软件
-    产品图标（必填，从媒体库选取）
-    一句话定位描述（必填，多语言）
-  多语言内容 Tab（zh-CN 必填，en-US 必填）：
-    详细描述（富文本）
-    核心功能模块（多条，每条含：标题 + 说明）
-    规格参数表（键值对列表）
-  关联配置：
-    关联解决方案（多选，双向生效）
-    关联文件资产（多选）
-  SEO：
-    页面 title（必填，多语言）
-    meta description（必填，多语言）</pre>
-      <div class="ac">产品内容修改发布后，官网对应产品页通过 ISR 自动刷新，无需代码部署。</div>
-      <div class="ac">关联解决方案配置后，产品页「应用场景」卡片和解决方案页「本方案使用的产品」卡片同步生效。</div>
-
-      <!-- CMS-09 解决方案内容管理 -->
-      <div class="epic" id="cms09" style="margin-top:24px">CMS-09 解决方案内容管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增场景]，右侧：搜索框
-
-场景列表表格：
-场景名称 | Slug | 多语言状态 | 最后更新 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  基本信息：
-    场景名称（必填，多语言）
-    Slug（必填）
-    Banner 图片（必填，从媒体库选取）
-    一句话定位描述（必填，多语言）
-  多语言内容 Tab（zh-CN 必填，en-US 必填）：
-    3个核心痛点（每个：标题 + 说明）
-    方案描述（富文本）
-    接入方式说明（单选：云端直连 / 网关局域网 / 两者均支持）
-    架构示意图（可选，从媒体库选取）
-  关联配置：
-    关联产品（多选，双向生效）
-    关联案例（多选）</pre>
-      <div class="ac">关联产品配置后，解决方案页产品跳转卡片自动展示对应产品信息。</div>
-
-      <!-- ── 📦 资产管理 ──────────────────────────────────── -->
-      <h3>📦 资产管理</h3>
-
-      <!-- CMS-10 文件资产管理 -->
-      <div class="epic" id="cms10">CMS-10 文件资产管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [上传文件]，右侧：搜索框 + 文件类型筛选 + 产品型号筛选
-
-文件列表表格：
-文件名 | 类型 | 版本 | 关联产品 | 文件大小 | 上传日期 | 下载次数 | 操作（下载/编辑/删除）
-
-上传弹窗字段：
-  文件（必填，拖拽上传区域，≤50MB）
-  文件类型（必填，单选）：产品文档 / 工控桌面软件 / 移动端安装包 / 网关固件包
-  关联产品型号（必填，多选）
-  版本号（必填，如 v2.1）
-  Changelog（选填，富文本）
-  ──── 固件包专用字段 ────
-  云平台最低版本要求（选填，如 EVCMS v1.5+）
-  配置工具最低版本要求（选填，如 工具 v3.0+）
-  ────────────────────────
-  删除前二次确认弹窗</pre>
-
-      <!-- CMS-11 兼容品牌管理 -->
-      <div class="epic" id="cms11" style="margin-top:24px">CMS-11 兼容品牌管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增品牌]，右侧：搜索框（品牌名）+ 状态筛选下拉
-
-品牌列表表格：
-品牌名 | 设备类型 | 接入方式 | 能力标签 | 状态 | 排序 | 操作（编辑/删除）
-
-新增/编辑弹窗字段：
-  品牌名称（必填）
-  品牌 Logo（必填，从媒体库选取）
-  设备类型（必填，单选）：储能电池 / 光伏逆变器 / 充电桩 / 智能电表
-  接入方式（必填，单选）：云端直连 / 网关局域网 / 两者均支持
-  支持能力（必填，复选）：
-    □ 实时数据读取（遥测）
-    □ 充放电控制（调度）
-    □ 历史数据导出
-  状态（必填）：已支持 / 开发中 / 规划中
-  首页 Logo 墙可见（开关，默认关闭）
-  排序权重（数字，越小越靠前）
-  删除前二次确认弹窗</pre>
-
-      <!-- CMS-12 产品关联配置 -->
-      <div class="epic" id="cms12" style="margin-top:24px">CMS-12 产品关联配置</div>
-      <h4>区块结构</h4>
-      <pre>配置列表表格：
-产品名称 | 关联解决方案 | 最后更新 | 操作（编辑）
-
-编辑弹窗字段：
-  产品（只读，从产品内容模块同步）
-  关联解决方案场景（多选，选中后双向生效）
-
-说明：
-  - 此处配置后，产品页「应用场景跳转卡片」自动展示对应场景
-  - 对应解决方案页「本方案使用的产品」卡片同步生效
-  - 一次配置，双向生效，无需分别在两侧重复配置</pre>
-      <div class="ac">配置关联后，产品页和解决方案页的跳转卡片均自动生效。</div>
-
-      <!-- ── 📋 线索与工单 ──────────────────────────────────── -->
-      <h3>📋 线索与工单</h3>
-
-      <!-- CMS-13 客户线索管理 -->
-      <div class="epic" id="cms13">CMS-13 客户线索管理（商务线索）</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：状态筛选（全部/待处理/跟进中/已关闭）+ 来源筛选 + 日期范围筛选
-
-线索列表表格：
-提交时间 | 来源页面 | 意向分类 | 姓名 | 公司 | 邮箱 | 状态 | 操作（查看）
-
-详情弹窗：
-  完整表单提交数据
-  意向分类及自动路由结果记录
-  处理状态（下拉修改：待处理/跟进中/已关闭）
-  内部备注（文本域）
-  [发送邮件回复] 按钮</pre>
-
-      <!-- CMS-14 报修工单管理 -->
-      <div class="epic" id="cms14" style="margin-top:24px">CMS-14 报修工单管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：状态筛选（全部/待处理/处理中/已关闭）+ 日期范围筛选
-
-工单列表表格：
-提交时间 | 姓名 | 联系电话 | 设备型号 | 状态 | 操作（查看）
-
-详情弹窗：
-  完整工单提交数据（姓名/电话/设备型号/故障描述/故障截图）
-  处理状态（下拉修改：待处理/处理中/已关闭）
-  内部处理备注（文本域）
-  企微通知记录（显示通知是否已发送）</pre>
-      <div class="ac">报修表单提交后，工单自动出现在列表，状态默认「待处理」。</div>
-
-      <!-- ── ⚙️ 系统配置 ──────────────────────────────────── -->
-      <h3>⚙️ 系统配置</h3>
-
-      <!-- CMS-15 多语言字典管理 -->
-      <div class="epic" id="cms15">CMS-15 多语言字典管理</div>
-      <h4>区块结构</h4>
-      <pre>Toolbar：左侧 [新增词条]，右侧：搜索框（Key 或翻译内容）+ 命名空间筛选
-
-词条列表表格：
-Key | 命名空间 | zh-CN | en-US | 完整率 | 操作（编辑）
-
-命名空间分类：
-  common      — 通用词条（按钮/标签/状态文字）
-  nav         — 导航菜单文字
-  home        — 首页各区块文案
-  products    — 产品页通用文案
-  solutions   — 解决方案页通用文案
-  support     — 帮助中心通用文案
-  developer   — 开发者中心 Tooltip 文案
-  forms       — 表单字段/提示文字
-  emails      — 邮件模板通用文案
-
-编辑弹窗字段：
-  Key（只读，创建后不可修改）
-  命名空间（只读）
-  各语言翻译内容（zh-CN 必填，en-US 必填，其他语言选填）</pre>
-      <div class="ac">词条修改发布后，前台对应文案通过 ISR 自动刷新，无需代码部署。</div>
-      <div class="ac">Key 一经创建不可修改，避免前端引用失效。</div>
-
-      <!-- CMS-16 通知配置 -->
-      <div class="epic" id="cms16" style="margin-top:24px">CMS-16 通知配置</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">企微 Webhook 配置：
-  ┌─────────────────────────────────────────────────┐
-  │ 整套方案咨询  Webhook URL  [____________] [测试] │
-  │ API 接入需求  Webhook URL  [____________] [测试] │
-  │ 纯硬件采购   Webhook URL  [____________] [测试] │
-  │ VPP/定制开发 Webhook URL  [____________] [测试] │
-  │ 渠道合作     Webhook URL  [____________] [测试] │
-  │ 报修工单     Webhook URL  [____________] [测试] │
-  └─────────────────────────────────────────────────┘
-
-内部通知邮箱：
-  销售通知邮箱（多个，逗号分隔）
-  技术支持通知邮箱（多个，逗号分隔）
-
-用户回执邮件模板（多语言 Tab）：
-  商务咨询回执（zh-CN / en-US）
-  报修工单回执（zh-CN / en-US）
-  开发者申请回执（zh-CN / en-US）</div>
-
-      <!-- CMS-17 SEO 配置 -->
-      <div class="epic" id="cms17" style="margin-top:24px">CMS-17 SEO 配置</div>
-      <h4>区块结构</h4>
-      <pre>页面列表（与前台页面一一对应）：
-页面名称 | 语言 | title 状态 | description 状态 | 最后更新
-
-编辑弹窗字段（按语言 Tab）：
-  页面 title（必填，建议 50~60 字符）
-  meta description（必填，建议 120~160 字符）
-  OG Title（选填，默认同 title）
-  OG Description（选填，默认同 description）
-  OG Image（选填，从媒体库选取，建议 1200×630px）</pre>
-      <div class="ac">SEO 配置修改发布后，对应页面 <code>&lt;title&gt;</code> 和 <code>&lt;meta&gt;</code> 标签正确更新。</div>
-
-      <!-- CMS-18 操作日志 -->
-      <div class="epic" id="cms18" style="margin-top:24px">CMS-18 操作日志</div>
-      <h4>区块结构</h4>
-      <pre>筛选：操作人 + 操作类型 + 日期范围
-
-日志列表表格：
-操作时间 | 操作人 | 操作类型（新增/修改/删除/发布）| 操作对象 | 详情（展开）
-
-只读，不可删除</pre>
-
-      <!-- ── 🔧 运维工具 ──────────────────────────────────── -->
-      <h3>🔧 运维工具</h3>
-
-      <!-- CMS-19 缓存管理 -->
-      <div class="epic" id="cms19">CMS-19 缓存管理</div>
-      <h4>区块结构</h4>
-      <pre>操作区：
-  [清除全站缓存]    — 谨慎操作，影响所有页面
-  [按页面清除缓存]  — 输入路径（如 /zh-CN/products/neuron-ii），精确清除
-  [CDN 资源刷新]    — 刷新指定 CDN 路径
-
-操作日志：
-  操作时间 | 操作人 | 操作类型 | 影响范围</pre>
-
-      <!-- CMS-20 页面健康检查 -->
-      <div class="epic" id="cms20" style="margin-top:24px">CMS-20 页面健康检查</div>
-      <h4>区块结构</h4>
-      <pre>[立即扫描] 按钮
-
-扫描结果列表：
-  问题类型（死链/多语言缺失/SEO 字段空缺）| 页面路径 | 语言 | 状态
-
-检查项目：
-  - 死链扫描（内部链接是否有效）
-  - 多语言内容完整性（zh-CN 和 en-US 是否都有内容）
-  - SEO 字段完整性（title/description 是否已填）</pre>
-
-      <!-- CMS-21 Sitemap 管理 -->
-      <div class="epic" id="cms21" style="margin-top:24px">CMS-21 Sitemap 管理</div>
-      <h4>区块结构</h4>
-      <pre>页面状态概览：
-总页面数 | 已索引 | 上次更新时间
-
-操作区：
-  [手动触发 Sitemap 更新]   — 全量重新生成
-  [提交 Google Search Console] — 自动调用 GSC API
-
-规则说明（只读展示）：
-  - 内容发布/修改后 Sitemap 自动更新（通过 ISR Webhook 触发）
-  - Staging 环境 robots.txt 已设置 noindex，Sitemap 不对外暴露
-  - 自动生成频率：内容发布触发 + 每日凌晨全量重建</pre>
-      <div class="ac">生产环境 Sitemap 可通过 /sitemap.xml 正常访问。</div>
-      <div class="ac">Staging 环境 robots.txt 包含 Disallow: / 且 Sitemap 不提交至搜索引擎。</div>
-
-      <!-- ── 👤 账号管理 ──────────────────────────────────── -->
-      <div class="epic" id="cms22" style="margin-top:32px">CMS-22 后台账号管理（超级管理员专用）</div>
-      <div class="note">📌 仅超级管理员可访问。用于创建、停用后台账号并分配角色。其他角色在菜单中不可见此模块。</div>
-      <h4>区块结构</h4>
-      <div class="arch-box">账号列表：
-┌──────┬──────────┬────────┬──────────┬────────────────┐
-│ 姓名  │ 邮箱      │ 角色   │ 状态     │ 操作            │
-├──────┼──────────┼────────┼──────────┼────────────────┤
-│ 张三  │ a@xx.com │ 内容运营│ ✅ 启用  │ [编辑] [停用]   │
-│ 李四  │ b@xx.com │ 商务销售│ ✅ 启用  │ [编辑] [停用]   │
-│ 王五  │ c@xx.com │ 技术支持│ ⏸ 停用  │ [编辑] [启用]   │
-└──────┴──────────┴────────┴──────────┴────────────────┘
-[+ 新增账号]</div>
-
-      <h4>角色定义</h4>
-      <table>
-        <thead><tr><th>角色</th><th>典型人员</th><th>可访问模块</th></tr></thead>
-        <tbody>
-          <tr><td>内容运营</td><td>市场/运营同学</td><td>新闻动态 / FAQ / 案例管理 / 招聘岗位 / 媒体库 / 页面内容 / 产品内容 / 解决方案内容 / 兼容品牌 / SEO 配置</td></tr>
-          <tr><td>商务/销售</td><td>销售团队</td><td>客户线索管理</td></tr>
-          <tr><td>技术支持</td><td>售后/技术团队</td><td>报修工单管理 / 文件资产管理 / 版本兼容矩阵</td></tr>
-          <tr><td>超级管理员</td><td>系统管理员</td><td>全部模块（含账号管理 / 操作日志 / 缓存管理 / 页面健康检查）</td></tr>
-        </tbody>
-      </table>
-
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>新增账号</td><td>填写姓名、邮箱、角色，系统发送激活邮件</td></tr>
-          <tr><td>停用账号</td><td>停用后该账号立即无法登录，数据保留</td></tr>
-          <tr><td>启用账号</td><td>重新激活已停用账号</td></tr>
-          <tr><td>修改角色</td><td>超管可随时调整任意账号的角色权限</td></tr>
-          <tr><td>不可删除账号</td><td>只能停用，不可物理删除，保留操作日志完整性</td></tr>
-          <tr><td>超管不可自降</td><td>超级管理员不能修改自己的角色或停用自己</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">新增账号后激活邮件在 5 分钟内送达。</div>
-      <div class="ac">停用账号后，该账号立即无法登录（已有 session 同步失效）。</div>
-      <div class="ac">非超管账号在菜单中看不到「账号管理」入口。</div>
-
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════
-         四、全局功能需求
-    ══════════════════════════════════════════════════════ -->
-    <div class="section" id="s4">
-      <h2>四、全局功能需求</h2>
-
-      <div class="epic" id="gf01">GF-01 全局多语言路由与字典</div>
-      <div class="note">📌 P0 必须实现 zh-CN + en-US + zh-TW 三套；de/fr/pt/es/ru 五种机器翻译辅助语言同步上线，路由机制相同。</div>
-      <h4>语言策略</h4>
-      <table>
-        <thead><tr><th>语言</th><th>代码</th><th>维护方式</th><th>P0 状态</th></tr></thead>
-        <tbody>
-          <tr><td>简体中文</td><td>zh-CN</td><td>人工维护（主语言）</td><td>✅ 必须</td></tr>
-          <tr><td>英文</td><td>en-US</td><td>人工维护</td><td>✅ 必须</td></tr>
-          <tr><td>繁体中文</td><td>zh-TW</td><td>由 zh-CN 自动繁简转换</td><td>✅ 必须</td></tr>
-          <tr><td>德文</td><td>de</td><td>机器翻译辅助（DeepL/Google）</td><td>✅ P0 上线</td></tr>
-          <tr><td>法文</td><td>fr</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
-          <tr><td>葡萄牙文</td><td>pt</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
-          <tr><td>西班牙文</td><td>es</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
-          <tr><td>俄文</td><td>ru</td><td>机器翻译辅助</td><td>✅ P0 上线</td></tr>
-        </tbody>
-      </table>
-
-      <h4>路由规则</h4>
-      <pre>URL 结构：/{lang-code}/{path}
-示例：
-  /zh-CN/products/neuron-ii
-  /en-US/products/neuron-ii
-  /zh-TW/products/neuron-ii
-  /de/products/neuron-ii
-
-首次访问：根据浏览器 Accept-Language 自动跳转对应语言；
-         无匹配语言时降级至 zh-CN。
-语言切换：Header 语言切换器，切换后跳转当前页对应语言版本。
-降级策略：CMS 某语言内容未填写时，降级显示 zh-CN 内容，
-         前端标注"待翻译"视觉标记（开发环境可见），
-         严禁白屏或乱码。</pre>
-
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>8 种语言路由</td><td>全部 8 种语言的 URL 路径独立存在，SEO 可索引</td></tr>
-          <tr><td>hreflang 标签</td><td>每页 HTML &lt;head&gt; 输出全部 8 种语言的 hreflang，供搜索引擎识别</td></tr>
-          <tr><td>UI 字典动态加载</td><td>所有静态文案（「查看更多」「联系我们」等）从 CMS-15 多语言字典 API 加载，禁止前端组件硬编码</td></tr>
-          <tr><td>zh-TW 自动转换</td><td>服务端渲染时由 zh-CN 内容自动转换，无需 CMS 单独维护</td></tr>
-          <tr><td>机器翻译流水线</td><td>de/fr/pt/es/ru 内容由机器翻译预生成并写入 CMS，人工可后期修订</td></tr>
-          <tr><td>语言切换器</td><td>Header 常驻，下拉展示全部 8 种语言，切换后跳转当前路径对应语言版本</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">全部 8 种语言的首页 URL 可正常访问，内容正确渲染，无白屏。</div>
-      <div class="ac">hreflang 标签在页面源码中正确输出，覆盖全部 8 种语言。</div>
-      <div class="ac">语言切换后跳转至当前页对应语言版本（非首页）。</div>
-      <div class="ac">某语言内容缺失时降级显示 zh-CN，不出现白屏或乱码。</div>
-
-      <div class="epic" id="gf02" style="margin-top:20px">GF-02 全局联合搜索</div>
-      <div class="note">📌 P0 全内容公开，搜索结果无权限过滤。P1 接入 SSO 后再加权限过滤逻辑。</div>
-      <h4>搜索索引范围</h4>
-      <table>
-        <thead><tr><th>内容类型</th><th>索引字段</th><th>P0 状态</th></tr></thead>
-        <tbody>
-          <tr><td>FAQ 条目</td><td>问题标题 + 答案正文</td><td>✅</td></tr>
-          <tr><td>产品页</td><td>产品名称 + 定位描述 + 规格参数</td><td>✅</td></tr>
-          <tr><td>解决方案页</td><td>场景名称 + 痛点描述 + 方案描述</td><td>✅</td></tr>
-          <tr><td>兼容品牌</td><td>品牌名称 + 能力标签</td><td>✅</td></tr>
-          <tr><td>文件资产</td><td>文件名称 + 产品型号 + 版本号</td><td>✅</td></tr>
-          <tr><td>新闻动态</td><td>标题 + 摘要</td><td>✅</td></tr>
-          <tr><td>案例</td><td>案例名称 + 摘要</td><td>✅</td></tr>
-        </tbody>
-      </table>
-
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>Header 常驻搜索框</td><td>所有页面顶部均可触发搜索</td></tr>
-          <tr><td>中文分词支持</td><td>建议接入 Algolia 或 Typesense，降低自研成本；技术选型详见技术选型备忘.html</td></tr>
-          <tr><td>多语言搜索</td><td>当前语言环境下的索引内容优先返回；支持跨语言匹配</td></tr>
-          <tr><td>搜索结果分类展示</td><td>结果按内容类型分组展示（产品 / 解决方案 / FAQ / 文件 / 新闻）</td></tr>
-          <tr><td>索引自动更新</td><td>CMS 内容发布后自动触发搜索索引更新，无需手动操作</td></tr>
-          <tr><td>空结果引导</td><td>无结果时展示「联系我们」入口引导用户</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">在搜索框输入产品关键词，结果页正确返回对应产品/FAQ/文件条目。</div>
-      <div class="ac">CMS 发布新内容后，5 分钟内该内容可被搜索到。</div>
-      <div class="ac">中文搜索不因分词问题漏掉相关结果（如搜「储能」能找到「储能系统」相关内容）。</div>
-
-      <div class="epic" id="gf03" style="margin-top:20px">GF-03 表单统一通知</div>
-      <div class="note">📌 全站所有表单（联系我们 / 在线报修）提交后触发三路通知。Webhook URL 和收件邮箱全部在 CMS-16 通知配置模块维护，严禁硬编码。</div>
-      <h4>通知流程</h4>
-      <pre>用户提交表单
-    │
-    ├──① 企业微信群机器人
-    │      按「意向分类」路由至对应群：
-    │      整套方案咨询 → 销售群
-    │      纯硬件采购   → 国内/海外销售群
-    │      VPP/定制开发 → 产品群
-    │      API 接入需求 → 技术群
-    │      渠道合作     → 商务群
-    │      在线报修     → 技术支持群
-    │
-    ├──② 内部邮件通知
-    │      按意向分类发送至对应负责人邮箱
-    │      邮箱在 CMS-16 后台配置，不硬编码
-    │
-    └──③ 用户确认回执邮件
-           发送至用户填写的邮箱
-           邮件模板在 CMS-16 后台编辑，支持多语言</pre>
-
-      <h4>功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>企微 Webhook 路由</td><td>按意向分类精准路由，6 条路由规则，URL 在 CMS-16 配置</td></tr>
-          <tr><td>内部邮件通知</td><td>收件邮箱在 CMS-16 配置，不硬编码</td></tr>
-          <tr><td>用户回执邮件</td><td>多语言模板，模板内容在 CMS-16 编辑</td></tr>
-          <tr><td>提交前合规校验</td><td>表单提交前必须校验「数据处理同意声明」勾选状态，未勾选则阻断提交</td></tr>
-          <tr><td>5 分钟送达 SLA</td><td>企微和邮件通知须在提交后 5 分钟内到达</td></tr>
-          <tr><td>失败重试</td><td>Webhook 失败后自动重试 3 次，最终失败写入错误日志</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">联系我们表单提交后，对应企微群 5 分钟内收到通知。</div>
-      <div class="ac">用户邮箱 5 分钟内收到多语言确认回执。</div>
-      <div class="ac">未勾选同意声明时，提交按钮被阻断，表单不发送。</div>
-      <div class="ac">修改 CMS-16 中的 Webhook URL 后，下一条提交即生效，无需代码部署。</div>
-
-      <div class="epic" id="gf04" style="margin-top:20px">GF-04 SEO 基础规格</div>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>SSR（服务端渲染）强制</td><td>不使用纯 SPA，保证搜索引擎可索引</td></tr>
-          <tr><td>每页 title / description / OG Tags 可配置</td><td>在 CMS SEO 配置模块独立维护</td></tr>
-          <tr><td>Sitemap 自动生成</td><td>内容发布后自动更新</td></tr>
-          <tr><td>robots.txt 配置</td><td>Staging 全站 noindex</td></tr>
-        </tbody>
-      </table>
-
-      <div class="epic" id="gf05" style="margin-top:20px">GF-05 隐私合规（Cookie 横幅 + 隐私政策页）</div>
-      <div class="note">📌 两件独立的事：① Cookie 同意横幅（UI组件，非页面）② 隐私政策页（独立文本页，EP-09）。两者需配合工作，但开发和内容准备可分开进行。</div>
-
-      <h4>GF-05A · Cookie 同意横幅（UI 组件）</h4>
-      <div class="arch-box">触发时机：用户首次访问任意页面时，页面底部弹出横幅
-
-横幅内容：
-┌──────────────────────────────────────────────────────┐
-│  🍪 我们使用 Cookie 来改善您的浏览体验。               │
-│  继续使用即表示您同意我们的 Cookie 政策。              │
-│  [了解更多] → 跳转隐私政策页                          │
-│                            [拒绝] [接受所有 Cookie]   │
-└──────────────────────────────────────────────────────┘
-
-用户操作后行为：
-  点击「接受」：记录同意状态（localStorage），横幅消失，不再出现
-  点击「拒绝」：记录拒绝状态，横幅消失，仅保留必要 Cookie
-  再次访问：已有记录则不再弹出，除非清除浏览器数据
-
-适用法规：GDPR（欧盟）/ LGPD（巴西）/ PIPL（中国）</div>
-
-      <h4>GF-05B · Cookie 同意横幅功能清单</h4>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>首次访问自动弹出</td><td>无论用户从哪个页面进入，均弹出横幅</td></tr>
-          <tr><td>同意状态持久化</td><td>用户选择记录在 localStorage，有效期 12 个月</td></tr>
-          <tr><td>「了解更多」跳转</td><td>跳转至 EP-09 隐私政策页（/zh-CN/privacy-policy）</td></tr>
-          <tr><td>多语言支持</td><td>横幅文案通过多语言字典（CMS-15）配置</td></tr>
-          <tr><td>拒绝后仅保留必要 Cookie</td><td>必要 Cookie：Session / CSRF Token / 语言偏好；禁止加载第三方分析 Cookie</td></tr>
-          <tr><td>不阻断用户操作</td><td>横幅悬浮于底部，不遮挡页面主内容，用户可继续浏览</td></tr>
-        </tbody>
-      </table>
-      <div class="ac">首次访问时底部横幅正常出现，点击「接受」后再次访问不再弹出。</div>
-      <div class="ac">点击「了解更多」正确跳转隐私政策页对应语言版本。</div>
-      <div class="ac">点击「拒绝」后，第三方分析脚本不加载（Network 面板可验证）。</div>
-
-      <h4>GF-05C · 隐私政策页说明（→ 详见 EP-09）</h4>
-      <table>
-        <thead><tr><th>项目</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>页面 URL</td><td>/zh-CN/privacy-policy（多语言各有独立路径）</td></tr>
-          <tr><td>内容准备</td><td>⚠️ 须经法务审核，不可使用模板占位；上线前 Checklist 必须包含此项</td></tr>
-          <tr><td>与横幅的关系</td><td>横幅「了解更多」链接至本页；本页内容独立存在，用户也可直接通过 Footer 链接访问</td></tr>
-          <tr><td>包含内容</td><td>隐私政策 + Cookie 政策（合并在同一页面，分章节展示）</td></tr>
-          <tr><td>CMS 管理</td><td>内容在 CMS-07 页面内容模块维护，法务可自行更新无需开发介入</td></tr>
-        </tbody>
-      </table>
-
-      <div class="epic" id="gf06" style="margin-top:20px">GF-06 SSO / 访问控制（P1 预留）</div>
-      <div class="note">📌 初版上线时所有内容公开，无登录入口。SSO 及权限体系后续迭代接入。</div>
-      <table>
-        <thead><tr><th>功能点</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>初版全内容公开</td><td>无登录入口，所有页面匿名可访问</td></tr>
-          <tr><td>SSO 接入（后续迭代）</td><td>统一账号系统，Header 显示登录按钮</td></tr>
-          <tr><td>文件下载权限分层（后续迭代）</td><td>无权限时引导联系商务</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════
-         五、非功能性需求
-    ══════════════════════════════════════════════════════ -->
     <div class="section" id="s5">
-      <h2>五、非功能性需求</h2>
+      <h2>五、CMS 内容管理需求</h2>
+      <p>CMS 后台是支撑官网内容运营的核心系统。其核心目标是：<strong>让运营人员能够独立完成所有内容的增删改发布，不依赖开发人员介入</strong>。</p>
+
+      <h3>5.0 CMS 后台概览</h3>
+            <h4>5.0.1 使用角色定义</h4>
+      <p>CMS 后台按职能划分为四类角色，每类角色的访问范围不同：</p>
       <table>
-        <thead><tr><th>指标</th><th>要求</th></tr></thead>
+        <thead>
+          <tr><th>角色</th><th>典型人员</th><th>核心职责</th></tr>
+        </thead>
         <tbody>
-          <tr><td>内容更新不走代码发布</td><td>所有用户内容通过 CMS 管理，运营独立操作</td></tr>
-          <tr><td>SSR 服务端渲染</td><td>强制，不使用纯 SPA</td></tr>
-          <tr><td>表单通知时效</td><td>提交 5 分钟内企微/邮件到达</td></tr>
-          <tr><td>国内外双节点访问</td><td>国内/海外用户走就近加速节点</td></tr>
-          <tr><td>ICP 备案</td><td>上线前完成</td></tr>
-          <tr><td>Staging 环境</td><td>独立数据库+CMS，noindex 隔离</td></tr>
-          <tr><td>移动端适配</td><td>首页/联系我们/产品页正常可用</td></tr>
-          <tr><td>隐私合规</td><td>Cookie 弹窗+隐私政策法务确认后上线</td></tr>
-          <tr><td>文件下载签名链接</td><td>⏸ P1：SSO 权限控制启用后生效，链接有效期 ≤ 5 分钟；P0 阶段所有文件公开下载，无签名链接</td></tr>
+          <tr><td><strong>内容运营</strong></td><td>市场/运营同学</td><td>维护新闻动态、FAQ、案例、兼容品牌、SEO 配置</td></tr>
+          <tr><td><strong>商务/销售</strong></td><td>销售团队</td><td>处理商务线索、开通/管理客户权限与产品线标签</td></tr>
+          <tr><td><strong>技术支持</strong></td><td>售后/技术团队</td><td>处理报修工单、管理文件资产（文档/软件/固件）</td></tr>
+          <tr><td><strong>超级管理员</strong></td><td>系统管理员</td><td>全模块访问权限，负责账号管理与系统配置</td></tr>
         </tbody>
       </table>
+      <p>一个人可同时持有多个角色。角色权限详见 5.0.3。</p>
+
+      <h4>5.0.2 CMS 后台导航架构</h4>
+    <div class="arch-box">CMS 后台
+│
+├── 🏠 仪表盘
+│   └── 今日待办汇总（新线索 / 待审 API 申请 / 未处理工单 / 待发布内容）
+│
+├── 📝 内容管理
+│   ├── 新闻动态        — 发布/编辑/下架公司新闻与行业动态
+│   ├── FAQ            — 维护帮助中心常见问题库
+│   ├── 案例管理        — 发布项目案例，关联解决方案场景页
+│   └── 招聘管理        — 发布/关闭招聘岗位
+│
+├── 🖼️ 内容与页面
+│   ├── 媒体库          — 统一管理全站图片/视频，OSS 直传，CDN 链接自动生成
+│   ├── 页面内容        — 编辑首页区块、Banner、CTA 文案，草稿预览发布
+│   ├── 产品内容        — 管理 8 个产品页内容（参数表/功能列表/接入方式）
+│   └── 解决方案内容    — 管理 5 个场景页内容（痛点/方案描述/技术亮点）
+│
+├── 📦 资产管理
+│   ├── 文件资产        — 上传管理文档/软件/固件，设置版本与权限标签
+│   ├── 兼容品牌        — 维护兼容生态页品牌数据与 Logo
+│   └── 产品关联        — 配置产品 ↔ 解决方案双向跳转关系
+│
+├── 👥 客户与权限
+│   ├── 客户账号管理    — 查看客户列表，分配/调整产品线标签
+│   └── API 开发者管理  — 审核 API 申请，配置调用配额与权限范围
+│
+├── 📋 线索与工单
+│   ├── 商务线索        — 查看/跟进官网表单提交的业务咨询
+│   └── 报修工单        — 查看/处理在线报修表单提交的售后工单
+│
+├── ⚙️ 系统配置
+│   ├── 多语言字典管理  — 管理全站 UI 翻译词条，支持后台新增语言
+│   ├── SEO 配置        — 各页面 title / description / OG Tags 独立配置
+│   └── 操作日志        — 查看所有后台操作记录（谁/何时/改了什么）
+│
+├── 🔧 运维工具
+│   ├── 缓存管理        — 全站/按页清除缓存，CDN 资源刷新
+│   ├── 页面健康检查    — 死链扫描，多语言内容完整性检查
+│   └── Sitemap 管理    — 手动触发更新，提交 Google Search Console
+│
+└── 👤 账号管理（超级管理员专用）
+    └── 后台账号管理    — 创建/停用后台账号，分配角色</div>
+
+      <h4>5.0.3 角色权限矩阵</h4>
+      <table>
+        <thead>
+          <tr><th>模块</th><th>内容运营</th><th>商务/销售</th><th>技术支持</th><th>超级管理员</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>仪表盘</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>媒体库</td><td>✅</td><td>❌</td><td>✅</td><td>✅</td></tr>
+          <tr><td>页面内容</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>产品内容</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>解决方案内容</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>新闻动态</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>FAQ</td><td>✅</td><td>❌</td><td>✅</td><td>✅</td></tr>
+          <tr><td>案例管理</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>招聘管理</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>文件资产</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+          <tr><td>兼容品牌</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>产品关联配置</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>客户账号管理</td><td>❌</td><td>✅</td><td>❌</td><td>✅</td></tr>
+          <tr><td>API 开发者管理</td><td>❌</td><td>✅</td><td>❌</td><td>✅</td></tr>
+          <tr><td>商务线索</td><td>❌</td><td>✅</td><td>❌</td><td>✅</td></tr>
+          <tr><td>报修工单</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+          <tr><td>多语言字典管理</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>SEO 配置</td><td>✅</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>缓存管理 / 健康检查</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Sitemap 管理</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>操作日志</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+          <tr><td>后台账号管理</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+        </tbody>
+      </table>
+
+      <h4>5.0.4 仪表盘说明</h4>
+      <p>仪表盘是登录后的默认首页，按角色过滤展示与自己相关的待办事项：</p>
+    <div class="arch-box">┌─────────────────────────────────────────────────┐
+│  今日待办                                         │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐         │
+│  │ 新线索    │ │待审API申请│ │ 未处理工单│         │
+│  │   3 条   │ │   2 条   │ │   1 条   │         │
+│  └──────────┘ └──────────┘ └──────────┘         │
+├─────────────────────────────────────────────────┤
+│  最近活动                                         │
+│  — 张三 提交了商务咨询（整套方案）   5 分钟前        │
+│  — 李四 申请了 API Key              2 小时前       │
+│  — 王五 提交了报修工单（Neuron III） 昨天 14:32    │
+├─────────────────────────────────────────────────┤
+│  内容状态                                         │
+│  草稿中：3 篇新闻  |  待发布：1 个案例             │
+│  待翻译：2 条 FAQ（缺英文版）                      │
+└─────────────────────────────────────────────────┘</div>
+      <p><strong>角色差异展示：</strong>内容运营：显示内容状态（草稿/待翻译）；商务/销售：显示新线索数、待审 API 申请数；技术支持：显示未处理报修工单数；超级管理员：显示全部。</p>
+
+      <h3>5.1 各模块通用规范</h3>
+      <ul>
+        <li><strong>多语言支持</strong>：所有面向用户的内容字段，均需支持多语言维护。核心维护语言为简体中文（zh-CN）和英文（en-US），繁体中文（zh-TW）由 zh-CN 自动转换，德/法/葡/西/俄五种语言以 en-US 为源、机器翻译辅助、人工校对后发布</li>
+        <li><strong>草稿与发布分离</strong>：内容支持保存草稿后预览，确认无误后再正式发布，避免未完成的内容意外上线</li>
+        <li><strong>版本可追溯</strong>：关键内容（新闻、产品描述）保留修改历史，支持查看历史版本</li>
+        <li><strong>软删除</strong>：内容下架不等于物理删除，保留归档记录，支持查阅历史</li>
+      </ul>
+
+      <div class="gray-box">
+        <h4>5.2 文件与资产管理需求</h4>
+        <p>管理官网所有可下载的文件资产，包括产品文档、工控软件、移动端 App 安装包、网关固件包。<strong>核心需求：</strong></p>
+        <ul>
+          <li>文件按类型分类管理：产品文档 / 工控桌面软件 / 移动端安装包 / 网关固件包</li>
+          <li>每个文件关联对应产品型号（Neuron II / HEMS 云平台等），方便在帮助中心按型号筛选展示</li>
+          <li>支持版本号管理，新版本上传后旧版本仍可保留归档</li>
+          <li>记录每个文件的下载次数，了解用户关注点</li>
+          <li>文件上传后自动生成下载链接，无需手动配置</li>
+          <li>固件文件支持填写版本依赖关系（依赖的云平台最低版本、配置工具最低版本），用于帮助中心版本兼容性矩阵展示及下载时的联动提示</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.3 兼容品牌管理需求</h4>
+        <p>管理官网"兼容生态"页面和首页合作伙伴 Logo 墙的品牌数据。<strong>核心需求：</strong></p>
+        <ul>
+          <li>运营人员可自助新增、编辑、下架品牌条目</li>
+          <li>每个品牌可标注：设备类型（储能电池 / 光伏逆变器 / 充电桩 / 智能电表）</li>
+          <li>每个品牌可标注接入方式：云端直连 / 网关局域网 / 两者均支持</li>
+          <li>每个品牌可标注支持的能力范围（复选）：实时数据读取（遥测）/ 充放电控制（调度）/ 历史数据导出</li>
+          <li>支持状态管理：已支持 / 开发中 / 规划中</li>
+          <li>支持排序调整，控制品牌在页面上的展示顺序</li>
+          <li>保存后官网自动更新，无需重新部署</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.4 新闻与动态管理需求</h4>
+        <p>管理官网"最新动态"板块的内容，替代现有的代码写死方式。<strong>核心需求：</strong></p>
+        <ul>
+          <li>支持富文本编辑，可插入图片、标题、段落、列表等</li>
+          <li>每篇文章维护 zh-CN 和 en-US 两个核心语言版本；zh-TW 自动转换；de/fr/pt/es/ru 以 en-US 为源，支持一键机器翻译生成初稿</li>
+          <li>支持设置发布时间（可提前写好定时发布）</li>
+          <li>文章列表支持按日期、标题搜索</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.5 FAQ 管理需求</h4>
+        <p>管理帮助中心的常见问题库，替代当前 3 条占位数据。<strong>核心需求：</strong></p>
+        <ul>
+          <li>运营人员可自助新增、编辑、排序、下架问题条目</li>
+          <li>每个 FAQ 条目可归属分类：账号与权限 / 设备接入 / 网关配置 / 云平台使用 / App 使用 / 故障排查</li>
+          <li>可关联具体产品型号，方便帮助中心按产品筛选展示</li>
+          <li>答案支持 Markdown 格式，可插入代码片段、链接、图片</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.6 客户线索管理需求</h4>
+        <p>集中管理官网所有表单提交，包括业务咨询、在线报修、API Key 申请、Demo 申请。<strong>核心需求：</strong></p>
+        <ul>
+          <li>统一收件箱展示所有来源的线索，记录提交时间、来源页面、意向分类</li>
+          <li>每条线索支持状态流转：待处理 → 跟进中 → 已关闭</li>
+          <li>新线索提交后自动推送通知至企业微信对应业务群（按意向类型分发）</li>
+          <li>支持按时间、状态、意向类型筛选</li>
+          <li>预留标准化 CRM Webhook/API 出口：表单提交后，除企微通知外，可将线索数据推送至外部 CRM 系统，推送字段包含来源页面、意向分类、提交时间，实现营销转化闭环</li>
+        </ul>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px"><strong>什么是 CRM？</strong><br>
+        CRM（客户关系管理系统）是用来统一管理销售线索、记录客户沟通历史、追踪成单进度的工具。企微群消息通知只是"提醒"，不是"沉淀"——线索多了之后，没有 CRM 就无法知道有多少线索在谈、多少丢单、哪个渠道转化率最高。常见工具：国内有纷享销客、飞书 CRM；海外有 HubSpot、Salesforce。<br>
+        <strong>官网侧只需预留标准 Webhook 出口，CRM 工具由业务团队按实际需求自行选型接入，不在本次重构范围内。</strong></p>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.7 开发者账号管理需求</h4>
+        <p>管理 API 开放平台的开发者账号申请与权限，支撑"开发者中心"模块。<strong>核心需求：</strong></p>
+        <ul>
+          <li>查看待审核的 API Key 申请，显示公司信息与使用场景描述</li>
+          <li>一键审核通过后，系统自动生成 API Key 并通知申请人</li>
+          <li>可配置每个账号允许调用的接口类型与日调用配额</li>
+          <li>支持暂停 / 恢复账号，异常账号快速处理</li>
+          <li>提供各账号的调用量统计，了解使用情况</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.8 BMS 告警字典管理需求</h4>
+        <p>管理各品牌电池的故障码翻译库，供官网展示及移动端 App 动态调用。<strong>核心需求：</strong></p>
+        <ul>
+          <li>按品牌分组维护故障码与对应描述</li>
+          <li>每条故障码支持多语言翻译（中 / 英 / 其他语言按需扩展）</li>
+          <li>标注告警级别：提示 / 警告 / 严重</li>
+          <li>支持批量导入（避免逐条手动录入）</li>
+          <li>维护后通过接口实时同步至 App 端，无需 App 发版更新</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.9 SEO 配置管理需求</h4>
+        <p>让运营人员可以独立管理每个页面的搜索引擎相关配置，替代当前写死在代码中的方式。<strong>核心需求：</strong></p>
+        <ul>
+          <li>每个页面可独立配置标题、描述、关键词</li>
+          <li>支持配置社交分享图（Open Graph），控制链接在社交平台的展示样式</li>
+          <li>新增或修改页面内容后，站点地图（Sitemap）自动更新，无需手动维护</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.10 多语言字典管理需求</h4>
+        <p>管理官网 UI 界面的公共翻译词条（按钮、标签、提示文字、导航文字等固定文案），让运营人员在后台统一维护，不写死在代码里。</p>
+        <p style="font-size:13px;color:var(--muted)"><strong>为什么需要字典管理？</strong><br>官网 §7.3 要求支持 8 种语言，除了页面内容需要多语言维护，UI 界面上的公共固定文案（如"查看更多"、"联系我们"、"暂无数据"等）也需要各语言版本。如果这些词条写死在代码里，每次调整措辞或新增语言都要走代码发布流程。字典管理让运营人员直接在后台修改、新增语言，无需开发介入。</p>
+        <div class="highlight" style="margin-top:12px;">
+          <strong>核心能力：后台添加语言 → 前台自动支持</strong><br>
+          在「语言管理」中新增一种语言（如 <code>de</code>），系统自动：① 在前台语言切换器中出现该语言选项（发布后可见）；② 在 CMS 所有内容编辑界面增加该语言的编辑 Tab；③ 导出待翻译词条清单。整个过程不需要修改任何代码。
+        </div>
+        
+        <p><strong>核心需求：</strong></p>
+        <ul>
+          <li>支持管理官网所有语言的 UI 公共词条（按 key-value 对维护）</li>
+          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；zh-TW 由 zh-CN 自动转换；de / fr / pt / es / ru 由 en-US 机器翻译初稿，支持人工校对覆盖</li>
+          <li>支持新增语言：当官网需要扩展新语言时（如 de），在后台添加语言后即可开始维护词条，无需修改代码结构</li>
+          <li>支持批量导入/导出（Excel/CSV），方便交给翻译人员处理后批量回填</li>
+          <li>词条修改后官网实时生效，无需重新部署</li>
+          <li>支持搜索词条 key 或内容，快速定位需要修改的词条</li>
+        </ul>
+
+        <p style="font-size:13px; font-weight: 600; margin-top: 12px;">字典示例：</p>
+        <table style="font-size:13px;">
+          <thead>
+            <tr><th>Key</th><th>zh-CN（核心）</th><th>zh-TW（自动转换）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机器翻译）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>nav.solutions</code></td><td>解决方案</td><td>解決方案（自动）</td><td>Solutions</td><td>Lösungen / Solutions / Soluções…（机器翻译）</td></tr>
+            <tr><td><code>nav.products</code></td><td>产品中心</td><td>產品中心（自动）</td><td>Products</td><td>Produkte / Produits…（机器翻译）</td></tr>
+            <tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>聯絡我們（自动）</td><td>Contact Us</td><td>Kontakt / Contactez…（机器翻译）</td></tr>
+            <tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>暫無資料（自动）</td><td>No results found</td><td>Keine Ergebnisse…（机器翻译）</td></tr>
+          </tbody>
+        </table>
+<pre>后台操作界面：
+多语言字典
+  ├── 语言管理    — 查看/新增官网支持的语言列表
+  │   当前：zh-CN / zh-TW / en-US / de / fr / pt / es / ru
+  │   [+ 新增语言]  ← 新增后前台语言选择器自动出现该选项（需设为"已发布"）
+  │
+  └── 词条管理    — 按语言 Tab 切换，批量编辑各语言词条
+      [搜索词条 Key 或内容]
+      [批量导入] [批量导出]
+      翻译状态筛选：[全部] [已翻译] [待翻译] [使用回退]</pre>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.11 产品-解决方案关联管理需求（新增）</h4>
+        <p>支撑产品页「应用场景跳转卡片」与解决方案页「本方案使用的产品跳转卡片」双向互通的数据配置。<strong>核心需求：</strong></p>
+        <ul>
+          <li>在 CMS 后台维护「产品 ↔ 解决方案」关联关系，一次配置，两个方向自动展示</li>
+          <li>每个产品（硬件或云平台）可关联一个或多个解决方案场景</li>
+          <li>每个解决方案场景可关联一个或多个产品（硬件 + 云平台分开列）</li>
+          <li>关联卡片支持自定义展示顺序（拖拽排序）</li>
+          <li>关联卡片支持配置「在产品页显示」和「在解决方案页显示」两个独立开关，灵活控制可见性</li>
+          <li>修改关联关系后，两端页面（产品页 + 解决方案页）同时自动更新，无需分别维护</li>
+        </ul>
+
+        <p><strong>关联关系映射表（初始配置）：</strong></p>
+        <table style="font-size:13px;">
+          <thead>
+            <tr><th>产品</th><th>关联解决方案场景</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Neuron II</td><td>户用家庭储能 / 工商业储能 / 电能质量管理</td></tr>
+            <tr><td>Neuron III</td><td>充电站负载管理 / 工商业储能</td></tr>
+            <tr><td>Neuron III Lite</td><td>充电站负载管理</td></tr>
+            <tr><td>HEMS 云平台</td><td>户用家庭储能</td></tr>
+            <tr><td>ESS 云平台</td><td>工商业储能</td></tr>
+            <tr><td>EVCMS 云平台</td><td>充电站负载管理</td></tr>
+            <tr><td>PQMS 云平台</td><td>电能质量管理</td></tr>
+            <tr><td>VPP 云平台</td><td>VPP 虚拟电厂调度</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>CMS 后台入口位置：</strong>产品资产 → 产品-解决方案关联</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.12 媒体库（图片 / 视频统一管理）</h4>
+        <p>官网所有页面使用的图片（产品图、解决方案 Banner、首页 Hero 背景、案例封面图、团队照片等）统一在媒体库管理，不允许直接硬编码图片 URL 到代码中。<strong>核心需求：</strong></p>
+        <ul>
+          <li><strong>统一上传入口：</strong>运维人员在媒体库上传图片/视频，系统自动上传至 OSS 并生成 CDN 加速链接，无需手动配置</li>
+          <li><strong>图片分类与标签：</strong>支持按用途分类（产品图 / Banner / 案例封面 / Logo / 其他），支持搜索文件名</li>
+          <li><strong>图片替换：</strong>替换某张图片时，上传新图后可选择「覆盖原链接」（所有引用该图片的页面自动更新）或「新建链接」（保留旧图，手动更新引用）</li>
+          <li><strong>图片裁剪与压缩：</strong>上传时自动压缩（WebP 格式优先），支持在线裁剪以适配不同展示尺寸（如 Banner 16:9、产品图 1:1、缩略图 4:3）</li>
+          <li><strong>引用追踪：</strong>每张图片显示被哪些页面/内容引用，避免误删正在使用的图片</li>
+          <li><strong>软删除：</strong>删除图片前检查引用，有引用时禁止删除并提示；无引用时允许软删除，保留 30 天后物理删除</li>
+          <li><strong>容量统计：</strong>显示已用存储空间，便于运维监控 OSS 成本</li>
+        </ul>
+        <p><strong>与其他模块的关系：</strong>富文本编辑器（新闻、FAQ、解决方案内容）插入图片时，均调用媒体库选择器，而非直接上传。保证所有图片资产统一管理，不散落在各编辑器内。</p>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.13 页面内容管理</h4>
+        <p>管理官网各页面的可编辑内容区块，包括首页、独立落地页（隐私政策、开发者中心占位页等）的文案、图片、CTA 配置。<strong>核心需求：</strong></p>
+        <ul>
+          <li><strong>区块化编辑：</strong>每个页面拆分为独立的内容区块（Hero / 核心差异化 / 底部 CTA 等），运维人员按区块独立编辑，不影响其他区块</li>
+          <li><strong>首页 Hero 区块：</strong>可配置主标语、副标语、背景图（从媒体库选择）、三路分流 CTA 按钮文字与跳转链接，支持多语言</li>
+          <li><strong>首页数字展示区块：</strong>可配置兼容品牌数 / 覆盖国家数 / 已交付项目数（与公司介绍核心数字同源），⚠️ 数字需经内部确认后填写</li>
+          <li><strong>各页面 Banner 图：</strong>解决方案页、产品页的顶部 Banner 图可在后台独立替换，无需发布代码</li>
+          <li><strong>草稿与预览：</strong>修改内容后可先保存草稿并预览效果，确认无误后发布</li>
+          <li><strong>变更历史：</strong>记录每次内容修改的操作人、时间和修改前后对比，支持回滚至历史版本</li>
+          <li><strong>多语言：</strong>每个内容区块支持 zh-CN / en-US 独立编辑，zh-TW 自动转换，其他语言机器翻译辅助</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.14 产品内容管理</h4>
+        <p>管理产品中心 8 个产品页面（Neuron II / III / III Lite + HEMS / ESS / EVCMS / PQMS / VPP）的全部可编辑内容。<strong>核心需求：</strong></p>
+        <ul>
+          <li><strong>产品基本信息：</strong>产品名称、定位一句话、产品主图（从媒体库选择），支持多语言</li>
+          <li><strong>核心参数表（硬件产品）：</strong>结构化字段维护（通信接口、支持协议、供电规格、工作温度、防护等级、认证），字段值支持多语言</li>
+          <li><strong>核心功能列表（云平台产品）：</strong>图文卡片列表，每个功能点包含图标/截图（从媒体库选择）+ 标题 + 描述，支持拖拽排序</li>
+          <li><strong>接入方式说明：</strong>富文本，支持多语言</li>
+          <li><strong>技术规格（云平台）：</strong>结构化字段（设备数量上限 / 数据刷新频率 / 历史数据保留周期 / 支持协议）</li>
+          <li><strong>产品页 Banner 图：</strong>可独立配置，从媒体库选择</li>
+          <li><strong>草稿 / 发布 / 下线状态：</strong>产品下线时前台自动隐藏，不影响已关联的解决方案页（关联卡片自动隐藏）</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.15 解决方案内容管理</h4>
+        <p>管理解决方案板块 5 个场景页（户用家庭储能 / 工商业储能 / 充电站管理 / VPP 虚拟电厂 / 电能质量管理）的全部可编辑内容。<strong>核心需求：</strong></p>
+        <ul>
+          <li><strong>场景基本信息：</strong>场景名称、场景一句话描述、场景 Banner 图（从媒体库选择），支持多语言</li>
+          <li><strong>场景背景 / 痛点描述：</strong>富文本，支持图文混排，支持多语言</li>
+          <li><strong>方案描述：</strong>富文本，支持多语言</li>
+          <li><strong>接入方式说明：</strong>富文本，支持多语言</li>
+          <li><strong>技术亮点列表：</strong>结构化列表（标题 + 描述），支持拖拽排序，支持多语言</li>
+          <li><strong>应用案例关联：</strong>从案例库中选择关联案例（§P1 案例管理），非硬编码；未关联案例时该区块自动隐藏</li>
+          <li><strong>草稿 / 发布 / 下线状态：</strong>场景下线时前台自动隐藏该场景入口</li>
+        </ul>
+      </div>
+
+      <div class="gray-box">
+        <h4>5.16 运维工具</h4>
+        <p>提供运维人员日常维护官网所需的系统级操作工具，降低对开发人员的依赖。<strong>核心需求：</strong></p>
+        <ul>
+          <li><strong>缓存管理：</strong>
+            <ul>
+              <li>一键清除全站缓存（适用于紧急内容纠错，如错别字、错误联系方式等）</li>
+              <li>按页面/路径精准清除缓存（避免全站刷新影响性能）</li>
+              <li>CDN 资源刷新：媒体库图片替换后，支持一键刷新对应 CDN 节点缓存</li>
+            </ul>
+          </li>
+          <li><strong>页面健康检查：</strong>
+            <ul>
+              <li>扫描全站死链（404 链接），列出问题 URL 及来源页面，支持一键下载报告</li>
+              <li>检查多语言内容完整性：列出哪些页面/内容存在「待翻译」或「使用回退」状态</li>
+            </ul>
+          </li>
+          <li><strong>Sitemap 手动触发：</strong>内容发布后系统自动更新 Sitemap，运维也可手动触发立即更新并提交至 Google Search Console</li>
+          <li><strong>操作日志（P2）：</strong>记录所有后台操作（谁/何时/改了什么），保留 90 天，用于安全审计与异常排查（详见 §6 P2）</li>
+          <li><strong>系统状态监控（P2）：</strong>展示官网各服务健康状态（前台 / CMS API / OSS / CDN），异常时在仪表盘显示告警（详见 §4.4 系统状态页）</li>
+        </ul>
+        <p><strong>权限：</strong>缓存清除、页面健康检查由技术支持或超级管理员操作；Sitemap 触发和操作日志查看由超级管理员操作。</p>
+      </div>
+
+    </div>
+
+    <div class="section" id="s6">
+      <div class="section-label">第六部分</div>
+      <h2>六、CMS 能力清单</h2>
+
+      <div class="priority-block">
+        <div class="priority-row">
+          <div class="priority-badge-col"><span class="badge badge-p0">P0</span></div>
+          <div style="width: 100%;">
+            <div style="font-size:14px;font-weight:700;color:var(--danger);margin-bottom:8px">必须有（官网上线前）</div>
+            <table>
+              <thead>
+                <tr><th>模块</th><th>能力</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td rowspan="5" style="background:#fff"><strong>文件资产管理</strong></td><td>OSS 直传上传</td><td>前端直传 OSS，应用层不经手文件流</td></tr>
+                <tr><td>版本号管理</td><td>语义化版本（x.y.z），新版本不覆盖旧版</td></tr>
+                <tr><td>平台/分类标注</td><td>Win / Mac / iOS / Android / 通用</td></tr>
+                <tr><td>下载统计</td><td>记录每次下载 count</td></tr>
+                <tr><td>软删除</td><td>下架不删文件，保留历史可查</td></tr>
+
+                <tr><td rowspan="4" style="background:#fff"><strong>兼容品牌管理</strong></td><td>CRUD 品牌条目</td><td>含 Logo 上传</td></tr>
+                <tr><td>接入方式标注</td><td>云端直连 / 网关局域网 复选</td></tr>
+                <tr><td>状态管理</td><td>已支持 / 开发中 / 规划中</td></tr>
+                <tr><td>排序控制</td><td>数字权重或拖拽</td></tr>
+
+                <tr><td rowspan="3" style="background:#fff"><strong>新闻动态</strong></td><td>富文本编辑</td><td>图文混排，图片上传 OSS</td></tr>
+                <tr><td>语言版本管理</td><td>zh-CN / en-US 人工维护；zh-TW 自动转换；de/fr/pt/es/ru 机器翻译辅助</td></tr>
+                <tr><td>草稿/发布状态</td><td>先存草稿，确认后发布</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>FAQ 管理</strong></td><td>CRUD 条目</td><td>运营自助增删改</td></tr>
+                <tr><td>分类管理</td><td>按产品/场景分类</td></tr>
+
+                <tr><td rowspan="4" style="background:#fff"><strong>线索管理</strong></td><td>表单收件箱</td><td>展示所有提交</td></tr>
+                <tr><td>状态跟踪</td><td>待处理 / 跟进中 / 已关闭</td></tr>
+                <tr><td>企业微信推送</td><td>按意向分类推对应业务群</td></tr>
+                <tr><td>来源标记</td><td>记录来自哪个页面</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>媒体库</strong></td><td>统一图片/视频上传</td><td>OSS 直传，自动生成 CDN 链接，运营无需手动配置存储</td></tr>
+                <tr><td>图片分类与搜索</td><td>按用途分类（产品图/Banner/Logo/案例封面），支持文件名搜索</td></tr>
+                <tr><td>图片替换（覆盖原链接）</td><td>替换后所有引用该图的页面自动更新，无需逐页修改</td></tr>
+                <tr><td>引用追踪</td><td>每张图片显示被哪些页面/内容引用，防误删在用图片</td></tr>
+                <tr><td>自动压缩（WebP）</td><td>上传时自动转 WebP，在线裁剪适配不同展示比例</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>页面内容管理</strong></td><td>首页 Hero 区块编辑</td><td>主标语/副标语/背景图/CTA 文字与链接，支持多语言，草稿预览后发布</td></tr>
+                <tr><td>首页数字展示区块</td><td>兼容品牌数/覆盖国家数/已交付项目数可配置（⚠️ 上线前填真实数据）</td></tr>
+                <tr><td>各页面 Banner 图替换</td><td>解决方案页/产品页顶部 Banner 独立替换，不走代码发布</td></tr>
+                <tr><td>草稿预览 + 变更历史</td><td>修改后先预览，确认后发布；可回滚至历史版本</td></tr>
+                <tr><td>隐私政策等独立页面</td><td>法律声明/隐私政策/Cookie 政策由 CMS 管理多语言版本</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>产品内容管理</strong></td><td>产品基本信息</td><td>产品名称/定位一句话/主图（从媒体库选择），支持多语言</td></tr>
+                <tr><td>核心参数表（硬件）</td><td>结构化字段：通信接口/支持协议/供电/温度/防护等级/认证，非富文本</td></tr>
+                <tr><td>核心功能卡片（云平台）</td><td>图文卡片列表，含图标/截图（从媒体库选择）+ 标题 + 描述，可拖拽排序</td></tr>
+                <tr><td>接入方式说明</td><td>富文本，支持多语言</td></tr>
+                <tr><td>产品发布状态控制</td><td>产品下线时前台自动隐藏，关联的跳转卡片同步隐藏</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>解决方案内容管理</strong></td><td>场景基本信息</td><td>场景名称/一句话描述/Banner 图（从媒体库选择），支持多语言</td></tr>
+                <tr><td>场景背景 / 痛点描述</td><td>富文本，支持图文混排，支持多语言</td></tr>
+                <tr><td>技术亮点列表</td><td>结构化列表（标题+描述），可拖拽排序，支持多语言</td></tr>
+                <tr><td>应用案例关联</td><td>从案例库中选择关联案例，未关联时该区块自动隐藏</td></tr>
+                <tr><td>场景发布状态控制</td><td>场景下线时前台自动隐藏该场景入口</td></tr>
+
+                <tr><td rowspan="3" style="background:#fff"><strong>运维工具（基础）</strong></td><td>缓存清除（全站 / 按页）</td><td>内容错误时快速清除缓存生效，无需联系开发</td></tr>
+                <tr><td>CDN 资源刷新</td><td>媒体库图片替换后，一键刷新 CDN 节点缓存</td></tr>
+                <tr><td>死链扫描</td><td>定期检查全站 404 链接，列出问题 URL 及来源页</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-block">
+        <div class="priority-row">
+          <div class="priority-badge-col"><span class="badge badge-p1">P1</span></div>
+          <div style="width: 100%;">
+            <div style="font-size:14px;font-weight:700;color:var(--warning);margin-bottom:8px">应该有（开发者中心上线前）</div>
+            <table>
+              <thead>
+                <tr><th>模块</th><th>能力</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td rowspan="4" style="background:#fff"><strong>客户权限管理（SSO）</strong></td><td>账号与统一账号系统打通</td><td>复用旭衡统一账号体系（爱尚管理后台），官网不单独维护账号密码；<strong>P0 阶段跳过，P1 接入</strong></td></tr>
+                <tr><td>产品线标签分配</td><td>给每个客户账号打标签：HEMS / ESS / EVCMS / VPP / PQMS</td></tr>
+                <tr><td>标签批量操作</td><td>支持批量给多个账号增减标签</td></tr>
+                <tr><td>权限变更即时生效</td><td>修改标签后官网访问权限实时更新，无需重新登录</td></tr>
+
+                <tr><td rowspan="3" style="background:#fff"><strong>资源权限标注</strong></td><td>文件权限标签</td><td>每个文件可设置最低访问权限（公开/客户基础/产品线标签）；<strong>P0 阶段全部公开</strong></td></tr>
+                <tr><td>API 文档模块权限</td><td>每个 API 文档模块可独立配置所需标签</td></tr>
+                <tr><td>权限变更审计</td><td>记录谁在什么时间修改了哪个资源的权限设置</td></tr>
+
+                <tr><td rowspan="4" style="background:#fff"><strong>多语言字典管理</strong></td><td>语言管理</td><td>维护官网支持的语言列表，新增语言无需改代码</td></tr>
+                <tr><td>词条 CRUD</td><td>按 key-value 管理 UI 公共翻译词条</td></tr>
+                <tr><td>批量导入/导出</td><td>Excel/CSV 格式，方便交翻译人员处理</td></tr>
+                <tr><td>实时生效</td><td>词条修改后官网无需重新部署</td></tr>
+
+                <tr><td rowspan="6" style="background:#fff"><strong>API 开发者管理</strong></td><td>申请审核</td><td>列表查看待审核申请</td></tr>
+                <tr><td>一键批准发 Key</td><td>系统自动生成并通过邮件发送</td></tr>
+                <tr><td>权限配置</td><td>勾选可调用接口类型</td></tr>
+                <tr><td>配额管理</td><td>设置日调用量上限</td></tr>
+                <tr><td>禁用/启用</td><td>快速暂停异常账号</td></tr>
+                <tr><td>调用统计面板</td><td>每个 Key 的调用量趋势</td></tr>
+
+                <tr><td rowspan="4" style="background:#fff"><strong>BMS 字典管理</strong></td><td>按品牌维护</td><td>各品牌故障码库独立</td></tr>
+                <tr><td>多语言翻译</td><td>中/英/德/其他</td></tr>
+                <tr><td>批量导入</td><td>Excel/CSV 导入</td></tr>
+                <tr><td>对外 API</td><td>App 端动态拉取字典</td></tr>
+
+                <tr><td rowspan="4" style="background:#fff"><strong>案例管理</strong></td><td>案例 CRUD</td><td>标题 / 封面图 / 正文 / 关联场景</td></tr>
+                <tr><td>关联解决方案页</td><td>每个案例可关联到一个或多个场景页</td></tr>
+                <tr><td>多语言支持</td><td>zh-CN / en-US 核心维护；其他语言自动/机器翻译</td></tr>
+                <tr><td>草稿/发布状态</td><td>先存草稿，确认后上线</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size:12px;color:var(--muted);margin-top:8px"><strong>案例管理升级至 P1 的理由：</strong> 解决方案页每个场景均有「应用案例」区块，官网上线时若案例区块为空或仅有占位文字，将显著削弱场景页的说服力。建议至少准备 3~5 个真实案例，随官网一同上线。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-block">
+        <div class="priority-row">
+          <div class="priority-badge-col"><span class="badge badge-p2">P2</span></div>
+          <div style="width: 100%;">
+            <div style="font-size:14px;font-weight:700;color:var(--success);margin-bottom:8px">可以后做</div>
+            <table>
+              <thead>
+                <tr><th>模块</th><th>能力</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td rowspan="3" style="background:#fff"><strong>FAQ AI 问答</strong></td><td>RAG 知识库接入</td><td>以 FAQ 库 + 产品文档为知识底座，接入大语言模型 API</td></tr>
+                <tr><td>AI 问答界面</td><td>FAQ 页顶部 AI 对话框，支持自然语言提问</td></tr>
+                <tr><td>兜底引导</td><td>无法回答时自动引导至在线报修 / 联系我们</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>SEO 配置</strong></td><td>每页独立配置</td><td>title / description / OG Tags</td></tr>
+                <tr><td>自动 sitemap</td><td>新增内容自动更新 sitemap.xml</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>招聘管理</strong></td><td>岗位 CRUD</td><td>岗位名称 / 地点 / 类型 / 详情 / 状态</td></tr>
+                <tr><td>上线/下线控制</td><td>运营自助发布和关闭岗位</td></tr>
+
+                <tr><td rowspan="5" style="background:#fff"><strong>公司介绍管理</strong></td><td>公司简介编辑</td><td>富文本，支持三语言</td></tr>
+                <tr><td>核心数字配置</td><td>兼容品牌数 / 覆盖国家数 / 已交付项目数，与首页数字同源</td></tr>
+                <tr><td>核心能力说明编辑</td><td>zh-CN / en-US 核心维护；其他语言自动/机器翻译</td></tr>
+                <tr><td>发展历程管理</td><td>时间轴条目增删改；zh-CN / en-US 核心维护</td></tr>
+                <tr><td>联系地址编辑</td><td>文字地址；各语言版本同步（地址本身不翻译，说明文字翻译）</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>多区域内容管理</strong></td><td>语言+区域组合管理</td><td>支持同一语言下按区域差异化内容（如 en-AU / en-Global）</td></tr>
+                <tr><td>区域内容开关</td><td>各区域内容可独立上线/下线，按市场进度按需开启</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>系统状态页</strong></td><td>服务状态展示</td><td>各 API 服务实时状态、30天可用率、历史故障记录</td></tr>
+                <tr><td>维护通知发布</td><td>计划维护提前公告，开发者中心和 Footer 展示入口</td></tr>
+
+                <tr><td style="background:#fff"><strong>操作日志</strong></td><td>审计追踪</td><td>谁在什么时间改了什么，保留 90 天</td></tr>
+
+                <tr><td rowspan="2" style="background:#fff"><strong>运维工具（高级）</strong></td><td>Sitemap 手动触发</td><td>手动触发生成并提交 Google Search Console</td></tr>
+                <tr><td>多语言完整性检查</td><td>列出所有「待翻译」/「使用回退」的内容区块，辅助翻译排期</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section" id="s7">
+      <div class="section-label">第七部分</div>
+      <h2>七、非功能性需求</h2>
+
+      <h4>7.1 内容与代码解耦</h4>
+      <p>官网所有面向用户的内容（产品描述、解决方案文案、FAQ、新闻动态、兼容品牌数据）必须通过 CMS 管理，<strong>不允许直接写死在代码文件中</strong>。内容更新不需要走代码发布流程，运营人员独立操作即可生效。</p>
+
+      <h4>7.2 SEO 可配置</h4>
+      <p>每个页面的 SEO 元数据（标题、描述、关键词、社交分享图）必须通过 CMS 独立配置。站点地图随内容变化自动更新，不能是静态文件。</p>
+
+      <h4>7.3 多语言完整覆盖</h4>
+      <p>官网支持 8 种语言，分三个层级管理，<strong>维护成本不均等</strong>：</p>
+
+      <table>
+        <thead>
+          <tr><th>层级</th><th>语言代码</th><th>语言</th><th>目标市场</th><th>维护方式</th><th>优先级</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2"><strong>第一层<br>核心维护</strong></td><td><code>zh-CN</code></td><td>简体中文</td><td>中国大陆</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td><code>en-US</code></td><td>英文</td><td>全球英语市场、澳洲、东南亚</td><td>✏️ 人工全量维护</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td><strong>第二层<br>自动转换</strong></td><td><code>zh-TW</code></td><td>繁体中文</td><td>台湾、香港</td><td>🔄 由 zh-CN 自动繁简转换，人工校对关键词</td><td><span class="badge badge-p0">P0</span></td></tr>
+          <tr><td rowspan="5"><strong>第三层<br>机器翻译辅助</strong></td><td><code>de</code></td><td>德文</td><td>德国、奥地利、瑞士</td><td>🤖 以 en-US 为源，机器翻译生成初稿，人工校对发布</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>fr</code></td><td>法文</td><td>法国及法语区</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>pt</code></td><td>葡萄牙文（巴西）</td><td>巴西（LGPD 合规重点市场）</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>es</code></td><td>西班牙文</td><td>西班牙及拉美市场</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+          <tr><td><code>ru</code></td><td>俄文</td><td>俄罗斯及独联体</td><td>🤖 以 en-US 为源，机器翻译 + 人工校对</td><td><span class="badge badge-p1">P1</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <strong>核心设计原则：2套核心 + 1套自动 + 5套机器翻译辅助，不是 8套独立维护。</strong><br>
+        日常只需维护 zh-CN 和 en-US。zh-TW 自动同步，zh-CN 更新后自动触发繁简转换。P1 五种语言：en-US 内容更新后，系统自动标记对应语言「需要重新翻译」，运营一键触发机器翻译生成初稿，人工校对后发布。
+      </div>
+
+      <p><strong>回退链：</strong> 某语言内容未翻译或未发布时，按以下顺序回退：</p>
+      <ul>
+        <li>zh-TW → 回退至 zh-CN</li>
+        <li>de / fr / pt / es / ru → 先回退至 en-US，en-US 也缺失时回退至 zh-CN</li>
+        <li>不允许显示空内容或乱码；回退内容在 CMS 中自动标记「使用回退语言」</li>
+      </ul>
+
+      <p><strong>前台语言切换器行为：</strong></p>
+      <ul>
+        <li>Header 右上角固定展示语言切换下拉，仅显示已在 CMS 后台「已发布」状态的语言</li>
+        <li>默认语言根据访客 IP 地理位置自动判断：IP 地区语言 → 浏览器语言 → zh-CN</li>
+        <li>用户手动切换后记录偏好（localStorage），下次访问直接使用上次选择</li>
+        <li>URL 结构：<code>/zh-CN/solutions/hems</code>、<code>/en-US/solutions/hems</code>，各语言独立 URL，支持 SEO 独立索引</li>
+      </ul>
+
+      <p><strong>翻译工作流（P1 语言）：</strong></p>
+      <ul>
+        <li>en-US 内容发布 → 系统自动标记 5 种语言「待翻译」</li>
+        <li>运营在 CMS 点击「一键翻译」→ 机器翻译 API 生成全部语言初稿</li>
+        <li>人工校对（可批量导出 Excel 交翻译人员）→ 确认后逐语言发布</li>
+        <li>每条内容显示翻译状态：✅ 已发布 / ⚠️ 待校对 / 🔄 使用回退</li>
+      </ul>
+
+      <h4>7.4 文件下载可靠性</h4>
+      <p>所有可下载资产（文档、软件、固件）通过统一的文件管理系统分发，下载链接稳定可用。文件更新后旧链接不失效（旧版本归档保留），新版本通过 CMS 发布。</p>
+
+      <h4>7.5 表单通知配置</h4>
+      <p>官网所有表单（业务咨询、在线报修、API Key 申请）提交后，必须同时触发以下通知，确保线索 5 分钟内到达相关人员。通知目标和内容均通过 CMS 后台配置，<strong>不硬编码联系人信息</strong>。</p>
+
+      <div class="gray-box">
+        <p style="font-weight:700; margin-bottom:10px">通知渠道（CMS 后台「通知配置」模块统一管理）：</p>
+        <table>
+          <thead><tr><th>通知类型</th><th>触发条件</th><th>配置内容</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td><strong>企业微信群机器人</strong></td><td>所有表单提交</td><td>配置企微 Webhook URL；按意向分类（商务/报修/API 申请）路由至不同群</td><td>运营在后台填写各类型对应的 Webhook，不改代码</td></tr>
+            <tr><td><strong>邮件通知（内部）</strong></td><td>商务咨询 / 报修工单</td><td>配置接收邮箱列表（支持多个邮箱，逗号分隔）；按意向分类路由</td><td>如：Rory 接收国内商务咨询，Julie 接收海外咨询，Alan 接收报修工单</td></tr>
+            <tr><td><strong>邮件回执（用户侧）</strong></td><td>所有表单提交</td><td>配置发件人显示名 / 发件邮箱；回执邮件模板（标题/正文）支持多语言编辑</td><td>用户提交后自动收到确认邮件，告知已收到并预计响应时间</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-weight:700; margin: 14px 0 8px">通知消息内容（固定字段，所有渠道通用）：</p>
+        <ul>
+          <li>提交时间 / 来源页面 / 意向分类</li>
+          <li>姓名 / 公司名 / 邮箱 / 电话</li>
+          <li>用户填写的具体内容（咨询描述/报修描述）</li>
+          <li>CMS 后台直达链接（一键跳转至该线索详情）</li>
+        </ul>
+
+        <p style="font-weight:700; margin: 14px 0 8px">用户侧回执邮件内容（示意，多语言模板）：</p>
+        <ul>
+          <li>主题：「感谢您的咨询 / Thank you for contacting us」</li>
+          <li>内容：已收到您的提交，我们的团队将在 1 个工作日内与您联系；附带提交信息摘要供用户确认</li>
+          <li>模板在 CMS「通知配置 → 邮件模板」中编辑，支持 zh-CN / en-US，其余语言机器翻译</li>
+        </ul>
+      </div>
+
+      <h4>7.6 移动端适配策略</h4>
+      <p>官网以 PC 端为主要使用场景（B2B 客户决策链路长，主要在办公环境访问），但部分页面有移动端访问需求：</p>
+      <table>
+        <thead>
+          <tr><th>页面类型</th><th>适配要求</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>首页 / 解决方案 / 产品介绍</td><td>完全响应式适配，移动端体验与 PC 对等</td></tr>
+          <tr><td>帮助中心（FAQ / 文档列表）</td><td>完全响应式适配</td></tr>
+          <tr><td>开发者中心（API 文档）</td><td>PC 优先，移动端基础可读（不要求复杂交互）</td></tr>
+          <tr><td>个人中心</td><td>基础可用（权限查看、下载记录）</td></tr>
+          <tr><td>CMS 后台</td><td>PC 专用，不要求移动端适配</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--muted)">断点标准：≤ 768px 为移动端，769px~1024px 为平板，> 1024px 为 PC。</p>
+
+      <h4>7.7 错误页面</h4>
+      <table>
+        <thead>
+          <tr><th>页面</th><th>内容要求</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>404 页面</strong></td><td>友好提示 + 搜索框 + 常用页面快捷链接（首页 / 帮助中心 / 联系我们）</td></tr>
+          <tr><td><strong>403 页面</strong></td><td>明确告知权限不足原因（未登录 / 无对应标签）+ 引导动作（登录 / 联系商务）</td></tr>
+          <tr><td><strong>500 页面</strong></td><td>简洁报错提示 + 联系技术支持入口</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--muted)">错误页面需支持三语言，与全站语言切换保持一致。</p>
+
+      <h4>7.8 多语言与多区域内容策略</h4>
+      <p>旭衡业务覆盖多个海外市场（包括但不限于澳洲、东南亚、拉美等），官网需要区分两个层次：</p>
+      <ul>
+        <li><strong>层次一：多语言（i18n） — 文字翻译</strong><br>核心维护语言：zh-CN / en-US（人工全量维护）；zh-TW 自动转换；de/fr/pt/es/ru 机器翻译辅助。语言切换对所有用户可见，通过 URL 或语言选择器控制（详见 §7.3）。</li>
+        <li><strong>层次二：多区域（Localization） — 内容差异化</strong><br>同一语言下，不同市场的用户看到针对性的场景描述、案例和法规话术。CMS 需支持按「语言 + 区域」的组合管理内容，而不仅是按语言。具体覆盖哪些区域、何时上线，由运营按市场进度按需配置，PRD 不约束。</li>
+      </ul>
+
+      <div class="gray-box">
+        <div style="font-weight:700; color:var(--primary); margin-bottom:6px">为什么翻译不够？</div>
+        <p style="font-size:13px; margin:0">旭衡业务已覆盖澳洲、巴西、俄罗斯等多个市场。同样是英文版官网，澳洲客户关心当地电力市场的调度机制，东南亚客户关心充电桩和工商储能，用同一套英文内容打全球是不够的。Localization（本地化）的核心是：相同语言下，不同市场看到的场景描述、案例和合规话术可以不同。</p>
+      </div>
+
+      <p><strong>多语言覆盖优先级：</strong></p>
+      <table>
+        <thead>
+          <tr><th>内容类型</th><th>zh-CN（核心）</th><th>zh-TW（自动）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机翻）</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>首页 / 解决方案 / 产品介绍</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>P1 上线时校对发布</td><td>核心转化页面</td></tr>
+          <tr><td>帮助中心（FAQ / 文档列表）</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>可选，未翻译回退 en-US</td><td>按市场需求决定</td></tr>
+          <tr><td>开发者中心</td><td>✅ 必须</td><td>❌ 不要求</td><td>✅ 必须</td><td>可选，回退 en-US</td><td>开发者以中英为主</td></tr>
+          <tr><td>新闻动态</td><td>✅ 必须</td><td>🔄 自动转换</td><td>可选</td><td>可选</td><td>按目标市场选择性翻译</td></tr>
+          <tr><td>案例内容</td><td>✅ 必须</td><td>🔄 自动转换</td><td>可选</td><td>可选</td><td>按案例目标市场决定</td></tr>
+          <tr><td>兼容生态页</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>P1 上线时校对发布</td><td>说明文字需翻译，品牌名通用</td></tr>
+          <tr><td>联系人信息</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>✅ 必须（显示相同联系人）</td><td>各语言展示相同内容</td></tr>
+          <tr><td>隐私政策页</td><td>✅ 必须</td><td>🔄 自动转换</td><td>✅ 必须</td><td>✅ 必须（GDPR/LGPD 合规）</td><td>法律要求，机翻后须法务审核</td></tr>
+          <tr><td>CMS 后台界面</td><td>✅ 必须</td><td>❌ 不要求</td><td>❌ 不要求</td><td>❌ 不要求</td><td>内部系统，中文即可</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--muted)"><strong>回退原则：</strong> zh-TW 未覆盖内容回退至 zh-CN；de/fr/pt/es/ru 未覆盖内容先回退至 en-US，再回退至 zh-CN。不允许显示空内容或乱码。P1 语言随业务进入对应市场时开启，不强制与 P0 同步上线。</p>
+
+      <h4>7.9 预发布环境（Staging）</h4>
+      <p>官网必须配备独立的预发布环境（staging），与生产环境（production）完全隔离。运营人员所有内容更新必须先在 staging 验证，确认无误后才能发布到生产环境。</p>
+      <div class="gray-box">
+        <table>
+          <thead><tr><th>维度</th><th>Staging 环境</th><th>Production 环境</th></tr></thead>
+          <tbody>
+            <tr><td>域名</td><td><code>staging.alwayscontrol.com.cn</code>（访问需鉴权）</td><td><code>alwayscontrol.com.cn</code></td></tr>
+            <tr><td>数据库</td><td>独立数据库，与生产完全隔离</td><td>生产数据库</td></tr>
+            <tr><td>CMS 后台</td><td>独立 CMS 实例，改动不影响生产</td><td>生产 CMS</td></tr>
+            <tr><td>内容同步</td><td>可一键从生产拉取最新内容快照</td><td>—</td></tr>
+            <tr><td>用途</td><td>新功能测试 / 内容预览 / 上线前验收</td><td>面向真实用户</td></tr>
+          </tbody>
+        </table>
+        <ul style="margin-top:12px">
+          <li><strong>内容发布流程：</strong>CMS 编辑内容 → Staging 预览确认 → 超管审核 → 发布至 Production</li>
+          <li><strong>紧急修复例外：</strong>生产环境发现紧急问题（错误联系方式/错别字）允许直接修生产，但事后必须同步回 Staging</li>
+          <li><strong>访问控制：</strong>Staging 域名需 HTTP Basic Auth 或 IP 白名单保护，防止被搜索引擎索引</li>
+          <li><strong>SEO 隔离：</strong>Staging 全站加 <code>noindex</code> 响应头，不被 Google 收录</li>
+        </ul>
+      </div>
+
+      <h4>7.10 隐私合规（GDPR / LGPD）</h4>
+      <div class="gray-box">
+        <div style="font-weight:700; color:var(--primary); margin-bottom:6px">为什么要做这个？</div>
+        <p style="font-size:13px; margin:0">GDPR 是欧盟的数据隐私法规，LGPD 是巴西的对应法规，两者均要求网站在收集用户数据前必须明确获得授权，违规最高罚款可达年营收的 4%。旭衡官网收集用户邮箱、公司信息、设备坐标，并向海外用户提供 API 服务，属于合规要求的覆盖范围。大型能源企业在采购前会做供应商合规审查，官网不合规会直接影响商务谈判。</p>
+        <p style="font-size:13px; font-weight:700; color:var(--danger); margin-top:8px">隐私合规为 P0 必须完成项，上线前需由法务确认合规文本，不得使用模板占位。</p>
+      </div>
+      <p>旭衡业务覆盖欧盟及巴西等有严格数据隐私法规的市场，官网必须满足以下合规要求：</p>
+      <ul>
+        <li><strong>Cookie 授权管理：</strong>首次访问时展示 Cookie 授权弹窗，支持分类授权（必要 / 分析 / 营销）。用户可随时撤回授权，设置入口在页脚常驻。按访客地区自动适配合规标准（欧盟用户遵循 GDPR，巴西用户遵循 LGPD）。</li>
+        <li><strong>表单合规：</strong>「申请接入」「联系我们」「在线报修」等所有收集用户信息的表单，底部必须包含：《隐私政策》链接（CMS 可配置，支持多语言版本）、《数据处理同意声明》勾选框（必填，不勾选无法提交）、若涉及数据跨境传输需补充《数据出境合规声明》。</li>
+        <li><strong>隐私政策页：</strong>独立页面，通过 CMS 管理内容，支持多语言版本独立维护。涵盖：数据收集范围、使用目的、存储期限、用户权利（查阅/删除/更正）、数据出境说明。</li>
+      </ul>
+
+      <h4>7.11 访问加速与国内备案</h4>
+      <div class="gray-box">
+        <div style="font-weight:700; color:var(--primary); margin-bottom:6px">为什么要双节点？</div>
+        <p style="font-size:13px; margin:0">旭衡官网需要同时服务国内客户（访问速度快、合规要求备案）和海外客户（不能因国内网络波动影响固件下载和 API 调用）。单节点无法同时满足两端需求，因此需要国内外分别部署加速节点。ICP 备案是国内网站上线的法律要求，包含中文内容的站点必须完成后才能对国内用户提供服务。</p>
+      </div>
+      <p>旭衡官网同时服务国内和海外用户，且包含大量文件下载（文档/固件/软件），需满足以下访问要求：</p>
+      <ul>
+        <li><strong>国内访问：</strong>域名（alwayscontrol.com.cn）需完成 ICP 备案。国内用户访问须经国内加速节点，保证访问速度；文件下载走国内对象存储 + CDN，避免境外带宽影响体验。</li>
+        <li><strong>海外访问：</strong>海外用户访问须走境外加速节点，确保不受国内网络波动影响。API 文档、固件下载等资源需在海外节点缓存，开发者调用 <code>api.alwayscontrol.com.cn</code> 的延迟应在可接受范围内。</li>
+        <li><strong>智能路由：</strong>须支持按用户地理位置自动路由至就近加速节点，海外用户不走国内节点。</li>
+        <li><strong>备案要求：</strong>zh-CN 版本内容必须在 ICP 备案完成后才能上线，此项为上线硬性前提。</li>
+      </ul>
+      <p style="font-size:12px; color:var(--muted)">具体 CDN 服务商选型、部署架构详见技术选型文档。</p>
+
+      <h4>7.13 全局搜索能力</h4>
+      <p>官网 Header 常驻全局搜索框，支持跨全站内容索引，覆盖以下内容类型：</p>
+      <table>
+        <thead>
+          <tr><th>内容类型</th><th>索引范围</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>FAQ 条目</td><td>问题标题 + 答案摘要</td><td>故障排查场景高频使用</td></tr>
+          <tr><td>API 文档段落</td><td>接口名称 + 描述</td><td>开发者搜报错信息、接口名</td></tr>
+          <tr><td>兼容品牌</td><td>品牌名称 + 设备类型</td><td>快速确认某品牌是否已接入</td></tr>
+          <tr><td>固件版本</td><td>型号 + 版本号 + 关键词</td><td>搜索特定固件版本</td></tr>
+          <tr><td>产品页 / 解决方案页</td><td>页面标题 + 摘要</td><td>快速定位页面入口</td></tr>
+          <tr><td>帮助文档</td><td>文档标题 + 章节</td><td>技术手册内容检索</td></tr>
+        </tbody>
+      </table>
+      <p><strong>交互要求：</strong></p>
+      <ul>
+        <li>搜索框在 Header 始终可见，点击展开全屏搜索覆盖层</li>
+        <li>搜索结果按内容类型分组展示（FAQ / API 文档 / 品牌 / 产品页）</li>
+        <li>权限控制：受限内容（如需登录的 API 文档）在搜索结果中显示标题和摘要，点击后跳转至对应引导页（登录 / 联系商务）</li>
+        <li>支持全部已发布语言的独立索引，搜索结果与当前语言版本匹配；未完整翻译的语言回退展示 en-US 或 zh-CN 结果</li>
+      </ul>
+      <p style="font-size:13px; color:var(--muted)"><strong>实现建议：</strong> 可使用 Algolia 或 Typesense 等成熟搜索组件，接入成本低，支持中文分词，无需自研。</p>
+
+      <h4>7.12 访问控制安全性（详见第八章）</h4>
+      <p>受限资源（文件下载链接、API 文档内容）的权限校验必须在服务端执行，不能仅依赖前端隐藏。具体要求：</p>
+      <ul>
+        <li>文件下载链接为签名临时链接，有效期不超过 5 分钟，不可直接分享给他人使用（具体实现方案见技术选型文档）</li>
+        <li>API 文档内容通过接口动态返回，服务端校验 token 后才返回对应模块内容</li>
+        <li>权限变更（如客户账号被停用、标签被移除）后，已颁发的 token 在下次请求时校验失效，不允许继续访问受限资源</li>
+        <li>所有受限资源的访问记录须保留日志，用于审计与异常排查</li>
+      </ul>
+    </div>
+
+    <div class="section" id="s8">
+      <div class="section-label">第八部分</div>
+      <h2>八、访问控制与权限体系</h2>
+
+      <div class="gray-box" style="border-left: 4px solid var(--warning); border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+        <strong>⏸ P1 阶段实现，P0 阶段跳过本章</strong><br>
+        P0 阶段官网为纯展示型，所有内容公开访问，无需登录。文件下载（文档/固件/软件）P0 阶段全部公开，不做权限控制。<br><br>
+        SSO 接入（爱尚管理后台账号体系）、产品线标签权限、个人中心均推后至 <strong>P1 阶段</strong>，届时再完成接口对接与权限体系部署。<br><br>
+        <strong>P0 阶段前台无任何登录入口，Header 不显示「登录」按钮。</strong>
+      </div>
+
+      <h3>8.1 设计原则</h3>
+      <p>官网采用 <strong>RBAC + 资源标签（Role-Based Access Control + Resource Tag）</strong> 混合模式：</p>
+      <ul>
+        <li><strong>角色</strong>决定基础访问层级（是否登录、是否为客户）</li>
+        <li><strong>资源标签</strong>决定具体内容的可见性（购买了哪条产品线）</li>
+        <li>两者取交集，精准控制每个客户能看到什么</li>
+      </ul>
+      <p style="font-size:13px; color:var(--muted)">这套模型参考了 Twilio、Salesforce 等主流 B2B 平台的权限设计，适合产品线多、客户群体差异大的场景。</p>
+
+      <h3>8.2 角色定义</h3>
+      <table>
+        <thead>
+          <tr><th>角色</th><th>定义</th><th>获取方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>访客</strong></td><td>未登录用户</td><td>直接访问官网</td></tr>
+          <tr><td><strong>客户</strong></td><td>已登录的认证用户</td><td>通过旭衡统一账号体系登录（如：爱尚管理后台账号），商务开通后激活</td></tr>
+          <tr><td><strong>管理员</strong></td><td>CMS 后台操作人员</td><td>内部账号，不通过官网登录</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px; color:var(--muted)">客户账号与旭衡统一账号体系完全打通（如：爱尚管理后台），官网不单独维护账号密码，SSO 登录。</p>
+
+      <h3>8.3 资源标签定义</h3>
+      <p>每个受控资源（文件、API 文档模块、页面区块）均可打上一个或多个标签，用户持有对应标签才能访问：</p>
+      <table>
+        <thead>
+          <tr><th>标签</th><th>含义</th><th>适用场景</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>[公开]</code></td><td>无需登录，任何人可见</td><td>产品介绍、解决方案、联系我们、开发者中心概览</td></tr>
+          <tr><td><code>[客户基础]</code></td><td>登录即可，所有客户均有</td><td>基础文档、软件下载、快速开始、通用云端 API</td></tr>
+          <tr><td><code>[HEMS]</code></td><td>购买/授权 HEMS 产品的客户</td><td>HEMS 技术文档、HEMS 云端 API 文档</td></tr>
+          <tr><td><code>[ESS]</code></td><td>购买/授权 ESS 产品的客户</td><td>ESS 技术文档、ESS 云端 API 文档</td></tr>
+          <tr><td><code>[EVCMS]</code></td><td>购买/授权 EVCMS 产品的客户</td><td>EVCMS 技术文档、充电站云端 API 文档</td></tr>
+          <tr><td><code>[VPP]</code></td><td>VPP 定制客户</td><td>VPP 技术文档、VPP 云端 API 文档（高敏感，严格管控）</td></tr>
+          <tr><td><code>[PQMS]</code></td><td>购买/授权 PQMS 产品的客户</td><td>PQMS 技术文档、PQMS 云端 API 文档</td></tr>
+          <tr><td><code>[Neuron II]</code></td><td>Neuron II 网关客户</td><td>Neuron II 固件下载、高级配置文档</td></tr>
+          <tr><td><code>[Neuron III]</code></td><td>Neuron III 网关客户</td><td>Neuron III 固件下载、高级配置文档</td></tr>
+          <tr><td><code>[Neuron-Dev]</code></td><td>需要对 Neuron 网关做二次开发的客户</td><td>Neuron II/III 本地 API 文档、上位机协议文档、Modbus 寄存器表</td></tr>
+        </tbody>
+      </table>
+      <p><strong>标签可叠加：</strong> 一个客户可以持有多个标签，例如同时购买了 HEMS 和 Neuron II 网关并需要本地 API 的集成商，同时持有 <code>[客户基础]</code> <code>[HEMS]</code> <code>[Neuron II]</code> <code>[Neuron-Dev]</code>。</p>
+      <p><strong><code>[Neuron-Dev]</code> 与 <code>[Neuron II]</code> / <code>[Neuron III]</code> 的区别：</strong></p>
+      <ul>
+        <li><code>[Neuron II]</code> / <code>[Neuron III]</code>：购买了对应硬件的普通客户，可以下载固件和基础配置文档</li>
+        <li><code>[Neuron-Dev]</code>：在此基础上，需要调用网关本地 API 做二次开发的集成商/工程师，额外开放本地 API 文档和协议细节</li>
+      </ul>
+
+      <h3>8.4 内容访问矩阵</h3>
+      <table>
+        <thead>
+          <tr><th>官网内容</th><th>访客</th><th>客户（基础）</th><th>客户（+产品标签）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>产品介绍页</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>解决方案页</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>兼容生态页</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>开发者中心概览</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>快速开始 / 通用云端 API 文档</td><td>❌ → 引导登录</td><td>✅</td><td>✅</td></tr>
+          <tr><td>云端产品线 API 文档（HEMS/ESS/EVCMS/VPP/PQMS）</td><td>❌ → 引导登录</td><td>❌ → 引导开通</td><td>✅（对应标签）</td></tr>
+          <tr><td>网关本地 API 文档（Neuron II/III）</td><td>❌ → 引导登录</td><td>❌ → 引导开通</td><td>✅（需 <code>[Neuron-Dev]</code>）</td></tr>
+          <tr><td>基础文档下载</td><td>❌ → 引导登录</td><td>✅</td><td>✅</td></tr>
+          <tr><td>高级技术文档下载</td><td>❌ → 引导登录</td><td>❌ → 引导开通</td><td>✅（对应标签）</td></tr>
+          <tr><td>软件下载（上位机/配置工具）</td><td>❌ → 引导登录</td><td>✅</td><td>✅</td></tr>
+          <tr><td>固件下载</td><td>❌ → 引导登录</td><td>❌ → 引导开通</td><td>✅（<code>[Neuron II]</code> 或 <code>[Neuron III]</code>）</td></tr>
+          <tr><td>FAQ</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        </tbody>
+      </table>
+
+      <h3>8.5 用户体验流程</h3>
+    <pre>未登录用户访问受限资源：
+点击受限内容
+  → 弹出提示：「此内容仅限客户访问，请登录」
+  → [前往登录] 按钮
+  → 登录后自动返回原页面，权限满足则直接展示
+
+已登录但权限不足：
+点击受限内容（如无 [VPP] 标签的客户点击 VPP API 文档）
+  → 展示提示：「此内容需要开通 VPP 服务权限」
+  → [联系商务] 按钮 → 跳转联系我们页面，意向分类预填「API 接口接入需求」
+
+登录方式：
+官网登录入口 → SSO 跳转至旭衡统一账号系统完成认证（如：爱尚管理后台）→ 携带 token 返回官网
+token 由统一账号系统签发，官网服务端校验后获取用户标签信息</pre>
+
+      <h3>8.6 CMS 权限管理操作</h3>
+    <pre>给客户分配标签（管理员操作）：
+CMS 后台 → 客户账号管理 → 搜索客户
+  → 编辑账号 → 勾选产品线标签（复选框）→ 保存
+  → 实时生效，客户下次请求时即获得新权限
+
+给资源打标签（管理员操作）：
+上传/编辑文件或 API 文档模块时
+  → 权限设置字段：选择所需标签（单选或多选）
+  → 保存后官网自动按新权限规则展示</pre>
+
+      <h3>8.7 技术实现要点</h3>
+      <table>
+        <thead>
+          <tr><th>要点</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>账号打通</strong></td><td>官网后台（CMS）与各云平台后台（HEMS / ESS / EVCMS / VPP / PQMS）共用旭衡统一账号体系，通过 SSO（OAuth2 / JWT）集成。用户在任意一个后台登录后，可无缝跳转至其他已授权后台，无需重复登录。官网前台（客户侧）同样复用这套账号体系，不单独维护用户表。</td></tr>
+          <tr><td><strong>标签存储</strong></td><td>用户产品线标签（HEMS / ESS / EVCMS 等）由旭衡统一账号系统维护，各平台（包括官网）通过 API 或 JWT Claims 读取，标签变更实时同步至所有接入平台。</td></tr>
+          <tr><td><strong>服务端校验</strong></td><td>所有受限资源请求在服务端校验 token + 标签，前端仅做展示层处理，不以前端隐藏代替服务端鉴权。</td></tr>
+          <tr><td><strong>临时下载链接</strong></td><td>文件下载使用签名临时链接（有效期 5 分钟），防止链接外泄或二次分发，具体方案见技术选型文档。</td></tr>
+          <tr><td><strong>权限缓存</strong></td><td>标签信息可缓存（TTL ≤ 5 分钟），保证权限变更后快速生效，不出现长时间权限延迟。</td></tr>
+          <tr><td><strong>审计日志</strong></td><td>所有受限资源访问、权限变更操作均记录日志，保留 90 天，用于安全审计与异常排查。</td></tr>
+          <tr><td><strong>网关本地 API 鉴权独立</strong></td><td>网关本地 API 使用设备级 Token（在 Neuron 配置工具中生成），与云端账号体系独立。官网仅管理"是否有权查看本地 API 文档"，不介入设备本身的认证逻辑。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section" id="s9">
+      <div class="section-label">第九部分</div>
+      <h2>九、前台内容 CMS 覆盖审计</h2>
+      <p>本章逐页审查官网前台所有内容区块，确认每个区块是否有对应的 CMS 后台支撑。凡标注 ❌ 的内容，开发时必须补充对应的 CMS 管理能力，不允许硬编码上线。</p>
+
+      <div class="stat-row" style="margin: 20px 0;">
+        <div class="stat"><div class="num">60+</div><div class="lbl">识别内容区块</div></div>
+        <div class="stat"><div class="num">97%</div><div class="lbl">CMS 覆盖率</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">合理不接 CMS</div></div>
+        <div class="stat"><div class="num" style="color:var(--danger)">5+</div><div class="lbl">上线前待确认项</div></div>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.1 首页</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>Hero 主标语 / 副标语</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>官网上线必须可编辑，支持多语言</td></tr>
+            <tr><td>三路分流 CTA 文字</td><td><span class="badge badge-p0">P0</span></td><td>多语言字典</td><td>按钮文案可在后台调整</td></tr>
+            <tr><td>Hero 背景图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 页面内容管理</td><td>从媒体库选择，不硬编码路径</td></tr>
+            <tr><td>核心差异化区块（接入方式）</td><td><span class="badge badge-p1">P1</span></td><td>页面内容管理</td><td>文案需多语言版本</td></tr>
+            <tr><td>场景解决方案卡片列表</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>自动从解决方案内容拉取，无需单独维护</td></tr>
+            <tr><td>产品概览卡片</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>产品名称/描述从产品内容拉取</td></tr>
+            <tr><td>兼容品牌 Logo 墙</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>仅显示「已支持」且设为首页展示的品牌</td></tr>
+            <tr><td>信任背书数字（品牌数/国家数/项目数）</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 核心数字</td><td>⚠️ 数字待填入真实数据，P0 阶段硬编码</td></tr>
+            <tr><td>底部 CTA 区块文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.2 解决方案各场景页（5个）</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>场景 Banner 图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 解决方案内容管理</td><td>从媒体库选择</td></tr>
+            <tr><td>场景背景 / 痛点描述</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>富文本，支持多语言</td></tr>
+            <tr><td>方案描述文案</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>支持多语言</td></tr>
+            <tr><td>接入方式说明</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>支持多语言</td></tr>
+            <tr><td>技术亮点列表</td><td><span class="badge badge-p0">P0</span></td><td>解决方案内容管理</td><td>结构化列表，可拖拽排序</td></tr>
+            <tr><td>本方案使用的产品跳转卡片</td><td><span class="badge badge-p0">P0</span></td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
+            <tr><td>应用案例区块</td><td><span class="badge badge-p1">P1</span></td><td>案例管理 → 关联解决方案</td><td>从案例库关联，未关联时自动隐藏</td></tr>
+            <tr><td>CTA 按钮文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>页面 SEO（title/description）</td><td><span class="badge badge-p2">P2</span></td><td>SEO 配置</td><td>P0 阶段硬编码，P2 迁入 CMS</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.3 产品中心各产品页（8个）</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>产品主图 / Banner 图</td><td><span class="badge badge-p0">P0</span></td><td>媒体库 + 产品内容管理</td><td>从媒体库选择</td></tr>
+            <tr><td>产品定位一句话</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>支持多语言</td></tr>
+            <tr><td>核心参数表（硬件）</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>结构化字段，非富文本</td></tr>
+            <tr><td>核心功能列表（云平台）</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>图文卡片，可拖拽排序</td></tr>
+            <tr><td>接入方式说明</td><td><span class="badge badge-p0">P0</span></td><td>产品内容管理</td><td>支持多语言</td></tr>
+            <tr><td>应用场景跳转卡片（→解决方案）</td><td><span class="badge badge-p0">P0</span></td><td>产品-解决方案关联（§5.11）</td><td>双向关联，自动展示</td></tr>
+            <tr><td>可下载资源列表</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>按产品型号筛选展示，权限控制</td></tr>
+            <tr><td>页面 SEO</td><td><span class="badge badge-p2">P2</span></td><td>SEO 配置</td><td>P0 阶段硬编码</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.4 兼容生态页</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>品牌卡片（Logo/名称/标签/状态）</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>全量数据来自 CMS</td></tr>
+            <tr><td>筛选栏选项</td><td><span class="badge badge-p0">P0</span></td><td>兼容品牌管理</td><td>选项由品牌数据动态生成</td></tr>
+            <tr><td>底部 CTA 文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.5 开发者中心 <span style="font-size:12px;font-weight:400;color:var(--warning);margin-left:8px">⏸ 本期仅占位页</span></h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>「正在开发中」占位页文案 + 背景图</td><td><span class="badge badge-p0">P0</span></td><td>多语言字典 + 媒体库</td><td>本期必须实现，支持多语言</td></tr>
+            <tr><td>占位页 CTA（提交接入意向）</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（API 申请类）</td><td>跳转联系我们，意向预填</td></tr>
+            <tr><td>概览页 / 快速开始 / API 文档</td><td><span class="badge badge-p1">P1</span> 后续</td><td>页面内容管理 / OpenAPI Spec</td><td>待开发者中心启动时实现</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.6 帮助中心</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>FAQ 问答内容</td><td><span class="badge badge-p0">P0</span></td><td>FAQ 管理</td><td>全量内容来自 CMS，支持多语言</td></tr>
+            <tr><td>文档资料列表</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>按产品型号/类型筛选，权限控制</td></tr>
+            <tr><td>软件下载（配置工具/App）</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理</td><td>下载链接从 CMS 动态拉取</td></tr>
+            <tr><td>固件列表 + 版本兼容矩阵</td><td><span class="badge badge-p0">P0</span></td><td>文件资产管理（固件类型）</td><td>依赖关系字段填写后自动展示矩阵</td></tr>
+            <tr><td>在线报修表单</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（报修工单类）</td><td>提交进入 CMS 工单收件箱</td></tr>
+            <tr><td>联系电话/邮箱</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>⚠️ P0 阶段直接填写真实数据，不得使用占位号</td></tr>
+            <tr><td>AI 问答入口</td><td><span class="badge badge-p2">P2</span></td><td>FAQ AI 问答</td><td>以 FAQ 库为知识底座，内容积累后接入</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.7 关于我们</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>最新动态文章列表</td><td><span class="badge badge-p0">P0</span></td><td>新闻动态管理</td><td>全量内容来自 CMS</td></tr>
+            <tr><td>公司简介文字</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理</td><td>P0 阶段硬编码，需准确</td></tr>
+            <tr><td>核心数字展示</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 核心数字</td><td>⚠️ 需填入真实数据，P0 阶段暂硬编码</td></tr>
+            <tr><td>发展历程时间轴</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理 → 发展历程</td><td>–</td></tr>
+            <tr><td>招聘岗位列表</td><td><span class="badge badge-p2">P2</span></td><td>招聘管理</td><td>–</td></tr>
+            <tr><td>联系地址</td><td><span class="badge badge-p2">P2</span></td><td>公司介绍管理</td><td>P0 阶段硬编码</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.8 联系我们</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>意向分类表单提交</td><td><span class="badge badge-p0">P0</span></td><td>线索管理（商务咨询类）</td><td>按意向分类推送企业微信对应群</td></tr>
+            <tr><td>联系人信息展示</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>⚠️ P0 阶段填写真实联系人，不得占位</td></tr>
+            <tr><td>意向分类选项文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>选项文案支持多语言</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box" style="border-left:4px solid var(--warning);border-radius:0 8px 8px 0;">
+        <h3 style="margin-top:0">9.9 个人中心 <span style="font-size:12px;font-weight:400;color:var(--warning);margin-left:8px">⏸ P1 阶段实现，依赖 SSO 接入</span></h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px">P0 阶段无登录功能，个人中心整体推后至 P1。SSO 接入完成后按下表实现。</p>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>已开通权限标签展示</td><td><span class="badge badge-p1">P1</span></td><td>客户账号管理（权限标签）</td><td>依赖 SSO，P1 实现</td></tr>
+            <tr><td>下载记录</td><td><span class="badge badge-p1">P1</span></td><td>文件资产管理（下载日志）</td><td>依赖登录态，P1 实现</td></tr>
+            <tr><td>API Key 管理</td><td><span class="badge badge-p1">P1</span> 后续</td><td>API 开发者管理</td><td>开发者中心启动时实现</td></tr>
+            <tr><td>账号信息展示</td><td><span class="badge badge-p1">P1</span></td><td>—</td><td>从统一账号系统同步，只读</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0">9.10 全局 / 通用组件</h3>
+        <table>
+          <thead><tr><th>内容区块</th><th style="width:100px">优先级</th><th>对应后台模块</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>隐私政策页内容</td><td><span class="badge badge-p0">P0</span></td><td>页面内容管理</td><td>法务确认后由 CMS 管理多语言版本</td></tr>
+            <tr><td>全局搜索索引</td><td><span class="badge badge-p0">P0</span></td><td>各内容模块（自动同步）</td><td>CMS 内容发布后自动更新搜索索引</td></tr>
+            <tr><td>Header 导航文字</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>Footer 链接文字</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>语言切换器选项</td><td><span class="badge badge-p1">P1</span></td><td>语言管理（动态生成）</td><td>由「已发布」语言自动生成</td></tr>
+            <tr><td>404/403/500 错误页文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>–</td></tr>
+            <tr><td>Cookie 授权弹窗文案</td><td><span class="badge badge-p1">P1</span></td><td>多语言字典</td><td>GDPR/LGPD 合规要求</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight">
+        <strong>审计结论：</strong><br>
+        前台共识别 <strong>65 个内容区块</strong>，其中：<br>
+        <span class="badge badge-p0" style="margin-right:4px">P0</span> 必须上线即可编辑：32 个 &nbsp;|&nbsp;
+        <span class="badge badge-p1" style="margin-right:4px">P1</span> 上线后迭代：18 个 &nbsp;|&nbsp;
+        <span class="badge badge-p2" style="margin-right:4px">P2</span> 后期迁入：12 个 &nbsp;|&nbsp;
+        ❌ 合理不接 CMS：3 个（账号信息 / API 文档内容 / 代码示例）<br><br>
+        <strong>⚠️ P0 阶段上线前必须人工确认的硬编码项：</strong>真实联系电话、联系人信息、首页信任背书数字、公司简介文字。这些内容 P0 允许硬编码，但必须填写真实数据，不允许带 placeholder 上线。
+      </div>
+    </div>
+
+    <div class="section" id="s10">
+      <div class="section-label">附录</div>
+      <h2>十、上线前必须完成清单（Pre-launch Checklist）</h2>
+      <p>以下事项为技术开发完成后、正式上线前必须逐项核对的非技术确认项。带 ⚠️ 的项目需要业务或法务人员确认，不可由开发人员代为填写。</p>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--danger)">🔴 内容确认（必须完成，不得带占位上线）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>首页信任背书数字：兼容品牌数、覆盖国家数、已交付项目数——填入真实数据</td><td>业务负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>2</td><td>关于我们页核心数字（与首页同源）——与首页数字一致</td><td>业务负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>3</td><td>联系我们页联系人信息（姓名/职位/邮箱/电话）——Rory / Julie / Alan 真实信息</td><td>各联系人本人确认</td><td>⬜ 待确认</td></tr>
+            <tr><td>4</td><td>帮助中心技术支持电话——替换「400-888-8888」占位内容</td><td>运维负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>5</td><td>公司简介文字（中英文）——准确描述公司，无夸大无错误</td><td>市场负责人</td><td>⬜ 待确认</td></tr>
+            <tr><td>6</td><td>隐私政策 / Cookie 政策（中英文）——法务审核通过</td><td>法务</td><td>⬜ 待确认</td></tr>
+            <tr><td>7</td><td>FAQ 内容——替换 3 条占位示例，至少准备 10 条真实常见问题</td><td>技术支持</td><td>⬜ 待确认</td></tr>
+            <tr><td>8</td><td>至少 1 条新闻动态发布（不空白）</td><td>市场负责人</td><td>⬜ 待确认</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--warning)">🟡 系统配置（技术人员确认）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>9</td><td>企业微信 Webhook 配置——商务咨询 / 报修 / API 申请三类分别配置正确群</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>10</td><td>邮件通知配置——各意向分类的内部收件邮箱填写正确</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>11</td><td>用户侧回执邮件——发件箱配置、邮件模板（中英文）确认可正常发送</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>12</td><td>对象存储 + CDN 域名配置——文件上传 / 下载 / 图片加速链接均可访问</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>14</td><td>HTTPS 证书——<code>alwayscontrol.com.cn</code> 及所有子域名证书有效</td><td>运维</td><td>⬜ 待配置</td></tr>
+            <tr><td>15</td><td>Staging 环境 <code>noindex</code> 隔离——确认 Staging 不被 Google 收录</td><td>后端开发</td><td>⬜ 待验证</td></tr>
+            <tr><td>16</td><td>多语言回退链正常——未翻译内容正确回退至 en-US / zh-CN，无空白页</td><td>前端开发</td><td>⬜ 待验证</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="gray-box">
+        <h3 style="margin-top:0; color:var(--success)">🟢 上线验收（所有人）</h3>
+        <table>
+          <thead><tr><th style="width:30px">#</th><th>确认项</th><th>负责人</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>17</td><td>所有页面在 Staging 完整浏览一遍——无乱码、无404、无占位文字残留</td><td>项目负责人</td><td>⬜ 待验收</td></tr>
+            <tr><td>18</td><td>商务咨询表单提交测试——企微通知 + 内部邮件 + 用户回执邮件三路均正常收到</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>19</td><td>报修工单提交测试——工单进入 CMS 收件箱，技术支持收到通知</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>20</td><td>文件下载测试——权限控制正确（未登录无法下载受限文件），下载链接有效</td><td>运营</td><td>⬜ 待测试</td></tr>
+            <tr><td>21</td><td>移动端页面验收——首页 / 联系我们 / 产品页在 iPhone 和 Android 各测试一遍</td><td>前端开发</td><td>⬜ 待测试</td></tr>
+            <tr><td>22</td><td>语言切换测试——zh-CN / en-US 切换正常，URL 结构正确，SEO 独立索引</td><td>前端开发</td><td>⬜ 待测试</td></tr>
+            <tr><td>23</td><td>Google Search Console 提交 Sitemap——生产域名 Sitemap 提交完成</td><td>运维</td><td>⬜ 待执行</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight">
+        <strong>上线原则：</strong> 以上 23 项全部完成并在 Staging 验收通过后，方可执行生产环境发布。第 1–8 项内容确认项由业务侧负责，<strong>开发完成不等于可以上线</strong>。
+      </div>
     </div>
 
   </main>
 </div>
+
+<div class="doc-footer">
+  Always Control · Website &amp; CMS 架构设计文档 v1.0 &nbsp;·&nbsp; 2026-03-12（v3.7：表单通知配置化、Staging环境、§7.9补入、上线前Checklist）
+</div>
+
+<script>
+  // 滚动监听脚本 (ScrollSpy)
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.sidebar a');
+
+    // 监听滚动的交叉观察器
+    const observerOptions = {
+      root: null,
+      rootMargin: '-80px 0px -70% 0px', // 顶部偏移，适应固定导航/空隙
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 移除所有激活状态
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          // 找到当前对应 id 的链接并添加 active
+          const id = entry.target.getAttribute('id');
+          const activeLink = document.querySelector(`.sidebar a[href="#${id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    // 点击导航平滑滚动
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+          
+          // 更新 URL 而不导致跳动
+          window.history.pushState(null, null, `#${targetId}`);
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
