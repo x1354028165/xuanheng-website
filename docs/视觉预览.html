@@ -17,12 +17,15 @@
       --text:      #0F172A;
       --text-sub:  #64748B;
       --border:    #E2E8F0;
-      --radius:    8px;
+      --radius-sm: 8px;
+      --radius:    12px;
       --max-w:     1200px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.06);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,.08);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -33,7 +36,6 @@
     }
 
     h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
-
     .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
 
     /* ========== 1. TOP NAV ========== */
@@ -42,12 +44,17 @@
       top: 0;
       z-index: 1000;
       height: 72px;
-      background: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.92);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid transparent;
       display: flex;
       align-items: center;
+      transition: box-shadow .3s ease-out, border-color .3s ease-out;
+    }
+    .nav.scrolled {
+      box-shadow: 0 1px 12px rgba(0,0,0,.08);
+      border-bottom-color: var(--border);
     }
     .nav .container {
       display: flex;
@@ -76,7 +83,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
     }
     .nav-links a {
@@ -90,7 +97,7 @@
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
     .nav-lang {
       font-size: 13px;
@@ -99,7 +106,7 @@
       cursor: pointer;
       border: 1px solid var(--border);
       padding: 6px 12px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-sm);
       background: transparent;
       transition: border-color .2s ease-out;
     }
@@ -109,16 +116,15 @@
       color: var(--white);
       border: none;
       padding: 10px 24px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-sm);
       font-size: 14px;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
-      transition: background .2s ease-out;
+      transition: background .2s ease-out, transform .2s ease-out;
     }
-    .btn-cta:hover { background: var(--brand-dark); }
+    .btn-cta:hover { background: var(--brand-dark); transform: translateY(-1px); }
 
-    /* Mobile menu toggle */
     .nav-toggle {
       display: none;
       background: none;
@@ -135,7 +141,7 @@
       transition: .2s;
     }
 
-    /* ========== 2. HERO ========== */
+    /* ========== 2. HERO (100vh, dark) ========== */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -147,7 +153,6 @@
       background: var(--dark);
       padding: 120px 24px 80px;
     }
-    /* CSS solar panel / energy grid texture */
     .hero::before {
       content: '';
       position: absolute;
@@ -155,22 +160,21 @@
       background-image:
         linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
       background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
       pointer-events: none;
     }
-    /* Brand cyan glow at top */
     .hero::after {
       content: '';
       position: absolute;
-      top: -200px;
+      top: -220px;
       left: 50%;
       transform: translateX(-50%);
-      width: 900px;
-      height: 500px;
+      width: 1000px;
+      height: 550px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56,196,232,.2) 0%, rgba(56,196,232,.05) 40%, transparent 65%);
+      background: radial-gradient(circle, rgba(56,196,232,.18) 0%, rgba(56,196,232,.06) 35%, transparent 60%);
       pointer-events: none;
     }
     .hero-content {
@@ -180,47 +184,48 @@
       max-width: 800px;
     }
     .hero h1 {
-      font-size: clamp(36px, 5vw, 56px);
+      font-size: clamp(36px, 5vw, 60px);
       font-weight: 800;
       color: var(--white);
-      line-height: 1.15;
+      line-height: 1.12;
       letter-spacing: -1.5px;
       margin-bottom: 24px;
     }
     .hero-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,.5);
+      font-size: 16px;
+      color: rgba(255,255,255,.45);
       line-height: 1.7;
       max-width: 600px;
-      margin: 0 auto 40px;
+      margin: 0 auto 48px;
     }
     .hero-buttons {
       display: flex;
       justify-content: center;
       gap: 16px;
-      margin-bottom: 80px;
+      margin-bottom: 96px;
       position: relative;
       z-index: 1;
+      flex-wrap: wrap;
     }
     .btn-hero-primary {
       background: var(--white);
       color: var(--dark);
       border: none;
       padding: 14px 36px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-sm);
       font-size: 15px;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
-      transition: opacity .2s ease-out;
+      transition: opacity .2s ease-out, transform .2s ease-out;
     }
-    .btn-hero-primary:hover { opacity: .9; }
+    .btn-hero-primary:hover { opacity: .9; transform: translateY(-1px); }
     .btn-hero-outline {
       background: transparent;
       color: var(--white);
       border: 1px solid rgba(255,255,255,.3);
       padding: 14px 36px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-sm);
       font-size: 15px;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
@@ -241,7 +246,7 @@
     .hero-stat { text-align: center; }
     .hero-stat-num {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 800;
       color: var(--white);
       line-height: 1;
@@ -249,15 +254,69 @@
     .hero-stat-num span { color: var(--brand); }
     .hero-stat-label {
       font-size: 14px;
-      color: rgba(255,255,255,.45);
+      color: rgba(255,255,255,.4);
       margin-top: 8px;
       font-weight: 500;
     }
+    .hero-stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,.12);
+      align-self: stretch;
+    }
 
-    /* ========== 3. SOLUTIONS ========== */
-    .solutions {
+    /* ========== 3. TRUST DATA (white) ========== */
+    .trust {
       background: var(--white);
-      padding: 120px 24px;
+      padding: 96px 24px;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .trust-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s ease-out, transform .2s ease-out;
+    }
+    .trust-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .trust-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--brand);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .trust-num span {
+      font-size: 30px;
+      color: var(--brand);
+    }
+    .trust-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 16px;
+    }
+    .trust-sub {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* ========== 4. CORE DIFFERENTIATION (gray) ========== */
+    .diff {
+      background: var(--gray-bg);
+      padding: 96px 24px;
     }
     .section-header {
       text-align: center;
@@ -273,9 +332,62 @@
     .section-header p {
       font-size: 16px;
       color: var(--text-sub);
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
       line-height: 1.6;
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 880px;
+      margin: 0 auto 40px;
+    }
+    .diff-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s ease-out, transform .2s ease-out;
+    }
+    .diff-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .diff-icon {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .diff-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .diff-card p {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
+    .diff-note {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-sub);
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ========== 5. SOLUTIONS (white) ========== */
+    .solutions {
+      background: var(--white);
+      padding: 96px 24px;
     }
     .sol-grid {
       display: grid;
@@ -287,20 +399,22 @@
     .sol-card {
       background: var(--white);
       border: 1px solid var(--border);
+      border-left: 3px solid transparent;
       border-radius: var(--radius);
       padding: 32px 24px;
+      box-shadow: var(--shadow-sm);
       transition: transform .2s ease-out, border-color .2s ease-out, box-shadow .2s ease-out;
       cursor: pointer;
     }
     .sol-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--brand);
-      box-shadow: 0 8px 30px rgba(56,196,232,.1);
+      transform: translateY(-2px);
+      border-left-color: var(--brand);
+      box-shadow: var(--shadow-lg);
     }
     .sol-icon {
       width: 48px;
       height: 48px;
-      border-radius: var(--radius);
+      border-radius: var(--radius-sm);
       background: var(--gray-bg);
       display: flex;
       align-items: center;
@@ -332,68 +446,38 @@
       transform: translateX(4px);
     }
 
-    /* ========== 4. CORE DATA ========== */
-    .core-data {
-      background: var(--gray-bg);
-      padding: 100px 24px;
-    }
-    .data-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-    .data-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      text-align: center;
-    }
-    .data-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--brand);
-      line-height: 1;
-      letter-spacing: -2px;
-    }
-    .data-num span {
-      font-size: 28px;
-      color: var(--brand);
-    }
-    .data-label {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 12px;
-    }
-    .data-sub {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin-top: 4px;
-    }
-
-    /* ========== 5. PRODUCTS (DARK) ========== */
+    /* ========== 6. PRODUCTS (dark) ========== */
     .products {
       background: var(--dark);
-      padding: 120px 24px;
+      padding: 96px 24px;
     }
     .products .section-header h2 { color: var(--white); }
     .products .section-header p { color: rgba(255,255,255,.5); }
-    .prod-grid {
+    .prod-cols {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
       max-width: var(--max-w);
       margin: 0 auto;
+    }
+    .prod-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 24px;
+    }
+    .prod-hw-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
     .prod-card {
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.08);
       border-radius: var(--radius);
-      padding: 40px 32px;
+      padding: 32px 28px;
       transition: border-color .2s ease-out, background .2s ease-out;
       cursor: pointer;
     }
@@ -401,74 +485,111 @@
       border-color: var(--brand);
       background: rgba(56,196,232,.06);
     }
-    .prod-tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--brand);
-      margin-bottom: 16px;
-    }
     .prod-card h3 {
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 18px;
+      font-weight: 700;
       color: var(--white);
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      margin-bottom: 8px;
     }
     .prod-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,.45);
-      line-height: 1.65;
-      margin-bottom: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.6;
     }
-    .prod-specs {
+    .prod-sw-list {
+      list-style: none;
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      flex-direction: column;
+      gap: 12px;
     }
-    .prod-spec {
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(255,255,255,.35);
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 4px 10px;
+    .prod-sw-item {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color .2s ease-out, background .2s ease-out;
+      cursor: pointer;
+    }
+    .prod-sw-item:hover {
+      border-color: var(--brand);
+      background: rgba(56,196,232,.06);
+    }
+    .prod-sw-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .prod-sw-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,.4);
+    }
+    .prod-sw-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--brand);
+      background: rgba(56,196,232,.1);
+      padding: 4px 8px;
       border-radius: 4px;
-      font-family: 'Inter', monospace;
+      white-space: nowrap;
     }
 
-    /* ========== 6. BRAND WALL ========== */
+    /* ========== 7. BRAND WALL (white, 4x3) ========== */
     .brands {
       background: var(--white);
-      padding: 100px 24px;
+      padding: 96px 24px;
     }
     .brands-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 16px;
-      max-width: 900px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 800px;
       margin: 0 auto;
     }
     .brand-box {
-      aspect-ratio: 2 / 1;
-      background: var(--gray-bg);
+      aspect-ratio: 2.2 / 1;
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      margin: -0.5px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      gap: 8px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--text-sub);
-      transition: border-color .2s ease-out;
+      filter: grayscale(1);
+      opacity: .55;
+      transition: filter .3s ease-out, opacity .3s ease-out;
+      cursor: pointer;
     }
-    .brand-box:hover { border-color: var(--brand); }
+    .brand-box:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+    .brand-box .brand-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .brand-box .brand-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-    /* ========== 7. NEWS ========== */
+    /* ========== 8. NEWS (gray) ========== */
     .news {
-      background: var(--white);
-      padding: 100px 24px;
-      border-top: 1px solid var(--border);
+      background: var(--gray-bg);
+      padding: 96px 24px;
     }
     .news-grid {
       display: grid;
@@ -478,20 +599,22 @@
       margin: 0 auto;
     }
     .news-card {
+      background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
       transition: box-shadow .2s ease-out, transform .2s ease-out;
       cursor: pointer;
     }
     .news-card:hover {
-      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      box-shadow: var(--shadow-lg);
       transform: translateY(-2px);
     }
     .news-img {
       width: 100%;
       height: 200px;
-      background: var(--gray-bg);
+      background: linear-gradient(135deg, #e8f4f8 0%, #f0f4f8 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -499,10 +622,23 @@
       font-size: 13px;
     }
     .news-body { padding: 24px; }
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
     .news-date {
       font-size: 12px;
       color: var(--text-sub);
-      margin-bottom: 8px;
+    }
+    .news-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand);
+      background: rgba(56,196,232,.08);
+      padding: 2px 8px;
+      border-radius: 4px;
     }
     .news-card h3 {
       font-size: 17px;
@@ -526,9 +662,10 @@
     }
     .news-link:hover { color: var(--brand-dark); }
 
-    /* ========== 8. FOOTER ========== */
+    /* ========== 9. FOOTER (dark) ========== */
     .footer {
       background: var(--dark);
+      border-top: 1px solid var(--brand);
       padding: 80px 24px 40px;
     }
     .footer-grid {
@@ -562,9 +699,7 @@
       letter-spacing: 1px;
       margin-bottom: 20px;
     }
-    .footer-col ul {
-      list-style: none;
-    }
+    .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 12px; }
     .footer-col a {
       font-size: 14px;
@@ -575,8 +710,7 @@
     .footer-col a:hover { color: var(--white); }
     .footer-divider {
       border: none;
-      border-top: 1px solid var(--brand);
-      opacity: .3;
+      border-top: 1px solid rgba(255,255,255,.08);
       max-width: var(--max-w);
       margin: 48px auto 24px;
     }
@@ -591,12 +725,20 @@
       font-size: 13px;
       color: rgba(255,255,255,.25);
     }
+    .footer-bottom .nav-lang {
+      color: rgba(255,255,255,.4);
+      border-color: rgba(255,255,255,.15);
+    }
+    .footer-bottom .nav-lang:hover {
+      border-color: var(--brand);
+      color: var(--white);
+    }
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
       .sol-grid { grid-template-columns: repeat(3, 1fr); }
-      .data-grid { grid-template-columns: repeat(2, 1fr); }
-      .prod-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .prod-cols { grid-template-columns: 1fr; }
       .brands-grid { grid-template-columns: repeat(4, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     }
@@ -611,23 +753,23 @@
       .hero-desc { font-size: 15px; }
       .hero-buttons { flex-direction: column; align-items: center; }
       .hero-stats { flex-direction: column; gap: 32px; }
+      .hero-stat-divider { display: none; }
 
       .sol-grid { grid-template-columns: 1fr 1fr; }
-      .data-grid { grid-template-columns: 1fr 1fr; }
-      .prod-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .diff-grid { grid-template-columns: 1fr; }
       .news-grid { grid-template-columns: 1fr; }
       .brands-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
       .section-header { margin-bottom: 40px; }
-      .solutions, .products { padding: 80px 24px; }
-      .core-data, .brands, .news { padding: 64px 24px; }
+      .trust, .diff, .solutions, .products, .brands, .news { padding: 64px 24px; }
     }
 
     @media (max-width: 480px) {
       .sol-grid { grid-template-columns: 1fr; }
-      .data-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
       .brands-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
@@ -635,21 +777,22 @@
 <body>
 
   <!-- ===== 1. TOP NAV ===== -->
-  <nav class="nav">
+  <nav class="nav" id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo">
         <span class="nav-logo-zh">旭衡电子</span>
         <span class="nav-logo-en">AlwaysControl</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#">解决方案</a></li>
         <li><a href="#">产品中心</a></li>
+        <li><a href="#">解决方案</a></li>
         <li><a href="#">兼容生态</a></li>
+        <li><a href="#">开发者中心</a></li>
         <li><a href="#">帮助中心</a></li>
         <li><a href="#">关于我们</a></li>
       </ul>
       <div class="nav-right">
-        <button class="nav-lang">EN / 中</button>
+        <button class="nav-lang">EN / 中文</button>
         <button class="btn-cta">联系我们</button>
         <button class="nav-toggle" aria-label="菜单">
           <span></span><span></span><span></span>
@@ -658,13 +801,14 @@
     </div>
   </nav>
 
-  <!-- ===== 2. HERO ===== -->
+  <!-- ===== 2. HERO (100vh, dark) ===== -->
   <section class="hero">
     <div class="hero-content">
       <h1>跨品牌能源管理<br>解决方案的优质选择</h1>
       <p class="hero-desc">旭衡电子（深圳）有限公司 — EMS + 边缘计算智能网关 + 新能源智慧管理云平台，覆盖全场景能源资产管理</p>
       <div class="hero-buttons">
         <button class="btn-hero-primary">查看解决方案</button>
+        <button class="btn-hero-outline">开发者中心</button>
         <button class="btn-hero-outline">联系我们</button>
       </div>
     </div>
@@ -673,10 +817,12 @@
         <div class="hero-stat-num">XX<span>+</span></div>
         <div class="hero-stat-label">兼容品牌</div>
       </div>
+      <div class="hero-stat-divider"></div>
       <div class="hero-stat">
         <div class="hero-stat-num">XX<span>+</span></div>
         <div class="hero-stat-label">覆盖国家</div>
       </div>
+      <div class="hero-stat-divider"></div>
       <div class="hero-stat">
         <div class="hero-stat-num">XX<span>+</span></div>
         <div class="hero-stat-label">已交付项目</div>
@@ -684,155 +830,193 @@
     </div>
   </section>
 
-  <!-- ===== 3. SOLUTIONS ===== -->
+  <!-- ===== 3. TRUST DATA (white) ===== -->
+  <section class="trust">
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-num">XX<span>+</span></div>
+        <div class="trust-label">兼容品牌</div>
+        <div class="trust-sub">逆变器 / 电池 / 充电桩</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-num">XX<span>+</span></div>
+        <div class="trust-label">覆盖国家</div>
+        <div class="trust-sub">亚太 / 欧洲 / 美洲</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-num">XX<span>+</span></div>
+        <div class="trust-label">已交付项目</div>
+        <div class="trust-sub">工商业 / 户用 / 微电网</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-num">99.9<span>%</span></div>
+        <div class="trust-label">平台可用性</div>
+        <div class="trust-sub">SLA 保障</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. CORE DIFFERENTIATION (gray) ===== -->
+  <section class="diff">
+    <div class="section-header">
+      <h2>接入方式，由你决定</h2>
+      <p>两种接入路径，灵活适配不同项目需求</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="diff-icon">&#9729;</span>
+        <h3>云端直连（无需网关）</h3>
+        <p>通过逆变器/电池厂商云端API直接对接，零硬件部署，适合轻量化项目与快速接入场景。降低前期成本，缩短交付周期。</p>
+      </div>
+      <div class="diff-card">
+        <span class="diff-icon">&#128279;</span>
+        <h3>网关局域网接入</h3>
+        <p>通过Neuron系列边缘网关在本地局域网直连设备，实时采集与本地策略执行。适合对延迟敏感、需要边缘计算的复杂场景。</p>
+      </div>
+    </div>
+    <div class="diff-note">两种方式均支持多品牌设备接入，可根据项目需求灵活选择或混合部署</div>
+  </section>
+
+  <!-- ===== 5. SOLUTIONS (white) ===== -->
   <section class="solutions">
     <div class="section-header">
       <h2>五大核心应用场景</h2>
       <p>从家庭到电网，覆盖能源资产全生命周期的管理与调度</p>
     </div>
     <div class="sol-grid">
-      <!-- 微电网 -->
-      <div class="sol-card">
-        <div class="sol-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <h3>微电网</h3>
-        <p>分布式能源聚合管理，多源协同调度，离网并网无缝切换</p>
-        <span class="sol-arrow">&rarr;</span>
-      </div>
-      <!-- 户用 -->
       <div class="sol-card">
         <div class="sol-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <h3>户用储能</h3>
+        <h3>户用家庭储能</h3>
         <p>家庭全设备统一接入，自发自用/经济/应急模式一键切换</p>
         <span class="sol-arrow">&rarr;</span>
       </div>
-      <!-- 充电站 -->
-      <div class="sol-card">
-        <div class="sol-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="5" y1="12" x2="9" y2="12"/></svg>
-        </div>
-        <h3>充电站</h3>
-        <p>多桩协同充电，实时动态功率分配，不扩容主线</p>
-        <span class="sol-arrow">&rarr;</span>
-      </div>
-      <!-- 工商储 -->
       <div class="sol-card">
         <div class="sol-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16"/><path d="M10 4v16"/></svg>
         </div>
-        <h3>工商储</h3>
+        <h3>工商业储能</h3>
         <p>跨站点统一监控，峰谷自动套利，告警分级管理</p>
         <span class="sol-arrow">&rarr;</span>
       </div>
-      <!-- 光储一体 -->
       <div class="sol-card">
         <div class="sol-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2h-2"/><line x1="7" y1="10" x2="7" y2="14"/><line x1="5" y1="12" x2="9" y2="12"/></svg>
         </div>
-        <h3>光储一体</h3>
-        <p>光伏+储能深度集成，最大化自消费率与收益</p>
+        <h3>充电站管理</h3>
+        <p>多桩协同充电，实时动态功率分配，不扩容主线</p>
+        <span class="sol-arrow">&rarr;</span>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>VPP虚拟电厂</h3>
+        <p>分布式能源聚合管理，多源协同调度，参与电力市场交易</p>
+        <span class="sol-arrow">&rarr;</span>
+      </div>
+      <div class="sol-card">
+        <div class="sol-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>电能质量管理</h3>
+        <p>实时监测电能质量，谐波治理与无功补偿，保障用电安全</p>
         <span class="sol-arrow">&rarr;</span>
       </div>
     </div>
   </section>
 
-  <!-- ===== 4. CORE DATA ===== -->
-  <section class="core-data">
-    <div class="section-header">
-      <h2>核心数据</h2>
-      <p>持续增长的行业影响力</p>
-    </div>
-    <div class="data-grid">
-      <div class="data-card">
-        <div class="data-num">XX<span>+</span></div>
-        <div class="data-label">兼容品牌</div>
-        <div class="data-sub">逆变器 / 电池 / 充电桩</div>
-      </div>
-      <div class="data-card">
-        <div class="data-num">XX<span>+</span></div>
-        <div class="data-label">覆盖国家</div>
-        <div class="data-sub">亚太 / 欧洲 / 美洲</div>
-      </div>
-      <div class="data-card">
-        <div class="data-num">XX<span>+</span></div>
-        <div class="data-label">已交付项目</div>
-        <div class="data-sub">工商业 / 户用 / 微电网</div>
-      </div>
-      <div class="data-card">
-        <div class="data-num">99.9<span>%</span></div>
-        <div class="data-label">平台可用性</div>
-        <div class="data-sub">SLA 保障</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 5. PRODUCTS (DARK) ===== -->
+  <!-- ===== 6. PRODUCTS (dark) ===== -->
   <section class="products">
     <div class="section-header">
-      <h2>产品矩阵</h2>
+      <h2>智能硬件 + 云端软件，完整解决方案</h2>
       <p>从边缘到云端，模块化覆盖全场景需求</p>
     </div>
-    <div class="prod-grid">
-      <div class="prod-card">
-        <div class="prod-tag">GATEWAY</div>
-        <h3>Neuron III</h3>
-        <p>高性能边缘网关，100+ 设备并发接入，支持边缘计算与本地策略执行</p>
-        <div class="prod-specs">
-          <span class="prod-spec">RS485</span>
-          <span class="prod-spec">4G/WiFi</span>
-          <span class="prod-spec">Modbus</span>
-          <span class="prod-spec">MQTT</span>
+    <div class="prod-cols">
+      <div>
+        <div class="prod-col-title">智能硬件</div>
+        <div class="prod-hw-grid">
+          <div class="prod-card">
+            <h3>Neuron II</h3>
+            <p>经济型边缘网关，适合轻量户用场景，标准协议接入</p>
+          </div>
+          <div class="prod-card">
+            <h3>Neuron III</h3>
+            <p>高性能边缘网关，100+ 设备并发接入，支持边缘计算与本地策略执行</p>
+          </div>
+          <div class="prod-card">
+            <h3>Neuron III Lite</h3>
+            <p>精简版网关，面向成本敏感项目，保留核心接入与采集能力</p>
+          </div>
         </div>
       </div>
-      <div class="prod-card">
-        <div class="prod-tag">CLOUD PLATFORM</div>
-        <h3>HEMS Cloud</h3>
-        <p>家庭能源管理云平台，自发自用/经济模式智能切换，白标 SaaS 支持</p>
-        <div class="prod-specs">
-          <span class="prod-spec">SaaS</span>
-          <span class="prod-spec">REST API</span>
-          <span class="prod-spec">White-label</span>
-        </div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-tag">CLOUD PLATFORM</div>
-        <h3>ESS Cloud</h3>
-        <p>工商业储能管理平台，峰谷自动套利，多站点统一监控与告警</p>
-        <div class="prod-specs">
-          <span class="prod-spec">SaaS</span>
-          <span class="prod-spec">Multi-tenant</span>
-          <span class="prod-spec">API</span>
-        </div>
+      <div>
+        <div class="prod-col-title">云端软件</div>
+        <ul class="prod-sw-list">
+          <li class="prod-sw-item">
+            <span class="prod-sw-badge">SaaS</span>
+            <div>
+              <div class="prod-sw-name">HEMS</div>
+              <div class="prod-sw-desc">家庭能源管理系统</div>
+            </div>
+          </li>
+          <li class="prod-sw-item">
+            <span class="prod-sw-badge">SaaS</span>
+            <div>
+              <div class="prod-sw-name">ESS</div>
+              <div class="prod-sw-desc">工商业储能管理平台</div>
+            </div>
+          </li>
+          <li class="prod-sw-item">
+            <span class="prod-sw-badge">SaaS</span>
+            <div>
+              <div class="prod-sw-name">EVCMS</div>
+              <div class="prod-sw-desc">充电站管理系统</div>
+            </div>
+          </li>
+          <li class="prod-sw-item">
+            <span class="prod-sw-badge">SaaS</span>
+            <div>
+              <div class="prod-sw-name">PQMS</div>
+              <div class="prod-sw-desc">电能质量管理系统</div>
+            </div>
+          </li>
+          <li class="prod-sw-item">
+            <span class="prod-sw-badge">Platform</span>
+            <div>
+              <div class="prod-sw-name">VPP</div>
+              <div class="prod-sw-desc">虚拟电厂调度平台</div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===== 6. BRAND WALL ===== -->
+  <!-- ===== 7. BRAND WALL (white, 4x3 Victron style) ===== -->
   <section class="brands">
     <div class="section-header">
       <h2>兼容 XX+ 主流品牌</h2>
       <p>逆变器、电池、充电桩，跨品牌无缝接入</p>
     </div>
     <div class="brands-grid">
-      <div class="brand-box">BYD</div>
-      <div class="brand-box">CATL</div>
-      <div class="brand-box">Growatt</div>
-      <div class="brand-box">SolarEdge</div>
-      <div class="brand-box">Victron</div>
-      <div class="brand-box">Tesla</div>
-      <div class="brand-box">Deye</div>
-      <div class="brand-box">Sungrow</div>
-      <div class="brand-box">Fronius</div>
-      <div class="brand-box">SMA</div>
-      <div class="brand-box">GoodWe</div>
-      <div class="brand-box">Sofar</div>
+      <div class="brand-box"><span class="brand-logo">BYD</span><span class="brand-name">比亚迪</span></div>
+      <div class="brand-box"><span class="brand-logo">CATL</span><span class="brand-name">宁德时代</span></div>
+      <div class="brand-box"><span class="brand-logo">Growatt</span><span class="brand-name">古瑞瓦特</span></div>
+      <div class="brand-box"><span class="brand-logo">SolarEdge</span><span class="brand-name">Solar Edge</span></div>
+      <div class="brand-box"><span class="brand-logo">Victron</span><span class="brand-name">Victron Energy</span></div>
+      <div class="brand-box"><span class="brand-logo">Tesla</span><span class="brand-name">特斯拉</span></div>
+      <div class="brand-box"><span class="brand-logo">Deye</span><span class="brand-name">德业</span></div>
+      <div class="brand-box"><span class="brand-logo">Sungrow</span><span class="brand-name">阳光电源</span></div>
+      <div class="brand-box"><span class="brand-logo">Fronius</span><span class="brand-name">Fronius</span></div>
+      <div class="brand-box"><span class="brand-logo">SMA</span><span class="brand-name">SMA Solar</span></div>
+      <div class="brand-box"><span class="brand-logo">GoodWe</span><span class="brand-name">固德威</span></div>
+      <div class="brand-box"><span class="brand-logo">Sofar</span><span class="brand-name">首航新能源</span></div>
     </div>
   </section>
 
-  <!-- ===== 7. NEWS ===== -->
+  <!-- ===== 8. NEWS (gray) ===== -->
   <section class="news">
     <div class="section-header">
       <h2>新闻动态</h2>
@@ -842,7 +1026,10 @@
       <div class="news-card">
         <div class="news-img">图片占位</div>
         <div class="news-body">
-          <div class="news-date">2026-03-10</div>
+          <div class="news-meta">
+            <span class="news-date">2026-03-10</span>
+            <span class="news-tag">产品发布</span>
+          </div>
           <h3>旭衡电子发布 Neuron III 边缘网关</h3>
           <p class="news-excerpt">全新一代高性能边缘计算网关，支持 100+ 设备并发接入，内置本地策略引擎...</p>
           <a href="#" class="news-link">阅读更多 &rarr;</a>
@@ -851,7 +1038,10 @@
       <div class="news-card">
         <div class="news-img">图片占位</div>
         <div class="news-body">
-          <div class="news-date">2026-02-28</div>
+          <div class="news-meta">
+            <span class="news-date">2026-02-28</span>
+            <span class="news-tag">平台更新</span>
+          </div>
           <h3>HEMS Cloud 平台新增白标 SaaS 支持</h3>
           <p class="news-excerpt">面向渠道合作伙伴提供完整白标方案，品牌定制 + 独立部署，快速上线...</p>
           <a href="#" class="news-link">阅读更多 &rarr;</a>
@@ -860,7 +1050,10 @@
       <div class="news-card">
         <div class="news-img">图片占位</div>
         <div class="news-body">
-          <div class="news-date">2026-02-15</div>
+          <div class="news-meta">
+            <span class="news-date">2026-02-15</span>
+            <span class="news-tag">生态合作</span>
+          </div>
           <h3>兼容生态突破 XX+ 品牌里程碑</h3>
           <p class="news-excerpt">覆盖全球主流逆变器、电池与充电桩品牌，持续扩展跨品牌兼容能力...</p>
           <a href="#" class="news-link">阅读更多 &rarr;</a>
@@ -869,7 +1062,7 @@
     </div>
   </section>
 
-  <!-- ===== 8. FOOTER ===== -->
+  <!-- ===== 9. FOOTER (dark) ===== -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand">
@@ -880,20 +1073,21 @@
       <div class="footer-col">
         <h4>解决方案</h4>
         <ul>
-          <li><a href="#">微电网</a></li>
-          <li><a href="#">户用储能</a></li>
-          <li><a href="#">充电站</a></li>
-          <li><a href="#">工商储</a></li>
-          <li><a href="#">光储一体</a></li>
+          <li><a href="#">户用家庭储能</a></li>
+          <li><a href="#">工商业储能</a></li>
+          <li><a href="#">充电站管理</a></li>
+          <li><a href="#">VPP虚拟电厂</a></li>
+          <li><a href="#">电能质量管理</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>产品</h4>
+        <h4>产品中心</h4>
         <ul>
+          <li><a href="#">Neuron II 网关</a></li>
           <li><a href="#">Neuron III 网关</a></li>
+          <li><a href="#">Neuron III Lite</a></li>
           <li><a href="#">HEMS Cloud</a></li>
           <li><a href="#">ESS Cloud</a></li>
-          <li><a href="#">VPP Platform</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -902,15 +1096,24 @@
           <li><a href="#">商务合作</a></li>
           <li><a href="#">技术支持</a></li>
           <li><a href="#">申请 Demo</a></li>
-          <li><a href="#">alwayscontrol.com.cn</a></li>
+          <li><a href="#">开发者中心</a></li>
         </ul>
       </div>
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
-      <div class="footer-copy">&copy; 2026 旭衡电子 Xuheng Electronics. All rights reserved.</div>
+      <div class="footer-copy">&copy; 2026 旭衡电子（深圳）有限公司 Xuheng Electronics. All rights reserved. | ICP备案号</div>
+      <button class="nav-lang">EN / 中文</button>
     </div>
   </footer>
+
+  <script>
+    // Sticky nav shadow on scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  </script>
 
 </body>
 </html>
