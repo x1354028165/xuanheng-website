@@ -9,13 +9,13 @@
 <style>
   :root {
     /* Primary Scale */
-    --primary-50:#EEF2FF; --primary-100:#E0E7FF; --primary-200:#C7D2FE;
-    --primary-300:#A5B4FC; --primary-400:#818CF8; --primary-500:#6366F1;
-    --primary-600:#3B4FD4; --primary-700:#1A3FAD; --primary-800:#1330A0;
-    --primary-900:#0C1829;
+    --primary-50:#E8FAFE; --primary-100:#C8F0FA; --primary-200:#9BE3F5;
+    --primary-300:#6DD6F0; --primary-400:#4FCDE9; --primary-500:#38C4E8;
+    --primary-600:#2BADD0; --primary-700:#1E96B5; --primary-800:#17748D;
+    --primary-900:#0D4F63;
     /* Accent Scale */
-    --accent-100:#E0F7FD; --accent-300:#7DD9F0; --accent-500:#38C4E8;
-    --accent-700:#1AAED4; --accent-900:#0D7A9B;
+    --accent-100:#E0E7FF; --accent-300:#A5B4FC; --accent-500:#1A3FAD;
+    --accent-700:#1330A0; --accent-900:#0C1829;
     /* Semantic */
     --success:#10B981; --success-light:rgba(16,185,129,.1);
     --error:#EF4444; --error-light:rgba(239,68,68,.1);
@@ -30,7 +30,7 @@
     --shadow-md:0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06);
     --shadow-lg:0 10px 15px rgba(0,0,0,0.1),0 4px 6px rgba(0,0,0,0.05);
     --shadow-xl:0 20px 25px rgba(0,0,0,0.1),0 10px 10px rgba(0,0,0,0.04);
-    --shadow-brand:0 4px 14px rgba(26,63,173,0.25);
+    --shadow-brand:0 4px 14px rgba(56,196,232,0.25);
     /* Radius */
     --radius-sm:6px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px;
   }
@@ -94,7 +94,7 @@
   .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 22px;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 200ms ease-out;font-family:'Inter',sans-serif;}
   .btn-primary{background:var(--primary-700);color:#fff;}
   .btn-primary:hover{background:var(--primary-800);box-shadow:var(--shadow-brand);}
-  .btn-primary:active{background:#0F2A8A;transform:scale(0.98);}
+  .btn-primary:active{background:#17748D;transform:scale(0.98);}
   .btn-primary.disabled{opacity:0.5;cursor:not-allowed;pointer-events:none;}
   .btn-secondary{background:transparent;color:var(--primary-700);border:1.5px solid var(--primary-200);;}
   .btn-secondary:hover{background:var(--primary-50);border-color:var(--primary-400);}
@@ -141,7 +141,7 @@
   .form-group{margin-bottom:16px;}
   .form-label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;}
   .form-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-md);font-size:14px;color:var(--text);outline:none;transition:all 200ms ease-out;font-family:'Inter',sans-serif;}
-  .form-input:focus{border-color:var(--primary-700);box-shadow:0 0 0 3px rgba(26,63,173,.12);}
+  .form-input:focus{border-color:var(--primary-700);box-shadow:0 0 0 3px rgba(56,196,232,.12);}
   .form-input.error{border-color:var(--error);}
   .form-hint{font-size:12px;color:var(--muted);margin-top:5px;}
   .form-error{font-size:12px;color:var(--error);margin-top:5px;}
@@ -213,15 +213,15 @@
     <h2>一、色彩系统 Color System</h2>
 
     <h3>品牌主色</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Logo 色值：主色 #1A3FAD（深宝蓝）· 辅色 #38C4E8（亮青蓝）· 渐变 linear-gradient(135deg, #38C4E8 0%, #1A3FAD 100%) · 深色背景 #0C1829</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Logo 色值：主色 #38C4E8（品牌青蓝）· 辅色 #1A3FAD（深宝蓝）· 渐变 linear-gradient(135deg, #38C4E8 0%, #1A3FAD 100%) · 深色背景 #0C1829</p>
     <div class="grid grid-4" style="margin-bottom:20px">
       <div class="swatch">
-        <div class="swatch-color" style="background:#1A3FAD"></div>
-        <div class="swatch-info"><div class="swatch-name">Primary 主色</div><div class="swatch-hex">#1A3FAD</div><div class="swatch-usage">导航栏、标题、主按钮、CTA</div></div>
+        <div class="swatch-color" style="background:#38C4E8"></div>
+        <div class="swatch-info"><div class="swatch-name">Primary 主色</div><div class="swatch-hex">#38C4E8</div><div class="swatch-usage">导航栏、标题、主按钮、CTA</div></div>
       </div>
       <div class="swatch">
-        <div class="swatch-color" style="background:#38C4E8"></div>
-        <div class="swatch-info"><div class="swatch-name">Accent 辅色</div><div class="swatch-hex">#38C4E8</div><div class="swatch-usage">链接、强调色、图标高亮</div></div>
+        <div class="swatch-color" style="background:#1A3FAD"></div>
+        <div class="swatch-info"><div class="swatch-name">Accent 辅色</div><div class="swatch-hex">#1A3FAD</div><div class="swatch-usage">链接、强调色、图标高亮</div></div>
       </div>
       <div class="swatch">
         <div class="swatch-color" style="background:linear-gradient(135deg,#38C4E8,#1A3FAD)"></div>
@@ -266,48 +266,49 @@
 
     <h3>Primary 主色色阶（9级）</h3>
     <div class="scale-row">
-      <div class="scale-cell" style="background:#EEF2FF;color:#1A3FAD">50</div>
-      <div class="scale-cell" style="background:#E0E7FF;color:#1A3FAD">100</div>
-      <div class="scale-cell" style="background:#C7D2FE;color:#1A3FAD">200</div>
-      <div class="scale-cell" style="background:#A5B4FC;color:#1A3FAD">300</div>
-      <div class="scale-cell" style="background:#818CF8;color:#fff">400</div>
-      <div class="scale-cell" style="background:#6366F1;color:#fff">500</div>
-      <div class="scale-cell" style="background:#3B4FD4;color:#fff">600</div>
-      <div class="scale-cell" style="background:#1A3FAD;color:#fff">700</div>
-      <div class="scale-cell" style="background:#1330A0;color:#fff">800</div>
+      <div class="scale-cell" style="background:#E8FAFE;color:#0D4F63">50</div>
+      <div class="scale-cell" style="background:#C8F0FA;color:#0D4F63">100</div>
+      <div class="scale-cell" style="background:#9BE3F5;color:#0D4F63">200</div>
+      <div class="scale-cell" style="background:#6DD6F0;color:#0D4F63">300</div>
+      <div class="scale-cell" style="background:#4FCDE9;color:#fff">400</div>
+      <div class="scale-cell" style="background:#38C4E8;color:#fff">500</div>
+      <div class="scale-cell" style="background:#2BADD0;color:#fff">600</div>
+      <div class="scale-cell" style="background:#1E96B5;color:#fff">700</div>
+      <div class="scale-cell" style="background:#17748D;color:#fff">800</div>
+      <div class="scale-cell" style="background:#0D4F63;color:#fff">900</div>
     </div>
     <table style="margin-bottom:28px">
       <thead><tr><th>Token</th><th>色值</th><th>用途</th></tr></thead>
       <tbody>
-        <tr><td>Primary-50</td><td><code>#EEF2FF</code></td><td>悬停背景、选中行背景</td></tr>
-        <tr><td>Primary-100</td><td><code>#E0E7FF</code></td><td>标签背景、浅色卡片</td></tr>
-        <tr><td>Primary-200</td><td><code>#C7D2FE</code></td><td>边框高亮、分割线强调</td></tr>
-        <tr><td>Primary-300</td><td><code>#A5B4FC</code></td><td>图标填充（浅）、进度条背景</td></tr>
-        <tr><td>Primary-400</td><td><code>#818CF8</code></td><td>次要按钮 hover、装饰图形</td></tr>
-        <tr><td>Primary-500</td><td><code>#6366F1</code></td><td>过渡色、中间态</td></tr>
-        <tr><td>Primary-600</td><td><code>#3B4FD4</code></td><td>链接色、图标填充</td></tr>
-        <tr><td>Primary-700</td><td><code>#1A3FAD</code></td><td>主色：按钮、导航、标题</td></tr>
-        <tr><td>Primary-800</td><td><code>#1330A0</code></td><td>按钮 Hover 态</td></tr>
-        <tr><td>Primary-900</td><td><code>#0C1829</code></td><td>深色背景：Footer、产品区</td></tr>
+        <tr><td>Primary-50</td><td><code>#E8FAFE</code></td><td>悬停背景、选中行背景</td></tr>
+        <tr><td>Primary-100</td><td><code>#C8F0FA</code></td><td>标签背景、浅色卡片</td></tr>
+        <tr><td>Primary-200</td><td><code>#9BE3F5</code></td><td>边框高亮、分割线强调</td></tr>
+        <tr><td>Primary-300</td><td><code>#6DD6F0</code></td><td>图标填充（浅）、进度条背景</td></tr>
+        <tr><td>Primary-400</td><td><code>#4FCDE9</code></td><td>次要按钮 hover、装饰图形</td></tr>
+        <tr><td>Primary-500</td><td><code>#38C4E8</code></td><td>过渡色、中间态</td></tr>
+        <tr><td>Primary-600</td><td><code>#2BADD0</code></td><td>链接色、图标填充</td></tr>
+        <tr><td>Primary-700</td><td><code>#1E96B5</code></td><td>主色：按钮、导航、标题</td></tr>
+        <tr><td>Primary-800</td><td><code>#17748D</code></td><td>按钮 Hover 态</td></tr>
+        <tr><td>Primary-900</td><td><code>#0D4F63</code></td><td>深色背景：Footer、产品区</td></tr>
       </tbody>
     </table>
 
     <h3>Accent 辅色色阶（5级）</h3>
     <div class="scale-row">
-      <div class="scale-cell" style="background:#E0F7FD;color:#0D7A9B">100</div>
-      <div class="scale-cell" style="background:#7DD9F0;color:#0D7A9B">300</div>
-      <div class="scale-cell" style="background:#38C4E8;color:#fff">500</div>
-      <div class="scale-cell" style="background:#1AAED4;color:#fff">700</div>
-      <div class="scale-cell" style="background:#0D7A9B;color:#fff">900</div>
+      <div class="scale-cell" style="background:#E0E7FF;color:#1A3FAD">100</div>
+      <div class="scale-cell" style="background:#A5B4FC;color:#1A3FAD">300</div>
+      <div class="scale-cell" style="background:#1A3FAD;color:#fff">500</div>
+      <div class="scale-cell" style="background:#1330A0;color:#fff">700</div>
+      <div class="scale-cell" style="background:#0C1829;color:#fff">900</div>
     </div>
     <table>
       <thead><tr><th>Token</th><th>色值</th><th>用途</th></tr></thead>
       <tbody>
-        <tr><td>Accent-100</td><td><code>#E0F7FD</code></td><td>提示背景、浅色标签</td></tr>
-        <tr><td>Accent-300</td><td><code>#7DD9F0</code></td><td>图表辅助色、渐变起始</td></tr>
-        <tr><td>Accent-500</td><td><code>#38C4E8</code></td><td>辅色主色调：强调、高亮</td></tr>
-        <tr><td>Accent-700</td><td><code>#1AAED4</code></td><td>辅色 Hover 态</td></tr>
-        <tr><td>Accent-900</td><td><code>#0D7A9B</code></td><td>辅色深色态、深色文字</td></tr>
+        <tr><td>Accent-100</td><td><code>#E0E7FF</code></td><td>提示背景、浅色标签</td></tr>
+        <tr><td>Accent-300</td><td><code>#A5B4FC</code></td><td>图表辅助色、渐变起始</td></tr>
+        <tr><td>Accent-500</td><td><code>#1A3FAD</code></td><td>辅色主色调：强调、高亮</td></tr>
+        <tr><td>Accent-700</td><td><code>#1330A0</code></td><td>辅色 Hover 态</td></tr>
+        <tr><td>Accent-900</td><td><code>#0C1829</code></td><td>辅色深色态、深色文字</td></tr>
       </tbody>
     </table>
   </div>
@@ -425,7 +426,7 @@ fontSize: {
     <div class="grid grid-3" style="margin-bottom:20px">
       <div class="shadow-demo" style="box-shadow:0 10px 15px rgba(0,0,0,0.1),0 4px 6px rgba(0,0,0,0.05)"><div style="font-weight:600;margin-bottom:4px">shadow-lg</div>下拉菜单、浮层</div>
       <div class="shadow-demo" style="box-shadow:0 20px 25px rgba(0,0,0,0.1),0 10px 10px rgba(0,0,0,0.04)"><div style="font-weight:600;margin-bottom:4px">shadow-xl</div>模态框、Popover</div>
-      <div class="shadow-demo" style="box-shadow:0 4px 14px rgba(26,63,173,0.25)"><div style="font-weight:600;margin-bottom:4px;color:var(--primary-700)">shadow-brand</div>主色按钮 Hover</div>
+      <div class="shadow-demo" style="box-shadow:0 4px 14px rgba(56,196,232,0.25)"><div style="font-weight:600;margin-bottom:4px;color:var(--primary-700)">shadow-brand</div>主色按钮 Hover</div>
     </div>
 
     <table>
@@ -436,7 +437,7 @@ fontSize: {
         <tr><td>shadow-md</td><td><code>0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06)</code></td><td>卡片 hover、下拉触发</td></tr>
         <tr><td>shadow-lg</td><td><code>0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05)</code></td><td>下拉菜单、浮层</td></tr>
         <tr><td>shadow-xl</td><td><code>0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04)</code></td><td>模态框、全屏浮层</td></tr>
-        <tr><td>shadow-brand</td><td><code>0 4px 14px rgba(26,63,173,0.25)</code></td><td>Primary 按钮 hover 态</td></tr>
+        <tr><td>shadow-brand</td><td><code>0 4px 14px rgba(56,196,232,0.25)</code></td><td>Primary 按钮 hover 态</td></tr>
       </tbody>
     </table>
   </div>
@@ -534,16 +535,16 @@ fontSize: {
       <tbody>
         <tr>
           <td><strong>Primary</strong></td>
-          <td><code>bg:#1A3FAD</code> <code>text:#FFF</code></td>
-          <td><code>bg:#1330A0</code> <code>shadow-brand</code></td>
-          <td><code>bg:#0F2A8A</code> <code>scale(0.98)</code></td>
+          <td><code>bg:#38C4E8</code> <code>text:#FFF</code></td>
+          <td><code>bg:#2BADD0</code> <code>shadow-brand</code></td>
+          <td><code>bg:#1E96B5</code> <code>scale(0.98)</code></td>
           <td><code>opacity:0.5</code></td>
         </tr>
         <tr>
           <td><strong>Secondary</strong></td>
-          <td><code>bg:transparent</code> <code>border:#C7D2FE</code></td>
-          <td><code>bg:#EEF2FF</code> <code>border:#818CF8</code></td>
-          <td><code>bg:#E0E7FF</code> <code>scale(0.98)</code></td>
+          <td><code>bg:transparent</code> <code>border:#9BE3F5</code></td>
+          <td><code>bg:#E8FAFE</code> <code>border:#4FCDE9</code></td>
+          <td><code>bg:#C8F0FA</code> <code>scale(0.98)</code></td>
           <td><code>opacity:0.5</code></td>
         </tr>
         <tr>
@@ -664,28 +665,26 @@ fontSize: {
   <!-- ===== 十二、图标 ===== -->
   <div class="section" id="icons">
     <h2>十二、图标规范 Icons</h2>
-    <p style="font-size:13px;margin-bottom:16px">推荐使用 <strong>Lucide Icons</strong> 或 <strong>Heroicons</strong>（MIT 协议），风格统一，提供 SVG 和组件两种用法。</p>
-    <div class="icon-grid">
-      <div class="icon-item"><span>⚡</span>Energy</div>
-      <div class="icon-item"><span>🔌</span>Charging</div>
-      <div class="icon-item"><span>🌐</span>Global</div>
-      <div class="icon-item"><span>📊</span>Analytics</div>
-      <div class="icon-item"><span>🔒</span>Security</div>
-      <div class="icon-item"><span>📁</span>Files</div>
-      <div class="icon-item"><span>💬</span>Contact</div>
-      <div class="icon-item"><span>✅</span>Done</div>
-    </div>
-    <br>
+    <p style="font-size:13px;margin-bottom:16px">本项目使用<strong>专业定制设计图标</strong>（由设计师提供），非系统符号或开源图标库。</p>
+
+    <h3>使用规范</h3>
     <table>
-      <thead><tr><th>尺寸</th><th>像素</th><th>使用场景</th></tr></thead>
+      <thead><tr><th>项目</th><th>规范</th></tr></thead>
       <tbody>
-        <tr><td>xs</td><td>14px</td><td>行内图标、表格内图标</td></tr>
-        <tr><td>sm</td><td>18px</td><td>按钮图标、标签图标</td></tr>
-        <tr><td>md</td><td>24px</td><td>导航图标、卡片图标（标准）</td></tr>
-        <tr><td>lg</td><td>32px</td><td>功能模块入口图标</td></tr>
-        <tr><td>xl</td><td>48px</td><td>空状态插图、大图标</td></tr>
+        <tr><td>格式</td><td>SVG（支持任意尺寸缩放，保持清晰度）</td></tr>
+        <tr><td>尺寸规格</td><td>16px / 20px / 24px / 32px / 48px</td></tr>
+        <tr><td>线宽</td><td>1.5px（小尺寸） / 2px（标准尺寸）</td></tr>
+        <tr><td>风格</td><td>线性图标为主，与品牌青蓝主色 <code>#38C4E8</code> 搭配使用</td></tr>
+        <tr><td>颜色</td><td>默认继承父元素 <code>currentColor</code>，便于深色/浅色背景复用</td></tr>
+        <tr><td>交付格式</td><td>SVG文件 + React组件（TSX）双版本</td></tr>
+        <tr><td>存放路径</td><td><code>frontend/src/components/icons/</code></td></tr>
+        <tr><td>命名规范</td><td>PascalCase，如 <code>IconSolar.tsx</code> / <code>IconBattery.tsx</code></td></tr>
       </tbody>
     </table>
+
+    <div style="margin-top:16px;padding:14px 18px;background:var(--warning-light);border-radius:var(--radius-md);font-size:13px;border-left:3px solid var(--warning)">
+      <strong>⚠️ 禁止使用 Emoji 作为功能性图标</strong>；临时占位可用，上线前必须替换为定制图标。
+    </div>
   </div>
 
   <!-- ===== 十三、图片规范 ===== -->
