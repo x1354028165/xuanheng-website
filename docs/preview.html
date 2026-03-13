@@ -240,21 +240,18 @@
       object-fit: cover; opacity: 0; transition: opacity .6s ease;
     }
     .sw-img.active { opacity: 1; }
-    .sw-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,.6) 0%, rgba(0,0,0,.15) 55%, transparent 100%);
-      pointer-events: none;
+    .sw-img-overlay { display: none; }
+    .sw-text-overlay { display: none; }
+    /* Text description below tabs */
+    .sw-desc-area {
+      max-width: var(--max-w); margin: 0 auto; padding: 28px 24px 0;
+      min-height: 72px;
     }
-    .sw-text-overlay {
-      position: absolute; bottom: 48px; left: 56px; color: #fff; max-width: 440px;
-    }
-    .sw-text-panel { display: none; }
-    .sw-text-panel.active { display: block; animation: fadeUp .4s ease; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-    .sw-text-panel h3 {
-      font-size: 32px; font-weight: 800; margin-bottom: 14px; line-height: 1.15;
-    }
-    .sw-text-panel p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.75; }
+    .sw-desc-panel { display: none; animation: fadeUp .3s ease; }
+    .sw-desc-panel.active { display: flex; align-items: flex-start; gap: 32px; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .sw-desc-panel h3 { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 8px; white-space: nowrap; }
+    .sw-desc-panel p { font-size: 15px; color: var(--text-sub); line-height: 1.75; }
     /* Tabs below image */
     .sw-tabs { display: flex; border-top: 2px solid var(--border); margin-top: 32px; }
     .sw-tab { flex: 1; padding: 20px 16px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; text-align: left; border-top: 3px solid transparent; margin-top: -2px; transition: color .2s, border-color .2s, background .2s; background: none; border-bottom: none; border-left: none; border-right: none; font-family: 'Inter', sans-serif; }
@@ -569,29 +566,7 @@
         <img class="sw-img" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80&auto=format&fit=crop" alt="EVCMS">
         <img class="sw-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80&auto=format&fit=crop" alt="PQMS">
         <img class="sw-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&q=80&auto=format&fit=crop" alt="VPP">
-        <div class="sw-img-overlay"></div>
-        <div class="sw-text-overlay">
-          <div class="sw-text-panel active">
-            <h3>HEMS Cloud</h3>
-            <p>家庭能源管理平台，光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</p>
-          </div>
-          <div class="sw-text-panel">
-            <h3>ESS Cloud</h3>
-            <p>工商业储能管理，峰谷套利，多站点统一监控，告警分级管理</p>
-          </div>
-          <div class="sw-text-panel">
-            <h3>EVCMS</h3>
-            <p>充电站管理，多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</p>
-          </div>
-          <div class="sw-text-panel">
-            <h3>PQMS</h3>
-            <p>电能质量监测与治理，谐波分析，实时告警，合规报告一键导出</p>
-          </div>
-          <div class="sw-text-panel">
-            <h3>VPP Platform</h3>
-            <p>虚拟电厂平台，分布式资产聚合调度，接入辅助服务电力市场</p>
-          </div>
-        </div>
+
       </div>
     </div>
   </section>
