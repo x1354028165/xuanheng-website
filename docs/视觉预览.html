@@ -221,45 +221,39 @@
     .hw-card-img svg { width: 85%; height: auto; }
     .hw-card-name { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
 
-    /* Software switcher */
+    /* Software switcher — Sungrow style */
     .sw-switcher { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
-    /* Tabs ABOVE the image */
-    .sw-tabs {
-      display: flex; border-bottom: 2px solid var(--border);
-      margin-bottom: 20px;
-    }
-    .sw-tab {
-      flex: 1; padding: 16px 16px 18px; font-size: 14px; font-weight: 700;
-      color: var(--text-sub); cursor: pointer; text-align: left;
-      border-bottom: 3px solid transparent; margin-bottom: -2px;
-      transition: color .2s, border-color .2s;
-      background: none; border-top: none; border-left: none; border-right: none;
-      font-family: 'Inter', sans-serif;
-    }
-    .sw-tab:hover { color: var(--text); }
-    .sw-tab.active { color: var(--brand); border-bottom-color: var(--brand); }
-    .sw-tab-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-    .sw-tab-sub { font-size: 11px; font-weight: 400; color: var(--text-sub); }
-    .sw-tab.active .sw-tab-sub { color: rgba(56,196,232,.7); }
-    /* Image with text overlay at bottom-left */
     .sw-image-wrap {
-      position: relative; width: 100%; border-radius: 16px;
-      overflow: hidden; aspect-ratio: 16/7; background: var(--gray-bg);
+      width: 100%; border-radius: 12px; overflow: hidden;
+      aspect-ratio: 16/7; background: var(--gray-bg);
     }
-    .sw-image-wrap .sw-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .sw-img-gradient {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,.65) 0%, rgba(0,0,0,.2) 50%, transparent 100%);
-      pointer-events: none;
+    .sw-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* 5-col text row below image */
+    .sw-cols {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      margin-top: 36px; border-top: 2px solid var(--border);
     }
-    .sw-desc-area {
-      position: absolute; bottom: 40px; left: 44px; max-width: 460px;
+    .sw-col {
+      padding: 28px 24px 24px; cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: border-color .2s, background .2s;
+      border-right: 1px solid var(--border);
     }
-    .sw-desc-panel { display: none; }
-    .sw-desc-panel.active { display: block; animation: swFade .35s ease; }
-    @keyframes swFade { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-    .sw-desc-panel h3 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.2; }
-    .sw-desc-panel p { font-size: 15px; color: rgba(255,255,255,.82); line-height: 1.75; }
+    .sw-col:last-child { border-right: none; }
+    .sw-col:hover { background: var(--gray-bg); }
+    .sw-col.active { border-left-color: var(--brand); }
+    .sw-col-title {
+      font-size: 15px; font-weight: 800; color: var(--text);
+      margin-bottom: 10px; line-height: 1.3;
+    }
+    .sw-col-sub {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      color: var(--brand); margin-bottom: 8px; text-transform: uppercase;
+    }
+    .sw-col.active .sw-col-title { color: var(--text); }
+    .sw-col-desc {
+      font-size: 13px; color: var(--text-sub); line-height: 1.7;
+    }
 
         /* ========== 6. BRANDS ========== */
     .brands { background: var(--white); padding: 96px 24px; }
@@ -564,27 +558,39 @@
 
     <!-- Software: 1 big image + tabs + description -->
     <div class="sw-switcher">
-      <!-- Tabs ABOVE image -->
-      <div class="sw-tabs">
-        <button class="sw-tab active" data-idx="0"><div class="sw-tab-name">HEMS Cloud</div><div class="sw-tab-sub">家庭能源管理平台</div></button>
-        <button class="sw-tab" data-idx="1"><div class="sw-tab-name">ESS Cloud</div><div class="sw-tab-sub">工商业储能管理</div></button>
-        <button class="sw-tab" data-idx="2"><div class="sw-tab-name">EVCMS</div><div class="sw-tab-sub">充电站管理系统</div></button>
-        <button class="sw-tab" data-idx="3"><div class="sw-tab-name">PQMS</div><div class="sw-tab-sub">电能质量监测</div></button>
-        <button class="sw-tab" data-idx="4"><div class="sw-tab-name">VPP Platform</div><div class="sw-tab-sub">虚拟电厂平台</div></button>
-      </div>
-      <!-- Image with overlay text at bottom-left -->
+      <!-- Big image — static -->
       <div class="sw-image-wrap">
-        <img class="sw-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" alt="Software">
-        <div class="sw-img-gradient"></div>
-        <div class="sw-desc-area">
-          <div class="sw-desc-panel active"><h3>HEMS Cloud</h3><p>家庭能源管理平台，光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</p></div>
-          <div class="sw-desc-panel"><h3>ESS Cloud</h3><p>工商业储能管理，峰谷套利，多站点统一监控，告警分级管理</p></div>
-          <div class="sw-desc-panel"><h3>EVCMS</h3><p>充电站管理，多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</p></div>
-          <div class="sw-desc-panel"><h3>PQMS</h3><p>电能质量监测与治理，谐波分析，实时告警，合规报告一键导出</p></div>
-          <div class="sw-desc-panel"><h3>VPP Platform</h3><p>虚拟电厂平台，分布式资产聚合调度，接入辅助服务电力市场</p></div>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80&auto=format&fit=crop" alt="Software Platform">
+      </div>
+      <!-- 5-col row below -->
+      <div class="sw-cols">
+        <div class="sw-col active" data-idx="0">
+          <div class="sw-col-sub">HEMS Cloud</div>
+          <div class="sw-col-title">家庭能源<br>智慧管理</div>
+          <div class="sw-col-desc">光储充一体，自发自用策略自动执行，白标 SaaS 快速交付</div>
+        </div>
+        <div class="sw-col" data-idx="1">
+          <div class="sw-col-sub">ESS Cloud</div>
+          <div class="sw-col-title">工商业储能<br>峰谷套利</div>
+          <div class="sw-col-desc">多站点统一监控，告警分级管理，收益可视化</div>
+        </div>
+        <div class="sw-col" data-idx="2">
+          <div class="sw-col-sub">EVCMS</div>
+          <div class="sw-col-title">充电站<br>智能调度</div>
+          <div class="sw-col-desc">多桩负载均衡，OCPP 兼容，动态功率分配防跳闸</div>
+        </div>
+        <div class="sw-col" data-idx="3">
+          <div class="sw-col-sub">PQMS</div>
+          <div class="sw-col-title">电能质量<br>监测治理</div>
+          <div class="sw-col-desc">谐波分析，实时告警，合规报告一键导出</div>
+        </div>
+        <div class="sw-col" data-idx="4">
+          <div class="sw-col-sub">VPP Platform</div>
+          <div class="sw-col-title">虚拟电厂<br>聚合调度</div>
+          <div class="sw-col-desc">分布式资产聚合，接入辅助服务电力市场</div>
         </div>
       </div>
-    </div>
+    </div>    </div>
   </section>
 
       <!-- ===== 6. BRANDS ===== -->
@@ -715,16 +721,12 @@
       });
     });
 
-    // Software switcher: tabs + description below
-    const swTabs = document.querySelectorAll(".sw-tab");
-    const swDescs = document.querySelectorAll(".sw-desc-panel");
-    swTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const idx = +tab.dataset.idx;
-        swTabs.forEach(t => t.classList.remove("active"));
-        swDescs.forEach(p => p.classList.remove("active"));
-        tab.classList.add("active");
-        swDescs[idx].classList.add("active");
+    // Software col switcher
+    const swCols = document.querySelectorAll(".sw-col");
+    swCols.forEach(col => {
+      col.addEventListener("click", () => {
+        swCols.forEach(c => c.classList.remove("active"));
+        col.classList.add("active");
       });
     });
   </script>
