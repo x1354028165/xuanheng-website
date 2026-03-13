@@ -89,11 +89,15 @@
     .nav-links a {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-sub);
+      color: rgba(255,255,255,.85);
       text-decoration: none;
       transition: color .2s ease-out;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.nav-active { color: #fff; font-weight: 600; }
+    .nav.scrolled .nav-links a.nav-active { color: var(--brand); }
+    .nav.scrolled .nav-links a { color: var(--text); }
+    .nav.scrolled .nav-links a:hover { color: var(--brand); }
     .nav-right {
       display: flex;
       align-items: center;
@@ -103,14 +107,16 @@
       background: none;
       border: none;
       padding: 4px;
-      color: var(--text);
+      color: rgba(255,255,255,.85);
       cursor: pointer;
       display: flex;
       align-items: center;
       border-radius: 50%;
       transition: color .2s;
     }
-    .nav-lang:hover { color: var(--brand); }
+    .nav-lang:hover { color: #fff; }
+    .nav.scrolled .nav-lang { color: var(--text); }
+    .nav.scrolled .nav-lang:hover { color: var(--brand); }
     .btn-cta {
       background: var(--brand);
       color: var(--white);
@@ -616,7 +622,7 @@
         <img src="assets/logo.jpg" alt="AlwaysControl" class="nav-logo-img nav-logo-dark" style="display:none;">
       </a>
       <ul class="nav-links">
-        <li><a href="#">首页</a></li>
+        <li><a href="#" class="nav-active">首页</a></li>
         <li><a href="#">产品中心</a></li>
         <li><a href="#">解决方案</a></li>
         <li><a href="#">兼容生态</a></li>
@@ -811,11 +817,15 @@
     .nav-links a {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-sub);
+      color: rgba(255,255,255,.85);
       text-decoration: none;
       transition: color .2s ease-out;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.nav-active { color: #fff; font-weight: 600; }
+    .nav.scrolled .nav-links a.nav-active { color: var(--brand); }
+    .nav.scrolled .nav-links a { color: var(--text); }
+    .nav.scrolled .nav-links a:hover { color: var(--brand); }
     .nav-right {
       display: flex;
       align-items: center;
@@ -825,14 +835,16 @@
       background: none;
       border: none;
       padding: 4px;
-      color: var(--text);
+      color: rgba(255,255,255,.85);
       cursor: pointer;
       display: flex;
       align-items: center;
       border-radius: 50%;
       transition: color .2s;
     }
-    .nav-lang:hover { color: var(--brand); }
+    .nav-lang:hover { color: #fff; }
+    .nav.scrolled .nav-lang { color: var(--text); }
+    .nav.scrolled .nav-lang:hover { color: var(--brand); }
     .btn-cta {
       background: var(--brand);
       color: var(--white);
@@ -1338,7 +1350,7 @@
         <img src="assets/logo.jpg" alt="AlwaysControl" class="nav-logo-img nav-logo-dark" style="display:none;">
       </a>
       <ul class="nav-links">
-        <li><a href="#">首页</a></li>
+        <li><a href="#" class="nav-active">首页</a></li>
         <li><a href="#">产品中心</a></li>
         <li><a href="#">解决方案</a></li>
         <li><a href="#">兼容生态</a></li>
