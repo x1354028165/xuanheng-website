@@ -51,7 +51,7 @@
       border-bottom-color: var(--border);
       box-shadow: 0 1px 8px rgba(0,0,0,.04);
     }
-    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; overflow: visible; }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo-img { height: 36px; width: auto; object-fit: contain; }
@@ -217,46 +217,24 @@
     }
     .hw-card {
       background: var(--gray-bg); border-radius: 20px;
-      padding: 48px 32px 36px; text-align: center;
+      padding: 40px 28px 32px; text-align: center;
       cursor: pointer; transition: box-shadow .25s, transform .25s;
       border: 1.5px solid transparent;
     }
-    .hw-card:hover {
-      box-shadow: 0 16px 48px rgba(0,0,0,.1);
-      transform: translateY(-6px);
-      border-color: rgba(56,196,232,.3);
-    }
+    .hw-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-6px); border-color: rgba(56,196,232,.3); }
     .hw-card-badge {
-      display: inline-block; font-size: 11px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: var(--brand); background: rgba(56,196,232,.1);
-      padding: 4px 12px; border-radius: 20px; margin-bottom: 32px;
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--brand); background: rgba(56,196,232,.1);
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 28px;
     }
-    .hw-card-img {
-      width: 100%; display: flex; align-items: center;
-      justify-content: center; margin-bottom: 32px;
-      min-height: 200px;
-    }
+    .hw-card-img { width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; min-height: 180px; }
     .hw-card-img svg { width: 75%; height: auto; }
-    .hw-card-name {
-      font-size: 22px; font-weight: 800; color: var(--text);
-      letter-spacing: -0.5px; margin-bottom: 10px;
-    }
-    .hw-card-desc {
-      font-size: 14px; color: var(--text-sub); line-height: 1.7;
-      margin-bottom: 24px;
-    }
-    .hw-card-specs {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
-    }
-    .hw-spec {
-      font-size: 11px; font-weight: 600; color: var(--text-sub);
-      background: #fff; border: 1px solid var(--border);
-      padding: 4px 10px; border-radius: 4px;
-    }
-
-    /* Software image switcher */
-    .sw-switcher { max-width: var(--max-w); margin: 48px auto 0; padding: 0 24px; }
+    .hw-card-name { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 10px; }
+    .hw-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 20px; }
+    .hw-card-specs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .hw-spec { font-size: 11px; font-weight: 600; color: var(--text-sub); background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; }
+        /* Software image switcher */
+    .sw-switcher { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
     .sw-image-wrap {
       position: relative; width: 100%; border-radius: 20px; overflow: hidden;
       aspect-ratio: 16/7; background: var(--gray-bg); margin-bottom: 0;
@@ -282,17 +260,8 @@
     }
     .sw-text-panel p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.75; }
     /* Tabs below image */
-    .sw-tabs {
-      display: flex; border-top: 2px solid var(--border);
-    }
-    .sw-tab {
-      flex: 1; padding: 20px 16px 20px; font-size: 14px; font-weight: 700;
-      color: var(--text-sub); cursor: pointer; text-align: left;
-      border-top: 3px solid transparent; margin-top: -2px;
-      transition: color .2s, border-color .2s, background .2s;
-      background: none; border-bottom: none; border-left: none; border-right: none;
-      font-family: 'Inter', sans-serif;
-    }
+    .sw-tabs { display: flex; border-top: 2px solid var(--border); }
+    .sw-tab { flex: 1; padding: 20px 16px; font-size: 14px; font-weight: 700; color: var(--text-sub); cursor: pointer; text-align: left; border-top: 3px solid transparent; margin-top: -2px; transition: color .2s, border-color .2s, background .2s; background: none; border-bottom: none; border-left: none; border-right: none; font-family: 'Inter', sans-serif; }
     .sw-tab:hover { color: var(--text); background: var(--gray-bg); }
     .sw-tab.active { color: var(--brand); border-top-color: var(--brand); }
     .sw-tab-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
@@ -542,27 +511,16 @@
             <rect x="20" y="20" width="280" height="180" rx="20" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="2"/>
             <rect x="40" y="44" width="240" height="132" rx="12" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1.5"/>
             <circle cx="160" cy="110" r="38" fill="#fff" stroke="#D0D7E3" stroke-width="2"/>
-            <circle cx="160" cy="110" r="17" fill="#38C4E8" opacity=".85"/>
-            <circle cx="160" cy="110" r="7" fill="#fff"/>
-            <circle cx="58" cy="62" r="6" fill="#38C4E8" opacity=".9"/>
-            <circle cx="76" cy="62" r="6" fill="#38C4E8" opacity=".5"/>
-            <circle cx="94" cy="62" r="6" fill="#C8D0DA"/>
-            <rect x="40" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="98" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="156" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="230" y="208" width="50" height="10" rx="4" fill="#38C4E8" opacity=".6"/>
-            <line x1="272" y1="20" x2="272" y2="-4" stroke="#C8D0DA" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="272" cy="-5" r="3" fill="#C8D0DA"/>
+            <circle cx="160" cy="110" r="17" fill="#38C4E8" opacity=".85"/><circle cx="160" cy="110" r="7" fill="#fff"/>
+            <circle cx="58" cy="62" r="6" fill="#38C4E8" opacity=".9"/><circle cx="76" cy="62" r="6" fill="#38C4E8" opacity=".5"/><circle cx="94" cy="62" r="6" fill="#C8D0DA"/>
+            <rect x="40" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/><rect x="98" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/>
+            <rect x="156" y="208" width="50" height="10" rx="4" fill="#D0D7E3"/><rect x="230" y="208" width="50" height="10" rx="4" fill="#38C4E8" opacity=".6"/>
+            <line x1="272" y1="20" x2="272" y2="0" stroke="#C8D0DA" stroke-width="3" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="hw-card-name">Neuron III</div>
         <div class="hw-card-desc">旗舰级边缘计算网关，100+ 设备并发接入，内置本地策略引擎，断网自治</div>
-        <div class="hw-card-specs">
-          <span class="hw-spec">RS485 ×4</span>
-          <span class="hw-spec">4G / WiFi</span>
-          <span class="hw-spec">MQTT</span>
-          <span class="hw-spec">边缘计算</span>
-        </div>
+        <div class="hw-card-specs"><span class="hw-spec">RS485 ×4</span><span class="hw-spec">4G / WiFi</span><span class="hw-spec">MQTT</span><span class="hw-spec">边缘计算</span></div>
       </div>
       <div class="hw-card">
         <div class="hw-card-badge">Essential</div>
@@ -571,22 +529,15 @@
             <rect x="40" y="30" width="240" height="170" rx="20" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="2"/>
             <rect x="60" y="52" width="200" height="126" rx="12" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1.5"/>
             <circle cx="160" cy="115" r="32" fill="#fff" stroke="#D0D7E3" stroke-width="2"/>
-            <circle cx="160" cy="115" r="14" fill="#38C4E8" opacity=".75"/>
-            <circle cx="160" cy="115" r="6" fill="#fff"/>
-            <circle cx="76" cy="68" r="5" fill="#38C4E8" opacity=".7"/>
-            <circle cx="92" cy="68" r="5" fill="#C8D0DA"/>
-            <rect x="60" y="208" width="44" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="112" y="208" width="44" height="10" rx="4" fill="#D0D7E3"/>
+            <circle cx="160" cy="115" r="14" fill="#38C4E8" opacity=".75"/><circle cx="160" cy="115" r="6" fill="#fff"/>
+            <circle cx="76" cy="68" r="5" fill="#38C4E8" opacity=".7"/><circle cx="92" cy="68" r="5" fill="#C8D0DA"/>
+            <rect x="60" y="208" width="44" height="10" rx="4" fill="#D0D7E3"/><rect x="112" y="208" width="44" height="10" rx="4" fill="#D0D7E3"/>
             <rect x="216" y="208" width="44" height="10" rx="4" fill="#38C4E8" opacity=".5"/>
           </svg>
         </div>
         <div class="hw-card-name">Neuron II</div>
         <div class="hw-card-desc">经济型边缘网关，专为家庭户用场景设计，即插即用，5分钟完成配置</div>
-        <div class="hw-card-specs">
-          <span class="hw-spec">RS485 ×2</span>
-          <span class="hw-spec">WiFi</span>
-          <span class="hw-spec">Modbus</span>
-        </div>
+        <div class="hw-card-specs"><span class="hw-spec">RS485 ×2</span><span class="hw-spec">WiFi</span><span class="hw-spec">Modbus</span></div>
       </div>
       <div class="hw-card">
         <div class="hw-card-badge">Pro Lite</div>
@@ -595,38 +546,33 @@
             <rect x="25" y="24" width="270" height="174" rx="20" fill="#E8EDF2" stroke="#C8D0DA" stroke-width="2"/>
             <rect x="45" y="48" width="230" height="126" rx="12" fill="#F5F7FA" stroke="#DDE3EC" stroke-width="1.5"/>
             <circle cx="160" cy="111" r="35" fill="#fff" stroke="#D0D7E3" stroke-width="2"/>
-            <circle cx="160" cy="111" r="15" fill="#38C4E8" opacity=".8"/>
-            <circle cx="160" cy="111" r="6" fill="#fff"/>
-            <circle cx="63" cy="66" r="5" fill="#38C4E8" opacity=".8"/>
-            <circle cx="79" cy="66" r="5" fill="#38C4E8" opacity=".45"/>
-            <circle cx="95" cy="66" r="5" fill="#C8D0DA"/>
-            <rect x="45" y="208" width="46" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="99" y="208" width="46" height="10" rx="4" fill="#D0D7E3"/>
-            <rect x="153" y="208" width="46" height="10" rx="4" fill="#D0D7E3"/>
+            <circle cx="160" cy="111" r="15" fill="#38C4E8" opacity=".8"/><circle cx="160" cy="111" r="6" fill="#fff"/>
+            <circle cx="63" cy="66" r="5" fill="#38C4E8" opacity=".8"/><circle cx="79" cy="66" r="5" fill="#38C4E8" opacity=".45"/><circle cx="95" cy="66" r="5" fill="#C8D0DA"/>
+            <rect x="45" y="208" width="46" height="10" rx="4" fill="#D0D7E3"/><rect x="99" y="208" width="46" height="10" rx="4" fill="#D0D7E3"/>
             <rect x="229" y="208" width="46" height="10" rx="4" fill="#38C4E8" opacity=".55"/>
             <line x1="262" y1="24" x2="262" y2="2" stroke="#C8D0DA" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="262" cy="1" r="2.5" fill="#C8D0DA"/>
           </svg>
         </div>
         <div class="hw-card-name">Neuron III Lite</div>
-        <div class="hw-card-desc">Neuron III 精简版，中小工商业最佳性价比，50设备以内中型站点首选</div>
-        <div class="hw-card-specs">
-          <span class="hw-spec">RS485 ×2</span>
-          <span class="hw-spec">4G</span>
-          <span class="hw-spec">Modbus / MQTT</span>
-        </div>
+        <div class="hw-card-desc">Neuron III 精简版，中小工商业最佳性价比，50设备中型站点首选</div>
+        <div class="hw-card-specs"><span class="hw-spec">RS485 ×2</span><span class="hw-spec">4G</span><span class="hw-spec">Modbus / MQTT</span></div>
       </div>
     </div>
-    <!-- Software label + Showcase -->
-    <div style="max-width:var(--max-w);margin:64px auto 0;padding:0 24px;border-top:1px solid var(--border);padding-top:48px;">
-      <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brand);margin-bottom:8px;">软件 · Software</div>
-      <div style="font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:40px;">云端平台产品矩阵</div>
+
+    <!-- Software label -->
+    <div style="max-width:var(--max-w);margin:64px auto 0;padding:0 24px 40px;border-top:1px solid var(--border);">
+      <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brand);margin-bottom:8px;padding-top:40px;">软件 · Software</div>
+      <div style="font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--text);letter-spacing:-0.5px;">云端平台产品矩阵</div>
     </div>
-    <!-- Software Showcase: one big image, tabs below change text -->
+        <!-- Software Switcher: big image first, tabs below -->
     <div class="sw-switcher">
+      <!-- Big image -->
       <div class="sw-image-wrap">
-        <!-- Single fixed image -->
-        <img class="sw-img active" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&auto=format&fit=crop" alt="Software">
+        <img class="sw-img active" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80&auto=format&fit=crop" alt="HEMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&auto=format&fit=crop" alt="ESS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1400&q=80&auto=format&fit=crop" alt="EVCMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80&auto=format&fit=crop" alt="PQMS">
+        <img class="sw-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&q=80&auto=format&fit=crop" alt="VPP">
         <div class="sw-img-overlay"></div>
         <div class="sw-text-overlay">
           <div class="sw-text-panel active">
@@ -651,29 +597,149 @@
           </div>
         </div>
       </div>
-      <!-- Tabs below -->
-      <div class="sw-tabs">
-        <button class="sw-tab active" data-idx="0">
-          <div class="sw-tab-name">HEMS Cloud</div>
-          <div class="sw-tab-sub">家庭能源管理平台</div>
-        </button>
-        <button class="sw-tab" data-idx="1">
-          <div class="sw-tab-name">ESS Cloud</div>
-          <div class="sw-tab-sub">工商业储能管理</div>
-        </button>
-        <button class="sw-tab" data-idx="2">
-          <div class="sw-tab-name">EVCMS</div>
-          <div class="sw-tab-sub">充电站管理系统</div>
-        </button>
-        <button class="sw-tab" data-idx="3">
-          <div class="sw-tab-name">PQMS</div>
-          <div class="sw-tab-sub">电能质量监测</div>
-        </button>
-        <button class="sw-tab" data-idx="4">
-          <div class="sw-tab-name">VPP Platform</div>
-          <div class="sw-tab-sub">虚拟电厂平台</div>
-        </button>
+    </div>
+  </section>
+
+    <!-- ===== 6. BRANDS ===== -->
+  <section class="brands">
+    <div class="section-header">
+      <h2>兼容 80+ 主流品牌</h2>
+      <p>逆变器、电池、充电桩，跨品牌无缝接入</p>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-box" style="color:#1464A0">BYD</div>
+      <div class="brand-box" style="color:#0066CC">CATL</div>
+      <div class="brand-box" style="color:#FF6B00">Growatt</div>
+      <div class="brand-box" style="color:#E31837">SolarEdge</div>
+      <div class="brand-box" style="color:#1B5EA3">Victron</div>
+      <div class="brand-box" style="color:#CC0000">Tesla</div>
+      <div class="brand-box" style="color:#0059A8">Deye</div>
+      <div class="brand-box" style="color:#FF7900">Sungrow</div>
+      <div class="brand-box" style="color:#E2000F">Fronius</div>
+      <div class="brand-box" style="color:#5A873D">SMA</div>
+      <div class="brand-box" style="color:#003F87">GoodWe</div>
+      <div class="brand-box" style="color:#0086CF">Sofar</div>
+    </div>
+  </section>
+
+  <!-- ===== 7. NEWS ===== -->
+  <section class="news">
+    <div class="section-header">
+      <h2>新闻动态</h2>
+      <p>了解旭衡电子最新资讯与行业洞察</p>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-03-10</div>
+          <h3>旭衡电子发布 Neuron III 边缘网关</h3>
+          <p class="news-excerpt">全新一代高性能边缘计算网关，支持 100+ 设备并发接入，内置本地策略引擎...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-02-28</div>
+          <h3>HEMS Cloud 平台新增白标 SaaS 支持</h3>
+          <p class="news-excerpt">面向渠道合作伙伴提供完整白标方案，品牌定制 + 独立部署，快速上线...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <img class="news-img" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80&auto=format&fit=crop" alt="">
+        <div class="news-body">
+          <div class="news-date">2026-02-15</div>
+          <h3>兼容生态突破 80+ 品牌里程碑</h3>
+          <p class="news-excerpt">覆盖全球主流逆变器、电池与充电桩品牌，持续扩展跨品牌兼容能力...</p>
+          <a href="#" class="news-link">阅读更多 →</a>
+        </div>
       </div>
     </div>
+  </section>
 
-    >
+  <!-- ===== 8. FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-brand-name">旭衡电子</span>
+        <span class="footer-brand-sub">AlwaysControl</span>
+        <p>打破协议壁垒，让每一度电都被精准管理。跨品牌能源管理解决方案提供商。</p>
+      </div>
+      <div class="footer-col">
+        <h4>解决方案</h4>
+        <ul>
+          <li><a href="#">户用储能</a></li>
+          <li><a href="#">工商储能</a></li>
+          <li><a href="#">充电站</a></li>
+          <li><a href="#">VPP虚拟电厂</a></li>
+          <li><a href="#">微电网</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>产品</h4>
+        <ul>
+          <li><a href="#">Neuron III 网关</a></li>
+          <li><a href="#">HEMS Cloud</a></li>
+          <li><a href="#">ESS Cloud</a></li>
+          <li><a href="#">EVCMS</a></li>
+          <li><a href="#">VPP Platform</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>联系我们</h4>
+        <ul>
+          <li><a href="#">商务合作</a></li>
+          <li><a href="#">技术支持</a></li>
+          <li><a href="#">申请 Demo</a></li>
+          <li><a href="#">alwayscontrol.com.cn</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 旭衡电子 Xuheng Electronics. All rights reserved.</div>
+      <div class="footer-icp">沪ICP备XXXXXXXX号</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector(".nav");
+    function updateNav() {
+      nav.classList.toggle("scrolled", window.scrollY > window.innerHeight - 80);
+    }
+    window.addEventListener("scroll", updateNav);
+    updateNav();
+
+    // Hardware product switcher
+    const hwBtns = document.querySelectorAll(".hw-sel-btn");
+    const hwPanels = document.querySelectorAll(".hw-panel");
+    hwBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = +btn.dataset.hw;
+        hwBtns.forEach(b => b.classList.remove("active"));
+        hwPanels.forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        hwPanels[idx].classList.add("active");
+      });
+    });
+
+    // Software image switcher
+    const tabs = document.querySelectorAll(".sw-tab");
+    const imgs = document.querySelectorAll(".sw-img");
+    const panels = document.querySelectorAll(".sw-text-panel");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const idx = +tab.dataset.idx;
+        tabs.forEach(t => t.classList.remove("active"));
+        imgs.forEach(i => i.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+        tab.classList.add("active");
+        imgs[idx].classList.add("active");
+        panels[idx].classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
