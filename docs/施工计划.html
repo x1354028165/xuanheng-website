@@ -179,21 +179,22 @@
   <main class="main-content">
 
     <div class="highlight" style="margin-bottom:8px;">
-      <strong>⚙️ 施工原则 — 双级门控</strong>
+      <strong>⚙️ 施工原则 — 自动流水线</strong>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;">
       <div class="highlight" style="border-left:4px solid #38C4E8;margin:0;">
-        <strong>🔹 任务级门控（每个子任务）</strong><br>
+        <strong>🔹 模块级（自动推进，无需等待确认）</strong><br>
         <span style="color:#475569;font-size:14px;line-height:1.7;">
-          完成子任务 → 本地验证通过（无报错、功能符合预期）→ 开始下一子任务<br>
-          <strong style="color:#dc2626;">⚠️ 验证失败必须当场修复，不允许带着问题继续</strong>
+          完成模块 → 跑该模块测试 → <strong style="color:#16a34a;">通过：自动开始下一模块</strong><br>
+          失败：当场修复 → 重跑 → 通过后继续<br>
+          <strong style="color:#dc2626;">⚠️ 测试失败 = 停止推进，原地修复</strong>
         </span>
       </div>
       <div class="highlight" style="border-left:4px solid #1A3FAD;margin:0;">
-        <strong>🔷 阶段级门控（每个 Phase）</strong><br>
+        <strong>🔷 尾部全量测试（Phase 收尾）</strong><br>
         <span style="color:#475569;font-size:14px;line-height:1.7;">
-          完成当前 Phase 所有子任务 → 跑对应全部测试用例 → 全部通过 → 进入下一 Phase<br>
-          <strong style="color:#dc2626;">⚠️ 存在未通过用例，禁止开启下一 Phase</strong>
+          当前 Phase 所有模块完成 → 跑完整测试用例集 → 全部通过 → 进入下一 Phase<br>
+          <strong style="color:#dc2626;">⚠️ 不允许带着失败测试进入下一 Phase</strong>
         </span>
       </div>
     </div>
