@@ -114,7 +114,7 @@
 
     /* ===== HERO ===== */
     .hero {
-      background-color: #fff;
+      background-color: #0C1829;
       background-image:
         url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=85&fit=crop');
       background-size: cover;
@@ -123,8 +123,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 64px 48px 0;
+      justify-content: space-between;
+      padding: 0;
       position: relative;
       overflow: hidden;
     }
@@ -158,6 +158,11 @@
       text-align: center;
       max-width: 900px;
       margin: 0 auto;
+      padding-top: 30vh;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .hero-eyebrow {
       display: inline-flex;
@@ -179,12 +184,13 @@
     }
     .hero h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(48px, 6.5vw, 80px);
+      font-size: clamp(36px, 5vw, 64px);
       font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -3px;
+      line-height: 1.1;
+      letter-spacing: -2px;
       color: #fff;
-      margin-bottom: 24px;
+      margin-bottom: 0;
+      text-shadow: 0 2px 16px rgba(0,0,0,.3);
     }
     .gradient-text {
       background: linear-gradient(90deg, #4ADE80 0%, #2DD4BF 100%);
@@ -200,12 +206,38 @@
       margin: 0 auto 48px;
       font-weight: 400;
     }
+    .hero-brand {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,.9);
+      margin-bottom: 8px;
+      letter-spacing: .5px;
+    }
     .hero-cta {
+      position: relative;
+      z-index: 1;
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 80px;
+      padding: 32px 48px 48px;
+      width: 100%;
     }
+    .btn-tesla {
+      background: rgba(255,255,255,0.85);
+      color: #111;
+      border: none;
+      padding: 14px 0;
+      width: 240px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(8px);
+      transition: background .15s;
+      letter-spacing: .3px;
+    }
+    .btn-tesla:hover { background: rgba(255,255,255,1); }
     .btn-primary {
       background: #16A34A;
       color: #fff;
@@ -835,11 +867,12 @@
       <div class="hero-glow-right"></div>
     </div>
     <div class="hero-content">
-      <h1><span class="gradient-text">跨品牌能源管理解决方案</span><br>的优质选择</h1>
-      <div class="hero-cta">
-        <button class="btn-primary">查看解决方案</button>
-        <button class="btn-outline">联系我们</button>
-      </div>
+      <p class="hero-brand">AlwaysControl</p>
+      <h1>跨品牌能源管理解决方案<br>的优质选择</h1>
+    </div>
+    <div class="hero-cta">
+      <button class="btn-tesla">查看解决方案</button>
+      <button class="btn-tesla">联系我们</button>
     </div>
   </section>
 
