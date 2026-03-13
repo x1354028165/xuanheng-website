@@ -74,7 +74,21 @@ APP_KEYS=<生成>
 JWT_SECRET=<生成>
 ```
 
+## 多语言策略
+
+**架构**：next-intl 8语言全量配置，Phase 0 只开放 3 个路由
+
+| 语言 | Phase 0 | 翻译方式 |
+|------|---------|---------|
+| zh-CN | ✅ 开放 | 原文 |
+| en-US | ✅ 开放 | DeepSeek一键翻译 + 人工校对核心页 |
+| zh-TW | ✅ 开放 | OpenCC本地转换（不调API）|
+| de/fr/pt/es/ru | ❌ 重定向至en-US | Phase N 由市场战略决定 |
+
+**DeepSeek翻译插件**：`cms/src/api/translate/` — Strapi编辑后台「一键翻译」按钮，服务端调用，不受国内网络限制
+
 ## 当前进度
 - [x] 文档套件完整（需求/执行/视觉/前端规范/后端规范/测试用例/施工计划）
 - [x] 视觉预览页 `docs/preview.html` 确认
+- [x] i18n 最终方案确认（8语言底座/3语言Phase0开放/DeepSeek翻译插件/zh-TW OpenCC）
 - [ ] Phase 0 — 项目初始化（待开始）

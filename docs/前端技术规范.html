@@ -584,35 +584,61 @@ export async function generateStaticParams() {
 
       <h3>4.2 语言配置（8 种）</h3>
 
+      <div class="highlight">
+        <strong>架构策略：Day 1 全量定义，Phase 0 只开放 3 个路由。</strong><br>
+        <code>locales</code> 数组从第一天起包含全部 8 个 locale（避免后期改表结构）。<code>activeLocales</code> 控制 Phase 0 实际对外开放的路由，其余重定向至 <code>en-US</code>。de/fr/pt/es/ru 由市场战略决定激活时间（Phase N）。
+      </div>
+
       <table>
         <thead>
-          <tr><th>语言</th><th>locale 标识</th><th>内容来源</th><th>优先级</th><th>备注</th></tr>
+          <tr><th>语言</th><th>locale 标识</th><th>翻译方式</th><th>Phase 0 路由</th><th>备注</th></tr>
         </thead>
         <tbody>
-          <tr><td>中文简体</td><td><code>zh-CN</code></td><td>手动翻译</td><td><span class="badge badge-red">P0</span></td><td>基准语言，所有内容首先以此撰写</td></tr>
-          <tr><td>英文</td><td><code>en-US</code></td><td>手动翻译</td><td><span class="badge badge-red">P0</span></td><td>海外市场主力语言</td></tr>
-          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>自动繁简转换（OpenCC）</td><td><span class="badge badge-red">P0</span></td><td>基于 zh-CN 自动生成</td></tr>
-          <tr><td>德语</td><td><code>de</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>欧洲核心市场</td></tr>
-          <tr><td>法语</td><td><code>fr</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>欧洲 + 非洲市场</td></tr>
-          <tr><td>葡萄牙语</td><td><code>pt</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>巴西市场</td></tr>
-          <tr><td>西班牙语</td><td><code>es</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>拉美 + 欧洲市场</td></tr>
-          <tr><td>俄语</td><td><code>ru</code></td><td>机器翻译</td><td><span class="badge badge-red">P0</span></td><td>独联体市场</td></tr>
+          <tr><td>中文简体</td><td><code>zh-CN</code></td><td>原文，人工维护</td><td><span class="badge badge-red">✅ 开放</span></td><td>基准语言，所有内容首先以此撰写</td></tr>
+          <tr><td>英文</td><td><code>en-US</code></td><td>DeepSeek 一键翻译 + 核心页人工校对</td><td><span class="badge badge-red">✅ 开放</span></td><td>海外市场主力语言，服务端调用 DeepSeek API</td></tr>
+          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>OpenCC 本地转换（零 API 调用）</td><td><span class="badge badge-red">✅ 开放</span></td><td>构建时自动从 zh-CN 生成，不从 Strapi 取数据</td></tr>
+          <tr><td>德语</td><td><code>de</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>欧洲核心市场，代码已预留</td></tr>
+          <tr><td>法语</td><td><code>fr</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>欧洲 + 非洲市场，代码已预留</td></tr>
+          <tr><td>葡萄牙语</td><td><code>pt</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>巴西市场，代码已预留</td></tr>
+          <tr><td>西班牙语</td><td><code>es</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>拉美 + 欧洲市场，代码已预留</td></tr>
+          <tr><td>俄语</td><td><code>ru</code></td><td>DeepSeek 一键翻译（Phase N）</td><td><span class="badge badge-gray">❌ 重定向至 en-US</span></td><td>独联体市场，代码已预留</td></tr>
         </tbody>
       </table>
 
       <h3>4.3 next-intl 实现方案</h3>
 
+      <h4>i18n.config.ts — 全量语言定义</h4>
+
+<pre><code>// i18n.config.ts
+// next-intl 完整配置（Day 1全量定义，Phase 0只开放3个）
+export const locales = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'] as const
+export type Locale = typeof locales[number]
+export const defaultLocale = 'zh-CN'
+
+// Phase 0 激活的路由（其余重定向至 en-US）
+// de/fr/pt/es/ru 由市场战略决定激活时间，通过环境变量或此配置开关控制
+export const activeLocales: Locale[] = ['zh-CN', 'en-US', 'zh-TW']
+
+// zh-TW 特殊处理：不从 Strapi 取数据，而是 OpenCC 转换 zh-CN 内容
+// import { Converter } from 'opencc-js'
+// const converter = Converter({ from: 'cn', to: 'tw' })</code></pre>
+
       <h4>middleware.ts — 语言检测与重定向</h4>
 
 <pre><code>// middleware.ts
 import createMiddleware from 'next-intl/middleware';
+import { locales, defaultLocale, activeLocales } from './i18n.config';
 
 export default createMiddleware({
-  locales: ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru'],
-  defaultLocale: 'zh-CN',
-  localeDetection: true,  // 自动检测 Accept-Language header
-  localePrefix: 'always', // URL 始终包含 locale 前缀
+  locales,                            // 全量 8 个 locale（代码底座完整）
+  defaultLocale,
+  localeDetection: true,              // 自动检测 Accept-Language header
+  localePrefix: 'always',             // URL 始终包含 locale 前缀
 });
+
+// 注意：de/fr/pt/es/ru 路由存在于代码中但 Phase 0 不对外开放
+// 通过 activeLocales 配置控制语言切换器显示，未开放语言访问时重定向至 en-US
+// 激活新语言只需将其加入 activeLocales 数组，无需改表结构
 
 export const config = {
   // 匹配所有路径（排除 api / _next / 静态资源）

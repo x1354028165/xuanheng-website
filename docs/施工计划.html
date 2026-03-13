@@ -250,8 +250,8 @@
           <code>npx create-next-app@latest frontend --typescript --tailwind --app --src-dir</code>，确认 <code>src/app/</code> 结构存在</li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-2</span> 配置 Tailwind CSS + 字体<br>
           引入 Google Fonts：Plus Jakarta Sans + Inter，配置 <code>tailwind.config.ts</code> 字体变量</li>
-        <li><span class="checkbox">☐</span> <span class="task-id">P0-3</span> 配置 next-intl 多语言<br>
-          支持 locale：<code>zh-CN</code>（默认）、<code>en-US</code>，目录：<code>src/messages/zh-CN.json</code>、<code>src/messages/en-US.json</code>，路由：<code>/[locale]/...</code></li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-3</span> 配置 next-intl 多语言（基础路由，详细配置见 P0-Y）<br>
+          支持 locale：<code>zh-CN</code>（默认）、<code>en-US</code>、<code>zh-TW</code>（Phase 0 开放），底座定义全部8个 locale（zh-CN/en-US/zh-TW/de/fr/pt/es/ru），目录：<code>src/messages/zh-CN.json</code>（建立完整 key 结构），路由：<code>/[locale]/...</code></li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-4</span> 配置 Strapi v4<br>
           初始化至 <code>cms/</code>，数据库：PostgreSQL（本地开发用 SQLite），创建 API Token</li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-5</span> 基础布局组件<br>
@@ -264,11 +264,15 @@
           <code>npx shadcn-ui@latest init</code>，配置主题色：<code>--primary: #1A3FAD</code>，<code>--accent: #38C4E8</code></li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-9</span> 配置 Ant Design（CMS 插件目录）<br>
           <code>cd cms && npm install antd</code></li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-X</span> DeepSeek 翻译插件（Strapi 服务端）<br>
+          创建 <code>cms/src/api/translate/</code> 自定义 API；Controller 调用 DeepSeek API（model: deepseek-chat）；Strapi Admin Extension 注入「一键翻译」按钮；配置 <code>DEEPSEEK_API_KEY</code> 环境变量；测试：输入中文 → 返回英文，专业术语正确</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-Y</span> next-intl 全量配置（8语言底座，3语言激活）<br>
+          <code>i18n.config.ts</code> 定义全部8个locale；<code>middleware.ts</code> 只对 zh-CN/en-US/zh-TW 放行，其余重定向至 en-US；zh-TW 路由接入 OpenCC（<code>opencc-js</code>）处理；<code>messages/zh-CN.json</code> 建立完整key结构（Phase 2 填充翻译）</li>
       </ul>
 
       <h3>通过条件</h3>
       <div class="arch-box-success">
-        <strong>✅ 验收标准：</strong><code>npm run dev</code> 启动无报错，首页可访问，导航 + Footer 渲染正常，多语言路由 <code>/zh-CN/</code> <code>/en-US/</code> 均响应。
+        <strong>✅ 验收标准：</strong><code>npm run dev</code> 启动无报错，首页可访问，导航 + Footer 渲染正常，多语言路由 <code>/zh-CN/</code> <code>/en-US/</code> <code>/zh-TW/</code> 均响应，<code>/de/</code> 重定向至 <code>/en-US/</code>，DeepSeek 翻译插件 <code>/api/translate</code> 接口测试通过。
       </div>
     </div>
 
@@ -357,7 +361,7 @@
 
       <h3>任务清单</h3>
       <ul class="task-list">
-        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言切换 — 语言切换器（Header 右上角），zh-CN / en-US 人工翻译，zh-TW 自动繁简转换</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言切换（Phase 2 完善）— 语言切换器（Header 右上角，仅显示已激活路由）；AI 生成 <code>messages/en-US.json</code>（全部 UI 字符串）；OpenCC 自动生成 <code>messages/zh-TW.json</code>；de/fr/pt/es/ru JSON 文件创建占位结构（内容 Phase N 填充）；zh-TW 路由从 OpenCC 转换 zh-CN 内容，不从 Strapi 取独立数据</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-02</span> 全局搜索（前台内容全文检索）</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-03</span> Cookie 横幅 — 首次访问显示，接受后存 localStorage，关联隐私政策页</li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-04</span> 404 错误页（<code>src/app/not-found.tsx</code>）</li>
