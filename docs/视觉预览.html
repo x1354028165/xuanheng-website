@@ -699,19 +699,16 @@
       });
     });
 
-    // Software image switcher
-    const tabs = document.querySelectorAll(".sw-tab");
-    const imgs = document.querySelectorAll(".sw-img");
-    const panels = document.querySelectorAll(".sw-text-panel");
-    tabs.forEach(tab => {
+    // Software switcher: tabs + description below
+    const swTabs = document.querySelectorAll(".sw-tab");
+    const swDescs = document.querySelectorAll(".sw-desc-panel");
+    swTabs.forEach(tab => {
       tab.addEventListener("click", () => {
         const idx = +tab.dataset.idx;
-        tabs.forEach(t => t.classList.remove("active"));
-        imgs.forEach(i => i.classList.remove("active"));
-        panels.forEach(p => p.classList.remove("active"));
+        swTabs.forEach(t => t.classList.remove("active"));
+        swDescs.forEach(p => p.classList.remove("active"));
         tab.classList.add("active");
-        imgs[idx].classList.add("active");
-        panels[idx].classList.add("active");
+        swDescs[idx].classList.add("active");
       });
     });
   </script>
