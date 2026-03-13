@@ -347,15 +347,21 @@
       padding: 40px 48px;
     }
     .trust-inner {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      gap: 24px;
+      gap: 0;
     }
     .trust-item {
       text-align: center;
+      flex: 1;
+      padding: 0 32px;
+      border-right: 1px solid var(--gray-200);
+    }
+    .trust-item:last-child {
+      border-right: none;
     }
     .trust-number {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -375,11 +381,7 @@
       color: var(--gray-400);
       margin-top: 4px;
     }
-    .trust-divider {
-      width: 1px;
-      height: 56px;
-      background: var(--gray-200);
-    }
+
 
     /* ─── SECTION COMMON ─── */
     .section {
@@ -963,19 +965,16 @@
       <div class="trust-label">兼容品牌</div>
       <div class="trust-note">⚠️ 数字待确认</div>
     </div>
-    <div class="trust-divider"></div>
     <div class="trust-item">
       <div class="trust-number">XX+</div>
       <div class="trust-label">覆盖国家</div>
       <div class="trust-note">⚠️ 数字待确认</div>
     </div>
-    <div class="trust-divider"></div>
     <div class="trust-item">
       <div class="trust-number">XX+</div>
       <div class="trust-label">已交付项目</div>
       <div class="trust-note">⚠️ 数字待确认</div>
     </div>
-    <div class="trust-divider"></div>
     <div class="trust-item">
       <div class="trust-number">8</div>
       <div class="trust-label">语言支持</div>
