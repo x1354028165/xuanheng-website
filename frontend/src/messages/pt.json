@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "solutions": "解决方案",
+    "products": "产品中心",
+    "ecosystem": "兼容生态",
+    "help": "帮助中心",
+    "about": "关于我们",
+    "contact": "联系我们"
+  },
+  "footer": {
+    "company": "旭衡电子",
+    "companyDesc": "专注工业自动化与控制技术",
+    "products": "产品中心",
+    "solutions": "解决方案",
+    "contact": "联系方式",
+    "address": "公司地址",
+    "phone": "联系电话",
+    "email": "电子邮箱",
+    "copyright": "© {year} 旭衡电子 版权所有"
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "viewAll": "查看全部",
+    "submit": "提交",
+    "cancel": "取消",
+    "confirm": "确认",
+    "loading": "加载中...",
+    "error": "出错了",
+    "retry": "重试",
+    "search": "搜索",
+    "noResults": "暂无结果",
+    "backToHome": "返回首页",
+    "download": "下载",
+    "share": "分享"
+  },
+  "home": {
+    "heroTitle": "工业控制，始终如一",
+    "heroSubtitle": "旭衡电子 — 您值得信赖的工业自动化解决方案提供商",
+    "heroCta": "了解解决方案",
+    "featuresTitle": "核心优势",
+    "solutionsTitle": "解决方案",
+    "productsTitle": "热门产品",
+    "partnersTitle": "合作伙伴",
+    "ctaTitle": "准备好开始了吗？",
+    "ctaSubtitle": "联系我们，获取专属解决方案",
+    "ctaButton": "立即咨询"
+  },
+  "solutions": {
+    "title": "解决方案",
+    "subtitle": "为不同行业提供专业的自动化控制方案",
+    "viewDetail": "查看详情"
+  },
+  "products": {
+    "title": "产品中心",
+    "subtitle": "高品质工业自动化产品",
+    "specifications": "技术参数",
+    "documents": "相关文档",
+    "relatedProducts": "相关产品"
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "旭衡电子 — 工业控制领域的可靠伙伴",
+    "history": "发展历程",
+    "team": "团队介绍",
+    "certifications": "资质认证"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "我们随时准备为您服务",
+    "form": {
+      "name": "姓名",
+      "company": "公司名称",
+      "phone": "联系电话",
+      "email": "电子邮箱",
+      "message": "留言内容",
+      "submit": "发送消息"
+    },
+    "success": "消息已发送，我们会尽快与您联系",
+    "error": "发送失败，请稍后重试"
+  },
+  "help": {
+    "title": "帮助中心",
+    "subtitle": "常见问题与技术支持",
+    "faq": "常见问题",
+    "docs": "技术文档",
+    "support": "技术支持"
+  }
+}

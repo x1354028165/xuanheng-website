@@ -7,3 +7,4 @@ dist/
 .nuxt/
 *.log
 .DS_Store
+.secrets

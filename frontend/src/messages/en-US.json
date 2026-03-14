@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "solutions": "Solutions",
+    "products": "Products",
+    "ecosystem": "Ecosystem",
+    "help": "Help Center",
+    "about": "About Us",
+    "contact": "Contact Us"
+  },
+  "footer": {
+    "company": "AlwaysControl",
+    "companyDesc": "Specializing in industrial automation and control technology",
+    "products": "Products",
+    "solutions": "Solutions",
+    "contact": "Contact",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "copyright": "© {year} AlwaysControl Technology. All rights reserved."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "search": "Search",
+    "noResults": "No results found",
+    "backToHome": "Back to Home",
+    "download": "Download",
+    "share": "Share"
+  },
+  "home": {
+    "heroTitle": "Industrial Control, Always Reliable",
+    "heroSubtitle": "AlwaysControl — Your trusted industrial automation solution provider",
+    "heroCta": "Explore Solutions",
+    "featuresTitle": "Core Advantages",
+    "solutionsTitle": "Solutions",
+    "productsTitle": "Featured Products",
+    "partnersTitle": "Partners",
+    "ctaTitle": "Ready to get started?",
+    "ctaSubtitle": "Contact us for a customized solution",
+    "ctaButton": "Get in Touch"
+  },
+  "solutions": {
+    "title": "Solutions",
+    "subtitle": "Professional automation solutions for various industries",
+    "viewDetail": "View Details"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "High-quality industrial automation products",
+    "specifications": "Specifications",
+    "documents": "Documents",
+    "relatedProducts": "Related Products"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "AlwaysControl — A reliable partner in industrial control",
+    "history": "History",
+    "team": "Our Team",
+    "certifications": "Certifications"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are always ready to serve you",
+    "form": {
+      "name": "Name",
+      "company": "Company",
+      "phone": "Phone",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send Message"
+    },
+    "success": "Message sent successfully. We will get back to you soon.",
+    "error": "Failed to send. Please try again later."
+  },
+  "help": {
+    "title": "Help Center",
+    "subtitle": "FAQ and technical support",
+    "faq": "FAQ",
+    "docs": "Documentation",
+    "support": "Technical Support"
+  }
+}
