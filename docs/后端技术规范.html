@@ -429,16 +429,23 @@
 </tbody>
 </table>
 
-<h4>product-relations（产品关联关系）</h4>
+<h4>product-relations（CMS-12）— 产品-解决方案关联</h4>
 <table>
 <thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
 <tbody>
-<tr><td><code>sourceProduct</code></td><td>Relation（M2O → products）</td><td>✅</td><td>来源产品</td></tr>
-<tr><td><code>targetProduct</code></td><td>Relation（M2O → products）</td><td>✅</td><td>目标产品</td></tr>
-<tr><td><code>relationType</code></td><td>Enumeration</td><td>✅</td><td><code>accessory</code> | <code>replacement</code> | <code>upgrade</code> | <code>bundle</code></td></tr>
-<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>排序权重</td></tr>
+<tr><td><code>product</code></td><td>Relation（M2O → products）</td><td>✅</td><td>关联的产品</td></tr>
+<tr><td><code>solution</code></td><td>Relation（M2O → solutions）</td><td>✅</td><td>关联的解决方案</td></tr>
+<tr><td><code>showOnProduct</code></td><td>Boolean</td><td>❌</td><td>「在产品页显示」开关，默认 true</td></tr>
+<tr><td><code>showOnSolution</code></td><td>Boolean</td><td>❌</td><td>「在解决方案页显示」开关，默认 true</td></tr>
+<tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>展示顺序权重，默认 0</td></tr>
 </tbody>
 </table>
+<p><strong>用途：</strong></p>
+<ul>
+  <li>产品页：展示"适用场景"卡片（showOnProduct=true 的关联）</li>
+  <li>解决方案页：展示"配套产品"卡片（showOnSolution=true 的关联）</li>
+  <li>修改后两端页面同时触发 ISR 刷新</li>
+</ul>
 
 <h4>repair-tickets（报修工单）</h4>
 <table>

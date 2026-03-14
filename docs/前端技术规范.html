@@ -499,7 +499,7 @@
           <tr><td><code>/[locale]</code></td><td>EP-01</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>首页，Hero / 信任数据 / 方案卡片均 CMS 驱动</td></tr>
           <tr><td><code>/[locale]/products</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>产品中心列表页</td></tr>
           <tr><td><code>/[locale]/products/[slug]</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>单产品详情页（动态路由）</td></tr>
-          <tr><td><code>/[locale]/solutions</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>解决方案总览页：展示5大解决方案入口卡片（封面图/标题/摘要/slug），数据来源 GET /api/solutions（5条），SEO metadata 存入 page-configs Single Type，Sitemap 优先级 0.8</td></tr>
+          <tr><td><code>/[locale]/solutions</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>解决方案总览页：展示5大解决方案入口卡片（封面图/标题/摘要/slug），数据来源 GET /api/solutions（5条），SEO metadata 调用 CMS-17（seo-configs）：GET /api/seo-configs?filters[pageKey][$eq]=solutions，Sitemap 优先级 0.8</td></tr>
           <tr><td><code>/[locale]/solutions/[scenario]</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>5 个场景页：hems / ess / evcms / vpp / pqms</td></tr>
           <tr><td><code>/[locale]/ecosystem</code></td><td>EP-03</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>兼容生态，品牌列表 + 筛选</td></tr>
           <tr><td><code>/[locale]/support</code></td><td>EP-04</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>帮助中心（FAQ / 文档下载）</td></tr>

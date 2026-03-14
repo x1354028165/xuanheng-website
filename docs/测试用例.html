@@ -158,7 +158,7 @@
 前台：Next.js 14 + Strapi v4 | 部署：Vercel + 阿里云 ECS Docker | 语言：8 种</blockquote>
 
 <div class="stats-bar">
-  <div class="stat-item"><strong>210</strong>测试用例总计</div>
+  <div class="stat-item"><strong>216</strong>测试用例总计</div>
   <div class="stat-item"><strong>8</strong>测试模块</div>
   <div class="stat-item"><strong><span class="badge badge-p0">P0</span></strong>上线阻断</div>
   <div class="stat-item"><strong><span class="badge badge-p1">P1</span></strong>重要功能</div>
@@ -2405,7 +2405,7 @@
 <hr>
 
 <!-- ==================== 八、API 接口测试 ==================== -->
-<h2 id="sec-api">八、API 接口测试（TC-A01 ~ TC-A20）</h2>
+<h2 id="sec-api">八、API 接口测试（TC-A01 ~ TC-A24）</h2>
 
 <div class="tc-card">
   <div class="tc-card-header"><span class="tc-card-id">TC-A01</span><span class="tc-card-name">GET /api/products 正常返回产品列表</span><span class="badge badge-p0">P0</span></div>
@@ -2452,13 +2452,13 @@
 </div>
 
 <div class="tc-card">
-  <div class="tc-card-header"><span class="tc-card-id">TC-A05</span><span class="tc-card-name">GET /api/news 分页返回新闻列表</span><span class="badge badge-p0">P0</span></div>
+  <div class="tc-card-header"><span class="tc-card-id">TC-A05</span><span class="tc-card-name">GET /api/articles?sort=publishedAt:desc&amp;locale=zh-CN 分页返回文章列表</span><span class="badge badge-p0">P0</span></div>
   <div class="tc-card-body">
-    <div class="tc-field"><div class="tc-label">前置条件</div>news 集合已发布数据</div>
+    <div class="tc-field"><div class="tc-label">前置条件</div>articles 集合已发布数据，locale=zh-CN 有内容</div>
     <div class="tc-field"><div class="tc-label">操作步骤</div>
-      <ol><li>执行 <code>curl -s "https://strapi-domain.com/api/news?pagination[page]=1&pagination[pageSize]=10"</code></li><li>检查分页字段</li></ol>
+      <ol><li>执行 <code>curl -s "https://strapi-domain.com/api/articles?sort=publishedAt:desc&amp;locale=zh-CN&amp;pagination[page]=1&amp;pagination[pageSize]=10"</code></li><li>检查分页字段及排序</li></ol>
     </div>
-    <div class="tc-field"><div class="tc-label">预期结果</div>返回 <code>200</code>；响应包含 <code>meta.pagination.total</code>、<code>meta.pagination.page</code> 等分页字段</div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>返回 <code>200</code>；响应包含 <code>meta.pagination.total</code>、<code>meta.pagination.page</code> 等分页字段；文章按 publishedAt 倒序排列</div>
   </div>
 </div>
 
@@ -2677,6 +2677,28 @@
     </div>
     <div class="tc-field"><div class="tc-label">预期结果</div>前端展示上一次 ISR 缓存的内容，页面正常渲染，不报错，不白屏；符合降级策略（宁可显示旧内容，也不白屏）</div>
     <div class="tc-field"><div class="tc-label">自动化</div>手动测试（需停止服务，不适合全自动化）</div>
+  </div>
+</div>
+
+<div class="tc-card">
+  <div class="tc-card-header"><span class="tc-card-id">TC-A24</span><span class="tc-card-name">GET /api/download/:id 下载中转接口</span><span class="badge badge-p1">P1</span></div>
+  <div class="tc-card-body">
+    <div class="tc-field"><div class="tc-label">前置条件</div>download-files 集合已有上线文件记录；自定义路由 GET /api/download/:id 已部署</div>
+    <div class="tc-field"><div class="tc-label">操作步骤</div>
+      <ol>
+        <li>正常情况：执行 <code>curl -I "https://strapi-domain.com/api/download/1"</code></li>
+        <li>ID不存在：执行 <code>curl -I "https://strapi-domain.com/api/download/99999"</code></li>
+        <li>文件已下线：将文件记录标记为下线状态后访问</li>
+      </ol>
+    </div>
+    <div class="tc-field"><div class="tc-label">预期结果</div>
+      <ul>
+        <li>正常情况：返回 <code>302</code>，Location 头指向 CDN 地址，数据库 download_count+1</li>
+        <li>ID不存在：返回 <code>404</code></li>
+        <li>文件已下线：返回 <code>410</code></li>
+      </ul>
+    </div>
+    <div class="tc-field"><div class="tc-label">自动化</div>集成测试；文件 <code>tests/integration/download.spec.ts</code></div>
   </div>
 </div>
 

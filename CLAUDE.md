@@ -27,8 +27,8 @@ cd cms && npm run develop           # http://localhost:1337/admin
 - SSR 强制：所有页面必须服务端渲染，禁止纯客户端 SPA
 
 ### 颜色规则
-- 主色（品牌青）：`#38C4E8` → CSS var: `--brand`
-- 辅色（深蓝）：`#1A3FAD` → CSS var: `--accent`
+- 主色（深宝蓝）：`#1A3FAD` → CSS var: `--primary`
+- 强调色（品牌青）：`#38C4E8` → CSS var: `--accent`
 - 深背景：`#0C1829`
 - 禁止在同一视图使用两种品牌色
 - `#38C4E8` 禁止用作大面积背景色（只用于CTA/强调）
@@ -58,7 +58,7 @@ cd cms && npm run develop           # http://localhost:1337/admin
 | 前端技术规范 | `docs/前端技术规范.html` | Next.js/Tailwind/测试规范 |
 | 后端技术规范 | `docs/后端技术规范.html` | Strapi Content Type/API/DDL |
 | 测试用例 | `docs/测试用例.html` | TC-A~TC-T 215条测试用例 |
-| 施工计划 | `docs/施工计划.html` | Phase 0-7 任务清单 |
+| 施工计划 | `施工计划.md` | Phase 0-7 任务清单 |
 
 ## 环境变量
 ```env
@@ -66,6 +66,9 @@ cd cms && npm run develop           # http://localhost:1337/admin
 NEXT_PUBLIC_API_URL=http://localhost:1337
 NEXT_PUBLIC_SITE_URL=https://alwayscontrol.com.cn
 STRAPI_WEBHOOK_SECRET=<生成随机字符串>
+STRAPI_PUBLIC_TOKEN=<只读API Token，Next.js ISR拉取数据用>
+STRAPI_WRITE_TOKEN=<限权写Token，仅leads/repair-tickets create权限，表单提交用>
+# STRAPI_ADMIN_TOKEN=<禁止在Next.js API Route中使用，仅限服务端管理脚本>
 
 # cms/.env
 DATABASE_CLIENT=postgres
@@ -90,7 +93,7 @@ JWT_SECRET=<生成>
 - 保存草稿 → 不触发翻译
 - 新增语言 → 批量翻译所有现有内容 → 前台立即出现
 
-**UI词条**：存 Strapi CMS-14，ISR+Webhook 实时生效，不用重新部署
+**UI词条**：存 Strapi CMS-15，ISR+Webhook 实时生效，不用重新部署
 
 **draftAndPublish 必须开启**：articles / products / solutions / case-studies / page-configs
 
