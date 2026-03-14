@@ -585,7 +585,18 @@
       <h4>新增：合作伙伴 Logo 墙</h4>
       <p>首页底部新增品牌展示区块，数据由 CMS 维护，运营人员自助增删品牌 Logo 与排序，无需发布代码。Logo 墙与"兼容生态页"共用同一份品牌数据源，仅展示状态为「已支持」且设置为可见的品牌。</p>
 
-      <h3>4.2 解决方案页（5个场景）</h3>
+      <h3>4.2 解决方案总览页 + 5个场景页</h3>
+
+      <div class="gray-box">
+        <h4>4.2.0 解决方案总览页（新增需求）</h4>
+        <p><strong>路由：</strong><code>/[locale]/solutions</code></p>
+        <p><strong>功能：</strong>展示5大解决方案的入口卡片，每张卡片包含：封面图 / 标题 / 摘要 / slug（跳转到对应场景详情页）。</p>
+        <p><strong>数据来源：</strong><code>GET /api/solutions?locale={locale}&amp;pagination[limit]=5</code>（现有 solutions Collection Type）</p>
+        <p><strong>SEO Metadata：</strong>从 <code>page-configs</code> Single Type 获取（不放入 CMS-15 多语言字典）</p>
+        <p><strong>Sitemap 优先级：</strong>0.8（仅次于首页）</p>
+        <p><strong>渲染模式：</strong>ISR revalidate=3600，接入 Webhook 刷新链路</p>
+      </div>
+
       <p>解决方案板块以客户业务场景为核心，每个场景页面完整覆盖：场景背景与痛点 → 方案架构与接入方式 → 核心能力 → 应用案例。产品作为解决手段出现，而非主角。</p>
       <p>重构后官网共规划 <strong>5 个场景页</strong>：</p>
 
@@ -1399,8 +1410,8 @@ API Key 管理页：
         <h4>5.4 新闻与动态管理需求</h4>
         <p>管理官网"最新动态"板块的内容，替代现有的代码写死方式。<strong>核心需求：</strong></p>
         <ul>
-          <li>支持富文本编辑，可插入图片、标题、段落、列表等</li>
-          <li>每篇文章维护 zh-CN 为核心语言版本；zh-TW 由 OpenCC 本地自动转换；en-US 通过 Strapi 后台「一键翻译」按钮（DeepSeek API）生成，核心页面一次性人工校对；de/fr/pt/es/ru Phase N 开放时同样通过 DeepSeek 一键翻译生成初稿</li>
+          <li>支持 <strong>Markdown 富文本编辑</strong>（全站统一 Markdown 格式，Strapi 后台安装 Toast UI Editor 插件，非技术编辑可视化操作，支持插入图片、标题、段落、列表、代码片段等）</li>
+          <li>每篇文章维护 zh-CN 为核心语言版本；<strong>zh-TW 不存储，由前端 opencc-js 实时从 zh-CN 转换</strong>；en-US 通过 DeepSeek API 自动翻译，核心页面一次性人工校对；de/fr/pt/es/ru Phase N 开放时同样通过 DeepSeek 一键翻译生成初稿（Markdown 文本直接翻译，无 AST 破坏风险）</li>
           <li>支持设置发布时间（可提前写好定时发布）</li>
           <li>文章列表支持按日期、标题搜索</li>
         </ul>
@@ -1478,8 +1489,8 @@ API Key 管理页：
         <p><strong>核心需求：</strong></p>
         <ul>
           <li>支持管理官网所有语言的 UI 公共词条（按 key-value 对维护）</li>
-          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；zh-TW 由 zh-CN 自动转换；de / fr / pt / es / ru 由 en-US 机器翻译初稿，支持人工校对覆盖</li>
-          <li>支持新增语言：当官网需要扩展新语言时（如 de），在后台添加语言后即可开始维护词条，无需修改代码结构</li>
+          <li>词条按语言分组维护，核心语言（zh-CN / en-US）人工维护；<strong>zh-TW 不在数据库存储</strong>，由前端 opencc-js 实时从 zh-CN 转换（数据库零存储）；de / fr / pt / es / ru 由 DeepSeek 机器翻译初稿，支持人工校对覆盖</li>
+          <li>支持新增语言（<strong>全自动门控</strong>）：新增语言时批量翻译在后台异步运行，翻译完成后系统自动将该语言加入前台语言列表（<code>isTranslationComplete</code> 标记置 true），翻译期间前台不显示该语言选项，无需管理员手动操作</li>
           <li>支持批量导入/导出（Excel/CSV），方便交给翻译人员处理后批量回填</li>
           <li>词条修改后官网实时生效，无需重新部署</li>
           <li>支持搜索词条 key 或内容，快速定位需要修改的词条</li>
@@ -1488,20 +1499,20 @@ API Key 管理页：
         <p style="font-size:13px; font-weight: 600; margin-top: 12px;">字典示例：</p>
         <table style="font-size:13px;">
           <thead>
-            <tr><th>Key</th><th>zh-CN（核心）</th><th>zh-TW（自动转换）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机器翻译）</th></tr>
+            <tr><th>Key</th><th>zh-CN（核心）</th><th>en-US（核心）</th><th>de/fr/pt/es/ru（机器翻译）</th><th>zh-TW</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>nav.solutions</code></td><td>解决方案</td><td>解決方案（自动）</td><td>Solutions</td><td>Lösungen / Solutions / Soluções…（机器翻译）</td></tr>
-            <tr><td><code>nav.products</code></td><td>产品中心</td><td>產品中心（自动）</td><td>Products</td><td>Produkte / Produits…（机器翻译）</td></tr>
-            <tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>聯絡我們（自动）</td><td>Contact Us</td><td>Kontakt / Contactez…（机器翻译）</td></tr>
-            <tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>暫無資料（自动）</td><td>No results found</td><td>Keine Ergebnisse…（机器翻译）</td></tr>
+            <tr><td><code>nav.solutions</code></td><td>解决方案</td><td>Solutions</td><td>Lösungen / Solutions / Soluções…（机器翻译）</td><td>前端 opencc-js 自动转换，不存储</td></tr>
+            <tr><td><code>nav.products</code></td><td>产品中心</td><td>Products</td><td>Produkte / Produits…（机器翻译）</td><td>前端 opencc-js 自动转换，不存储</td></tr>
+            <tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>Contact Us</td><td>Kontakt / Contactez…（机器翻译）</td><td>前端 opencc-js 自动转换，不存储</td></tr>
+            <tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>No results found</td><td>Keine Ergebnisse…（机器翻译）</td><td>前端 opencc-js 自动转换，不存储</td></tr>
           </tbody>
         </table>
 <pre>后台操作界面：
 多语言字典
   ├── 语言管理    — 查看/新增官网支持的语言列表
   │   当前：zh-CN / zh-TW / en-US / de / fr / pt / es / ru
-  │   [+ 新增语言]  ← 新增后前台语言选择器自动出现该选项（需设为"已发布"）
+  │   [+ 新增语言]  ← 触发批量翻译，翻译完成后（isTranslationComplete=true）前台语言选择器自动出现该选项，全自动门控无需手动操作
   │
   └── 词条管理    — 按语言 Tab 切换，批量编辑各语言词条
       [搜索词条 Key 或内容]
@@ -1856,7 +1867,8 @@ API Key 管理页：
         <li>zh-CN 内容录入 → 点「发布」→ Strapi Lifecycle Hook（afterPublish）自动触发 DeepSeek 翻译所有激活语言</li>
         <li>zh-TW 由 OpenCC 自动从 zh-CN 生成，无需人工介入，无 API 调用</li>
         <li>Strapi 后台支持人工修改机翻结果（字段级覆盖）</li>
-        <li>新增语言时：Strapi 后台操作 → 批量翻译所有现有内容 → 前台立即出现新语言选项</li>
+        <li>新增语言时（<strong>全自动门控</strong>）：Strapi 后台操作 → 批量翻译在后台异步运行 → 翻译完成 <code>isTranslationComplete=true</code> → 前台语言选择器自动出现该语言（翻译期间前台不显示，无需管理员手动操作）</li>
+        <li><strong>翻译竞态修复：</strong>禁用多语言 Content Type 的 Strapi 原生 Webhook，正确顺序为 afterPublish → DeepSeek 异步翻译 → 翻译完成落库 → 代码手动触发 /api/revalidate；守卫条件防止翻译结果保存再次触发翻译死循环</li>
         <li>每条内容显示翻译状态：✅ 已翻译 / ⏳ 待翻译 / 🤖 机翻待校对</li>
       </ul>
 

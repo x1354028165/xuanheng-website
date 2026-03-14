@@ -499,16 +499,16 @@
           <tr><td><code>/[locale]</code></td><td>EP-01</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>首页，Hero / 信任数据 / 方案卡片均 CMS 驱动</td></tr>
           <tr><td><code>/[locale]/products</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>产品中心列表页</td></tr>
           <tr><td><code>/[locale]/products/[slug]</code></td><td>EP-06</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>单产品详情页（动态路由）</td></tr>
-          <tr><td><code>/[locale]/solutions</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>解决方案列表页</td></tr>
+          <tr><td><code>/[locale]/solutions</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>解决方案总览页：展示5大解决方案入口卡片（封面图/标题/摘要/slug），数据来源 GET /api/solutions（5条），SEO metadata 存入 page-configs Single Type，Sitemap 优先级 0.8</td></tr>
           <tr><td><code>/[locale]/solutions/[scenario]</code></td><td>EP-02</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>5 个场景页：hems / ess / evcms / vpp / pqms</td></tr>
           <tr><td><code>/[locale]/ecosystem</code></td><td>EP-03</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>兼容生态，品牌列表 + 筛选</td></tr>
           <tr><td><code>/[locale]/support</code></td><td>EP-04</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>帮助中心（FAQ / 文档下载）</td></tr>
-          <tr><td><code>/[locale]/about</code></td><td>EP-07</td><td><span class="badge badge-green">SSG</span></td><td>关于我们（公司介绍）</td></tr>
+          <tr><td><code>/[locale]/about</code></td><td>EP-07</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>关于我们（公司介绍，已从 SSG 改为 ISR revalidate=3600，接入 Webhook 刷新链路）</td></tr>
           <tr><td><code>/[locale]/about/news</code></td><td>EP-07</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>新闻列表</td></tr>
           <tr><td><code>/[locale]/about/news/[slug]</code></td><td>EP-07</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>新闻详情（动态路由）</td></tr>
           <tr><td><code>/[locale]/about/careers</code></td><td>EP-07</td><td><span class="badge badge-green">SSG</span></td><td>加入我们</td></tr>
-          <tr><td><code>/[locale]/contact</code></td><td>EP-08</td><td><span class="badge badge-green">SSG</span></td><td>联系我们（含表单，表单提交走 API Route）</td></tr>
-          <tr><td><code>/[locale]/privacy</code></td><td>EP-09</td><td><span class="badge badge-green">SSG</span></td><td>隐私政策</td></tr>
+          <tr><td><code>/[locale]/contact</code></td><td>EP-08</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>联系我们（含表单，表单提交走 API Route；已从 SSG 改为 ISR revalidate=3600，接入 Webhook 刷新链路）</td></tr>
+          <tr><td><code>/[locale]/privacy</code></td><td>EP-09</td><td><span class="badge badge-blue">ISR 3600s</span></td><td>隐私政策（已从 SSG 改为 ISR revalidate=3600，接入 Webhook 刷新链路）</td></tr>
         </tbody>
       </table>
 
@@ -596,7 +596,7 @@ export async function generateStaticParams() {
         <tbody>
           <tr><td>中文简体</td><td><code>zh-CN</code></td><td>人工维护</td><td><span class="badge badge-red">✅ 激活</span></td><td>原文，核心语言</td></tr>
           <tr><td>英文</td><td><code>en-US</code></td><td>人工维护</td><td><span class="badge badge-red">✅ 激活</span></td><td>核心语言，人工校对</td></tr>
-          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>OpenCC 本地转换（零 API 调用）</td><td><span class="badge badge-red">✅ 激活</span></td><td>构建时自动从 zh-CN 转换</td></tr>
+          <tr><td>中文繁体</td><td><code>zh-TW</code></td><td>前端 <code>opencc-js</code> 实时转换（数据库零存储，不建 zh-TW locale 数据）</td><td><span class="badge badge-red">✅ 激活</span></td><td>zh-TW 路由在数据拉取层拦截，强制请求 zh-CN 数据，渲染前通过 opencc-js 转换（from:'cn' to:'twp'）</td></tr>
           <tr><td>德语</td><td><code>de</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
           <tr><td>法语</td><td><code>fr</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
           <tr><td>葡萄牙语</td><td><code>pt</code></td><td>DeepSeek 自动翻译 + 人工可覆盖</td><td><span class="badge badge-red">✅ 激活</span></td><td>发布时自动触发翻译</td></tr>
@@ -618,11 +618,14 @@ export const defaultLocale = 'zh-CN'
 // 语言列表从 Strapi 动态获取（不写死），用于前台语言切换器
 // GET /api/i18n/locales → 返回当前激活的语言列表
 
-// zh-TW 特殊处理：OpenCC 本地转换，零 API 调用
+// zh-TW 特殊处理：数据库零存储，前端实时转换
+// zh-TW 路由在数据拉取层拦截，强制请求 zh-CN 数据，渲染前通过 opencc-js 转换
+// 示例：
 import { Converter } from 'opencc-js'
 const twConverter = Converter({ from: 'cn', to: 'twp' })
+// 使用：const twContent = locale === 'zh-TW' ? twConverter(zhCNContent) : zhCNContent
 
-// UI字符串从 Strapi CMS-14 动态获取（非静态JSON文件）
+// UI字符串从 Strapi CMS-15 动态获取（CMS-15 = 多语言字典，无 zh_TW 字段）
 // ISR revalidate + Webhook 触发刷新</code></pre>
 
       <h4>middleware.ts — 语言检测与路由</h4>
@@ -646,14 +649,16 @@ export const config = {
   matcher: ['/((?!api|_next|.*\\..*).*)'],
 };</code></pre>
 
-      <h4>UI 字符串获取方式（CMS-14 动态获取）</h4>
+      <h4>UI 字符串获取方式（CMS-15 动态获取 + 本地 JSON 兜底）</h4>
 
       <div class="highlight">
-        <strong>UI 字符串不使用静态 JSON 文件，而是从 Strapi CMS-14（多语言字典）动态获取。</strong><br>
+        <strong>UI 字符串优先从 Strapi CMS-15（多语言字典）动态获取，本地 JSON 文件作为兜底。</strong><br>
+        降级链：Strapi API → 本地 <code>messages/*.json</code> → <code>en-US</code> → <code>zh-CN</code><br>
+        CI/CD：每次构建前执行 <code>prebuild</code> 脚本，从 Strapi 导出最新词条覆写 <code>messages/*.json</code>（<code>package.json</code> 补充：<code>"prebuild": "node scripts/sync-i18n.js"</code>）<br>
         通过 ISR 缓存（revalidate），Webhook 触发刷新，修改词条后5秒内前台生效，无需重新部署。
       </div>
 
-<pre><code>// lib/i18n-client.ts — 从 Strapi CMS-14 获取 UI 词条
+<pre><code>// lib/i18n-client.ts — 从 Strapi CMS-15 获取 UI 词条（含本地兜底）
 export async function getI18nMessages(locale: string) {
   const res = await fetch(
     `${process.env.STRAPI_URL}/api/i18n-keys?locale=${locale}&pagination[limit]=-1`,
@@ -691,22 +696,43 @@ export async function getMessages(locale: string) {
     notFound();
   }
 
+  // zh-TW 特殊处理：永远走 zh-CN+OpenCC 路径，不参与通用降级链
+  if (locale === 'zh-TW') {
+    const zhCNMessages = (await import('../messages/zh-CN.json')).default;
+    // 实际文本渲染时在组件层通过 opencc-js 转换，messages 仍返回 zh-CN 结构
+    return zhCNMessages;
+  }
+
   try {
+    // 优先从本地 JSON 兜底文件获取（由 prebuild 脚本从 Strapi 同步）
     return (await import(`../messages/${locale}.json`)).default;
   } catch {
-    // 降级链：任意语言 → zh-CN，绝不抛错
-    console.warn(`[i18n] Missing messages for locale: ${locale}, falling back to zh-CN`);
-    return (await import('../messages/zh-CN.json')).default;
+    // 降级链：target → en-US → zh-CN，绝不抛错（zh-TW 已在上方单独处理，不参与此链）
+    console.warn(`[i18n] Missing messages for locale: ${locale}, trying en-US...`);
+    try {
+      return (await import('../messages/en-US.json')).default;
+    } catch {
+      console.warn('[i18n] en-US missing, falling back to zh-CN');
+      return (await import('../messages/zh-CN.json')).default;
+    }
   }
 }
 
-// CMS 内容降级：Strapi 多语言字段为空时的降级
+// CMS 内容降级：Strapi 多语言字段为空时的降级（新文章10秒窗口期兜底）
+// 若目标语言数据为 null（新文章未翻译完），降级顺序：target → en-US → zh-CN
+// 严禁前端抛出白屏或 404
+// 注意：zh-TW 不参与此降级链，永远走 zh-CN+OpenCC 路径
 export function getLocalizedField&lt;T&gt;(
   data: Record&lt;string, T&gt;,
   locale: string,
   fallbackLocale: string = 'zh-CN'
 ): T | undefined {
-  return data[locale] ?? data[fallbackLocale] ?? Object.values(data)[0];
+  if (locale === 'zh-TW') {
+    // zh-TW 强制使用 zh-CN 数据，由调用方负责 OpenCC 转换
+    return data['zh-CN'] ?? Object.values(data)[0];
+  }
+  // 通用降级链：target → en-US → zh-CN
+  return data[locale] ?? data['en-US'] ?? data[fallbackLocale] ?? Object.values(data)[0];
 }</code></pre>
     </div>
 
@@ -1004,8 +1030,8 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
           <tr><td>解决方案场景页</td><td>ISR</td><td>3600s</td><td>内容较稳定，Webhook 触发刷新即可</td></tr>
           <tr><td>新闻列表 / 详情</td><td>ISR</td><td>3600s</td><td>新闻发布后需较快可见</td></tr>
           <tr><td>兼容生态</td><td>ISR</td><td>3600s</td><td>品牌列表由 CMS 维护</td></tr>
-          <tr><td>关于我们 / 隐私政策</td><td>SSG</td><td>—</td><td>内容极少变化，构建时生成</td></tr>
-          <tr><td>联系我们</td><td>SSG</td><td>—</td><td>页面模板固定，表单提交走 API Route</td></tr>
+          <tr><td>关于我们（/about）/ 隐私政策（/privacy）</td><td>ISR</td><td>3600s</td><td>内容由 CMS 维护，改为 ISR revalidate=3600 接入 Webhook 刷新链路（原 SSG 已废弃）</td></tr>
+          <tr><td>联系我们（/contact）</td><td>ISR</td><td>3600s</td><td>页面文案由 CMS 维护，改为 ISR revalidate=3600 接入 Webhook 刷新链路（原 SSG 已废弃）</td></tr>
         </tbody>
       </table>
 
@@ -1081,11 +1107,12 @@ export async function POST(request: NextRequest) {
       <h3>7.3 Strapi API 客户端封装</h3>
 
 <pre><code>// lib/strapi.ts
+// ⚠️ 安全规范：数据拉取使用只读 Token（STRAPI_PUBLIC_TOKEN），严禁使用 STRAPI_ADMIN_TOKEN
 const STRAPI_URL = process.env.STRAPI_API_URL;
-const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
+const STRAPI_TOKEN = process.env.STRAPI_PUBLIC_TOKEN; // 只读 Token，仅 find/findOne 权限
 
 if (!STRAPI_URL) throw new Error('Missing STRAPI_API_URL env variable');
-if (!STRAPI_TOKEN) throw new Error('Missing STRAPI_API_TOKEN env variable');
+if (!STRAPI_TOKEN) throw new Error('Missing STRAPI_PUBLIC_TOKEN env variable');
 
 interface StrapiResponse&lt;T&gt; {
   data: T;
@@ -1787,15 +1814,15 @@ test('CMS发布 → 前端同步', async ({ page }) => {
   const res = await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}`, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`,
+      'Authorization': `Bearer ${process.env.STRAPI_PUBLIC_TOKEN}`, // 只读 Token
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ data: { title: `集成测试_${timestamp}` } })
   })
-  // 2. 发布 → 触发 Webhook → ISR revalidate
+  // 2. 发布 → 触发 Webhook → ISR revalidate（集成测试使用 STRAPI_PUBLIC_TOKEN 只读 Token）
   await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}/actions/publish`, {
     method: 'POST',
-    headers: { 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}` }
+    headers: { 'Authorization': `Bearer ${process.env.STRAPI_PUBLIC_TOKEN}` }
   })
   // 3. 等待 ISR（最多5秒）
   await page.waitForTimeout(3000)
@@ -1808,7 +1835,7 @@ test('CMS发布 → 前端同步', async ({ page }) => {
 test('草稿保护：撤回发布 → 前端不可见', async ({ page }) => {
   await fetch(`${process.env.STRAPI_URL}/api/articles/${TEST_ARTICLE_ID}/actions/unpublish`, {
     method: 'POST',
-    headers: { 'Authorization': `Bearer ${process.env.STRAPI_TOKEN}` }
+    headers: { 'Authorization': `Bearer ${process.env.STRAPI_PUBLIC_TOKEN}` }
   })
   await page.waitForTimeout(3000)
   await page.goto('/zh-CN/news')

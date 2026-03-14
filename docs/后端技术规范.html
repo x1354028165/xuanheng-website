@@ -222,7 +222,7 @@
 <h3 id="s2-1">2.1 设计原则</h3>
 <ul>
 <li>所有面向前台展示的内容必须开启 Strapi <strong>i18n 插件</strong>（多语言字段）</li>
-<li>富文本字段使用 Strapi 内置 Rich Text（基于 Slate.js），不引入第三方编辑器</li>
+<li>富文本字段全站统一使用 <strong>Markdown</strong> 格式（替代 Slate.js RichText），Strapi 后台安装 Toast UI Editor 插件（WYSIWYG Markdown 编辑器）保证非技术编辑体验；DeepSeek 翻译时直接处理纯 Markdown 文本（String-in/String-out），无 AST 破坏风险</li>
 <li>关系字段（如产品 ↔ 解决方案）使用 Strapi <strong>多对多关系</strong>（many-to-many）</li>
 <li>所有 Collection Type 默认包含字段：<code>createdAt</code> / <code>updatedAt</code> / <code>publishedAt</code> / <code>locale</code></li>
 <li>UID 字段（slug）统一使用英文，基于 <code>name</code> 自动生成，确保 URL 友好</li>
@@ -268,7 +268,7 @@
 <tr><td><code>name</code></td><td>String</td><td>✅</td><td>✅</td><td>产品名称</td></tr>
 <tr><td><code>slug</code></td><td>UID（基于 name）</td><td>❌</td><td>✅</td><td>URL 标识，英文，全局唯一</td></tr>
 <tr><td><code>shortDescription</code></td><td>Text</td><td>✅</td><td>✅</td><td>简短描述，用于列表页</td></tr>
-<tr><td><code>fullDescription</code></td><td>RichText</td><td>✅</td><td>❌</td><td>完整产品描述（Slate.js）</td></tr>
+<tr><td><code>fullDescription</code></td><td>Markdown</td><td>✅</td><td>❌</td><td>完整产品描述（Markdown，Toast UI Editor 编辑）</td></tr>
 <tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>产品封面图</td></tr>
 <tr><td><code>gallery</code></td><td>Media（多图）</td><td>❌</td><td>❌</td><td>产品图片集</td></tr>
 <tr><td><code>specSheet</code></td><td>Media（PDF）</td><td>❌</td><td>❌</td><td>规格手册下载</td></tr>
@@ -286,7 +286,7 @@
 <tr><td><code>name</code></td><td>String</td><td>✅</td><td>✅</td><td>场景名称</td></tr>
 <tr><td><code>slug</code></td><td>UID</td><td>❌</td><td>✅</td><td><code>hems</code> | <code>ess</code> | <code>evcms</code> | <code>vpp</code> | <code>pqms</code></td></tr>
 <tr><td><code>tagline</code></td><td>String</td><td>✅</td><td>❌</td><td>副标题</td></tr>
-<tr><td><code>description</code></td><td>RichText</td><td>✅</td><td>✅</td><td>场景详细描述</td></tr>
+<tr><td><code>description</code></td><td>Markdown</td><td>✅</td><td>✅</td><td>场景详细描述（Markdown）</td></tr>
 <tr><td><code>heroImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>场景主图</td></tr>
 <tr><td><code>features</code></td><td>JSON</td><td>✅</td><td>❌</td><td>功能点列表（结构化数组）</td></tr>
 <tr><td><code>relatedProducts</code></td><td>Relation（M2M → products）</td><td>❌</td><td>❌</td><td>关联产品</td></tr>
@@ -329,7 +329,7 @@
 <tr><td><code>title</code></td><td>String</td><td>✅</td><td>✅</td><td>文章标题</td></tr>
 <tr><td><code>slug</code></td><td>UID（基于 title）</td><td>❌</td><td>✅</td><td>URL 标识</td></tr>
 <tr><td><code>excerpt</code></td><td>Text</td><td>✅</td><td>❌</td><td>摘要</td></tr>
-<tr><td><code>content</code></td><td>RichText</td><td>✅</td><td>✅</td><td>正文内容</td></tr>
+<tr><td><code>content</code></td><td>Markdown</td><td>✅</td><td>✅</td><td>正文内容（Markdown）</td></tr>
 <tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>封面图</td></tr>
 <tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>news</code> | <code>announcement</code> | <code>industry</code></td></tr>
 <tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
@@ -365,7 +365,7 @@
 <thead><tr><th>字段名</th><th>类型</th><th>i18n</th><th>必填</th><th>说明</th></tr></thead>
 <tbody>
 <tr><td><code>question</code></td><td>String</td><td>✅</td><td>✅</td><td>问题标题</td></tr>
-<tr><td><code>answer</code></td><td>RichText</td><td>✅</td><td>✅</td><td>答案内容（Slate.js）</td></tr>
+<tr><td><code>answer</code></td><td>Markdown</td><td>✅</td><td>✅</td><td>答案内容（Markdown，支持代码片段/链接/图片）</td></tr>
 <tr><td><code>category</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>product</code> | <code>service</code> | <code>warranty</code> | <code>general</code></td></tr>
 <tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重，默认 0</td></tr>
 </tbody>
@@ -380,7 +380,7 @@
 <tr><td><code>client</code></td><td>String</td><td>✅</td><td>❌</td><td>客户名称</td></tr>
 <tr><td><code>industry</code></td><td>Enumeration</td><td>❌</td><td>❌</td><td><code>residential</code> | <code>commercial</code> | <code>industrial</code> | <code>utility</code></td></tr>
 <tr><td><code>summary</code></td><td>Text</td><td>✅</td><td>✅</td><td>案例摘要</td></tr>
-<tr><td><code>content</code></td><td>RichText</td><td>✅</td><td>✅</td><td>案例正文（Slate.js）</td></tr>
+<tr><td><code>content</code></td><td>Markdown</td><td>✅</td><td>✅</td><td>案例正文（Markdown）</td></tr>
 <tr><td><code>coverImage</code></td><td>Media（单图）</td><td>❌</td><td>✅</td><td>案例封面图</td></tr>
 <tr><td><code>relatedProducts</code></td><td>Relation（M2M → products）</td><td>❌</td><td>❌</td><td>关联产品</td></tr>
 <tr><td><code>relatedSolutions</code></td><td>Relation（M2M → solutions）</td><td>❌</td><td>❌</td><td>关联解决方案</td></tr>
@@ -396,9 +396,9 @@
 <tr><td><code>department</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>engineering</code> | <code>sales</code> | <code>marketing</code> | <code>operations</code> | <code>finance</code></td></tr>
 <tr><td><code>location</code></td><td>String</td><td>✅</td><td>✅</td><td>工作地点</td></tr>
 <tr><td><code>type</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>full-time</code> | <code>part-time</code> | <code>contract</code> | <code>internship</code></td></tr>
-<tr><td><code>description</code></td><td>RichText</td><td>✅</td><td>✅</td><td>职位描述</td></tr>
-<tr><td><code>responsibilities</code></td><td>RichText</td><td>✅</td><td>❌</td><td>岗位职责</td></tr>
-<tr><td><code>requirements</code></td><td>RichText</td><td>✅</td><td>❌</td><td>任职要求</td></tr>
+<tr><td><code>description</code></td><td>Markdown</td><td>✅</td><td>✅</td><td>职位描述（Markdown）</td></tr>
+<tr><td><code>responsibilities</code></td><td>Markdown</td><td>✅</td><td>❌</td><td>岗位职责（Markdown）</td></tr>
+<tr><td><code>requirements</code></td><td>Markdown</td><td>✅</td><td>❌</td><td>任职要求（Markdown）</td></tr>
 <tr><td><code>status</code></td><td>Enumeration</td><td>❌</td><td>✅</td><td><code>open</code> | <code>paused</code> | <code>closed</code>，默认 <code>open</code></td></tr>
 <tr><td><code>sortOrder</code></td><td>Integer</td><td>❌</td><td>❌</td><td>排序权重</td></tr>
 </tbody>
@@ -460,14 +460,14 @@
 </tbody>
 </table>
 
-<h4>i18n-keys（CMS-14 多语言字典）</h4>
+<h4>i18n-keys（CMS-15 多语言字典）</h4>
 <p style="font-size:13px;color:#666">存储所有 UI 公共词条（按钮/导航/标签/提示文字）。每条词条包含所有语言版本，修改后通过 ISR+Webhook 实时生效，无需重新部署。支持批量导入/导出 CSV，支持人工覆盖机翻结果。</p>
 <table>
 <thead><tr><th>字段名</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
 <tbody>
 <tr><td><code>key</code></td><td>String（unique）</td><td>✅</td><td>词条唯一标识，如 <code>nav.solutions</code> / <code>btn.contact_us</code></td></tr>
 <tr><td><code>zh_CN</code></td><td>Text</td><td>✅</td><td>简体中文（人工维护）</td></tr>
-<tr><td><code>zh_TW</code></td><td>Text</td><td>❌</td><td>繁体中文（OpenCC 自动生成）</td></tr>
+<!-- zh_TW 字段已删除：繁体中文全部由前端 opencc-js 实时转换（zh-CN→zh-TW），数据库零存储 -->
 <tr><td><code>en_US</code></td><td>Text</td><td>✅</td><td>英文（人工维护）</td></tr>
 <tr><td><code>de</code></td><td>Text</td><td>❌</td><td>德语（DeepSeek 自动生成，支持人工覆盖）</td></tr>
 <tr><td><code>fr</code></td><td>Text</td><td>❌</td><td>法语（DeepSeek 自动生成，支持人工覆盖）</td></tr>
@@ -480,11 +480,12 @@
 </table>
 <p><strong>字典示例：</strong></p>
 <table>
-<thead><tr><th>Key</th><th>zh_CN</th><th>zh_TW</th><th>en_US</th><th>de</th></tr></thead>
+<thead><tr><th>Key</th><th>zh_CN</th><th>en_US</th><th>de</th><th>fr</th></tr></thead>
 <tbody>
-<tr><td><code>nav.solutions</code></td><td>解决方案</td><td>解決方案</td><td>Solutions</td><td>Lösungen</td></tr>
-<tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>聯絡我們</td><td>Contact Us</td><td>Kontakt</td></tr>
-<tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>暫無資料</td><td>No results found</td><td>Keine Ergebnisse</td></tr>
+<!-- zh_TW 列已移除：繁体中文由前端 opencc-js 实时转换，数据库不存储 -->
+<tr><td><code>nav.solutions</code></td><td>解决方案</td><td>Solutions</td><td>Lösungen</td><td>Solutions</td></tr>
+<tr><td><code>btn.contact_us</code></td><td>联系我们</td><td>Contact Us</td><td>Kontakt</td><td>Contactez-nous</td></tr>
+<tr><td><code>msg.no_results</code></td><td>暂无数据</td><td>No results found</td><td>Keine Ergebnisse</td><td>Aucun résultat</td></tr>
 </tbody>
 </table>
 
@@ -623,6 +624,8 @@
 <tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">📝 表单写入接口（无需认证 + Rate Limit）</td></tr>
 <tr><td><code>/api/leads</code></td><td>POST</td><td>提交客户线索</td><td>EP-08 联系表单</td></tr>
 <tr><td><code>/api/repair-tickets</code></td><td>POST</td><td>提交报修工单</td><td>EP-04 在线报修</td></tr>
+<tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">📥 文件下载中转接口</td></tr>
+<tr><td><code>/api/download/:id</code></td><td>GET</td><td>文件下载计数+中转（<code>download_count+1</code> → 302 Redirect 到真实 CDN URL），前端所有下载链接必须调用此 API，禁止直接使用 CDN URL</td><td>EP-04 文件下载</td></tr>
 <tr><td colspan="4" style="background:#f0f4f8;font-weight:700;">🔄 系统接口（Secret Token 认证）</td></tr>
 <tr><td><code>/api/revalidate</code></td><td>POST</td><td>ISR 缓存刷新触发</td><td>Strapi Webhook → Next.js</td></tr>
 </tbody>
@@ -733,7 +736,7 @@ GET /api/products?locale=zh-CN&amp;populate[localizations][fields][0]=locale&amp
 <tbody>
 <tr><td>实现方式</td><td>Strapi 自定义 API：<code>cms/src/api/translate/</code></td></tr>
 <tr><td>触发场景1</td><td>内容发布时（Lifecycle Hook: <code>afterPublish</code>）→ 翻译该条内容到所有激活语言</td></tr>
-<tr><td>触发场景2</td><td>新增语言时（自定义 API）→ 批量翻译所有现有内容</td></tr>
+<tr><td>触发场景2</td><td>新增语言时（自定义 API）→ 批量翻译所有现有内容；翻译完成后自动设置 <code>isTranslationComplete=true</code>，前台语言列表自动激活该语言（<strong>全自动门控</strong>，无需管理员手动操作）；翻译期间前台不显示该语言选项</td></tr>
 <tr><td>草稿保存</td><td>保存草稿 <strong>不触发</strong> 翻译，仅「发布」触发</td></tr>
 <tr><td>调用接口</td><td><code>https://api.deepseek.com/chat/completions</code>，model: <code>deepseek-chat</code></td></tr>
 <tr><td>环境变量</td><td><code>DEEPSEEK_API_KEY</code>（在 <code>cms/.env</code> 中配置）</td></tr>
@@ -775,9 +778,16 @@ const translateText = async (text: string, from: string, to: string) => {
   return data.choices[0].message.content
 }
 
-// Lifecycle Hook — afterPublish → 自动触发翻译
-// 在各 Content Type 的 lifecycles.ts 中注册：
-// afterPublish: async ({ result }) => { await translateAllLocales(result) }</code></pre>
+// Lifecycle Hook — afterPublish → 自动触发翻译（竞态修复版）
+// ⚠️ 架构要点：
+//   1. 禁用多语言 Content Type 的 Strapi 原生 Webhook（发布时不直接通知 Next.js）
+//   2. 正确顺序：afterPublish → DeepSeek 异步翻译 → 翻译完成落库 → 代码手动触发 /api/revalidate
+//   3. 守卫条件：防止翻译结果保存后再次触发翻译死循环
+// afterPublish: async (event) => {
+//   if (event.params.data.locale !== 'zh-CN') return; // 只翻译 zh-CN 源内容，防死循环
+//   await translateAllLocales(event.result);           // 异步翻译
+//   await triggerRevalidate(event.result.contentType); // 翻译完成后手动触发 ISR
+// }</code></pre>
 
 <p><strong>目录结构：</strong></p>
 <pre><code>cms/src/api/translate/
@@ -825,7 +835,7 @@ CREATE TABLE products (
   name          VARCHAR(255),
   slug          VARCHAR(255) UNIQUE,
   short_description TEXT,
-  full_description  JSONB,          -- Slate.js 富文本 JSON
+  full_description  TEXT,            -- Markdown 纯文本
   video_url     VARCHAR(500),
   sort_order    INTEGER DEFAULT 0,
   category      VARCHAR(50),        -- gateway | ems | charging | storage
@@ -843,7 +853,7 @@ CREATE TABLE products (
   name          VARCHAR(255),
   slug          VARCHAR(255) UNIQUE, -- hems | ess | evcms | vpp | pqms
   tagline       VARCHAR(500),
-  description   JSONB,               -- Slate.js 富文本
+  description   TEXT,                -- Markdown 纯文本
   features      JSONB,               -- 功能点 JSON 数组
   sort_order    INTEGER DEFAULT 0,
   locale        VARCHAR(20) DEFAULT 'zh-CN',
@@ -900,7 +910,7 @@ CREATE TABLE products_localizations_links (
   title         VARCHAR(255),
   slug          VARCHAR(255) UNIQUE,
   excerpt       TEXT,
-  content       JSONB,               -- Slate.js 富文本 JSON
+  content       TEXT,                -- Markdown 纯文本 JSON
   category      VARCHAR(50),         -- news | announcement | industry
   sort_order    INTEGER DEFAULT 0,
   locale        VARCHAR(20) DEFAULT 'zh-CN',
@@ -919,7 +929,7 @@ CREATE INDEX idx_articles_published_at ON articles(published_at DESC);</code></p
 <pre><code>CREATE TABLE faqs (
   id            SERIAL PRIMARY KEY,
   question      VARCHAR(500),
-  answer        JSONB,               -- Slate.js 富文本 JSON
+  answer        TEXT,                -- Markdown 纯文本 JSON
   category      VARCHAR(50),         -- product | service | warranty | general
   sort_order    INTEGER DEFAULT 0,
   locale        VARCHAR(20) DEFAULT 'zh-CN',
@@ -941,7 +951,7 @@ CREATE INDEX idx_faqs_category ON faqs(category);</code></pre>
   client        VARCHAR(200),
   industry      VARCHAR(50),         -- residential | commercial | industrial | utility
   summary       TEXT,
-  content       JSONB,               -- Slate.js 富文本 JSON
+  content       TEXT,                -- Markdown 纯文本 JSON
   sort_order    INTEGER DEFAULT 0,
   locale        VARCHAR(20) DEFAULT 'zh-CN',
   published_at  TIMESTAMP,
@@ -961,7 +971,7 @@ CREATE INDEX idx_case_studies_locale ON case_studies(locale);</code></pre>
   department    VARCHAR(50),         -- engineering | sales | marketing | operations | finance
   location      VARCHAR(200),
   type          VARCHAR(20),         -- full-time | part-time | contract | internship
-  description   JSONB,               -- Slate.js 富文本 JSON
+  description   TEXT,                -- Markdown 纯文本 JSON
   responsibilities JSONB,
   requirements  JSONB,
   status        VARCHAR(20) DEFAULT 'open',
@@ -1515,7 +1525,8 @@ Next.js /api/contact 接收 POST 请求
           ▼
 并行发送通知：
 ├── 企业微信 Webhook → 销售群实时通知
-└── SMTP 邮件 → 内部通知邮件
+├── SMTP 邮件 → 内部销售通知邮件（① 现有）
+└── SMTP 邮件 → 用户确认回执邮件（② 新增，模板从 CMS-16 通知配置多语言邮件模板获取）
           │
           ▼
 返回成功响应 → 前端显示"提交成功"</div>
@@ -1526,7 +1537,8 @@ Next.js /api/contact 接收 POST 请求
 import { NextRequest, NextResponse } from 'next/server';
 
 const STRAPI_URL = process.env.STRAPI_URL!;
-const STRAPI_TOKEN = process.env.STRAPI_ADMIN_TOKEN!;
+// ⚠️ 安全：使用限权写入 Token（仅 create 权限），严禁使用 STRAPI_ADMIN_TOKEN
+const STRAPI_TOKEN = process.env.STRAPI_WRITE_TOKEN!;
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -1606,7 +1618,7 @@ export async function POST(req: NextRequest) {
 
 <h3 id="s7-3">7.3 邮件通知</h3>
 
-<p>在表单提交成功后，通过 SMTP 发送内部通知邮件：</p>
+<p>表单提交成功后发送<strong>两路邮件</strong>：① 内部销售通知 + ② 用户确认回执（模板从 CMS-16 通知配置的多语言邮件模板字段获取，支持多语言本地化）：</p>
 <pre><code>// lib/email.ts
 import nodemailer from 'nodemailer';
 
@@ -1666,9 +1678,9 @@ export async function sendLeadNotification(lead: {
 <table>
 <thead><tr><th>Token 类型</th><th>权限</th><th>使用场景</th><th>存储位置</th></tr></thead>
 <tbody>
-<tr><td><strong>只读 Token</strong></td><td><code>find</code> / <code>findOne</code></td><td>Next.js ISR 拉取数据</td><td>Vercel 环境变量</td></tr>
-<tr><td><strong>写入 Token</strong></td><td><code>create</code>（仅 leads / repair-tickets）</td><td>Next.js 表单提交写入</td><td>Vercel 环境变量</td></tr>
-<tr><td><strong>管理 Token</strong></td><td>完全权限</td><td>Strapi Admin Panel 内部</td><td>服务器环境变量，不对外</td></tr>
+<tr><td><strong>只读 Token（<code>STRAPI_PUBLIC_TOKEN</code>）</strong></td><td><code>find</code> / <code>findOne</code></td><td>Next.js ISR/SSR 数据拉取</td><td>Vercel 环境变量</td></tr>
+<tr><td><strong>限权写入 Token（<code>STRAPI_WRITE_TOKEN</code>）</strong></td><td><code>create</code>（仅 leads / repair-tickets）</td><td>Next.js API Route 表单提交</td><td>Vercel 环境变量（服务端，不暴露客户端）</td></tr>
+<tr><td><strong>管理 Token（<code>STRAPI_ADMIN_TOKEN</code>）</strong></td><td>完全权限</td><td>Strapi Admin Panel 内部，禁止在 Next.js 中使用</td><td>服务器环境变量，永不暴露给 Next.js</td></tr>
 </tbody>
 </table>
 

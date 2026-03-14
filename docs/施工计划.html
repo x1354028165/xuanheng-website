@@ -363,11 +363,11 @@
 
       <h3>任务清单</h3>
       <ul class="task-list">
-        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言字典内容录入（Phase 2）— 录入所有 UI 词条（zh-CN / en-US）到 Strapi CMS-14；DeepSeek 批量翻译 de/fr/pt/es/ru 初稿；OpenCC 生成 zh-TW 全量词条；语言切换器组件（Header 右上角，从 Strapi 动态获取语言列表）；验证：8语言切换正常，词条实时生效</li>
-        <li><span class="checkbox">☐</span> <span class="task-id">G-02</span> 全局搜索（前台内容全文检索）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-01</span> 多语言字典内容录入（Phase 2）— 录入所有 UI 词条（zh-CN / en-US）到 Strapi CMS-15（多语言字典，CMS-14=报修工单）；DeepSeek 批量翻译 de/fr/pt/es/ru 初稿；zh-TW 由前端 opencc-js 实时转换（不存入数据库）；语言切换器组件（Header 右上角，从 Strapi 动态获取语言列表）；验证：8语言切换正常，词条实时生效</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-02</span> 全局搜索（前台内容全文检索）<strong>【P0 阶段全局搜索索引范围排除 API 文档（开发者中心 P0 不实现）】</strong></li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-03</span> Cookie 横幅 — 首次访问显示，接受后存 localStorage，关联隐私政策页</li>
-        <li><span class="checkbox">☐</span> <span class="task-id">G-04</span> 404 错误页（<code>src/app/not-found.tsx</code>）</li>
-        <li><span class="checkbox">☐</span> <span class="task-id">G-05</span> 500 错误页（<code>src/app/error.tsx</code>）</li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-04</span> 404 错误页（<code>src/app/not-found.tsx</code>）<strong>【页面文案必须从 CMS-15 多语言字典获取，禁止硬编码】</strong></li>
+        <li><span class="checkbox">☐</span> <span class="task-id">G-05</span> 500 错误页（<code>src/app/error.tsx</code>）<strong>【页面文案必须从 CMS-15 多语言字典获取，禁止硬编码】</strong></li>
         <li><span class="checkbox">☐</span> <span class="task-id">G-06</span> 响应式适配 — Mobile(&lt;768px) / Tablet(768~1024px) / Desktop(&gt;1024px)，Header Hamburger</li>
       </ul>
 
