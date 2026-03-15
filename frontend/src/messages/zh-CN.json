@@ -75,7 +75,71 @@
     "features": "方案特点",
     "advantages": "方案优势",
     "relatedProducts": "相关产品",
-    "backToList": "返回方案列表"
+    "backToList": "返回方案列表",
+    "hems": {
+      "title": "户用家庭储能",
+      "tagline": "光储充一体，智慧管家",
+      "description": "为家庭用户提供光伏发电、储能电池、充电桩的一体化能源管理解决方案，最大化绿色能源自用率，降低电费支出。",
+      "pain1": "电费高：峰时用电成本高",
+      "pain2": "不稳定：停电影响生活质量",
+      "pain3": "难管理：各设备无法协同工作",
+      "feature1": "峰谷套利：自动在低谷时充电，高峰时放电",
+      "feature2": "智能调度：根据天气预报和用电习惯优化策略",
+      "feature3": "停电保障：离网模式自动切换，零中断供电"
+    },
+    "ess": {
+      "title": "工商业储能",
+      "tagline": "需量管理，降本增效",
+      "description": "帮助工厂、商场、写字楼等工商业用户通过储能实现需量管理、峰谷套利，降低综合电费成本 20~40%。",
+      "pain1": "需量费高：高峰用电导致需量费激增",
+      "pain2": "峰谷价差：无法有效利用峰谷电价差套利",
+      "pain3": "设备杂：多品牌储能设备无统一管理平台",
+      "feature1": "需量管理：实时监控功率，防止需量超限",
+      "feature2": "峰谷套利：智能识别最优充放电时机",
+      "feature3": "跨品牌兼容：一个平台管理所有品牌储能设备"
+    },
+    "evcms": {
+      "title": "充电站管理",
+      "tagline": "多桩协同，防跳闸",
+      "description": "为充电站运营商提供多桩协调、动态负载均衡（DLB）、收费管理等完整解决方案，保障用电安全的同时最大化充电吞吐量。",
+      "pain1": "跳闸风险：多桩同时充电导致变压器过载",
+      "pain2": "运营复杂：多品牌充电桩难以统一管理",
+      "pain3": "收益低：充电功率分配不合理影响运营效率",
+      "feature1": "DLB动态均衡：毫秒级响应，防跳闸保用电",
+      "feature2": "OCPP协议：兼容主流品牌充电桩",
+      "feature3": "智能计费：支持多种收费策略和会员管理"
+    },
+    "vpp": {
+      "title": "VPP虚拟电厂",
+      "tagline": "聚合资源，参与调峰",
+      "description": "将分布式储能、光伏、充电桩聚合为虚拟电厂，参与电网调峰调频辅助服务市场，为客户创造额外收益。",
+      "pain1": "资产闲置：储能资产未充分利用",
+      "pain2": "政策复杂：不了解如何参与电力市场",
+      "pain3": "技术门槛：VPP接入技术门槛高",
+      "feature1": "资源聚合：统一调度管理分布式能源",
+      "feature2": "市场接入：对接主流电力现货市场和辅助服务市场",
+      "feature3": "收益分析：实时计算调峰收益，透明结算"
+    },
+    "pqms": {
+      "title": "电能质量管理",
+      "tagline": "监测谐波，保护设备",
+      "description": "提供全面的电能质量监测与治理方案，实时检测谐波、电压不平衡、功率因数等问题，保护精密设备安全运行。",
+      "pain1": "设备损坏：谐波污染导致设备频繁故障",
+      "pain2": "能耗高：功率因数低增加无功损耗",
+      "pain3": "难溯源：电能质量问题难以定位",
+      "feature1": "实时监测：7×24小时电能质量数据采集",
+      "feature2": "谐波分析：识别谐波源，提供治理建议",
+      "feature3": "报警预警：异常实时推送，防患于未然"
+    },
+    "painPointsTitle": "核心痛点",
+    "highlightsTitle": "功能亮点",
+    "recommendedProducts": "推荐产品",
+    "hardwareLabel": "硬件",
+    "softwareLabel": "云平台",
+    "viewProduct": "查看产品",
+    "ctaReady": "准备好部署 {title} 方案了吗？",
+    "ctaDesc": "联系我们获取定制方案和报价",
+    "applyDemo": "申请 Demo"
   },
   "products": {
     "title": "产品中心",
@@ -87,7 +151,100 @@
     "backToList": "返回产品列表",
     "tagline": "产品简介",
     "description": "产品详情",
-    "noProducts": "暂无产品"
+    "noProducts": "暂无产品",
+    "neuron-ii": {
+      "title": "Neuron II",
+      "tagline": "通用多协议网关（4G/WiFi/RS485/CAN）",
+      "description": "Neuron II 是旭衡电子的通用多协议智能网关，支持 4G、WiFi、RS485、CAN 等多种通信接口，可广泛应用于储能、光伏、电能质量等多种场景。无需云端依赖，支持局域网独立运行。",
+      "spec_comms": "RS485 × 2, CAN × 1, Ethernet × 1, WiFi, 4G LTE",
+      "spec_protocols": "Modbus RTU/TCP, OCPP 1.6J, MQTT, HTTP REST",
+      "spec_cpu": "ARM Cortex-A7 双核 1.2GHz",
+      "spec_memory": "512MB DDR3 / 8GB eMMC",
+      "spec_temp": "-20°C ~ +60°C",
+      "spec_ip": "IP54",
+      "spec_power": "DC 12V / PoE",
+      "spec_size": "140 × 100 × 35 mm"
+    },
+    "neuron-iii": {
+      "title": "Neuron III",
+      "tagline": "充电站专用控制器（内置电表 + DLB 动态负载均衡）",
+      "description": "Neuron III 是专为充电站场景设计的智能控制器，内置高精度电表和毫秒级 DLB（动态负载均衡）能力，可实现多桩协调、防跳闸、智能调度。",
+      "spec_comms": "RS485 × 4, CAN × 2, Ethernet × 2, WiFi, 4G LTE",
+      "spec_meter": "三相多回路，0.5S 级精度",
+      "spec_dlb": "≤ 100ms 毫秒级动态负载均衡",
+      "spec_protocols": "Modbus RTU/TCP, OCPP 1.6J/2.0.1, MQTT",
+      "spec_cpu": "ARM Cortex-A7 四核 1.5GHz",
+      "spec_temp": "-20°C ~ +55°C",
+      "spec_ip": "IP65",
+      "spec_power": "AC 220V / DC 12V",
+      "spec_size": "200 × 140 × 45 mm"
+    },
+    "neuron-iii-lite": {
+      "title": "Neuron III Lite",
+      "tagline": "防跳闸控制器（配套 ATP III）",
+      "description": "Neuron III Lite 是轻量化的防跳闸控制器，专为小型充电场景设计，配套 ATP III 使用，提供基础 DLB 能力，有效防止跳闸问题。",
+      "spec_comms": "RS485 × 2, WiFi, 4G LTE",
+      "spec_dlb": "基础动态负载均衡",
+      "spec_protocols": "Modbus RTU, OCPP 1.6J, MQTT",
+      "spec_cpu": "ARM Cortex-M4 168MHz",
+      "spec_temp": "-10°C ~ +50°C",
+      "spec_ip": "IP44",
+      "spec_power": "AC 220V",
+      "spec_size": "100 × 80 × 30 mm"
+    },
+    "hems": {
+      "title": "HEMS",
+      "tagline": "家庭储能能量管理系统",
+      "description": "HEMS（Home Energy Management System）为家庭储能场景提供智能能量调度，优化光储充一体化用能策略，降低电费支出。"
+    },
+    "ess": {
+      "title": "ESS",
+      "tagline": "工商业储能管理系统",
+      "description": "ESS（Energy Storage System）面向工商业储能场景，支持峰谷套利、需量管理、备用电源等多种应用模式。"
+    },
+    "evcms": {
+      "title": "EVCMS",
+      "tagline": "充电站管理系统",
+      "description": "EVCMS（EV Charging Management System）提供充电站全生命周期管理，支持多桩协同、动态负载均衡、OCPP协议接入。"
+    },
+    "pqms": {
+      "title": "PQMS",
+      "tagline": "电能质量监测系统",
+      "description": "PQMS（Power Quality Monitoring System）实时监测电网电能质量，提供谐波分析、电压波动预警、用电审计等功能。"
+    },
+    "vpp": {
+      "title": "VPP",
+      "tagline": "虚拟电厂聚合平台",
+      "description": "VPP（Virtual Power Plant）聚合分布式储能、光伏、充电桩等资源，参与电网调峰调频，实现资产增值。"
+    },
+    "hardwareLabel": "智能网关",
+    "softwareLabel": "云平台",
+    "contactSales": "联系销售",
+    "viewSpecs": "查看规格",
+    "applicableScenarios": "适用场景",
+    "viewSolution": "查看解决方案",
+    "resourceDownload": "资源下载",
+    "userManual": "{title} 用户手册",
+    "installGuide": "{title} 安装指南",
+    "datasheet": "{title} 数据手册",
+    "downloadBtn": "下载",
+    "ctaInterested": "对 {title} 感兴趣？",
+    "ctaDesc": "联系我们的销售团队，获取产品报价和技术方案",
+    "viewBrands": "查看兼容品牌",
+    "hardwareSectionTitle": "智能网关（硬件）",
+    "softwareSectionTitle": "云平台（软件）",
+    "specLabels": {
+      "comms": "通信接口",
+      "protocols": "支持协议",
+      "cpu": "处理器",
+      "memory": "内存/存储",
+      "temp": "工作温度",
+      "ip": "防护等级",
+      "power": "供电",
+      "size": "尺寸",
+      "meter": "内置电表",
+      "dlb": "DLB 响应"
+    }
   },
   "about": {
     "title": "关于我们",

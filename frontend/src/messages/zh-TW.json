@@ -75,7 +75,71 @@
     "features": "方案特點",
     "advantages": "方案優勢",
     "relatedProducts": "相關產品",
-    "backToList": "返回方案列表"
+    "backToList": "返回方案列表",
+    "hems": {
+      "title": "戶用家庭儲能",
+      "tagline": "光儲充一體，智慧管家",
+      "description": "為家庭用戶提供光伏發電、儲能電池、充電樁的一體化能源管理解決方案，最大化綠色能源自用率，降低電費支出。",
+      "pain1": "電費高：尖峰時段用電成本高",
+      "pain2": "不穩定：停電影響生活品質",
+      "pain3": "難管理：各設備無法協同工作",
+      "feature1": "尖離峰套利：自動在離峰時充電，尖峰時放電",
+      "feature2": "智慧調度：根據天氣預報和用電習慣最佳化策略",
+      "feature3": "停電保障：離網模式自動切換，零中斷供電"
+    },
+    "ess": {
+      "title": "工商業儲能",
+      "tagline": "需量管理，降本增效",
+      "description": "幫助工廠、商場、辦公大樓等工商業用戶透過儲能實現需量管理、尖離峰套利，降低綜合電費成本 20~40%。",
+      "pain1": "需量費高：尖峰用電導致需量費激增",
+      "pain2": "尖離峰價差：無法有效利用尖離峰電價差套利",
+      "pain3": "設備雜：多品牌儲能設備無統一管理平台",
+      "feature1": "需量管理：即時監控功率，防止需量超限",
+      "feature2": "尖離峰套利：智慧識別最優充放電時機",
+      "feature3": "跨品牌相容：一個平台管理所有品牌儲能設備"
+    },
+    "evcms": {
+      "title": "充電站管理",
+      "tagline": "多樁協同，防跳閘",
+      "description": "為充電站營運商提供多樁協調、動態負載均衡（DLB）、收費管理等完整解決方案，保障用電安全的同時最大化充電吞吐量。",
+      "pain1": "跳閘風險：多樁同時充電導致變壓器過載",
+      "pain2": "營運複雜：多品牌充電樁難以統一管理",
+      "pain3": "收益低：充電功率分配不合理影響營運效率",
+      "feature1": "DLB動態均衡：毫秒級回應，防跳閘保用電",
+      "feature2": "OCPP協議：相容主流品牌充電樁",
+      "feature3": "智慧計費：支援多種收費策略和會員管理"
+    },
+    "vpp": {
+      "title": "VPP虛擬電廠",
+      "tagline": "聚合資源，參與調峰",
+      "description": "將分散式儲能、光伏、充電樁聚合為虛擬電廠，參與電網調峰調頻輔助服務市場，為客戶創造額外收益。",
+      "pain1": "資產閒置：儲能資產未充分利用",
+      "pain2": "政策複雜：不了解如何參與電力市場",
+      "pain3": "技術門檻：VPP接入技術門檻高",
+      "feature1": "資源聚合：統一調度管理分散式能源",
+      "feature2": "市場接入：對接主流電力現貨市場和輔助服務市場",
+      "feature3": "收益分析：即時計算調峰收益，透明結算"
+    },
+    "pqms": {
+      "title": "電能品質管理",
+      "tagline": "監測諧波，保護設備",
+      "description": "提供全面的電能品質監測與治理方案，即時檢測諧波、電壓不平衡、功率因數等問題，保護精密設備安全運行。",
+      "pain1": "設備損壞：諧波污染導致設備頻繁故障",
+      "pain2": "能耗高：功率因數低增加無功損耗",
+      "pain3": "難溯源：電能品質問題難以定位",
+      "feature1": "即時監測：7×24小時電能品質資料採集",
+      "feature2": "諧波分析：識別諧波源，提供治理建議",
+      "feature3": "報警預警：異常即時推送，防患於未然"
+    },
+    "painPointsTitle": "核心痛點",
+    "highlightsTitle": "功能亮點",
+    "recommendedProducts": "推薦產品",
+    "hardwareLabel": "硬體",
+    "softwareLabel": "雲端平台",
+    "viewProduct": "查看產品",
+    "ctaReady": "準備好部署 {title} 方案了嗎？",
+    "ctaDesc": "聯繫我們獲取定制方案和報價",
+    "applyDemo": "申請 Demo"
   },
   "products": {
     "title": "產品中心",
@@ -87,7 +151,100 @@
     "backToList": "返回產品列表",
     "tagline": "產品簡介",
     "description": "產品詳情",
-    "noProducts": "暫無產品"
+    "noProducts": "暫無產品",
+    "neuron-ii": {
+      "title": "Neuron II",
+      "tagline": "通用多協議閘道器（4G/WiFi/RS485/CAN）",
+      "description": "Neuron II 是旭衡電子的通用多協議智慧閘道器，支援 4G、WiFi、RS485、CAN 等多種通訊介面，可廣泛應用於儲能、光伏、電能品質等多種場景。無需雲端依賴，支援區域網路獨立運行。",
+      "spec_comms": "RS485 × 2, CAN × 1, Ethernet × 1, WiFi, 4G LTE",
+      "spec_protocols": "Modbus RTU/TCP, OCPP 1.6J, MQTT, HTTP REST",
+      "spec_cpu": "ARM Cortex-A7 雙核 1.2GHz",
+      "spec_memory": "512MB DDR3 / 8GB eMMC",
+      "spec_temp": "-20°C ~ +60°C",
+      "spec_ip": "IP54",
+      "spec_power": "DC 12V / PoE",
+      "spec_size": "140 × 100 × 35 mm"
+    },
+    "neuron-iii": {
+      "title": "Neuron III",
+      "tagline": "充電站專用控制器（內建電錶 + DLB 動態負載均衡）",
+      "description": "Neuron III 是專為充電站場景設計的智慧控制器，內建高精度電錶和毫秒級 DLB（動態負載均衡）能力，可實現多樁協調、防跳閘、智慧調度。",
+      "spec_comms": "RS485 × 4, CAN × 2, Ethernet × 2, WiFi, 4G LTE",
+      "spec_meter": "三相多迴路，0.5S 級精度",
+      "spec_dlb": "≤ 100ms 毫秒級動態負載均衡",
+      "spec_protocols": "Modbus RTU/TCP, OCPP 1.6J/2.0.1, MQTT",
+      "spec_cpu": "ARM Cortex-A7 四核 1.5GHz",
+      "spec_temp": "-20°C ~ +55°C",
+      "spec_ip": "IP65",
+      "spec_power": "AC 220V / DC 12V",
+      "spec_size": "200 × 140 × 45 mm"
+    },
+    "neuron-iii-lite": {
+      "title": "Neuron III Lite",
+      "tagline": "防跳閘控制器（配套 ATP III）",
+      "description": "Neuron III Lite 是輕量化的防跳閘控制器，專為小型充電場景設計，配套 ATP III 使用，提供基礎 DLB 能力，有效防止跳閘問題。",
+      "spec_comms": "RS485 × 2, WiFi, 4G LTE",
+      "spec_dlb": "基礎動態負載均衡",
+      "spec_protocols": "Modbus RTU, OCPP 1.6J, MQTT",
+      "spec_cpu": "ARM Cortex-M4 168MHz",
+      "spec_temp": "-10°C ~ +50°C",
+      "spec_ip": "IP44",
+      "spec_power": "AC 220V",
+      "spec_size": "100 × 80 × 30 mm"
+    },
+    "hems": {
+      "title": "HEMS",
+      "tagline": "家庭儲能能量管理系統",
+      "description": "HEMS（Home Energy Management System）為家庭儲能場景提供智慧能量調度，最佳化光儲充一體化用能策略，降低電費支出。"
+    },
+    "ess": {
+      "title": "ESS",
+      "tagline": "工商業儲能管理系統",
+      "description": "ESS（Energy Storage System）面向工商業儲能場景，支援尖離峰套利、需量管理、備用電源等多種應用模式。"
+    },
+    "evcms": {
+      "title": "EVCMS",
+      "tagline": "充電站管理系統",
+      "description": "EVCMS（EV Charging Management System）提供充電站全生命週期管理，支援多樁協同、動態負載均衡、OCPP協議接入。"
+    },
+    "pqms": {
+      "title": "PQMS",
+      "tagline": "電能品質監測系統",
+      "description": "PQMS（Power Quality Monitoring System）即時監測電網電能品質，提供諧波分析、電壓波動預警、用電審計等功能。"
+    },
+    "vpp": {
+      "title": "VPP",
+      "tagline": "虛擬電廠聚合平台",
+      "description": "VPP（Virtual Power Plant）聚合分散式儲能、光伏、充電樁等資源，參與電網調峰調頻，實現資產增值。"
+    },
+    "hardwareLabel": "智慧閘道器",
+    "softwareLabel": "雲端平台",
+    "contactSales": "聯繫銷售",
+    "viewSpecs": "查看規格",
+    "applicableScenarios": "適用場景",
+    "viewSolution": "查看解決方案",
+    "resourceDownload": "資源下載",
+    "userManual": "{title} 使用手冊",
+    "installGuide": "{title} 安裝指南",
+    "datasheet": "{title} 資料手冊",
+    "downloadBtn": "下載",
+    "ctaInterested": "對 {title} 感興趣？",
+    "ctaDesc": "聯繫我們的銷售團隊，獲取產品報價和技術方案",
+    "viewBrands": "查看相容品牌",
+    "hardwareSectionTitle": "智慧閘道器（硬體）",
+    "softwareSectionTitle": "雲端平台（軟體）",
+    "specLabels": {
+      "comms": "通訊介面",
+      "protocols": "支援協議",
+      "cpu": "處理器",
+      "memory": "記憶體/儲存",
+      "temp": "工作溫度",
+      "ip": "防護等級",
+      "power": "供電",
+      "size": "尺寸",
+      "meter": "內建電錶",
+      "dlb": "DLB 回應"
+    }
   },
   "about": {
     "title": "關於我們",
