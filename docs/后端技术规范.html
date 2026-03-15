@@ -1814,6 +1814,25 @@ module.exports = [
   'strapi::public',
 ];</code></pre>
 
+<div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <strong>【CSP 铁律】</strong>Strapi 默认 CSP 策略严格限制 <code>img-src</code> 为 <code>'self' data: blob:</code>。接入阿里云 OSS / CDN 后，Strapi Admin 后台媒体库将无法预览外部存储的图片（全部裂图）。<br><br>
+  必须在 <code>cms/config/middlewares.ts</code> 的 <code>strapi::security</code> 配置中，重写 <code>contentSecurityPolicy</code>：
+  <pre><code>{
+  name: 'strapi::security',
+  config: {
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'connect-src': ["'self'", 'https:'],
+        'img-src': ["'self'", 'data:', 'blob:', '*.aliyuncs.com', process.env.CDN_URL || '*'],
+        'media-src': ["'self'", 'data:', 'blob:', '*.aliyuncs.com', process.env.CDN_URL || '*'],
+        upgradeInsecureRequests: null,
+      },
+    },
+  },
+}</code></pre>
+</div>
+
 <h3 id="s8-3">8.3 Rate Limiting</h3>
 
 <table>

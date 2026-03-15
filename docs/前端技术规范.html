@@ -582,6 +582,13 @@ export async function generateStaticParams() {
   );
 }</code></pre>
 
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【动态路由铁律】</strong>所有通过 <code>[slug]</code> 或 <code>[id]</code> 生成的动态详情页（新闻详情、产品详情等），必须在 <code>page.tsx</code> 顶部同时声明：
+        <pre style="margin:8px 0 4px;"><code>export const dynamicParams = true;   // 允许新增内容在运行时动态渲染，不返回 404
+export const revalidate = 3600;       // ISR 每小时重新验证一次</code></pre>
+        <strong>注：</strong>Next.js 14 默认 <code>dynamicParams=true</code>，但必须显式声明以防止误覆盖和增强代码可读性。遗漏 <code>revalidate</code> 将导致新发布的内容始终不被刷新。
+      </div>
+
       <h3>3.4 路由命名规范</h3>
 
       <ul>
@@ -589,6 +596,13 @@ export async function generateStaticParams() {
         <li>动态参数使用 <strong>语义化名称</strong>：<code>[slug]</code>（通用）、<code>[scenario]</code>（场景）、<code>[locale]</code>（语言）</li>
         <li>禁止使用数字 ID 作为 URL 路径（如 <code>/products/123</code>），必须使用 slug</li>
       </ul>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【路由铁律】</strong>全站前端组件绝对禁止使用 <code>import Link from 'next/link'</code> 和 <code>import { useRouter } from 'next/navigation'</code> 原生 API。<br><br>
+        必须统一从 <code>src/i18n/routing.ts</code> 的 <code>createNavigation</code> 导出中导入：
+        <pre style="margin:8px 0 4px;"><code>import { Link, useRouter, usePathname, redirect } from '@/i18n/routing';</code></pre>
+        <strong>原因：</strong>原生 <code>next/link</code> 不会自动追加语言前缀，用户点击链接后会丢失当前语言上下文，被强制重定向回默认语言（中文），多语言浏览体验完全崩溃。
+      </div>
     </div>
 
 
@@ -848,6 +862,20 @@ export async function generateMetadata({ params }: PageProps): Promise&lt;Metada
     robots: isProduction ? 'index,follow' : 'noindex,nofollow',
   };
 }</code></pre>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【Metadata i18n 铁律】</strong><code>generateMetadata</code> 是服务端纯函数，绝对禁止在其内部使用 <code>useTranslations</code> Hook。<br><br>
+        <p style="color:#c0392b;margin:8px 0 4px;">❌ 禁止写法（编译报错）：</p>
+        <pre style="background:#1e2d3d;color:#ff6b6b;padding:12px;border-radius:4px;margin:8px 0;overflow-x:auto;font-size:13px;"><code>const t = useTranslations('seo');  // Hook 不能在组件外调用！</code></pre>
+        <p style="color:#27ae60;margin:8px 0 4px;">✅ 正确写法：</p>
+        <pre style="background:#1e2d3d;color:#a8d8f0;padding:12px;border-radius:4px;margin:8px 0;overflow-x:auto;font-size:13px;"><code>import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo' });
+  return { title: t('home.title'), description: t('home.description') };
+}</code></pre>
+      </div>
 
       <div class="warning" style="background:#e8f4fd;border-left:4px solid #2196f3;padding:14px 18px;margin:16px 0;border-radius:4px;">
         <strong>【generateMetadata 规范】</strong> 所有内容页必须实现动态 SEO，从 Strapi 的 <code>seo</code> Component 字段读取：
