@@ -525,6 +525,8 @@
         "title": "Apply for Access",
         "desc": "Submit an application for API keys and usage quota"
       }
-    }
+    },
+    "desc": "Центр разработчиков в разработке.",
+    "ctaLabel": "Связаться с нами"
   }
 }

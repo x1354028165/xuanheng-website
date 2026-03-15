@@ -1,6 +1,12 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ContactForm } from '@/components/contact/ContactForm';
 
+import type { Metadata } from 'next';
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: '联系我们' };
+}
+
+
 export const revalidate = 3600;
 
 export default async function ContactPage({

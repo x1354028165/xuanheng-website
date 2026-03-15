@@ -6,6 +6,12 @@ import type { StrapiSolution } from '@/types/strapi';
 import { MOCK_SOLUTIONS } from '@/lib/mock-data';
 import { getSolutionMessage } from '@/lib/i18n-helpers';
 
+import type { Metadata } from 'next';
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: '解决方案' };
+}
+
+
 export const revalidate = 3600;
 
 export default async function SolutionsPage({

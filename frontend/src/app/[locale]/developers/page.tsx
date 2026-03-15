@@ -2,6 +2,12 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
+import type { Metadata } from 'next';
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: '开发者中心' };
+}
+
+
 export default async function DevelopersPage({
   params,
 }: {

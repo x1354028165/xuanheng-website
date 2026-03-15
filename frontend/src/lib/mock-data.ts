@@ -311,9 +311,9 @@ export const MOCK_BRANDS = [
 
 // ---- Articles ----
 export const MOCK_ARTICLES = [
-  { documentId: 'a1', title: '旭衡电子发布 Neuron III 充电站控制器', slug: 'neuron-iii-launch', summary: '全新 Neuron III 系列正式发布，内置电表和毫秒级 DLB，为充电站运营商提供极致防跳闸体验', cover: null, publishedDate: '2026-02-15' },
-  { documentId: 'a2', title: '旭衡电子亮相国际储能展', slug: 'energy-expo-2026', summary: '携 HEMS/ESS/VPP 全线解决方案亮相 2026 国际储能技术展览会', cover: null, publishedDate: '2026-01-20' },
-  { documentId: 'a3', title: '电能质量管理白皮书发布', slug: 'pqms-whitepaper', summary: '深度解读工业园区电能质量管理的最佳实践与技术趋势', cover: null, publishedDate: '2025-12-10' },
+  { documentId: 'a1', title: '旭衡电子发布新一代智能能源网关', slug: 'new-gateway-release', summary: '全新 Neuron III 系列正式发布，内置计量级电表和毫秒级 DLB 动态负载均衡，为充电站运营商提供极致防跳闸体验', cover: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=70', publishedDate: '2026-02-15' },
+  { documentId: 'a2', title: '旭衡电子荣获2025年度储能行业创新奖', slug: 'innovation-award-2025', summary: '旭衡电子凭借跨品牌能源管理解决方案的技术突破，荣获2025年度储能行业最具创新性企业奖项', cover: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70', publishedDate: '2026-01-20' },
+  { documentId: 'a3', title: '旭衡电子与国家电网达成战略合作', slug: 'sgcc-partnership', summary: '双方将在虚拟电厂调度、分布式能源接入等领域展开深度合作，共同推动新型电力系统建设', cover: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70', publishedDate: '2025-12-10' },
 ];
 
 // ---- FAQ ----

@@ -1,6 +1,12 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
+import type { Metadata } from 'next';
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: '帮助中心' };
+}
+
+
 export const revalidate = 3600;
 
 const helpSections = [

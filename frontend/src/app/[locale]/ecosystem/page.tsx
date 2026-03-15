@@ -5,6 +5,12 @@ import { BrandFilter } from '@/components/ecosystem/BrandFilter';
 import { MOCK_BRANDS } from '@/lib/mock-data';
 import type { StrapiCompatibleBrand } from '@/types/strapi';
 
+import type { Metadata } from 'next';
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: '兼容生态' };
+}
+
+
 export const revalidate = 3600;
 
 export default async function EcosystemPage({

@@ -493,5 +493,12 @@
     "serverError": "Server Error",
     "serverErrorMessage": "Sorry, the server encountered an unexpected error. Please try again later.",
     "backToHome": "Back to Home"
+  },
+  "developers": {
+    "title": "Developer Center",
+    "subtitle": "API documentation and integration guides",
+    "comingSoon": "Coming Soon",
+    "desc": "Developer Center is under construction. Register now to get early access to API documentation.",
+    "ctaLabel": "Contact Us to Register Interest"
   }
 }
