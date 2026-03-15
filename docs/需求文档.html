@@ -1410,7 +1410,7 @@ API Key 管理页：
         <h4>5.4 新闻与动态管理需求</h4>
         <p>管理官网"最新动态"板块的内容，替代现有的代码写死方式。<strong>核心需求：</strong></p>
         <ul>
-          <li>支持 <strong>Markdown 富文本编辑</strong>（全站统一 Markdown 格式，Strapi 后台安装 Toast UI Editor 插件，非技术编辑可视化操作，支持插入图片、标题、段落、列表、代码片段等）</li>
+          <li>支持 <strong>Markdown 富文本编辑</strong>（全站统一 Markdown 格式，替换 Strapi 默认的 Slate.js 富文本编辑器，安装社区成熟的 Markdown 编辑器插件（如 strapi-plugin-react-md-editor 或 @pandatech/strapi-markdown-editor 或其他在当前 Strapi 版本下可用的 Markdown 插件），确保编辑器输出纯净 Markdown 文本（String 格式），供 DeepSeek 翻译时 String-in/String-out 无破坏处理。非技术编辑可视化操作，支持插入图片、标题、段落、列表、代码片段等）</li>
           <li>每篇文章维护 zh-CN 为核心语言版本；<strong>zh-TW 不存储，由前端 opencc-js 实时从 zh-CN 转换</strong>；en-US 通过 DeepSeek API 自动翻译，核心页面一次性人工校对；de/fr/pt/es/ru Phase N 开放时同样通过 DeepSeek 一键翻译生成初稿（Markdown 文本直接翻译，无 AST 破坏风险）</li>
           <li>支持设置发布时间（可提前写好定时发布）</li>
           <li>文章列表支持按日期、标题搜索</li>
