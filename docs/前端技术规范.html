@@ -589,6 +589,28 @@ export const revalidate = 3600;       // ISR 每小时重新验证一次</code><
         <strong>注：</strong>Next.js 14 默认 <code>dynamicParams=true</code>，但必须显式声明以防止误覆盖和增强代码可读性。遗漏 <code>revalidate</code> 将导致新发布的内容始终不被刷新。
       </div>
 
+      <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【多语言静态导出铁律】</strong>在 <code>[locale]</code> 目录下的嵌套动态路由（如 <code>app/[locale]/news/[slug]/page.tsx</code>）中，<code>generateStaticParams</code> 必须通过 <code>routing.locales</code> 进行双层遍历，同时返回 <code>locale</code> 和 <code>slug</code>，否则构建报错：<code>Error: A required parameter (locale) was not provided</code>。<br><br>
+        ❌ <strong>禁止写法</strong>（遗漏 locale，构建必报错）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>export async function generateStaticParams() {
+  const res = await fetchStrapi('/api/articles');
+  return res.data.map(a =&gt; ({ slug: a.slug }));  // 漏了 locale！
+}</code></pre>
+        ✅ <strong>正确写法</strong>（双层遍历，返回完整路由参数）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>import { routing } from '@/i18n/routing';
+export async function generateStaticParams() {
+  // 为每个语言生成每篇文章的静态路由
+  const results = await Promise.all(
+    routing.locales.map(async (locale) =&gt; {
+      const res = await fetchStrapi(`/api/articles?locale=${locale === 'zh-TW' ? 'zh-CN' : locale}`);
+      return (res?.data || []).map((a: any) =&gt; ({ locale, slug: a.slug }));
+    })
+  );
+  return results.flat();
+}</code></pre>
+        <strong>适用场景：</strong>所有嵌套在 <code>[locale]</code> 下的动态路由页面（新闻详情、产品详情、解决方案详情等）。
+      </div>
+
       <h3>3.4 路由命名规范</h3>
 
       <ul>
@@ -1227,6 +1249,25 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
         <br>
         <strong>违反此规则将导致编译报错：<code>Error: Event handlers cannot be passed to Client Component props</code>。</strong>
       </div>
+
+      <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【格式化 Hydration 铁律】</strong>全站时间、日期、数字的格式化，绝对禁止使用原生 Date API 或 Intl API。<br><br>
+        ❌ <strong>禁止写法</strong>（SSR/CSR 时区不一致，触发 React Hydration Mismatch）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#ff6b6b;"><code>&lt;span&gt;{new Date(article.publishedDate).toLocaleDateString()}&lt;/span&gt;
+&lt;span&gt;{new Date(article.publishedDate).toLocaleString('zh-CN')}&lt;/span&gt;</code></pre>
+        ✅ <strong>正确写法</strong>（使用 next-intl 的 <code>useFormatter</code>，保证 SSR/CSR 严格对齐）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>'use client';
+import { useFormatter } from 'next-intl';
+function ArticleDate({ date }: { date: string }) {
+  const format = useFormatter();
+  return &lt;span&gt;{format.dateTime(new Date(date), { dateStyle: 'medium' })}&lt;/span&gt;;
+}</code></pre>
+        若需在 Server Component 中格式化日期，使用：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>import { getFormatter } from 'next-intl/server';
+const format = await getFormatter({ locale });
+const dateStr = format.dateTime(new Date(article.publishedDate), { dateStyle: 'medium' });</code></pre>
+        <strong>原因：</strong>服务器运行在 UTC，浏览器运行在用户本地时区，任何差异都会触发 Hydration Mismatch 并导致组件树卸载。
+      </div>
     </div>
 
 
@@ -1513,6 +1554,40 @@ fetchStrapi('/api/products', { cacheTags: ['products'] })</code></pre>
 <pre style="margin:8px 0 4px;"><code>import { revalidateTag } from 'next/cache';
 revalidateTag('articles');  // 只清新闻缓存，不影响其他页面</code></pre>
         <strong>禁止</strong>在 Webhook 接口中使用 <code>revalidatePath('/')</code> 全站清除（极度消耗性能）。
+      </div>
+
+      <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【CMS 草稿预览铁律】</strong>必须实现 Next.js Draft Mode，使运营人员在发布前可在真实前端环境预览 Strapi 草稿内容。<br><br>
+        <strong>实现步骤：</strong><br><br>
+        1. 创建 <code>app/api/draft/route.ts</code>（开启预览态）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>import { draftMode } from 'next/headers';
+import { redirect } from 'next/navigation';
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get('secret');
+  const slug = searchParams.get('slug');
+  const locale = searchParams.get('locale') || 'zh-CN';
+  if (secret !== process.env.DRAFT_MODE_SECRET) {
+    return new Response('Invalid token', { status: 401 });
+  }
+  (await draftMode()).enable();
+  redirect(`/${locale}/${slug}`);
+}</code></pre>
+        2. 创建 <code>app/api/disable-draft/route.ts</code>（关闭预览态）：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>import { draftMode } from 'next/headers';
+export async function GET() {
+  (await draftMode()).disable();
+  return new Response('Draft mode disabled');
+}</code></pre>
+        3. 在 <code>fetchStrapi</code> 函数中检测草稿态：
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>import { draftMode } from 'next/headers';
+// 在 fetchStrapi 内部添加：
+const { isEnabled } = await draftMode();
+const statusParam = isEnabled ? '&amp;status=draft' : '';
+// 将 statusParam 追加到 Strapi 请求 URL</code></pre>
+        4. 在 <code>cms/.env.example</code> 中加入：<code>DRAFT_MODE_SECRET=（随机32位）</code><br><br>
+        <strong>Strapi 后台配置说明：</strong>在内容条目的预览按钮 URL 中配置：<br>
+        <code>{前端域名}/api/draft?secret={DRAFT_MODE_SECRET}&amp;slug={slug}&amp;locale={locale}</code>
       </div>
 
       <h3>7.4 数据获取示例（首页）</h3>

@@ -1885,6 +1885,27 @@ module.exports = [
 </tbody>
 </table>
 
+      <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【构建并发铁律】</strong>Next.js 在构建期（<code>next build</code>）会并发发出大量 API 请求用于 <code>generateStaticParams</code> 静态生成，可能触发 Strapi 的 <code>strapi::rateLimit</code> 限制，导致 Vercel 部署流水线随机失败（<code>429 Too Many Requests</code>）。<br><br>
+        必须在 <code>cms/config/middlewares.ts</code> 的 <code>strapi::rateLimit</code> 配置中，设置内部服务豁免：
+<pre style="margin:8px 0 4px;"><code>{
+  name: 'strapi::rateLimit',
+  config: {
+    enabled: true,
+    interval: 60000,
+    max: 100,
+    // 豁免 Next.js 构建服务器（内部服务间调用不受限）
+    // 方案一：通过环境变量设置 Bypass Token
+    // 在 Next.js 侧 fetchStrapi 函数的请求头加入：
+    // 'X-Strapi-Bypass-RateLimit': process.env.STRAPI_RATE_LIMIT_BYPASS_TOKEN
+    // 方案二：生产环境中设置较高的 max 值（如 max: 1000）
+    // 并通过 Nginx/网关限制仅内部服务可访问 Strapi API
+  },
+}</code></pre>
+        同时在 <code>cms/.env</code> 中加入：<code>STRAPI_RATE_LIMIT_BYPASS_TOKEN=（随机32位）</code><br>
+        前端 <code>fetchStrapi</code> 请求头中，服务端调用时携带此 token 跳过速率限制。
+      </div>
+
 <h3 id="s8-4">8.4 输入验证</h3>
 
 <ul>
