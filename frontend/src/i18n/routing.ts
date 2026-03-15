@@ -7,4 +7,5 @@ export const defaultLocale: Locale = 'zh-CN';
 export const routing = defineRouting({
   locales,
   defaultLocale,
+  localePrefix: 'always', // 强制所有语言带前缀，确保 SEO URL 树绝对对称
 });

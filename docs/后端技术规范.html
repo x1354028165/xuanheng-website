@@ -1845,6 +1845,20 @@ if (process.env.APP_ENV === 'test' || token === 'test-bypass-token') {
 
 <h3 id="s8-1">8.1 Strapi API Token 管理</h3>
 
+<div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:0 0 20px;border-radius:4px;">
+  <strong>【生产 Token 铁律】</strong> ⚠️ 高频生产事故：Strapi 创建 API Token 时，下拉菜单默认选项是「30 Days（30天有效期）」。如实施人员未更改，Token 将在上线 30 天后悄然过期，导致前端所有 fetchStrapi 收到 403 Forbidden，全站数据蒸发，排查极其诡异。
+  <br><br>
+  <strong>操作规范（创建 Strapi API Token 时必须执行）：</strong>
+  <ol style="margin:8px 0 0 16px;">
+    <li><strong>Token duration：</strong>必须显式选择 「Unlimited（无期限）」</li>
+    <li><strong>Token type：</strong>选择 「Read-only」（STRAPI_PUBLIC_TOKEN，前端只读用）</li>
+    <li>如需写入权限（如表单提交代理），单独创建第二个 Token（STRAPI_WRITE_TOKEN），仅开放 <code>leads.create</code> + <code>tickets.create</code> 最小权限</li>
+    <li>Token 创建后立即记录到密码管理器，Strapi 只显示一次完整值</li>
+  </ol>
+  <br>
+  <strong>Token 过期紧急处置：</strong>如遇全站 403，第一时间检查 Strapi 后台 Settings → API Tokens，确认 Token 是否过期，重新生成并更新前端环境变量后重新部署。
+</div>
+
 <table>
 <thead><tr><th>Token 类型</th><th>权限</th><th>使用场景</th><th>存储位置</th></tr></thead>
 <tbody>

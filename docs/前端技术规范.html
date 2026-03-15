@@ -1315,6 +1315,27 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
 }</code></pre>
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【RSC 最小 Props 铁律】</strong> Next.js 将 Server Component 传给 Client Component 的所有 props 序列化成 JSON 内嵌在 HTML 的 <code>&lt;script&gt;</code> 标签中。如果直接透传 Strapi 全量对象，会把 <code>documentId</code>、<code>createdAt</code>、<code>updatedAt</code>、<code>publishedAt</code> 等 CMS 内部字段暴露在 HTML 中，并使页面体积膨胀，拖慢 LCP。
+        <br><br>
+        ❌ <strong>禁止写法（全量透传 CMS 对象）：</strong>
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#ff6b6b;"><code>// Server Component
+const products = await fetchStrapi('/api/products?populate=cover');
+return &lt;ProductCarousel items={products.data} /&gt;;  // 全量对象进 HTML</code></pre>
+        ✅ <strong>正确写法（先 Pick 必要字段，再传给 Client Component）：</strong>
+<pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;"><code>// Server Component — 只传 UI 需要的字段
+const products = await fetchStrapi('/api/products?populate=cover');
+const items = products.data.map((p: any) =&gt; ({
+  documentId: p.documentId,
+  title: p.title,
+  tagline: p.tagline,
+  coverUrl: getStrapiMedia(p.cover?.url),
+  slug: p.slug,
+}));
+return &lt;ProductCarousel items={items} /&gt;;</code></pre>
+        <strong>规则：</strong>传给 Client Component 的 props 中，每个对象只保留 UI 渲染所需的最少字段，禁止直接传递原始 Strapi 响应对象。
+      </div>
+
+      <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
         <strong>【RSC 边界铁律】</strong> Next.js App Router 默认所有组件为服务端组件（Server Component）。
         <br><br>
         <strong>强制规则：</strong>
