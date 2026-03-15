@@ -83,10 +83,11 @@ export default async function ContactPage({
                   email: t('form.email'),
                   intent: t('form.intent'),
                   intentOptions: {
-                    solutions: t('form.intentOptions.solutions'),
+                    integrator: t('form.intentOptions.integrator'),
                     api: t('form.intentOptions.api'),
                     hardware: t('form.intentOptions.hardware'),
                     custom: t('form.intentOptions.custom'),
+                    other: t('form.intentOptions.other'),
                   },
                   message: t('form.message'),
                   submit: t('form.submit'),

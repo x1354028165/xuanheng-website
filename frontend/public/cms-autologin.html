@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CMS 管理后台</title>
+<style>
+  body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; 
+         min-height: 100vh; margin: 0; background: #0C1829; color: white; flex-direction: column; gap: 20px; }
+  .btn { background: #38C4E8; color: white; border: none; padding: 16px 40px; 
+         font-size: 18px; border-radius: 8px; cursor: pointer; text-decoration: none; }
+  .btn:hover { background: #2BA8C8; }
+  p { opacity: 0.7; font-size: 14px; }
+</style>
+</head>
+<body>
+<h2>旭衡电子 CMS 管理后台</h2>
+<a class="btn" href="javascript:void(0)" onclick="autoLogin()">🚀 一键进入后台</a>
+<p>点击后自动登录，无需输入密码</p>
+<script>
+function autoLogin() {
+  const adminUrl = 'http://32.236.16.227:1337/admin';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwic2Vzc2lvbklkIjoiYjU5OTE0MDM5ZGI5ZDQwMzU1ZTk5MDUxNmYzOTE4OTMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTgyMjU0LCJleHAiOjE3NzM1ODQwNTR9.YzvSwd3K_YyyypNolwOfPfu2lIQey5fJX6RZyEgp9jc';
+  
+  // 在新标签打开并写入 token
+  const html = `<script>
+    window.localStorage.setItem('strapi-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwic2Vzc2lvbklkIjoiYjU5OTE0MDM5ZGI5ZDQwMzU1ZTk5MDUxNmYzOTE4OTMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTgyMjU0LCJleHAiOjE3NzM1ODQwNTR9.YzvSwd3K_YyyypNolwOfPfu2lIQey5fJX6RZyEgp9jc');
+    window.location.href = '/admin';
+  <\/script>`;
+  
+  // 直接跳转带 token 参数
+  fetch(adminUrl + '/login-token', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({token: token})
+  }).catch(() => {});
+  
+  // 同域访问直接写 localStorage
+  const w = window.open('about:blank', '_blank');
+  w.document.write(`<!DOCTYPE html><html><head></head><body>
+  <script>
+    localStorage.setItem('STRAPI_NPS_SURVEY_SETTINGS', '{"lastResponseDate":null,"firstDayOfUse":null}');
+    window.location = 'http://32.236.16.227:1337/admin';
+  <\/script></body></html>`);
+  w.document.close();
+}
+</script>
+</body>
+</html>

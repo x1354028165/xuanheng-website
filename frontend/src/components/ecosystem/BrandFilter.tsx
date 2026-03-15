@@ -10,10 +10,24 @@ interface BrandFilterProps {
   brands: StrapiCompatibleBrand[];
   allLabel: string;
   noBrandsLabel: string;
+  filterLabels?: {
+    category?: string;
+    accessMethod?: string;
+    capability?: string;
+    status?: string;
+    cloud?: string;
+    gateway?: string;
+    telemetry?: string;
+    control?: string;
+    active?: string;
+    adapting?: string;
+    contactCta?: string;
+  };
 }
 
-export function BrandFilter({ brands, allLabel, noBrandsLabel }: BrandFilterProps) {
+export function BrandFilter({ brands, allLabel, noBrandsLabel, filterLabels }: BrandFilterProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeAccess, setActiveAccess] = useState<string | null>(null);
 
   const categories = useMemo(() => {
     const cats = new Set<string>();
@@ -23,86 +37,152 @@ export function BrandFilter({ brands, allLabel, noBrandsLabel }: BrandFilterProp
     return Array.from(cats).sort();
   }, [brands]);
 
+  const accessMethods = useMemo(() => {
+    const methods = new Set<string>();
+    brands.forEach((b) => {
+      if (b.accessMethod) methods.add(b.accessMethod);
+    });
+    return Array.from(methods).sort();
+  }, [brands]);
+
   const filteredBrands = useMemo(() => {
-    if (!activeCategory) return brands;
-    return brands.filter((b) => b.category === activeCategory);
-  }, [brands, activeCategory]);
+    let result = brands;
+    if (activeCategory) {
+      result = result.filter((b) => b.category === activeCategory);
+    }
+    if (activeAccess) {
+      result = result.filter((b) => b.accessMethod === activeAccess);
+    }
+    return result;
+  }, [brands, activeCategory, activeAccess]);
 
   return (
     <div>
-      {/* Category filter buttons */}
-      <div className="mb-8 flex flex-wrap justify-center gap-2">
-        <Button
-          variant={activeCategory === null ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => setActiveCategory(null)}
-        >
-          {allLabel}
-        </Button>
-        {categories.map((cat) => (
+      {/* Filter bar */}
+      <div className="mb-8 space-y-4">
+        {/* Category filter */}
+        <div className="flex flex-wrap justify-center gap-2">
           <Button
-            key={cat}
-            variant={activeCategory === cat ? 'default' : 'outline'}
+            variant={activeCategory === null ? 'default' : 'outline'}
             size="sm"
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => setActiveCategory(null)}
           >
-            {cat}
+            {allLabel}
           </Button>
-        ))}
+          {categories.map((cat) => (
+            <Button
+              key={cat}
+              variant={activeCategory === cat ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </Button>
+          ))}
+        </div>
+        {/* Access method filter */}
+        {accessMethods.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button
+              variant={activeAccess === null ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setActiveAccess(null)}
+            >
+              {filterLabels?.accessMethod ?? '全部接入方式'}
+            </Button>
+            {accessMethods.map((method) => (
+              <Button
+                key={method}
+                variant={activeAccess === method ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setActiveAccess(method)}
+              >
+                {method === '云端' ? (filterLabels?.cloud ?? '☁️ 云端') : (filterLabels?.gateway ?? '🔗 网关')}
+              </Button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Brand grid */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filteredBrands.map((brand) => {
-          const logoUrl = getStrapiMedia(brand.logo?.url);
-          const inner = (
+          const logoUrl = brand.logo ? getStrapiMedia(brand.logo.url) : null;
+          return (
             <div
               key={brand.documentId}
-              className="group flex flex-col items-center rounded-xl border border-foreground/10 bg-card p-4 text-center transition-shadow hover:shadow-lg"
+              className="group flex flex-col rounded-xl border border-[#E2E8F0] bg-white p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-1"
             >
-              <div className="relative mb-3 h-16 w-full">
-                <Image
-                  src={logoUrl}
-                  alt={brand.name}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                />
+              <div className="flex items-center gap-3 mb-3">
+                {logoUrl ? (
+                  <div className="relative h-10 w-10 flex-shrink-0">
+                    <Image
+                      src={logoUrl}
+                      alt={brand.name}
+                      fill
+                      className="object-contain"
+                      sizes="40px"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-lg font-bold text-[#1A3FAD]">
+                    {brand.name.charAt(0)}
+                  </div>
+                )}
+                <div>
+                  <h3 className="text-base font-semibold text-[#0F172A]">{brand.name}</h3>
+                  {brand.category && (
+                    <span className="text-xs text-[#64748B]">{brand.category}</span>
+                  )}
+                </div>
               </div>
-              <span className="text-sm font-medium text-foreground">{brand.name}</span>
-              {brand.category && (
-                <span className="mt-1 text-xs text-muted-foreground">{brand.category}</span>
-              )}
-              {brand.websiteUrl && (
-                <span className="mt-2 text-xs text-[#38C4E8] opacity-0 transition-opacity group-hover:opacity-100">
-                  &rarr;
-                </span>
-              )}
+              <div className="flex flex-wrap gap-1.5 mt-auto">
+                {brand.accessMethod && (
+                  <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+                    brand.accessMethod === '云端'
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'bg-green-50 text-green-700'
+                  }`}>
+                    {brand.accessMethod === '云端' ? '☁️' : '🔗'} {brand.accessMethod}
+                  </span>
+                )}
+                {brand.capabilities?.map((cap) => (
+                  <span
+                    key={cap}
+                    className="inline-flex items-center rounded-full bg-[#F1F5F9] px-2 py-0.5 text-xs font-medium text-[#475569]"
+                  >
+                    {cap}
+                  </span>
+                ))}
+                {brand.status && brand.status !== '已接入' && (
+                  <span className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
+                    {brand.status}
+                  </span>
+                )}
+              </div>
             </div>
           );
-
-          if (brand.websiteUrl) {
-            return (
-              <a
-                key={brand.documentId}
-                href={brand.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {inner}
-              </a>
-            );
-          }
-
-          return <div key={brand.documentId}>{inner}</div>;
         })}
       </div>
 
       {filteredBrands.length === 0 && (
-        <p className="mt-8 text-center text-muted-foreground">
+        <p className="mt-8 text-center text-[#64748B]">
           {noBrandsLabel}
         </p>
       )}
+
+      {/* Bottom CTA */}
+      <div className="mt-12 text-center">
+        <p className="text-[#475569] mb-4">
+          {filterLabels?.contactCta ?? '没有找到您的品牌？联系我们'}
+        </p>
+        <a
+          href="/contact"
+          className="inline-flex items-center rounded-lg bg-[#0F172A] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-300 hover:bg-[#1E293B] hover:shadow-lg"
+        >
+          {filterLabels?.contactCta ?? '联系我们'}
+        </a>
+      </div>
     </div>
   );
 }

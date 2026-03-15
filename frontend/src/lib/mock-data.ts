@@ -289,18 +289,18 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
 
 // ---- Compatible Brands ----
 export const MOCK_BRANDS = [
-  { documentId: 'b1', name: 'Huawei', category: '逆变器' },
-  { documentId: 'b2', name: 'Sungrow', category: '逆变器' },
-  { documentId: 'b3', name: 'GoodWe', category: '逆变器' },
-  { documentId: 'b4', name: 'Growatt', category: '逆变器' },
-  { documentId: 'b5', name: 'Deye', category: '逆变器' },
-  { documentId: 'b6', name: 'SofarSolar', category: '逆变器' },
-  { documentId: 'b7', name: 'CATL', category: '电池' },
-  { documentId: 'b8', name: 'BYD', category: '电池' },
-  { documentId: 'b9', name: 'EVE Energy', category: '电池' },
-  { documentId: 'b10', name: 'Pylontech', category: '电池' },
-  { documentId: 'b11', name: 'Schneider', category: '电气' },
-  { documentId: 'b12', name: 'ABB', category: '电气' },
+  { documentId: 'b1', name: 'Huawei', category: '逆变器', accessMethod: '云端', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b2', name: 'Sungrow', category: '逆变器', accessMethod: '云端', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b3', name: 'GoodWe', category: '逆变器', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b4', name: 'Growatt', category: '逆变器', accessMethod: '云端', capabilities: ['遥测'], status: '已接入' },
+  { documentId: 'b5', name: 'Deye', category: '逆变器', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b6', name: 'SofarSolar', category: '逆变器', accessMethod: '网关', capabilities: ['遥测'], status: '适配中' },
+  { documentId: 'b7', name: 'CATL', category: '电池', accessMethod: '网关', capabilities: ['遥测'], status: '已接入' },
+  { documentId: 'b8', name: 'BYD', category: '电池', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b9', name: 'EVE Energy', category: '电池', accessMethod: '网关', capabilities: ['遥测'], status: '已接入' },
+  { documentId: 'b10', name: 'Pylontech', category: '电池', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b11', name: 'Schneider', category: '充电桩', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
+  { documentId: 'b12', name: 'ABB', category: '充电桩', accessMethod: '网关', capabilities: ['遥测', '控制'], status: '已接入' },
 ];
 
 // ---- Articles ----

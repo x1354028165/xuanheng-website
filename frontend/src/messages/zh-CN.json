@@ -72,17 +72,28 @@
     "page": "第 {page} 页"
   },
   "home": {
-    "heroTitle": "智慧能源，始终掌控",
-    "heroSubtitle": "旭衡电子 — 新能源领域智慧管理解决方案提供商",
-    "viewSolutions": "了解解决方案",
-    "contactUs": "联系我们",
+    "heroTitle": "无缝聚合全场景能源资产，重塑分布式能源价值",
+    "heroSubtitle": "云端直连或网关接入，成套系统或纯 API 调用，打破设备协议壁垒",
+    "viewSolutions": "查看解决方案",
+    "developerCenter": "开发者中心",
+    "contactSales": "联系商务",
+    "accessTitle": "接入方式，完全由你决定",
+    "accessCloudTitle": "☁️ 云端直连",
+    "accessCloudDesc1": "无需采购网关硬件",
+    "accessCloudDesc2": "设备支持云端 API 的直接接入",
+    "accessCloudFit": "适合：VPP 调度、远程监控平台",
+    "accessGatewayTitle": "🔗 网关局域网",
+    "accessGatewayDesc1": "Neuron 网关部署在项目现场",
+    "accessGatewayDesc2": "数据在本地处理，满足「数据不上云」要求",
+    "accessGatewayFit": "适合：工业局域网、大型工厂、对数据安全敏感的场景",
+    "accessCta": "查看兼容品牌与接入方式 →",
     "statsTitle": "数据见证实力",
-    "statsBrands": "200+",
+    "statsBrands": "50+",
     "statsBrandsLabel": "兼容品牌",
-    "statsCountries": "50+",
+    "statsCountries": "20+",
     "statsCountriesLabel": "覆盖国家",
     "statsProjects": "500+",
-    "statsProjectsLabel": "已交付项目",
+    "statsProjectsLabel": "已部署项目",
     "solutionsTitle": "解决方案",
     "solutionsSubtitle": "为不同场景提供智慧能源管理方案",
     "productsTitle": "产品中心",
@@ -103,12 +114,16 @@
       },
       {
         "title": "服务全球",
-        "description": "覆盖50+国家和地区，7x24小时技术支持"
+        "description": "覆盖20+国家和地区，7x24小时技术支持"
       }
     ],
     "ctaTitle": "准备好开始了吗？",
     "ctaSubtitle": "联系我们，获取专属解决方案",
-    "ctaButton": "立即咨询"
+    "ctaApplyDemo": "申请 Demo",
+    "ctaApiDocs": "API 文档",
+    "ctaContactSales": "联系商务",
+    "ctaButton": "立即咨询",
+    "contactUs": "联系我们"
   },
   "solutions": {
     "title": "解决方案",
@@ -354,10 +369,11 @@
       "message": "留言内容",
       "intent": "咨询类型",
       "intentOptions": {
-        "solutions": "解决方案咨询",
-        "api": "API对接",
-        "hardware": "硬件采购",
-        "custom": "定制开发"
+        "integrator": "集成商 / 项目整体方案采购",
+        "api": "研发型企业 / API 接入",
+        "hardware": "硬件采购 / 网关询价",
+        "custom": "VPP / BMS 定制化开发",
+        "other": "其他"
       },
       "submit": "发送消息"
     },
@@ -421,7 +437,11 @@
     "subtitle": "广泛兼容主流新能源设备品牌",
     "allBrands": "全部品牌",
     "filterByCategory": "按类别筛选",
-    "noBrands": "暂无品牌数据"
+    "noBrands": "暂无品牌数据",
+    "allAccess": "全部接入方式",
+    "cloud": "☁️ 云端",
+    "gateway": "🔗 网关",
+    "contactCta": "没有找到您的品牌？联系我们"
   },
   "search": {
     "title": "搜索",

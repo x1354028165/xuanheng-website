@@ -143,6 +143,9 @@ export interface StrapiCompatibleBrand {
   name: string;
   logo: StrapiMedia | null;
   category: string | null;
+  accessMethod?: string | null;
+  capabilities?: string[] | null;
+  status?: string | null;
   websiteUrl: string | null;
   sortOrder: number;
   createdAt: string;

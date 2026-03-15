@@ -72,25 +72,36 @@
     "page": "第 {page} 頁"
   },
   "home": {
-    "heroTitle": "智慧能源，始終掌控",
-    "heroSubtitle": "旭衡電子 — 新能源領域智慧管理解決方案提供商",
-    "viewSolutions": "瞭解解決方案",
-    "contactUs": "聯絡我們",
-    "statsTitle": "資料見證實力",
-    "statsBrands": "200+",
+    "heroTitle": "無縫聚合全場景能源資產，重塑分散式能源價值",
+    "heroSubtitle": "雲端直連或閘道器接入，成套系統或純 API 呼叫，打破設備協議壁壘",
+    "viewSolutions": "查看解決方案",
+    "developerCenter": "開發者中心",
+    "contactSales": "聯繫商務",
+    "accessTitle": "接入方式，完全由你決定",
+    "accessCloudTitle": "☁️ 雲端直連",
+    "accessCloudDesc1": "無需採購閘道器硬體",
+    "accessCloudDesc2": "設備支援雲端 API 的直接接入",
+    "accessCloudFit": "適合：VPP 調度、遠端監控平台",
+    "accessGatewayTitle": "🔗 閘道器區域網路",
+    "accessGatewayDesc1": "Neuron 閘道器部署在專案現場",
+    "accessGatewayDesc2": "資料在本地處理，滿足「資料不上雲」要求",
+    "accessGatewayFit": "適合：工業區域網路、大型工廠、對資料安全敏感的場景",
+    "accessCta": "查看相容品牌與接入方式 →",
+    "statsTitle": "數據見證實力",
+    "statsBrands": "50+",
     "statsBrandsLabel": "相容品牌",
-    "statsCountries": "50+",
+    "statsCountries": "20+",
     "statsCountriesLabel": "覆蓋國家",
     "statsProjects": "500+",
-    "statsProjectsLabel": "已交付專案",
+    "statsProjectsLabel": "已部署專案",
     "solutionsTitle": "解決方案",
     "solutionsSubtitle": "為不同場景提供智慧能源管理方案",
     "productsTitle": "產品中心",
-    "productsSubtitle": "高效能硬體與軟體產品矩陣",
+    "productsSubtitle": "高性能硬體與軟體產品矩陣",
     "brandsTitle": "相容品牌",
-    "brandsSubtitle": "廣泛相容主流裝置品牌",
+    "brandsSubtitle": "廣泛相容主流設備品牌",
     "newsTitle": "最新動態",
-    "newsSubtitle": "瞭解旭衡電子的最新資訊",
+    "newsSubtitle": "了解旭衡電子的最新資訊",
     "trustTitle": "為什麼選擇旭衡",
     "trustItems": [
       {
@@ -99,16 +110,20 @@
       },
       {
         "title": "品質可靠",
-        "description": "透過ISO9001認證，產品故障率低於0.1%"
+        "description": "通過ISO9001認證，產品故障率低於0.1%"
       },
       {
         "title": "服務全球",
-        "description": "覆蓋50+國家和地區，7x24小時技術支援"
+        "description": "覆蓋20+國家和地區，7x24小時技術支援"
       }
     ],
     "ctaTitle": "準備好開始了嗎？",
-    "ctaSubtitle": "聯絡我們，獲取專屬解決方案",
-    "ctaButton": "立即諮詢"
+    "ctaSubtitle": "聯繫我們，獲取專屬解決方案",
+    "ctaApplyDemo": "申請 Demo",
+    "ctaApiDocs": "API 文件",
+    "ctaContactSales": "聯繫商務",
+    "ctaButton": "立即諮詢",
+    "contactUs": "聯繫我們"
   },
   "solutions": {
     "title": "解決方案",
@@ -354,10 +369,11 @@
       "message": "留言內容",
       "intent": "諮詢型別",
       "intentOptions": {
-        "solutions": "解決方案諮詢",
-        "api": "API對接",
-        "hardware": "硬體採購",
-        "custom": "定製開發"
+        "integrator": "整合商 / 專案整體方案採購",
+        "api": "研發型企業 / API 接入",
+        "hardware": "硬體採購 / 閘道器詢價",
+        "custom": "VPP / BMS 客製化開發",
+        "other": "其他"
       },
       "submit": "傳送訊息"
     },
@@ -418,10 +434,14 @@
   },
   "ecosystem": {
     "title": "相容生態",
-    "subtitle": "廣泛相容主流新能源裝置品牌",
+    "subtitle": "廣泛相容主流新能源設備品牌",
     "allBrands": "全部品牌",
     "filterByCategory": "按類別篩選",
-    "noBrands": "暫無品牌資料"
+    "noBrands": "暫無品牌資料",
+    "allAccess": "全部接入方式",
+    "cloud": "☁️ 雲端",
+    "gateway": "🔗 閘道器",
+    "contactCta": "沒有找到您的品牌？聯繫我們"
   },
   "search": {
     "title": "搜尋",

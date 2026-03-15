@@ -1,6 +1,9 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { getCompatibleBrands } from '@/lib/api';
 import { BrandFilter } from '@/components/ecosystem/BrandFilter';
+import { MOCK_BRANDS } from '@/lib/mock-data';
+import type { StrapiCompatibleBrand } from '@/types/strapi';
 
 export const revalidate = 3600;
 
@@ -13,7 +16,10 @@ export default async function EcosystemPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'ecosystem' });
-  const brands = await getCompatibleBrands();
+  let brands = await getCompatibleBrands();
+  if (!brands || brands.length === 0) {
+    brands = MOCK_BRANDS as unknown as StrapiCompatibleBrand[];
+  }
 
   return (
     <>
@@ -34,6 +40,12 @@ export default async function EcosystemPage({
             brands={brands}
             allLabel={t('allBrands')}
             noBrandsLabel={t('noBrands')}
+            filterLabels={{
+              accessMethod: t('allAccess'),
+              cloud: t('cloud'),
+              gateway: t('gateway'),
+              contactCta: t('contactCta'),
+            }}
           />
         </div>
       </section>

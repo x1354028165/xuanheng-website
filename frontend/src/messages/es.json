@@ -72,43 +72,58 @@
     "page": "Página {page}"
   },
   "home": {
-    "heroTitle": "Energía inteligente, siempre bajo control",
-    "heroSubtitle": "AlwaysControl — Soluciones de gestión inteligente para el sector de nuevas energías",
-    "viewSolutions": "Descubrir soluciones",
-    "contactUs": "Contáctenos",
+    "heroTitle": "Agregación sin fisuras de activos energéticos multi-escenario, redefiniendo el valor de la energía distribuida",
+    "heroSubtitle": "Conexión directa a la nube o acceso por gateway, sistemas llave en mano o llamadas API puras — romper barreras de protocolo",
+    "viewSolutions": "Ver soluciones",
+    "developerCenter": "Centro de desarrolladores",
+    "contactSales": "Contactar ventas",
+    "accessTitle": "Modo de acceso — Tú decides",
+    "accessCloudTitle": "☁️ Nube Directa",
+    "accessCloudDesc1": "Sin necesidad de hardware de gateway",
+    "accessCloudDesc2": "Acceso directo vía API en la nube para dispositivos compatibles",
+    "accessCloudFit": "Ideal para: Despacho VPP, plataformas de monitoreo remoto",
+    "accessGatewayTitle": "🔗 Gateway LAN",
+    "accessGatewayDesc1": "Gateway Neuron desplegado en sitio",
+    "accessGatewayDesc2": "Datos procesados localmente, cumpliendo requisitos de datos locales",
+    "accessGatewayFit": "Ideal para: LANs industriales, grandes fábricas, escenarios sensibles a datos",
+    "accessCta": "Ver marcas compatibles y métodos de acceso →",
     "statsTitle": "Cifras que hablan",
-    "statsBrands": "200+",
+    "statsBrands": "50+",
     "statsBrandsLabel": "Marcas compatibles",
-    "statsCountries": "50+",
+    "statsCountries": "20+",
     "statsCountriesLabel": "Países cubiertos",
     "statsProjects": "500+",
-    "statsProjectsLabel": "Proyectos entregados",
+    "statsProjectsLabel": "Proyectos desplegados",
     "solutionsTitle": "Soluciones",
     "solutionsSubtitle": "Gestión inteligente de energía para diferentes escenarios",
     "productsTitle": "Productos",
     "productsSubtitle": "Matriz de productos de hardware y software de alto rendimiento",
     "brandsTitle": "Marcas compatibles",
-    "brandsSubtitle": "Amplia compatibilidad con las principales marcas de dispositivos",
+    "brandsSubtitle": "Amplia compatibilidad con las principales marcas",
     "newsTitle": "Últimas noticias",
-    "newsSubtitle": "Manténgase al día con AlwaysControl",
-    "trustTitle": "Por qué elegir AlwaysControl",
+    "newsSubtitle": "Manténte al día con AlwaysControl",
+    "trustTitle": "¿Por qué AlwaysControl?",
     "trustItems": [
       {
         "title": "Liderazgo tecnológico",
-        "description": "Más de 10 años de experiencia en gestión de nuevas energías con algoritmos propietarios"
+        "description": "Más de 10 años de experiencia en gestión energética con algoritmos propietarios"
       },
       {
         "title": "Calidad confiable",
-        "description": "Certificación ISO 9001 con una tasa de fallo de producto inferior al 0,1 %"
+        "description": "Certificado ISO 9001 con tasa de fallo inferior al 0,1%"
       },
       {
         "title": "Servicio global",
-        "description": "Cobertura en más de 50 países y regiones con soporte técnico 24/7"
+        "description": "Cobertura en 20+ países con soporte técnico 24/7"
       }
     ],
-    "ctaTitle": "¿Listo para comenzar?",
-    "ctaSubtitle": "Contáctenos para una solución personalizada",
-    "ctaButton": "Consultar ahora"
+    "ctaTitle": "¿Listo para empezar?",
+    "ctaSubtitle": "Contáctenos para una solución a medida",
+    "ctaApplyDemo": "Solicitar demo",
+    "ctaApiDocs": "Documentación API",
+    "ctaContactSales": "Contactar ventas",
+    "ctaButton": "Contáctenos",
+    "contactUs": "Contáctenos"
   },
   "solutions": {
     "title": "Soluciones",
@@ -354,10 +369,11 @@
       "message": "Mensaje",
       "intent": "Tipo de consulta",
       "intentOptions": {
-        "solutions": "Consulta de soluciones",
-        "api": "Integración de API",
-        "hardware": "Compra de hardware",
-        "custom": "Desarrollo personalizado"
+        "integrator": "Integrador / Solución llave en mano",
+        "api": "Empresa I+D / Integración API",
+        "hardware": "Compra de hardware / Consulta de gateway",
+        "custom": "Desarrollo VPP / BMS personalizado",
+        "other": "Otro"
       },
       "submit": "Enviar mensaje"
     },
@@ -417,11 +433,15 @@
     "content": "AlwaysControl Technology (en adelante \"nosotros\") atribuye gran importancia a la protección de la privacidad de los usuarios. Esta Política de Privacidad explica cómo recopilamos, usamos, almacenamos y protegemos su información personal. Solo recopilamos su información personal en la medida necesaria, incluyendo pero no limitado a nombre, dirección de correo electrónico, número de teléfono y nombre de la empresa. Esta información se utiliza para responder a sus consultas, proporcionar soporte técnico y mejorar nuestros productos y servicios. Empleamos medidas de seguridad estándar de la industria para proteger su información. Sin su consentimiento, no compartiremos su información personal con terceros. Usted tiene derecho a acceder, corregir o eliminar su información personal en cualquier momento. Para consultas relacionadas con la privacidad, contáctenos en info@alwayscontrol.com.cn."
   },
   "ecosystem": {
-    "title": "Ecosistema",
-    "subtitle": "Amplia compatibilidad con las principales marcas de dispositivos de nuevas energías",
+    "title": "Ecosistema compatible",
+    "subtitle": "Amplia compatibilidad con las principales marcas de dispositivos energéticos",
     "allBrands": "Todas las marcas",
     "filterByCategory": "Filtrar por categoría",
-    "noBrands": "No hay datos de marcas disponibles"
+    "noBrands": "No hay datos de marcas disponibles",
+    "allAccess": "Todos los métodos de acceso",
+    "cloud": "☁️ Nube",
+    "gateway": "🔗 Gateway",
+    "contactCta": "¿No encuentra su marca? Contáctenos"
   },
   "search": {
     "title": "Búsqueda",

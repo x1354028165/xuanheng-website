@@ -26,7 +26,6 @@ export default async function HomePage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'home' });
   const tc = await getTranslations({ locale, namespace: 'common' });
-  // Product/solution translations use direct i18n-helpers (avoids next-intl production SSR issues)
 
   // Fetch data with mock fallbacks
   let solutions = await getSolutions(locale);
@@ -57,7 +56,7 @@ export default async function HomePage({
 
   return (
     <>
-      {/* ===== HERO SECTION — Dark bg with background image ===== */}
+      {/* ===== HERO SECTION ===== */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0C1829]">
         <Image
           src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop"
@@ -68,30 +67,86 @@ export default async function HomePage({
         />
         <div className="absolute inset-0 bg-[#0C1829]/70" />
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
             {t('heroTitle')}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-200 sm:text-xl md:text-2xl">
+          <p className="mx-auto mt-6 max-w-3xl text-base text-gray-200 sm:text-lg md:text-xl">
             {t('heroSubtitle')}
           </p>
+          {/* Three-way CTA */}
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/solutions"
-              className="inline-flex items-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-xl sm:text-lg"
+              className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#2BADD0] hover:shadow-xl sm:text-lg"
             >
               {t('viewSolutions')}
+            </Link>
+            <Link
+              href="/developers"
+              className="inline-flex items-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-xl sm:text-lg"
+            >
+              {t('developerCenter')}
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center rounded-lg border-2 border-white px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:text-lg"
             >
-              {t('contactUs')}
+              {t('contactSales')}
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ===== STATS SECTION — White bg ===== */}
+      {/* ===== ACCESS MODE DIFFERENTIATION SECTION ===== */}
+      <section className="bg-[#F8FAFC] py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
+            {t('accessTitle')}
+          </h2>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            {/* Cloud Direct */}
+            <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+              <h3 className="text-xl font-bold text-[#0F172A] mb-4">{t('accessCloudTitle')}</h3>
+              <ul className="space-y-3 text-[#475569]">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
+                  {t('accessCloudDesc1')}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
+                  {t('accessCloudDesc2')}
+                </li>
+              </ul>
+              <p className="mt-4 text-sm font-medium text-[#1A3FAD]">{t('accessCloudFit')}</p>
+            </div>
+            {/* Gateway LAN */}
+            <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+              <h3 className="text-xl font-bold text-[#0F172A] mb-4">{t('accessGatewayTitle')}</h3>
+              <ul className="space-y-3 text-[#475569]">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
+                  {t('accessGatewayDesc1')}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
+                  {t('accessGatewayDesc2')}
+                </li>
+              </ul>
+              <p className="mt-4 text-sm font-medium text-[#1A3FAD]">{t('accessGatewayFit')}</p>
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/ecosystem"
+              className="inline-flex items-center rounded-lg bg-[#0F172A] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-300 hover:bg-[#1E293B] hover:shadow-lg"
+            >
+              {t('accessCta')}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== STATS SECTION ===== */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
@@ -115,7 +170,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ===== SOLUTIONS SECTION — White bg ===== */}
+      {/* ===== SOLUTIONS SECTION — 5 scenario cards ===== */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
@@ -201,55 +256,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ===== PRODUCTS SECTION — White bg ===== */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-2xl font-bold text-[#0F172A] sm:text-3xl">{t('productsTitle')}</h2>
-            <p className="mt-3 text-[#475569]">{t('productsSubtitle')}</p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {products.slice(0, 8).map((product) => {
-              const pTitle = getProductMessage(locale, product.slug, 'title') ?? product.title;
-              const pTagline = getProductMessage(locale, product.slug, 'tagline') ?? product.tagline;
-              return (
-                <Link
-                  key={product.documentId}
-                  href={`/products/${product.slug}`}
-                  className="group overflow-hidden rounded-2xl bg-[#F8FAFC] transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                >
-                  <div className="relative h-40 w-full overflow-hidden">
-                    <Image
-                      src={getStrapiMedia(product.cover?.url)}
-                      alt={pTitle}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
-                      {pTitle}
-                    </h3>
-                    {pTagline && (
-                      <p className="mt-1.5 text-sm text-[#475569] line-clamp-2">{pTagline}</p>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/products"
-              className="inline-flex items-center text-[#38C4E8] font-medium hover:underline"
-            >
-              {tc('viewAll')} &rarr;
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== COMPATIBLE BRANDS — White bg ===== */}
+      {/* ===== COMPATIBLE BRANDS LOGO WALL ===== */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
@@ -277,7 +284,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ===== WHY CHOOSE US — Light gray bg ===== */}
+      {/* ===== WHY CHOOSE US ===== */}
       <section className="bg-[#F8FAFC] py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
@@ -314,7 +321,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ===== LATEST NEWS — Light gray bg ===== */}
+      {/* ===== LATEST NEWS ===== */}
       <section className="bg-[#F8FAFC] py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
@@ -356,7 +363,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ===== CTA SECTION — Dark bg ===== */}
+      {/* ===== BOTTOM CTA — Three entries ===== */}
       <section className="relative overflow-hidden bg-[#0C1829] py-24">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage:
@@ -366,12 +373,26 @@ export default async function HomePage({
         <div className="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">{t('ctaTitle')}</h2>
           <p className="mt-4 text-lg text-gray-300">{t('ctaSubtitle')}</p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#38C4E8]/90 hover:shadow-xl sm:text-lg"
-          >
-            {t('ctaButton')}
-          </Link>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#2BADD0] hover:shadow-xl sm:text-lg"
+            >
+              {t('ctaApplyDemo')}
+            </Link>
+            <Link
+              href="/developers"
+              className="inline-flex items-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-xl sm:text-lg"
+            >
+              {t('ctaApiDocs')}
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-lg border-2 border-white px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:text-lg"
+            >
+              {t('ctaContactSales')}
+            </Link>
+          </div>
         </div>
       </section>
     </>

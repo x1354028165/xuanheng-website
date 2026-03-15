@@ -72,17 +72,28 @@
     "page": "Page {page}"
   },
   "home": {
-    "heroTitle": "Smart Energy, Always in Control",
-    "heroSubtitle": "AlwaysControl — Smart Management Solutions for the New Energy Sector",
+    "heroTitle": "Seamlessly Aggregate Multi-Scenario Energy Assets, Reshape Distributed Energy Value",
+    "heroSubtitle": "Cloud-direct or gateway access, turnkey systems or pure API calls — break through device protocol barriers",
     "viewSolutions": "Explore Solutions",
-    "contactUs": "Contact Us",
+    "developerCenter": "Developer Center",
+    "contactSales": "Contact Sales",
+    "accessTitle": "Access Mode — Your Choice, Your Way",
+    "accessCloudTitle": "☁️ Cloud Direct",
+    "accessCloudDesc1": "No gateway hardware required",
+    "accessCloudDesc2": "Direct access via cloud API for supported devices",
+    "accessCloudFit": "Ideal for: VPP dispatch, remote monitoring platforms",
+    "accessGatewayTitle": "🔗 Gateway LAN",
+    "accessGatewayDesc1": "Neuron gateway deployed on-site",
+    "accessGatewayDesc2": "Data processed locally, meeting data-stays-local requirements",
+    "accessGatewayFit": "Ideal for: Industrial LANs, large factories, data-sensitive scenarios",
+    "accessCta": "View Compatible Brands & Access Methods →",
     "statsTitle": "Numbers That Speak",
-    "statsBrands": "200+",
+    "statsBrands": "50+",
     "statsBrandsLabel": "Compatible Brands",
-    "statsCountries": "50+",
+    "statsCountries": "20+",
     "statsCountriesLabel": "Countries Covered",
     "statsProjects": "500+",
-    "statsProjectsLabel": "Projects Delivered",
+    "statsProjectsLabel": "Projects Deployed",
     "solutionsTitle": "Solutions",
     "solutionsSubtitle": "Smart energy management for different scenarios",
     "productsTitle": "Products",
@@ -103,12 +114,16 @@
       },
       {
         "title": "Global Service",
-        "description": "Covering 50+ countries and regions with 24/7 technical support"
+        "description": "Covering 20+ countries and regions with 24/7 technical support"
       }
     ],
     "ctaTitle": "Ready to Get Started?",
     "ctaSubtitle": "Contact us for a tailored solution",
-    "ctaButton": "Get in Touch"
+    "ctaApplyDemo": "Request Demo",
+    "ctaApiDocs": "API Docs",
+    "ctaContactSales": "Contact Sales",
+    "ctaButton": "Get in Touch",
+    "contactUs": "Contact Us"
   },
   "solutions": {
     "title": "Solutions",
@@ -354,10 +369,11 @@
       "message": "Message",
       "intent": "Inquiry Type",
       "intentOptions": {
-        "solutions": "Solution Inquiry",
-        "api": "API Integration",
-        "hardware": "Hardware Purchase",
-        "custom": "Custom Development"
+        "integrator": "Integrator / Turnkey Solution",
+        "api": "R&D Enterprise / API Integration",
+        "hardware": "Hardware Purchase / Gateway Inquiry",
+        "custom": "VPP / BMS Custom Development",
+        "other": "Other"
       },
       "submit": "Send Message"
     },
@@ -417,11 +433,15 @@
     "content": "AlwaysControl Technology (hereinafter referred to as \"we\") attaches great importance to user privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information. We only collect your personal information to the extent necessary, including but not limited to your name, email address, phone number, and company name. This information is used to respond to your inquiries, provide technical support, and improve our products and services. We employ industry-standard security measures to protect your information. Without your consent, we will not share your personal information with third parties. You have the right to access, correct, or delete your personal information at any time. For any privacy-related questions, please contact us at info@alwayscontrol.com.cn."
   },
   "ecosystem": {
-    "title": "Ecosystem",
+    "title": "Compatible Ecosystem",
     "subtitle": "Widely compatible with mainstream new energy device brands",
     "allBrands": "All Brands",
     "filterByCategory": "Filter by Category",
-    "noBrands": "No brand data available"
+    "noBrands": "No brand data available",
+    "allAccess": "All Access Methods",
+    "cloud": "☁️ Cloud",
+    "gateway": "🔗 Gateway",
+    "contactCta": "Can't find your brand? Contact us"
   },
   "search": {
     "title": "Search",

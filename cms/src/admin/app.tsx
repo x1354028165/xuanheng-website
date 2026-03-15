@@ -2,14 +2,7 @@ import type { StrapiApp } from '@strapi/strapi/admin';
 
 export default {
   config: {
-    // Brand logos for auth (login) and sidebar menu
-    auth: {
-      logo: 'https://alwayscontrol.com.cn/logo.png',
-    },
-    menu: {
-      logo: 'https://alwayscontrol.com.cn/logo.png',
-    },
-    // Enable Chinese locale in admin UI
+    // Available locales in admin UI
     locales: ['zh-Hans', 'en'],
     // Disable release notifications and tutorials for cleaner UX
     notifications: {
@@ -23,9 +16,18 @@ export default {
       },
     },
   },
-  bootstrap(app: StrapiApp) {
-    // Custom routes disabled — app.router.addRoute not available in Strapi v5
-    // Dashboard customization via content-manager instead
-    void app;
+  bootstrap(_app: StrapiApp) {
+    // Force light theme and Chinese language as defaults
+    // Only set if the user hasn't explicitly changed them
+    if (typeof window !== 'undefined') {
+      // Set light theme (key: STRAPI_THEME, values: 'light' | 'dark' | 'system')
+      if (!localStorage.getItem('STRAPI_THEME')) {
+        localStorage.setItem('STRAPI_THEME', 'light');
+      }
+      // Set Chinese (Simplified) as default language (key: strapi-admin-language)
+      if (!localStorage.getItem('strapi-admin-language')) {
+        localStorage.setItem('strapi-admin-language', 'zh-Hans');
+      }
+    }
   },
 };

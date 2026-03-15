@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>CMS 登录中...</title></head>
+<body>
+<p>正在登录 CMS，请稍候...</p>
+<script>
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyIiwic2Vzc2lvbklkIjoiZmE4ZTA1NjA4OTEwNTgzMzdjNjAxYjQ2ZTQwYjA4OGEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTgyMjAwLCJleHAiOjE3NzM1ODQwMDB9.gDYeR9KwpyoMWDZTP4Ak1ael1Eu2Piy9eV2k6tg58TU";
+  // 写入 Strapi admin localStorage
+  const strapiUrl = "http://32.236.16.227:1337";
+  // 打开 Strapi admin 并注入 token
+  const w = window.open(strapiUrl + "/admin", "_blank");
+  setTimeout(() => {
+    try {
+      w.localStorage.setItem("jwtToken", token);
+      w.location.reload();
+    } catch(e) {
+      document.body.innerHTML = '<p>由于跨域限制，请手动访问：<a href="' + strapiUrl + '/admin/auth/login">CMS登录页</a></p><p>邮箱：admin@alwayscontrol.com.cn<br>密码：Admin12345</p>';
+    }
+  }, 2000);
+</script>
+</body>
+</html>

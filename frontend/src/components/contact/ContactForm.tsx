@@ -11,10 +11,11 @@ interface ContactFormLabels {
   email: string;
   intent: string;
   intentOptions: {
-    solutions: string;
+    integrator: string;
     api: string;
     hardware: string;
     custom: string;
+    other: string;
   };
   message: string;
   submit: string;
@@ -131,10 +132,11 @@ export function ContactForm({ labels }: ContactFormProps) {
           className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <option value="">--</option>
-          <option value="solutions">{labels.intentOptions.solutions}</option>
+          <option value="integrator">{labels.intentOptions.integrator}</option>
           <option value="api">{labels.intentOptions.api}</option>
           <option value="hardware">{labels.intentOptions.hardware}</option>
           <option value="custom">{labels.intentOptions.custom}</option>
+          <option value="other">{labels.intentOptions.other}</option>
         </select>
       </div>
 
