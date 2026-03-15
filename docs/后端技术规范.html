@@ -1541,6 +1541,38 @@ export async function POST(req: NextRequest) {
 <li><strong>IP 白名单（可选）</strong>：在 Vercel 或 Nginx 层限制仅允许 Strapi 服务器 IP 访问 <code>/api/revalidate</code></li>
 </ul>
 
+<div style="background:#fff3cd;border-left:4px solid #f0ad4e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <h4 style="margin:0 0 10px 0;color:#856404;">🔒 【Webhook 环境隔离铁律】</h4>
+  <p style="margin:0 0 10px 0;">如果生产（Prod）和测试（Staging）前端共用同一个 Strapi 实例，Webhook 配置不当会导致测试环境操作污染生产环境缓存（<strong>Cache Invalidation Storm</strong>）。</p>
+  <p style="margin:0 0 8px 0;color:#b45309;"><strong>必须在 Strapi 后台 Settings → Webhooks 中为每个环境单独创建 Webhook 记录：</strong></p>
+  <table style="width:100%;border-collapse:collapse;margin:0 0 10px 0;font-size:13px;">
+    <thead>
+      <tr style="background:#f0ad4e22;">
+        <th style="border:1px solid #f0ad4e;padding:6px 10px;text-align:left;">环境</th>
+        <th style="border:1px solid #f0ad4e;padding:6px 10px;text-align:left;">Webhook URL</th>
+        <th style="border:1px solid #f0ad4e;padding:6px 10px;text-align:left;">Secret</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;">生产</td>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;"><code>https://alwayscontrol.com.cn/api/revalidate</code></td>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;">独立随机 Secret A</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;">测试</td>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;"><code>https://staging.xxx.com/api/revalidate</code></td>
+        <td style="border:1px solid #f0ad4e;padding:6px 10px;">独立随机 Secret B</td>
+      </tr>
+    </tbody>
+  </table>
+  <ul style="margin:0;padding-left:20px;color:#856404;">
+    <li>每个环境必须有独立的 <code>REVALIDATE_SECRET</code>，<strong>禁止多环境共享</strong></li>
+    <li>生产 Strapi 只向生产前端发 Webhook，Staging Strapi 只向 Staging 前端发</li>
+    <li>如果只有一个 Strapi 实例，必须通过不同的 Secret 区分请求来源，前端 Route Handler 校验 Secret 时精确匹配对应环境</li>
+  </ul>
+</div>
+
 <hr>
 
 <!-- ============================================================ -->
@@ -1601,6 +1633,21 @@ module.exports = ({ env }) =&gt; ({
     },
   },
 });</code></pre>
+
+<div style="background:#ffeaea;border-left:4px solid #e74c3c;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <h4 style="margin:0 0 10px 0;color:#c0392b;">⚠️ 【资产合规铁律】</h4>
+  <p style="margin:0 0 10px 0;">Strapi 媒体库删除操作<strong>默认只删数据库记录</strong>，OSS 上的物理文件依然存在且 URL 永久有效。B2B 场景下，被替换的方案文档/敏感资料可能被竞争对手持续下载。</p>
+  <p style="margin:0 0 8px 0;color:#c0392b;"><strong>两种合规方案（生产部署前必须选择并执行）：</strong></p>
+  <p style="margin:0 0 4px 0;color:#27ae60;"><strong>方案一（推荐）：配置 Strapi upload 插件同步删除 OSS 物理文件</strong></p>
+  <p style="margin:0 0 10px 0;">在 <code>cms/config/plugins.ts</code> 中确保 <code>@strapi/provider-upload-aws-s3</code>（或阿里云 OSS 自定义 provider）配置了删除钩子，使媒体库删除操作同步触发 OSS 物理文件删除。</p>
+  <p style="margin:0 0 4px 0;color:#27ae60;"><strong>方案二：OSS 桶设为私有 + 后端生成签名 URL（Signed URL）</strong></p>
+  <ul style="margin:0 0 10px 0;padding-left:20px;">
+    <li>阿里云 OSS 桶访问权限设为「<strong>私有</strong>」</li>
+    <li>前端展示图片通过 Strapi 后端中间层生成带时效的签名 URL（有效期建议 <strong>1 小时</strong>）</li>
+    <li>禁止在前端直接硬编码或展示永久有效的 OSS 物理地址</li>
+  </ul>
+  <p style="margin:0;color:#856404;"><strong>开发阶段（本地存储）：</strong>不涉及，上线前必须确认上述方案已实施。</p>
+</div>
 
 <h3 id="s6-3">6.3 图片处理规范</h3>
 
