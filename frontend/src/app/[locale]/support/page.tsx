@@ -38,6 +38,7 @@ export default async function HelpPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'help' });
+  const tc = await getTranslations({ locale, namespace: 'common' });
 
   return (
     <>
@@ -50,14 +51,14 @@ export default async function HelpPage({
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {helpSections.map((section) => (
               <Link
                 key={section.href}
                 href={section.href}
-                className="group rounded-xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                className="group rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 <div className="text-4xl mb-4">{section.icon}</div>
                 <h2 className="text-xl font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
@@ -65,7 +66,7 @@ export default async function HelpPage({
                 </h2>
                 <p className="mt-2 text-[#475569]">{t(section.descKey)}</p>
                 <span className="mt-4 inline-flex items-center text-sm font-medium text-[#38C4E8]">
-                  查看详情 →
+                  {tc('viewDetails')} →
                 </span>
               </Link>
             ))}

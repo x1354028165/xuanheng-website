@@ -12,6 +12,7 @@ export default async function ContactPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'contact' });
+  const tc = await getTranslations({ locale, namespace: 'common' });
 
   return (
     <>
@@ -24,7 +25,7 @@ export default async function ContactPage({
         </div>
       </section>
 
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Information */}
@@ -68,13 +69,13 @@ export default async function ContactPage({
               </div>
 
               {/* Map Placeholder */}
-              <div className="mt-8 flex h-64 items-center justify-center rounded-xl border border-[#E2E8F0] bg-[#F8FAFC]">
-                <p className="text-sm text-[#64748B]">地图加载中...</p>
+              <div className="mt-8 flex h-64 items-center justify-center rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC]">
+                <p className="text-sm text-[#64748B]">{tc('loading')}</p>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
               <ContactForm
                 labels={{
                   name: t('form.name'),

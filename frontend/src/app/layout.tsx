@@ -19,7 +19,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "旭衡电子 | AlwaysControl Technology",
-  description: "旭衡电子官方网站 — 工业自动化与控制解决方案",
+  description: "AlwaysControl Technology — Smart Energy Management Solutions",
 };
 
 export default function RootLayout({

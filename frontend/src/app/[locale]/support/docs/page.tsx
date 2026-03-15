@@ -137,7 +137,7 @@ export default function DocsPage() {
                 </button>
               ))}
             </div>
-            <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
+            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0]">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-[#F8FAFC]">
@@ -174,7 +174,7 @@ export default function DocsPage() {
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {MOCK_SOFTWARE.map((sw, idx) => (
-                <div key={idx} className="rounded-xl border border-[#E2E8F0] bg-white shadow-sm p-6">
+                <div key={idx} className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm p-6">
                   <div className="flex items-start justify-between mb-1">
                     <h3 className="text-lg font-semibold text-[#0F172A]">{sw.name}</h3>
                     <span className="rounded bg-[#F1F5F9] px-2 py-0.5 text-xs text-[#475569]">{sw.version}</span>
@@ -218,7 +218,7 @@ export default function DocsPage() {
                 </button>
               ))}
             </div>
-            <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
+            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0]">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-[#F8FAFC]">

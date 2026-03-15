@@ -67,7 +67,7 @@ export default function FAQPage() {
             {filtered.map((faq) => (
               <div
                 key={faq.id}
-                className="rounded-xl border border-[#E2E8F0] bg-white overflow-hidden"
+                className="rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden"
               >
                 <button
                   onClick={() => setOpenId(openId === faq.id ? null : faq.id)}

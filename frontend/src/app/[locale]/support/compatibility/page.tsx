@@ -48,7 +48,7 @@ export default async function CompatibilityPage({
               <h2 className="mb-4 text-xl font-bold text-[#0F172A] flex items-center gap-2">
                 <span className="text-[#38C4E8]">⚡</span> {model}
               </h2>
-              <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
+              <div className="overflow-hidden rounded-2xl border border-[#E2E8F0]">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[#F8FAFC]">

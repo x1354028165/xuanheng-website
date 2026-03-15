@@ -45,7 +45,7 @@ export default async function ProductsPage({
       </section>
 
       {/* Hardware Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'hardwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -53,7 +53,7 @@ export default async function ProductsPage({
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}
-                className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                className="group rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                   <div className="text-4xl text-[#1A3FAD]/30">⚡</div>
@@ -76,7 +76,7 @@ export default async function ProductsPage({
       </section>
 
       {/* Software Section */}
-      <section className="bg-[#F8FAFC] py-16">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'softwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,7 +84,7 @@ export default async function ProductsPage({
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}
-                className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                className="group rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                   <div className="text-4xl text-[#1A3FAD]/30">☁️</div>

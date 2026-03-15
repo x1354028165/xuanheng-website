@@ -95,7 +95,7 @@ export default function DownloadPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {currentDownloads.map((sw, idx) => (
-              <div key={idx} className="rounded-xl border border-[#E2E8F0] bg-white shadow-sm p-6">
+              <div key={idx} className="rounded-2xl border border-[#E2E8F0] bg-white shadow-sm p-6">
                 <div className="flex items-start justify-between mb-1">
                   <h3 className="text-lg font-semibold text-[#0F172A]">{sw.name}</h3>
                   <span className="rounded bg-[#ECFDF5] px-2 py-0.5 text-xs font-medium text-[#059669]">{sw.version}</span>

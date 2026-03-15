@@ -5,9 +5,10 @@ import { Link } from '@/i18n/navigation';
 import { getArticleBySlug } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
+import { MOCK_ARTICLES } from '@/lib/mock-data';
 
 export function generateStaticParams() {
-  return [];
+  return MOCK_ARTICLES.map((a) => ({ slug: a.slug }));
 }
 
 export const dynamicParams = false;
@@ -21,7 +22,23 @@ export default async function ArticleDetailPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'about' });
-  const article = await getArticleBySlug(slug, locale);
+  let article = await getArticleBySlug(slug, locale);
+
+  // Fallback to mock data
+  if (!article) {
+    const mock = MOCK_ARTICLES.find((a) => a.slug === slug);
+    if (mock) {
+      article = {
+        documentId: mock.documentId,
+        title: mock.title,
+        slug: mock.slug,
+        summary: mock.summary,
+        content: mock.summary,
+        cover: null,
+        publishedDate: mock.publishedDate,
+      } as Awaited<ReturnType<typeof getArticleBySlug>>;
+    }
+  }
 
   if (!article) {
     notFound();

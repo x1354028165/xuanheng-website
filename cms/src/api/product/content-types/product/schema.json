@@ -69,6 +69,10 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

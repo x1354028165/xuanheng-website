@@ -34,7 +34,7 @@ export default async function EcosystemPage({
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-16">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <BrandFilter
             brands={brands}

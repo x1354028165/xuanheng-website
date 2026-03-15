@@ -48,7 +48,8 @@
     "about-news-desc": "Latest news and industry insights",
     "about-careers-desc": "Join our team",
     "nav-hardware": "Hardware · Smart Gateways",
-    "nav-software": "Software · Cloud Platform"
+    "nav-software": "Software · Cloud Platform",
+    "home": "Home"
   },
   "common": {
     "learnMore": "Learn More",

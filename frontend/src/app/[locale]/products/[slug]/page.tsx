@@ -119,21 +119,21 @@ export default async function ProductDetailPage({
 
       {/* Specs Table */}
       {finalSpecs.length > 0 && (
-        <section id="specs" className="bg-[#0f1b2e] py-16">
+        <section id="specs" className="bg-white py-24">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-white">{t('specifications')}</h2>
-            <div className="overflow-hidden rounded-xl border border-white/10">
+            <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{t('specifications')}</h2>
+            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0]">
               <table className="w-full">
                 <tbody>
                   {finalSpecs.map(([key, value], idx) => (
                     <tr
                       key={key}
-                      className={idx % 2 === 0 ? 'bg-white/5' : 'bg-white/[0.02]'}
+                      className={idx % 2 === 0 ? 'bg-[#F8FAFC]' : 'bg-white'}
                     >
-                      <td className="px-6 py-4 text-sm font-medium text-gray-300 w-1/3 border-r border-white/10">
+                      <td className="px-6 py-4 text-sm font-medium text-[#0F172A] w-1/3 border-r border-[#E2E8F0]">
                         {key}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-400">
+                      <td className="px-6 py-4 text-sm text-[#64748B]">
                         {String(value)}
                       </td>
                     </tr>
@@ -147,9 +147,9 @@ export default async function ProductDetailPage({
 
       {/* Related Solutions */}
       {relatedSolutions.length > 0 && (
-        <section className="bg-[#0C1829] py-16">
+        <section className="bg-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-white">{applicableScenarios}</h2>
+            <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{applicableScenarios}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedSolutions.map((solution) => {
                 const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
@@ -158,12 +158,12 @@ export default async function ProductDetailPage({
                   <Link
                     key={solution.slug}
                     href={`/solutions/${solution.slug}`}
-                    className="group rounded-xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-[#38C4E8]/30 hover:-translate-y-1"
+                    className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                   >
-                    <h3 className="text-lg font-semibold text-white group-hover:text-[#38C4E8] transition-colors">
+                    <h3 className="text-lg font-semibold text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
                       {sTitle}
                     </h3>
-                    <p className="mt-2 text-sm text-gray-400">{sTagline}</p>
+                    <p className="mt-2 text-sm text-[#64748B]">{sTagline}</p>
                     <span className="mt-4 inline-flex items-center text-sm font-medium text-[#38C4E8]">
                       {viewSolution} →
                     </span>
@@ -176,9 +176,9 @@ export default async function ProductDetailPage({
       )}
 
       {/* Downloads */}
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-white">{resourceDownload}</h2>
+          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{resourceDownload}</h2>
           <div className="space-y-3">
             {[
               { name: interpolate(getProductLabel(locale, 'userManual'), { title }), format: 'PDF', size: '3.2MB' },
@@ -187,18 +187,18 @@ export default async function ProductDetailPage({
             ].map((doc) => (
               <div
                 key={doc.name}
-                className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-6 py-4 transition-all hover:border-[#38C4E8]/30"
+                className="flex items-center justify-between rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] px-6 py-4 transition-all hover:shadow-md hover:border-[#38C4E8]/30"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/20 text-[#38C4E8]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#38C4E8]/10 text-[#38C4E8]">
                     📄
                   </div>
                   <div>
-                    <p className="font-medium text-white">{doc.name}</p>
-                    <p className="text-xs text-gray-500">{doc.format} · {doc.size}</p>
+                    <p className="font-medium text-[#0F172A]">{doc.name}</p>
+                    <p className="text-xs text-[#64748B]">{doc.format} · {doc.size}</p>
                   </div>
                 </div>
-                <button className="rounded-md bg-[#38C4E8]/10 px-4 py-2 text-sm font-medium text-[#38C4E8] hover:bg-[#38C4E8]/20 transition-colors">
+                <button className="rounded-md bg-[#38C4E8] px-4 py-2 text-sm font-medium text-white hover:bg-[#2BA8C8] transition-colors">
                   {downloadBtn}
                 </button>
               </div>

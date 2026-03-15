@@ -48,7 +48,8 @@
     "about-news-desc": "最新動態與產業資訊",
     "about-careers-desc": "加入我們",
     "nav-hardware": "硬體 · 智慧閘道器",
-    "nav-software": "軟體 · 雲端平台"
+    "nav-software": "軟體 · 雲端平台",
+    "home": "首頁"
   },
   "common": {
     "learnMore": "瞭解更多",
@@ -215,11 +216,11 @@
     "ctaDesc": "聯繫我們獲取定制方案和報價",
     "applyDemo": "申請 Demo",
     "accessModesTitle": "接入方式",
-    "accessModesSubtitle": "选择最适合您的接入模式",
-    "accessCloud": "☁️ 云端直连",
-    "accessCloudDesc": "设备支持云端 API 的直接接入，无需额外硬件",
-    "accessGateway": "🔗 网关接入",
-    "accessGatewayDesc": "通过 Neuron 网关在本地局域网接入设备"
+    "accessModesSubtitle": "接入方式由你決定，沒有綁定關係",
+    "accessCloud": "☁️ 雲端直連",
+    "accessCloudDesc": "無需網關，透過品牌雲 API 直接接入，零硬體成本，快速部署",
+    "accessGateway": "🔗 網關區域網",
+    "accessGatewayDesc": "Neuron 網關現場部署，資料不上雲，本地即時控制，適合工業場景"
   },
   "products": {
     "title": "產品中心",

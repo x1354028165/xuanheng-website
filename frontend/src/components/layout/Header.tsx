@@ -45,6 +45,7 @@ function hasGroups(children: { groups?: NavGroup[]; items?: SubItem[] }): childr
 
 /* ─── Navigation Config ─── */
 const NAV_ITEMS: NavItem[] = [
+  { key: "home", href: "/" },
   {
     key: "products",
     href: "/products",
@@ -237,14 +238,16 @@ export function Header({ locale }: { locale: string }) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0C1829] ${
-          scrolled ? "shadow-lg" : ""
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/92 backdrop-blur-xl border-b border-[#E2E8F0] shadow-sm"
+            : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold font-display text-white">
+            <span className={`text-xl font-bold font-display transition-colors ${scrolled ? "text-[#0F172A]" : "text-white"}`}>
               AlwaysControl
             </span>
           </Link>
@@ -252,7 +255,7 @@ export function Header({ locale }: { locale: string }) {
           {/* Desktop Nav */}
           <nav className="hidden items-center gap-0.5 md:flex">
             {NAV_ITEMS.map((nav) => {
-              const isActive = pathname === nav.href || pathname.startsWith(`${nav.href}/`);
+              const isActive = pathname === nav.href || (nav.href !== "/" && pathname.startsWith(`${nav.href}/`));
               const hasChildren = !!nav.children;
 
               return (
@@ -266,8 +269,10 @@ export function Header({ locale }: { locale: string }) {
                     href={nav.href}
                     className={`inline-flex items-center gap-0.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-brand-cyan"
-                        : "text-white/80 hover:text-white"
+                        ? "text-[#38C4E8]"
+                        : scrolled
+                          ? "text-[#0F172A]/80 hover:text-[#38C4E8]"
+                          : "text-white/85 hover:text-white"
                     }`}
                   >
                     {t(nav.key)}
@@ -295,7 +300,7 @@ export function Header({ locale }: { locale: string }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className="rounded-md p-2 text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+              className={`rounded-md p-2 transition-colors ${scrolled ? "text-[#0F172A]/60 hover:text-[#38C4E8] hover:bg-gray-100" : "text-white/60 hover:text-white hover:bg-white/10"}`}
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
@@ -305,7 +310,7 @@ export function Header({ locale }: { locale: string }) {
             <div ref={langRef} className="relative hidden sm:block">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1 rounded-md px-2 py-1.5 text-xs text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${scrolled ? "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100" : "text-white/70 hover:text-white hover:bg-white/10"}`}
                 type="button"
               >
                 <span>🌐</span>
@@ -321,15 +326,15 @@ export function Header({ locale }: { locale: string }) {
                 </svg>
               </button>
               {langOpen && (
-                <div className="absolute right-0 top-full mt-1 z-50 w-36 rounded-lg bg-[#0C1829] border border-white/10 shadow-xl py-1 overflow-hidden">
+                <div className="absolute right-0 top-full mt-1 z-50 w-36 rounded-lg bg-white border border-[#E2E8F0] shadow-xl py-1 overflow-hidden">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => switchLocale(lang.code)}
                       className={`w-full text-left px-3 py-2 text-sm transition-colors ${
                         currentLocale === lang.code
-                          ? "text-brand-cyan bg-white/5"
-                          : "text-white/70 hover:text-white hover:bg-white/5"
+                          ? "text-[#38C4E8] bg-[#F8FAFC]"
+                          : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-[#F8FAFC]"
                       }`}
                     >
                       {lang.label}
@@ -341,7 +346,7 @@ export function Header({ locale }: { locale: string }) {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden rounded-md p-2 text-white hover:bg-white/10 transition-colors"
+              className={`md:hidden rounded-md p-2 transition-colors ${scrolled ? "text-[#0F172A] hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >

@@ -1,21 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 const DEVICE_MODELS = [
   'Neuron II',
   'Neuron III',
   'Neuron III Lite',
-  'HEMS 云平台',
-  'ESS 云平台',
-  'EVCMS 云平台',
-  'PQMS 云平台',
-  'VPP 云平台',
-  '其他',
+  'HEMS',
+  'ESS',
+  'EVCMS',
+  'PQMS',
+  'VPP',
 ];
 
 export default function RepairPage() {
+  const t = useTranslations('help');
+  const tc = useTranslations('common');
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -35,22 +37,21 @@ export default function RepairPage() {
         <section className="bg-[#0C1829] pb-8 pt-32">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Link href="/support" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
-              &larr; 返回帮助中心
+              &larr; {t('backToHelp')}
             </Link>
-            <h1 className="text-3xl font-bold text-white">在线报修</h1>
+            <h1 className="text-3xl font-bold text-white">{t('repairTitle')}</h1>
           </div>
         </section>
-        <section className="bg-white py-16">
+        <section className="bg-white py-24">
           <div className="mx-auto max-w-lg px-4 text-center">
-            <div className="rounded-xl border border-green-200 bg-green-50 p-12">
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-12">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="text-xl font-bold text-[#0F172A] mb-2">报修工单已提交</h2>
-              <p className="text-[#475569]">我们的技术支持团队会在 24 小时内联系您，请保持电话畅通。</p>
+              <h2 className="text-xl font-bold text-[#0F172A] mb-2">{t('repairSuccess')}</h2>
               <Link
                 href="/support"
                 className="mt-6 inline-flex items-center rounded-lg bg-[#38C4E8] px-6 py-2.5 text-sm font-semibold text-[#0C1829] transition-colors hover:bg-[#38C4E8]/90"
               >
-                返回帮助中心
+                {t('backToHelp')}
               </Link>
             </div>
           </div>
@@ -64,20 +65,20 @@ export default function RepairPage() {
       <section className="bg-[#0C1829] pb-8 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link href="/support" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
-            &larr; 返回帮助中心
+            &larr; {t('backToHelp')}
           </Link>
-          <h1 className="text-3xl font-bold text-white">在线报修</h1>
-          <p className="mt-2 text-gray-400">提交报修工单，我们的技术支持团队会尽快处理</p>
+          <h1 className="text-3xl font-bold text-white">{t('repairTitle')}</h1>
+          <p className="mt-2 text-gray-400">{t('repairSubtitle')}</p>
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-12">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="rounded-xl border border-[#E2E8F0] bg-white p-8 space-y-6 shadow-sm">
+          <form onSubmit={handleSubmit} className="rounded-2xl border border-[#E2E8F0] bg-white p-8 space-y-6 shadow-sm">
             {/* Name */}
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">
-                姓名 <span className="text-red-400">*</span>
+                {t('repairForm.name')} <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -85,14 +86,13 @@ export default function RepairPage() {
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
-                placeholder="请输入您的姓名"
               />
             </div>
 
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">
-                联系电话 <span className="text-red-400">*</span>
+                {t('repairForm.phone')} <span className="text-red-400">*</span>
               </label>
               <input
                 type="tel"
@@ -100,14 +100,13 @@ export default function RepairPage() {
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                 className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
-                placeholder="请输入您的电话号码"
               />
             </div>
 
             {/* Device Model */}
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">
-                设备型号 <span className="text-red-400">*</span>
+                {t('repairForm.product')} <span className="text-red-400">*</span>
               </label>
               <select
                 required
@@ -115,7 +114,7 @@ export default function RepairPage() {
                 onChange={(e) => setFormData(prev => ({ ...prev, model: e.target.value }))}
                 className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
               >
-                <option value="">请选择设备型号</option>
+                <option value="">—</option>
                 {DEVICE_MODELS.map((model) => (
                   <option key={model} value={model}>{model}</option>
                 ))}
@@ -125,7 +124,7 @@ export default function RepairPage() {
             {/* Description */}
             <div>
               <label className="block text-sm font-medium text-[#0F172A] mb-2">
-                故障描述 <span className="text-red-400">*</span>
+                {t('repairForm.description')} <span className="text-red-400">*</span>
               </label>
               <textarea
                 required
@@ -133,26 +132,15 @@ export default function RepairPage() {
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20 resize-none"
-                placeholder="请详细描述故障现象"
               />
-            </div>
-
-            {/* Screenshots placeholder */}
-            <div>
-              <label className="block text-sm font-medium text-[#0F172A] mb-2">
-                故障截图（可选，最多5张）
-              </label>
-              <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-[#E2E8F0] px-6 py-8 text-center">
-                <p className="text-sm text-[#475569]">点击或拖拽上传截图</p>
-              </div>
             </div>
 
             {/* Submit */}
             <button
               type="submit"
-              className="w-full rounded-lg bg-[#1A3FAD] py-3 text-base font-semibold text-white transition-all hover:bg-[#1A3FAD]/90 hover:shadow-lg"
+              className="w-full rounded-lg bg-[#38C4E8] py-3 text-base font-semibold text-[#0C1829] transition-all hover:bg-[#2BA8C8] hover:shadow-lg"
             >
-              提交报修
+              {t('repairForm.submit')}
             </button>
           </form>
         </div>

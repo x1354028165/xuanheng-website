@@ -34,7 +34,7 @@ export default async function SolutionsPage({
       </section>
 
       {/* Solutions Grid */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => {
@@ -45,7 +45,7 @@ export default async function SolutionsPage({
                 <Link
                   key={solution.documentId}
                   href={`/solutions/${solution.slug}`}
-                  className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+                  className="group rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
                 >
                   <div className="relative h-52 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                     <div className="text-5xl text-[#1A3FAD]/30">🔋</div>

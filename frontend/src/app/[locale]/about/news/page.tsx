@@ -31,7 +31,7 @@ export default async function NewsPage({
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-16">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {articles.length > 0 ? (
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -39,7 +39,7 @@ export default async function NewsPage({
                 <Link
                   key={article.documentId}
                   href={`/about/news/${article.slug}`}
-                  className="group overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm transition-all duration-300 hover:shadow-md"
+                  className="group overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-sm transition-all duration-300 hover:shadow-md"
                 >
                   <div className="relative aspect-video w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                     <div className="text-3xl text-gray-600">📰</div>

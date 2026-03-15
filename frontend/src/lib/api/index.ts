@@ -19,7 +19,7 @@ export async function getProducts(locale = 'zh-CN'): Promise<StrapiProduct[]> {
     const res = await fetchWithFallback<StrapiResponse<StrapiProduct>>('/products', {
       locale,
       populate: '*',
-      sort: ['sortOrder:asc', 'createdAt:desc'],
+      sort: ['createdAt:desc'],
     });
     return res.data ?? [];
   } catch {
@@ -54,7 +54,7 @@ export async function getSolutions(locale = 'zh-CN'): Promise<StrapiSolution[]> 
     const res = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
       locale,
       populate: '*',
-      sort: ['sortOrder:asc', 'createdAt:desc'],
+      sort: ['createdAt:desc'],
     });
     return res.data ?? [];
   } catch {
@@ -133,7 +133,7 @@ export async function getFAQs(locale = 'zh-CN'): Promise<StrapiFAQ[]> {
   try {
     const res = await fetchWithFallback<StrapiResponse<StrapiFAQ>>('/faqs', {
       locale,
-      sort: ['sortOrder:asc', 'createdAt:asc'],
+      sort: ['createdAt:asc'],
     });
     return res.data ?? [];
   } catch {
@@ -152,7 +152,7 @@ export async function getCompatibleBrands(): Promise<StrapiCompatibleBrand[]> {
       '/compatible-brands',
       {
         populate: '*',
-        sort: ['sortOrder:asc', 'name:asc'],
+        sort: ['name:asc'],
       }
     );
     return res.data ?? [];

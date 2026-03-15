@@ -31,7 +31,7 @@ export default async function AboutPage({
       </section>
 
       {/* Company Introduction */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-4 text-xl font-bold text-[#0F172A]">{t('companyIntro')}</h2>
           <p className="text-lg leading-relaxed text-[#475569]">
@@ -41,7 +41,7 @@ export default async function AboutPage({
       </section>
 
       {/* Development Milestones Timeline */}
-      <section className="bg-[#F8FAFC] py-16">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-center text-2xl font-bold text-[#0F172A]">
             {t('historyTitle')}
@@ -72,12 +72,12 @@ export default async function AboutPage({
       </section>
 
       {/* Links to News and Careers */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2">
             <Link
               href="/about/news"
-              className="group rounded-xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
+              className="group rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
             >
               <h3 className="text-xl font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
                 {t('newsTitle')}
@@ -86,7 +86,7 @@ export default async function AboutPage({
             </Link>
             <Link
               href="/about/careers"
-              className="group rounded-xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
+              className="group rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
             >
               <h3 className="text-xl font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
                 {t('careersTitle')}

@@ -25,14 +25,14 @@ export default async function CareersPage({
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-16">
+      <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {jobs.length > 0 ? (
             <div className="space-y-4">
               {jobs.map((job) => (
                 <div
                   key={job.documentId}
-                  className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition-all hover:shadow-md"
+                  className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition-all hover:shadow-md"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -57,7 +57,7 @@ export default async function CareersPage({
               ))}
             </div>
           ) : (
-            <div className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-12 text-center">
+            <div className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-12 text-center">
               <p className="text-lg text-[#475569]">{t('noOpenings')}</p>
             </div>
           )}
