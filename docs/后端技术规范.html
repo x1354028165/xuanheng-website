@@ -1616,6 +1616,26 @@ module.exports = ({ env }) =&gt; ({
 </tbody>
 </table>
 
+<div style="background:#fff3cd;border-left:4px solid #f0ad4e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <h4 style="margin:0 0 10px 0;color:#856404;">💰 【CDN 图片优化财务铁律】</h4>
+  <p style="margin:0 0 10px 0;">⚠️ Vercel 免费/基础套餐对 Image Optimization 有严格限额（<strong>1000 Source Images/月</strong>）。Strapi 上传图片后，Next.js <code>&lt;Image&gt;</code> 组件若再次经 Vercel 压缩，形成双重优化，不仅浪费首屏时间，更会快速耗尽 Vercel 图片优化配额，产生超额账单。</p>
+  <p style="margin:0 0 8px 0;color:#b45309;"><strong>生产部署方案（接入阿里云 OSS 后必须执行）：</strong></p>
+  <p style="margin:0 0 4px 0;color:#27ae60;"><strong>方案一（推荐）：在 <code>next.config.ts</code> 中配置 OSS 自定义 loader，让图片优化由 OSS CDN 承担：</strong></p>
+  <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// next.config.ts
+images: {
+  loader: 'custom',
+  loaderFile: './src/lib/oss-loader.ts',
+}
+
+// src/lib/oss-loader.ts
+export default function ossLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
+  return `${src}?x-oss-process=image/resize,w_${width}/quality,q_${quality || 75}/format,webp`;
+}</code></pre>
+  <p style="margin:0 0 4px 0;color:#27ae60;"><strong>方案二：对确认由 OSS 托管的大图组件显式加 <code>unoptimized={true}</code>：</strong></p>
+  <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>&lt;Image src={coverUrl} unoptimized={process.env.NODE_ENV === 'production'} ... /&gt;</code></pre>
+  <p style="margin:0;color:#856404;"><strong>开发阶段（未接 OSS）：</strong>保持默认配置，让 Next.js 本地优化正常工作，不要提前加 <code>unoptimized</code>。</p>
+</div>
+
 <h3 id="s6-4">6.4 文件类型限制</h3>
 
 <table>

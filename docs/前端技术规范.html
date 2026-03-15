@@ -1142,6 +1142,22 @@ export default function ProductListClient() {
         <p style="margin:0;color:#c0392b;"><strong>⚠️ 适用场景：所有包含分页（?page=N）或筛选（?category=X）的列表页。违反此规则将导致 ISR 彻底失效，每次请求都走服务端渲染，服务器成本暴涨。</strong></p>
       </div>
 
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #f0ad4e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <h4 style="margin:0 0 10px 0;color:#856404;">📊 【v5 分页 withCount 铁律】</h4>
+        <p style="margin:0 0 10px 0;">Strapi v5 为优化数据库查询性能，在某些配置下默认不执行 <code>COUNT(*)</code> 统计，<code>meta.pagination.total</code> 可能为 <code>undefined</code>，导致前端分页器显示 NaN 或崩溃。</p>
+        <p style="margin:0 0 6px 0;color:#b45309;"><strong>规则：凡是需要在前端展示总页数/总条数的列表请求，必须在 URL 中强制追加 <code>&amp;pagination[withCount]=true</code>：</strong></p>
+        <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// ✅ 需要分页器的列表（新闻、产品等）
+const res = await fetchStrapi(
+  '/api/articles?pagination[page]=1&amp;pagination[pageSize]=10&amp;pagination[withCount]=true'
+);
+const total = res.meta.pagination.total;     // 有了 withCount=true 才可靠
+const pageCount = res.meta.pagination.pageCount;
+
+// ✅ 不需要分页器的全量拉取（如品牌 Logo 墙）— 不需要 withCount
+const allBrands = await fetchStrapi('/api/compatible-brands?pagination[limit]=-1');</code></pre>
+        <p style="margin:0;color:#856404;"><strong>注意：</strong><code>pagination[limit]=-1</code>（全量拉取）时不需要 withCount，只有分页展示时才需要。</p>
+      </div>
+
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
         <h4 style="margin:0 0 10px 0;color:#b71c1c;">🗺️ 【Sitemap hreflang 铁律】</h4>
         <p style="margin:0 0 10px 0;"><code>app/sitemap.ts</code> 返回的每个 URL 对象必须包含 <code>alternates.languages</code>，将所有语言版本交叉映射，否则 Google 将各语言版本视为孤立的重复内容并降权。</p>
