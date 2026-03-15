@@ -1800,6 +1800,32 @@ const article = res.data[0];</code></pre>
         <p style="margin:0 0 6px 0;"><strong>适用场景：</strong>产品详情页、解决方案详情页、新闻详情页等内容型动态路由。</p>
         <p style="margin:0;color:#555;"><strong>注意：</strong>列表页（产品列表、新闻列表）不适用此规则，列表为空时正常显示空状态。</p>
       </div>
+
+      <h3>7.z+1 字段级翻译缺失兜底铁律</h3>
+      <div style="background:#fff8e1;border:2px solid #f9a825;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#e65100;">⚠️ 【字段级翻译缺失兜底铁律】</h4>
+        <p style="margin:0 0 10px 0;"><code>fetchWithFallback</code> 整页回退可防止 404，但 Strapi 中同一个 Document 的字段可能只翻译了部分（如 <code>title</code> 已翻译，<code>specs/description</code> 未翻译），导致这些字段返回空字符串或 <code>null</code>，在非中文页面上显示为空白，损害品牌专业感。</p>
+        <p style="margin:0 0 8px 0;"><strong>规则：渲染 CMS 关键字段时，必须提供明确的空值兜底策略：</strong></p>
+<pre style="margin:0 0 12px 0;"><code>// 方案一：显示降级提示（适合 B2B 专业场景）
+const specs = product.specs || t('common.translationPending');
+// 渲染结果：'Translation in progress / 翻译整理中'
+
+// 方案二：静默回退到 zh-CN 字段值（适合不想暴露未翻译状态）
+// 注意：需要在 fetchWithFallback 中同时携带 zh-CN 兜底数据
+
+// 方案三（最简，推荐）：条件渲染，字段为空时整段不渲染
+{product.specs &amp;&amp; (
+  &lt;section className='product-specs'&gt;
+    &lt;MarkdownRenderer content={product.specs} /&gt;
+  &lt;/section&gt;
+)}</code></pre>
+        <p style="margin:0 0 6px 0;"><strong>关键字段分级：</strong></p>
+        <ul style="margin:0 0 8px 0;padding-left:20px;">
+          <li><strong>必填字段（title/tagline）：</strong>Strapi Content Type 中设置 <code>required</code>，从源头避免空值</li>
+          <li><strong>非必填字段（specs/gallery/description）：</strong>前端使用方案一或方案三兜底</li>
+          <li style="color:#c62828;"><strong>严禁</strong>直接 <code>{product.specs}</code> 裸渲染而不做空值处理</li>
+        </ul>
+      </div>
     </div>
 
 
