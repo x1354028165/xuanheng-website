@@ -15,70 +15,14 @@ async function isEmpty(strapi: Core.Strapi, uid: string): Promise<boolean> {
 /*  Products (8)                                                       */
 /* ------------------------------------------------------------------ */
 const products = [
-  {
-    title: '智能能源网关',
-    slug: 'smart-energy-gateway',
-    tagline: '多协议兼容，智能调度',
-    description:
-      '旭衡智能能源网关支持 Modbus、OCPP、MQTT 等多种通讯协议，可同时接入光伏逆变器、储能BMS、充电桩、电表等设备，实现本地边缘计算与云端协同调度，是分布式能源系统的核心枢纽。',
-    sortOrder: 1,
-  },
-  {
-    title: '工商业储能系统',
-    slug: 'commercial-ess',
-    tagline: '大容量储能，削峰填谷',
-    description:
-      '面向工商业用户的大容量储能解决方案，支持100kWh至10MWh灵活配置。通过智能削峰填谷策略，帮助企业降低用电成本30%以上，同时提供备用电源保障，确保生产连续性。',
-    sortOrder: 2,
-  },
-  {
-    title: '户用储能系统',
-    slug: 'home-ess',
-    tagline: '家庭能源管理，安全可靠',
-    description:
-      '专为家庭用户设计的一体化储能系统，采用磷酸铁锂电池，循环寿命超6000次。支持光伏自发自用、峰谷套利、应急备电等多种模式，配合手机App实时监控，让家庭用电更智能更经济。',
-    sortOrder: 3,
-  },
-  {
-    title: '充电桩负载管理器',
-    slug: 'ev-load-manager',
-    tagline: '智能分配，高效充电',
-    description:
-      '针对多充电桩场景的智能负载管理设备，通过动态功率分配算法，在不增加变压器容量的前提下最大化充电效率。支持OCPP 1.6/2.0协议，兼容市面主流充电桩品牌。',
-    sortOrder: 4,
-  },
-  {
-    title: 'VPP虚拟电厂平台',
-    slug: 'vpp-platform',
-    tagline: '聚合分布式资源，参与电力市场',
-    description:
-      '旭衡VPP平台聚合分布式光伏、储能、可调负荷等柔性资源，通过AI预测与优化调度算法，实现虚拟电厂的自动化运营。已接入国内多个省级电力交易平台，帮助用户获取需求响应收益。',
-    sortOrder: 5,
-  },
-  {
-    title: '电能质量管理系统',
-    slug: 'pqms',
-    tagline: '实时监测，精准治理',
-    description:
-      '集电能质量监测、谐波治理、无功补偿于一体的综合管理系统。支持GB/T 14549等国标要求，实时采集电压、电流、谐波、功率因数等参数，自动生成治理方案并执行补偿策略。',
-    sortOrder: 6,
-  },
-  {
-    title: '光储一体逆变器',
-    slug: 'hybrid-inverter',
-    tagline: '光伏+储能，一机搞定',
-    description:
-      '集光伏MPPT与储能变流器于一体的混合逆变器，支持3~20kW功率段。内置智能EMS能量管理系统，自动切换并网/离网模式，实现光伏发电、储能充放电、负载供电的最优调度。',
-    sortOrder: 7,
-  },
-  {
-    title: '智慧能源云平台',
-    slug: 'cloud-platform',
-    tagline: '数据驱动，智慧运维',
-    description:
-      '基于云计算和大数据技术的能源管理SaaS平台，提供设备监控、能耗分析、告警推送、运维工单、报表生成等功能。支持多站点统一管理，帮助运维人员提升管理效率，降低运维成本。',
-    sortOrder: 8,
-  },
+  { title: 'Neuron II 智能能源网关', slug: 'neuron-ii', tagline: '通用多协议网关，支持4G/WiFi/RS485/CAN', description: 'Neuron II 是旭衡电子推出的第二代智能能源网关，支持Modbus、OCPP、MQTT等20+通讯协议，可同时接入光伏逆变器、储能BMS、充电桩、电表等设备。内置边缘计算引擎，支持本地智能调度与云端协同，是分布式能源系统的核心枢纽。', sortOrder: 1 },
+  { title: 'Neuron III 充电站专用控制器', slug: 'neuron-iii', tagline: '内置电表+动态负载均衡', description: 'Neuron III 专为充电站场景设计，内置计量级电表和动态负载均衡算法。支持OCPP 1.6/2.0协议，可管理最多32个充电桩的智能功率分配，在不增加变压器容量的前提下最大化充电效率。', sortOrder: 2 },
+  { title: 'Neuron III Lite 防跳闸控制器', slug: 'neuron-iii-lite', tagline: '配套ATP III，极简安装', description: 'Neuron III Lite 是Neuron III的精简版本，专为小型充电场景设计。配套ATP III安装工具，即插即用，5分钟完成安装。内置防跳闸保护算法，智能限制充电功率，确保用电安全。', sortOrder: 3 },
+  { title: 'HEMS 家庭能源管理系统', slug: 'hems', tagline: '光储充一体，智能电费优化', description: 'HEMS家庭能源管理系统将光伏逆变器、储能电池、充电桩深度集成，实现家庭光伏发电的最大化自用。系统自动根据电价、天气、用电习惯进行智能调度，帮助家庭用户节省50%以上电费支出。', sortOrder: 4 },
+  { title: 'ESS 工商业储能管理系统', slug: 'ess', tagline: '峰谷套利，备用电源，动态增容', description: 'ESS工商业储能管理系统面向工商业用户，支持100kWh至10MWh灵活配置。通过智能削峰填谷策略帮助企业降低用电成本30%以上，同时提供备用电源保障和动态增容能力。', sortOrder: 5 },
+  { title: 'EVCMS 充电站管理平台', slug: 'evcms', tagline: '多桩负载均衡，防跳闸', description: 'EVCMS充电站管理平台提供多充电桩的集中管理和智能调度，通过动态功率分配算法实现负载均衡。支持远程监控、计费管理、故障诊断等功能，降低充电站建设和运营成本。', sortOrder: 6 },
+  { title: 'PQMS 电能质量监控系统', slug: 'pqms', tagline: '谐波治理，远程监控，参数优化', description: 'PQMS电能质量监控系统集电能质量监测、谐波治理、无功补偿于一体。支持GB/T 14549等国标要求，实时采集电压、电流、谐波、功率因数等参数，自动生成治理方案。', sortOrder: 7 },
+  { title: 'VPP 虚拟电厂平台', slug: 'vpp', tagline: '设备聚合，参与电网调度', description: 'VPP虚拟电厂平台聚合分布式光伏、储能、可调负荷等柔性资源，通过AI预测与优化调度算法实现虚拟电厂的自动化运营。已接入国内多个省级电力交易平台，帮助用户获取需求响应收益。', sortOrder: 8 },
 ];
 
 /* ------------------------------------------------------------------ */

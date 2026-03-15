@@ -33,6 +33,10 @@
     "sortOrder": {
       "type": "integer",
       "default": 0
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

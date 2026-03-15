@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "repair_tickets",
+  "info": {
+    "singularName": "repair-ticket",
+    "pluralName": "repair-tickets",
+    "displayName": "Repair Ticket"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": false
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "productModel": {
+      "type": "string"
+    },
+    "serialNumber": {
+      "type": "string"
+    },
+    "faultDesc": {
+      "type": "text"
+    },
+    "cfToken": {
+      "type": "string"
+    }
+  }
+}
