@@ -8,25 +8,25 @@ const helpSections = [
     icon: '📄',
     titleKey: 'docsTitle',
     descKey: 'docsSubtitle',
-    href: '/help/docs',
+    href: '/support/docs',
   },
   {
     icon: '🔄',
     titleKey: 'compatibilityTitle',
     descKey: 'compatibilitySubtitle',
-    href: '/help/compatibility',
+    href: '/support/compatibility',
   },
   {
     icon: '❓',
     titleKey: 'faqTitle',
     descKey: 'faqSubtitle',
-    href: '/help/faq',
+    href: '/support/faq',
   },
   {
     icon: '🔧',
     titleKey: 'repairTitle',
     descKey: 'repairSubtitle',
-    href: '/help/repair',
+    href: '/support/repair',
   },
 ];
 

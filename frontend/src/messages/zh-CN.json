@@ -6,7 +6,7 @@
     "help": "帮助中心",
     "about": "关于我们",
     "contact": "联系我们",
-    "developers": "开发者中心即将推出"
+    "developers": "开发者中心"
   },
   "common": {
     "learnMore": "了解更多",
@@ -193,7 +193,8 @@
     },
     "repairSuccess": "维修申请已提交，我们会尽快与您联系",
     "compatibilityTitle": "版本兼容矩阵",
-    "compatibilitySubtitle": "查询固件与云平台的版本兼容关系"
+    "compatibilitySubtitle": "查询固件与云平台的版本兼容关系",
+    "backToHelp": "返回帮助中心"
   },
   "footer": {
     "company": "旭衡电子",

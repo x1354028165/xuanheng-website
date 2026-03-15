@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { getSolutions } from '@/lib/api';
 import type { StrapiSolution } from '@/types/strapi';
 import { MOCK_SOLUTIONS } from '@/lib/mock-data';
+import { getSolutionMessage } from '@/lib/i18n-helpers';
 
 export const revalidate = 3600;
 
@@ -37,9 +38,9 @@ export default async function SolutionsPage({
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => {
-              const sTitle = t.has(`${solution.slug}.title`) ? t(`${solution.slug}.title`) : solution.title;
+              const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
               const mockMatch = MOCK_SOLUTIONS.find(s => s.slug === solution.slug);
-              const sTagline = t.has(`${solution.slug}.tagline`) ? t(`${solution.slug}.tagline`) : (solution.tagline || mockMatch?.tagline);
+              const sTagline = getSolutionMessage(locale, solution.slug, 'tagline') ?? solution.tagline ?? mockMatch?.tagline ?? '';
               return (
                 <Link
                   key={solution.documentId}

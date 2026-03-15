@@ -1,15 +1,17 @@
-import translateService from '../../../../extensions/translate/services/translate';
-
 export default {
-  async afterPublish(event: { result: Record<string, unknown> }) {
+  async afterUpdate(event: { result: Record<string, unknown>; params: Record<string, unknown> }) {
     const { result } = event;
-    // 铁律：只有主语言 zh-CN 发布时触发翻译
+    // 只在 zh-CN 发布时触发翻译（publishedAt 存在代表刚发布）
+    if (!result.publishedAt) return;
     if (result.locale !== 'zh-CN') return;
-    // 翻译锁检查
     if (result.is_translation_locked) return;
-    // 异步执行，不阻塞发布响应
-    translateService
-      .translateEntry(result.documentId as string, 'api::product.product')
-      .catch((err: unknown) => console.error('[product] translate error:', err));
+    try {
+      const { default: translateService } = await import('../../../../extensions/translate/services/translate');
+      translateService
+        .translateEntry(result.documentId as string, 'api::CONTENT_TYPE.CONTENT_TYPE')
+        .catch((err: unknown) => console.error('[lifecycle] translate error:', err));
+    } catch (_e) {
+      // translate service optional
+    }
   },
 };

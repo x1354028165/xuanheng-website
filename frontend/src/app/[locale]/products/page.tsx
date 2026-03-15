@@ -6,6 +6,7 @@ import { getStrapiMedia } from '@/lib/strapi';
 import { getProducts } from '@/lib/api';
 import type { StrapiProduct } from '@/types/strapi';
 import { MOCK_PRODUCTS } from '@/lib/mock-data';
+import { getProductMessage, getProductLabel } from '@/lib/i18n-helpers';
 
 export const revalidate = 3600;
 
@@ -19,9 +20,9 @@ export default async function ProductsPage({
   const t = await getTranslations({ locale, namespace: 'products' });
   const tc = await getTranslations({ locale, namespace: 'common' });
 
-  // Helper to get translated product fields
-  const getPTitle = (slug: string, fallback: string) => t.has(`${slug}.title`) ? t(`${slug}.title`) : fallback;
-  const getPTagline = (slug: string, fallback: string) => t.has(`${slug}.tagline`) ? t(`${slug}.tagline`) : fallback;
+  // Helper to get translated product fields (using direct import to avoid next-intl production issues)
+  const getPTitle = (slug: string, fallback: string) => getProductMessage(locale, slug, 'title') ?? fallback;
+  const getPTagline = (slug: string, fallback: string) => getProductMessage(locale, slug, 'tagline') ?? fallback;
 
   let products = await getProducts(locale);
   if (!products || products.length === 0) {
@@ -46,7 +47,7 @@ export default async function ProductsPage({
       {/* Hardware Section */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{t('hardwareSectionTitle')}</h2>
+          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'hardwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(usesMock ? hardware : products.slice(0, 3)).map((product) => (
               <Link
@@ -77,7 +78,7 @@ export default async function ProductsPage({
       {/* Software Section */}
       <section className="bg-[#F8FAFC] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{t('softwareSectionTitle')}</h2>
+          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'softwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(usesMock ? software : products.slice(3)).map((product) => (
               <Link

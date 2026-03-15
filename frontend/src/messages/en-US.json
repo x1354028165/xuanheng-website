@@ -6,7 +6,7 @@
     "help": "Help Center",
     "about": "About Us",
     "contact": "Contact Us",
-    "developers": "Developer Center Coming Soon"
+    "developers": "Developers"
   },
   "common": {
     "learnMore": "Learn More",
@@ -193,7 +193,8 @@
     },
     "repairSuccess": "Repair request submitted. We will contact you shortly.",
     "compatibilityTitle": "Version Compatibility Matrix",
-    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility"
+    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
+    "backToHelp": "Back to Help Center"
   },
   "footer": {
     "company": "AlwaysControl",

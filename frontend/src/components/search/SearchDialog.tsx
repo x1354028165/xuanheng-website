@@ -99,7 +99,7 @@ export function SearchDialog({
       case "article":
         return `/about/news/${result.slug}`;
       case "faq":
-        return "/help";
+        return "/support";
     }
   };
 

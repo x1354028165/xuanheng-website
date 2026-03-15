@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemapEntry("/products", undefined, 0.9),
     sitemapEntry("/solutions", undefined, 0.9),
     sitemapEntry("/ecosystem", undefined, 0.7),
-    sitemapEntry("/help", undefined, 0.6),
+    sitemapEntry("/support", undefined, 0.6),
     sitemapEntry("/about", undefined, 0.7),
     sitemapEntry("/about/news", undefined, 0.7),
     sitemapEntry("/about/careers", undefined, 0.5),

@@ -193,7 +193,8 @@
     },
     "repairSuccess": "Solicitud de reparación enviada. Nos pondremos en contacto pronto.",
     "compatibilityTitle": "Version Compatibility Matrix",
-    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility"
+    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
+    "backToHelp": "Volver al Centro de Ayuda"
   },
   "footer": {
     "company": "AlwaysControl",
@@ -249,5 +250,38 @@
     "serverError": "Error del servidor",
     "serverErrorMessage": "Lo sentimos, el servidor encontró un error inesperado. Inténtelo de nuevo más tarde.",
     "backToHome": "Volver al inicio"
+  },
+  "developers": {
+    "badge": "Developer Center",
+    "title": "Developer Center",
+    "subtitle": "REST API / MQTT / WebSocket / Gateway Local API — Full documentation and SDKs coming soon",
+    "cta": "Register Early Access",
+    "featuresTitle": "Coming Soon",
+    "comingSoon": "Coming Soon",
+    "notifyTitle": "Want early access to developer docs?",
+    "notifyDesc": "Leave your contact info and we'll notify you when docs go live",
+    "notifyCta": "Get Early Access →",
+    "features": {
+      "quickstart": {
+        "icon": "⚡",
+        "title": "Quick Start",
+        "desc": "Connect your first device in 5 minutes with sample code"
+      },
+      "cloudApi": {
+        "icon": "☁️",
+        "title": "Cloud API",
+        "desc": "Full REST / MQTT / WebSocket API reference"
+      },
+      "gatewayApi": {
+        "icon": "🔌",
+        "title": "Gateway Local API",
+        "desc": "HTTP / Modbus TCP local API for offline scenarios"
+      },
+      "applyAccess": {
+        "icon": "🔑",
+        "title": "Apply for Access",
+        "desc": "Submit an application for API keys and usage quota"
+      }
+    }
   }
 }

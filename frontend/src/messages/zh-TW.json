@@ -1,114 +1,114 @@
 {
   "nav": {
-    "solutions": "解决方案",
-    "products": "产品中心",
-    "ecosystem": "兼容生态",
-    "help": "帮助中心",
-    "about": "关于我们",
-    "contact": "联系我们",
-    "developers": "开发者中心即将推出"
+    "solutions": "解決方案",
+    "products": "產品中心",
+    "ecosystem": "相容生態",
+    "help": "幫助中心",
+    "about": "關於我們",
+    "contact": "聯絡我們",
+    "developers": "開發者中心"
   },
   "common": {
-    "learnMore": "了解更多",
-    "viewAll": "查看全部",
+    "learnMore": "瞭解更多",
+    "viewAll": "檢視全部",
     "submit": "提交",
     "cancel": "取消",
-    "loading": "加载中...",
-    "error": "出错了",
-    "retry": "重试",
-    "search": "搜索",
-    "noResults": "暂无结果",
-    "backToHome": "返回首页",
-    "download": "下载",
+    "loading": "載入中...",
+    "error": "出錯了",
+    "retry": "重試",
+    "search": "搜尋",
+    "noResults": "暫無結果",
+    "backToHome": "返回首頁",
+    "download": "下載",
     "share": "分享",
-    "contactUs": "联系我们",
-    "getStarted": "开始使用",
-    "readMore": "阅读更多",
-    "viewDetails": "查看详情",
-    "previous": "上一页",
-    "next": "下一页",
-    "page": "第 {page} 页"
+    "contactUs": "聯絡我們",
+    "getStarted": "開始使用",
+    "readMore": "閱讀更多",
+    "viewDetails": "檢視詳情",
+    "previous": "上一頁",
+    "next": "下一頁",
+    "page": "第 {page} 頁"
   },
   "home": {
-    "heroTitle": "智慧能源，始终掌控",
-    "heroSubtitle": "旭衡电子 — 新能源领域智慧管理解决方案提供商",
-    "viewSolutions": "了解解决方案",
-    "contactUs": "联系我们",
-    "statsTitle": "数据见证实力",
+    "heroTitle": "智慧能源，始終掌控",
+    "heroSubtitle": "旭衡電子 — 新能源領域智慧管理解決方案提供商",
+    "viewSolutions": "瞭解解決方案",
+    "contactUs": "聯絡我們",
+    "statsTitle": "資料見證實力",
     "statsBrands": "200+",
-    "statsBrandsLabel": "兼容品牌",
+    "statsBrandsLabel": "相容品牌",
     "statsCountries": "50+",
-    "statsCountriesLabel": "覆盖国家",
+    "statsCountriesLabel": "覆蓋國家",
     "statsProjects": "500+",
-    "statsProjectsLabel": "已交付项目",
-    "solutionsTitle": "解决方案",
-    "solutionsSubtitle": "为不同场景提供智慧能源管理方案",
-    "productsTitle": "产品中心",
-    "productsSubtitle": "高性能硬件与软件产品矩阵",
-    "brandsTitle": "兼容品牌",
-    "brandsSubtitle": "广泛兼容主流设备品牌",
-    "newsTitle": "最新动态",
-    "newsSubtitle": "了解旭衡电子的最新资讯",
-    "trustTitle": "为什么选择旭衡",
+    "statsProjectsLabel": "已交付專案",
+    "solutionsTitle": "解決方案",
+    "solutionsSubtitle": "為不同場景提供智慧能源管理方案",
+    "productsTitle": "產品中心",
+    "productsSubtitle": "高效能硬體與軟體產品矩陣",
+    "brandsTitle": "相容品牌",
+    "brandsSubtitle": "廣泛相容主流裝置品牌",
+    "newsTitle": "最新動態",
+    "newsSubtitle": "瞭解旭衡電子的最新資訊",
+    "trustTitle": "為什麼選擇旭衡",
     "trustItems": [
       {
-        "title": "技术领先",
-        "description": "10年以上新能源管理经验，核心算法自主研发"
+        "title": "技術領先",
+        "description": "10年以上新能源管理經驗，核心演算法自主研發"
       },
       {
-        "title": "品质可靠",
-        "description": "通过ISO9001认证，产品故障率低于0.1%"
+        "title": "品質可靠",
+        "description": "透過ISO9001認證，產品故障率低於0.1%"
       },
       {
-        "title": "服务全球",
-        "description": "覆盖50+国家和地区，7x24小时技术支持"
+        "title": "服務全球",
+        "description": "覆蓋50+國家和地區，7x24小時技術支援"
       }
     ],
-    "ctaTitle": "准备好开始了吗？",
-    "ctaSubtitle": "联系我们，获取专属解决方案",
-    "ctaButton": "立即咨询"
+    "ctaTitle": "準備好開始了嗎？",
+    "ctaSubtitle": "聯絡我們，獲取專屬解決方案",
+    "ctaButton": "立即諮詢"
   },
   "solutions": {
-    "title": "解决方案",
-    "subtitle": "为不同行业提供专业的智慧能源管理方案",
-    "viewDetail": "查看详情",
-    "features": "方案特点",
-    "advantages": "方案优势",
-    "relatedProducts": "相关产品",
+    "title": "解決方案",
+    "subtitle": "為不同行業提供專業的智慧能源管理方案",
+    "viewDetail": "檢視詳情",
+    "features": "方案特點",
+    "advantages": "方案優勢",
+    "relatedProducts": "相關產品",
     "backToList": "返回方案列表"
   },
   "products": {
-    "title": "产品中心",
-    "subtitle": "高性能新能源管理硬件与软件产品",
-    "specifications": "技术参数",
-    "documents": "相关文档",
-    "relatedProducts": "相关产品",
-    "gallery": "产品图集",
-    "backToList": "返回产品列表",
-    "tagline": "产品简介",
-    "description": "产品详情",
-    "noProducts": "暂无产品"
+    "title": "產品中心",
+    "subtitle": "高效能新能源管理硬體與軟體產品",
+    "specifications": "技術引數",
+    "documents": "相關文件",
+    "relatedProducts": "相關產品",
+    "gallery": "產品圖集",
+    "backToList": "返回產品列表",
+    "tagline": "產品簡介",
+    "description": "產品詳情",
+    "noProducts": "暫無產品"
   },
   "about": {
-    "title": "关于我们",
-    "subtitle": "旭衡电子 — 新能源领域智慧管理与控制技术领航者",
-    "history": "发展历程",
-    "historyTitle": "发展历程",
-    "historySubtitle": "从创立到全球化布局的成长之路",
-    "companyIntro": "公司简介",
-    "companyIntroText": "旭衡电子（AlwaysControl Technology）成立于2018年，总部位于深圳市南山区科技园。公司专注于新能源领域的智慧管理与控制技术，致力于为全球客户提供高效、稳定、智能的能源管理解决方案。经过多年发展，旭衡电子已成为行业领先的解决方案提供商，产品和服务覆盖全球50多个国家和地区，兼容200多个设备品牌，累计交付500多个项目。",
-    "newsTitle": "新闻动态",
-    "newsSubtitle": "了解旭衡电子的最新资讯与行业洞察",
-    "careersTitle": "加入我们",
-    "careersSubtitle": "与优秀的团队一起，创造更美好的能源未来",
-    "department": "部门",
-    "location": "工作地点",
-    "type": "工作类型",
-    "fullTime": "全职",
-    "partTime": "兼职",
+    "title": "關於我們",
+    "subtitle": "旭衡電子 — 新能源領域智慧管理與控制技術領航者",
+    "history": "發展歷程",
+    "historyTitle": "發展歷程",
+    "historySubtitle": "從創立到全球化佈局的成長之路",
+    "companyIntro": "公司簡介",
+    "companyIntroText": "旭衡電子（AlwaysControl Technology）成立於2018年，總部位於深圳市南山區科技園。公司專注於新能源領域的智慧管理與控制技術，致力於為全球客戶提供高效、穩定、智慧的能源管理解決方案。經過多年發展，旭衡電子已成為行業領先的解決方案提供商，產品和服務覆蓋全球50多個國家和地區，相容200多個裝置品牌，累計交付500多個專案。",
+    "newsTitle": "新聞動態",
+    "newsSubtitle": "瞭解旭衡電子的最新資訊與行業洞察",
+    "careersTitle": "加入我們",
+    "careersSubtitle": "與優秀的團隊一起，創造更美好的能源未來",
+    "department": "部門",
+    "location": "工作地點",
+    "type": "工作型別",
+    "fullTime": "全職",
+    "partTime": "兼職",
     "contract": "合同制",
-    "apply": "立即申请",
-    "noOpenings": "暂无开放职位",
+    "apply": "立即申請",
+    "noOpenings": "暫無開放職位",
     "milestones": [
       {
         "year": "2018",
@@ -116,109 +116,110 @@
       },
       {
         "year": "2019",
-        "text": "首款网关发布"
+        "text": "首款閘道器釋出"
       },
       {
         "year": "2020",
-        "text": "获A轮融资"
+        "text": "獲A輪融資"
       },
       {
         "year": "2021",
-        "text": "产品出海"
+        "text": "產品出海"
       },
       {
         "year": "2022",
-        "text": "行业TOP10"
+        "text": "行業TOP10"
       },
       {
         "year": "2023",
-        "text": "战略合作伙伴100+"
+        "text": "戰略合作伙伴100+"
       },
       {
         "year": "2024",
-        "text": "年营收破亿"
+        "text": "年營收破億"
       },
       {
         "year": "2025",
-        "text": "全球化布局"
+        "text": "全球化佈局"
       }
     ]
   },
   "contact": {
-    "title": "联系我们",
-    "subtitle": "我们随时准备为您服务",
+    "title": "聯絡我們",
+    "subtitle": "我們隨時準備為您服務",
     "form": {
       "name": "姓名",
-      "company": "公司名称",
-      "phone": "联系电话",
-      "email": "电子邮箱",
-      "message": "留言内容",
-      "intent": "咨询类型",
+      "company": "公司名稱",
+      "phone": "聯絡電話",
+      "email": "電子郵箱",
+      "message": "留言內容",
+      "intent": "諮詢型別",
       "intentOptions": {
-        "solutions": "解决方案咨询",
-        "api": "API对接",
-        "hardware": "硬件采购",
-        "custom": "定制开发"
+        "solutions": "解決方案諮詢",
+        "api": "API對接",
+        "hardware": "硬體採購",
+        "custom": "定製開發"
       },
-      "submit": "发送消息"
+      "submit": "傳送訊息"
     },
-    "success": "消息已发送，我们会尽快与您联系",
-    "error": "发送失败，请稍后重试",
+    "success": "訊息已傳送，我們會盡快與您聯絡",
+    "error": "傳送失敗，請稍後重試",
     "info": {
-      "address": "深圳市南山区科技园",
+      "address": "深圳市南山區科技園",
       "phone": "+86 755-8888-9999",
       "email": "info@alwayscontrol.com.cn",
-      "hours": "周一至周五 9:00-18:00"
+      "hours": "週一至週五 9:00-18:00"
     }
   },
   "help": {
-    "title": "帮助中心",
-    "subtitle": "常见问题与技术支持",
-    "faq": "常见问题",
-    "faqTitle": "常见问题",
+    "title": "幫助中心",
+    "subtitle": "常見問題與技術支援",
+    "faq": "常見問題",
+    "faqTitle": "常見問題",
     "faqSubtitle": "快速找到您的答案",
-    "docs": "技术文档",
-    "docsTitle": "技术文档",
-    "docsSubtitle": "产品技术文档与开发指南",
-    "support": "技术支持",
-    "repairTitle": "维修申请",
-    "repairSubtitle": "提交产品维修或返修申请",
+    "docs": "技術文件",
+    "docsTitle": "技術文件",
+    "docsSubtitle": "產品技術文件與開發指南",
+    "support": "技術支援",
+    "repairTitle": "維修申請",
+    "repairSubtitle": "提交產品維修或返修申請",
     "repairForm": {
-      "name": "联系人姓名",
-      "phone": "联系电话",
-      "email": "电子邮箱",
-      "product": "产品型号",
+      "name": "聯絡人姓名",
+      "phone": "聯絡電話",
+      "email": "電子郵箱",
+      "product": "產品型號",
       "description": "故障描述",
-      "submit": "提交申请"
+      "submit": "提交申請"
     },
-    "repairSuccess": "维修申请已提交，我们会尽快与您联系",
-    "compatibilityTitle": "版本兼容矩阵",
-    "compatibilitySubtitle": "查询固件与云平台的版本兼容关系"
+    "repairSuccess": "維修申請已提交，我們會盡快與您聯絡",
+    "compatibilityTitle": "版本相容矩陣",
+    "compatibilitySubtitle": "查詢韌體與雲平臺的版本相容關係",
+    "backToHelp": "返回幫助中心"
   },
   "footer": {
-    "company": "旭衡电子",
-    "companyDesc": "专注新能源智慧管理与控制技术",
-    "products": "产品中心",
-    "solutions": "解决方案",
-    "about": "关于我们",
-    "help": "帮助中心",
-    "contact": "联系方式",
-    "address": "深圳市南山区科技园",
+    "company": "旭衡電子",
+    "companyDesc": "專注新能源智慧管理與控制技術",
+    "products": "產品中心",
+    "solutions": "解決方案",
+    "about": "關於我們",
+    "help": "幫助中心",
+    "contact": "聯絡方式",
+    "address": "深圳市南山區科技園",
     "phone": "+86 755-8888-9999",
     "email": "info@alwayscontrol.com.cn",
-    "copyright": "© {year} 旭衡电子 版权所有",
-    "privacy": "隐私政策",
-    "terms": "服务条款"
+    "copyright": "© {year} 旭衡電子 版權所有",
+    "privacy": "隱私政策",
+    "terms": "服務條款"
   },
   "privacy": {
-    "title": "隐私政策",
-    "subtitle": "我们重视您的隐私保护",
-    "lastUpdated": "最后更新：{date}",
-    "content": "旭衡电子（以下简称\"我们\"）非常重视用户的隐私保护。本隐私政策说明了我们如何收集、使用、存储和保护您的个人信息。我们仅在必要范围内收集您的个人信息，包括但不限于姓名、电子邮箱、联系电话和公司名称。这些信息将用于响应您的咨询请求、提供技术支持以及改善我们的产品和服务。我们采用行业标准的安全措施保护您的信息安全，未经您的同意，我们不会将您的个人信息分享给第三方。您有权随时查询、更正或删除您的个人信息，如有任何隐私相关问题，请通过 info@alwayscontrol.com.cn 联系我们。"
+    "title": "隱私政策",
+    "subtitle": "我們重視您的隱私保護",
+    "lastUpdated": "最後更新：{date}",
+    "content": "旭衡電子（以下簡稱\"我們\"）非常重視使用者的隱私保護。本隱私政策說明了我們如何收集、使用、儲存和保護您的個人資訊。我們僅在必要範圍內收集您的個人資訊，包括但不限於姓名、電子郵箱、聯絡電話和公司名稱。這些資訊將用於響應您的諮詢請求、提供技術支援以及改善我們的產品和服務。我們採用行業標準的安全措施保護您的資訊保安，未經您的同意，我們不會將您的個人資訊分享給第三方。您有權隨時查詢、更正或刪除您的個人資訊，如有任何隱私相關問題，請透過 info@alwayscontrol.com.cn 聯絡我們。"
   },
   "ecosystem": {
     "title": "相容生態",
-    "subtitle": "廣泛相容主流新能源設備品牌",
+    "subtitle": "廣泛相容主流新能源裝置品牌",
     "allBrands": "全部品牌",
     "filterByCategory": "按類別篩選",
     "noBrands": "暫無品牌資料"
@@ -228,20 +229,20 @@
     "placeholder": "搜尋產品、解決方案、文章...",
     "shortcut": "Cmd+K",
     "noResults": "未找到相關結果",
-    "noResultsHint": "試試其他關鍵詞，或聯繫我們獲取幫助",
+    "noResultsHint": "試試其他關鍵詞，或聯絡我們獲取幫助",
     "products": "產品",
     "solutions": "解決方案",
     "articles": "文章",
     "faqs": "常見問題",
     "searching": "搜尋中...",
-    "contactUs": "聯繫我們"
+    "contactUs": "聯絡我們"
   },
   "cookie": {
     "message": "我們使用 Cookie 來改善您的瀏覽體驗。繼續使用本網站即表示您接受我們的 Cookie 政策。",
     "acceptAll": "接受全部",
     "essentialOnly": "僅必要",
     "managePreferences": "管理偏好",
-    "learnMore": "了解更多"
+    "learnMore": "瞭解更多"
   },
   "error": {
     "notFound": "頁面未找到",
@@ -249,5 +250,38 @@
     "serverError": "伺服器錯誤",
     "serverErrorMessage": "抱歉，伺服器遇到了意外錯誤，請稍後重試。",
     "backToHome": "返回首頁"
+  },
+  "developers": {
+    "badge": "開發者中心",
+    "title": "開發者中心",
+    "subtitle": "REST API / MQTT / WebSocket / 閘道器本地 API，完整的接入檔案與 SDK 正在緊張準備中",
+    "cta": "立即留資，優先取得通知",
+    "featuresTitle": "即將上線的功能",
+    "comingSoon": "即將上線",
+    "notifyTitle": "想第一時間取得開發者檔案？",
+    "notifyDesc": "留下聯絡方式，檔案上線時第一時間通知您",
+    "notifyCta": "優先取得通知 →",
+    "features": {
+      "quickstart": {
+        "icon": "⚡",
+        "title": "快速開始",
+        "desc": "5分鐘完成第一個裝置接入，包含範例程式碼"
+      },
+      "cloudApi": {
+        "icon": "☁️",
+        "title": "雲端 API",
+        "desc": "REST / MQTT / WebSocket 完整介面檔案"
+      },
+      "gatewayApi": {
+        "icon": "🔌",
+        "title": "閘道器本地 API",
+        "desc": "HTTP / Modbus TCP 本地介面，支援離網場景"
+      },
+      "applyAccess": {
+        "icon": "🔑",
+        "title": "申請接入",
+        "desc": "提交申請，取得 API Key 和呼叫配額"
+      }
+    }
   }
 }

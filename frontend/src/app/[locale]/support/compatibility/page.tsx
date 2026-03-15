@@ -33,7 +33,7 @@ export default async function CompatibilityPage({
     <>
       <section className="bg-[#0C1829] pb-8 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Link href="/help" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
+          <Link href="/support" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
             &larr; 返回帮助中心
           </Link>
           <h1 className="text-3xl font-bold text-white">版本兼容矩阵</h1>

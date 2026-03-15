@@ -34,7 +34,7 @@ export default function RepairPage() {
       <>
         <section className="bg-[#0C1829] pb-8 pt-32">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <Link href="/help" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
+            <Link href="/support" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
               &larr; 返回帮助中心
             </Link>
             <h1 className="text-3xl font-bold text-white">在线报修</h1>
@@ -47,7 +47,7 @@ export default function RepairPage() {
               <h2 className="text-xl font-bold text-[#0F172A] mb-2">报修工单已提交</h2>
               <p className="text-[#475569]">我们的技术支持团队会在 24 小时内联系您，请保持电话畅通。</p>
               <Link
-                href="/help"
+                href="/support"
                 className="mt-6 inline-flex items-center rounded-lg bg-[#38C4E8] px-6 py-2.5 text-sm font-semibold text-[#0C1829] transition-colors hover:bg-[#38C4E8]/90"
               >
                 返回帮助中心
@@ -63,7 +63,7 @@ export default function RepairPage() {
     <>
       <section className="bg-[#0C1829] pb-8 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Link href="/help" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
+          <Link href="/support" className="mb-4 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors">
             &larr; 返回帮助中心
           </Link>
           <h1 className="text-3xl font-bold text-white">在线报修</h1>

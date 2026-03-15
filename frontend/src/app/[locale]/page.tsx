@@ -9,6 +9,7 @@ import { getProducts, getSolutions, getArticles, getCompatibleBrands } from '@/l
 import type { StrapiSolution, StrapiProduct, StrapiArticle, StrapiCompatibleBrand } from '@/types/strapi';
 
 import { MOCK_PRODUCTS as _MP, MOCK_SOLUTIONS as _MS, MOCK_ARTICLES as _MA, MOCK_BRANDS as _MB } from '@/lib/mock-data';
+import { getProductMessage, getSolutionMessage } from '@/lib/i18n-helpers';
 
 // Map shared mock data to Strapi-compatible shapes
 const MOCK_SOLUTIONS = _MS.map(s => ({ documentId: s.documentId, title: s.title, slug: s.slug, tagline: s.tagline, cover: s.cover }));
@@ -25,8 +26,7 @@ export default async function HomePage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'home' });
   const tc = await getTranslations({ locale, namespace: 'common' });
-  const tp = await getTranslations({ locale, namespace: 'products' });
-  const ts = await getTranslations({ locale, namespace: 'solutions' });
+  // Product/solution translations use direct i18n-helpers (avoids next-intl production SSR issues)
 
   // Fetch data with mock fallbacks
   let solutions = await getSolutions(locale);
@@ -125,8 +125,8 @@ export default async function HomePage({
           {/* Accordion-style horizontal cards for desktop */}
           <div className="hidden lg:flex h-[500px] gap-2">
             {solutions.slice(0, 5).map((solution) => {
-              const sTitle = ts.has(`${solution.slug}.title`) ? ts(`${solution.slug}.title`) : solution.title;
-              const sTagline = ts.has(`${solution.slug}.tagline`) ? ts(`${solution.slug}.tagline`) : solution.tagline;
+              const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
+              const sTagline = getSolutionMessage(locale, solution.slug, 'tagline') ?? solution.tagline;
               return (
                 <Link
                   key={solution.documentId}
@@ -159,8 +159,8 @@ export default async function HomePage({
           {/* Grid fallback for mobile/tablet */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
             {solutions.slice(0, 5).map((solution) => {
-              const sTitle = ts.has(`${solution.slug}.title`) ? ts(`${solution.slug}.title`) : solution.title;
-              const sTagline = ts.has(`${solution.slug}.tagline`) ? ts(`${solution.slug}.tagline`) : solution.tagline;
+              const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
+              const sTagline = getSolutionMessage(locale, solution.slug, 'tagline') ?? solution.tagline;
               return (
                 <Link
                   key={solution.documentId}
@@ -210,8 +210,8 @@ export default async function HomePage({
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {products.slice(0, 8).map((product) => {
-              const pTitle = tp.has(`${product.slug}.title`) ? tp(`${product.slug}.title`) : product.title;
-              const pTagline = tp.has(`${product.slug}.tagline`) ? tp(`${product.slug}.tagline`) : product.tagline;
+              const pTitle = getProductMessage(locale, product.slug, 'title') ?? product.title;
+              const pTagline = getProductMessage(locale, product.slug, 'tagline') ?? product.tagline;
               return (
                 <Link
                   key={product.documentId}
