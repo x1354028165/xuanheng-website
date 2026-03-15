@@ -279,6 +279,30 @@
 </tbody>
 </table>
 
+<div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <h4 style="margin:0 0 10px 0;color:#b71c1c;">🔴 【线索入库铁律】</h4>
+  <p style="margin:0 0 10px 0;">在 Strapi 后台建立 <code>leads</code>（联系我们线索）和 <code>repair-tickets</code>（报修单）等用户提交型 Collection 时，<strong>必须彻底关闭其高级设置中的 Draft &amp; Publish 功能</strong>。</p>
+  <p style="margin:0 0 8px 0;"><strong>原因：Strapi v5 开启 Draft &amp; Publish 后，通过 API POST 创建的条目默认为草稿（Draft）状态：</strong></p>
+  <ul style="margin:0 0 10px 16px;line-height:1.9;">
+    <li>草稿不会触发 <code>afterPublish</code> 生命周期钩子（销售收不到邮件/企微通知）</li>
+    <li>Strapi 后台默认视图过滤草稿，运营人员看不到客户提交的线索</li>
+  </ul>
+  <p style="margin:0 0 8px 0;"><strong>两种解法（选其一）：</strong></p>
+  <p style="margin:0 0 4px 0;"><strong>方案一（推荐）：</strong>在 Collection Type 的 Advanced Settings 中关闭 Draft &amp; Publish，让条目创建即可用。</p>
+  <p style="margin:0 0 4px 0;"><strong>方案二：</strong>若必须保留 Draft &amp; Publish，在 Strapi 的自定义 Controller 中强制注入 <code>publishedAt</code>：</p>
+  <pre style="margin:8px 0 4px;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// cms/src/api/lead/controllers/lead.ts
+export default factories.createCoreController('api::lead.lead', ({ strapi }) =&gt; ({
+  async create(ctx) {
+    ctx.request.body.data = {
+      ...ctx.request.body.data,
+      publishedAt: new Date().toISOString(),  // 强制发布
+    };
+    return super.create(ctx);
+  },
+}));</code></pre>
+  <p style="margin:8px 0 0;color:#c0392b;"><strong>⚠️ 违反此规则：线索静默丢失，销售人员毫无感知，直至主动进后台才发现满屏草稿。</strong></p>
+</div>
+
 <h3 id="s2-3">2.3 各内容类型字段定义</h3>
 
 <h4>products（产品）</h4>
@@ -1789,6 +1813,27 @@ export async function sendLeadNotification(lead: {
     </li>
   </ol>
   <p style="margin:10px 0 0;color:#c0392b;"><strong>⚠️ 违反此规则：上线第一天机器人将爆刷，企业微信群被垃圾线索刷屏，邮件 API 额度耗尽。</strong></p>
+</div>
+
+<div class="warning" style="background:#fff3cd;border-left:4px solid #f0ad4e;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <h4 style="margin:0 0 10px 0;color:#856404;">🧪 【E2E 测试 Turnstile 穿透铁律】</h4>
+  <p style="margin:0 0 10px 0;">无头浏览器（Playwright/Cypress）无法通过 Turnstile 人机验证，<strong>必须实现测试环境后门</strong>，否则 E2E 测试流水线 100% 死锁。</p>
+  <p style="margin:0 0 6px 0;"><strong>前端侧（Turnstile 组件）：</strong></p>
+  <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>if (process.env.NEXT_PUBLIC_APP_ENV === 'test') {
+  // 测试环境：隐藏验证码组件，注入 Dummy Token
+  return &lt;input type='hidden' name='cf-turnstile-response' value='test-bypass-token' /&gt;;
+}</code></pre>
+  <p style="margin:0 0 6px 0;"><strong>后端侧（Route Handler 校验层）：</strong></p>
+  <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>const TURNSTILE_SECRET = process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY;
+// 测试环境跳过校验
+if (process.env.APP_ENV === 'test' || token === 'test-bypass-token') {
+  // 跳过 Turnstile 校验，直接通过
+} else {
+  // 正常校验流程
+  const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {...});
+}</code></pre>
+  <p style="margin:0 0 6px 0;">在 <code>.env.test</code> 中加入：<code>NEXT_PUBLIC_APP_ENV=test</code></p>
+  <p style="margin:0;color:#856404;"><strong>⚠️ 注意：<code>test-bypass-token</code> 只在 <code>APP_ENV=test</code> 时有效，生产环境任何 dummy token 都会被拦截。</strong></p>
 </div>
 
 <hr>

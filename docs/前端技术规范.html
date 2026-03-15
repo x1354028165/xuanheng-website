@@ -795,6 +795,29 @@ export const config = {
   matcher: ['/((?!api|_next|.*\\..*).*)'],
 };</code></pre>
 
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <h4 style="margin:0 0 10px 0;color:#b71c1c;">🍪 【语言 Cookie 防污染铁律】</h4>
+        <p style="margin:0 0 10px 0;">next-intl 中间件在处理带语言前缀的共享链接时，可能将 Cookie 中的语言偏好覆写为链接中的语言，导致用户下次访问根域名时被永久重定向到错误语言。</p>
+        <p style="margin:0 0 8px 0;"><strong>规则：仅当用户主动通过语言切换器（Language Switcher）切换语言时，才更新持久化语言 Cookie。绝不允许因访问带有特定语言前缀的共享链接而自动污染用户的语言偏好。</strong></p>
+        <p style="margin:0 0 6px 0;"><strong>实现要点：</strong></p>
+        <ol style="margin:0 0 10px 16px;line-height:1.9;">
+          <li>语言切换器组件通过 Server Action 或 Route Handler 显式设置 Cookie：
+            <pre style="margin:6px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// app/actions/locale.ts
+'use server';
+import { cookies } from 'next/headers';
+export async function setLocaleCookie(locale: string) {
+  (await cookies()).set('NEXT_LOCALE', locale, {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365,  // 1年
+    sameSite: 'lax',
+  });
+}</code></pre>
+          </li>
+          <li>middleware.ts 中不要让 next-intl 在用户直接访问带前缀 URL 时覆写 Cookie，只在根路径重定向时设置。</li>
+        </ol>
+        <p style="margin:0;color:#c0392b;"><strong>⚠️ 违反此规则：用户点击朋友分享的德语版链接后，永久被锁定在德语，无法正常返回中文界面。</strong></p>
+      </div>
+
       <h4>UI 字符串获取方式（CMS-15 动态获取 + 本地 JSON 兜底）</h4>
 
       <div class="highlight">
@@ -1083,6 +1106,68 @@ export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
           <li>使用"加载更多"按钮做纯 CSR 追加（第2批内容对搜索引擎不可见）</li>
         </ul>
         <p style="margin:10px 0 0;color:#c0392b;"><strong>⚠️ 违反此规则：搜索引擎永远只能看到列表第一页，旧新闻被挤到第二页后将从 Google 消失。</strong></p>
+      </div>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <h4 style="margin:0 0 10px 0;color:#b71c1c;">⚡ 【searchParams 动态降级防御铁律】</h4>
+        <p style="margin:0 0 10px 0;">在 Next.js App Router 中，<code>page.tsx</code> 顶层直接读取 <code>searchParams</code> props 会导致整页强制进入 Dynamic Rendering，丧失 ISR 静态缓存，TTFB 从 50ms 暴跌至 800ms+。</p>
+        <p style="margin:0 0 6px 0;color:#c0392b;"><strong>❌ 禁止写法（顶层读取 searchParams，全页动态化）：</strong></p>
+        <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// page.tsx - Server Component
+export default async function ProductsPage({ searchParams }: { searchParams: { page?: string } }) {
+  const page = searchParams.page || '1';  // 触发 Dynamic Rendering！
+  const data = await fetchProducts(page);
+  return &lt;ProductList data={data} /&gt;;
+}</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;"><strong>✅ 正确写法（用 Suspense 隔离，静态壳 + 动态内容分离）：</strong></p>
+        <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>// page.tsx - 保持静态壳（ISR 缓存）
+export default function ProductsPage() {
+  return (
+    &lt;div&gt;
+      &lt;StaticHero /&gt;  {/* 这部分享受 ISR 缓存 */}
+      &lt;Suspense fallback={&lt;Skeleton /&gt;}&gt;
+        &lt;ProductListClient /&gt;  {/* 读取 searchParams 的逻辑隔离在此 */}
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+
+// ProductListClient.tsx - Client Component
+'use client';
+import { useSearchParams } from 'next/navigation';
+export default function ProductListClient() {
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') || '1';
+  // ...
+}</code></pre>
+        <p style="margin:0;color:#c0392b;"><strong>⚠️ 适用场景：所有包含分页（?page=N）或筛选（?category=X）的列表页。违反此规则将导致 ISR 彻底失效，每次请求都走服务端渲染，服务器成本暴涨。</strong></p>
+      </div>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <h4 style="margin:0 0 10px 0;color:#b71c1c;">🗺️ 【Sitemap hreflang 铁律】</h4>
+        <p style="margin:0 0 10px 0;"><code>app/sitemap.ts</code> 返回的每个 URL 对象必须包含 <code>alternates.languages</code>，将所有语言版本交叉映射，否则 Google 将各语言版本视为孤立的重复内容并降权。</p>
+        <p style="margin:0 0 6px 0;color:#c0392b;"><strong>❌ 禁止写法（无 alternates，各语言 URL 孤立）：</strong></p>
+        <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>return locales.flatMap(locale =&gt;
+  articles.map(article =&gt; ({
+    url: `${base}/${locale}/about/news/${article.slug}`,
+    lastModified: article.updatedAt,
+  }))
+);</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;"><strong>✅ 正确写法（含 alternates，建立 Google 多语言索引网络）：</strong></p>
+        <pre style="margin:0 0 10px 0;background:#2d2d2d;color:#f8f8f2;padding:12px;border-radius:4px;overflow-x:auto;"><code>import { routing } from '@/i18n/routing';
+// 按内容条目分组，为每个条目生成含完整 alternates 的 URL 对象
+return articles.map(article =&gt; ({
+  url: `${base}/zh-CN/about/news/${article.slug}`,  // canonical
+  lastModified: article.updatedAt,
+  alternates: {
+    languages: Object.fromEntries(
+      routing.locales.map(locale =&gt; [
+        locale,
+        `${base}/${locale}/about/news/${article.slug}`,
+      ])
+    ),
+  },
+}));</code></pre>
+        <p style="margin:0;color:#c0392b;"><strong>⚠️ 此规范适用于：首页、产品列表/详情、解决方案列表/详情、新闻列表/详情等所有收录页面。违反此规则将导致 Google 将 8 个语言版本判定为重复内容，SEO 权重被稀释为原来的 1/8。</strong></p>
       </div>
 
       <h3>5.4 SEO 禁止事项</h3>
