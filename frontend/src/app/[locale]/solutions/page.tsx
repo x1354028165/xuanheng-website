@@ -8,7 +8,7 @@ import { getSolutionMessage } from '@/lib/i18n-helpers';
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: '解决方案' };
+  return { title: '解决方案 | 旭衡电子' };
 }
 
 

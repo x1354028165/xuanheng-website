@@ -18,10 +18,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "旭衡电子 | AlwaysControl Technology",
-    template: "%s | 旭衡电子",
-  },
+  title: "旭衡电子 | AlwaysControl Technology",
   description: "AlwaysControl Technology — 跨品牌能源管理解决方案，覆盖户用储能、工商储、充电站、VPP全场景",
 };
 

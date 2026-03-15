@@ -10,7 +10,7 @@ import { getProductMessage, getProductLabel } from '@/lib/i18n-helpers';
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: '产品中心' };
+  return { title: '产品中心 | 旭衡电子' };
 }
 
 

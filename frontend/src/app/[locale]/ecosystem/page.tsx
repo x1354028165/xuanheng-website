@@ -7,7 +7,7 @@ import type { StrapiCompatibleBrand } from '@/types/strapi';
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: '兼容生态' };
+  return { title: '兼容生态 | 旭衡电子' };
 }
 
 

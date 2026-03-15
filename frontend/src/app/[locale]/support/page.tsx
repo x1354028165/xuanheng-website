@@ -3,7 +3,7 @@ import { Link } from '@/i18n/navigation';
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: '帮助中心' };
+  return { title: '帮助中心 | 旭衡电子' };
 }
 
 

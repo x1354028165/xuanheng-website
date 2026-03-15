@@ -3,7 +3,7 @@ import { ContactForm } from '@/components/contact/ContactForm';
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
-  return { title: '联系我们' };
+  return { title: '联系我们 | 旭衡电子' };
 }
 
 
