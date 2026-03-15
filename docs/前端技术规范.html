@@ -668,6 +668,23 @@ setRequestLocale(locale);  // 必须在任何 await 之前调用</code></pre>
         不调用此函数的后果：页面自动降级为 Dynamic SSR，ISR 彻底失效，<code>next build</code> 可能报错。
       </div>
 
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🔁 【异步 RSC setRequestLocale 铁律】</h4>
+        <p style="margin:0 0 10px 0;"><code>setRequestLocale(locale)</code> 不仅要在 <code>page.tsx</code> 和 <code>layout.tsx</code> 中调用，<strong>任何深层的异步 Server Component（Async RSC）只要使用了 <code>getTranslations()</code>，也必须接收 <code>locale</code> prop 并调用 <code>setRequestLocale</code></strong>。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 遗漏 setRequestLocale 的后果：</p>
+        <p style="margin:0 0 12px 0;">该组件破坏父级路由的 Static Rendering 能力，整条路由链强制降级为 Dynamic SSR，服务器 CPU 成倍飙升。</p>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（深层异步 RSC）：</p>
+<pre style="margin:0 0 12px 0;"><code>import { setRequestLocale, getTranslations } from 'next-intl/server';
+
+// 异步 Server Component 必须接收并声明 locale
+async function ProductCard({ locale, documentId }: { locale: string; documentId: string }) {
+  setRequestLocale(locale);  // 必须在任何 await 之前调用
+  const t = await getTranslations({ locale, namespace: 'products' });
+  // ...
+}</code></pre>
+        <p style="margin:0;color:#555;">注意：使用 next-intl v4 的稳定 API <code>setRequestLocale</code>，<strong style="color:#c0392b;">禁止使用 v3 废弃的 <code>unstable_setRequestLocale</code></strong>。</p>
+      </div>
+
       <h4>i18n.config.ts — 全量语言定义</h4>
 
 <pre><code>// i18n.config.ts
@@ -706,6 +723,33 @@ export const twConverter = await OpenCC.Converter({ from: 'cn', to: 'tw' });
 import { twConverter } from '@/lib/opencc';
 const twText = twConverter(zhCNText);</code></pre>
         <p style="margin:0;color:#555;">所有 zh-TW 转换逻辑必须使用此全局单例，<strong style="color:#c0392b;">禁止在函数内部或组件中重新创建 Converter 实例。</strong></p>
+      </div>
+
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🔒 【OpenCC URL 保护铁律】</h4>
+        <p style="margin:0 0 10px 0;">对 <code>content</code> 等 Markdown/富文本字段执行繁体转换时，<strong>绝对禁止对整个字符串执行全局 OpenCC 转换</strong>。必须先用正则提取并暂存所有 URL，转换后还原：</p>
+<pre style="margin:0 0 12px 0;"><code>// src/lib/opencc.ts 中的安全转换函数
+export function convertToTW(text: string): string {
+  const urlPlaceholders: string[] = [];
+  // 步骤1：提取保护 Markdown 链接URL、图片URL、HTML属性中的路径
+  const protected = text.replace(
+    /(\[.*?\]\()([^)]+)(\))|(&lt;[^&gt;]+(?:src|href)=&quot;)([^&quot;]+)(&quot;)/g,
+    (match, p1, url1, p3, p4, url2) =&gt; {
+      const url = url1 || url2;
+      const idx = urlPlaceholders.length;
+      urlPlaceholders.push(url);
+      return match.replace(url, `__URL_${idx}__`);
+    }
+  );
+  // 步骤2：仅对纯文本部分执行繁体转换
+  let converted = twConverter(protected);
+  // 步骤3：还原所有 URL
+  urlPlaceholders.forEach((url, idx) =&gt; {
+    converted = converted.replace(`__URL_${idx}__`, url);
+  });
+  return converted;
+}</code></pre>
+        <p style="margin:0;color:#c0392b;font-weight:bold;">原因：OSS 上的物理文件名是简体中文，OpenCC 转换后 URL 变成繁体导致所有中文命名文件 404 失效。</p>
       </div>
 
       <h4>middleware.ts — 语言检测与路由</h4>
@@ -915,6 +959,29 @@ export async function generateMetadata({ params }) {
         <li><code>canonical</code> 指向当前语言版本的绝对 URL</li>
         <li>动态页面（产品/新闻）的 hreflang URL 必须包含对应的 slug</li>
       </ul>
+
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🌐 【多语言 hreflang 铁律】</h4>
+        <p style="margin:0 0 10px 0;">所有页面的 <code>generateMetadata</code> 除了 <code>title/description</code>，<strong>必须强制包含 <code>alternates</code> 属性</strong>，声明所有语言版本的 URL，否则 Google 将各语言版本判定为重复内容并降权。</p>
+<pre style="margin:0 0 12px 0;"><code>import { routing } from '@/i18n/routing';
+
+export async function generateMetadata({ params }: { params: { locale: string; slug?: string } }) {
+  const { locale, slug } = await params;
+  const basePath = slug ? `/products/${slug}` : '/';
+
+  return {
+    title: '...',
+    description: '...',
+    alternates: {
+      canonical: `/${locale}${basePath}`,
+      languages: Object.fromEntries(
+        routing.locales.map(lang =&gt; [lang, `/${lang}${basePath}`])
+      ),
+    },
+  };
+}</code></pre>
+        <p style="margin:0;color:#555;">此规范适用于所有页面（首页、列表页、详情页），是 B2B 国际化站点 SEO 的必要配置。</p>
+      </div>
 
       <h3>5.3 Sitemap 自动生成</h3>
 
@@ -1292,6 +1359,22 @@ export async function POST(request: NextRequest) {
         <p style="margin:0;color:#555;">所有四种事件统一调用 <code>revalidateTag(uid)</code>，其中 <code>uid</code> 为触发事件的 Collection Type 标识（如 <code>'articles'</code>、<code>'products'</code>）。</p>
       </div>
 
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">📦 【v5 Webhook Payload 铁律】</h4>
+        <p style="margin:0 0 10px 0;">Strapi v5 的 Webhook Payload 结构与 v4 不同，必须使用正确字段。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 禁止（v4 旧写法，v5 中字段不存在）：</p>
+<pre style="margin:0 0 12px 0;"><code>const { entry } = body;
+revalidateTag(entry.slug);   // v5 Payload 无 entry 包装层</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确（v5 Payload 结构）：</p>
+<pre style="margin:0 0 12px 0;"><code>// Strapi v5 Webhook Payload 关键字段：
+// body.documentId — 触发事件的文档 ID
+// body.model      — Collection Type 标识（如 'article', 'product'）
+// body.event      — 事件类型（entry.publish / entry.update / entry.unpublish / entry.delete）
+const { model, documentId, event } = body;
+revalidateTag(model);              // 精准清除该集合缓存（如 'article'）
+revalidateTag('strapi-data');      // 同时清除通用标签作为保底</code></pre>
+      </div>
+
       <h3>7.3 Strapi API 客户端封装</h3>
 
       <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
@@ -1304,6 +1387,23 @@ export async function POST(request: NextRequest) {
           <li>客户端只 POST 到 <code>/api/submit-lead</code>，不直接调用 Strapi</li>
         </ul>
         <strong>禁止在 <code>fetchStrapi</code> 或任何客户端代码中使用写权限 Token。</strong>
+      </div>
+
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">⚡ 【Route Handler 语法铁律】</h4>
+        <p style="margin:0 0 10px 0;">Next.js App Router 中不存在 <code>res</code> 对象，Pages Router 的旧语法会导致运行时崩溃。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 禁止写法（Pages Router 旧语法，App Router 中 res 为 undefined）：</p>
+<pre style="margin:0 0 12px 0;"><code>export async function POST(req, res) {
+  const body = req.body;           // undefined！App Router 无此属性
+  res.status(200).json({...});     // TypeError: res.status is not a function
+}</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（App Router Route Handler）：</p>
+<pre style="margin:0 0 12px 0;"><code>import { NextRequest, NextResponse } from 'next/server';
+export async function POST(request: NextRequest) {
+  const body = await request.json();   // 必须 await
+  return NextResponse.json({ success: true }, { status: 200 });
+}</code></pre>
+        <p style="margin:0;color:#555;">适用范围：所有 <code>app/api/**/route.ts</code> 文件，包括表单提交、revalidate、下载中转等所有 Route Handler。</p>
       </div>
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
