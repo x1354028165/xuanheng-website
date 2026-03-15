@@ -3,7 +3,15 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const isExport = process.env.NEXT_EXPORT === 'true';
+const basePath = isExport ? '/xuanheng-website' : '';
+
 const nextConfig: NextConfig = {
+  // Static export for GitHub Pages
+  ...(isExport ? { output: 'export' } : {}),
+  ...(basePath ? { basePath } : {}),
+  trailingSlash: true,
+
   // Performance: enable gzip/brotli compression
   compress: true,
 
@@ -11,11 +19,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   images: {
+    ...(isExport ? { unoptimized: true } : {}),
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         // 阿里云 OSS / CDN（生产环境）
@@ -37,7 +44,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  async headers() {
+  async headers(): Promise<import('next/dist/lib/load-custom-routes').Header[]> {
+    if (isExport) return [];
+
     return [
       {
         // 静态资源长期缓存

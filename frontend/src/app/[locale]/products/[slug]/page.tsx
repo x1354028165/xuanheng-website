@@ -6,8 +6,7 @@ import { Link } from '@/i18n/navigation';
 import { getStrapiMedia } from '@/lib/strapi';
 import { getProductBySlug } from '@/lib/api';
 
-export const dynamicParams = true;
-export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return [];

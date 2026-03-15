@@ -6,8 +6,11 @@ import { getArticleBySlug } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
 
-export const dynamicParams = true;
-export const revalidate = 3600;
+export function generateStaticParams() {
+  return [];
+}
+
+export const dynamicParams = false;
 
 export default async function ArticleDetailPage({
   params,

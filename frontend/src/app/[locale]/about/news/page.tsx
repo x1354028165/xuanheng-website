@@ -4,27 +4,18 @@ import { Link } from '@/i18n/navigation';
 import { getArticles } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 
-export const revalidate = 3600;
-
-const PAGE_SIZE = 12;
-
 export default async function NewsPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string }>;
 }) {
   const { locale } = await params;
-  const { page: pageParam } = await searchParams;
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'about' });
   const tc = await getTranslations({ locale, namespace: 'common' });
-  const currentPage = Math.max(1, parseInt(pageParam || '1', 10) || 1);
 
-  const { data: articles, meta } = await getArticles(locale, currentPage, PAGE_SIZE);
-  const { pageCount } = meta.pagination;
+  const { data: articles } = await getArticles(locale, 1, 12);
 
   return (
     <section className="py-16 md:py-24">
@@ -78,43 +69,6 @@ export default async function NewsPage({
           </div>
         ) : (
           <p className="text-center text-muted-foreground">{tc('noResults')}</p>
-        )}
-
-        {/* Pagination */}
-        {pageCount > 1 && (
-          <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
-            {currentPage > 1 && (
-              <Link
-                href={`/about/news?page=${currentPage - 1}`}
-                className="rounded-lg border border-foreground/10 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-              >
-                {tc('previous')}
-              </Link>
-            )}
-
-            {Array.from({ length: pageCount }, (_, i) => i + 1).map((pageNum) => (
-              <Link
-                key={pageNum}
-                href={`/about/news?page=${pageNum}`}
-                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                  pageNum === currentPage
-                    ? 'bg-[#1A3FAD] text-white'
-                    : 'border border-foreground/10 text-foreground hover:bg-muted'
-                }`}
-              >
-                {pageNum}
-              </Link>
-            ))}
-
-            {currentPage < pageCount && (
-              <Link
-                href={`/about/news?page=${currentPage + 1}`}
-                className="rounded-lg border border-foreground/10 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-              >
-                {tc('next')}
-              </Link>
-            )}
-          </nav>
         )}
       </div>
     </section>
