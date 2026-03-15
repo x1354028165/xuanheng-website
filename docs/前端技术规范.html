@@ -263,6 +263,33 @@
         <strong>违反此规则将导致 Markdown 文章完全无样式（无标题层级、无列表缩进、无字重区分）。</strong>
       </div>
 
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【Markdown 内图片渲染铁律】</strong> Strapi 后台编辑器插入的图片路径为相对路径（如 <code>/uploads/image.jpg</code>），<code>react-markdown</code> 默认不处理路径，导致浏览器向前端服务器请求图片，100% 破图。<br><br>
+        必须在 <code>ReactMarkdown</code> 组件上重写 <code>img</code> 渲染器：
+        <pre style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;margin:12px 0;overflow-x:auto;font-size:13px;"><code>// src/components/ui/MarkdownRenderer.tsx — 全站统一 Markdown 渲染组件
+import ReactMarkdown from 'react-markdown';
+
+export function MarkdownRenderer({ content }: { content: string }) {
+  return (
+    &lt;ReactMarkdown
+      className='prose dark:prose-invert max-w-none'
+      components={{
+        img: ({ node, src, alt, ...props }) =&gt; {
+          // 相对路径补全 Strapi 地址，绝对路径直接使用
+          const resolvedSrc = src?.startsWith('/')
+            ? process.env.NEXT_PUBLIC_API_URL + src
+            : src;
+          return &lt;img src={resolvedSrc} alt={alt || ''} {...props} className='rounded-lg max-w-full' /&gt;;
+        },
+      }}
+    &gt;
+      {content}
+    &lt;/ReactMarkdown&gt;
+  );
+}</code></pre>
+        所有页面中需要渲染 Markdown 的地方，统一使用此 <code>MarkdownRenderer</code> 组件，<strong>禁止直接使用裸 <code>ReactMarkdown</code></strong>。
+      </div>
+
       <h3>1.4 前台组件库：shadcn/ui</h3>
 
       <p>官网前台使用 <strong>shadcn/ui</strong>（基于 Radix UI + Tailwind CSS）作为核心组件库。</p>

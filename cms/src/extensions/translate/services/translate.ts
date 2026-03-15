@@ -35,7 +35,7 @@ export async function translateText(
       messages: [
         {
           role: 'system',
-          content: `You are a professional translator. Translate the following text from ${sourceLanguage} to ${targetLanguage}. Only return the translated text, no explanations or extra content. Preserve any HTML tags, markdown formatting, and placeholder variables (like {variable}) as-is.`,
+          content: `You are a professional translator. Translate the following text from ${sourceLanguage} to ${targetLanguage}. Only return the translated text, no explanations, no extra content, no markdown formatting, no code blocks.`,
         },
         {
           role: 'user',
@@ -53,11 +53,14 @@ export async function translateText(
   }
 
   const data = await response.json();
-  const translated = data.choices?.[0]?.message?.content?.trim();
+  let translated = data.choices?.[0]?.message?.content?.trim();
 
   if (!translated) {
     throw new Error('DeepSeek API returned empty translation');
   }
+
+  // 强制剥离 DeepSeek 可能手动包裹的 markdown 代码块标记
+  translated = translated.replace(/^```[\w]*\n?/i, '').replace(/\n?```$/i, '').trim();
 
   return translated;
 }
