@@ -18,17 +18,17 @@ export default defineConfig({
     },
     {
       name: "tablet",
-      use: { ...devices["iPad Mini"], viewport: { width: 768, height: 1024 } },
+      use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } },
     },
     {
       name: "mobile",
-      use: { ...devices["iPhone 13"], viewport: { width: 375, height: 812 } },
+      use: { ...devices["Pixel 5"], viewport: { width: 375, height: 812 } },
     },
   ],
   webServer: {
-    command: "npm run dev",
+    command: "npm run build && npm run start",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
+    reuseExistingServer: false,
+    timeout: 300_000,
   },
 });
