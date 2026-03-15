@@ -24,13 +24,8 @@ export default {
     },
   },
   bootstrap(app: StrapiApp) {
-    // Override the default homepage with our custom dashboard
-    app.router.addRoute({
-      path: '/',
-      lazy: async () => {
-        const { default: HomePage } = await import('./pages/HomePage');
-        return { Component: HomePage };
-      },
-    });
+    // Custom routes disabled — app.router.addRoute not available in Strapi v5
+    // Dashboard customization via content-manager instead
+    void app;
   },
 };
