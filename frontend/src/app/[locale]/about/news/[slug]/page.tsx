@@ -28,12 +28,12 @@ export default async function ArticleDetailPage({
   }
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Back link */}
         <Link
           href="/about/news"
-          className="mb-8 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="mb-8 inline-flex items-center gap-1 text-sm text-[#475569] transition-colors hover:text-[#0F172A]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,14 +52,14 @@ export default async function ArticleDetailPage({
         </Link>
 
         {/* Article Header */}
-        <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-[#0F172A] md:text-4xl">
           {article.title}
         </h1>
 
         {article.publishedDate && (
           <time
             dateTime={article.publishedDate}
-            className="mt-4 block text-sm text-muted-foreground"
+            className="mt-4 block text-sm text-[#475569]"
           >
             {new Date(article.publishedDate).toLocaleDateString(locale)}
           </time>
@@ -84,7 +84,7 @@ export default async function ArticleDetailPage({
           <div className="mt-10">
             <MarkdownRenderer
               content={article.content}
-              className="prose prose-lg dark:prose-invert max-w-none"
+              className="prose prose-lg max-w-none text-[#475569]"
             />
           </div>
         )}

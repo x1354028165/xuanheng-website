@@ -25,9 +25,9 @@ export default async function PrivacyPage({
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-invert prose-lg max-w-none text-gray-300">
+          <div className="prose prose-lg max-w-none text-[#475569]">
             <p>{t('content')}</p>
           </div>
         </div>

@@ -109,7 +109,7 @@ export default function MarkdownRenderer({ content, className }: MarkdownRendere
 
   return (
     <div
-      className={className || 'prose dark:prose-invert max-w-none'}
+      className={className || 'prose max-w-none'}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

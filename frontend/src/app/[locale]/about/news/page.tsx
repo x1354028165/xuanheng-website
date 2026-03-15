@@ -31,7 +31,7 @@ export default async function NewsPage({
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-[#F8FAFC] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {articles.length > 0 ? (
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -39,22 +39,22 @@ export default async function NewsPage({
                 <Link
                   key={article.documentId}
                   href={`/about/news/${article.slug}`}
-                  className="group overflow-hidden rounded-xl border border-white/10 bg-white/5 transition-all duration-300 hover:border-[#38C4E8]/30 hover:shadow-lg"
+                  className="group overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm transition-all duration-300 hover:shadow-md"
                 >
-                  <div className="relative aspect-video w-full overflow-hidden bg-[#0C1829] flex items-center justify-center">
+                  <div className="relative aspect-video w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                     <div className="text-3xl text-gray-600">📰</div>
                   </div>
                   <div className="p-5">
-                    <h2 className="line-clamp-2 text-lg font-semibold text-white group-hover:text-[#38C4E8] transition-colors">
+                    <h2 className="line-clamp-2 text-lg font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
                       {article.title}
                     </h2>
                     {article.summary && (
-                      <p className="mt-2 line-clamp-2 text-sm text-gray-400">
+                      <p className="mt-2 line-clamp-2 text-sm text-[#475569]">
                         {article.summary}
                       </p>
                     )}
                     {article.publishedDate && (
-                      <time className="mt-3 block text-xs text-gray-500">
+                      <time className="mt-3 block text-xs text-[#64748B]">
                         {article.publishedDate}
                       </time>
                     )}
@@ -63,7 +63,7 @@ export default async function NewsPage({
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-400">{tc('noResults')}</p>
+            <p className="text-center text-[#475569]">{tc('noResults')}</p>
           )}
         </div>
       </section>

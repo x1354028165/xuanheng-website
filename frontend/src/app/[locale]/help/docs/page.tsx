@@ -64,29 +64,29 @@ export default async function DocsPage({
       </section>
 
       {/* Documents Tab */}
-      <section className="bg-[#0f1b2e] py-12">
+      <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-bold text-white">📄 文档资料</h2>
-          <div className="overflow-hidden rounded-xl border border-white/10">
+          <h2 className="mb-6 text-xl font-bold text-[#0F172A]">📄 文档资料</h2>
+          <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-white/5">
-                  <th className="px-6 py-3 text-left font-medium text-gray-300">文件名</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">版本</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">更新日期</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">大小</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">格式</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-300">操作</th>
+                <tr className="bg-[#F8FAFC]">
+                  <th className="px-6 py-3 text-left font-medium text-[#475569]">文件名</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">版本</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">更新日期</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">大小</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">格式</th>
+                  <th className="px-4 py-3 text-right font-medium text-[#475569]">操作</th>
                 </tr>
               </thead>
               <tbody>
                 {MOCK_DOCS.map((doc, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white/[0.02]' : ''}>
-                    <td className="px-6 py-3 text-white">{doc.name}</td>
-                    <td className="px-4 py-3 text-gray-400">{doc.version}</td>
-                    <td className="px-4 py-3 text-gray-400">{doc.date}</td>
-                    <td className="px-4 py-3 text-gray-400">{doc.size}</td>
-                    <td className="px-4 py-3 text-gray-400">{doc.format}</td>
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-[#F8FAFC]' : 'bg-white'}>
+                    <td className="px-6 py-3 text-[#0F172A]">{doc.name}</td>
+                    <td className="px-4 py-3 text-[#475569]">{doc.version}</td>
+                    <td className="px-4 py-3 text-[#475569]">{doc.date}</td>
+                    <td className="px-4 py-3 text-[#475569]">{doc.size}</td>
+                    <td className="px-4 py-3 text-[#475569]">{doc.format}</td>
                     <td className="px-4 py-3 text-right">
                       <button className="text-[#38C4E8] hover:underline text-xs">下载</button>
                     </td>
@@ -99,22 +99,22 @@ export default async function DocsPage({
       </section>
 
       {/* Software */}
-      <section className="bg-[#0C1829] py-12">
+      <section className="bg-[#F8FAFC] py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-bold text-white">💾 软件下载</h2>
+          <h2 className="mb-6 text-xl font-bold text-[#0F172A]">💾 软件下载</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {MOCK_SOFTWARE.map((sw, idx) => (
-              <div key={idx} className="rounded-xl border border-white/10 bg-white/5 p-6">
-                <h3 className="text-lg font-semibold text-white">{sw.name}</h3>
-                <p className="text-sm text-gray-400 mb-4">{sw.version}</p>
+              <div key={idx} className="rounded-xl border border-[#E2E8F0] bg-white shadow-sm p-6">
+                <h3 className="text-lg font-semibold text-[#0F172A]">{sw.name}</h3>
+                <p className="text-sm text-[#475569] mb-4">{sw.version}</p>
                 <div className="space-y-2">
                   {sw.downloads.map((dl, i) => (
                     <button
                       key={i}
-                      className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-gray-300 hover:border-[#38C4E8]/30 hover:text-white transition-colors"
+                      className="flex w-full items-center justify-between rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-4 py-3 text-sm text-[#0F172A] hover:border-[#38C4E8]/30 transition-colors"
                     >
                       <span>{dl.label} {dl.ext}</span>
-                      {dl.size && <span className="text-xs text-gray-500">{dl.size}</span>}
+                      {dl.size && <span className="text-xs text-[#475569]">{dl.size}</span>}
                     </button>
                   ))}
                 </div>
@@ -125,27 +125,27 @@ export default async function DocsPage({
       </section>
 
       {/* Firmware */}
-      <section className="bg-[#0f1b2e] py-12">
+      <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-xl font-bold text-white">🔧 固件下载</h2>
-          <div className="overflow-hidden rounded-xl border border-white/10">
+          <h2 className="mb-6 text-xl font-bold text-[#0F172A]">🔧 固件下载</h2>
+          <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-white/5">
-                  <th className="px-6 py-3 text-left font-medium text-gray-300">型号</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">固件版本</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">发布日期</th>
-                  <th className="px-4 py-3 text-left font-medium text-gray-300">更新日志</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-300">操作</th>
+                <tr className="bg-[#F8FAFC]">
+                  <th className="px-6 py-3 text-left font-medium text-[#475569]">型号</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">固件版本</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">发布日期</th>
+                  <th className="px-4 py-3 text-left font-medium text-[#475569]">更新日志</th>
+                  <th className="px-4 py-3 text-right font-medium text-[#475569]">操作</th>
                 </tr>
               </thead>
               <tbody>
                 {MOCK_FIRMWARE.map((fw, idx) => (
-                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white/[0.02]' : ''}>
-                    <td className="px-6 py-3 text-white">{fw.model}</td>
-                    <td className="px-4 py-3 text-gray-400">{fw.version}</td>
-                    <td className="px-4 py-3 text-gray-400">{fw.date}</td>
-                    <td className="px-4 py-3 text-gray-400 max-w-xs truncate">{fw.changelog}</td>
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-[#F8FAFC]' : 'bg-white'}>
+                    <td className="px-6 py-3 text-[#0F172A]">{fw.model}</td>
+                    <td className="px-4 py-3 text-[#475569]">{fw.version}</td>
+                    <td className="px-4 py-3 text-[#475569]">{fw.date}</td>
+                    <td className="px-4 py-3 text-[#475569] max-w-xs truncate">{fw.changelog}</td>
                     <td className="px-4 py-3 text-right">
                       <button className="text-[#38C4E8] hover:underline text-xs">下载</button>
                     </td>

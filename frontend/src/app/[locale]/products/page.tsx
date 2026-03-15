@@ -19,6 +19,10 @@ export default async function ProductsPage({
   const t = await getTranslations({ locale, namespace: 'products' });
   const tc = await getTranslations({ locale, namespace: 'common' });
 
+  // Helper to get translated product fields
+  const getPTitle = (slug: string, fallback: string) => t.has(`${slug}.title`) ? t(`${slug}.title`) : fallback;
+  const getPTagline = (slug: string, fallback: string) => t.has(`${slug}.tagline`) ? t(`${slug}.tagline`) : fallback;
+
   let products = await getProducts(locale);
   if (!products || products.length === 0) {
     products = MOCK_PRODUCTS as unknown as StrapiProduct[];
@@ -40,25 +44,25 @@ export default async function ProductsPage({
       </section>
 
       {/* Hardware Section */}
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-white">智能网关（硬件）</h2>
+          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{t('hardwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(usesMock ? hardware : products.slice(0, 3)).map((product) => (
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}
-                className="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:border-[#38C4E8]/30 hover:shadow-lg hover:shadow-[#1A3FAD]/10 hover:-translate-y-1"
+                className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
-                <div className="relative h-48 w-full overflow-hidden bg-[#0C1829] flex items-center justify-center">
-                  <div className="text-4xl text-[#38C4E8]/30">⚡</div>
+                <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
+                  <div className="text-4xl text-[#1A3FAD]/30">⚡</div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-semibold text-white group-hover:text-[#38C4E8] transition-colors duration-300">
-                    {product.title}
+                  <h3 className="text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
+                    {getPTitle(product.slug, product.title)}
                   </h3>
                   {product.tagline && (
-                    <p className="mt-2 text-sm text-gray-400 line-clamp-2">{product.tagline}</p>
+                    <p className="mt-2 text-sm text-[#475569] line-clamp-2">{getPTagline(product.slug, product.tagline)}</p>
                   )}
                   <span className="mt-3 inline-flex items-center text-sm font-medium text-[#38C4E8] transition-transform duration-300 group-hover:translate-x-1">
                     {tc('viewDetails')} &rarr;
@@ -71,25 +75,25 @@ export default async function ProductsPage({
       </section>
 
       {/* Software Section */}
-      <section className="bg-[#0C1829] py-16">
+      <section className="bg-[#F8FAFC] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-8 text-2xl font-bold text-white">云平台（软件）</h2>
+          <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{t('softwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {(usesMock ? software : products.slice(3)).map((product) => (
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}
-                className="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:border-[#38C4E8]/30 hover:shadow-lg hover:shadow-[#1A3FAD]/10 hover:-translate-y-1"
+                className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
-                <div className="relative h-48 w-full overflow-hidden bg-[#0C1829] flex items-center justify-center">
+                <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
                   <div className="text-4xl text-[#1A3FAD]/30">☁️</div>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-semibold text-white group-hover:text-[#38C4E8] transition-colors duration-300">
-                    {product.title}
+                  <h3 className="text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
+                    {getPTitle(product.slug, product.title)}
                   </h3>
                   {product.tagline && (
-                    <p className="mt-2 text-sm text-gray-400 line-clamp-2">{product.tagline}</p>
+                    <p className="mt-2 text-sm text-[#475569] line-clamp-2">{getPTagline(product.slug, product.tagline)}</p>
                   )}
                   <span className="mt-3 inline-flex items-center text-sm font-medium text-[#38C4E8] transition-transform duration-300 group-hover:translate-x-1">
                     {tc('viewDetails')} &rarr;

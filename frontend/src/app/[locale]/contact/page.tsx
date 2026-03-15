@@ -24,57 +24,57 @@ export default async function ContactPage({
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Information */}
             <div>
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/20 text-[#38C4E8]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-[#1A3FAD]">
                     📍
                   </div>
                   <div>
-                    <p className="text-sm text-gray-300">{t('info.address')}</p>
+                    <p className="text-sm text-[#0F172A]">{t('info.address')}</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/20 text-[#38C4E8]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-[#1A3FAD]">
                     📞
                   </div>
                   <div>
-                    <p className="text-sm text-gray-300">{t('info.phone')}</p>
+                    <p className="text-sm text-[#0F172A]">{t('info.phone')}</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/20 text-[#38C4E8]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-[#1A3FAD]">
                     ✉️
                   </div>
                   <div>
-                    <p className="text-sm text-gray-300">{t('info.email')}</p>
+                    <p className="text-sm text-[#0F172A]">{t('info.email')}</p>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/20 text-[#38C4E8]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-[#1A3FAD]">
                     🕐
                   </div>
                   <div>
-                    <p className="text-sm text-gray-300">{t('info.hours')}</p>
+                    <p className="text-sm text-[#0F172A]">{t('info.hours')}</p>
                   </div>
                 </div>
               </div>
 
               {/* Map Placeholder */}
-              <div className="mt-8 flex h-64 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                <p className="text-sm text-gray-500">地图加载中...</p>
+              <div className="mt-8 flex h-64 items-center justify-center rounded-xl border border-[#E2E8F0] bg-[#F8FAFC]">
+                <p className="text-sm text-[#64748B]">地图加载中...</p>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <div className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
               <ContactForm
                 labels={{
                   name: t('form.name'),

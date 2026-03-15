@@ -32,7 +32,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-12">
+      <section className="bg-white py-12">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           {/* Search */}
           <div className="mb-8">
@@ -41,7 +41,7 @@ export default function FAQPage() {
               placeholder="搜索问题..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:border-[#38C4E8]/50 focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/50"
+              className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
             />
           </div>
 
@@ -53,8 +53,8 @@ export default function FAQPage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   activeCategory === cat
-                    ? 'bg-[#38C4E8] text-[#0C1829]'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
+                    ? 'bg-[#38C4E8] text-white'
+                    : 'bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0] hover:bg-[#F1F5F9]'
                 }`}
               >
                 {cat}
@@ -67,15 +67,15 @@ export default function FAQPage() {
             {filtered.map((faq) => (
               <div
                 key={faq.id}
-                className="rounded-xl border border-white/10 bg-white/5 overflow-hidden"
+                className="rounded-xl border border-[#E2E8F0] bg-white overflow-hidden"
               >
                 <button
                   onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
                   className="flex w-full items-center justify-between px-6 py-4 text-left"
                 >
-                  <span className="text-white font-medium pr-4">{faq.question}</span>
+                  <span className="text-[#0F172A] font-medium pr-4">{faq.question}</span>
                   <svg
-                    className={`h-5 w-5 shrink-0 text-gray-400 transition-transform ${
+                    className={`h-5 w-5 shrink-0 text-[#475569] transition-transform ${
                       openId === faq.id ? 'rotate-180' : ''
                     }`}
                     fill="none"
@@ -87,9 +87,9 @@ export default function FAQPage() {
                   </svg>
                 </button>
                 {openId === faq.id && (
-                  <div className="border-t border-white/10 px-6 py-4">
-                    <p className="text-gray-300 leading-relaxed text-sm">{faq.answer}</p>
-                    <span className="mt-3 inline-block rounded-full bg-[#1A3FAD]/20 px-2.5 py-0.5 text-xs text-[#38C4E8]">
+                  <div className="border-t border-[#E2E8F0] px-6 py-4">
+                    <p className="text-[#475569] leading-relaxed text-sm">{faq.answer}</p>
+                    <span className="mt-3 inline-block rounded-full bg-[#1A3FAD]/10 px-2.5 py-0.5 text-xs text-[#1A3FAD]">
                       {faq.category}
                     </span>
                   </div>
@@ -97,7 +97,7 @@ export default function FAQPage() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <p className="text-center text-gray-500 py-8">未找到匹配的问题</p>
+              <p className="text-center text-[#475569] py-8">未找到匹配的问题</p>
             )}
           </div>
         </div>

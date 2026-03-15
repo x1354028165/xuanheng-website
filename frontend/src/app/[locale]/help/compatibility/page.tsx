@@ -41,47 +41,47 @@ export default async function CompatibilityPage({
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-12">
+      <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12">
           {Object.entries(COMPATIBILITY_DATA).map(([model, rows]) => (
             <div key={model}>
-              <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="mb-4 text-xl font-bold text-[#0F172A] flex items-center gap-2">
                 <span className="text-[#38C4E8]">⚡</span> {model}
               </h2>
-              <div className="overflow-hidden rounded-xl border border-white/10">
+              <div className="overflow-hidden rounded-xl border border-[#E2E8F0]">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-white/5">
-                      <th className="px-6 py-3 text-left font-medium text-gray-300">固件版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-gray-300">云平台最低版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-gray-300">配置工具最低版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-gray-300">备注</th>
+                    <tr className="bg-[#F8FAFC]">
+                      <th className="px-6 py-3 text-left font-medium text-[#475569]">固件版本</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">云平台最低版本</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">配置工具最低版本</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">备注</th>
                     </tr>
                   </thead>
                   <tbody>
                     {rows.map((row, idx) => (
-                      <tr key={idx} className={idx % 2 === 0 ? 'bg-white/[0.02]' : ''}>
-                        <td className="px-6 py-3 text-white font-mono">{row.firmware}</td>
-                        <td className="px-4 py-3 text-gray-400">{row.cloud}</td>
-                        <td className="px-4 py-3 text-gray-400">{row.tool}</td>
+                      <tr key={idx} className={idx % 2 === 0 ? 'bg-[#F8FAFC]' : 'bg-white'}>
+                        <td className="px-6 py-3 text-[#0F172A] font-mono">{row.firmware}</td>
+                        <td className="px-4 py-3 text-[#475569]">{row.cloud}</td>
+                        <td className="px-4 py-3 text-[#475569]">{row.tool}</td>
                         <td className="px-4 py-3">
                           {row.note === '当前推荐' && (
-                            <span className="rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-400">
+                            <span className="rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-600">
                               {row.note}
                             </span>
                           )}
                           {row.note === '即将停止维护' && (
-                            <span className="rounded-full bg-yellow-500/10 px-2.5 py-0.5 text-xs font-medium text-yellow-400">
+                            <span className="rounded-full bg-yellow-500/10 px-2.5 py-0.5 text-xs font-medium text-yellow-600">
                               {row.note}
                             </span>
                           )}
                           {row.note === '已停止维护' && (
-                            <span className="rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-medium text-red-400">
+                            <span className="rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-medium text-red-600">
                               {row.note}
                             </span>
                           )}
                           {row.note && !['当前推荐', '即将停止维护', '已停止维护'].includes(row.note) && (
-                            <span className="text-gray-500 text-xs">{row.note}</span>
+                            <span className="text-[#475569] text-xs">{row.note}</span>
                           )}
                         </td>
                       </tr>

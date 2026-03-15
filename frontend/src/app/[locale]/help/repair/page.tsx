@@ -40,12 +40,12 @@ export default function RepairPage() {
             <h1 className="text-3xl font-bold text-white">在线报修</h1>
           </div>
         </section>
-        <section className="bg-[#0f1b2e] py-16">
+        <section className="bg-white py-16">
           <div className="mx-auto max-w-lg px-4 text-center">
-            <div className="rounded-xl border border-green-500/20 bg-green-500/5 p-12">
+            <div className="rounded-xl border border-green-200 bg-green-50 p-12">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="text-xl font-bold text-white mb-2">报修工单已提交</h2>
-              <p className="text-gray-400">我们的技术支持团队会在 24 小时内联系您，请保持电话畅通。</p>
+              <h2 className="text-xl font-bold text-[#0F172A] mb-2">报修工单已提交</h2>
+              <p className="text-[#475569]">我们的技术支持团队会在 24 小时内联系您，请保持电话畅通。</p>
               <Link
                 href="/help"
                 className="mt-6 inline-flex items-center rounded-lg bg-[#38C4E8] px-6 py-2.5 text-sm font-semibold text-[#0C1829] transition-colors hover:bg-[#38C4E8]/90"
@@ -71,12 +71,12 @@ export default function RepairPage() {
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-12">
+      <section className="bg-[#F8FAFC] py-12">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="rounded-xl border border-white/10 bg-white/5 p-8 space-y-6">
+          <form onSubmit={handleSubmit} className="rounded-xl border border-[#E2E8F0] bg-white p-8 space-y-6 shadow-sm">
             {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0F172A] mb-2">
                 姓名 <span className="text-red-400">*</span>
               </label>
               <input
@@ -84,14 +84,14 @@ export default function RepairPage() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:border-[#38C4E8]/50 focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/50"
+                className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
                 placeholder="请输入您的姓名"
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0F172A] mb-2">
                 联系电话 <span className="text-red-400">*</span>
               </label>
               <input
@@ -99,21 +99,21 @@ export default function RepairPage() {
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:border-[#38C4E8]/50 focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/50"
+                className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
                 placeholder="请输入您的电话号码"
               />
             </div>
 
             {/* Device Model */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0F172A] mb-2">
                 设备型号 <span className="text-red-400">*</span>
               </label>
               <select
                 required
                 value={formData.model}
                 onChange={(e) => setFormData(prev => ({ ...prev, model: e.target.value }))}
-                className="w-full rounded-lg border border-white/10 bg-[#0C1829] px-4 py-3 text-white focus:border-[#38C4E8]/50 focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/50"
+                className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
               >
                 <option value="">请选择设备型号</option>
                 {DEVICE_MODELS.map((model) => (
@@ -124,7 +124,7 @@ export default function RepairPage() {
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0F172A] mb-2">
                 故障描述 <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -132,18 +132,18 @@ export default function RepairPage() {
                 rows={5}
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 focus:border-[#38C4E8]/50 focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/50 resize-none"
+                className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20 resize-none"
                 placeholder="请详细描述故障现象"
               />
             </div>
 
             {/* Screenshots placeholder */}
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-[#0F172A] mb-2">
                 故障截图（可选，最多5张）
               </label>
-              <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-white/10 px-6 py-8 text-center">
-                <p className="text-sm text-gray-500">点击或拖拽上传截图</p>
+              <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-[#E2E8F0] px-6 py-8 text-center">
+                <p className="text-sm text-[#475569]">点击或拖拽上传截图</p>
               </div>
             </div>
 

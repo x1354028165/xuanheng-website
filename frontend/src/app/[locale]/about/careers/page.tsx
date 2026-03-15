@@ -25,19 +25,19 @@ export default async function CareersPage({
         </div>
       </section>
 
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-[#F8FAFC] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {jobs.length > 0 ? (
             <div className="space-y-4">
               {jobs.map((job) => (
                 <div
                   key={job.documentId}
-                  className="rounded-xl border border-white/10 bg-white/5 p-6 transition-all hover:border-[#38C4E8]/30"
+                  className="rounded-xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition-all hover:shadow-md"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <h2 className="text-lg font-semibold text-white">{job.title}</h2>
-                      <div className="mt-2 flex flex-wrap gap-3 text-sm text-gray-400">
+                      <h2 className="text-lg font-semibold text-[#0F172A]">{job.title}</h2>
+                      <div className="mt-2 flex flex-wrap gap-3 text-sm text-[#475569]">
                         {job.department && <span>🏢 {job.department}</span>}
                         {job.location && <span>📍 {job.location}</span>}
                       </div>
@@ -49,7 +49,7 @@ export default async function CareersPage({
                     )}
                   </div>
                   {job.description && (
-                    <p className="mt-4 text-sm text-gray-400 line-clamp-3">
+                    <p className="mt-4 text-sm text-[#475569] line-clamp-3">
                       {job.description}
                     </p>
                   )}
@@ -57,8 +57,8 @@ export default async function CareersPage({
               ))}
             </div>
           ) : (
-            <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
-              <p className="text-lg text-gray-400">{t('noOpenings')}</p>
+            <div className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-12 text-center">
+              <p className="text-lg text-[#475569]">{t('noOpenings')}</p>
             </div>
           )}
         </div>

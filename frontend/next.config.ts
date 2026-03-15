@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
       },
+      {
+        // Unsplash（Hero背景图）
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 
@@ -116,7 +121,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://*.aliyuncs.com https://placehold.co http://localhost:1337",
+              "img-src 'self' data: blob: https://*.aliyuncs.com https://placehold.co https://images.unsplash.com http://localhost:1337",
               "font-src 'self' https://fonts.gstatic.com",
               "connect-src 'self' http://localhost:1337 https://*.aliyuncs.com https://challenges.cloudflare.com",
               "frame-src https://challenges.cloudflare.com",

@@ -33,27 +33,28 @@ export default async function SolutionsPage({
       </section>
 
       {/* Solutions Grid */}
-      <section className="bg-[#0f1b2e] py-16">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => {
+              const sTitle = t.has(`${solution.slug}.title`) ? t(`${solution.slug}.title`) : solution.title;
               const mockMatch = MOCK_SOLUTIONS.find(s => s.slug === solution.slug);
+              const sTagline = t.has(`${solution.slug}.tagline`) ? t(`${solution.slug}.tagline`) : (solution.tagline || mockMatch?.tagline);
               return (
                 <Link
                   key={solution.documentId}
                   href={`/solutions/${solution.slug}`}
-                  className="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition-all duration-300 hover:border-[#38C4E8]/30 hover:shadow-lg hover:shadow-[#1A3FAD]/10 hover:-translate-y-1"
+                  className="group rounded-xl border border-[#E2E8F0] bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
                 >
-                  <div className="relative h-52 w-full overflow-hidden bg-[#0C1829] flex items-center justify-center">
-                    <div className="text-5xl text-[#38C4E8]/20">🔋</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0C1829] via-[#0C1829]/30 to-transparent" />
+                  <div className="relative h-52 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
+                    <div className="text-5xl text-[#1A3FAD]/30">🔋</div>
                   </div>
                   <div className="p-6">
-                    <h2 className="text-xl font-semibold text-white group-hover:text-[#38C4E8] transition-colors duration-300">
-                      {solution.title}
+                    <h2 className="text-xl font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
+                      {sTitle}
                     </h2>
-                    <p className="mt-2 text-sm text-gray-400 line-clamp-2">
-                      {solution.tagline || mockMatch?.tagline}
+                    <p className="mt-2 text-sm text-[#475569] line-clamp-2">
+                      {sTagline}
                     </p>
                     <span className="mt-4 inline-flex items-center text-sm font-medium text-[#38C4E8] transition-transform duration-300 group-hover:translate-x-1">
                       {t('viewDetail')} &rarr;
