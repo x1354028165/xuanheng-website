@@ -4,7 +4,7 @@
   "info": {
     "singularName": "article",
     "pluralName": "articles",
-    "displayName": "Article"
+    "displayName": "文章 / 最新动态"
   },
   "options": {
     "draftAndPublish": true
@@ -47,7 +47,9 @@
     "cover": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "publishedDate": {
       "type": "datetime"

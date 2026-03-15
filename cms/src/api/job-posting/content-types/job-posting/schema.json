@@ -4,7 +4,7 @@
   "info": {
     "singularName": "job-posting",
     "pluralName": "job-postings",
-    "displayName": "Job Posting"
+    "displayName": "招聘职位"
   },
   "options": {
     "draftAndPublish": false
@@ -32,7 +32,11 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["full-time", "part-time", "contract"]
+      "enum": [
+        "full-time",
+        "part-time",
+        "contract"
+      ]
     },
     "description": {
       "type": "text",

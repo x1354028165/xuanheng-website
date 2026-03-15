@@ -11,11 +11,37 @@ import type { StrapiSolution, StrapiProduct, StrapiArticle, StrapiCompatibleBran
 import { MOCK_PRODUCTS as _MP, MOCK_SOLUTIONS as _MS, MOCK_ARTICLES as _MA, MOCK_BRANDS as _MB } from '@/lib/mock-data';
 import { getProductMessage, getSolutionMessage } from '@/lib/i18n-helpers';
 
-// Map shared mock data to Strapi-compatible shapes
+import SolutionsAccordion from '@/components/home/SolutionsAccordion';
+import SoftwareTabs from '@/components/home/SoftwareTabs';
+
 const MOCK_SOLUTIONS = _MS.map(s => ({ documentId: s.documentId, title: s.title, slug: s.slug, tagline: s.tagline, cover: s.cover }));
-const MOCK_PRODUCTS_LIST = _MP.map(p => ({ documentId: p.documentId, title: p.title, slug: p.slug, tagline: p.tagline, cover: p.cover }));
+const MOCK_PRODUCTS_LIST = _MP.map(p => ({ documentId: p.documentId, title: p.title, slug: p.slug, tagline: p.tagline, cover: p.cover, category: p.category }));
 const MOCK_ARTICLES_LIST = _MA;
 const MOCK_BRANDS_LIST = _MB;
+
+/* Hardware device SVG placeholder */
+function DeviceSVG() {
+  return (
+    <svg viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[85%] h-auto">
+      <rect x="20" y="16" width="260" height="166" rx="18" fill="#E8EDF2" stroke="#C8D0DA" strokeWidth="1.5"/>
+      <rect x="38" y="38" width="224" height="122" rx="10" fill="#F5F7FA" stroke="#DDE3EC" strokeWidth="1"/>
+      <circle cx="150" cy="99" r="34" fill="#fff" stroke="#D0D7E3" strokeWidth="1.5"/>
+      <circle cx="150" cy="99" r="15" fill="#38C4E8" opacity=".85"/>
+      <circle cx="150" cy="99" r="6" fill="#fff"/>
+      <circle cx="54" cy="54" r="5" fill="#38C4E8" opacity=".9"/>
+      <circle cx="70" cy="54" r="5" fill="#38C4E8" opacity=".5"/>
+      <circle cx="86" cy="54" r="5" fill="#C8D0DA"/>
+      <rect x="38" y="192" width="46" height="9" rx="3" fill="#D0D7E3"/>
+      <rect x="92" y="192" width="46" height="9" rx="3" fill="#D0D7E3"/>
+      <rect x="146" y="192" width="46" height="9" rx="3" fill="#D0D7E3"/>
+      <rect x="216" y="192" width="46" height="9" rx="3" fill="#38C4E8" opacity=".6"/>
+      <line x1="254" y1="16" x2="254" y2="-2" stroke="#C8D0DA" strokeWidth="2.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+/* News placeholder color blocks */
+const NEWS_COLORS = ['#38C4E8', '#1A3FAD', '#0891B2'];
 
 export default async function HomePage({
   params,
@@ -49,346 +75,281 @@ export default async function HomePage({
     brands = MOCK_BRANDS_LIST as unknown as StrapiCompatibleBrand[];
   }
 
-  const trustItems = [0, 1, 2].map((i) => ({
-    title: t(`trustItems.${i}.title`),
-    description: t(`trustItems.${i}.description`),
+  // Accordion data
+  const accordionItems = [
+    {
+      tag: 'Residential ESS',
+      titleKey: 'accordionHems',
+      descKey: 'accordionHemsDesc',
+      href: '/solutions/hems',
+      bgImage: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
+    },
+    {
+      tag: 'Commercial & Industrial',
+      titleKey: 'accordionEss',
+      descKey: 'accordionEssDesc',
+      href: '/solutions/ess',
+      bgImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
+    },
+    {
+      tag: 'EV Charging',
+      titleKey: 'accordionEvcms',
+      descKey: 'accordionEvcmsDesc',
+      href: '/solutions/evcms',
+      bgImage: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
+    },
+    {
+      tag: 'Virtual Power Plant',
+      titleKey: 'accordionVpp',
+      descKey: 'accordionVppDesc',
+      href: '/solutions/vpp',
+      bgImage: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
+    },
+    {
+      tag: 'Power Quality',
+      titleKey: 'accordionPqms',
+      descKey: 'accordionPqmsDesc',
+      href: '/solutions/pqms',
+      bgImage: 'https://images.unsplash.com/photo-1545259742-a0f2c1a2d2b5?w=800&q=70',
+    },
+  ];
+
+  const accordionData = accordionItems.map((item) => ({
+    tag: item.tag,
+    title: t(item.titleKey),
+    description: t(item.descKey),
+    href: item.href,
+    bgImage: item.bgImage,
+    linkText: t('viewDetail'),
   }));
+
+  // Hardware products
+  const hwProducts = ['Neuron II', 'Neuron III', 'Neuron III Lite'];
+
+  // Brand fallback names
+  const fallbackBrands = ['BYD', 'CATL', 'Growatt', 'SolarEdge', 'Victron', 'Tesla', 'Deye', 'Sungrow', 'Fronius', 'SMA', 'GoodWe', 'Sofar'];
 
   return (
     <>
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0C1829]">
+      {/* ===== 1. HERO ===== */}
+      <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#0C1829]">
         <Image
           src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop"
           alt="Solar energy background"
           fill
-          className="object-cover"
+          className="object-cover object-[center_60%]"
           priority
         />
-        <div className="absolute inset-0 bg-[#0C1829]/70" />
-        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-            {t('heroTitle')}
-          </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-base text-gray-200 sm:text-lg md:text-xl">
-            {t('heroSubtitle')}
+        {/* Gradient overlay 1 */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.10) 45%, rgba(0,0,0,.55) 100%)',
+        }} />
+        {/* Top glow */}
+        <div className="absolute pointer-events-none" style={{
+          top: '-200px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '900px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(56,196,232,.2) 0%, rgba(56,196,232,.05) 40%, transparent 65%)',
+        }} />
+
+        {/* Center content */}
+        <div className="relative z-10 text-center px-6">
+          <p className="text-white/85 text-sm md:text-base font-medium mb-3 tracking-wide">
+            AlwaysControl Technology
           </p>
-          {/* Three-way CTA */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/solutions"
-              className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#2BADD0] hover:shadow-xl sm:text-lg"
-            >
-              {t('viewSolutions')}
-            </Link>
-            <Link
-              href="/developers"
-              className="inline-flex items-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-xl sm:text-lg"
-            >
-              {t('developerCenter')}
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center rounded-lg border-2 border-white px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:text-lg"
-            >
-              {t('contactSales')}
-            </Link>
-          </div>
+          <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
+            {t('heroLine1')}<br />{t('heroLine2')}
+          </h1>
+        </div>
+
+        {/* Bottom CTA buttons */}
+        <div className="absolute bottom-20 left-0 right-0 z-20 flex justify-center gap-4 px-6 flex-col sm:flex-row items-center">
+          <Link
+            href="/solutions"
+            className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[clamp(14px,0.9vw,16px)] transition-colors duration-200 hover:bg-white"
+          >
+            {t('viewSolutions')}
+          </Link>
+          <Link
+            href="/contact"
+            className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+            style={{ background: 'rgba(255,255,255,.12)' }}
+          >
+            {t('contactUs')}
+          </Link>
         </div>
       </section>
 
-      {/* ===== ACCESS MODE DIFFERENTIATION SECTION ===== */}
-      <section className="bg-[#F8FAFC] py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
-            {t('accessTitle')}
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {/* Cloud Direct */}
-            <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <h3 className="text-xl font-bold text-[#0F172A] mb-4">{t('accessCloudTitle')}</h3>
-              <ul className="space-y-3 text-[#475569]">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
-                  {t('accessCloudDesc1')}
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
-                  {t('accessCloudDesc2')}
-                </li>
-              </ul>
-              <p className="mt-4 text-sm font-medium text-[#1A3FAD]">{t('accessCloudFit')}</p>
-            </div>
-            {/* Gateway LAN */}
-            <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <h3 className="text-xl font-bold text-[#0F172A] mb-4">{t('accessGatewayTitle')}</h3>
-              <ul className="space-y-3 text-[#475569]">
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
-                  {t('accessGatewayDesc1')}
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#38C4E8]" />
-                  {t('accessGatewayDesc2')}
-                </li>
-              </ul>
-              <p className="mt-4 text-sm font-medium text-[#1A3FAD]">{t('accessGatewayFit')}</p>
-            </div>
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/ecosystem"
-              className="inline-flex items-center rounded-lg bg-[#0F172A] px-6 py-3 text-base font-semibold text-white shadow transition-all duration-300 hover:bg-[#1E293B] hover:shadow-lg"
+      {/* ===== 2. STATS ===== */}
+      <section className="bg-white py-24 px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+          {[
+            { num: '80', suffix: '+', label: t('statsBrandsLabel') },
+            { num: '30', suffix: '+', label: t('statsCountriesLabel') },
+            { num: '500', suffix: '+', label: t('statsProjectsLabel') },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white border border-[#E2E8F0] rounded-2xl py-10 px-6 text-center"
             >
-              {t('accessCta')}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== STATS SECTION ===== */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
-            {t('statsTitle')}
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {[
-              { value: t('statsBrands'), label: t('statsBrandsLabel') },
-              { value: t('statsCountries'), label: t('statsCountriesLabel') },
-              { value: t('statsProjects'), label: t('statsProjectsLabel') },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
-              >
-                <div className="text-4xl font-bold text-[#38C4E8] sm:text-5xl">{stat.value}</div>
-                <div className="mt-2 text-base text-[#0F172A] sm:text-lg">{stat.label}</div>
+              <div className="text-[clamp(44px,3.5vw,64px)] font-extrabold text-[#38C4E8] leading-none tracking-[-2px]">
+                {stat.num}<span className="text-[clamp(22px,2vw,32px)]">{stat.suffix}</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SOLUTIONS SECTION — 5 scenario cards ===== */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-2xl font-bold text-[#0F172A] sm:text-3xl">{t('solutionsTitle')}</h2>
-            <p className="mt-3 text-[#475569]">{t('solutionsSubtitle')}</p>
-          </div>
-          {/* Accordion-style horizontal cards for desktop */}
-          <div className="hidden lg:flex h-[500px] gap-2">
-            {solutions.slice(0, 5).map((solution) => {
-              const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
-              const sTagline = getSolutionMessage(locale, solution.slug, 'tagline') ?? solution.tagline;
-              return (
-                <Link
-                  key={solution.documentId}
-                  href={`/solutions/${solution.slug}`}
-                  className="group relative flex-1 overflow-hidden rounded-2xl transition-all duration-500 hover:flex-[4]"
-                >
-                  <Image
-                    src={getStrapiMedia(solution.cover?.url)}
-                    alt={sTitle}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
-                  {/* Vertical label (shown when collapsed) */}
-                  <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-300">
-                    <span className="text-lg font-bold text-white [writing-mode:vertical-lr]">{sTitle}</span>
-                  </div>
-                  {/* Expanded content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                    <h3 className="text-xl font-bold text-white">{sTitle}</h3>
-                    {sTagline && <p className="mt-2 text-sm text-gray-200 line-clamp-2">{sTagline}</p>}
-                    <span className="mt-3 inline-flex items-center text-sm font-medium text-[#38C4E8]">
-                      {tc('learnMore')} &rarr;
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-          {/* Grid fallback for mobile/tablet */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
-            {solutions.slice(0, 5).map((solution) => {
-              const sTitle = getSolutionMessage(locale, solution.slug, 'title') ?? solution.title;
-              const sTagline = getSolutionMessage(locale, solution.slug, 'tagline') ?? solution.tagline;
-              return (
-                <Link
-                  key={solution.documentId}
-                  href={`/solutions/${solution.slug}`}
-                  className="group overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
-                >
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <Image
-                      src={getStrapiMedia(solution.cover?.url)}
-                      alt={sTitle}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
-                      {sTitle}
-                    </h3>
-                    {sTagline && (
-                      <p className="mt-2 text-sm text-[#475569] line-clamp-2">{sTagline}</p>
-                    )}
-                    <span className="mt-4 inline-flex items-center text-sm font-medium text-[#38C4E8] transition-transform duration-300 group-hover:translate-x-1">
-                      {tc('learnMore')} &rarr;
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/solutions"
-              className="inline-flex items-center text-[#38C4E8] font-medium hover:underline"
-            >
-              {tc('viewAll')} &rarr;
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== COMPATIBLE BRANDS LOGO WALL ===== */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-2xl font-bold text-[#0F172A] sm:text-3xl">{t('brandsTitle')}</h2>
-            <p className="mt-3 text-[#475569]">{t('brandsSubtitle')}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-            {brands.slice(0, 12).map((brand) => (
-              <div
-                key={brand.documentId}
-                className="flex items-center justify-center rounded-lg border border-[#E2E8F0] bg-white px-4 py-6 text-center transition-all duration-300 hover:shadow-md hover:-translate-y-1"
-              >
-                <span className="text-sm font-medium text-[#0F172A]">{brand.name}</span>
+              <div className="mt-3 text-[clamp(14px,0.9vw,17px)] font-semibold text-[#0F172A]">
+                {stat.label}
               </div>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/ecosystem"
-              className="inline-flex items-center text-[#38C4E8] font-medium hover:underline"
-            >
-              {tc('viewAll')} &rarr;
-            </Link>
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ===== WHY CHOOSE US ===== */}
-      <section className="bg-[#F8FAFC] py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A] sm:text-3xl">
-            {t('trustTitle')}
+      {/* ===== 3. SOLUTIONS (Accordion) ===== */}
+      <section className="bg-white py-24 px-6">
+        <h2 className="text-center text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-16">
+          {t('solutionsSectionTitle')}
+        </h2>
+        <SolutionsAccordion items={accordionData} />
+      </section>
+
+      {/* ===== 4. PRODUCTS ===== */}
+      <section className="bg-white pt-24 pb-20">
+        {/* Section header */}
+        <div className="text-center mb-14 px-6">
+          <h2 className="text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-4">
+            {t('productsTitle')}
           </h2>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            {trustItems.map((item, idx) => (
+          <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('productsSubtitle')}</p>
+        </div>
+
+        {/* HARDWARE label */}
+        <div className="max-w-[1200px] mx-auto px-6 mb-8">
+          <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
+            {t('hardwareLabel')}
+          </span>
+        </div>
+
+        {/* Hardware cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1200px] mx-auto px-6">
+          {hwProducts.map((name) => (
+            <div
+              key={name}
+              className="bg-[#F8FAFC] rounded-2xl pt-10 pb-7 px-6 text-center border-[1.5px] border-transparent cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.25)]"
+            >
+              <div className="flex items-center justify-center mb-6">
+                <DeviceSVG />
+              </div>
+              <div className="text-[clamp(20px,1.5vw,28px)] font-extrabold text-[#0F172A] tracking-[-0.5px]">
+                {name}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* SOFTWARE label */}
+        <div className="max-w-[1200px] mx-auto px-6 mt-[72px] pt-12 border-t border-[#E2E8F0]">
+          <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
+            {t('softwareLabel')}
+          </span>
+        </div>
+
+        {/* Software tabs */}
+        <div className="mt-8">
+          <SoftwareTabs />
+        </div>
+      </section>
+
+      {/* ===== 5. BRANDS ===== */}
+      <section className="bg-white py-24 px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
+            {t('brandsTitle')}
+          </h2>
+          <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('brandsSubtitle')}</p>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 max-w-[800px] mx-auto">
+          {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
+            const name = typeof brand === 'string' ? brand : brand.name;
+            return (
               <div
                 key={idx}
-                className="rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm transition-all duration-300 hover:shadow-md"
+                className="flex items-center justify-center bg-white border border-[#E2E8F0] rounded-lg text-[15px] font-bold tracking-[0.5px] cursor-pointer transition-all duration-200 hover:border-[#38C4E8] hover:shadow-[0_4px_12px_rgba(56,196,232,.15)] hover:-translate-y-0.5"
+                style={{ aspectRatio: '2.2 / 1' }}
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#1A3FAD]/10 text-[#1A3FAD]">
-                  {idx === 0 && (
-                    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-                    </svg>
-                  )}
-                  {idx === 1 && (
-                    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                    </svg>
-                  )}
-                  {idx === 2 && (
-                    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                    </svg>
-                  )}
-                </div>
-                <h3 className="text-lg font-semibold text-[#0F172A]">{item.title}</h3>
-                <p className="mt-2 text-sm text-[#475569]">{item.description}</p>
+                {name}
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+        <div className="mt-10 text-center">
+          <Link href="/ecosystem" className="text-sm font-medium text-[#64748B] hover:text-[#38C4E8] transition-colors">
+            {t('brandsMissing')} →
+          </Link>
         </div>
       </section>
 
-      {/* ===== LATEST NEWS ===== */}
-      <section className="bg-[#F8FAFC] py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-2xl font-bold text-[#0F172A] sm:text-3xl">{t('newsTitle')}</h2>
-            <p className="mt-3 text-[#475569]">{t('newsSubtitle')}</p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.slice(0, 3).map((article) => (
+      {/* ===== 6. NEWS ===== */}
+      <section className="bg-[#F8FAFC] py-24 px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
+            {t('newsTitle')}
+          </h2>
+          <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('newsSubtitle')}</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+          {articles.slice(0, 3).map((article, idx) => {
+            const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
+            return (
               <Link
                 key={article.documentId}
                 href={`/about/news/${article.slug}`}
-                className="group overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                className="group bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-[0_8px_30px_rgba(0,0,0,.06)] hover:-translate-y-0.5"
               >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={getStrapiMedia(article.cover?.url)}
-                    alt={article.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+                {coverUrl ? (
+                  <div className="relative w-full h-[200px] overflow-hidden">
+                    <Image src={coverUrl} alt={article.title} fill className="object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-full h-[200px]" style={{ background: NEWS_COLORS[idx % 3], opacity: 0.15 }} />
+                )}
                 <div className="p-6">
                   {article.publishedDate && (
-                    <time className="text-xs text-[#64748B]">{article.publishedDate}</time>
+                    <div className="text-xs text-[#64748B] mb-2">{article.publishedDate}</div>
                   )}
-                  <h3 className="mt-2 text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-[17px] font-bold text-[#0F172A] leading-snug mb-2 line-clamp-2">
                     {article.title}
                   </h3>
                   {article.summary && (
-                    <p className="mt-2 text-sm text-[#475569] line-clamp-2">{article.summary}</p>
+                    <p className="text-sm text-[#64748B] leading-relaxed mb-4 line-clamp-2">{article.summary}</p>
                   )}
-                  <span className="mt-3 inline-flex items-center text-sm font-medium text-[#38C4E8]">
-                    {tc('readMore')} &rarr;
+                  <span className="text-sm font-semibold text-[#38C4E8] group-hover:text-[#2BA8C8] transition-colors">
+                    {tc('readMore')} →
                   </span>
                 </div>
               </Link>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* ===== BOTTOM CTA — Three entries ===== */}
-      <section className="relative overflow-hidden bg-[#0C1829] py-24">
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }} />
-        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">{t('ctaTitle')}</h2>
-          <p className="mt-4 text-lg text-gray-300">{t('ctaSubtitle')}</p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      {/* ===== 7. BOTTOM CTA ===== */}
+      <section className="bg-[#0C1829] py-24 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">{t('ctaTitle')}</h2>
+          <p className="text-lg text-gray-300 mb-8">{t('ctaSubtitle')}</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#2BADD0] hover:shadow-xl sm:text-lg"
+              className="inline-flex items-center rounded bg-white/92 px-8 py-3.5 text-base font-semibold text-[#0C1829] transition-colors duration-200 hover:bg-white"
             >
               {t('ctaApplyDemo')}
             </Link>
             <Link
-              href="/developers"
-              className="inline-flex items-center rounded-lg bg-white px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-xl sm:text-lg"
-            >
-              {t('ctaApiDocs')}
-            </Link>
-            <Link
               href="/contact"
-              className="inline-flex items-center rounded-lg border-2 border-white px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:text-lg"
+              className="inline-flex items-center rounded border-[1.5px] border-white/60 px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-white/20"
+              style={{ background: 'rgba(255,255,255,.12)' }}
             >
               {t('ctaContactSales')}
             </Link>

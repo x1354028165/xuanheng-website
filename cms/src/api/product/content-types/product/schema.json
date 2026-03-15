@@ -4,7 +4,7 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product"
+    "displayName": "产品"
   },
   "options": {
     "draftAndPublish": true
@@ -47,12 +47,16 @@
     "cover": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "gallery": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "specs": {
       "type": "json"

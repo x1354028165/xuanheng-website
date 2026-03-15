@@ -4,7 +4,7 @@
   "info": {
     "singularName": "i18n-key",
     "pluralName": "i18n-keys",
-    "displayName": "I18n Key"
+    "displayName": "多语言字典"
   },
   "options": {
     "draftAndPublish": false
@@ -46,7 +46,10 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": ["pending", "approved"],
+      "enum": [
+        "pending",
+        "approved"
+      ],
       "default": "pending"
     }
   }

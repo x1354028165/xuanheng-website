@@ -141,6 +141,32 @@ export default async function SolutionDetailPage({
         </section>
       )}
 
+      {/* Access Modes */}
+      {mockSolution && mockSolution.accessModes && mockSolution.accessModes.length > 0 && (
+        <section className="bg-[#0C1829] py-16 border-t border-white/5">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-2 text-2xl font-bold text-white text-center">{t('accessModesTitle')}</h2>
+            <p className="mb-10 text-center text-gray-400">{t('accessModesSubtitle')}</p>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
+              {mockSolution.accessModes.includes('cloud') && (
+                <div className="rounded-xl border border-[#38C4E8]/20 bg-[#38C4E8]/5 p-6 text-center">
+                  <div className="text-4xl mb-4">☁️</div>
+                  <h3 className="text-lg font-semibold text-[#38C4E8] mb-2">{t('accessCloud')}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t('accessCloudDesc')}</p>
+                </div>
+              )}
+              {mockSolution.accessModes.includes('gateway') && (
+                <div className="rounded-xl border border-[#38C4E8]/20 bg-[#38C4E8]/5 p-6 text-center">
+                  <div className="text-4xl mb-4">🔗</div>
+                  <h3 className="text-lg font-semibold text-[#38C4E8] mb-2">{t('accessGateway')}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t('accessGatewayDesc')}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <section className="bg-[#0f1b2e] py-16">

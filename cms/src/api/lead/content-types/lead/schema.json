@@ -4,7 +4,7 @@
   "info": {
     "singularName": "lead",
     "pluralName": "leads",
-    "displayName": "Lead"
+    "displayName": "销售线索"
   },
   "options": {
     "draftAndPublish": false

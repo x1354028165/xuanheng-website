@@ -14,7 +14,7 @@ export interface MockProduct {
   description: string;
   specs: Record<string, string>;
   scenarios: string[]; // solution slugs
-  cover: null;
+  cover: string | null;
 }
 
 export const MOCK_PRODUCTS: MockProduct[] = [
@@ -36,7 +36,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '尺寸': '140 × 100 × 35 mm',
     },
     scenarios: ['hems', 'ess', 'pqms'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=70',
   },
   {
     documentId: 'p2',
@@ -57,7 +57,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '尺寸': '200 × 140 × 45 mm',
     },
     scenarios: ['evcms'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=70',
   },
   {
     documentId: 'p3',
@@ -77,7 +77,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '尺寸': '100 × 80 × 30 mm',
     },
     scenarios: ['evcms'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=70',
   },
   {
     documentId: 'p4',
@@ -95,7 +95,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '是否需要网关': '可选（Neuron II）',
     },
     scenarios: ['hems'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
   },
   {
     documentId: 'p5',
@@ -113,7 +113,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '是否需要网关': '可选（Neuron II）',
     },
     scenarios: ['ess'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
   },
   {
     documentId: 'p6',
@@ -131,7 +131,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '是否需要网关': '推荐 Neuron III',
     },
     scenarios: ['evcms'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
   },
   {
     documentId: 'p7',
@@ -149,7 +149,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '是否需要网关': '推荐 Neuron II',
     },
     scenarios: ['pqms'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1545259742-a0f2c1a2d2b5?w=800&q=70',
   },
   {
     documentId: 'p8',
@@ -167,7 +167,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       '是否需要网关': '不需要（纯云端）',
     },
     scenarios: ['vpp'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
   },
 ];
 
@@ -181,7 +181,8 @@ export interface MockSolution {
   painPoints: string[];
   highlights: string[];
   relatedProducts: string[]; // product slugs
-  cover: null;
+  cover: string | null;
+  accessModes: ('cloud' | 'gateway')[];
 }
 
 export const MOCK_SOLUTIONS: MockSolution[] = [
@@ -203,7 +204,8 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
       '支持云端直连，无需额外硬件投入',
     ],
     relatedProducts: ['hems', 'neuron-ii'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
+    accessModes: ['cloud', 'gateway'],
   },
   {
     documentId: 's2',
@@ -223,7 +225,8 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
       '多站点统一管理，运维效率提升 80%',
     ],
     relatedProducts: ['ess', 'neuron-ii'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
+    accessModes: ['cloud', 'gateway'],
   },
   {
     documentId: 's3',
@@ -243,7 +246,8 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
       '实时监控和运营数据分析',
     ],
     relatedProducts: ['evcms', 'neuron-iii'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
+    accessModes: ['gateway'],
   },
   {
     documentId: 's4',
@@ -263,7 +267,8 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
       '支持多种电力市场交易模式',
     ],
     relatedProducts: ['vpp'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
+    accessModes: ['cloud'],
   },
   {
     documentId: 's5',
@@ -283,7 +288,8 @@ export const MOCK_SOLUTIONS: MockSolution[] = [
       '多级告警机制，企微/邮件实时通知',
     ],
     relatedProducts: ['pqms', 'neuron-ii'],
-    cover: null,
+    cover: 'https://images.unsplash.com/photo-1545259742-a0f2c1a2d2b5?w=800&q=70',
+    accessModes: ['gateway', 'cloud'],
   },
 ];
 

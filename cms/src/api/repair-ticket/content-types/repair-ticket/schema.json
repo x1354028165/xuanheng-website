@@ -4,7 +4,7 @@
   "info": {
     "singularName": "repair-ticket",
     "pluralName": "repair-tickets",
-    "displayName": "Repair Ticket"
+    "displayName": "报修工单"
   },
   "options": {
     "draftAndPublish": false

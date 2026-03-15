@@ -4,7 +4,7 @@
   "info": {
     "singularName": "compatible-brand",
     "pluralName": "compatible-brands",
-    "displayName": "Compatible Brand"
+    "displayName": "兼容品牌"
   },
   "options": {
     "draftAndPublish": false
@@ -22,7 +22,9 @@
     "logo": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "category": {
       "type": "string"
