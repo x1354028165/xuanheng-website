@@ -8,42 +8,13 @@ import { getStrapiMedia } from '@/lib/strapi';
 import { getProducts, getSolutions, getArticles, getCompatibleBrands } from '@/lib/api';
 import type { StrapiSolution, StrapiProduct, StrapiArticle, StrapiCompatibleBrand } from '@/types/strapi';
 
-// Mock data fallbacks
-const MOCK_SOLUTIONS: Pick<StrapiSolution, 'documentId' | 'title' | 'slug' | 'tagline' | 'cover'>[] = [
-  { documentId: '1', title: '光伏电站管理', slug: 'solar-plant', tagline: '智能光伏电站监控与管理系统', cover: null },
-  { documentId: '2', title: '储能系统管理', slug: 'energy-storage', tagline: '高效储能系统监控与调度方案', cover: null },
-  { documentId: '3', title: '充电桩管理', slug: 'ev-charging', tagline: '新能源汽车充电网络管理方案', cover: null },
-  { documentId: '4', title: '微电网管理', slug: 'microgrid', tagline: '分布式微电网智慧管理系统', cover: null },
-  { documentId: '5', title: '能源数据平台', slug: 'data-platform', tagline: '企业级能源数据分析与管理平台', cover: null },
-];
+import { MOCK_PRODUCTS as _MP, MOCK_SOLUTIONS as _MS, MOCK_ARTICLES as _MA, MOCK_BRANDS as _MB } from '@/lib/mock-data';
 
-const MOCK_PRODUCTS: Pick<StrapiProduct, 'documentId' | 'title' | 'slug' | 'tagline' | 'cover'>[] = [
-  { documentId: '1', title: 'AC-GW1000 网关', slug: 'ac-gw1000', tagline: '高性能多协议物联网关', cover: null },
-  { documentId: '2', title: 'AC-GW2000 网关', slug: 'ac-gw2000', tagline: '工业级智能数据采集网关', cover: null },
-  { documentId: '3', title: 'AC-EM100 电表', slug: 'ac-em100', tagline: '智能多功能电力仪表', cover: null },
-  { documentId: '4', title: 'AC-CT200 传感器', slug: 'ac-ct200', tagline: '高精度电流互感器', cover: null },
-];
-
-const MOCK_ARTICLES: Pick<StrapiArticle, 'documentId' | 'title' | 'slug' | 'summary' | 'cover' | 'publishedDate'>[] = [
-  { documentId: '1', title: '旭衡电子发布新一代智能网关', slug: 'new-gateway-launch', summary: '全新AC-GW3000系列网关正式发布，性能提升200%', cover: null, publishedDate: '2025-12-01' },
-  { documentId: '2', title: '旭衡电子亮相国际能源展', slug: 'energy-expo-2025', summary: '携最新产品和解决方案亮相2025国际新能源展览会', cover: null, publishedDate: '2025-11-15' },
-  { documentId: '3', title: '智慧储能白皮书发布', slug: 'storage-whitepaper', summary: '深度解读储能系统管理的最佳实践与技术趋势', cover: null, publishedDate: '2025-10-20' },
-];
-
-const MOCK_BRANDS: Pick<StrapiCompatibleBrand, 'documentId' | 'name' | 'category'>[] = [
-  { documentId: '1', name: 'Huawei', category: '逆变器' },
-  { documentId: '2', name: 'Sungrow', category: '逆变器' },
-  { documentId: '3', name: 'GoodWe', category: '逆变器' },
-  { documentId: '4', name: 'Growatt', category: '逆变器' },
-  { documentId: '5', name: 'Deye', category: '逆变器' },
-  { documentId: '6', name: 'SofarSolar', category: '逆变器' },
-  { documentId: '7', name: 'CATL', category: '电池' },
-  { documentId: '8', name: 'BYD', category: '电池' },
-  { documentId: '9', name: 'EVE Energy', category: '电池' },
-  { documentId: '10', name: 'Pylontech', category: '电池' },
-  { documentId: '11', name: 'Schneider', category: '电气' },
-  { documentId: '12', name: 'ABB', category: '电气' },
-];
+// Map shared mock data to Strapi-compatible shapes
+const MOCK_SOLUTIONS = _MS.map(s => ({ documentId: s.documentId, title: s.title, slug: s.slug, tagline: s.tagline, cover: s.cover }));
+const MOCK_PRODUCTS_LIST = _MP.map(p => ({ documentId: p.documentId, title: p.title, slug: p.slug, tagline: p.tagline, cover: p.cover }));
+const MOCK_ARTICLES_LIST = _MA;
+const MOCK_BRANDS_LIST = _MB;
 
 export default async function HomePage({
   params,
@@ -58,23 +29,23 @@ export default async function HomePage({
   // Fetch data with mock fallbacks
   let solutions = await getSolutions(locale);
   if (!solutions || solutions.length === 0) {
-    solutions = MOCK_SOLUTIONS as StrapiSolution[];
+    solutions = MOCK_SOLUTIONS as unknown as StrapiSolution[];
   }
 
   let products = await getProducts(locale);
   if (!products || products.length === 0) {
-    products = MOCK_PRODUCTS as StrapiProduct[];
+    products = MOCK_PRODUCTS_LIST as unknown as StrapiProduct[];
   }
 
   const articlesRes = await getArticles(locale, 1, 3);
   let articles = articlesRes.data;
   if (!articles || articles.length === 0) {
-    articles = MOCK_ARTICLES as StrapiArticle[];
+    articles = MOCK_ARTICLES_LIST as unknown as StrapiArticle[];
   }
 
   let brands = await getCompatibleBrands();
   if (!brands || brands.length === 0) {
-    brands = MOCK_BRANDS as StrapiCompatibleBrand[];
+    brands = MOCK_BRANDS_LIST as unknown as StrapiCompatibleBrand[];
   }
 
   const trustItems = [0, 1, 2].map((i) => ({

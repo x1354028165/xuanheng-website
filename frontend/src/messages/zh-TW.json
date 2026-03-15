@@ -110,14 +110,38 @@
     "apply": "立即申请",
     "noOpenings": "暂无开放职位",
     "milestones": [
-      { "year": "2018", "text": "公司成立" },
-      { "year": "2019", "text": "首款网关发布" },
-      { "year": "2020", "text": "获A轮融资" },
-      { "year": "2021", "text": "产品出海" },
-      { "year": "2022", "text": "行业TOP10" },
-      { "year": "2023", "text": "战略合作伙伴100+" },
-      { "year": "2024", "text": "年营收破亿" },
-      { "year": "2025", "text": "全球化布局" }
+      {
+        "year": "2018",
+        "text": "公司成立"
+      },
+      {
+        "year": "2019",
+        "text": "首款网关发布"
+      },
+      {
+        "year": "2020",
+        "text": "获A轮融资"
+      },
+      {
+        "year": "2021",
+        "text": "产品出海"
+      },
+      {
+        "year": "2022",
+        "text": "行业TOP10"
+      },
+      {
+        "year": "2023",
+        "text": "战略合作伙伴100+"
+      },
+      {
+        "year": "2024",
+        "text": "年营收破亿"
+      },
+      {
+        "year": "2025",
+        "text": "全球化布局"
+      }
     ]
   },
   "contact": {
@@ -167,7 +191,9 @@
       "description": "故障描述",
       "submit": "提交申请"
     },
-    "repairSuccess": "维修申请已提交，我们会尽快与您联系"
+    "repairSuccess": "维修申请已提交，我们会尽快与您联系",
+    "compatibilityTitle": "版本兼容矩阵",
+    "compatibilitySubtitle": "查询固件与云平台的版本兼容关系"
   },
   "footer": {
     "company": "旭衡电子",
@@ -180,7 +206,7 @@
     "address": "深圳市南山区科技园",
     "phone": "+86 755-8888-9999",
     "email": "info@alwayscontrol.com.cn",
-    "copyright": "\u00a9 {year} 旭衡电子 版权所有",
+    "copyright": "© {year} 旭衡电子 版权所有",
     "privacy": "隐私政策",
     "terms": "服务条款"
   },

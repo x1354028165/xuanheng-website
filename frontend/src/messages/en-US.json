@@ -110,14 +110,38 @@
     "apply": "Apply Now",
     "noOpenings": "No open positions at this time",
     "milestones": [
-      { "year": "2018", "text": "Company Founded" },
-      { "year": "2019", "text": "First Gateway Released" },
-      { "year": "2020", "text": "Series A Funding" },
-      { "year": "2021", "text": "International Expansion" },
-      { "year": "2022", "text": "Industry Top 10" },
-      { "year": "2023", "text": "100+ Strategic Partners" },
-      { "year": "2024", "text": "Annual Revenue Exceeds 100M" },
-      { "year": "2025", "text": "Global Expansion" }
+      {
+        "year": "2018",
+        "text": "Company Founded"
+      },
+      {
+        "year": "2019",
+        "text": "First Gateway Released"
+      },
+      {
+        "year": "2020",
+        "text": "Series A Funding"
+      },
+      {
+        "year": "2021",
+        "text": "International Expansion"
+      },
+      {
+        "year": "2022",
+        "text": "Industry Top 10"
+      },
+      {
+        "year": "2023",
+        "text": "100+ Strategic Partners"
+      },
+      {
+        "year": "2024",
+        "text": "Annual Revenue Exceeds 100M"
+      },
+      {
+        "year": "2025",
+        "text": "Global Expansion"
+      }
     ]
   },
   "contact": {
@@ -167,7 +191,9 @@
       "description": "Issue Description",
       "submit": "Submit Request"
     },
-    "repairSuccess": "Repair request submitted. We will contact you shortly."
+    "repairSuccess": "Repair request submitted. We will contact you shortly.",
+    "compatibilityTitle": "Version Compatibility Matrix",
+    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility"
   },
   "footer": {
     "company": "AlwaysControl",
@@ -180,7 +206,7 @@
     "address": "Science and Technology Park, Nanshan District, Shenzhen",
     "phone": "+86 755-8888-9999",
     "email": "info@alwayscontrol.com.cn",
-    "copyright": "\u00a9 {year} AlwaysControl Technology. All rights reserved.",
+    "copyright": "© {year} AlwaysControl Technology. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   },

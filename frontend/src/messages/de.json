@@ -110,14 +110,38 @@
     "apply": "Jetzt bewerben",
     "noOpenings": "Derzeit keine offenen Stellen",
     "milestones": [
-      { "year": "2018", "text": "Unternehmensgründung" },
-      { "year": "2019", "text": "Erstes Gateway veröffentlicht" },
-      { "year": "2020", "text": "Serie-A-Finanzierung" },
-      { "year": "2021", "text": "Internationale Expansion" },
-      { "year": "2022", "text": "Branche Top 10" },
-      { "year": "2023", "text": "100+ strategische Partner" },
-      { "year": "2024", "text": "Jahresumsatz über 100 Mio." },
-      { "year": "2025", "text": "Globale Expansion" }
+      {
+        "year": "2018",
+        "text": "Unternehmensgründung"
+      },
+      {
+        "year": "2019",
+        "text": "Erstes Gateway veröffentlicht"
+      },
+      {
+        "year": "2020",
+        "text": "Serie-A-Finanzierung"
+      },
+      {
+        "year": "2021",
+        "text": "Internationale Expansion"
+      },
+      {
+        "year": "2022",
+        "text": "Branche Top 10"
+      },
+      {
+        "year": "2023",
+        "text": "100+ strategische Partner"
+      },
+      {
+        "year": "2024",
+        "text": "Jahresumsatz über 100 Mio."
+      },
+      {
+        "year": "2025",
+        "text": "Globale Expansion"
+      }
     ]
   },
   "contact": {
@@ -167,7 +191,9 @@
       "description": "Fehlerbeschreibung",
       "submit": "Anfrage absenden"
     },
-    "repairSuccess": "Reparaturanfrage eingereicht. Wir werden uns in Kürze bei Ihnen melden."
+    "repairSuccess": "Reparaturanfrage eingereicht. Wir werden uns in Kürze bei Ihnen melden.",
+    "compatibilityTitle": "Version Compatibility Matrix",
+    "compatibilitySubtitle": "Check firmware and cloud platform version compatibility"
   },
   "footer": {
     "company": "AlwaysControl",
@@ -180,7 +206,7 @@
     "address": "Wissenschafts- und Technologiepark, Bezirk Nanshan, Shenzhen",
     "phone": "+86 755-8888-9999",
     "email": "info@alwayscontrol.com.cn",
-    "copyright": "\u00a9 {year} AlwaysControl Technology. Alle Rechte vorbehalten.",
+    "copyright": "© {year} AlwaysControl Technology. Alle Rechte vorbehalten.",
     "privacy": "Datenschutzrichtlinie",
     "terms": "Nutzungsbedingungen"
   },

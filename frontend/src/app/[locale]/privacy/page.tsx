@@ -13,19 +13,25 @@ export default async function PrivacyPage({
   const t = await getTranslations({ locale, namespace: 'privacy' });
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-          {t('title')}
-        </h1>
-        <p className="mb-8 text-sm text-muted-foreground">
-          {t('lastUpdated', { date: '2026-03-15' })}
-        </p>
-
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <p>{t('content')}</p>
+    <>
+      <section className="bg-[#0C1829] pb-12 pt-32">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-white md:text-4xl">
+            {t('title')}
+          </h1>
+          <p className="mt-2 text-sm text-gray-400">
+            {t('lastUpdated', { date: '2026-03-15' })}
+          </p>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="bg-[#0f1b2e] py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-invert prose-lg max-w-none text-gray-300">
+            <p>{t('content')}</p>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

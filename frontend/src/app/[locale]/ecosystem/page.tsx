@@ -16,25 +16,27 @@ export default async function EcosystemPage({
   const brands = await getCompatibleBrands();
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
+    <>
+      <section className="bg-[#0C1829] pb-12 pt-32">
+        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
             {t('title')}
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-gray-400">
             {t('subtitle')}
           </p>
         </div>
+      </section>
 
-        {/* Brand Filter + Grid */}
-        <BrandFilter
-          brands={brands}
-          allLabel={t('allBrands')}
-          noBrandsLabel={t('noBrands')}
-        />
-      </div>
-    </section>
+      <section className="bg-[#0f1b2e] py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <BrandFilter
+            brands={brands}
+            allLabel={t('allBrands')}
+            noBrandsLabel={t('noBrands')}
+          />
+        </div>
+      </section>
+    </>
   );
 }

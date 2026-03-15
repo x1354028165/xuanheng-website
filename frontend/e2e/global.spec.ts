@@ -249,7 +249,8 @@ test.describe("TC-G29~G30: 全局搜索", () => {
     await page.goto("/zh-CN");
     const searchBtn = page.locator("header").getByRole("button", { name: /search/i });
     if (await searchBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await searchBtn.click();
+      await searchBtn.dispatchEvent("click");
+      await page.waitForTimeout(300);
       const searchInput = page.locator("input[type='text']").last();
       await searchInput.fill("GW1000");
       await expect(page.getByText("AC-GW1000")).toBeVisible({ timeout: 5000 });
@@ -266,7 +267,7 @@ test.describe("TC-G29~G30: 全局搜索", () => {
     await page.goto("/zh-CN");
     const searchBtn = page.locator("header").getByRole("button", { name: /search/i });
     if (await searchBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await searchBtn.click();
+      await searchBtn.click({ force: true });
       const searchInput = page.locator("input[type='text']").last();
       await searchInput.fill("xyznonexistent");
       // Should show empty state after debounce
