@@ -154,6 +154,26 @@
 <hr>
 
 <!-- ============================================================ -->
+<!-- ⚠️ Strapi v5 版本声明 — AI 防幻觉核心指令 -->
+<!-- ============================================================ -->
+<div style="background:#fff3cd;border:2px solid #f39c12;border-radius:8px;padding:20px 24px;margin:0 0 28px;line-height:1.8;">
+  <p style="font-size:16px;font-weight:700;color:#b7770d;margin-bottom:14px;">⚠️ Strapi v5 版本声明 — AI 防幻觉核心指令</p>
+  <p style="margin-bottom:12px;">本项目使用 <strong>Strapi v5</strong>（已安装 v5.39.0），与 Strapi v4 存在两处破坏性变更，AI 编写代码时必须严格遵守：</p>
+
+  <p style="font-weight:700;margin-bottom:6px;">变更一：主键从 <code>id</code> 升级为 <code>documentId</code></p>
+  <p style="margin-bottom:6px;">Strapi v5 引入 Document 架构，<code>documentId</code> 是跨语言版本和草稿/发布状态的统一唯一标识符（字符串类型）。</p>
+  <p style="margin-bottom:4px;color:#c0392b;">❌ 禁止（v4 写法）：<code>GET /api/articles/${params.id}</code></p>
+  <p style="margin-bottom:8px;color:#27ae60;">✅ 正确（v5 写法）：<code>GET /api/articles/${params.documentId}</code></p>
+  <p style="margin-bottom:14px;color:#7f8c8d;font-size:13px;">影响范围：所有动态路由 <code>[slug]/page.tsx</code> 的 generateStaticParams、fetchStrapi 调用、以及 Strapi 后台 Content Type 的 slug 字段设计。</p>
+
+  <p style="font-weight:700;margin-bottom:6px;">变更二：API 响应已原生扁平化（无 <code>attributes</code> 层）</p>
+  <p style="margin-bottom:6px;">Strapi v5 的 REST API 响应直接返回扁平对象，已移除 v4 的 <code>data.attributes</code> 嵌套。</p>
+  <p style="margin-bottom:4px;color:#c0392b;">❌ 禁止（v4 写法）：<code>item.attributes.title</code> / <code>item.data.attributes.cover.data.attributes.url</code></p>
+  <p style="margin-bottom:8px;color:#27ae60;">✅ 正确（v5 写法）：<code>item.title</code> / <code>item.cover.url</code></p>
+  <p style="color:#c0392b;font-weight:600;">严禁在任何代码中出现 <code>.attributes</code> 解构，否则将返回 undefined 导致全站白屏。</p>
+</div>
+
+<!-- ============================================================ -->
 <!-- 一、架构概览 -->
 <!-- ============================================================ -->
 <h2 id="ch1">一、架构概览</h2>

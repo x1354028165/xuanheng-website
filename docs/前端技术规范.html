@@ -1151,6 +1151,15 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
       <div class="section-label">SECTION 07</div>
       <h2>七、CMS 数据获取规范</h2>
 
+      <div style="background:#fff3cd;border:2px solid #f39c12;border-radius:8px;padding:18px 22px;margin:0 0 24px;line-height:1.8;">
+        <p style="font-size:15px;font-weight:700;color:#b7770d;margin-bottom:12px;">⚠️ Strapi v5 数据结构 — 两条铁律</p>
+        <p style="margin-bottom:10px;">本项目后端为 <strong>Strapi v5</strong>，与市面上大多数教程（v4）不同：</p>
+        <ol style="padding-left:20px;margin:0;">
+          <li style="margin-bottom:8px;">使用 <code>documentId</code>（字符串）作为唯一标识，<strong style="color:#c0392b;">禁止用 <code>id</code> 做路由参数</strong></li>
+          <li>API 响应已扁平化，<strong style="color:#c0392b;">禁止出现 <code>.attributes</code> 解构</strong>，直接用 <code>item.title</code>、<code>item.cover.url</code> 等第一层属性</li>
+        </ol>
+      </div>
+
       <h3>7.1 数据获取模式选择原则</h3>
 
       <table>

@@ -24,7 +24,7 @@
 |------|------|------|
 | 前端框架 | Next.js 14+（App Router） | SSR 必须，保证 SEO |
 | 样式 | Tailwind CSS | 不用 CSS-in-JS |
-| CMS | Strapi v4 | 开源自部署，不用 SaaS |
+| CMS | Strapi v5（v5.39.0） | 开源自部署，不用 SaaS；⚠️ 使用 documentId 非 id，数据无 attributes 层 |
 | 部署-前端 | Vercel | 自动 CI/CD |
 | 部署-CMS | AWS ECS + Docker | 稳定托管 |
 | 数据库 | PostgreSQL（Strapi 默认） | |
