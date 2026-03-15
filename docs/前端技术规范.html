@@ -1160,6 +1160,16 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
         </ol>
       </div>
 
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:0 0 24px;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🚫 【v5 populate 防幻觉指令】</h4>
+        <p style="margin:0 0 10px 0;">Strapi v5 API 响应虽已扁平化（无 <code>attributes</code> 层），但默认仍<strong>不返回 Media（图片）和 Relations（关联字段）</strong>。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 危险幻觉（Claude 常见错误）：</p>
+        <p style="margin:0 0 12px 0;background:#fdecea;border-radius:4px;padding:8px 12px;font-style:italic;">"数据扁平了，所以图片字段也会自动返回"</p>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确认知：</p>
+        <p style="margin:0 0 12px 0;">v5 扁平化只改变了响应<strong>结构</strong>，不改变 <strong>populate 策略</strong>。<code>product.cover</code> 在不加 <code>populate</code> 时依然是 <code>undefined</code>。</p>
+        <p style="margin:0;color:#555;"><strong>规则与 v4 完全相同：</strong>获取含图片或关联数据时，必须显式追加 <code>?populate=*</code> 或精准 populate 参数。</p>
+      </div>
+
       <h3>7.1 数据获取模式选择原则</h3>
 
       <table>
@@ -1246,6 +1256,23 @@ export async function POST(request: NextRequest) {
   }
 }</code></pre>
 
+      <div style="background:#fff8e1;border:2px solid #f39c12;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b7770d;">👻 【防幽灵缓存铁律】</h4>
+        <p style="margin:0 0 12px 0;">Next.js 的 <code>/api/revalidate</code> Webhook 路由，<strong>必须同时监听 Strapi 的四种内容事件</strong>：</p>
+        <p style="margin:0 0 8px 0;color:#27ae60;font-weight:bold;">✅ 必须处理的事件类型：</p>
+        <table style="width:100%;border-collapse:collapse;margin:0 0 16px 0;font-size:14px;">
+          <tbody>
+            <tr style="background:#eafaf1;"><td style="padding:8px 12px;border:1px solid #a9dfbf;"><code>entry.publish</code></td><td style="padding:8px 12px;border:1px solid #a9dfbf;">新内容发布，触发缓存刷新</td><td style="padding:8px 12px;border:1px solid #a9dfbf;color:#27ae60;">✅ 大多数实现已有</td></tr>
+            <tr><td style="padding:8px 12px;border:1px solid #a9dfbf;"><code>entry.update</code></td><td style="padding:8px 12px;border:1px solid #a9dfbf;">内容更新，触发缓存刷新</td><td style="padding:8px 12px;border:1px solid #a9dfbf;color:#27ae60;">✅ 大多数实现已有</td></tr>
+            <tr style="background:#fff8e1;"><td style="padding:8px 12px;border:1px solid #a9dfbf;"><code>entry.unpublish</code></td><td style="padding:8px 12px;border:1px solid #a9dfbf;">内容撤回为草稿，必须立即销毁前台缓存</td><td style="padding:8px 12px;border:1px solid #a9dfbf;color:#e67e22;">⚠️ 常被遗漏</td></tr>
+            <tr style="background:#fff8e1;"><td style="padding:8px 12px;border:1px solid #a9dfbf;"><code>entry.delete</code></td><td style="padding:8px 12px;border:1px solid #a9dfbf;">内容删除，必须立即销毁前台缓存</td><td style="padding:8px 12px;border:1px solid #a9dfbf;color:#e67e22;">⚠️ 常被遗漏</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0 0 12px 0;color:#e74c3c;font-weight:bold;">❌ 只监听 publish/update 的后果：</p>
+        <p style="margin:0 0 12px 0;">运营将已发布的高风险内容撤回为草稿后，该内容仍然存活在 Next.js ISR 缓存中，对公网持续展示，<strong>造成公关事故</strong>。</p>
+        <p style="margin:0;color:#555;">所有四种事件统一调用 <code>revalidateTag(uid)</code>，其中 <code>uid</code> 为触发事件的 Collection Type 标识（如 <code>'articles'</code>、<code>'products'</code>）。</p>
+      </div>
+
       <h3>7.3 Strapi API 客户端封装</h3>
 
       <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
@@ -1268,6 +1295,25 @@ export async function POST(request: NextRequest) {
           <li>表单提交时将 token 一并 POST 到后端 Route Handler</li>
           <li><strong>禁止在 token 为空时允许提交</strong></li>
         </ul>
+      </div>
+
+      <div style="background:#e3f2fd;border:2px solid #1976d2;border-radius:8px;padding:18px 22px;margin:16px 0;">
+        <h4 style="margin:0 0 12px 0;color:#0d47a1;">🌐 【i18n 表单校验铁律】</h4>
+        <p style="margin:0 0 12px 0;">使用 shadcn/ui + react-hook-form + Zod 构建表单时，<strong>严禁在组件外部静态定义 Zod Schema 并硬编码中文或英文报错文案</strong>。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 禁止写法（报错文案硬编码，不跟随语言切换）：</p>
+        <pre style="background:#fdecea;border:1px solid #f5c6cb;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>const formSchema = z.object({
+  name: z.string().min(1, '姓名不能为空'),  // 硬编码！
+});</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（动态构建，跟随语言）：</p>
+        <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>function ContactForm() {
+  const t = useTranslations('form');
+  const formSchema = z.object({
+    name: z.string().min(1, t('errors.required')),
+    email: z.string().email(t('errors.invalidEmail')),
+  });
+  // ...
+}</code></pre>
+        <p style="margin:0;color:#555;"><strong>原因：</strong>B2B 官网面向全球客户，德国/俄罗斯客户填写表单时看到中文报错是严重 UX 问题，直接影响询盘转化率。</p>
       </div>
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">

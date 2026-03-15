@@ -852,6 +852,26 @@ for (const locale of targetLocales) {
   <p style="margin:0;color:#555;"><strong>原因：</strong>DeepSeek 免费/低价账号对并发请求有限制，<code>Promise.all</code> 并发 6 个长文本翻译请求将触发 <strong>HTTP 429 Too Many Requests</strong>，导致部分语言翻译失败且不入库。</p>
 </div>
 
+<div style="background:#e8f5e9;border:2px solid #27ae60;border-radius:8px;padding:18px 22px;margin:24px 0;">
+  <h4 style="margin:0 0 12px 0;color:#1a5e1f;">🔒 【v5 Document Service 铁律】</h4>
+  <p style="margin:0 0 12px 0;">在编写任何 Strapi 后台自定义逻辑（自动翻译入库、Lifecycle Hook、自定义 API）时，<strong>绝对禁止使用 Strapi v4 的废弃 API：<code>strapi.entityService</code></strong>。</p>
+  <p style="margin:0 0 8px 0;color:#27ae60;font-weight:bold;">✅ 必须使用 Strapi v5 的 Document Service API：</p>
+  <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>// 更新指定 documentId 的某语言版本
+await strapi.documents('api::article.article').update({
+  documentId: entry.documentId,
+  locale: 'en-US',
+  data: { title: translatedTitle, content: translatedContent },
+});
+
+// 查询
+const doc = await strapi.documents('api::product.product').findOne({
+  documentId: params.documentId,
+  locale: 'zh-CN',
+  populate: ['cover', 'category'],
+});</code></pre>
+  <p style="margin:0;color:#555;"><strong>原因：</strong>Strapi v5 中不同语言版本属于同一 <code>documentId</code> 下的 locale 变体，<code>entityService</code> 的 create/update 模式会破坏底层关联表，导致 CMS 数据损坏。</p>
+</div>
+
 <h3 id="s3-5">3.5 错误码对照表</h3>
 <table>
 <thead><tr><th>HTTP 状态码</th><th>含义</th><th>前端处理方式</th></tr></thead>
