@@ -840,8 +840,13 @@ export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
     }))
   );
 
-  // 动态页面：产品
-  const products = await fetchStrapi&lt;any&gt;('/products?fields[0]=slug&amp;fields[1]=updatedAt');
+  // 【分页铁律】Strapi 默认只返回前 25 条数据。所有需要获取全量数据的场景（Sitemap生成、下拉选项、关联数据），
+  // 必须强制追加 pagination[limit]=-1 参数（-1 表示不限制）。
+  // 示例：/api/articles?pagination[limit]=-1&amp;fields[0]=slug&amp;fields[1]=updatedAt
+  // 违反此规则将导致第26条及以后的内容永远不被 Google 收录。
+
+  // 动态页面：产品（pagination[limit]=-1 强制获取全量，禁止省略）
+  const products = await fetchStrapi&lt;any&gt;('/products?pagination[limit]=-1&amp;fields[0]=slug&amp;fields[1]=updatedAt');
   const productEntries = products.data.flatMap((p: any) =&gt;
     LOCALES.map(locale =&gt; ({
       url: `${SITE_URL}/${locale}/products/${p.attributes.slug}`,
@@ -851,8 +856,8 @@ export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
     }))
   );
 
-  // 动态页面：新闻
-  const news = await fetchStrapi&lt;any&gt;('/articles?fields[0]=slug&amp;fields[1]=updatedAt');
+  // 动态页面：新闻（pagination[limit]=-1 强制获取全量，禁止省略）
+  const news = await fetchStrapi&lt;any&gt;('/articles?pagination[limit]=-1&amp;fields[0]=slug&amp;fields[1]=updatedAt');
   const newsEntries = news.data.flatMap((n: any) =&gt;
     LOCALES.map(locale =&gt; ({
       url: `${SITE_URL}/${locale}/about/news/${n.attributes.slug}`,
@@ -864,6 +869,12 @@ export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
 
   return [...staticEntries, ...productEntries, ...newsEntries];
 }</code></pre>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【分页铁律】</strong> Strapi 默认只返回前 25 条数据。所有需要获取全量数据的场景（Sitemap生成、下拉选项、关联数据），必须强制追加 <code>pagination[limit]=-1</code> 参数（-1 表示不限制）。<br>
+        示例：<code>/api/articles?pagination[limit]=-1&amp;fields[0]=slug&amp;fields[1]=updatedAt</code><br>
+        <strong>违反此规则将导致第26条及以后的内容永远不被 Google 收录。</strong>
+      </div>
 
       <h3>5.4 SEO 禁止事项</h3>
 
@@ -1106,6 +1117,22 @@ export async function POST(request: NextRequest) {
 
       <h3>7.3 Strapi API 客户端封装</h3>
 
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【写操作铁律】</strong> <code>fetchStrapi</code> 仅用于读操作（GET），使用只读 <code>STRAPI_PUBLIC_TOKEN</code>。<br>
+        所有写操作（表单提交/线索创建/工单创建）必须通过独立的 Next.js Route Handler 执行：
+        <ul style="margin:8px 0 0 16px;">
+          <li>创建文件：<code>app/api/submit-lead/route.ts</code>（联系表单）</li>
+          <li>创建文件：<code>app/api/submit-repair/route.ts</code>（报修工单）</li>
+          <li>Route Handler 服务端使用 <code>STRAPI_WRITE_TOKEN</code>（写权限 Token），客户端永远看不到写 Token</li>
+          <li>客户端只 POST 到 <code>/api/submit-lead</code>，不直接调用 Strapi</li>
+        </ul>
+        <strong>禁止在 <code>fetchStrapi</code> 或任何客户端代码中使用写权限 Token。</strong>
+      </div>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【zh-TW 拦截铁律】</strong> zh-TW locale 必须在 <code>fetchStrapi</code> 层拦截改写为 zh-CN，禁止直接向 Strapi 请求 <code>locale=zh-TW</code>（数据库无此数据，将返回空数组导致白屏）。
+      </div>
+
 <pre><code>// lib/strapi.ts
 // ⚠️ 安全规范：数据拉取使用只读 Token（STRAPI_PUBLIC_TOKEN），严禁使用 STRAPI_ADMIN_TOKEN
 const STRAPI_URL = process.env.STRAPI_API_URL;
@@ -1132,7 +1159,14 @@ export async function fetchStrapi&lt;T&gt;(
 ): Promise&lt;StrapiResponse&lt;T&gt;&gt; {
   const { revalidate = 3600, ...fetchOptions } = options ?? {};
 
-  const res = await fetch(`${STRAPI_URL}/api${path}`, {
+  // 强制拦截繁体请求，改写为请求简体数据，OpenCC 转换在后续白名单处理中完成
+  // zh-TW 不存储在数据库，必须从 zh-CN 数据转换
+  const requestPath = path.includes('locale=zh-TW')
+    ? path.replace('locale=zh-TW', 'locale=zh-CN')
+    : path;
+  // 后续使用 requestPath 而非原始 path 构造请求 URL
+
+  const res = await fetch(`${STRAPI_URL}/api${requestPath}`, {
     headers: {
       Authorization: `Bearer ${STRAPI_TOKEN}`,
       'Content-Type': 'application/json',
@@ -1143,7 +1177,7 @@ export async function fetchStrapi&lt;T&gt;(
 
   if (!res.ok) {
     throw new Error(
-      `Strapi fetch failed: ${res.status} ${res.statusText} — path: ${path}`
+      `Strapi fetch failed: ${res.status} ${res.statusText} — path: ${requestPath}`
     );
   }
 
@@ -1151,6 +1185,11 @@ export async function fetchStrapi&lt;T&gt;(
 }</code></pre>
 
       <h3>7.4 数据获取示例（首页）</h3>
+
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【Single Type 规范】</strong> 首页、解决方案场景页等单页配置，在 Strapi 中必须使用 <strong>Single Type</strong>（而非 Collection Type），API 返回单个对象而非数组，直接访问 <code>data.attributes</code> 无需取 <code>[0]</code>。如已建为 Collection Type，则必须取 <code>heroData.data[0].attributes</code>。<br><br>
+        <strong>⚠️ page-contents</strong> 建议改为 Single Type，避免数组解构陷阱。使用 Collection Type 时若忘记取 <code>[0]</code> 会导致 <code>attributes</code> 为 undefined，页面白屏。
+      </div>
 
 <pre><code>// app/[locale]/page.tsx
 import { fetchStrapi } from '@/lib/strapi';
@@ -1169,8 +1208,12 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = params;
 
   // 并行请求所有数据，减少瀑布式延迟
+  // ⚠️ page-contents 建议改为 Single Type（⚠️ 建议改为 Single Type，避免数组解构陷阱）
+  // Single Type: heroData.data.attributes.xxx（直接访问，无需 [0]）
+  // Collection Type: heroData.data[0].attributes.xxx（必须取 [0]）
+  // 首页、解决方案场景页等单页配置必须使用 Single Type，API 返回单个对象而非数组。
   const [heroData, brandsData, solutionsData, productsData] = await Promise.all([
-    fetchStrapi(`/api/page-contents?filters[pageKey][$eq]=home&amp;populate=*&amp;locale=${locale}`),
+    fetchStrapi(`/api/page-contents?filters[pageKey][$eq]=home&amp;populate=*&amp;locale=${locale}`), // ⚠️ 建议改为 Single Type，避免数组解构陷阱
     fetchStrapi('/compatible-brands?populate=logo&amp;sort=sortOrder:asc'),
     fetchStrapi(`/solutions?populate=icon,cover&amp;locale=${locale}`),
     fetchStrapi(`/products?populate=thumbnail&amp;locale=${locale}`),
