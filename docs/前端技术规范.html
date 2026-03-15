@@ -1187,6 +1187,16 @@ export async function POST(request: NextRequest) {
         <strong>禁止在 <code>fetchStrapi</code> 或任何客户端代码中使用写权限 Token。</strong>
       </div>
 
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【表单验证码铁律】</strong> 所有对外公开的表单组件（<code>ContactForm</code>、<code>RepairForm</code>）必须集成 Cloudflare Turnstile：
+        <ul style="margin:10px 0 0 16px;line-height:1.8;">
+          <li>安装：<code>npm install @marsidev/react-turnstile</code></li>
+          <li>组件：<code>&lt;Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} onSuccess={setToken} /&gt;</code></li>
+          <li>表单提交时将 token 一并 POST 到后端 Route Handler</li>
+          <li><strong>禁止在 token 为空时允许提交</strong></li>
+        </ul>
+      </div>
+
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
         <strong>【zh-TW 拦截铁律】</strong> zh-TW locale 必须在 <code>fetchStrapi</code> 层拦截改写为 zh-CN，禁止直接向 Strapi 请求 <code>locale=zh-TW</code>（数据库无此数据，将返回空数组导致白屏）。
       </div>
