@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
+      {
+        // 占位图（开发/无CMS时的fallback）
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
     ],
   },
 };
