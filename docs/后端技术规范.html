@@ -1122,6 +1122,26 @@ CREATE INDEX idx_i18n_keys_namespace ON i18n_keys(namespace);</code></pre>
 
 CREATE UNIQUE INDEX idx_seo_configs_key_locale ON seo_configs(page_key, locale);</code></pre>
 
+<div class="warning" style="background:#e8f4fd;border-left:4px solid #2196f3;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <strong>【SEO Shared Component】</strong> 在 Strapi 中创建名为 <code>seo</code> 的 Shared Component（路径：<code>components/shared/seo</code>），包含以下字段：
+  <ul style="margin:10px 0 0 16px;line-height:1.8;">
+    <li><code>metaTitle</code>: String（最大 60 字符，SEO 标题）</li>
+    <li><code>metaDescription</code>: String（最大 160 字符，SEO 描述）</li>
+    <li><code>keywords</code>: String（关键词，逗号分隔）</li>
+    <li><code>ogImage</code>: Media（Open Graph 图片，建议 1200×630px）</li>
+    <li><code>canonicalURL</code>: String（可选，规范链接）</li>
+  </ul>
+  <p style="margin:10px 0 4px;">该 Component 必须挂载到以下所有 Collection Type 上：</p>
+  <ul style="margin:4px 0 0 16px;line-height:1.8;">
+    <li><code>articles</code>（新闻动态）</li>
+    <li><code>products</code>（产品）</li>
+    <li><code>solutions</code>（解决方案）</li>
+    <li><code>page-contents</code>（页面内容）</li>
+    <li><code>faqs</code>（常见问题）</li>
+  </ul>
+  <p style="margin:10px 0 0;">字段名统一为 <code>seo</code>（如 <code>product.seo.metaTitle</code>）。</p>
+</div>
+
 <h4>audit_logs 表</h4>
 <pre><code>CREATE TABLE audit_logs (
   id          BIGSERIAL PRIMARY KEY,

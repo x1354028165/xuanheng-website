@@ -252,6 +252,17 @@
         <li><strong>设计系统一致性</strong>：通过 <code>tailwind.config.js</code> 统一定义颜色/字体/间距，确保全站视觉一致</li>
       </ul>
 
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【Markdown 渲染规范】</strong> 全站富文本内容改为 Markdown 格式，使用 <code>react-markdown</code> 渲染。<br>
+        Tailwind CSS 的 Preflight 会重置所有标签默认样式（h1~h6 大小相同，ul 无缩进），必须通过 <code>@tailwindcss/typography</code> 插件恢复排版。
+        <ul style="margin:8px 0 0 16px;">
+          <li><strong>安装：</strong><code>npm install @tailwindcss/typography</code></li>
+          <li><strong>注册：</strong><code>tailwind.config.ts</code> 的 <code>plugins</code> 数组加入 <code>require('@tailwindcss/typography')</code></li>
+          <li><strong>使用：</strong>所有 <code>react-markdown</code> 渲染的外层容器必须添加 <code>className='prose dark:prose-invert max-w-none'</code></li>
+        </ul>
+        <strong>违反此规则将导致 Markdown 文章完全无样式（无标题层级、无列表缩进、无字重区分）。</strong>
+      </div>
+
       <h3>1.4 前台组件库：shadcn/ui</h3>
 
       <p>官网前台使用 <strong>shadcn/ui</strong>（基于 Radix UI + Tailwind CSS）作为核心组件库。</p>
@@ -1019,6 +1030,27 @@ export function LanguageSwitcher({ currentLocale, locales }: LanguageSwitcherPro
     &lt;/select&gt;
   );
 }</code></pre>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【RSC 边界铁律】</strong> Next.js App Router 默认所有组件为服务端组件（Server Component）。
+        <br><br>
+        <strong>强制规则：</strong>
+        <ol style="margin:8px 0 0 16px;">
+          <li><code>page.tsx</code> 必须永远保持为 Server Component：仅负责 <code>fetchStrapi</code> 数据拉取和 <code>generateMetadata</code> SEO 生成，禁止包含任何交互逻辑</li>
+          <li>凡包含以下特征的组件，文件顶部必须声明 <code>'use client'</code>：
+            <ul style="margin:6px 0 0 16px;">
+              <li><code>useState</code> / <code>useEffect</code> / <code>useRef</code> 等 React Hooks</li>
+              <li><code>onClick</code> / <code>onChange</code> / <code>onSubmit</code> 等事件处理器</li>
+              <li>浏览器 API（<code>window</code> / <code>document</code> / <code>localStorage</code>）</li>
+              <li>第三方交互组件（表单库、动画库等）</li>
+            </ul>
+          </li>
+          <li>组件拆分原则：交互组件与数据拉取分离，<code>page.tsx</code> 拉数据 → 传 props → Client Component 渲染交互</li>
+          <li>表单组件（联系表单/报修表单）必须是独立的 Client Component</li>
+        </ol>
+        <br>
+        <strong>违反此规则将导致编译报错：<code>Error: Event handlers cannot be passed to Client Component props</code>。</strong>
+      </div>
     </div>
 
 
@@ -1131,6 +1163,18 @@ export async function POST(request: NextRequest) {
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
         <strong>【zh-TW 拦截铁律】</strong> zh-TW locale 必须在 <code>fetchStrapi</code> 层拦截改写为 zh-CN，禁止直接向 Strapi 请求 <code>locale=zh-TW</code>（数据库无此数据，将返回空数组导致白屏）。
+      </div>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【Strapi populate 铁律】</strong> Strapi 默认 API 响应不返回任何关联关系（Relations）和媒体文件（Media/Images）。<br>
+        禁止在未追加 <code>populate</code> 参数的情况下渲染图片或关联字段，否则运行时必崩（<code>TypeError: Cannot read properties of undefined</code>）。
+        <ul style="margin:8px 0 0 16px;">
+          <li><strong>开发阶段：</strong>追加 <code>?populate=*</code> 快速拉取所有关联（仅限本地开发）</li>
+          <li><strong>生产阶段：</strong>必须改为精确 populate，仅请求实际需要的字段：<br>
+            例：<code>populate[cover][fields][0]=url&amp;populate[cover][fields][1]=alternativeText</code></li>
+          <li><strong>多层关联：</strong><code>populate[category][populate][icon][fields][0]=url</code></li>
+        </ul>
+        <strong>违反此规则将导致大面积空指针崩溃（<code>product.attributes.cover</code> 为 <code>undefined</code>）。</strong>
       </div>
 
 <pre><code>// lib/strapi.ts
