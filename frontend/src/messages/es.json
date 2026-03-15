@@ -1,88 +1,200 @@
 {
   "nav": {
-    "solutions": "解决方案",
-    "products": "产品中心",
-    "ecosystem": "兼容生态",
-    "help": "帮助中心",
-    "about": "关于我们",
-    "contact": "联系我们"
-  },
-  "footer": {
-    "company": "旭衡电子",
-    "companyDesc": "专注工业自动化与控制技术",
-    "products": "产品中心",
-    "solutions": "解决方案",
-    "contact": "联系方式",
-    "address": "公司地址",
-    "phone": "联系电话",
-    "email": "电子邮箱",
-    "copyright": "© {year} 旭衡电子 版权所有"
+    "solutions": "Soluciones",
+    "products": "Productos",
+    "ecosystem": "Ecosistema",
+    "help": "Centro de Ayuda",
+    "about": "Sobre Nosotros",
+    "contact": "Contáctenos",
+    "developers": "Centro de Desarrolladores próximamente"
   },
   "common": {
-    "learnMore": "了解更多",
-    "viewAll": "查看全部",
-    "submit": "提交",
-    "cancel": "取消",
-    "confirm": "确认",
-    "loading": "加载中...",
-    "error": "出错了",
-    "retry": "重试",
-    "search": "搜索",
-    "noResults": "暂无结果",
-    "backToHome": "返回首页",
-    "download": "下载",
-    "share": "分享"
+    "learnMore": "Más información",
+    "viewAll": "Ver todo",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar",
+    "search": "Buscar",
+    "noResults": "No se encontraron resultados",
+    "backToHome": "Volver al inicio",
+    "download": "Descargar",
+    "share": "Compartir",
+    "contactUs": "Contáctenos",
+    "getStarted": "Comenzar",
+    "readMore": "Leer más",
+    "viewDetails": "Ver detalles",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {page}"
   },
   "home": {
-    "heroTitle": "工业控制，始终如一",
-    "heroSubtitle": "旭衡电子 — 您值得信赖的工业自动化解决方案提供商",
-    "heroCta": "了解解决方案",
-    "featuresTitle": "核心优势",
-    "solutionsTitle": "解决方案",
-    "productsTitle": "热门产品",
-    "partnersTitle": "合作伙伴",
-    "ctaTitle": "准备好开始了吗？",
-    "ctaSubtitle": "联系我们，获取专属解决方案",
-    "ctaButton": "立即咨询"
+    "heroTitle": "Energía inteligente, siempre bajo control",
+    "heroSubtitle": "AlwaysControl — Soluciones de gestión inteligente para el sector de nuevas energías",
+    "viewSolutions": "Descubrir soluciones",
+    "contactUs": "Contáctenos",
+    "statsTitle": "Cifras que hablan",
+    "statsBrands": "200+",
+    "statsBrandsLabel": "Marcas compatibles",
+    "statsCountries": "50+",
+    "statsCountriesLabel": "Países cubiertos",
+    "statsProjects": "500+",
+    "statsProjectsLabel": "Proyectos entregados",
+    "solutionsTitle": "Soluciones",
+    "solutionsSubtitle": "Gestión inteligente de energía para diferentes escenarios",
+    "productsTitle": "Productos",
+    "productsSubtitle": "Matriz de productos de hardware y software de alto rendimiento",
+    "brandsTitle": "Marcas compatibles",
+    "brandsSubtitle": "Amplia compatibilidad con las principales marcas de dispositivos",
+    "newsTitle": "Últimas noticias",
+    "newsSubtitle": "Manténgase al día con AlwaysControl",
+    "trustTitle": "Por qué elegir AlwaysControl",
+    "trustItems": [
+      {
+        "title": "Liderazgo tecnológico",
+        "description": "Más de 10 años de experiencia en gestión de nuevas energías con algoritmos propietarios"
+      },
+      {
+        "title": "Calidad confiable",
+        "description": "Certificación ISO 9001 con una tasa de fallo de producto inferior al 0,1 %"
+      },
+      {
+        "title": "Servicio global",
+        "description": "Cobertura en más de 50 países y regiones con soporte técnico 24/7"
+      }
+    ],
+    "ctaTitle": "¿Listo para comenzar?",
+    "ctaSubtitle": "Contáctenos para una solución personalizada",
+    "ctaButton": "Consultar ahora"
   },
   "solutions": {
-    "title": "解决方案",
-    "subtitle": "为不同行业提供专业的自动化控制方案",
-    "viewDetail": "查看详情"
+    "title": "Soluciones",
+    "subtitle": "Soluciones profesionales de gestión inteligente de energía para diversas industrias",
+    "viewDetail": "Ver detalles",
+    "features": "Características de la solución",
+    "advantages": "Ventajas de la solución",
+    "relatedProducts": "Productos relacionados",
+    "backToList": "Volver a soluciones"
   },
   "products": {
-    "title": "产品中心",
-    "subtitle": "高品质工业自动化产品",
-    "specifications": "技术参数",
-    "documents": "相关文档",
-    "relatedProducts": "相关产品"
+    "title": "Productos",
+    "subtitle": "Hardware y software de alto rendimiento para la gestión de nuevas energías",
+    "specifications": "Especificaciones técnicas",
+    "documents": "Documentos",
+    "relatedProducts": "Productos relacionados",
+    "gallery": "Galería de productos",
+    "backToList": "Volver a productos",
+    "tagline": "Resumen del producto",
+    "description": "Detalles del producto",
+    "noProducts": "No hay productos disponibles"
   },
   "about": {
-    "title": "关于我们",
-    "subtitle": "旭衡电子 — 工业控制领域的可靠伙伴",
-    "history": "发展历程",
-    "team": "团队介绍",
-    "certifications": "资质认证"
+    "title": "Sobre Nosotros",
+    "subtitle": "AlwaysControl — Pionera en gestión inteligente y tecnología de control en el sector de nuevas energías",
+    "history": "Historia",
+    "historyTitle": "Nuestra historia",
+    "historySubtitle": "Desde la fundación hasta la expansión global",
+    "companyIntro": "Acerca de la empresa",
+    "companyIntroText": "AlwaysControl Technology fue fundada en 2018 y tiene su sede en el Parque Científico y Tecnológico, Distrito de Nanshan, Shenzhen. La empresa se enfoca en tecnologías de gestión inteligente y control en el sector de nuevas energías, dedicada a proporcionar soluciones de gestión energética eficientes, estables e inteligentes a clientes de todo el mundo. Tras años de crecimiento, AlwaysControl se ha convertido en un proveedor líder de soluciones del sector, con productos y servicios que cubren más de 50 países y regiones, compatible con más de 200 marcas de dispositivos, y más de 500 proyectos entregados.",
+    "newsTitle": "Noticias",
+    "newsSubtitle": "Últimas noticias y análisis del sector de AlwaysControl",
+    "careersTitle": "Únase a nosotros",
+    "careersSubtitle": "Únase a un equipo excepcional para construir un mejor futuro energético",
+    "department": "Departamento",
+    "location": "Ubicación",
+    "type": "Tipo de empleo",
+    "fullTime": "Tiempo completo",
+    "partTime": "Medio tiempo",
+    "contract": "Contrato",
+    "apply": "Aplicar ahora",
+    "noOpenings": "No hay vacantes disponibles actualmente",
+    "milestones": [
+      { "year": "2018", "text": "Fundación de la empresa" },
+      { "year": "2019", "text": "Primer gateway lanzado" },
+      { "year": "2020", "text": "Financiamiento Serie A" },
+      { "year": "2021", "text": "Expansión internacional" },
+      { "year": "2022", "text": "Top 10 del sector" },
+      { "year": "2023", "text": "100+ socios estratégicos" },
+      { "year": "2024", "text": "Ingresos anuales superan 100M" },
+      { "year": "2025", "text": "Expansión global" }
+    ]
   },
   "contact": {
-    "title": "联系我们",
-    "subtitle": "我们随时准备为您服务",
+    "title": "Contáctenos",
+    "subtitle": "Siempre estamos listos para atenderle",
     "form": {
-      "name": "姓名",
-      "company": "公司名称",
-      "phone": "联系电话",
-      "email": "电子邮箱",
-      "message": "留言内容",
-      "submit": "发送消息"
+      "name": "Nombre",
+      "company": "Empresa",
+      "phone": "Teléfono",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "intent": "Tipo de consulta",
+      "intentOptions": {
+        "solutions": "Consulta de soluciones",
+        "api": "Integración de API",
+        "hardware": "Compra de hardware",
+        "custom": "Desarrollo personalizado"
+      },
+      "submit": "Enviar mensaje"
     },
-    "success": "消息已发送，我们会尽快与您联系",
-    "error": "发送失败，请稍后重试"
+    "success": "Mensaje enviado con éxito. Nos pondremos en contacto pronto.",
+    "error": "Error al enviar. Inténtelo de nuevo más tarde.",
+    "info": {
+      "address": "Parque Científico y Tecnológico, Distrito de Nanshan, Shenzhen",
+      "phone": "+86 755-8888-9999",
+      "email": "info@alwayscontrol.com.cn",
+      "hours": "Lunes a viernes, 9:00–18:00"
+    }
   },
   "help": {
-    "title": "帮助中心",
-    "subtitle": "常见问题与技术支持",
-    "faq": "常见问题",
-    "docs": "技术文档",
-    "support": "技术支持"
+    "title": "Centro de Ayuda",
+    "subtitle": "Preguntas frecuentes y soporte técnico",
+    "faq": "FAQ",
+    "faqTitle": "Preguntas frecuentes",
+    "faqSubtitle": "Encuentre sus respuestas rápidamente",
+    "docs": "Documentación",
+    "docsTitle": "Documentación técnica",
+    "docsSubtitle": "Documentación de productos y guías para desarrolladores",
+    "support": "Soporte técnico",
+    "repairTitle": "Solicitud de reparación",
+    "repairSubtitle": "Envíe una solicitud de reparación o devolución de producto",
+    "repairForm": {
+      "name": "Nombre de contacto",
+      "phone": "Teléfono",
+      "email": "Correo electrónico",
+      "product": "Modelo del producto",
+      "description": "Descripción del problema",
+      "submit": "Enviar solicitud"
+    },
+    "repairSuccess": "Solicitud de reparación enviada. Nos pondremos en contacto pronto."
+  },
+  "footer": {
+    "company": "AlwaysControl",
+    "companyDesc": "Especializada en gestión inteligente y control de nuevas energías",
+    "products": "Productos",
+    "solutions": "Soluciones",
+    "about": "Sobre Nosotros",
+    "help": "Centro de Ayuda",
+    "contact": "Contacto",
+    "address": "Parque Científico y Tecnológico, Distrito de Nanshan, Shenzhen",
+    "phone": "+86 755-8888-9999",
+    "email": "info@alwayscontrol.com.cn",
+    "copyright": "\u00a9 {year} AlwaysControl Technology. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "subtitle": "Valoramos la protección de su privacidad",
+    "lastUpdated": "Última actualización: {date}",
+    "content": "AlwaysControl Technology (en adelante \"nosotros\") atribuye gran importancia a la protección de la privacidad de los usuarios. Esta Política de Privacidad explica cómo recopilamos, usamos, almacenamos y protegemos su información personal. Solo recopilamos su información personal en la medida necesaria, incluyendo pero no limitado a nombre, dirección de correo electrónico, número de teléfono y nombre de la empresa. Esta información se utiliza para responder a sus consultas, proporcionar soporte técnico y mejorar nuestros productos y servicios. Empleamos medidas de seguridad estándar de la industria para proteger su información. Sin su consentimiento, no compartiremos su información personal con terceros. Usted tiene derecho a acceder, corregir o eliminar su información personal en cualquier momento. Para consultas relacionadas con la privacidad, contáctenos en info@alwayscontrol.com.cn."
+  },
+  "ecosystem": {
+    "title": "Ecosistema",
+    "subtitle": "Amplia compatibilidad con las principales marcas de dispositivos de nuevas energías",
+    "allBrands": "Todas las marcas",
+    "filterByCategory": "Filtrar por categoría",
+    "noBrands": "No hay datos de marcas disponibles"
   }
 }

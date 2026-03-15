@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "i18n_keys",
+  "info": {
+    "singularName": "i18n-key",
+    "pluralName": "i18n-keys",
+    "displayName": "I18n Key"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": false
+    }
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "zh_CN": {
+      "type": "text"
+    },
+    "zh_TW": {
+      "type": "text"
+    },
+    "en_US": {
+      "type": "text"
+    },
+    "de": {
+      "type": "text"
+    },
+    "fr": {
+      "type": "text"
+    },
+    "pt": {
+      "type": "text"
+    },
+    "es": {
+      "type": "text"
+    },
+    "ru": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "approved"],
+      "default": "pending"
+    }
+  }
+}

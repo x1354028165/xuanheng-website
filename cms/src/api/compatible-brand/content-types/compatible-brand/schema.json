@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "compatible_brands",
+  "info": {
+    "singularName": "compatible-brand",
+    "pluralName": "compatible-brands",
+    "displayName": "Compatible Brand"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": false
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "category": {
+      "type": "string"
+    },
+    "websiteUrl": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

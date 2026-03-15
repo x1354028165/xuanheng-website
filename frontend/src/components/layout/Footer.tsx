@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
-export function Footer({ locale }: { locale: string }) {
+export function Footer() {
   const t = useTranslations("footer");
   const currentYear = new Date().getFullYear();
 
@@ -23,7 +23,7 @@ export function Footer({ locale }: { locale: string }) {
             <ul className="mt-4 space-y-2">
               <li>
                 <Link
-                  href={`/${locale}/products`}
+                  href="/products"
                   className="text-sm text-white/60 hover:text-brand-cyan transition-colors"
                 >
                   {t("products")}
@@ -40,7 +40,7 @@ export function Footer({ locale }: { locale: string }) {
             <ul className="mt-4 space-y-2">
               <li>
                 <Link
-                  href={`/${locale}/solutions`}
+                  href="/solutions"
                   className="text-sm text-white/60 hover:text-brand-cyan transition-colors"
                 >
                   {t("solutions")}
@@ -62,9 +62,16 @@ export function Footer({ locale }: { locale: string }) {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-white/40">
-          {t("copyright", { year: currentYear })}
+        {/* Bottom */}
+        <div className="mt-12 border-t border-white/10 pt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <div className="text-sm text-white/40">
+            {t("copyright", { year: currentYear })}
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-sm text-white/40 hover:text-white/60 transition-colors">
+              {t("privacy")}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

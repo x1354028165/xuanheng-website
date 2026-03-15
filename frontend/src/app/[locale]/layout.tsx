@@ -29,7 +29,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Header locale={locale} />
       <main className="min-h-screen">{children}</main>
-      <Footer locale={locale} />
+      <Footer />
     </NextIntlClientProvider>
   );
 }

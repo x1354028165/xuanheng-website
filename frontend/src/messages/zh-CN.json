@@ -5,25 +5,14 @@
     "ecosystem": "兼容生态",
     "help": "帮助中心",
     "about": "关于我们",
-    "contact": "联系我们"
-  },
-  "footer": {
-    "company": "旭衡电子",
-    "companyDesc": "专注工业自动化与控制技术",
-    "products": "产品中心",
-    "solutions": "解决方案",
-    "contact": "联系方式",
-    "address": "公司地址",
-    "phone": "联系电话",
-    "email": "电子邮箱",
-    "copyright": "© {year} 旭衡电子 版权所有"
+    "contact": "联系我们",
+    "developers": "开发者中心即将推出"
   },
   "common": {
     "learnMore": "了解更多",
     "viewAll": "查看全部",
     "submit": "提交",
     "cancel": "取消",
-    "confirm": "确认",
     "loading": "加载中...",
     "error": "出错了",
     "retry": "重试",
@@ -31,38 +20,105 @@
     "noResults": "暂无结果",
     "backToHome": "返回首页",
     "download": "下载",
-    "share": "分享"
+    "share": "分享",
+    "contactUs": "联系我们",
+    "getStarted": "开始使用",
+    "readMore": "阅读更多",
+    "viewDetails": "查看详情",
+    "previous": "上一页",
+    "next": "下一页",
+    "page": "第 {page} 页"
   },
   "home": {
-    "heroTitle": "工业控制，始终如一",
-    "heroSubtitle": "旭衡电子 — 您值得信赖的工业自动化解决方案提供商",
-    "heroCta": "了解解决方案",
-    "featuresTitle": "核心优势",
+    "heroTitle": "智慧能源，始终掌控",
+    "heroSubtitle": "旭衡电子 — 新能源领域智慧管理解决方案提供商",
+    "viewSolutions": "了解解决方案",
+    "contactUs": "联系我们",
+    "statsTitle": "数据见证实力",
+    "statsBrands": "200+",
+    "statsBrandsLabel": "兼容品牌",
+    "statsCountries": "50+",
+    "statsCountriesLabel": "覆盖国家",
+    "statsProjects": "500+",
+    "statsProjectsLabel": "已交付项目",
     "solutionsTitle": "解决方案",
-    "productsTitle": "热门产品",
-    "partnersTitle": "合作伙伴",
+    "solutionsSubtitle": "为不同场景提供智慧能源管理方案",
+    "productsTitle": "产品中心",
+    "productsSubtitle": "高性能硬件与软件产品矩阵",
+    "brandsTitle": "兼容品牌",
+    "brandsSubtitle": "广泛兼容主流设备品牌",
+    "newsTitle": "最新动态",
+    "newsSubtitle": "了解旭衡电子的最新资讯",
+    "trustTitle": "为什么选择旭衡",
+    "trustItems": [
+      {
+        "title": "技术领先",
+        "description": "10年以上新能源管理经验，核心算法自主研发"
+      },
+      {
+        "title": "品质可靠",
+        "description": "通过ISO9001认证，产品故障率低于0.1%"
+      },
+      {
+        "title": "服务全球",
+        "description": "覆盖50+国家和地区，7x24小时技术支持"
+      }
+    ],
     "ctaTitle": "准备好开始了吗？",
     "ctaSubtitle": "联系我们，获取专属解决方案",
     "ctaButton": "立即咨询"
   },
   "solutions": {
     "title": "解决方案",
-    "subtitle": "为不同行业提供专业的自动化控制方案",
-    "viewDetail": "查看详情"
+    "subtitle": "为不同行业提供专业的智慧能源管理方案",
+    "viewDetail": "查看详情",
+    "features": "方案特点",
+    "advantages": "方案优势",
+    "relatedProducts": "相关产品",
+    "backToList": "返回方案列表"
   },
   "products": {
     "title": "产品中心",
-    "subtitle": "高品质工业自动化产品",
+    "subtitle": "高性能新能源管理硬件与软件产品",
     "specifications": "技术参数",
     "documents": "相关文档",
-    "relatedProducts": "相关产品"
+    "relatedProducts": "相关产品",
+    "gallery": "产品图集",
+    "backToList": "返回产品列表",
+    "tagline": "产品简介",
+    "description": "产品详情",
+    "noProducts": "暂无产品"
   },
   "about": {
     "title": "关于我们",
-    "subtitle": "旭衡电子 — 工业控制领域的可靠伙伴",
+    "subtitle": "旭衡电子 — 新能源领域智慧管理与控制技术领航者",
     "history": "发展历程",
-    "team": "团队介绍",
-    "certifications": "资质认证"
+    "historyTitle": "发展历程",
+    "historySubtitle": "从创立到全球化布局的成长之路",
+    "companyIntro": "公司简介",
+    "companyIntroText": "旭衡电子（AlwaysControl Technology）成立于2018年，总部位于深圳市南山区科技园。公司专注于新能源领域的智慧管理与控制技术，致力于为全球客户提供高效、稳定、智能的能源管理解决方案。经过多年发展，旭衡电子已成为行业领先的解决方案提供商，产品和服务覆盖全球50多个国家和地区，兼容200多个设备品牌，累计交付500多个项目。",
+    "newsTitle": "新闻动态",
+    "newsSubtitle": "了解旭衡电子的最新资讯与行业洞察",
+    "careersTitle": "加入我们",
+    "careersSubtitle": "与优秀的团队一起，创造更美好的能源未来",
+    "department": "部门",
+    "location": "工作地点",
+    "type": "工作类型",
+    "fullTime": "全职",
+    "partTime": "兼职",
+    "contract": "合同制",
+    "apply": "立即申请",
+    "noOpenings": "暂无开放职位",
+    "milestones": [
+      { "year": "2018", "text": "公司成立" },
+      { "year": "2019", "text": "首款网关发布" },
+      { "year": "2020", "text": "获A轮融资" },
+      { "year": "2021", "text": "产品出海" },
+      { "year": "2022", "text": "行业TOP10" },
+      { "year": "2023", "text": "战略合作伙伴100+" },
+      { "year": "2024", "text": "年营收破亿" },
+      { "year": "2025", "text": "全球化布局" }
+    ]
   },
   "contact": {
     "title": "联系我们",
@@ -73,16 +129,72 @@
       "phone": "联系电话",
       "email": "电子邮箱",
       "message": "留言内容",
+      "intent": "咨询类型",
+      "intentOptions": {
+        "solutions": "解决方案咨询",
+        "api": "API对接",
+        "hardware": "硬件采购",
+        "custom": "定制开发"
+      },
       "submit": "发送消息"
     },
     "success": "消息已发送，我们会尽快与您联系",
-    "error": "发送失败，请稍后重试"
+    "error": "发送失败，请稍后重试",
+    "info": {
+      "address": "深圳市南山区科技园",
+      "phone": "+86 755-8888-9999",
+      "email": "info@alwayscontrol.com.cn",
+      "hours": "周一至周五 9:00-18:00"
+    }
   },
   "help": {
     "title": "帮助中心",
     "subtitle": "常见问题与技术支持",
     "faq": "常见问题",
+    "faqTitle": "常见问题",
+    "faqSubtitle": "快速找到您的答案",
     "docs": "技术文档",
-    "support": "技术支持"
+    "docsTitle": "技术文档",
+    "docsSubtitle": "产品技术文档与开发指南",
+    "support": "技术支持",
+    "repairTitle": "维修申请",
+    "repairSubtitle": "提交产品维修或返修申请",
+    "repairForm": {
+      "name": "联系人姓名",
+      "phone": "联系电话",
+      "email": "电子邮箱",
+      "product": "产品型号",
+      "description": "故障描述",
+      "submit": "提交申请"
+    },
+    "repairSuccess": "维修申请已提交，我们会尽快与您联系"
+  },
+  "footer": {
+    "company": "旭衡电子",
+    "companyDesc": "专注新能源智慧管理与控制技术",
+    "products": "产品中心",
+    "solutions": "解决方案",
+    "about": "关于我们",
+    "help": "帮助中心",
+    "contact": "联系方式",
+    "address": "深圳市南山区科技园",
+    "phone": "+86 755-8888-9999",
+    "email": "info@alwayscontrol.com.cn",
+    "copyright": "\u00a9 {year} 旭衡电子 版权所有",
+    "privacy": "隐私政策",
+    "terms": "服务条款"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "subtitle": "我们重视您的隐私保护",
+    "lastUpdated": "最后更新：{date}",
+    "content": "旭衡电子（以下简称\"我们\"）非常重视用户的隐私保护。本隐私政策说明了我们如何收集、使用、存储和保护您的个人信息。我们仅在必要范围内收集您的个人信息，包括但不限于姓名、电子邮箱、联系电话和公司名称。这些信息将用于响应您的咨询请求、提供技术支持以及改善我们的产品和服务。我们采用行业标准的安全措施保护您的信息安全，未经您的同意，我们不会将您的个人信息分享给第三方。您有权随时查询、更正或删除您的个人信息，如有任何隐私相关问题，请通过 info@alwayscontrol.com.cn 联系我们。"
+  },
+  "ecosystem": {
+    "title": "兼容生态",
+    "subtitle": "广泛兼容主流新能源设备品牌",
+    "allBrands": "全部品牌",
+    "filterByCategory": "按类别筛选",
+    "noBrands": "暂无品牌数据"
   }
 }

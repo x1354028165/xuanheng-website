@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_postings",
+  "info": {
+    "singularName": "job-posting",
+    "pluralName": "job-postings",
+    "displayName": "Job Posting"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "department": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["full-time", "part-time", "contract"]
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "requirements": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

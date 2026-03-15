@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_seos",
+  "info": {
+    "displayName": "SEO",
+    "icon": "search",
+    "description": "SEO metadata component"
+  },
+  "attributes": {
+    "metaTitle": { "type": "string", "maxLength": 60 },
+    "metaDescription": { "type": "string", "maxLength": 160 },
+    "keywords": { "type": "string" },
+    "ogImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "canonicalURL": { "type": "string" }
+  }
+}
