@@ -62,37 +62,37 @@ export default async function ProductDetailPage({
   return (
     <>
       {/* Product Header */}
-      <section className="bg-[#0C1829] pb-16 pt-32">
+      <section className="bg-[#F8FAFC] pb-16 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/products"
-            className="mb-8 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors"
+            className="mb-8 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors"
           >
             &larr; {t('backToList')}
           </Link>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
             {/* Product Image Placeholder */}
-            <div className="relative h-72 overflow-hidden rounded-xl bg-[#0f1b2e] flex items-center justify-center sm:h-96 border border-white/10">
+            <div className="relative h-72 overflow-hidden rounded-xl bg-white flex items-center justify-center sm:h-96 border border-[#E2E8F0]">
               <div className="text-center">
                 <div className="text-6xl mb-4">{category === 'hardware' ? '⚡' : '☁️'}</div>
-                <p className="text-gray-500 text-sm">{title}</p>
+                <p className="text-[#64748B] text-sm">{title}</p>
               </div>
             </div>
 
             {/* Product Info */}
             <div>
-              <span className="inline-block rounded-full bg-[#1A3FAD]/20 px-3 py-1 text-xs font-medium text-[#38C4E8] mb-4">
+              <span className="inline-block rounded-full bg-[#38C4E8]/10 px-3 py-1 text-xs font-medium text-[#38C4E8] mb-4">
                 {category === 'hardware' ? hardwareLabel : softwareLabel}
               </span>
-              <h1 className="text-3xl font-bold text-white sm:text-4xl">
+              <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl">
                 {title}
               </h1>
               {tagline && (
                 <p className="mt-4 text-lg text-[#38C4E8]">{tagline}</p>
               )}
               {description && (
-                <div className="mt-6 text-gray-300 leading-relaxed">
+                <div className="mt-6 text-[#64748B] leading-relaxed">
                   {description.split('\n').map((paragraph: string, idx: number) => (
                     <p key={idx} className="mt-3 first:mt-0">{paragraph}</p>
                   ))}
@@ -101,13 +101,13 @@ export default async function ProductDetailPage({
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg bg-[#1A3FAD] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#1A3FAD]/90 hover:shadow-xl hover:shadow-[#1A3FAD]/20"
+                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#2BA8C8] hover:shadow-xl"
                 >
                   {contactSales}
                 </Link>
                 <a
                   href="#specs"
-                  className="inline-flex items-center rounded-lg border border-[#38C4E8]/30 px-6 py-3 text-base font-semibold text-[#38C4E8] transition-all duration-300 hover:bg-[#38C4E8]/10"
+                  className="inline-flex items-center rounded-lg border border-[#38C4E8] px-6 py-3 text-base font-semibold text-[#38C4E8] transition-all duration-300 hover:bg-[#38C4E8]/5"
                 >
                   {viewSpecs} ↓
                 </a>

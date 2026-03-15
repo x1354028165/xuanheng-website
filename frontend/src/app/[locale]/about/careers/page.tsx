@@ -16,12 +16,12 @@ export default async function CareersPage({
 
   return (
     <>
-      <section className="bg-[#0C1829] pb-12 pt-32">
+      <section className="bg-[#F8FAFC] pb-12 pt-32">
         <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl md:text-5xl">
             {t('careersTitle')}
           </h1>
-          <p className="mt-4 text-lg text-gray-400">{t('careersSubtitle')}</p>
+          <p className="mt-4 text-lg text-[#64748B]">{t('careersSubtitle')}</p>
         </div>
       </section>
 

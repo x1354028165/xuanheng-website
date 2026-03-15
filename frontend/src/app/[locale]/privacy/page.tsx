@@ -14,12 +14,12 @@ export default async function PrivacyPage({
 
   return (
     <>
-      <section className="bg-[#0C1829] pb-12 pt-32">
+      <section className="bg-white pb-12 pt-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white md:text-4xl">
+          <h1 className="text-3xl font-bold text-[#0F172A] md:text-4xl">
             {t('title')}
           </h1>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm text-[#64748B]">
             {t('lastUpdated', { date: '2026-03-15' })}
           </p>
         </div>

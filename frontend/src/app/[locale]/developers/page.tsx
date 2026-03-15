@@ -13,14 +13,14 @@ export default async function DevelopersPage({
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="bg-[#0C1829] py-32 text-center">
+      {/* Page Header */}
+      <section className="bg-[#F8FAFC] pt-32 pb-16 text-center">
         <div className="mx-auto max-w-3xl px-6">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#38C4E8]/10 px-4 py-2 text-sm text-[#38C4E8]">
             🚀 {t('badge')}
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">{t('title')}</h1>
-          <p className="text-lg text-white/70 mb-8">{t('subtitle')}</p>
+          <h1 className="text-4xl font-bold text-[#0F172A] mb-4">{t('title')}</h1>
+          <p className="text-lg text-[#64748B] mb-8">{t('subtitle')}</p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 bg-[#38C4E8] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#2BA8C8] transition-colors"

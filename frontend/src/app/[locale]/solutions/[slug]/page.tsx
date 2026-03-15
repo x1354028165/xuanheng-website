@@ -60,37 +60,37 @@ export default async function SolutionDetailPage({
 
   return (
     <>
-      {/* Hero Banner */}
-      <section className="relative bg-[#0C1829] pb-16 pt-32">
+      {/* Page Header */}
+      <section className="relative bg-[#F8FAFC] pb-16 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/solutions"
-            className="mb-8 inline-flex items-center text-sm text-gray-400 hover:text-[#38C4E8] transition-colors"
+            className="mb-8 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors"
           >
             &larr; {t('backToList')}
           </Link>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <div>
-              <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl md:text-5xl">
                 {title}
               </h1>
               {tagline && (
                 <p className="mt-4 text-xl text-[#38C4E8]">{tagline}</p>
               )}
               {description && (
-                <p className="mt-6 text-gray-300 leading-relaxed text-lg">{description}</p>
+                <p className="mt-6 text-[#64748B] leading-relaxed text-lg">{description}</p>
               )}
               <div className="mt-8">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg bg-[#1A3FAD] px-8 py-3.5 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#1A3FAD]/90 hover:shadow-xl"
+                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#2BA8C8] hover:shadow-xl"
                 >
                   {applyDemo}
                 </Link>
               </div>
             </div>
-            <div className="relative h-64 overflow-hidden rounded-xl bg-[#0f1b2e] border border-white/10 flex items-center justify-center sm:h-80 lg:h-96">
+            <div className="relative h-64 overflow-hidden rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center sm:h-80 lg:h-96">
               <div className="text-6xl text-[#38C4E8]/20">🔋</div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default async function SolutionDetailPage({
 
       {/* Pain Points */}
       {finalPainPoints.length > 0 && (
-        <section className="bg-[#F8FAFC] py-24">
+        <section className="bg-white py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{painPointsTitle}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -121,7 +121,7 @@ export default async function SolutionDetailPage({
 
       {/* Solution Highlights */}
       {finalHighlights.length > 0 && (
-        <section className="bg-white py-24">
+        <section className="bg-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{highlightsTitle}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -143,7 +143,7 @@ export default async function SolutionDetailPage({
 
       {/* Access Modes */}
       {mockSolution && mockSolution.accessModes && mockSolution.accessModes.length > 0 && (
-        <section className="bg-[#F8FAFC] py-24">
+        <section className="bg-white py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-2 text-2xl font-bold text-[#0F172A] text-center">{t('accessModesTitle')}</h2>
             <p className="mb-10 text-center text-[#64748B]">{t('accessModesSubtitle')}</p>
@@ -169,7 +169,7 @@ export default async function SolutionDetailPage({
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <section className="bg-white py-24">
+        <section className="bg-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{recommendedProducts}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
