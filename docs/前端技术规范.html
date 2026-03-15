@@ -689,6 +689,25 @@ const twConverter = Converter({ from: 'cn', to: 'twp' })
 // UI字符串从 Strapi CMS-15 动态获取（CMS-15 = 多语言字典，无 zh_TW 字段）
 // ISR revalidate + Webhook 触发刷新</code></pre>
 
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🚫 【OpenCC 单例铁律】</h4>
+        <p style="margin:0 0 10px 0;">opencc-js 初始化时会加载并解析庞大的繁简字典树，极其耗时耗内存。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 禁止写法（每次请求重新初始化，导致内存泄漏和 OOM 宕机）：</p>
+<pre style="margin:0 0 12px 0;"><code>async function convertToTW(text: string) {
+  const converter = await OpenCC.Converter({ from: 'cn', to: 'tw' });  // 每次都重新初始化！
+  return converter(text);
+}</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（模块级全局单例，字典只加载一次）：</p>
+<pre style="margin:0 0 12px 0;"><code>// src/lib/opencc.ts — 全局单例文件
+import OpenCC from 'opencc-js';
+export const twConverter = await OpenCC.Converter({ from: 'cn', to: 'tw' });
+
+// 使用时直接导入，不再 new
+import { twConverter } from '@/lib/opencc';
+const twText = twConverter(zhCNText);</code></pre>
+        <p style="margin:0;color:#555;">所有 zh-TW 转换逻辑必须使用此全局单例，<strong style="color:#c0392b;">禁止在函数内部或组件中重新创建 Converter 实例。</strong></p>
+      </div>
+
       <h4>middleware.ts — 语言检测与路由</h4>
 
 <pre><code>// middleware.ts
@@ -1450,6 +1469,39 @@ export default async function HomePage({ params }: PageProps) {
       <h3>7.x 文件下载铁律</h3>
       <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
         <strong>【文件下载铁律】</strong>所有前端文件下载链接，禁止使用 Strapi CMS 返回的绝对 CDN 地址（<code>file.url</code>）直接绑定到 <code>&lt;a&gt;</code> 标签。必须统一拼接为 <code>/api/download/{id}</code> 交由后端中转处理，以确保下载统计正常计入。违反此规则会导致后端下载统计归零。
+      </div>
+
+      <h3>7.y 空数据 notFound() 防御铁律</h3>
+      <div style="background:#fce4ec;border:2px solid #e74c3c;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#b71c1c;">🚫 【空数据防御铁律】</h4>
+        <p style="margin:0 0 10px 0;">所有通过 <code>slug</code> 或 <code>documentId</code> 查询单条数据的场景（新闻详情、产品详情等），获取数据后必须第一时间执行非空校验：</p>
+<pre style="margin:0 0 12px 0;"><code>import { notFound } from 'next/navigation';
+
+const res = await fetchStrapi('/api/articles?filters[slug][$eq]=' + slug);
+// 必须校验！空数组不会自动 404，会直接导致 500 崩溃
+if (!res?.data || res.data.length === 0) {
+  notFound();  // 优雅降级到 404 页面，保护 SEO 和服务器健康
+}
+const article = res.data[0];</code></pre>
+        <p style="margin:0;color:#c0392b;font-weight:bold;">禁止直接访问 <code>res.data[0].xxx</code> 而不进行前置非空校验，否则数据不存在时 Node.js 抛出 500 Internal Server Error，严重损害 SEO 和服务器稳定性。</p>
+      </div>
+
+      <h3>7.z 多语言数据级联 Fallback 铁律</h3>
+      <div style="background:#e8f5e9;border:2px solid #27ae60;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#1b5e20;">✅ 【多语言数据 Fallback 铁律】</h4>
+        <p style="margin:0 0 10px 0;">B2B 官网运营初期，非中英文语言版本内容可能尚未翻译完成。如果某语言的数据为空，必须实现级联回退，避免向海外客户展示 404：</p>
+        <p style="margin:0 0 6px 0;"><strong>回退链：</strong>目标语言（de/fr/pt/es/ru）→ en-US → zh-CN</p>
+        <p style="margin:0 0 8px 0;"><strong>实现示例（在 fetchStrapi 外层封装）：</strong></p>
+<pre style="margin:0 0 12px 0;"><code>async function fetchWithFallback(path: string, locale: string) {
+  const fallbackChain = [locale, 'en-US', 'zh-CN'].filter((l, i, arr) => arr.indexOf(l) === i);
+  for (const lang of fallbackChain) {
+    const res = await fetchStrapi(path + '&locale=' + lang);
+    if (res?.data && res.data.length > 0) return res;
+  }
+  return null;  // 所有语言均无数据，由调用方决定是否 notFound()
+}</code></pre>
+        <p style="margin:0 0 6px 0;"><strong>适用场景：</strong>产品详情页、解决方案详情页、新闻详情页等内容型动态路由。</p>
+        <p style="margin:0;color:#555;"><strong>注意：</strong>列表页（产品列表、新闻列表）不适用此规则，列表为空时正常显示空状态。</p>
       </div>
     </div>
 
