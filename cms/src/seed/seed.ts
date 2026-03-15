@@ -138,22 +138,81 @@ const faqs = [
       '您可以通过以下渠道申请售后维修：1）登录旭衡电子官网，在"服务支持"页面提交维修申请工单；2）拨打24小时服务热线 400-XXX-XXXX；3）联系您的专属客户经理。提交申请后，我们将在2小时内响应，24小时内给出诊断方案，必要时安排现场服务工程师上门处理。',
     sortOrder: 5,
   },
+  {
+    question: '旭衡的网关支持哪些品牌的设备接入？',
+    answer:
+      '旭衡智能能源网关已对接华为、比亚迪、宁德时代、阳光电源、固德威、古瑞瓦特、德业等国内外数十家主流品牌的光伏逆变器、储能BMS、充电桩设备。具体兼容品牌列表请查看官网兼容生态页面，我们持续在增加新品牌的支持。',
+    sortOrder: 6,
+  },
+  {
+    question: '云端直连和网关接入有什么区别？',
+    answer:
+      '云端直连通过互联网直接对接设备厂商的云API，无需硬件部署，适合纯软件平台和远程调度场景。网关接入通过Neuron网关在现场局域网内与设备通讯，数据不上云，适合对实时性和数据安全有要求的工业场景。两种方式可按需选择，也可混合使用。',
+    sortOrder: 7,
+  },
+  {
+    question: '如何申请API接入和开发者账号？',
+    answer:
+      '目前开发者中心正在建设中。如需API接入和技术对接，请通过官网联系我们页面提交申请，注明您的公司信息和接入需求，我们的技术团队会在2个工作日内与您联系，提供API文档和测试环境。',
+    sortOrder: 8,
+  },
+  {
+    question: 'VPP虚拟电厂平台是否支持定制开发？',
+    answer:
+      '是的，旭衡VPP平台支持深度定制开发。我们提供白标系统方案，可根据客户需求定制品牌、UI界面、调度策略、对接电力交易平台等。定制项目由专属项目经理跟进，详细需求请联系我们的商务团队。',
+    sortOrder: 9,
+  },
+  {
+    question: '产品安装是否需要专业人员？',
+    answer:
+      'Neuron II和Neuron III网关建议由专业电工或集成商安装，需要基本的电气接线和网络配置知识。Neuron III Lite配套ATP III安装工具，支持即插即用安装，普通用户参照快速安装指南即可在5分钟内完成安装。所有产品均提供详细的安装文档和视频教程。',
+    sortOrder: 10,
+  },
+  {
+    question: '储能系统的安全防护措施有哪些？',
+    answer:
+      '旭衡储能管理系统内置多重安全防护机制：电池过充/过放保护、温度异常告警、短路保护、漏电保护等。系统支持BMS深度集成，实时监控每个电芯的电压、温度、SOC等参数。同时支持远程断电和紧急停机功能，确保储能系统安全可靠运行。',
+    sortOrder: 11,
+  },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Compatible Brands (10)                                             */
+/*  Compatible Brands (22)                                             */
 /* ------------------------------------------------------------------ */
 const compatibleBrands = [
-  { name: '华为', slug: 'huawei', sortOrder: 1, description: '全球领先的ICT和智能终端提供商，在光伏逆变器和储能领域占据市场领导地位。' },
-  { name: '比亚迪', slug: 'byd', sortOrder: 2, description: '全球领先的新能源企业，业务涵盖电池、储能、电动汽车等领域。' },
-  { name: '宁德时代', slug: 'catl', sortOrder: 3, description: '全球最大的动力电池和储能电池制造商，技术领先，产能全球第一。' },
-  { name: '阳光电源', slug: 'sungrow', sortOrder: 4, description: '全球领先的光伏逆变器和储能系统供应商，产品远销全球150多个国家。' },
-  { name: '固德威', slug: 'goodwe', sortOrder: 5, description: '全球知名的光伏逆变器及储能产品供应商，产品覆盖户用和工商业场景。' },
-  { name: '古瑞瓦特', slug: 'growatt', sortOrder: 6, description: '全球领先的分布式能源解决方案供应商，逆变器出货量位居全球前列。' },
-  { name: '德业', slug: 'deye', sortOrder: 7, description: '国内知名的逆变器和热泵制造商，微型逆变器市场占有率领先。' },
-  { name: '科华数据', slug: 'kehua', sortOrder: 8, description: '国内领先的智慧电能供应商，在UPS、储能PCS等领域拥有30余年经验。' },
-  { name: '海基新能源', slug: 'highstar', sortOrder: 9, description: '专注于储能电池系统研发与制造的高新技术企业，产品广泛应用于电力储能领域。' },
-  { name: '南都电源', slug: 'narada', sortOrder: 10, description: '国内领先的储能和工业电池解决方案提供商，产品远销全球100多个国家。' },
+  { name: '华为', sortOrder: 1, category: '光伏逆变器/储能' },
+  { name: '比亚迪', sortOrder: 2, category: '储能/电动汽车' },
+  { name: '宁德时代', sortOrder: 3, category: '储能电池' },
+  { name: '阳光电源', sortOrder: 4, category: '光伏逆变器/储能' },
+  { name: '固德威', sortOrder: 5, category: '光伏逆变器' },
+  { name: '古瑞瓦特', sortOrder: 6, category: '光伏逆变器' },
+  { name: '德业', sortOrder: 7, category: '微型逆变器' },
+  { name: '科华数据', sortOrder: 8, category: '储能PCS' },
+  { name: '海基新能源', sortOrder: 9, category: '储能电池' },
+  { name: '南都电源', sortOrder: 10, category: '储能电池' },
+  { name: '特斯拉', sortOrder: 11, category: '储能/充电' },
+  { name: 'SMA', sortOrder: 12, category: '光伏逆变器' },
+  { name: 'Fronius', sortOrder: 13, category: '光伏逆变器' },
+  { name: 'Enphase', sortOrder: 14, category: '微型逆变器' },
+  { name: 'ABB', sortOrder: 15, category: '充电桩/PCS' },
+  { name: '锦浪', sortOrder: 16, category: '光伏逆变器' },
+  { name: '天合光能', sortOrder: 17, category: '光伏组件' },
+  { name: '派能科技', sortOrder: 18, category: '储能电池' },
+  { name: '星星充电', sortOrder: 19, category: '充电桩' },
+  { name: '特来电', sortOrder: 20, category: '充电桩' },
+  { name: 'SolarEdge', sortOrder: 21, category: '光伏优化器' },
+  { name: '科陆电子', sortOrder: 22, category: '储能PCS' },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Job Postings (5)                                                   */
+/* ------------------------------------------------------------------ */
+const jobPostings = [
+  { title: '嵌入式软件工程师', department: '研发部', location: '深圳', type: 'full-time' as const, description: '负责智能能源网关的嵌入式软件开发，包括通讯协议栈开发、边缘计算引擎优化、实时操作系统适配等。', requirements: '计算机/电子相关本科及以上，3年以上嵌入式开发经验，熟悉C/C++，了解Modbus/MQTT/OCPP等协议优先。', isActive: true },
+  { title: '云平台后端工程师', department: '研发部', location: '深圳', type: 'full-time' as const, description: '负责旭衡云平台后端服务开发，包括设备管理、数据采集、调度引擎等核心模块的设计与实现。', requirements: '计算机相关本科及以上，3年以上后端开发经验，熟悉Go/Java/Python，了解微服务架构。', isActive: true },
+  { title: '售前技术支持', department: '销售部', location: '深圳/上海', type: 'full-time' as const, description: '为客户提供技术咨询和方案设计支持，协助销售团队完成技术评审和投标。', requirements: '电气/能源/计算机相关本科及以上，2年以上售前或技术支持经验，良好的沟通能力。', isActive: true },
+  { title: '国际业务拓展经理', department: '销售部', location: '深圳', type: 'full-time' as const, description: '负责海外市场业务开拓，重点区域包括东南亚、澳洲、欧洲。', requirements: '本科及以上，3年以上海外业务开发经验，英语流利。', isActive: true },
+  { title: 'UI/UX 设计师', department: '产品部', location: '深圳', type: 'full-time' as const, description: '负责旭衡云平台、移动端App及官网的UI/UX设计工作。', requirements: '设计相关本科及以上，3年以上UI/UX设计经验，精通Figma/Sketch。', isActive: true },
 ];
 
 /* ================================================================== */
@@ -207,13 +266,14 @@ export async function seed(strapi: Core.Strapi): Promise<void> {
     strapi.log.info('[seed] Articles already exist — skipping.');
   }
 
-  /* ---------- FAQs (no draftAndPublish) ---------- */
+  /* ---------- FAQs (draftAndPublish) ---------- */
   if (await isEmpty(strapi, 'api::faq.faq')) {
     strapi.log.info('[seed] Seeding FAQs…');
     for (const f of faqs) {
       await strapi.documents('api::faq.faq').create({
         data: f as never,
         locale: 'zh-CN',
+        status: 'published',
       });
     }
     strapi.log.info(`[seed] ${faqs.length} FAQs created.`);
@@ -233,6 +293,20 @@ export async function seed(strapi: Core.Strapi): Promise<void> {
     strapi.log.info(`[seed] ${compatibleBrands.length} compatible brands created.`);
   } else {
     strapi.log.info('[seed] Compatible brands already exist — skipping.');
+  }
+
+  /* ---------- Job Postings (no draftAndPublish) ---------- */
+  if (await isEmpty(strapi, 'api::job-posting.job-posting')) {
+    strapi.log.info('[seed] Seeding job postings…');
+    for (const j of jobPostings) {
+      await strapi.documents('api::job-posting.job-posting').create({
+        data: j as never,
+        locale: 'zh-CN',
+      });
+    }
+    strapi.log.info(`[seed] ${jobPostings.length} job postings created.`);
+  } else {
+    strapi.log.info('[seed] Job postings already exist — skipping.');
   }
 
   strapi.log.info('[seed] Seed complete.');
