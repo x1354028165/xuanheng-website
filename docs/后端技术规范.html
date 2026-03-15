@@ -876,6 +876,19 @@ for (const locale of targetLocales) {
   <p style="margin:0;color:#555;"><strong>原因：</strong>DeepSeek 免费/低价账号对并发请求有限制，<code>Promise.all</code> 并发 6 个长文本翻译请求将触发 <strong>HTTP 429 Too Many Requests</strong>，导致部分语言翻译失败且不入库。</p>
 </div>
 
+<div style="background:#e3f2fd;border:2px solid #1976d2;border-radius:8px;padding:18px 22px;margin:24px 0;">
+  <h4 style="margin:0 0 10px 0;color:#0d47a1;">🔒 【翻译单向触发铁律】</h4>
+  <p style="margin:0 0 12px 0;">在 Strapi 翻译 Lifecycle Hook（<code>afterPublish</code>）中，必须首先校验触发事件的语言是主语言（<code>zh-CN</code>），才允许启动翻译流程。<strong>严禁非主语言更新触发跨语言写入</strong>，防止翻译死循环（机翻结果反写主语言）。</p>
+  <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（守卫条件防死循环）：</p>
+  <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>// cms/src/extensions/translate/... 中的 Lifecycle Hook
+async afterPublish(event) {
+  // 只有主语言发布才触发翻译
+  if (event.result.locale !== 'zh-CN') return;
+  // 执行翻译逻辑...
+}</code></pre>
+  <p style="margin:0;color:#555;"><strong>原因：</strong>自动翻译完成后写入 en-US / de / fr 等语言条目时，Strapi 会再次触发 <code>afterPublish</code>。若无此守卫，翻译结果将反写主语言（zh-CN），形成无限循环直至 API 限流或服务崩溃。</p>
+</div>
+
 <div style="background:#e8f5e9;border:2px solid #27ae60;border-radius:8px;padding:18px 22px;margin:24px 0;">
   <h4 style="margin:0 0 12px 0;color:#1a5e1f;">🔒 【v5 Document Service 铁律】</h4>
   <p style="margin:0 0 12px 0;">在编写任何 Strapi 后台自定义逻辑（自动翻译入库、Lifecycle Hook、自定义 API）时，<strong>绝对禁止使用 Strapi v4 的废弃 API：<code>strapi.entityService</code></strong>。</p>
@@ -1647,6 +1660,20 @@ module.exports = ({ env }) =&gt; ({
     <li>禁止在前端直接硬编码或展示永久有效的 OSS 物理地址</li>
   </ul>
   <p style="margin:0;color:#856404;"><strong>开发阶段（本地存储）：</strong>不涉及，上线前必须确认上述方案已实施。</p>
+</div>
+
+<div style="background:#fff8e1;border:2px solid #f9a825;border-radius:8px;padding:18px 22px;margin:24px 0;">
+  <h4 style="margin:0 0 10px 0;color:#e65100;">📁 【文件命名合规铁律】</h4>
+  <p style="margin:0 0 10px 0;">CMS 媒体库（Media Library）上传的所有文件（图片、PDF、视频），文件名必须符合以下规范：</p>
+  <ul style="margin:0 0 12px 0;padding-left:20px;">
+    <li><strong>只允许：</strong>小写英文字母、数字、连字符（<code>-</code>）、下划线（<code>_</code>）、英文点（<code>.</code>）</li>
+    <li><strong>严禁：</strong>中文、空格、特殊字符（<code>#%&amp;+</code> 等）</li>
+  </ul>
+  <p style="margin:0 0 8px 0;"><strong>示例：</strong></p>
+  <p style="margin:0 0 4px 0;color:#27ae60;">✅ <code>smart-energy-gateway-cover.jpg</code></p>
+  <p style="margin:0 0 12px 0;color:#e74c3c;">❌ <code>智能能源网关封面图.jpg</code></p>
+  <p style="margin:0 0 10px 0;color:#555;"><strong>原因：</strong>中文/特殊字符文件名在 OSS URL 编码后可能与数据库记录不一致，导致图片链接失效（返回 404 / 403）。</p>
+  <p style="margin:0;color:#555;"><strong>建议：</strong>在 Strapi upload 插件配置中设置 <code>sanitizeFilename</code> 钩子，自动将文件名中的非 ASCII 字符转为拼音或移除，作为最后一道防线。</p>
 </div>
 
 <h3 id="s6-3">6.3 图片处理规范</h3>

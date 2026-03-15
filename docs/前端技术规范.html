@@ -1436,6 +1436,23 @@ const dateStr = format.dateTime(new Date(article.publishedDate), { dateStyle: 'm
         </tbody>
       </table>
 
+      <div style="background:#e8f5e9;border:2px solid #27ae60;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#1a5e1f;">🔒 【React cache() 作用域铁律】</h4>
+        <p style="margin:0 0 10px 0;">React 的 <code>cache()</code> 函数作用域<strong>仅限于单次请求的生命周期</strong>（单个 React 渲染树），不能跨请求共享数据，不是全站级缓存。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 禁止误用场景（误以为是全站缓存）：</p>
+        <pre style="background:#fdecea;border:1px solid #f5c6cb;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>// cache() 只在同一请求内去重，不能减少服务器总请求数
+export const getProducts = cache(async (locale: string) =&gt; {
+  return await fetchStrapi('/api/products?locale=' + locale);
+});</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 正确使用场景（同一次请求中多个组件需要相同数据时去重）：</p>
+        <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>// Layout 和 Page 都需要产品列表时，cache() 确保只请求一次
+export const getProducts = cache(async (locale: string) =&gt; {
+  return await fetchStrapi('/api/products?locale=' + locale);
+});
+// layout.tsx 和 page.tsx 同时调用 getProducts('zh-CN')，实际只发一次请求</code></pre>
+        <p style="margin:0;color:#555;">跨请求的全站缓存必须依赖 <code>fetch</code> 的 <code>next: &#123; tags, revalidate &#125;</code> 机制，不依赖 <code>cache()</code>。</p>
+      </div>
+
       <h3>7.2 ISR 触发机制（Strapi Webhook → Next.js revalidate）</h3>
 
       <div class="flow-box">Strapi 后台发布/更新内容
@@ -1596,6 +1613,30 @@ export async function POST(request: NextRequest) {
   // ...
 }</code></pre>
         <p style="margin:0;color:#555;"><strong>原因：</strong>B2B 官网面向全球客户，德国/俄罗斯客户填写表单时看到中文报错是严重 UX 问题，直接影响询盘转化率。</p>
+      </div>
+
+      <div style="background:#e8eaf6;border:2px solid #3f51b5;border-radius:8px;padding:18px 22px;margin:16px 0;">
+        <h4 style="margin:0 0 12px 0;color:#1a237e;">🧩 【Zod 动态 Schema 绑定铁律】</h4>
+        <p style="margin:0 0 10px 0;">在 i18n 表单组件中，<strong>Zod Schema 必须与当前 locale 动态绑定</strong>，确保切换语言后校验错误信息立即更新。</p>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 推荐写法（useMemo + locale 依赖项）：</p>
+        <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 12px 0;overflow-x:auto;"><code>'use client';
+import { useMemo } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+
+function ContactForm() {
+  const locale = useLocale();
+  const t = useTranslations('form');
+
+  // locale 变化时 Schema 自动重建
+  const formSchema = useMemo(() =&gt; z.object({
+    name: z.string().min(1, t('errors.required')),
+    email: z.string().email(t('errors.invalidEmail')),
+  }), [locale, t]);  // locale 作为依赖项
+
+  const form = useForm({ resolver: zodResolver(formSchema) });
+  // ...
+}</code></pre>
+        <p style="margin:0;color:#555;"><strong>原因：</strong>Zod Schema 在组件内部被 <code>useMemo</code> 缓存，但若缺少 <code>locale</code> 依赖项，切换语言后 Schema 不会重建，校验报错将仍显示旧语言文案，严重影响国际化用户体验。</p>
       </div>
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:12px 16px;margin:16px 0;border-radius:4px;">
@@ -1825,6 +1866,17 @@ const specs = product.specs || t('common.translationPending');
           <li><strong>非必填字段（specs/gallery/description）：</strong>前端使用方案一或方案三兜底</li>
           <li style="color:#c62828;"><strong>严禁</strong>直接 <code>{product.specs}</code> 裸渲染而不做空值处理</li>
         </ul>
+      </div>
+      <div style="background:#fce4ec;border:2px solid #e91e63;border-radius:8px;padding:18px 22px;margin:24px 0;">
+        <h4 style="margin:0 0 12px 0;color:#880e4f;">⛓️ 【可选链强制铁律】</h4>
+        <p style="margin:0 0 10px 0;">Strapi v5 为性能优化，未填写的字段（<code>null</code>/<code>undefined</code>）可能<strong>直接从 JSON 响应中省略</strong>（而非返回 <code>null</code>）。若不使用可选链，访问省略字段的子属性会抛出 <code>Uncaught TypeError</code> 导致页面崩溃。</p>
+        <p style="margin:0 0 8px 0;"><strong>规则：</strong>访问任何 CMS 动态字段的子属性，必须使用可选链 <code>?.</code>；列表型字段必须提供空数组兜底。</p>
+        <p style="margin:0 0 6px 0;color:#e74c3c;font-weight:bold;">❌ 危险写法：</p>
+        <pre style="background:#fdecea;border:1px solid #f5c6cb;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>product.specs.features.map(...)   // TypeError if specs is undefined</code></pre>
+        <p style="margin:0 0 6px 0;color:#27ae60;font-weight:bold;">✅ 安全写法：</p>
+        <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 0 0;overflow-x:auto;"><code>(product.specs?.features || []).map(...)
+product.cover?.url
+product.gallery?.data?.map(item =&gt; item.url) || []</code></pre>
       </div>
     </div>
 
