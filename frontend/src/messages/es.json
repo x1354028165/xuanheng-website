@@ -196,5 +196,32 @@
     "allBrands": "Todas las marcas",
     "filterByCategory": "Filtrar por categoría",
     "noBrands": "No hay datos de marcas disponibles"
+  },
+  "search": {
+    "title": "Búsqueda",
+    "placeholder": "Buscar productos, soluciones, artículos...",
+    "shortcut": "Cmd+K",
+    "noResults": "No se encontraron resultados",
+    "noResultsHint": "Pruebe con otras palabras clave o contáctenos para obtener ayuda",
+    "products": "Productos",
+    "solutions": "Soluciones",
+    "articles": "Artículos",
+    "faqs": "FAQ",
+    "searching": "Buscando...",
+    "contactUs": "Contáctenos"
+  },
+  "cookie": {
+    "message": "Utilizamos cookies para mejorar su experiencia de navegación. Al continuar usando este sitio web, usted acepta nuestra Política de Cookies.",
+    "acceptAll": "Aceptar todo",
+    "essentialOnly": "Solo esenciales",
+    "managePreferences": "Gestionar preferencias",
+    "learnMore": "Más información"
+  },
+  "error": {
+    "notFound": "Página no encontrada",
+    "notFoundMessage": "Lo sentimos, la página que busca no existe o ha sido eliminada.",
+    "serverError": "Error del servidor",
+    "serverErrorMessage": "Lo sentimos, el servidor encontró un error inesperado. Inténtelo de nuevo más tarde.",
+    "backToHome": "Volver al inicio"
   }
 }

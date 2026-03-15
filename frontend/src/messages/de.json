@@ -196,5 +196,32 @@
     "allBrands": "Alle Marken",
     "filterByCategory": "Nach Kategorie filtern",
     "noBrands": "Keine Markendaten verfügbar"
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Produkte, Lösungen, Artikel suchen...",
+    "shortcut": "Cmd+K",
+    "noResults": "Keine Ergebnisse gefunden",
+    "noResultsHint": "Versuchen Sie andere Suchbegriffe oder kontaktieren Sie uns",
+    "products": "Produkte",
+    "solutions": "Lösungen",
+    "articles": "Artikel",
+    "faqs": "FAQ",
+    "searching": "Suche läuft...",
+    "contactUs": "Kontakt"
+  },
+  "cookie": {
+    "message": "Wir verwenden Cookies, um Ihr Browsererlebnis zu verbessern. Durch die weitere Nutzung dieser Website akzeptieren Sie unsere Cookie-Richtlinie.",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur notwendige",
+    "managePreferences": "Einstellungen verwalten",
+    "learnMore": "Mehr erfahren"
+  },
+  "error": {
+    "notFound": "Seite nicht gefunden",
+    "notFoundMessage": "Die gesuchte Seite existiert nicht oder wurde entfernt.",
+    "serverError": "Serverfehler",
+    "serverErrorMessage": "Der Server hat einen unerwarteten Fehler festgestellt. Bitte versuchen Sie es später erneut.",
+    "backToHome": "Zurück zur Startseite"
   }
 }

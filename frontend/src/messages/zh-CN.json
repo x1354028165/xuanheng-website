@@ -196,5 +196,32 @@
     "allBrands": "全部品牌",
     "filterByCategory": "按类别筛选",
     "noBrands": "暂无品牌数据"
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索产品、解决方案、文章...",
+    "shortcut": "Cmd+K",
+    "noResults": "未找到相关结果",
+    "noResultsHint": "试试其他关键词，或联系我们获取帮助",
+    "products": "产品",
+    "solutions": "解决方案",
+    "articles": "文章",
+    "faqs": "常见问题",
+    "searching": "搜索中...",
+    "contactUs": "联系我们"
+  },
+  "cookie": {
+    "message": "我们使用 Cookie 来改善您的浏览体验。继续使用本网站即表示您接受我们的 Cookie 政策。",
+    "acceptAll": "接受全部",
+    "essentialOnly": "仅必要",
+    "managePreferences": "管理偏好",
+    "learnMore": "了解更多"
+  },
+  "error": {
+    "notFound": "页面未找到",
+    "notFoundMessage": "抱歉，您访问的页面不存在或已被移除。",
+    "serverError": "服务器错误",
+    "serverErrorMessage": "抱歉，服务器遇到了意外错误，请稍后重试。",
+    "backToHome": "返回首页"
   }
 }

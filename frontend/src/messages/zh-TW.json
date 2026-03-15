@@ -191,10 +191,37 @@
     "content": "旭衡电子（以下简称\"我们\"）非常重视用户的隐私保护。本隐私政策说明了我们如何收集、使用、存储和保护您的个人信息。我们仅在必要范围内收集您的个人信息，包括但不限于姓名、电子邮箱、联系电话和公司名称。这些信息将用于响应您的咨询请求、提供技术支持以及改善我们的产品和服务。我们采用行业标准的安全措施保护您的信息安全，未经您的同意，我们不会将您的个人信息分享给第三方。您有权随时查询、更正或删除您的个人信息，如有任何隐私相关问题，请通过 info@alwayscontrol.com.cn 联系我们。"
   },
   "ecosystem": {
-    "title": "兼容生态",
-    "subtitle": "广泛兼容主流新能源设备品牌",
+    "title": "相容生態",
+    "subtitle": "廣泛相容主流新能源設備品牌",
     "allBrands": "全部品牌",
-    "filterByCategory": "按类别筛选",
-    "noBrands": "暂无品牌数据"
+    "filterByCategory": "按類別篩選",
+    "noBrands": "暫無品牌資料"
+  },
+  "search": {
+    "title": "搜尋",
+    "placeholder": "搜尋產品、解決方案、文章...",
+    "shortcut": "Cmd+K",
+    "noResults": "未找到相關結果",
+    "noResultsHint": "試試其他關鍵詞，或聯繫我們獲取幫助",
+    "products": "產品",
+    "solutions": "解決方案",
+    "articles": "文章",
+    "faqs": "常見問題",
+    "searching": "搜尋中...",
+    "contactUs": "聯繫我們"
+  },
+  "cookie": {
+    "message": "我們使用 Cookie 來改善您的瀏覽體驗。繼續使用本網站即表示您接受我們的 Cookie 政策。",
+    "acceptAll": "接受全部",
+    "essentialOnly": "僅必要",
+    "managePreferences": "管理偏好",
+    "learnMore": "了解更多"
+  },
+  "error": {
+    "notFound": "頁面未找到",
+    "notFoundMessage": "抱歉，您造訪的頁面不存在或已被移除。",
+    "serverError": "伺服器錯誤",
+    "serverErrorMessage": "抱歉，伺服器遇到了意外錯誤，請稍後重試。",
+    "backToHome": "返回首頁"
   }
 }

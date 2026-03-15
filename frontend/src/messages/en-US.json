@@ -196,5 +196,32 @@
     "allBrands": "All Brands",
     "filterByCategory": "Filter by Category",
     "noBrands": "No brand data available"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products, solutions, articles...",
+    "shortcut": "Cmd+K",
+    "noResults": "No results found",
+    "noResultsHint": "Try different keywords, or contact us for help",
+    "products": "Products",
+    "solutions": "Solutions",
+    "articles": "Articles",
+    "faqs": "FAQ",
+    "searching": "Searching...",
+    "contactUs": "Contact Us"
+  },
+  "cookie": {
+    "message": "We use cookies to improve your browsing experience. By continuing to use this website, you accept our Cookie Policy.",
+    "acceptAll": "Accept All",
+    "essentialOnly": "Essential Only",
+    "managePreferences": "Manage Preferences",
+    "learnMore": "Learn More"
+  },
+  "error": {
+    "notFound": "Page Not Found",
+    "notFoundMessage": "Sorry, the page you are looking for does not exist or has been removed.",
+    "serverError": "Server Error",
+    "serverErrorMessage": "Sorry, the server encountered an unexpected error. Please try again later.",
+    "backToHome": "Back to Home"
   }
 }
