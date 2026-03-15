@@ -804,6 +804,34 @@ const translateText = async (text: string, from: string, to: string) => {
 │   └── translate.ts      # POST /api/translate（批量翻译，新增语言时用）
 └── index.ts              # 注册路由</code></pre>
 
+<div style="background:#fff8e1;border-left:4px solid #f39c12;border-radius:6px;padding:18px 22px;margin:24px 0;">
+  <h4 style="margin:0 0 10px 0;color:#b7770d;">⚡ 【翻译防雪崩铁律】</h4>
+  <p style="margin:0 0 12px 0;"><strong>afterPublish Hook 触发多语言翻译时，绝对禁止使用 <code>Promise.all</code> 并发请求 DeepSeek API。</strong></p>
+  <p style="margin:0 0 8px 0;color:#e74c3c;font-weight:bold;">❌ 禁止写法（触发 429 限流）：</p>
+  <pre style="background:#fdecea;border:1px solid #f5c6cb;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>await Promise.all([
+  translateText(text, 'en-US'),
+  translateText(text, 'de'),
+  translateText(text, 'fr'),
+  translateText(text, 'pt'),
+  translateText(text, 'es'),
+  translateText(text, 'ru'),
+]);</code></pre>
+  <p style="margin:0 0 8px 0;color:#27ae60;font-weight:bold;">✅ 正确写法（串行 + 间隔，稳定不报错）：</p>
+  <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>const targetLocales = ['en-US', 'de', 'fr', 'pt', 'es', 'ru'];
+for (const locale of targetLocales) {
+  try {
+    const translated = await translateText(content, locale);
+    await updateStrapiLocale(entryId, locale, translated);
+    // 每次翻译后等待 1 秒，避免触发 DeepSeek 并发速率限制
+    await new Promise(r =&gt; setTimeout(r, 1000));
+  } catch (err) {
+    console.error(`翻译失败 [${locale}]:`, err);
+    // 单个语言失败不影响其他语言继续翻译
+  }
+}</code></pre>
+  <p style="margin:0;color:#555;"><strong>原因：</strong>DeepSeek 免费/低价账号对并发请求有限制，<code>Promise.all</code> 并发 6 个长文本翻译请求将触发 <strong>HTTP 429 Too Many Requests</strong>，导致部分语言翻译失败且不入库。</p>
+</div>
+
 <h3 id="s3-5">3.5 错误码对照表</h3>
 <table>
 <thead><tr><th>HTTP 状态码</th><th>含义</th><th>前端处理方式</th></tr></thead>

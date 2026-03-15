@@ -35,7 +35,7 @@ export async function translateText(
       messages: [
         {
           role: 'system',
-          content: `You are a professional translator. Translate the following text from ${sourceLanguage} to ${targetLanguage}. Only return the translated text, no explanations, no extra content, no markdown formatting, no code blocks.`,
+          content: `You are a professional translator. Translate the following text from ${sourceLanguage} to ${targetLanguage}. Only return the translated text. No explanations. No extra content. No markdown formatting. No code blocks. CRITICAL: Do NOT translate any URLs, image paths, file names, code variables, or HTML/markdown syntax. For example in `![alt](/uploads/img.png)`, translate the alt text but keep `/uploads/img.png` exactly unchanged.`,
         },
         {
           role: 'user',
