@@ -813,6 +813,16 @@ export async function generateMetadata({ params }: PageProps): Promise&lt;Metada
   };
 }</code></pre>
 
+      <div class="warning" style="background:#e8f4fd;border-left:4px solid #2196f3;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【generateMetadata 规范】</strong> 所有内容页必须实现动态 SEO，从 Strapi 的 <code>seo</code> Component 字段读取：
+        <ul style="margin:10px 0 0 16px;line-height:1.8;">
+          <li><code>title</code>：优先使用 <code>data.seo.metaTitle</code>，回退到 <code>data.title</code></li>
+          <li><code>description</code>：优先使用 <code>data.seo.metaDescription</code>，回退到 <code>data.summary</code> 前 160 字符</li>
+          <li><code>openGraph.images</code>：使用 <code>data.seo.ogImage.url</code></li>
+          <li><strong>禁止在 <code>generateMetadata</code> 中硬编码任何文案，必须从 CMS 动态获取。</strong></li>
+        </ul>
+      </div>
+
       <h3>5.2 hreflang 实现</h3>
 
       <p>Next.js 14 的 <code>alternates.languages</code> 会自动在 <code>&lt;head&gt;</code> 中生成 <code>&lt;link rel="alternate" hreflang="..."&gt;</code> 标签。关键规则：</p>
@@ -885,6 +895,22 @@ export default async function sitemap(): Promise&lt;MetadataRoute.Sitemap&gt; {
         <strong>【分页铁律】</strong> Strapi 默认只返回前 25 条数据。所有需要获取全量数据的场景（Sitemap生成、下拉选项、关联数据），必须强制追加 <code>pagination[limit]=-1</code> 参数（-1 表示不限制）。<br>
         示例：<code>/api/articles?pagination[limit]=-1&amp;fields[0]=slug&amp;fields[1]=updatedAt</code><br>
         <strong>违反此规则将导致第26条及以后的内容永远不被 Google 收录。</strong>
+      </div>
+
+      <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+        <strong>【SEO 分页铁律】</strong> 所有包含分页的列表页（新闻动态列表、兼容品牌列表、FAQ 列表等）必须使用 SSR + URL Search Params 驱动分页：
+        <p style="margin:10px 0 4px;color:#27ae60;"><strong>✅ 正确做法：</strong></p>
+        <ul style="margin:0 0 0 16px;line-height:1.8;">
+          <li>URL 形式：<code>/zh-CN/news?page=2</code>（页码写入 URL，爬虫可直接访问）</li>
+          <li>page.tsx 从 searchParams 读取页码：<code>const page = searchParams?.page ?? 1</code></li>
+          <li>服务端 fetchStrapi 时传入分页参数：<code>?pagination[page]=${page}&amp;pagination[pageSize]=12</code></li>
+        </ul>
+        <p style="margin:10px 0 4px;color:#c0392b;"><strong>❌ 禁止做法：</strong></p>
+        <ul style="margin:0 0 0 16px;line-height:1.8;">
+          <li>使用 <code>useState(1)</code> 维护当前页码（客户端状态，爬虫看不到第2页及以后内容）</li>
+          <li>使用"加载更多"按钮做纯 CSR 追加（第2批内容对搜索引擎不可见）</li>
+        </ul>
+        <p style="margin:10px 0 0;color:#c0392b;"><strong>⚠️ 违反此规则：搜索引擎永远只能看到列表第一页，旧新闻被挤到第二页后将从 Google 消失。</strong></p>
       </div>
 
       <h3>5.4 SEO 禁止事项</h3>

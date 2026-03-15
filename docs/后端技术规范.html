@@ -1701,6 +1701,28 @@ export async function sendLeadNotification(lead: {
 </tbody>
 </table>
 
+<div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
+  <strong>【表单防刷双保险】</strong> 所有公开表单 API（<code>/api/submit-lead</code>、<code>/api/submit-repair</code>）必须实现：
+  <ol style="margin:10px 0 0 16px;line-height:1.9;">
+    <li><strong>Cloudflare Turnstile 验证码校验</strong>（已有环境变量 <code>TURNSTILE_SECRET_KEY</code>）：
+      <ul style="margin:4px 0 0 16px;line-height:1.8;">
+        <li>前端提交时携带 <code>turnstileToken</code> 字段</li>
+        <li>后端向 <code>https://challenges.cloudflare.com/turnstile/v0/siteverify</code> 验证</li>
+        <li>验证失败返回 <code>400</code>，禁止写入数据库</li>
+      </ul>
+    </li>
+    <li><strong>IP Rate Limit（防爆刷）</strong>：
+      <ul style="margin:4px 0 0 16px;line-height:1.8;">
+        <li>使用 Next.js middleware 或 API Route 内置计数器</li>
+        <li>规则：同一 IP 每小时最多提交 5 次</li>
+        <li>超限返回 <code>429 Too Many Requests</code></li>
+        <li>可使用 <code>@upstash/ratelimit</code>（Redis-based）或内存计数器（单机简单方案）</li>
+      </ul>
+    </li>
+  </ol>
+  <p style="margin:10px 0 0;color:#c0392b;"><strong>⚠️ 违反此规则：上线第一天机器人将爆刷，企业微信群被垃圾线索刷屏，邮件 API 额度耗尽。</strong></p>
+</div>
+
 <hr>
 
 <!-- ============================================================ -->
