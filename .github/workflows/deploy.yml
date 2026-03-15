@@ -41,6 +41,9 @@ jobs:
       - name: Add .nojekyll
         run: touch frontend/out/.nojekyll
 
+      - name: Copy docs to output
+        run: cp -r docs frontend/out/docs
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
