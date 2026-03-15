@@ -618,6 +618,15 @@ export async function generateStaticParams() {
 
       <h3>4.3 next-intl 实现方案</h3>
 
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【next-intl v4 静态渲染铁律】</strong>项目使用 next-intl v4（已安装）。<br>
+        在需要保持 SSG/ISR 特性的服务端组件中（<code>page.tsx</code>、<code>layout.tsx</code>），必须在组件顶部调用：
+<pre style="margin:8px 0 4px;"><code>import { setRequestLocale } from 'next-intl/server';
+setRequestLocale(locale);  // 必须在任何 await 之前调用</code></pre>
+        <strong>注意：</strong>v4 使用 <code>setRequestLocale</code>（稳定 API），v3 的 <code>unstable_setRequestLocale</code> 已废弃，<strong>禁止使用旧版 API</strong>。<br>
+        不调用此函数的后果：页面自动降级为 Dynamic SSR，ISR 彻底失效，<code>next build</code> 可能报错。
+      </div>
+
       <h4>i18n.config.ts — 全量语言定义</h4>
 
 <pre><code>// i18n.config.ts
@@ -1264,6 +1273,19 @@ export async function fetchStrapi&lt;T&gt;(
   return res.json();
 }</code></pre>
 
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【ISR 精准刷新规范】</strong> <code>fetchStrapi</code> 必须支持 <code>cacheTags</code> 参数，实现 Next.js 标签化缓存精准刷新：<br><br>
+        1. <code>fetchStrapi</code> 函数签名追加：<code>options?: &#123; revalidate?: number, cacheTags?: string[] &#125;</code><br>
+        2. <code>fetch</code> 调用中传入：<code>next: &#123; revalidate: options?.revalidate ?? 3600, tags: options?.cacheTags &#125;</code><br>
+        3. 调用示例（按集合类型打标签）：
+<pre style="margin:8px 0 4px;"><code>fetchStrapi('/api/articles', { cacheTags: ['articles', 'zh-CN'] })
+fetchStrapi('/api/products', { cacheTags: ['products'] })</code></pre>
+        4. <code>/api/revalidate</code> Webhook 接口必须使用 <code>revalidateTag()</code> 精准清除：
+<pre style="margin:8px 0 4px;"><code>import { revalidateTag } from 'next/cache';
+revalidateTag('articles');  // 只清新闻缓存，不影响其他页面</code></pre>
+        <strong>禁止</strong>在 Webhook 接口中使用 <code>revalidatePath('/')</code> 全站清除（极度消耗性能）。
+      </div>
+
       <h3>7.4 数据获取示例（首页）</h3>
 
       <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
@@ -1349,6 +1371,19 @@ export default async function HomePage({ params }: PageProps) {
       </div>
 
       <h3>8.2 图片规范（next/image）</h3>
+
+      <div class="warning" style="background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>【图片渲染铁律】</strong> Strapi 在未配置 OSS 时返回相对路径图片 URL（如 <code>/uploads/hero.jpg</code>）。<br>
+        <strong>禁止</strong>直接将 Strapi 返回的图片 URL 赋值给 <code>&lt;Image src={} /&gt;</code>，必须通过封装函数处理：
+<pre style="margin:8px 0 4px;"><code>// src/lib/strapi.ts — 必须创建此工具函数
+export function getStrapiMedia(url: string | null | undefined): string {
+  if (!url) return '/images/placeholder.jpg';
+  if (url.startsWith('http')) return url;  // 绝对路径（OSS/CDN）直接使用
+  return `${process.env.NEXT_PUBLIC_API_URL}${url}`;  // 相对路径拼上 Strapi 地址
+}</code></pre>
+        使用方式：<code>&lt;Image src={getStrapiMedia(product.cover?.url)} alt={...} /&gt;</code><br>
+        违反此规则：本地开发和未配置 OSS 的生产环境将<strong>全站图片 404 破图</strong>。
+      </div>
 
       <table>
         <thead>
