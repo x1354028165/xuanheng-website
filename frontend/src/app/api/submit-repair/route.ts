@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendWecomNotification, sendEmailNotification } from '@/lib/notify';
+import { checkRateLimit } from '@/lib/rate-limit';
+import { sanitizeField, isValidEmail, isValidPhone } from '@/lib/sanitize';
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
 const STRAPI_WRITE_TOKEN = process.env.STRAPI_WRITE_TOKEN || '';
@@ -19,16 +21,38 @@ async function verifyTurnstile(token: string): Promise<boolean> {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json({ error: '请求过于频繁，请稍后再试' }, { status: 429 });
+    }
+
     const body = await request.json();
-    const { name, phone, email, product, serialNumber, description, cfToken, _honey } = body;
+    const { cfToken, _honey } = body;
 
     // Honeypot 检查
     if (_honey) {
       return NextResponse.json({ success: true });
     }
 
+    // 输入验证与清洗
+    const name = sanitizeField(body.name, 100);
+    const phone = sanitizeField(body.phone, 30);
+    const email = sanitizeField(body.email, 200);
+    const product = sanitizeField(body.product, 200);
+    const serialNumber = sanitizeField(body.serialNumber, 100);
+    const description = sanitizeField(body.description, 5000);
+
     if (!name) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });
+    }
+
+    if (email && !isValidEmail(email)) {
+      return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
+    }
+
+    if (phone && !isValidPhone(phone)) {
+      return NextResponse.json({ error: 'Invalid phone format' }, { status: 400 });
     }
 
     // Turnstile 验证

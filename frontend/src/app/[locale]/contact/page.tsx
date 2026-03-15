@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ContactForm } from '@/components/contact/ContactForm';
 
+export const revalidate = 3600;
+
 export default async function ContactPage({
   params,
 }: {

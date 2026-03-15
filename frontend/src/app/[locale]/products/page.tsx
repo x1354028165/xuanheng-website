@@ -6,6 +6,8 @@ import { getStrapiMedia } from '@/lib/strapi';
 import { getProducts } from '@/lib/api';
 import type { StrapiProduct } from '@/types/strapi';
 
+export const revalidate = 3600;
+
 const MOCK_PRODUCTS: Pick<StrapiProduct, 'documentId' | 'title' | 'slug' | 'tagline' | 'cover'>[] = [
   { documentId: '1', title: 'AC-GW1000 智能网关', slug: 'ac-gw1000', tagline: '高性能多协议物联网关，支持Modbus/MQTT/HTTP', cover: null },
   { documentId: '2', title: 'AC-GW2000 工业网关', slug: 'ac-gw2000', tagline: '工业级智能数据采集网关，IP67防护等级', cover: null },

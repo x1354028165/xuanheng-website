@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+export const revalidate = 3600;
+
 export default async function PrivacyPage({
   params,
 }: {

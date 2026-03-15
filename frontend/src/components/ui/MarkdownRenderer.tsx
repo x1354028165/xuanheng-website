@@ -28,7 +28,7 @@ function markdownToHtml(md: string): string {
   // Images: ![alt](src)
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt: string, src: string) => {
     const resolvedSrc = getStrapiMedia(src);
-    return `<img src="${resolvedSrc}" alt="${alt}" loading="lazy" />`;
+    return `<img src="${resolvedSrc}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" style="max-width:100%;height:auto" />`;
   });
 
   // Links: [text](url)

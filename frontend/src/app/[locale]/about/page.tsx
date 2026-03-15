@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
+export const revalidate = 3600;
+
 export default async function AboutPage({
   params,
 }: {

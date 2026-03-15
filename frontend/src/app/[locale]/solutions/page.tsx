@@ -6,6 +6,8 @@ import { getStrapiMedia } from '@/lib/strapi';
 import { getSolutions } from '@/lib/api';
 import type { StrapiSolution } from '@/types/strapi';
 
+export const revalidate = 3600;
+
 const MOCK_SOLUTIONS: Pick<StrapiSolution, 'documentId' | 'title' | 'slug' | 'tagline' | 'cover' | 'description'>[] = [
   {
     documentId: '1',
