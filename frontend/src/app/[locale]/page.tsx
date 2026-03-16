@@ -2,7 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
-export const revalidate = 3600;
+export const revalidate = 60; // 1分钟缓存，CMS更新后60s内生效
 import { Link } from '@/i18n/navigation';
 import { getStrapiMedia } from '@/lib/strapi';
 import { getProducts, getSolutions, getArticles, getCompatibleBrands } from '@/lib/api';
