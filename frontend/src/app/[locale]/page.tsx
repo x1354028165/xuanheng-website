@@ -160,7 +160,6 @@ export default async function HomePage({
 
         {/* Center content */}
         <div className="relative z-10 text-center px-6">
-          <Image src="/images/logo-white.png" alt="AlwaysControl Technology" width={240} height={54} className="mx-auto mb-6 h-14 w-auto" />
           <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
             {t('heroLine1')}<br />{t('heroLine2')}
           </h1>
