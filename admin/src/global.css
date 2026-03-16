@@ -1,0 +1,13 @@
+/* 强制去除 antd v6 Menu item 上下间距和圆角 */
+.ant-menu-item,
+.ant-menu-submenu-title {
+  margin-block: 0 !important;
+  margin-inline: 0 !important;
+  border-radius: 0 !important;
+}
+
+.ant-menu-submenu > .ant-menu .ant-menu-item {
+  margin-block: 0 !important;
+  margin-inline: 0 !important;
+  border-radius: 0 !important;
+}
