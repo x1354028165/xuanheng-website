@@ -49,20 +49,19 @@ export default function SolutionsAccordion({ items }: { items: SolutionItem[] })
                 background: 'linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.2) 100%)',
               }} />
 
-              {/* Collapsed state: tag + title */}
+              {/* Collapsed state: 只显示缩写文字，白色，字号与展开标题一致 */}
               <div
-                className="absolute inset-0 flex flex-col items-center justify-end pb-8 px-4 text-white text-center"
+                className="absolute inset-0 flex items-center justify-center text-white text-center px-2"
                 style={{
                   opacity: isActive ? 0 : 1,
                   transition: 'opacity 0.25s',
                   pointerEvents: 'none',
                 }}
               >
-                <span className="text-[11px] font-bold tracking-[2px] uppercase text-[#38C4E8] mb-1">{item.tag}</span>
-                <span className="text-[14px] font-semibold leading-tight whitespace-nowrap overflow-hidden text-ellipsis max-w-full px-2">{item.title}</span>
+                <span className="text-[22px] font-extrabold leading-tight">{item.tag}</span>
               </div>
 
-              {/* Expanded content */}
+              {/* Expanded content：不显示缩写文字 */}
               <div
                 className="absolute bottom-0 left-0 right-0 p-8 text-white"
                 style={{
@@ -73,7 +72,6 @@ export default function SolutionsAccordion({ items }: { items: SolutionItem[] })
                   pointerEvents: isActive ? 'auto' : 'none',
                 }}
               >
-                <span className="text-[11px] font-bold tracking-[2px] uppercase text-[#38C4E8] block mb-2">{item.tag}</span>
                 <h3 className="text-[22px] font-extrabold mb-2 leading-tight">{item.title}</h3>
                 <p className="text-[13px] text-white/80 leading-relaxed mb-5 line-clamp-3">{item.description}</p>
                 <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-white border border-white/40 rounded px-4 py-2 hover:bg-white/10 transition-colors">
