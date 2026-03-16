@@ -311,7 +311,7 @@ export default async function HomePage({
         </div>
 
         {/* Software tabs */}
-        <div className="mt-[72px] pt-12 border-t border-[#E2E8F0] max-w-[1652px] mx-auto">
+        <div className="mt-[72px] max-w-[1652px] mx-auto">
           <SoftwareTabs tabLabels={{
             HEMS: t("softwareHems"),
             ESS: t("softwareEss"),
