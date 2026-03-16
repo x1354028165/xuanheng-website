@@ -125,8 +125,8 @@ export default async function HomePage({
 
   // Hardware products
   const hwProducts = [
-    { name: 'Neuron II',       img: '/images/neuron-ii-bg.png' },
-    { name: 'Neuron III',      img: null },
+    { name: 'Neuron II',       img: '/images/neuron-ii-final-bg.png' },
+    { name: 'Neuron III',      img: '/images/neuron-iii-bg.png' },
     { name: 'Neuron III Lite', img: '/images/neuron-iii-lite-bg.png' },
   ];
 
@@ -237,8 +237,8 @@ export default async function HomePage({
                 {/* 毛玻璃卡片底部 */}
                 <div className="absolute bottom-6 left-6 right-6 rounded-xl p-6 transition-all duration-300 bg-white/20 backdrop-blur-[14px] group-hover:bg-white group-hover:backdrop-blur-none">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#38C4E8]/20 flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 text-[#38C4E8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <div className="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-white group-hover:text-[#0F172A] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                         <path strokeLinecap="round" strokeLinejoin="round" d={card.iconPath} />
                       </svg>
                     </div>
@@ -247,7 +247,7 @@ export default async function HomePage({
                   <ul className="space-y-1.5">
                     {card.points.map((p, j) => (
                       <li key={j} className="flex items-center gap-2 text-[13px] text-white/85 group-hover:text-[#475569] transition-colors">
-                        <svg className="w-3.5 h-3.5 text-[#38C4E8] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <svg className="w-3.5 h-3.5 text-white/70 group-hover:text-[#0F172A] flex-shrink-0 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                         {p}
@@ -296,23 +296,26 @@ export default async function HomePage({
           {hwProducts.map((hw) => (
             <div
               key={hw.name}
-              className="bg-white rounded-2xl px-6 text-center border border-[#E2E8F0] cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.4)] flex flex-col items-center justify-center"
+              className="bg-white rounded-2xl px-8 text-center border border-[#E2E8F0] cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.4)] flex flex-col"
               style={{ height: '565px' }}
             >
-              <div className="flex items-center justify-center mb-8 w-full">
+              {/* 图片区域 — 固定高度，设备居中 */}
+              <div className="flex items-center justify-center flex-1 w-full py-8">
                 {hw.img ? (
                   <Image
                     src={hw.img}
                     alt={hw.name}
                     width={420}
-                    height={280}
-                    className="object-contain w-full max-h-[340px]"
+                    height={320}
+                    className="object-contain w-full h-full"
+                    style={{ maxHeight: '380px' }}
                   />
                 ) : (
                   <DeviceSVG />
                 )}
               </div>
-              <div className="text-[clamp(20px,1.5vw,26px)] font-medium text-[#0F172A] tracking-[-0.5px]">
+              {/* 文字区域 — 底部对齐 */}
+              <div className="pb-10 text-[clamp(18px,1.3vw,24px)] font-medium text-[#0F172A] tracking-[-0.5px]">
                 {hw.name}
               </div>
             </div>
@@ -327,7 +330,7 @@ export default async function HomePage({
         </div>
 
         {/* Software tabs */}
-        <div className="mt-8">
+        <div className="mt-8 max-w-[1652px] mx-auto">
           <SoftwareTabs tabLabels={{
             HEMS: t("softwareHems"),
             ESS: t("softwareEss"),
