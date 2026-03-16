@@ -220,63 +220,39 @@ export default async function HomePage({
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 云端直连 */}
-            <div className="relative overflow-hidden rounded-2xl group cursor-pointer" style={{ aspectRatio: '16/9' }}>
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop')" }}
-              />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.05) 100%)' }} />
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
-                    </svg>
-                  </div>
-                  <span className="text-[11px] font-bold tracking-[2px] uppercase text-white/60">{t("accessCloudUseCase")}</span>
-                </div>
-                <h3 className="text-[22px] font-extrabold mb-3 leading-snug">{t("accessCloudTitle")}</h3>
-                <ul className="space-y-1.5">
-                  {[t("accessCloudPoint1"), t("accessCloudPoint2"), t("accessCloudPoint3")].map((p, i) => (
-                    <li key={i} className="flex items-center gap-2 text-[13px] text-white/80">
-                      <svg className="w-3.5 h-3.5 text-[#38C4E8] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            {([
+              { img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop", title: t("accessCloudTitle"), points: [t("accessCloudPoint1"), t("accessCloudPoint2"), t("accessCloudPoint3")], iconPath: "M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" },
+              { img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop", title: t("accessGatewayTitle"), points: [t("accessGatewayPoint1"), t("accessGatewayPoint2"), t("accessGatewayPoint3")], iconPath: "M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" },
+            ] as { img: string; title: string; points: string[]; iconPath: string }[]).map((card, i) => (
+              <div key={i} className="relative overflow-hidden rounded-2xl group cursor-pointer" style={{ aspectRatio: '806/520' }}>
+                {/* 背景图 — 无蒙版 */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url('${card.img}')` }}
+                />
+                {/* 毛玻璃卡片底部 */}
+                <div className="absolute bottom-6 left-6 right-6 rounded-xl p-6 transition-all duration-300 bg-white/20 backdrop-blur-[14px] group-hover:bg-white group-hover:backdrop-blur-none">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#38C4E8]/20 flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-[#38C4E8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d={card.iconPath} />
                       </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            {/* 网关局域网 */}
-            <div className="relative overflow-hidden rounded-2xl group cursor-pointer" style={{ aspectRatio: '16/9' }}>
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop')" }}
-              />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.05) 100%)' }} />
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" />
-                    </svg>
+                    </div>
+                    <h3 className="text-[17px] font-extrabold text-white group-hover:text-[#0F172A] transition-colors leading-tight">{card.title}</h3>
                   </div>
-                  <span className="text-[11px] font-bold tracking-[2px] uppercase text-white/60">{t("accessGatewayUseCase")}</span>
+                  <ul className="space-y-1.5">
+                    {card.points.map((p, j) => (
+                      <li key={j} className="flex items-center gap-2 text-[13px] text-white/85 group-hover:text-[#475569] transition-colors">
+                        <svg className="w-3.5 h-3.5 text-[#38C4E8] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-[22px] font-extrabold mb-3 leading-snug">{t("accessGatewayTitle")}</h3>
-                <ul className="space-y-1.5">
-                  {[t("accessGatewayPoint1"), t("accessGatewayPoint2"), t("accessGatewayPoint3")].map((p, i) => (
-                    <li key={i} className="flex items-center gap-2 text-[13px] text-white/80">
-                      <svg className="w-3.5 h-3.5 text-[#38C4E8] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
               </div>
-            </div>
+            ))}
           </div>
           <div className="mt-10 text-center">
             <Link href="/ecosystem" className="inline-flex items-center gap-2 text-[#0F172A] font-semibold hover:text-[#38C4E8] transition-colors text-[15px]">
