@@ -125,9 +125,9 @@ export default async function HomePage({
 
   // Hardware products
   const hwProducts = [
-    { name: 'Neuron II',       img: '/images/neuron-ii.jpg' },
+    { name: 'Neuron II',       img: '/images/neuron-ii-bg.png' },
     { name: 'Neuron III',      img: null },
-    { name: 'Neuron III Lite', img: '/images/neuron-iii-lite.jpg' },
+    { name: 'Neuron III Lite', img: '/images/neuron-iii-lite-bg.png' },
   ];
 
   // Brand fallback names
@@ -296,7 +296,7 @@ export default async function HomePage({
           {hwProducts.map((hw) => (
             <div
               key={hw.name}
-              className="bg-[#F8FAFC] rounded-2xl px-6 text-center border-[1.5px] border-transparent cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.25)] flex flex-col items-center justify-center"
+              className="bg-white rounded-2xl px-6 text-center border border-[#E2E8F0] cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.4)] flex flex-col items-center justify-center"
               style={{ height: '565px' }}
             >
               <div className="flex items-center justify-center mb-8 w-full">
