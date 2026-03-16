@@ -179,3 +179,54 @@ export async function getJobPostings(locale = 'zh-CN'): Promise<StrapiJobPosting
     return [];
   }
 }
+
+// ---------------------------------------------------------------------------
+// Doc Resources
+// ---------------------------------------------------------------------------
+
+export async function getDocResources(): Promise<any[]> {
+  try {
+    const res = await fetchWithFallback<StrapiResponse<any>>('/doc-resources', {
+      sort: ['sortOrder:asc'],
+      pagination: { limit: 100 },
+    });
+    return res.data ?? [];
+  } catch {
+    console.warn('[API] getDocResources failed, returning empty array');
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Software Downloads
+// ---------------------------------------------------------------------------
+
+export async function getSoftwareDownloads(): Promise<any[]> {
+  try {
+    const res = await fetchWithFallback<StrapiResponse<any>>('/software-downloads', {
+      sort: ['sortOrder:asc'],
+      pagination: { limit: 50 },
+    });
+    return res.data ?? [];
+  } catch {
+    console.warn('[API] getSoftwareDownloads failed, returning empty array');
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Firmware Versions
+// ---------------------------------------------------------------------------
+
+export async function getFirmwareVersions(): Promise<any[]> {
+  try {
+    const res = await fetchWithFallback<StrapiResponse<any>>('/firmware-versions', {
+      sort: ['sortOrder:asc'],
+      pagination: { limit: 100 },
+    });
+    return res.data ?? [];
+  } catch {
+    console.warn('[API] getFirmwareVersions failed, returning empty array');
+    return [];
+  }
+}

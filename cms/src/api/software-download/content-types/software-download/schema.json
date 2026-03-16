@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "software_downloads",
+  "info": {
+    "singularName": "software-download",
+    "pluralName": "software-downloads",
+    "displayName": "软件下载"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "fileUrl": {
+      "type": "string"
+    },
+    "releaseDate": {
+      "type": "date"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "firmware_versions",
+  "info": {
+    "singularName": "firmware-version",
+    "pluralName": "firmware-versions",
+    "displayName": "固件版本"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "version": {
+      "type": "string",
+      "required": true
+    },
+    "releaseDate": {
+      "type": "date"
+    },
+    "changelog": {
+      "type": "text"
+    },
+    "fileUrl": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

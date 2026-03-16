@@ -559,6 +559,40 @@ export interface ApiCompatibleBrandCompatibleBrand
   };
 }
 
+export interface ApiDocResourceDocResource extends Struct.CollectionTypeSchema {
+  collectionName: 'doc_resources';
+  info: {
+    displayName: '\u6280\u672F\u6587\u6863';
+    pluralName: 'doc-resources';
+    singularName: 'doc-resource';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fileType: Schema.Attribute.String;
+    fileUrl: Schema.Attribute.String;
+    language: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::doc-resource.doc-resource'
+    > &
+      Schema.Attribute.Private;
+    product: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.String;
+  };
+}
+
 export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   collectionName: 'faqs';
   info: {
@@ -641,6 +675,40 @@ export interface ApiFileAssetFileAsset extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     version: Schema.Attribute.String;
+  };
+}
+
+export interface ApiFirmwareVersionFirmwareVersion
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'firmware_versions';
+  info: {
+    displayName: '\u56FA\u4EF6\u7248\u672C';
+    pluralName: 'firmware-versions';
+    singularName: 'firmware-version';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    changelog: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fileUrl: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::firmware-version.firmware-version'
+    > &
+      Schema.Attribute.Private;
+    model: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    releaseDate: Schema.Attribute.Date;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1012,6 +1080,41 @@ export interface ApiSeoConfigSeoConfig extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSoftwareDownloadSoftwareDownload
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'software_downloads';
+  info: {
+    displayName: '\u8F6F\u4EF6\u4E0B\u8F7D';
+    pluralName: 'software-downloads';
+    singularName: 'software-download';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    fileUrl: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::software-download.software-download'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    platform: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    releaseDate: Schema.Attribute.Date;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    version: Schema.Attribute.String;
   };
 }
 
@@ -1585,8 +1688,10 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::case.case': ApiCaseCase;
       'api::compatible-brand.compatible-brand': ApiCompatibleBrandCompatibleBrand;
+      'api::doc-resource.doc-resource': ApiDocResourceDocResource;
       'api::faq.faq': ApiFaqFaq;
       'api::file-asset.file-asset': ApiFileAssetFileAsset;
+      'api::firmware-version.firmware-version': ApiFirmwareVersionFirmwareVersion;
       'api::i18n-key.i18n-key': ApiI18NKeyI18NKey;
       'api::job-posting.job-posting': ApiJobPostingJobPosting;
       'api::lead.lead': ApiLeadLead;
@@ -1596,6 +1701,7 @@ declare module '@strapi/strapi' {
       'api::product.product': ApiProductProduct;
       'api::repair-ticket.repair-ticket': ApiRepairTicketRepairTicket;
       'api::seo-config.seo-config': ApiSeoConfigSeoConfig;
+      'api::software-download.software-download': ApiSoftwareDownloadSoftwareDownload;
       'api::solution.solution': ApiSolutionSolution;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

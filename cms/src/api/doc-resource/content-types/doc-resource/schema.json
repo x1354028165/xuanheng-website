@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "doc_resources",
+  "info": {
+    "singularName": "doc-resource",
+    "pluralName": "doc-resources",
+    "displayName": "技术文档"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "product": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "fileUrl": {
+      "type": "string"
+    },
+    "fileType": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
