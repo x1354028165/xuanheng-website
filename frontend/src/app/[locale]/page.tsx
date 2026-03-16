@@ -279,13 +279,6 @@ export default async function HomePage({
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('productsSubtitle')}</p>
         </div>
 
-        {/* HARDWARE label */}
-        <div className="max-w-[1652px] mx-auto mb-8">
-          <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
-            {t('hardwareLabel')}
-          </span>
-        </div>
-
         {/* Hardware cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1652px] mx-auto">
           {hwProducts.map((hw) => (
@@ -317,15 +310,8 @@ export default async function HomePage({
           ))}
         </div>
 
-        {/* SOFTWARE label */}
-        <div className="max-w-[1652px] mx-auto mt-[72px] pt-12 border-t border-[#E2E8F0]">
-          <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
-            {t('softwareLabel')}
-          </span>
-        </div>
-
         {/* Software tabs */}
-        <div className="mt-8 max-w-[1652px] mx-auto">
+        <div className="mt-[72px] pt-12 border-t border-[#E2E8F0] max-w-[1652px] mx-auto">
           <SoftwareTabs tabLabels={{
             HEMS: t("softwareHems"),
             ESS: t("softwareEss"),
