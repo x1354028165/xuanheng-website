@@ -25,6 +25,9 @@ import AuditLogs from './pages/AuditLogs';
 import CacheMgmt from './pages/CacheMgmt';
 import HealthCheck from './pages/HealthCheck';
 import SitemapMgmt from './pages/SitemapMgmt';
+import DocResources from './pages/DocResources';
+import FirmwareVersions from './pages/FirmwareVersions';
+import SoftwareDownloads from './pages/SoftwareDownloads';
 import type { ReactNode } from 'react';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -80,6 +83,9 @@ export default function App() {
               <Route path="cache-mgmt" element={<CacheMgmt />} />
               <Route path="health-check" element={<HealthCheck />} />
               <Route path="sitemap" element={<SitemapMgmt />} />
+              <Route path="doc-resources" element={<DocResources />} />
+              <Route path="firmware-versions" element={<FirmwareVersions />} />
+              <Route path="software-downloads" element={<SoftwareDownloads />} />
             </Route>
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

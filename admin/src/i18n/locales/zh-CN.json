@@ -32,6 +32,9 @@
     "cacheMgmt": "缓存管理",
     "healthCheck": "健康检查",
     "sitemapMgmt": "Sitemap管理",
+    "docResources": "技术文档管理",
+    "firmwareVersions": "固件版本管理",
+    "softwareDownloads": "软件下载管理",
     "group": {
       "content": "内容管理",
       "pages": "内容与页面",
@@ -224,6 +227,32 @@
     "status": "状态码",
     "responseTime": "响应时间",
     "runCheck": "开始检查"
+  },
+  "docResources": {
+    "title": "标题",
+    "product": "产品",
+    "version": "版本",
+    "fileType": "文件类型",
+    "language": "语言",
+    "fileUrl": "文件URL",
+    "sortOrder": "排序"
+  },
+  "firmwareVersions": {
+    "model": "型号",
+    "version": "版本",
+    "releaseDate": "发布日期",
+    "changelog": "更新说明",
+    "fileUrl": "文件URL",
+    "sortOrder": "排序"
+  },
+  "softwareDownloads": {
+    "name": "名称",
+    "version": "版本",
+    "platform": "平台",
+    "description": "描述",
+    "fileUrl": "文件URL",
+    "releaseDate": "发布日期",
+    "sortOrder": "排序"
   },
   "sitemap": {
     "url": "Sitemap地址",

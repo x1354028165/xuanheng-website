@@ -32,6 +32,9 @@
     "cacheMgmt": "Cache",
     "healthCheck": "Health Check",
     "sitemapMgmt": "Sitemap",
+    "docResources": "Doc Resources",
+    "firmwareVersions": "Firmware Versions",
+    "softwareDownloads": "Software Downloads",
     "group": {
       "content": "Content",
       "pages": "Content & Pages",
@@ -224,6 +227,32 @@
     "status": "Status Code",
     "responseTime": "Response Time",
     "runCheck": "Run Check"
+  },
+  "docResources": {
+    "title": "Title",
+    "product": "Product",
+    "version": "Version",
+    "fileType": "File Type",
+    "language": "Language",
+    "fileUrl": "File URL",
+    "sortOrder": "Sort Order"
+  },
+  "firmwareVersions": {
+    "model": "Model",
+    "version": "Version",
+    "releaseDate": "Release Date",
+    "changelog": "Changelog",
+    "fileUrl": "File URL",
+    "sortOrder": "Sort Order"
+  },
+  "softwareDownloads": {
+    "name": "Name",
+    "version": "Version",
+    "platform": "Platform",
+    "description": "Description",
+    "fileUrl": "File URL",
+    "releaseDate": "Release Date",
+    "sortOrder": "Sort Order"
   },
   "sitemap": {
     "url": "Sitemap URL",

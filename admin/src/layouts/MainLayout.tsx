@@ -24,6 +24,9 @@ import {
   SisternodeOutlined,
   UserOutlined,
   AuditOutlined,
+  FilePdfOutlined,
+  CloudDownloadOutlined,
+  CodeOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -70,6 +73,9 @@ export default function MainLayout() {
         { key: '/file-assets', icon: <FolderOpenOutlined />, label: t('menu.fileAssets') },
         { key: '/brands', icon: <TagsOutlined />, label: t('menu.brands') },
         { key: '/product-relations', icon: <LinkOutlined />, label: t('menu.productRelations') },
+        { key: '/doc-resources', icon: <FilePdfOutlined />, label: t('menu.docResources') },
+        { key: '/firmware-versions', icon: <CodeOutlined />, label: t('menu.firmwareVersions') },
+        { key: '/software-downloads', icon: <CloudDownloadOutlined />, label: t('menu.softwareDownloads') },
       ],
     },
     {
