@@ -340,7 +340,7 @@ export function Header({ locale }: { locale: string }) {
               onClick={() => setLangPageOpen(true)}
               className={`hidden sm:flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
             >
-              <Globe className="h-4 w-4" />
+              <Globe className="h-5 w-5" />
             </button>
 
             {/* Mobile hamburger */}
@@ -479,7 +479,7 @@ export function Header({ locale }: { locale: string }) {
       >
         {/* 面板顶栏 */}
         <div className="flex items-center justify-between px-8 sm:px-16 h-[72px] border-b border-[#F1F5F9]">
-          <span className="text-[11px] font-semibold text-[#94A3B8] tracking-[3px] uppercase">Select Language</span>
+          <Globe className="h-5 w-5 text-[#94A3B8]" />
           <button
             onClick={() => setLangPageOpen(false)}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F1F5F9] transition-colors"
