@@ -249,7 +249,7 @@ export default async function HomePage({
       </section>
 
       {/* ===== 3. SOLUTIONS (Accordion) ===== */}
-      <section className="bg-white py-24 px-6">
+      <section className="bg-white py-24 px-[60px]">
         <h2 className="text-center text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-16">
           {t('solutionsSectionTitle')}
         </h2>
