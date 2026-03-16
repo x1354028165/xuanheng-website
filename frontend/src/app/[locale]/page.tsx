@@ -263,9 +263,11 @@ export default async function HomePage({
 
       {/* ===== 3. SOLUTIONS (Accordion) ===== */}
       <section className="bg-white py-24 px-[60px]">
-        <h2 className="text-center text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-16">
-          {t('solutionsSectionTitle')}
-        </h2>
+        <div className="max-w-[1652px] mx-auto">
+          <h2 className="text-center text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-16">
+            {t('solutionsSectionTitle')}
+          </h2>
+        </div>
         <SolutionsAccordion items={accordionData} />
       </section>
 
@@ -324,13 +326,14 @@ export default async function HomePage({
 
       {/* ===== 5. BRANDS ===== */}
       <section className="bg-white py-24 px-[60px]">
+        <div className="max-w-[1652px] mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
             {t('brandsTitle')}
           </h2>
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('brandsSubtitle')}</p>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 max-w-[800px] mx-auto">
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
           {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
             const name = typeof brand === 'string' ? brand : brand.name;
             return (
@@ -349,6 +352,7 @@ export default async function HomePage({
             {t('brandsMissing')} →
           </Link>
         </div>
+        </div>{/* /max-w-[1652px] */}
       </section>
 
       {/* ===== 6. NEWS ===== */}
