@@ -308,7 +308,7 @@ export default async function HomePage({
 
       {/* ===== 5. BRANDS ===== */}
       <section className="bg-white py-24 px-[60px]">
-        <div className="max-w-[1652px] mx-auto">
+        <div className="max-w-[1440px] mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
             {t('brandsTitle')}
@@ -318,8 +318,9 @@ export default async function HomePage({
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
             const name = typeof brand === 'string' ? brand : brand.name;
+            const STRAPI_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
             const logoUrl = typeof brand !== 'string' && brand.logo?.url
-              ? (brand.logo.url.startsWith('http') ? brand.logo.url : brand.logo.url)
+              ? (brand.logo.url.startsWith('http') ? brand.logo.url : `${STRAPI_BASE}${brand.logo.url}`)
               : null;
             return (
               <div
@@ -342,7 +343,7 @@ export default async function HomePage({
             {t('brandsMissing')} →
           </Link>
         </div>
-        </div>{/* /max-w-[1652px] */}
+        </div>{/* /max-w-[1440px] */}
       </section>
 
       {/* ===== 6. NEWS ===== */}

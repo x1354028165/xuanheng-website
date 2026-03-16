@@ -1,4 +1,6 @@
+// 服务端(SSR/ISR)内部访问用 localhost，客户端用公网URL
 const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+const STRAPI_INTERNAL_URL = process.env.STRAPI_INTERNAL_URL || 'http://localhost:1337';
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || '';
 
 export function getStrapiURL(path = ''): string {
@@ -90,7 +92,10 @@ export async function fetchStrapi<T = unknown>(
     fields.forEach((f, i) => params.set(`fields[${i}]`, f));
   }
 
-  const url = `${STRAPI_URL}/api${endpoint}?${params.toString()}`;
+  // 服务端环境用内部URL（localhost），客户端用公网URL
+  const isServer = typeof window === 'undefined';
+  const baseUrl = isServer ? STRAPI_INTERNAL_URL : STRAPI_URL;
+  const url = `${baseUrl}/api${endpoint}?${params.toString()}`;
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
