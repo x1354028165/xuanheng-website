@@ -78,35 +78,35 @@ export default async function HomePage({
   // Accordion data
   const accordionItems = [
     {
-      tag: 'Residential ESS',
+      tag: '户用储能',
       titleKey: 'accordionHems',
       descKey: 'accordionHemsDesc',
       href: '/solutions/hems',
       bgImage: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
     },
     {
-      tag: 'Commercial & Industrial',
+      tag: '工商业储能',
       titleKey: 'accordionEss',
       descKey: 'accordionEssDesc',
       href: '/solutions/ess',
       bgImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
     },
     {
-      tag: 'EV Charging',
+      tag: '充电站管理',
       titleKey: 'accordionEvcms',
       descKey: 'accordionEvcmsDesc',
       href: '/solutions/evcms',
       bgImage: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
     },
     {
-      tag: 'Virtual Power Plant',
+      tag: '虚拟电厂',
       titleKey: 'accordionVpp',
       descKey: 'accordionVppDesc',
       href: '/solutions/vpp',
       bgImage: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
     },
     {
-      tag: 'Power Quality',
+      tag: '电能质量',
       titleKey: 'accordionPqms',
       descKey: 'accordionPqmsDesc',
       href: '/solutions/pqms',
