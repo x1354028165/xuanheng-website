@@ -315,16 +315,24 @@ export default async function HomePage({
           </h2>
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('brandsSubtitle')}</p>
         </div>
-        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
             const name = typeof brand === 'string' ? brand : brand.name;
+            const logoUrl = typeof brand !== 'string' && brand.logo?.url
+              ? (brand.logo.url.startsWith('http') ? brand.logo.url : brand.logo.url)
+              : null;
             return (
               <div
                 key={idx}
-                className="flex items-center justify-center bg-white border border-[#E2E8F0] rounded-lg text-[15px] font-bold tracking-[0.5px] cursor-pointer transition-all duration-200 hover:border-[#38C4E8] hover:shadow-[0_4px_12px_rgba(56,196,232,.15)] hover:-translate-y-0.5"
-                style={{ aspectRatio: '2.2 / 1' }}
+                className="flex flex-col items-center justify-center gap-2 bg-white border border-[#E2E8F0] rounded-xl p-4 cursor-pointer transition-all duration-200 hover:border-[#38C4E8] hover:shadow-[0_4px_12px_rgba(56,196,232,.15)] hover:-translate-y-0.5"
+                style={{ aspectRatio: '2 / 1' }}
               >
-                {name}
+                {logoUrl ? (
+                  <Image src={logoUrl} alt={name} width={100} height={40}
+                    className="object-contain max-h-[36px] w-auto" />
+                ) : (
+                  <span className="text-[14px] font-semibold text-[#475569] tracking-[0.5px]">{name}</span>
+                )}
               </div>
             );
           })}
