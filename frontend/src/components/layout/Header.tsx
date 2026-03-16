@@ -271,7 +271,7 @@ export function Header({ locale }: { locale: string }) {
             : "bg-white/92 backdrop-blur-xl border-b border-[#E2E8F0] shadow-sm"
         }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex h-[72px] w-full items-center justify-between px-4 sm:px-8 lg:px-[60px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             {isTransparent ? (
