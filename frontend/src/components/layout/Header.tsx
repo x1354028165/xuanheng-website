@@ -481,7 +481,7 @@ export function Header({ locale }: { locale: string }) {
 
             {/* Language switcher trigger */}
             <button
-              onClick={() => setLangPageOpen(true)}
+              onClick={() => { setMobileOpen(false); setLangPageOpen(true); }}
               className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
             >
               <Globe className="h-5 w-5" />
@@ -490,7 +490,7 @@ export function Header({ locale }: { locale: string }) {
             {/* Mobile hamburger */}
             <button
               className={`md:hidden rounded-md p-2 transition-colors ${isTransparent ? "text-white hover:bg-white/10" : "text-[#0F172A] hover:bg-gray-100"}`}
-              onClick={() => setMobileOpen(!mobileOpen)}
+              onClick={() => { setLangPageOpen(false); setMobileOpen(!mobileOpen); }}
               aria-label="Toggle menu"
             >
               <svg
@@ -537,9 +537,19 @@ export function Header({ locale }: { locale: string }) {
           {activeMegaNav && renderMegaPanel(activeMegaNav)}
         </div>
 
-        {/* Mobile Nav Panel */}
-        {mobileOpen && (
-          <div className="md:hidden bg-[#0C1829]/95 backdrop-blur-md border-t border-white/10 max-h-[80vh] overflow-y-auto">
+      </header>
+
+      {/* Mobile Nav Backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-[90] bg-black/40 md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* Mobile Nav Panel — fixed below header, not in document flow */}
+      {mobileOpen && (
+        <div className="fixed top-[72px] left-0 right-0 z-[100] md:hidden bg-[#0C1829]/95 backdrop-blur-md border-t border-white/10 max-h-[calc(100vh-72px)] overflow-y-auto">
             <nav className="flex flex-col gap-1 px-4 py-4">
               {NAV_ITEMS.map((nav) => {
                 const hasChildren = !!nav.children;
@@ -621,7 +631,6 @@ export function Header({ locale }: { locale: string }) {
             </nav>
           </div>
         )}
-      </header>
 
       {/* 语言选择器蒙版 */}
       {langPageOpen && (
