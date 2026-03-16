@@ -264,7 +264,7 @@
       </div>
 
       <div class="warning" style="background:#fce8e8;border-left:4px solid #e53e3e;padding:12px 16px;margin:16px 0;border-radius:4px;">
-        <strong>【Markdown 内图片渲染铁律】</strong> Strapi 后台编辑器插入的图片路径为相对路径（如 <code>/uploads/image.jpg</code>），<code>react-markdown</code> 默认不处理路径，导致浏览器向前端服务器请求图片，100% 破图。<br><br>
+        <strong>【Markdown 内图片渲染铁律】</strong> 后台编辑器插入的图片路径为相对路径（如 <code>/uploads/image.jpg</code>），<code>react-markdown</code> 默认不处理路径，导致浏览器向前端服务器请求图片，100% 破图。<br><br>
         必须在 <code>ReactMarkdown</code> 组件上重写 <code>img</code> 渲染器：
         <pre style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:4px;margin:12px 0;overflow-x:auto;font-size:13px;"><code>// src/components/ui/MarkdownRenderer.tsx — 全站统一 Markdown 渲染组件
 import ReactMarkdown from 'react-markdown';
@@ -329,7 +329,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
       <p><strong>安装（在 cms/ 目录下）：</strong></p>
       <pre><code>npm install antd</code></pre>
 
-      <p><strong>注意：</strong>Ant Design 仅用于 CMS 后台扩展，不引入前台 Next.js 项目，避免 bundle 增大。</p>
+      <p><strong>注意：</strong>Ant Design 仅用于 后台扩展，不引入前台 Next.js 项目，避免 bundle 增大。</p>
 
       <h3>1.6 部署平台：Vercel</h3>
 
@@ -660,7 +660,7 @@ export async function generateStaticParams() {
 
       <div class="highlight">
         <strong>架构策略：8语言全量，Day 1 全部激活，无分阶段开放。</strong><br>
-        <code>locales</code> 数组定义全部 8 个 locale。语言列表从 Strapi 动态获取，用于前台语言切换器（<code>GET /api/i18n/locales</code>）。加新语言无需改代码：Strapi 后台添加 → DeepSeek 批量翻译 → 前台立即出现。
+        <code>locales</code> 数组定义全部 8 个 locale。语言列表从 Strapi 动态获取，用于前台语言切换器（<code>GET /api/i18n/locales</code>）。加新语言无需改代码：后台添加 → DeepSeek 批量翻译 → 前台立即出现。
       </div>
 
       <table>
@@ -788,7 +788,7 @@ export default createMiddleware({
 });
 
 // 所有语言 Day 1 全部激活，无重定向逻辑
-// 加新语言：Strapi 后台操作 → DeepSeek 批量翻译 → 前台立即出现，无需改代码
+// 加新语言：后台操作 → DeepSeek 批量翻译 → 前台立即出现，无需改代码
 
 export const config = {
   // 匹配所有路径（排除 api / _next / 静态资源）
@@ -1455,7 +1455,7 @@ export const getProducts = cache(async (locale: string) =&gt; {
 
       <h3>7.2 ISR 触发机制（Strapi Webhook → Next.js revalidate）</h3>
 
-      <div class="flow-box">Strapi 后台发布/更新内容
+      <div class="flow-box">后台发布/更新内容
         ↓
 Strapi Webhook POST → https://your-site.vercel.app/api/revalidate
         ↓  (携带 secret + 变更的 content type + entry id)
@@ -1749,7 +1749,7 @@ const { isEnabled } = await draftMode();
 const statusParam = isEnabled ? '&amp;status=draft' : '';
 // 将 statusParam 追加到 Strapi 请求 URL</code></pre>
         4. 在 <code>cms/.env.example</code> 中加入：<code>DRAFT_MODE_SECRET=（随机32位）</code><br><br>
-        <strong>Strapi 后台配置说明：</strong>在内容条目的预览按钮 URL 中配置：<br>
+        <strong>后台配置说明：</strong>在内容条目的预览按钮 URL 中配置：<br>
         <code>{前端域名}/api/draft?secret={DRAFT_MODE_SECRET}&amp;slug={slug}&amp;locale={locale}</code>
       </div>
 

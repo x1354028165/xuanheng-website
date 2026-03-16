@@ -164,7 +164,7 @@
   <p style="margin-bottom:6px;">Strapi v5 引入 Document 架构，<code>documentId</code> 是跨语言版本和草稿/发布状态的统一唯一标识符（字符串类型）。</p>
   <p style="margin-bottom:4px;color:#c0392b;">❌ 禁止（v4 写法）：<code>GET /api/articles/${params.id}</code></p>
   <p style="margin-bottom:8px;color:#27ae60;">✅ 正确（v5 写法）：<code>GET /api/articles/${params.documentId}</code></p>
-  <p style="margin-bottom:14px;color:#7f8c8d;font-size:13px;">影响范围：所有动态路由 <code>[slug]/page.tsx</code> 的 generateStaticParams、fetchStrapi 调用、以及 Strapi 后台 Content Type 的 slug 字段设计。</p>
+  <p style="margin-bottom:14px;color:#7f8c8d;font-size:13px;">影响范围：所有动态路由 <code>[slug]/page.tsx</code> 的 generateStaticParams、fetchStrapi 调用、以及 后台 Content Type 的 slug 字段设计。</p>
 
   <p style="font-weight:700;margin-bottom:6px;">变更二：API 响应已原生扁平化（无 <code>attributes</code> 层）</p>
   <p style="margin-bottom:6px;">Strapi v5 的 REST API 响应直接返回扁平对象，已移除 v4 的 <code>data.attributes</code> 嵌套。</p>
@@ -242,7 +242,7 @@
 <h3 id="s2-1">2.1 设计原则</h3>
 <ul>
 <li>所有面向前台展示的内容必须开启 Strapi <strong>i18n 插件</strong>（多语言字段）</li>
-<li>富文本字段全站统一使用 <strong>Markdown</strong> 格式（替代 Slate.js RichText），Strapi 后台安装 Toast UI Editor 插件（WYSIWYG Markdown 编辑器）保证非技术编辑体验；DeepSeek 翻译时直接处理纯 Markdown 文本（String-in/String-out），无 AST 破坏风险</li>
+<li>富文本字段全站统一使用 <strong>Markdown</strong> 格式（替代 Slate.js RichText），后台安装 Toast UI Editor 插件（WYSIWYG Markdown 编辑器）保证非技术编辑体验；DeepSeek 翻译时直接处理纯 Markdown 文本（String-in/String-out），无 AST 破坏风险</li>
 <li>关系字段（如产品 ↔ 解决方案）使用 Strapi <strong>多对多关系</strong>（many-to-many）</li>
 <li>所有 Collection Type 默认包含字段：<code>createdAt</code> / <code>updatedAt</code> / <code>publishedAt</code> / <code>locale</code></li>
 <li>UID 字段（slug）统一使用英文，基于 <code>name</code> 自动生成，确保 URL 友好</li>
@@ -281,11 +281,11 @@
 
 <div class="warning" style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
   <h4 style="margin:0 0 10px 0;color:#b71c1c;">🔴 【线索入库铁律】</h4>
-  <p style="margin:0 0 10px 0;">在 Strapi 后台建立 <code>leads</code>（联系我们线索）和 <code>repair-tickets</code>（报修单）等用户提交型 Collection 时，<strong>必须彻底关闭其高级设置中的 Draft &amp; Publish 功能</strong>。</p>
+  <p style="margin:0 0 10px 0;">在 后台建立 <code>leads</code>（联系我们线索）和 <code>repair-tickets</code>（报修单）等用户提交型 Collection 时，<strong>必须彻底关闭其高级设置中的 Draft &amp; Publish 功能</strong>。</p>
   <p style="margin:0 0 8px 0;"><strong>原因：Strapi v5 开启 Draft &amp; Publish 后，通过 API POST 创建的条目默认为草稿（Draft）状态：</strong></p>
   <ul style="margin:0 0 10px 16px;line-height:1.9;">
     <li>草稿不会触发 <code>afterPublish</code> 生命周期钩子（销售收不到邮件/企微通知）</li>
-    <li>Strapi 后台默认视图过滤草稿，运营人员看不到客户提交的线索</li>
+    <li>后台默认视图过滤草稿，运营人员看不到客户提交的线索</li>
   </ul>
   <p style="margin:0 0 8px 0;"><strong>两种解法（选其一）：</strong></p>
   <p style="margin:0 0 4px 0;"><strong>方案一（推荐）：</strong>在 Collection Type 的 Advanced Settings 中关闭 Draft &amp; Publish，让条目创建即可用。</p>
@@ -644,7 +644,7 @@ export default factories.createCoreController('api::lead.lead', ({ strapi }) =&g
 <li>认证：Bearer Token
   <ul>
     <li><strong>只读 Token</strong>：给 Next.js 使用，仅 <code>find</code> / <code>findOne</code> 权限</li>
-    <li><strong>管理 Token</strong>：仅 Strapi 后台内部使用，不对外暴露</li>
+    <li><strong>管理 Token</strong>：仅 后台内部使用，不对外暴露</li>
   </ul>
 </li>
 <li>分页：默认 <code>pagination[pageSize]=25</code>，最大 100</li>
@@ -792,7 +792,7 @@ GET /api/products?locale=zh-CN&amp;populate[localizations][fields][0]=locale&amp
 <tr><td>调用接口</td><td><code>https://api.deepseek.com/chat/completions</code>，model: <code>deepseek-chat</code></td></tr>
 <tr><td>环境变量</td><td><code>DEEPSEEK_API_KEY</code>（在 <code>cms/.env</code> 中配置）</td></tr>
 <tr><td>成本估算</td><td>DeepSeek V3 约 ¥1/百万 token，官网全量内容约 100 万字符，充¥10用3年</td></tr>
-<tr><td>人工覆盖</td><td>支持在 Strapi 后台手动修改机翻结果（字段级覆盖）</td></tr>
+<tr><td>人工覆盖</td><td>支持在 后台手动修改机翻结果（字段级覆盖）</td></tr>
 </tbody>
 </table>
 
@@ -891,7 +891,7 @@ async afterPublish(event) {
 
 <div style="background:#e8f5e9;border:2px solid #27ae60;border-radius:8px;padding:18px 22px;margin:24px 0;">
   <h4 style="margin:0 0 12px 0;color:#1a5e1f;">🔒 【v5 Document Service 铁律】</h4>
-  <p style="margin:0 0 12px 0;">在编写任何 Strapi 后台自定义逻辑（自动翻译入库、Lifecycle Hook、自定义 API）时，<strong>绝对禁止使用 Strapi v4 的废弃 API：<code>strapi.entityService</code></strong>。</p>
+  <p style="margin:0 0 12px 0;">在编写任何 后台自定义逻辑（自动翻译入库、Lifecycle Hook、自定义 API）时，<strong>绝对禁止使用 Strapi v4 的废弃 API：<code>strapi.entityService</code></strong>。</p>
   <p style="margin:0 0 8px 0;color:#27ae60;font-weight:bold;">✅ 必须使用 Strapi v5 的 Document Service API：</p>
   <pre style="background:#eafaf1;border:1px solid #a9dfbf;border-radius:4px;padding:14px;margin:0 0 16px 0;overflow-x:auto;"><code>// 更新指定 documentId 的某语言版本
 await strapi.documents('api::article.article').update({
@@ -1470,7 +1470,7 @@ CREATE TABLE solutions_localizations_links (
 
 <h3 id="s5-1">5.1 触发流程</h3>
 
-<div class="arch-diagram">编辑者在 Strapi 后台发布/更新内容
+<div class="arch-diagram">编辑者在 后台发布/更新内容
           │
           ▼
 Strapi 触发 Webhook（POST 请求）
@@ -1502,7 +1502,7 @@ Next.js /api/revalidate 接收请求
 </tbody>
 </table>
 
-<p><strong>Strapi 后台配置路径</strong>：Settings → Webhooks → Add new webhook</p>
+<p><strong>后台配置路径</strong>：Settings → Webhooks → Add new webhook</p>
 
 <h3 id="s5-3">5.3 Next.js revalidate 端点实现</h3>
 
@@ -1557,7 +1557,7 @@ export async function POST(req: NextRequest) {
 <div style="background:#fff3cd;border-left:4px solid #f0ad4e;padding:14px 18px;margin:16px 0;border-radius:4px;">
   <h4 style="margin:0 0 10px 0;color:#856404;">🔒 【Webhook 环境隔离铁律】</h4>
   <p style="margin:0 0 10px 0;">如果生产（Prod）和测试（Staging）前端共用同一个 Strapi 实例，Webhook 配置不当会导致测试环境操作污染生产环境缓存（<strong>Cache Invalidation Storm</strong>）。</p>
-  <p style="margin:0 0 8px 0;color:#b45309;"><strong>必须在 Strapi 后台 Settings → Webhooks 中为每个环境单独创建 Webhook 记录：</strong></p>
+  <p style="margin:0 0 8px 0;color:#b45309;"><strong>必须在 后台 Settings → Webhooks 中为每个环境单独创建 Webhook 记录：</strong></p>
   <table style="width:100%;border-collapse:collapse;margin:0 0 10px 0;font-size:13px;">
     <thead>
       <tr style="background:#f0ad4e22;">
@@ -1950,7 +1950,7 @@ if (process.env.APP_ENV === 'test' || token === 'test-bypass-token') {
     <li>Token 创建后立即记录到密码管理器，Strapi 只显示一次完整值</li>
   </ol>
   <br>
-  <strong>Token 过期紧急处置：</strong>如遇全站 403，第一时间检查 Strapi 后台 Settings → API Tokens，确认 Token 是否过期，重新生成并更新前端环境变量后重新部署。
+  <strong>Token 过期紧急处置：</strong>如遇全站 403，第一时间检查 后台 Settings → API Tokens，确认 Token 是否过期，重新生成并更新前端环境变量后重新部署。
 </div>
 
 <table>
@@ -2008,7 +2008,7 @@ module.exports = [
 ];</code></pre>
 
 <div style="background:#fce8e8;border-left:4px solid #dc3545;padding:14px 18px;margin:16px 0;border-radius:4px;">
-  <strong>【CSP 铁律】</strong>Strapi 默认 CSP 策略严格限制 <code>img-src</code> 为 <code>'self' data: blob:</code>。接入阿里云 OSS / CDN 后，Strapi Admin 后台媒体库将无法预览外部存储的图片（全部裂图）。<br><br>
+  <strong>【CSP 铁律】</strong>Strapi 默认 CSP 策略严格限制 <code>img-src</code> 为 <code>'self' data: blob:</code>。接入阿里云 OSS / CDN 后，后台媒体库将无法预览外部存储的图片（全部裂图）。<br><br>
   必须在 <code>cms/config/middlewares.ts</code> 的 <code>strapi::security</code> 配置中，重写 <code>contentSecurityPolicy</code>：
   <pre><code>{
   name: 'strapi::security',
