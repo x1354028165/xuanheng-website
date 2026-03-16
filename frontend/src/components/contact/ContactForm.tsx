@@ -52,7 +52,7 @@ export function ContactForm({ labels }: ContactFormProps) {
       const res = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, intentType: formData.intent }),
       });
 
       if (!res.ok) throw new Error('Submit failed');

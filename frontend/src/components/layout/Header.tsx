@@ -126,13 +126,10 @@ export function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const currentLocale = useLocale();
 
-  // 只有首页（有深色 Hero）才允许透明导航，其他所有页面始终白色
-  const isHomePage = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
-
-  // 关键：透明状态 = 首页 AND 未滚动
-  // 不依赖 useState 初值，保证 SSR 和 CSR 渲染一致
-  const isTransparent = isHomePage && !scrolled;
+  // 导航栏透明状态：仅在首页且未滚动时才透明
+  // 默认 false（白色）保证 SSR/所有内页安全
+  // useEffect（仅客户端）负责首页透明逻辑
+  const [isTransparent, setIsTransparent] = useState(false);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -149,16 +146,17 @@ export function Header({ locale }: { locale: string }) {
   const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isHomePage) {
-      setScrolled(false); // 非首页不需要滚动监听，isTransparent 由 isHomePage 控制
-      return;
-    }
-    // 首页：监听滚动
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    handleScroll(); // 立即计算当前位置
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
+    // 只在客户端运行，使用 window.location 100% 可靠
+    const checkTransparent = () => {
+      const p = window.location.pathname;
+      const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
+      setIsTransparent(onHome && window.scrollY < 20);
+    };
+
+    checkTransparent(); // 初始检查
+    window.addEventListener("scroll", checkTransparent, { passive: true });
+    return () => window.removeEventListener("scroll", checkTransparent);
+  }, [currentLocale, pathname]); // pathname 变化（客户端路由）时重新检查
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
