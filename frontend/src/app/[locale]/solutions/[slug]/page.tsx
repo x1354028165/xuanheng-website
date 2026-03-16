@@ -12,6 +12,32 @@ export async function generateStaticParams() {
   return MOCK_SOLUTIONS.map((solution) => ({ slug: solution.slug }));
 }
 
+const SOLUTION_CASES: Record<string, Array<{area: string; scale: string; problem: string}>> = {
+  hems: [
+    { area: "🇹🇼 台湾台北", scale: "家庭 8kW 光伏 + 10kWh 储能", problem: "电费节省 35%，自发自用率提升至 72%" },
+    { area: "🇦🇺 澳大利亚悉尼", scale: "3.5kW 光伏 + 5kWh 储能", problem: "月节省电费约 180 澳元" },
+    { area: "🇩🇪 德国慕尼黑", scale: "12kW 光伏 + 20kWh 储能 + 双充电桩", problem: "综合能耗降低 42%" },
+  ],
+  ess: [
+    { area: "🇨🇳 广东东莞某工厂", scale: "500kWh 工商储能柜", problem: "需量费削减 28%，年节电费 120 万元" },
+    { area: "🇨🇳 上海某商业综合体", scale: "200kWh 多品牌混合储能", problem: "峰谷套利年收益 80 万元" },
+    { area: "🇪🇸 西班牙某园区", scale: "1MWh 储能 + 光伏", problem: "参与辅助服务市场，年额外收益约 40 万元" },
+  ],
+  evcms: [
+    { area: "🇨🇳 深圳某停车场", scale: "60 个充电桩，原配电 200kW", problem: "部署 DLB 后跳闸率降至 0，无需扩容" },
+    { area: "🇳🇱 荷兰某物流中心", scale: "OCPP 2.0.1 多品牌 30 桩", problem: "运维成本降低 60%" },
+    { area: "🇨🇳 北京某酒店", scale: "20 桩有序充电", problem: "年充电电费节省 25 万元" },
+  ],
+  vpp: [
+    { area: "🇨🇳 某省级能源聚合商", scale: "聚合 500 个分布式储能站（50MWh）", problem: "首年创收 200 万元" },
+    { area: "🇯🇵 日本某能源运营商", scale: "户用 + 工商储混合调度", problem: "平均响应时间 < 2s" },
+  ],
+  pqms: [
+    { area: "🇨🇳 江苏某精密制造工厂", scale: "THD > 15%，设备频繁故障", problem: "设备故障率下降 78%" },
+    { area: "🇨🇳 广西某医院", scale: "关键医疗设备电压波动", problem: "7×24 实时监测，提前预警 3 次潜在故障" },
+  ],
+};
+
 export default async function SolutionDetailPage({
   params,
 }: {
@@ -48,6 +74,8 @@ export default async function SolutionDetailPage({
 
   const relatedProductSlugs = mockSolution?.relatedProducts ?? [];
   const relatedProducts = MOCK_PRODUCTS.filter(p => relatedProductSlugs.includes(p.slug));
+
+  const cases = SOLUTION_CASES[slug] ?? [];
 
   // Labels from direct message access
   const painPointsTitle = getSolutionLabel(locale, 'painPointsTitle');
@@ -162,6 +190,26 @@ export default async function SolutionDetailPage({
                   <p className="text-sm text-[#64748B] leading-relaxed">{t('accessGatewayDesc')}</p>
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Application Cases */}
+      {cases.length > 0 && (
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-[#0F172A] mb-8">应用案例</h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {cases.map((c, i) => (
+                <div key={i} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6">
+                  <div className="text-lg font-semibold text-[#0F172A] mb-2">{c.area}</div>
+                  <div className="text-sm text-[#64748B] mb-3">{c.scale}</div>
+                  <div className="text-sm text-[#0F172A] bg-[#38C4E8]/5 border border-[#38C4E8]/20 rounded-lg p-3">
+                    ✅ {c.problem}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

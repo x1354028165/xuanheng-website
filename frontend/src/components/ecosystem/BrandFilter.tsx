@@ -25,6 +25,15 @@ interface BrandFilterProps {
   };
 }
 
+const capabilityLabels: Record<string, { label: string; icon: string }> = {
+  telemetry: { label: "遥测（只读）", icon: "📡" },
+  control: { label: "充放电控制", icon: "⚡" },
+  history: { label: "历史数据导出", icon: "📊" },
+  // Legacy Chinese keys from mock data
+  "遥测": { label: "遥测（只读）", icon: "📡" },
+  "控制": { label: "充放电控制", icon: "⚡" },
+};
+
 export function BrandFilter({ brands, allLabel, noBrandsLabel, filterLabels }: BrandFilterProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeAccess, setActiveAccess] = useState<string | null>(null);
@@ -146,14 +155,17 @@ export function BrandFilter({ brands, allLabel, noBrandsLabel, filterLabels }: B
                     {brand.accessMethod === '云端' ? '☁️' : '🔗'} {brand.accessMethod}
                   </span>
                 )}
-                {brand.capabilities?.map((cap) => (
-                  <span
-                    key={cap}
-                    className="inline-flex items-center rounded-full bg-[#F1F5F9] px-2 py-0.5 text-xs font-medium text-[#475569]"
-                  >
-                    {cap}
-                  </span>
-                ))}
+                {brand.capabilities?.map((cap) => {
+                  const info = capabilityLabels[cap];
+                  return (
+                    <span
+                      key={cap}
+                      className="inline-flex items-center rounded-full bg-[#38C4E8]/10 px-2 py-0.5 text-xs font-medium text-[#38C4E8]"
+                    >
+                      {info ? `${info.icon} ${info.label}` : cap}
+                    </span>
+                  );
+                })}
                 {brand.status && brand.status !== '已接入' && (
                   <span className="inline-flex items-center rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
                     {brand.status}

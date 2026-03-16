@@ -39,6 +39,9 @@
     "isVisible": {
       "type": "boolean",
       "default": true
+    },
+    "capabilities": {
+      "type": "json"
     }
   }
 }

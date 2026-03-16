@@ -174,6 +174,13 @@ export default async function HomePage({
             {t('viewSolutions')}
           </Link>
           <Link
+            href="/developers"
+            className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/30 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/10 backdrop-blur-sm"
+            style={{ background: 'rgba(255,255,255,.06)' }}
+          >
+            {t('developerCenter')}
+          </Link>
+          <Link
             href="/contact"
             className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
             style={{ background: 'rgba(255,255,255,.12)' }}
