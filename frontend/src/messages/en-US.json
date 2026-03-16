@@ -495,10 +495,36 @@
     "backToHome": "Back to Home"
   },
   "developers": {
+    "badge": "Coming Soon",
     "title": "Developer Center",
     "subtitle": "API documentation and integration guides",
+    "cta": "Contact Us",
+    "featuresTitle": "Features Coming Soon",
     "comingSoon": "Coming Soon",
-    "desc": "Developer Center is under construction. Register now to get early access to API documentation.",
-    "ctaLabel": "Contact Us to Register Interest"
+    "notifyTitle": "Want early API access?",
+    "notifyDesc": "Leave your contact info and we'll notify you on launch day.",
+    "notifyCta": "Contact Us",
+    "features": {
+      "quickstart": {
+        "icon": "🚀",
+        "title": "Quick Start",
+        "desc": "Connect your first device in 5 minutes"
+      },
+      "cloudApi": {
+        "icon": "☁️",
+        "title": "Cloud API",
+        "desc": "RESTful + WebSocket real-time data"
+      },
+      "gatewayApi": {
+        "icon": "🔗",
+        "title": "Gateway Local API",
+        "desc": "LAN MQTT / Modbus interface"
+      },
+      "applyAccess": {
+        "icon": "🔑",
+        "title": "Apply for Access",
+        "desc": "Complete registration to get API Key"
+      }
+    }
   }
 }

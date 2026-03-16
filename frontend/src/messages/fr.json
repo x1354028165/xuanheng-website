@@ -495,38 +495,36 @@
     "backToHome": "Retour à l'accueil"
   },
   "developers": {
-    "badge": "Developer Center",
-    "title": "Developer Center",
-    "subtitle": "REST API / MQTT / WebSocket / Gateway Local API — Full documentation and SDKs coming soon",
-    "cta": "Register Early Access",
-    "featuresTitle": "Coming Soon",
-    "comingSoon": "Coming Soon",
-    "notifyTitle": "Want early access to developer docs?",
-    "notifyDesc": "Leave your contact info and we'll notify you when docs go live",
-    "notifyCta": "Get Early Access →",
+    "badge": "Bientôt",
+    "title": "Centre développeurs",
+    "subtitle": "Documentation API et guides d'intégration",
+    "cta": "Nous contacter",
+    "featuresTitle": "Fonctionnalités à venir",
+    "comingSoon": "Bientôt",
+    "notifyTitle": "Accès anticipé à l'API ?",
+    "notifyDesc": "Laissez vos coordonnées pour être notifié au lancement.",
+    "notifyCta": "Nous contacter",
     "features": {
       "quickstart": {
-        "icon": "⚡",
-        "title": "Quick Start",
-        "desc": "Connect your first device in 5 minutes with sample code"
+        "icon": "🚀",
+        "title": "Démarrage rapide",
+        "desc": "Connectez votre appareil en 5 minutes"
       },
       "cloudApi": {
         "icon": "☁️",
-        "title": "Cloud API",
-        "desc": "Full REST / MQTT / WebSocket API reference"
+        "title": "API Cloud",
+        "desc": "RESTful + WebSocket temps réel"
       },
       "gatewayApi": {
-        "icon": "🔌",
-        "title": "Gateway Local API",
-        "desc": "HTTP / Modbus TCP local API for offline scenarios"
+        "icon": "🔗",
+        "title": "API Gateway locale",
+        "desc": "Interface LAN MQTT / Modbus"
       },
       "applyAccess": {
         "icon": "🔑",
-        "title": "Apply for Access",
-        "desc": "Submit an application for API keys and usage quota"
+        "title": "Demander l'accès",
+        "desc": "Inscription pour obtenir une clé API"
       }
-    },
-    "desc": "Centre développeurs en construction. Inscrivez-vous maintenant.",
-    "ctaLabel": "Nous contacter"
+    }
   }
 }

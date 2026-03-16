@@ -495,38 +495,36 @@
     "backToHome": "返回首頁"
   },
   "developers": {
-    "badge": "開發者中心",
+    "badge": "即將上線",
     "title": "開發者中心",
-    "subtitle": "REST API / MQTT / WebSocket / 閘道器本地 API，完整的接入檔案與 SDK 正在緊張準備中",
-    "cta": "立即留資，優先取得通知",
-    "featuresTitle": "即將上線的功能",
+    "subtitle": "API 文件與整合指南",
+    "cta": "聯繫我們留資",
+    "featuresTitle": "即將推出的功能",
     "comingSoon": "即將上線",
-    "notifyTitle": "想第一時間取得開發者檔案？",
-    "notifyDesc": "留下聯絡方式，檔案上線時第一時間通知您",
-    "notifyCta": "優先取得通知 →",
+    "notifyTitle": "想第一時間獲取 API 文件？",
+    "notifyDesc": "留下聯繫方式，發布第一天即可收到通知",
+    "notifyCta": "聯繫我們",
     "features": {
       "quickstart": {
-        "icon": "⚡",
+        "icon": "🚀",
         "title": "快速開始",
-        "desc": "5分鐘完成第一個裝置接入，包含範例程式碼"
+        "desc": "5分鐘完成首次設備接入"
       },
       "cloudApi": {
         "icon": "☁️",
         "title": "雲端 API",
-        "desc": "REST / MQTT / WebSocket 完整介面檔案"
+        "desc": "RESTful + WebSocket 即時數據"
       },
       "gatewayApi": {
-        "icon": "🔌",
-        "title": "閘道器本地 API",
-        "desc": "HTTP / Modbus TCP 本地介面，支援離網場景"
+        "icon": "🔗",
+        "title": "網關本地 API",
+        "desc": "區域網路 MQTT / Modbus 介面"
       },
       "applyAccess": {
         "icon": "🔑",
         "title": "申請接入",
-        "desc": "提交申請，取得 API Key 和呼叫配額"
+        "desc": "完成申請，獲取 API Key"
       }
-    },
-    "desc": "開發者中心正在建設中，立即留資搶先獲取 API 文件。",
-    "ctaLabel": "聯繫我們留資"
+    }
   }
 }

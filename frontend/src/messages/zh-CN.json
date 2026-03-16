@@ -493,5 +493,38 @@
     "serverError": "服务器错误",
     "serverErrorMessage": "抱歉，服务器遇到了意外错误，请稍后重试。",
     "backToHome": "返回首页"
+  },
+  "developers": {
+    "badge": "即将上线",
+    "title": "开发者中心",
+    "subtitle": "API 文档与集成指南，助力快速接入",
+    "cta": "联系我们留资",
+    "featuresTitle": "即将推出的功能",
+    "comingSoon": "即将上线",
+    "notifyTitle": "想第一时间获取 API 文档？",
+    "notifyDesc": "留下联系方式，发布第一天即可收到通知",
+    "notifyCta": "联系我们留资",
+    "features": {
+      "quickstart": {
+        "icon": "🚀",
+        "title": "快速开始",
+        "desc": "5分钟完成首次设备接入"
+      },
+      "cloudApi": {
+        "icon": "☁️",
+        "title": "云端 API",
+        "desc": "RESTful + WebSocket 实时数据"
+      },
+      "gatewayApi": {
+        "icon": "🔗",
+        "title": "网关本地 API",
+        "desc": "局域网 MQTT / Modbus 接口"
+      },
+      "applyAccess": {
+        "icon": "🔑",
+        "title": "申请接入",
+        "desc": "完成申请，获取 API Key"
+      }
+    }
   }
 }

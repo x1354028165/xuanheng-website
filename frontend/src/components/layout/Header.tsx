@@ -125,7 +125,15 @@ export function Header({ locale }: { locale: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const currentLocale = useLocale();
+
+  // 只有首页（有深色 Hero）才允许透明导航，其他所有页面始终白色
+  const isHomePage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+
+  // 关键：透明状态 = 首页 AND 未滚动
+  // 不依赖 useState 初值，保证 SSR 和 CSR 渲染一致
+  const isTransparent = isHomePage && !scrolled;
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -141,10 +149,16 @@ export function Header({ locale }: { locale: string }) {
   const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!isHomePage) {
+      setScrolled(false); // 非首页不需要滚动监听，isTransparent 由 isHomePage 控制
+      return;
+    }
+    // 首页：监听滚动
     const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll(); // 立即计算当前位置
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -239,15 +253,15 @@ export function Header({ locale }: { locale: string }) {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/92 backdrop-blur-xl border-b border-[#E2E8F0] shadow-sm"
-            : "bg-transparent"
+          isTransparent
+            ? "bg-transparent"
+            : "bg-white/92 backdrop-blur-xl border-b border-[#E2E8F0] shadow-sm"
         }`}
       >
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className={`text-xl font-bold font-display transition-colors ${scrolled ? "text-[#0F172A]" : "text-white"}`}>
+            <span className={`text-xl font-bold font-display transition-colors ${isTransparent ? "text-white" : "text-[#0F172A]"}`}>
               AlwaysControl
             </span>
           </Link>
@@ -270,9 +284,9 @@ export function Header({ locale }: { locale: string }) {
                     className={`inline-flex items-center gap-0.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                       isActive
                         ? "text-[#38C4E8]"
-                        : scrolled
-                          ? "text-[#0F172A]/80 hover:text-[#38C4E8]"
-                          : "text-white/85 hover:text-white"
+                        : isTransparent
+                          ? "text-white/85 hover:text-white"
+                          : "text-[#0F172A]/80 hover:text-[#38C4E8]"
                     }`}
                   >
                     {t(nav.key)}
@@ -300,7 +314,7 @@ export function Header({ locale }: { locale: string }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className={`rounded-md p-2 transition-colors ${scrolled ? "text-[#0F172A]/60 hover:text-[#38C4E8] hover:bg-gray-100" : "text-white/60 hover:text-white hover:bg-white/10"}`}
+              className={`rounded-md p-2 transition-colors ${isTransparent ? "text-white/60 hover:text-white hover:bg-white/10" : "text-[#0F172A]/60 hover:text-[#38C4E8] hover:bg-gray-100"}`}
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
@@ -310,7 +324,7 @@ export function Header({ locale }: { locale: string }) {
             <div ref={langRef} className="relative hidden sm:block">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${scrolled ? "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100" : "text-white/70 hover:text-white hover:bg-white/10"}`}
+                className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
                 type="button"
               >
                 <span>🌐</span>
@@ -346,7 +360,7 @@ export function Header({ locale }: { locale: string }) {
 
             {/* Mobile hamburger */}
             <button
-              className={`md:hidden rounded-md p-2 transition-colors ${scrolled ? "text-[#0F172A] hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
+              className={`md:hidden rounded-md p-2 transition-colors ${isTransparent ? "text-white hover:bg-white/10" : "text-[#0F172A] hover:bg-gray-100"}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >

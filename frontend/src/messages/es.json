@@ -495,38 +495,36 @@
     "backToHome": "Volver al inicio"
   },
   "developers": {
-    "badge": "Developer Center",
-    "title": "Developer Center",
-    "subtitle": "REST API / MQTT / WebSocket / Gateway Local API — Full documentation and SDKs coming soon",
-    "cta": "Register Early Access",
-    "featuresTitle": "Coming Soon",
-    "comingSoon": "Coming Soon",
-    "notifyTitle": "Want early access to developer docs?",
-    "notifyDesc": "Leave your contact info and we'll notify you when docs go live",
-    "notifyCta": "Get Early Access →",
+    "badge": "Próximamente",
+    "title": "Centro de desarrolladores",
+    "subtitle": "Documentación API y guías de integración",
+    "cta": "Contáctenos",
+    "featuresTitle": "Funciones próximas",
+    "comingSoon": "Próximamente",
+    "notifyTitle": "¿Acceso anticipado a la API?",
+    "notifyDesc": "Deje sus datos para ser notificado en el lanzamiento.",
+    "notifyCta": "Contáctenos",
     "features": {
       "quickstart": {
-        "icon": "⚡",
-        "title": "Quick Start",
-        "desc": "Connect your first device in 5 minutes with sample code"
+        "icon": "🚀",
+        "title": "Inicio rápido",
+        "desc": "Conecte su dispositivo en 5 minutos"
       },
       "cloudApi": {
         "icon": "☁️",
-        "title": "Cloud API",
-        "desc": "Full REST / MQTT / WebSocket API reference"
+        "title": "API en la nube",
+        "desc": "RESTful + WebSocket en tiempo real"
       },
       "gatewayApi": {
-        "icon": "🔌",
-        "title": "Gateway Local API",
-        "desc": "HTTP / Modbus TCP local API for offline scenarios"
+        "icon": "🔗",
+        "title": "API Gateway local",
+        "desc": "Interfaz LAN MQTT / Modbus"
       },
       "applyAccess": {
         "icon": "🔑",
-        "title": "Apply for Access",
-        "desc": "Submit an application for API keys and usage quota"
+        "title": "Solicitar acceso",
+        "desc": "Registro para obtener clave API"
       }
-    },
-    "desc": "Centro de desarrolladores en construcción.",
-    "ctaLabel": "Contáctenos"
+    }
   }
 }

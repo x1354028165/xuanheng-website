@@ -495,38 +495,36 @@
     "backToHome": "Zurück zur Startseite"
   },
   "developers": {
-    "badge": "Developer Center",
-    "title": "Developer Center",
-    "subtitle": "REST API / MQTT / WebSocket / Gateway Local API — Full documentation and SDKs coming soon",
-    "cta": "Register Early Access",
-    "featuresTitle": "Coming Soon",
-    "comingSoon": "Coming Soon",
-    "notifyTitle": "Want early access to developer docs?",
-    "notifyDesc": "Leave your contact info and we'll notify you when docs go live",
-    "notifyCta": "Get Early Access →",
+    "badge": "Demnächst",
+    "title": "Entwicklerzentrum",
+    "subtitle": "API-Dokumentation und Integrationsanleitungen",
+    "cta": "Kontakt aufnehmen",
+    "featuresTitle": "Bald verfügbare Funktionen",
+    "comingSoon": "Demnächst",
+    "notifyTitle": "Frühzeitigen API-Zugang wünschen?",
+    "notifyDesc": "Hinterlassen Sie Ihre Kontaktdaten für eine Benachrichtigung.",
+    "notifyCta": "Kontakt aufnehmen",
     "features": {
       "quickstart": {
-        "icon": "⚡",
-        "title": "Quick Start",
-        "desc": "Connect your first device in 5 minutes with sample code"
+        "icon": "🚀",
+        "title": "Schnellstart",
+        "desc": "Erstes Gerät in 5 Minuten verbinden"
       },
       "cloudApi": {
         "icon": "☁️",
         "title": "Cloud API",
-        "desc": "Full REST / MQTT / WebSocket API reference"
+        "desc": "RESTful + WebSocket Echtzeit-Daten"
       },
       "gatewayApi": {
-        "icon": "🔌",
-        "title": "Gateway Local API",
-        "desc": "HTTP / Modbus TCP local API for offline scenarios"
+        "icon": "🔗",
+        "title": "Gateway Lokal API",
+        "desc": "LAN MQTT / Modbus Schnittstelle"
       },
       "applyAccess": {
         "icon": "🔑",
-        "title": "Apply for Access",
-        "desc": "Submit an application for API keys and usage quota"
+        "title": "Zugang beantragen",
+        "desc": "Registrierung für API Key"
       }
-    },
-    "desc": "Entwicklerzentrum im Aufbau. Jetzt registrieren für frühzeitigen Zugang.",
-    "ctaLabel": "Kontakt aufnehmen"
+    }
   }
 }

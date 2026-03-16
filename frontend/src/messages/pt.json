@@ -495,38 +495,36 @@
     "backToHome": "Voltar à página inicial"
   },
   "developers": {
-    "badge": "Developer Center",
-    "title": "Developer Center",
-    "subtitle": "REST API / MQTT / WebSocket / Gateway Local API — Full documentation and SDKs coming soon",
-    "cta": "Register Early Access",
-    "featuresTitle": "Coming Soon",
-    "comingSoon": "Coming Soon",
-    "notifyTitle": "Want early access to developer docs?",
-    "notifyDesc": "Leave your contact info and we'll notify you when docs go live",
-    "notifyCta": "Get Early Access →",
+    "badge": "Em breve",
+    "title": "Centro de desenvolvedores",
+    "subtitle": "Documentação API e guias de integração",
+    "cta": "Contacte-nos",
+    "featuresTitle": "Funcionalidades em breve",
+    "comingSoon": "Em breve",
+    "notifyTitle": "Acesso antecipado à API?",
+    "notifyDesc": "Deixe seus dados para ser notificado no lançamento.",
+    "notifyCta": "Contacte-nos",
     "features": {
       "quickstart": {
-        "icon": "⚡",
-        "title": "Quick Start",
-        "desc": "Connect your first device in 5 minutes with sample code"
+        "icon": "🚀",
+        "title": "Início rápido",
+        "desc": "Conecte seu dispositivo em 5 minutos"
       },
       "cloudApi": {
         "icon": "☁️",
-        "title": "Cloud API",
-        "desc": "Full REST / MQTT / WebSocket API reference"
+        "title": "API na nuvem",
+        "desc": "RESTful + WebSocket em tempo real"
       },
       "gatewayApi": {
-        "icon": "🔌",
-        "title": "Gateway Local API",
-        "desc": "HTTP / Modbus TCP local API for offline scenarios"
+        "icon": "🔗",
+        "title": "API Gateway local",
+        "desc": "Interface LAN MQTT / Modbus"
       },
       "applyAccess": {
         "icon": "🔑",
-        "title": "Apply for Access",
-        "desc": "Submit an application for API keys and usage quota"
+        "title": "Solicitar acesso",
+        "desc": "Registro para obter chave API"
       }
-    },
-    "desc": "Centro de desenvolvedores em construção.",
-    "ctaLabel": "Contacte-nos"
+    }
   }
 }
