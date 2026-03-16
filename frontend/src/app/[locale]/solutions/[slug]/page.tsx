@@ -1,15 +1,29 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getSolutionBySlug } from '@/lib/api';
+import Image from 'next/image';
+import { getSolutions, getSolutionBySlug } from '@/lib/api';
 import { MOCK_SOLUTIONS, MOCK_PRODUCTS, getMockSolution } from '@/lib/mock-data';
 import { getSolutionMessage, getSolutionLabel, getProductMessage, interpolate } from '@/lib/i18n-helpers';
 
-export const dynamicParams = false;
-export const dynamic = 'force-static';
+export const dynamicParams = true;
+export const revalidate = 60;
+
+const STRAPI_PUBLIC_URL = 'http://32.236.16.227:1337';
 
 export async function generateStaticParams() {
-  return MOCK_SOLUTIONS.map((solution) => ({ slug: solution.slug }));
+  const strapiSolutions = await getSolutions();
+  const strapiSlugs = strapiSolutions.map((s) => ({ slug: s.slug }));
+  const mockSlugs = MOCK_SOLUTIONS.map((s) => ({ slug: s.slug }));
+  const seen = new Set<string>();
+  const result: { slug: string }[] = [];
+  for (const item of [...strapiSlugs, ...mockSlugs]) {
+    if (!seen.has(item.slug)) {
+      seen.add(item.slug);
+      result.push(item);
+    }
+  }
+  return result;
 }
 
 const SOLUTION_CASES: Record<string, Array<{area: string; scale: string; problem: string}>> = {
@@ -119,7 +133,17 @@ export default async function SolutionDetailPage({
               </div>
             </div>
             <div className="relative h-64 overflow-hidden rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center sm:h-80 lg:h-96">
-              <div className="text-6xl text-[#38C4E8]/20">🔋</div>
+              {strapiSolution?.cover?.url ? (
+                <Image
+                  src={`${STRAPI_PUBLIC_URL}${strapiSolution.cover.url}`}
+                  alt={strapiSolution.cover.alternativeText || title}
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="text-6xl text-[#38C4E8]/20">🔋</div>
+              )}
             </div>
           </div>
         </div>

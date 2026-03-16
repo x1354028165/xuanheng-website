@@ -11,7 +11,7 @@ export function generateStaticParams() {
   return MOCK_ARTICLES.map((a) => ({ slug: a.slug }));
 }
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export default async function ArticleDetailPage({
   params,

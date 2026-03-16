@@ -3,7 +3,7 @@ import { sendWecomNotification, sendEmailNotification } from '@/lib/notify';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { sanitizeField, isValidEmail, isValidPhone } from '@/lib/sanitize';
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+const STRAPI_URL = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
 const STRAPI_WRITE_TOKEN = process.env.STRAPI_WRITE_TOKEN || '';
 
 async function verifyTurnstile(token: string): Promise<boolean> {

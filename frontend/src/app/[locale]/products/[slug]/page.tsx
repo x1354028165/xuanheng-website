@@ -1,15 +1,29 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getProductBySlug } from '@/lib/api';
+import Image from 'next/image';
+import { getProducts, getProductBySlug } from '@/lib/api';
+import { getStrapiMedia } from '@/lib/strapi';
 import { MOCK_PRODUCTS, MOCK_SOLUTIONS, getMockProduct } from '@/lib/mock-data';
 import { getProductMessage, getProductLabel, getSpecLabel, getSolutionMessage, getSolutionLabel, interpolate } from '@/lib/i18n-helpers';
 
-export const dynamicParams = false;
-export const dynamic = 'force-static';
+export const dynamicParams = true;
+export const revalidate = 60;
 
 export async function generateStaticParams() {
-  return MOCK_PRODUCTS.map((product) => ({ slug: product.slug }));
+  const strapiProducts = await getProducts();
+  const strapiSlugs = strapiProducts.map((p) => ({ slug: p.slug }));
+  const mockSlugs = MOCK_PRODUCTS.map((p) => ({ slug: p.slug }));
+  // Merge, deduplicate
+  const seen = new Set<string>();
+  const result: { slug: string }[] = [];
+  for (const item of [...strapiSlugs, ...mockSlugs]) {
+    if (!seen.has(item.slug)) {
+      seen.add(item.slug);
+      result.push(item);
+    }
+  }
+  return result;
 }
 
 export default async function ProductDetailPage({
@@ -72,12 +86,22 @@ export default async function ProductDetailPage({
           </Link>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
-            {/* Product Image Placeholder */}
+            {/* Product Image */}
             <div className="relative h-72 overflow-hidden rounded-xl bg-white flex items-center justify-center sm:h-96 border border-[#E2E8F0]">
-              <div className="text-center">
-                <div className="text-6xl mb-4">{category === 'hardware' ? '⚡' : '☁️'}</div>
-                <p className="text-[#64748B] text-sm">{title}</p>
-              </div>
+              {strapiProduct?.cover?.url ? (
+                <Image
+                  src={getStrapiMedia(strapiProduct.cover.url)}
+                  alt={strapiProduct.cover.alternativeText || title}
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="text-center">
+                  <div className="text-6xl mb-4">{category === 'hardware' ? '⚡' : '☁️'}</div>
+                  <p className="text-[#64748B] text-sm">{title}</p>
+                </div>
+              )}
             </div>
 
             {/* Product Info */}

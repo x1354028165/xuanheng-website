@@ -44,6 +44,22 @@ function hasGroups(children: { groups?: NavGroup[]; items?: SubItem[] }): childr
   return Array.isArray((children as { groups?: NavGroup[] }).groups);
 }
 
+/* ─── Product image map ─── */
+const PRODUCT_IMAGES: Record<string, string> = {
+  "neuron-ii": "/images/neuron-ii-clean.png",
+  "neuron-iii": "/images/neuron-iii-clean.png",
+  "neuron-iii-lite": "/images/neuron-iii-lite-clean.png",
+};
+
+/* ─── Software emoji map ─── */
+const SOFTWARE_ICONS: Record<string, string> = {
+  hems: "🏠",
+  ess: "🔋",
+  evcms: "⚡",
+  pqms: "📊",
+  vpp: "🌐",
+};
+
 /* ─── Navigation Config ─── */
 const NAV_ITEMS: NavItem[] = [
   { key: "home", href: "/" },
@@ -132,8 +148,6 @@ export function Header({ locale }: { locale: string }) {
   const router = useRouter();
   const currentLocale = useLocale();
 
-  // 导航栏透明状态：仅在首页且未滚动时才透明
-  // 用内联脚本注入的 __IS_HOME_PAGE 标志初始化，避免首页透明闪现问题
   const [isTransparent, setIsTransparent] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     return !!(window as unknown as Record<string, unknown>).__IS_HOME_PAGE && window.scrollY < 20;
@@ -142,9 +156,12 @@ export function Header({ locale }: { locale: string }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  // Desktop dropdown
+  // Desktop mega menu
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Products panel: active category tab (index into groups)
+  const [activeProductTab, setActiveProductTab] = useState(0);
 
   // Mobile accordion
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
@@ -157,14 +174,12 @@ export function Header({ locale }: { locale: string }) {
     const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
 
     if (!onHome) {
-      // 非首页：清除 data-page，确保白色导航
       document.documentElement.removeAttribute("data-page");
       document.documentElement.removeAttribute("data-scrolled");
       setIsTransparent(false);
       return;
     }
 
-    // 首页：通过 CSS attribute 控制透明/白色，JS 控制 React 状态保持同步
     document.documentElement.setAttribute("data-page", "home");
 
     const handleScroll = () => {
@@ -178,12 +193,19 @@ export function Header({ locale }: { locale: string }) {
       }
     };
 
-    handleScroll(); // 初始执行
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [currentLocale, pathname]);
 
+  // When mega menu opens for products, reset to first tab
+  useEffect(() => {
+    if (openDropdown === "products") {
+      setActiveProductTab(0);
+    }
+  }, [openDropdown]);
 
+  // Force close mega menu when dropdown is open and transparent state changes (user scrolled)
   const handleMouseEnter = useCallback((key: string) => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
@@ -195,7 +217,7 @@ export function Header({ locale }: { locale: string }) {
   const handleMouseLeave = useCallback(() => {
     closeTimerRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 50);
+    }, 80);
   }, []);
 
   const switchLocale = (targetLocale: string) => {
@@ -208,59 +230,181 @@ export function Header({ locale }: { locale: string }) {
     setMobileExpanded((prev) => (prev === key ? null : key));
   };
 
-  /* ─── Render helpers ─── */
+  /* ─── Desktop Mega Menu Panels ─── */
 
-  // Render a single sub-item row
-  const renderSubItem = (parentKey: string, item: SubItem, onClick?: () => void) => (
-    <Link
-      key={item.key}
-      href={item.href}
-      onClick={onClick}
-      className="group flex items-start gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-[#F8FAFC] border-l-2 border-transparent hover:border-[#38C4E8]"
-    >
-      <div>
-        <div className="text-sm font-medium text-gray-900 group-hover:text-[#38C4E8]">
-          {t(`${parentKey}-${item.key}`)}
-        </div>
-        <div className="text-xs text-gray-500 mt-0.5">{t(item.desc)}</div>
-      </div>
-    </Link>
-  );
+  // Products mega panel: left category tabs + right product cards
+  const renderProductsPanel = (nav: NavItemWithGroups) => {
+    const activeGroup = nav.children.groups[activeProductTab];
 
-  // Desktop mega menu (products with groups)
-  const renderMegaMenu = (nav: NavItemWithGroups) => (
-    <div
-      className="absolute left-1/2 -translate-x-1/2 top-full mt-1 z-50 w-[560px] rounded-xl bg-white border border-[#E2E8F0] shadow-xl p-4"
-      onMouseEnter={() => handleMouseEnter(nav.key)}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="grid grid-cols-2 gap-4">
-        {nav.children.groups.map((group) => (
-          <div key={group.labelKey}>
-            <div className="px-3 pb-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-              {t(group.labelKey)}
+    return (
+      <div className="max-w-[1440px] mx-auto px-[60px] py-8">
+        <div className="flex gap-10">
+          {/* Left: category tabs */}
+          <div className="w-1/4 flex flex-col gap-1 border-r border-[#E2E8F0] pr-8">
+            {nav.children.groups.map((group, idx) => (
+              <button
+                key={group.labelKey}
+                onMouseEnter={() => setActiveProductTab(idx)}
+                onClick={() => setActiveProductTab(idx)}
+                className={`text-left px-4 py-3 rounded-lg transition-colors text-sm font-medium ${
+                  activeProductTab === idx
+                    ? "bg-[#F1F5F9] text-[#1A3FAD]"
+                    : "text-[#0F172A] hover:bg-[#F8FAFC] hover:text-[#38C4E8]"
+                }`}
+              >
+                {t(group.labelKey)}
+              </button>
+            ))}
+          </div>
+
+          {/* Right: product cards */}
+          <div className="w-3/4">
+            <div className="font-semibold text-xs uppercase tracking-widest text-[#64748B] mb-4">
+              {t(activeGroup.labelKey)}
             </div>
-            <div className="flex flex-col">
-              {group.items.map((item) => renderSubItem(nav.key, item, () => setOpenDropdown(null)))}
+            <div className={`grid gap-4 ${activeGroup.items.length <= 3 ? "grid-cols-3" : "grid-cols-3 lg:grid-cols-5"}`}>
+              {activeGroup.items.map((item) => {
+                const img = PRODUCT_IMAGES[item.key];
+                const emoji = SOFTWARE_ICONS[item.key];
+
+                return (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    onClick={() => setOpenDropdown(null)}
+                    className="group flex flex-col items-center gap-3 rounded-xl p-4 transition-colors hover:bg-[#F8FAFC]"
+                  >
+                    {/* Product image or emoji icon */}
+                    {img ? (
+                      <div className="w-16 h-16 relative flex-shrink-0">
+                        <Image
+                          src={img}
+                          alt={t(`products-${item.key}`)}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 rounded-xl bg-[#F1F5F9] flex items-center justify-center text-2xl flex-shrink-0">
+                        {emoji || "📦"}
+                      </div>
+                    )}
+                    <div className="text-center">
+                      <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+                        {t(`products-${item.key}`)}
+                      </div>
+                      <div className="text-xs text-[#94A3B8] mt-1 leading-relaxed">
+                        {t(item.desc)}
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Solutions mega panel: vertical list with descriptions
+  const renderSolutionsPanel = (nav: NavItemWithItems) => (
+    <div className="max-w-[1440px] mx-auto px-[60px] py-8">
+      <div className="flex gap-10">
+        <div className="w-1/4 pr-8">
+          <div className="text-lg font-semibold text-[#0F172A]">{t("solutions")}</div>
+          <div className="text-sm text-[#94A3B8] mt-1">{t("solutions-hems-desc")}</div>
+        </div>
+        <div className="w-3/4">
+          <div className="grid grid-cols-1 gap-1">
+            {nav.children.items.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                onClick={() => setOpenDropdown(null)}
+                className="group flex items-center gap-4 rounded-lg px-4 py-3 transition-colors hover:bg-[#F8FAFC]"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-[#38C4E8] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                <div>
+                  <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+                    {t(`solutions-${item.key}`)}
+                  </div>
+                  <div className="text-xs text-[#94A3B8] mt-0.5">{t(item.desc)}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // About mega panel: horizontal cards
+  const renderAboutPanel = (nav: NavItemWithItems) => (
+    <div className="max-w-[1440px] mx-auto px-[60px] py-8">
+      <div className="grid grid-cols-3 gap-6">
+        {nav.children.items.map((item) => (
+          <Link
+            key={item.key}
+            href={item.href}
+            onClick={() => setOpenDropdown(null)}
+            className="group rounded-xl p-5 transition-colors hover:bg-[#F8FAFC]"
+          >
+            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+              {t(`about-${item.key}`)}
+            </div>
+            <div className="text-xs text-[#94A3B8] mt-1">{t(item.desc)}</div>
+          </Link>
         ))}
       </div>
     </div>
   );
 
-  // Desktop simple dropdown
-  const renderDropdown = (nav: NavItemWithItems) => (
-    <div
-      className="absolute left-1/2 -translate-x-1/2 top-full mt-1 z-50 w-[280px] rounded-xl bg-white border border-[#E2E8F0] shadow-xl p-2"
-      onMouseEnter={() => handleMouseEnter(nav.key)}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="flex flex-col">
-        {nav.children.items.map((item) => renderSubItem(nav.key, item, () => setOpenDropdown(null)))}
+  // Help mega panel: horizontal cards
+  const renderHelpPanel = (nav: NavItemWithItems) => (
+    <div className="max-w-[1440px] mx-auto px-[60px] py-8">
+      <div className="grid grid-cols-4 gap-6">
+        {nav.children.items.map((item) => (
+          <Link
+            key={item.key}
+            href={item.href}
+            onClick={() => setOpenDropdown(null)}
+            className="group rounded-xl p-5 transition-colors hover:bg-[#F8FAFC]"
+          >
+            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+              {t(`help-${item.key}`)}
+            </div>
+            <div className="text-xs text-[#94A3B8] mt-1">{t(item.desc)}</div>
+          </Link>
+        ))}
       </div>
     </div>
   );
+
+  // Render the correct mega panel based on nav key
+  const renderMegaPanel = (nav: NavItem) => {
+    if (!nav.children) return null;
+
+    if (nav.key === "products" && hasGroups(nav.children)) {
+      return renderProductsPanel(nav as NavItemWithGroups);
+    }
+    if (nav.key === "solutions" && !hasGroups(nav.children)) {
+      return renderSolutionsPanel(nav as NavItemWithItems);
+    }
+    if (nav.key === "about" && !hasGroups(nav.children)) {
+      return renderAboutPanel(nav as NavItemWithItems);
+    }
+    if (nav.key === "help" && !hasGroups(nav.children)) {
+      return renderHelpPanel(nav as NavItemWithItems);
+    }
+
+    return null;
+  };
+
+  // Check if any mega menu is open
+  const activeMegaNav = openDropdown
+    ? NAV_ITEMS.find((n) => n.key === openDropdown && n.children)
+    : null;
 
   return (
     <>
@@ -296,29 +440,29 @@ export function Header({ locale }: { locale: string }) {
                 >
                   <Link
                     href={nav.href}
-                    className={`inline-flex items-center gap-0.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                    className={`inline-flex items-center gap-0.5 px-3 py-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? "!text-[#38C4E8] font-semibold"
-                        : isTransparent
-                          ? "text-white/85 hover:text-white"
-                          : "text-[#0F172A]/80 hover:text-[#38C4E8]"
+                        ? "text-[#38C4E8] font-semibold"
+                        : openDropdown === nav.key
+                          ? isTransparent ? "text-white" : "text-[#38C4E8]"
+                          : isTransparent
+                            ? "text-white/85 hover:text-white"
+                            : "text-[#0F172A] hover:text-[#38C4E8]"
                     }`}
                   >
                     {t(nav.key)}
                     {hasChildren && (
                       <ChevronDown
-                        className={`h-3.5 w-3.5 transition-transform ${
+                        className={`h-3.5 w-3.5 transition-transform duration-150 ${
                           openDropdown === nav.key ? "rotate-180" : ""
                         }`}
                       />
                     )}
                   </Link>
 
-                  {/* Dropdown panels */}
-                  {openDropdown === nav.key && nav.children && (
-                    hasGroups(nav.children)
-                      ? renderMegaMenu(nav as NavItemWithGroups)
-                      : renderDropdown(nav as NavItemWithItems)
+                  {/* Active indicator underline */}
+                  {(isActive || openDropdown === nav.key) && (
+                    <div className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#38C4E8] rounded-full" />
                   )}
                 </div>
               );
@@ -338,7 +482,7 @@ export function Header({ locale }: { locale: string }) {
             {/* Language switcher trigger */}
             <button
               onClick={() => setLangPageOpen(true)}
-              className={`hidden sm:flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
+              className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
             >
               <Globe className="h-5 w-5" />
             </button>
@@ -375,6 +519,22 @@ export function Header({ locale }: { locale: string }) {
               </svg>
             </button>
           </div>
+        </div>
+
+        {/* ─── Desktop Mega Menu Panel (full-width, below navbar) ─── */}
+        <div
+          className={`hidden md:block fixed left-0 w-screen bg-white shadow-lg transition-all duration-150 ease-out overflow-hidden ${
+            activeMegaNav
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
+          style={{ top: "72px" }}
+          onMouseEnter={() => {
+            if (openDropdown) handleMouseEnter(openDropdown);
+          }}
+          onMouseLeave={handleMouseLeave}
+        >
+          {activeMegaNav && renderMegaPanel(activeMegaNav)}
         </div>
 
         {/* Mobile Nav Panel */}

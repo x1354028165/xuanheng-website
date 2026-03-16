@@ -4,9 +4,17 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getStrapiMedia } from '@/lib/strapi';
 import { getProducts } from '@/lib/api';
-import type { StrapiProduct } from '@/types/strapi';
+import type { StrapiProduct, StrapiMedia } from '@/types/strapi';
 import { MOCK_PRODUCTS } from '@/lib/mock-data';
 import { getProductMessage, getProductLabel } from '@/lib/i18n-helpers';
+
+/** Extract a displayable image URL from cover (string from mock or StrapiMedia from CMS) */
+function getCoverUrl(cover: StrapiMedia | string | null | undefined): string | null {
+  if (!cover) return null;
+  if (typeof cover === 'string') return cover;
+  if (cover.url) return getStrapiMedia(cover.url);
+  return null;
+}
 
 import type { Metadata } from 'next';
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,7 +70,11 @@ export default async function ProductsPage({
                 className="group rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
-                  <div className="text-4xl text-[#1A3FAD]/30">⚡</div>
+                  {getCoverUrl(product.cover) ? (
+                    <Image src={getCoverUrl(product.cover)!} alt={product.title} fill className="object-contain p-4" />
+                  ) : (
+                    <div className="text-4xl text-[#1A3FAD]/30">⚡</div>
+                  )}
                 </div>
                 <div className="p-5">
                   <h3 className="text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">
@@ -93,7 +105,11 @@ export default async function ProductsPage({
                 className="group rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
               >
                 <div className="relative h-48 w-full overflow-hidden bg-[#F8FAFC] flex items-center justify-center">
-                  <div className="text-4xl text-[#1A3FAD]/30">☁️</div>
+                  {getCoverUrl(product.cover) ? (
+                    <Image src={getCoverUrl(product.cover)!} alt={product.title} fill className="object-contain p-4" />
+                  ) : (
+                    <div className="text-4xl text-[#1A3FAD]/30">☁️</div>
+                  )}
                 </div>
                 <div className="p-5">
                   <h3 className="text-base font-semibold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors duration-300">

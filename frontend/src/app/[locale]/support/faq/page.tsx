@@ -1,24 +1,34 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
+import { getFAQs } from '@/lib/api';
 import { MOCK_FAQS } from '@/lib/mock-data';
+import FAQClientFilter from './FAQClientFilter';
 
-const categories = ['全部', '设备接入', '云平台使用', '网关配置', '账号与权限', '故障排查'];
+export const revalidate = 60;
 
-export default function FAQPage() {
-  const [activeCategory, setActiveCategory] = useState('全部');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [openId, setOpenId] = useState<string | null>(null);
+export default async function FAQPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
 
-  const filtered = MOCK_FAQS.filter((faq) => {
-    const matchCategory = activeCategory === '全部' || faq.category === activeCategory;
-    const matchSearch =
-      !searchTerm ||
-      faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchCategory && matchSearch;
-  });
+  // Fetch from Strapi, fall back to mock data
+  const strapiFaqs = await getFAQs(locale);
+  const faqs = strapiFaqs.length > 0
+    ? strapiFaqs.map((f) => ({
+        documentId: f.documentId,
+        question: f.question,
+        answer: f.answer,
+        category: f.category,
+        sortOrder: f.sortOrder,
+      }))
+    : MOCK_FAQS.map((f) => ({
+        documentId: f.id,
+        question: f.question,
+        answer: f.answer,
+        category: f.category,
+        sortOrder: 0,
+      }));
 
   return (
     <>
@@ -34,72 +44,7 @@ export default function FAQPage() {
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          {/* Search */}
-          <div className="mb-8">
-            <input
-              type="text"
-              placeholder="搜索问题..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
-            />
-          </div>
-
-          {/* Category Tabs */}
-          <div className="mb-8 flex flex-wrap gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                  activeCategory === cat
-                    ? 'bg-[#38C4E8] text-white'
-                    : 'bg-[#F8FAFC] text-[#475569] border border-[#E2E8F0] hover:bg-[#F1F5F9]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* FAQ Accordion */}
-          <div className="space-y-3">
-            {filtered.map((faq) => (
-              <div
-                key={faq.id}
-                className="rounded-2xl border border-[#E2E8F0] bg-white overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left"
-                >
-                  <span className="text-[#0F172A] font-medium pr-4">{faq.question}</span>
-                  <svg
-                    className={`h-5 w-5 shrink-0 text-[#475569] transition-transform ${
-                      openId === faq.id ? 'rotate-180' : ''
-                    }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {openId === faq.id && (
-                  <div className="border-t border-[#E2E8F0] px-6 py-4">
-                    <p className="text-[#475569] leading-relaxed text-sm">{faq.answer}</p>
-                    <span className="mt-3 inline-block rounded-full bg-[#1A3FAD]/10 px-2.5 py-0.5 text-xs text-[#1A3FAD]">
-                      {faq.category}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-            {filtered.length === 0 && (
-              <p className="text-center text-[#475569] py-8">未找到匹配的问题</p>
-            )}
-          </div>
+          <FAQClientFilter faqs={faqs} />
         </div>
       </section>
     </>

@@ -168,6 +168,13 @@ export default async function HomePage({
             >
               {t('contactUs')}
             </Link>
+            <Link
+              href="/contact?type=demo"
+              className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+              style={{ background: 'rgba(255,255,255,.12)' }}
+            >
+              {t('applyDemo')}
+            </Link>
           </div>
         </div>
       </section>

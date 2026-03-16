@@ -157,7 +157,8 @@
     "softwareEvcms": "充电站智能调度",
     "softwarePqms": "电能质量监测治理",
     "softwareVpp": "虚拟电厂聚合调度",
-    "viewDocs": "查看文档"
+    "viewDocs": "查看文档",
+    "applyDemo": "申请演示"
   },
   "solutions": {
     "title": "解决方案",
@@ -350,7 +351,7 @@
     "historyTitle": "发展历程",
     "historySubtitle": "从创立到全球化布局的成长之路",
     "companyIntro": "公司简介",
-    "companyIntroText": "旭衡电子（AlwaysControl Technology）成立于2018年，总部位于深圳市南山区科技园。公司专注于新能源领域的智慧管理与控制技术，致力于为全球客户提供高效、稳定、智能的能源管理解决方案。经过多年发展，旭衡电子已成为行业领先的解决方案提供商，产品和服务覆盖全球50多个国家和地区，兼容200多个设备品牌，累计交付500多个项目。",
+    "companyIntroText": "旭衡电子（AlwaysControl Technology）成立于2018年，总部位于深圳市宝安区。公司专注于新能源领域的智慧管理与控制技术，致力于为全球客户提供高效、稳定、智能的能源管理解决方案。经过多年发展，旭衡电子已成为行业领先的解决方案提供商，产品和服务覆盖全球50多个国家和地区，兼容200多个设备品牌，累计交付500多个项目。",
     "newsTitle": "新闻动态",
     "newsSubtitle": "了解旭衡电子的最新资讯与行业洞察",
     "careersTitle": "加入我们",
@@ -420,9 +421,9 @@
     "success": "消息已发送，我们会尽快与您联系",
     "error": "发送失败，请稍后重试",
     "info": {
-      "address": "深圳市南山区科技园",
-      "phone": "+86 755-8888-9999",
-      "email": "info@alwayscontrol.com.cn",
+      "address": "深圳市宝安区航城街道三围社区泰华梧桐工业园大暑(7#)栋4层",
+      "phone": "+86 136-0300-5641",
+      "email": "support@alwayscontrol.com.cn",
       "hours": "周一至周五 9:00-18:00"
     }
   },
@@ -459,9 +460,9 @@
     "about": "关于我们",
     "help": "帮助中心",
     "contact": "联系方式",
-    "address": "深圳市南山区科技园",
-    "phone": "+86 755-8888-9999",
-    "email": "info@alwayscontrol.com.cn",
+    "address": "深圳市宝安区航城街道三围社区泰华梧桐工业园大暑(7#)栋4层",
+    "phone": "+86 136-0300-5641",
+    "email": "support@alwayscontrol.com.cn",
     "copyright": "© {year} 旭衡电子 版权所有",
     "privacy": "隐私政策",
     "terms": "服务条款"

@@ -157,7 +157,8 @@
     "softwareEvcms": "EV Charging Smart Dispatch",
     "softwarePqms": "Power Quality Monitoring",
     "softwareVpp": "Virtual Power Plant Aggregation",
-    "viewDocs": "View Docs"
+    "viewDocs": "View Docs",
+    "applyDemo": "Request Demo"
   },
   "solutions": {
     "title": "Solutions",
@@ -350,7 +351,7 @@
     "historyTitle": "Our History",
     "historySubtitle": "From founding to global expansion",
     "companyIntro": "Company Overview",
-    "companyIntroText": "AlwaysControl Technology was founded in 2018 and is headquartered in the Science and Technology Park, Nanshan District, Shenzhen. The company focuses on smart management and control technology in the new energy sector, dedicated to providing efficient, stable, and intelligent energy management solutions to customers worldwide. After years of growth, AlwaysControl has become an industry-leading solution provider, with products and services covering over 50 countries and regions, compatible with more than 200 device brands, and over 500 projects delivered.",
+    "companyIntroText": "AlwaysControl Technology was founded in 2018 and is headquartered in Bao'an District, Shenzhen. The company focuses on smart management and control technology in the new energy sector, dedicated to providing efficient, stable, and intelligent energy management solutions to customers worldwide. After years of growth, AlwaysControl has become an industry-leading solution provider, with products and services covering over 50 countries and regions, compatible with more than 200 device brands, and over 500 projects delivered.",
     "newsTitle": "News",
     "newsSubtitle": "Stay updated on the latest news and industry insights from AlwaysControl",
     "careersTitle": "Join Us",
@@ -420,9 +421,9 @@
     "success": "Message sent successfully. We will get back to you soon.",
     "error": "Failed to send. Please try again later.",
     "info": {
-      "address": "Science and Technology Park, Nanshan District, Shenzhen",
-      "phone": "+86 755-8888-9999",
-      "email": "info@alwayscontrol.com.cn",
+      "address": "4F, Building 7#, Taihua Wutong Industrial Park, Sanwei Community, Hangcheng Street, Bao'an District, Shenzhen",
+      "phone": "+86 136-0300-5641",
+      "email": "support@alwayscontrol.com.cn",
       "hours": "Monday to Friday, 9:00 AM - 6:00 PM"
     }
   },
@@ -459,9 +460,9 @@
     "about": "About Us",
     "help": "Help Center",
     "contact": "Contact",
-    "address": "Science and Technology Park, Nanshan District, Shenzhen",
-    "phone": "+86 755-8888-9999",
-    "email": "info@alwayscontrol.com.cn",
+    "address": "4F, Building 7#, Taihua Wutong Industrial Park, Sanwei Community, Hangcheng Street, Bao'an District, Shenzhen",
+    "phone": "+86 136-0300-5641",
+    "email": "support@alwayscontrol.com.cn",
     "copyright": "© {year} AlwaysControl Technology. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"

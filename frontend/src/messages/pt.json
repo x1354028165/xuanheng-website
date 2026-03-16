@@ -157,7 +157,8 @@
     "softwareEvcms": "Gestão Carregamento EV",
     "softwarePqms": "Qualidade de Energia",
     "softwareVpp": "Usina Virtual",
-    "viewDocs": "Ver Documentação"
+    "viewDocs": "Ver Documentação",
+    "applyDemo": "Solicitar demo"
   },
   "solutions": {
     "title": "Soluções",
@@ -420,9 +421,9 @@
     "success": "Mensagem enviada com sucesso. Entraremos em contato em breve.",
     "error": "Falha no envio. Tente novamente mais tarde.",
     "info": {
-      "address": "Parque Científico e Tecnológico, Distrito de Nanshan, Shenzhen",
-      "phone": "+86 755-8888-9999",
-      "email": "info@alwayscontrol.com.cn",
+      "address": "4F, Edifício 7#, Parque Industrial Taihua Wutong, Sanwei, Rua Hangcheng, Distrito de Bao'an, Shenzhen",
+      "phone": "+86 136-0300-5641",
+      "email": "support@alwayscontrol.com.cn",
       "hours": "Segunda a sexta, 9h00–18h00"
     }
   },
@@ -459,9 +460,9 @@
     "about": "Sobre Nós",
     "help": "Central de Ajuda",
     "contact": "Contato",
-    "address": "Parque Científico e Tecnológico, Distrito de Nanshan, Shenzhen",
-    "phone": "+86 755-8888-9999",
-    "email": "info@alwayscontrol.com.cn",
+    "address": "4F, Edifício 7#, Parque Industrial Taihua Wutong, Sanwei, Rua Hangcheng, Distrito de Bao'an, Shenzhen",
+    "phone": "+86 136-0300-5641",
+    "email": "support@alwayscontrol.com.cn",
     "copyright": "© {year} AlwaysControl Technology. Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Serviço"
