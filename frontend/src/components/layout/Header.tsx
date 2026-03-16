@@ -75,7 +75,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     key: "solutions",
-    href: "/solutions",
+    href: "/solutions/hems",
     children: {
       items: [
         { key: "hems", href: "/solutions/hems", desc: "solutions-hems-desc" },
