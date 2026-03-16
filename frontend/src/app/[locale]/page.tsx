@@ -131,6 +131,9 @@ export default async function HomePage({
 
   return (
     <>
+      {/* 首页标志：在 React 加载前告知 Header 当前是首页，避免透明导航闪现 */}
+      <script dangerouslySetInnerHTML={{ __html: "window.__IS_HOME_PAGE=true;" }} />
+
       {/* ===== 1. HERO ===== */}
       <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#0C1829]">
         <Image

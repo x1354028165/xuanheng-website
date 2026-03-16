@@ -127,9 +127,11 @@ export function Header({ locale }: { locale: string }) {
   const currentLocale = useLocale();
 
   // 导航栏透明状态：仅在首页且未滚动时才透明
-  // 默认 false（白色）保证 SSR/所有内页安全
-  // useEffect（仅客户端）负责首页透明逻辑
-  const [isTransparent, setIsTransparent] = useState(false);
+  // 用内联脚本注入的 __IS_HOME_PAGE 标志初始化，避免首页透明闪现问题
+  const [isTransparent, setIsTransparent] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return !!(window as unknown as Record<string, unknown>).__IS_HOME_PAGE && window.scrollY < 20;
+  });
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
