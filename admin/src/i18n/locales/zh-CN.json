@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "旭衡电子管理后台"
+  },
+  "login": {
+    "title": "旭衡电子管理后台",
+    "email": "邮箱",
+    "password": "密码",
+    "submit": "登录",
+    "error": "登录失败，请检查邮箱和密码"
+  },
+  "menu": {
+    "dashboard": "仪表盘",
+    "leads": "商务线索",
+    "tickets": "报修工单",
+    "news": "新闻管理",
+    "faq": "FAQ管理",
+    "jobs": "招聘管理",
+    "products": "产品内容",
+    "solutions": "解决方案",
+    "brands": "兼容品牌"
+  },
+  "dashboard": {
+    "leads": "线索总数",
+    "tickets": "工单总数",
+    "news": "新闻总数",
+    "jobs": "招聘职位数",
+    "recentLeads": "最近线索"
+  },
+  "common": {
+    "search": "搜索",
+    "create": "新增",
+    "edit": "编辑",
+    "delete": "删除",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "confirmDelete": "确认删除此条记录？",
+    "operations": "操作",
+    "status": "状态",
+    "createdAt": "创建时间",
+    "id": "ID",
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话",
+    "title": "标题",
+    "description": "描述",
+    "published": "已发布",
+    "draft": "草稿",
+    "publish": "发布",
+    "unpublish": "下架",
+    "logout": "退出登录",
+    "language": "语言",
+    "total": "共 {{total}} 条"
+  },
+  "leads": {
+    "intentType": "意向类型",
+    "submitTime": "提交时间",
+    "company": "公司",
+    "message": "留言内容",
+    "detail": "线索详情"
+  },
+  "tickets": {
+    "productModel": "产品型号",
+    "serialNumber": "序列号",
+    "faultDescription": "故障描述",
+    "submitTime": "提交时间",
+    "detail": "工单详情",
+    "contactName": "联系人"
+  },
+  "news": {
+    "summary": "摘要",
+    "content": "内容",
+    "coverUrl": "封面图URL",
+    "slug": "Slug"
+  },
+  "faq": {
+    "question": "问题",
+    "answer": "回答",
+    "category": "分类"
+  },
+  "jobs": {
+    "position": "职位名称",
+    "department": "部门",
+    "location": "地点",
+    "open": "开启招聘",
+    "close": "关闭招聘",
+    "requirements": "任职要求",
+    "responsibilities": "岗位职责"
+  },
+  "products": {
+    "tagline": "标语",
+    "coverImage": "封面图",
+    "editProduct": "编辑产品"
+  },
+  "solutions": {
+    "editSolution": "编辑解决方案"
+  },
+  "brands": {
+    "brandName": "品牌名称",
+    "category": "分类",
+    "logo": "Logo",
+    "capabilities": "能力标签"
+  }
+}

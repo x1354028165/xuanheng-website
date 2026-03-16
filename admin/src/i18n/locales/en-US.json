@@ -1,0 +1,105 @@
+{
+  "app": {
+    "title": "AlwaysControl Admin"
+  },
+  "login": {
+    "title": "AlwaysControl Admin",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "error": "Login failed. Please check your email and password."
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "leads": "Leads",
+    "tickets": "Repair Tickets",
+    "news": "News",
+    "faq": "FAQ",
+    "jobs": "Jobs",
+    "products": "Products",
+    "solutions": "Solutions",
+    "brands": "Compatible Brands"
+  },
+  "dashboard": {
+    "leads": "Total Leads",
+    "tickets": "Total Tickets",
+    "news": "Total News",
+    "jobs": "Total Jobs",
+    "recentLeads": "Recent Leads"
+  },
+  "common": {
+    "search": "Search",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "confirmDelete": "Are you sure you want to delete this record?",
+    "operations": "Actions",
+    "status": "Status",
+    "createdAt": "Created At",
+    "id": "ID",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "title": "Title",
+    "description": "Description",
+    "published": "Published",
+    "draft": "Draft",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "logout": "Logout",
+    "language": "Language",
+    "total": "Total {{total}} records"
+  },
+  "leads": {
+    "intentType": "Intent Type",
+    "submitTime": "Submit Time",
+    "company": "Company",
+    "message": "Message",
+    "detail": "Lead Detail"
+  },
+  "tickets": {
+    "productModel": "Product Model",
+    "serialNumber": "Serial Number",
+    "faultDescription": "Fault Description",
+    "submitTime": "Submit Time",
+    "detail": "Ticket Detail",
+    "contactName": "Contact Name"
+  },
+  "news": {
+    "summary": "Summary",
+    "content": "Content",
+    "coverUrl": "Cover Image URL",
+    "slug": "Slug"
+  },
+  "faq": {
+    "question": "Question",
+    "answer": "Answer",
+    "category": "Category"
+  },
+  "jobs": {
+    "position": "Position",
+    "department": "Department",
+    "location": "Location",
+    "open": "Open",
+    "close": "Close",
+    "requirements": "Requirements",
+    "responsibilities": "Responsibilities"
+  },
+  "products": {
+    "tagline": "Tagline",
+    "coverImage": "Cover Image",
+    "editProduct": "Edit Product"
+  },
+  "solutions": {
+    "editSolution": "Edit Solution"
+  },
+  "brands": {
+    "brandName": "Brand Name",
+    "category": "Category",
+    "logo": "Logo",
+    "capabilities": "Capabilities"
+  }
+}
