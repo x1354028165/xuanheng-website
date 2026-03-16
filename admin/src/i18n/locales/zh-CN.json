@@ -18,7 +18,28 @@
     "jobs": "招聘管理",
     "products": "产品内容",
     "solutions": "解决方案",
-    "brands": "兼容品牌"
+    "brands": "兼容品牌",
+    "cases": "案例管理",
+    "fileAssets": "文件资产",
+    "productRelations": "产品关联",
+    "seoConfig": "SEO配置",
+    "notificationConfig": "通知配置",
+    "pageContent": "页面内容",
+    "i18nDict": "多语言字典",
+    "mediaLibrary": "媒体库",
+    "accountMgmt": "账号管理",
+    "auditLogs": "操作日志",
+    "cacheMgmt": "缓存管理",
+    "healthCheck": "健康检查",
+    "sitemapMgmt": "Sitemap管理",
+    "group": {
+      "content": "内容管理",
+      "pages": "内容与页面",
+      "assets": "资产管理",
+      "leads": "线索与工单",
+      "system": "系统配置",
+      "ops": "运维工具"
+    }
   },
   "dashboard": {
     "leads": "线索总数",
@@ -101,5 +122,117 @@
     "category": "分类",
     "logo": "Logo",
     "capabilities": "能力标签"
+  },
+  "cases": {
+    "client": "客户名称",
+    "location": "项目地点",
+    "solutionType": "方案类型",
+    "sortOrder": "排序",
+    "slug": "Slug",
+    "summary": "摘要",
+    "content": "内容"
+  },
+  "fileAssets": {
+    "name": "文件名称",
+    "fileType": "文件类型",
+    "productModel": "产品型号",
+    "version": "版本",
+    "fileUrl": "文件地址",
+    "fileSize": "文件大小",
+    "downloadCount": "下载次数",
+    "isActive": "状态",
+    "active": "启用",
+    "inactive": "禁用"
+  },
+  "productRelations": {
+    "productSlug": "产品Slug",
+    "solutionSlug": "方案Slug",
+    "showOnProduct": "产品页显示",
+    "showOnSolution": "方案页显示",
+    "sortOrder": "排序"
+  },
+  "seo": {
+    "pageKey": "页面标识",
+    "pageTitle": "页面标题",
+    "metaDescription": "Meta描述",
+    "ogTitle": "OG标题",
+    "ogDescription": "OG描述",
+    "ogImage": "OG图片",
+    "keywords": "关键词"
+  },
+  "notification": {
+    "configKey": "配置标识",
+    "webhookUrl": "Webhook地址",
+    "emailTo": "邮件接收",
+    "isEnabled": "启用状态",
+    "enabled": "已启用",
+    "disabled": "已禁用"
+  },
+  "pageContent": {
+    "pageKey": "页面标识",
+    "blockKey": "区块标识",
+    "content": "内容(JSON)",
+    "jsonPlaceholder": "请输入JSON格式内容"
+  },
+  "i18n": {
+    "key": "词条Key",
+    "zhCN": "简体中文",
+    "zhTW": "繁体中文",
+    "enUS": "英语",
+    "de": "德语",
+    "fr": "法语",
+    "pt": "葡萄牙语",
+    "es": "西班牙语",
+    "ru": "俄语",
+    "statusField": "审核状态",
+    "pending": "待审核",
+    "approved": "已审核"
+  },
+  "media": {
+    "preview": "预览",
+    "mime": "类型",
+    "size": "大小",
+    "upload": "上传文件"
+  },
+  "account": {
+    "firstname": "名",
+    "lastname": "姓",
+    "isActive": "状态",
+    "active": "活跃",
+    "inactive": "禁用",
+    "password": "密码"
+  },
+  "audit": {
+    "action": "操作类型",
+    "user": "操作人",
+    "model": "数据模型",
+    "payload": "操作内容"
+  },
+  "cache": {
+    "clearAllTitle": "清除全站缓存",
+    "clearAllDesc": "清除所有页面的ISR缓存，前台将重新生成所有页面",
+    "clearAll": "清除全站缓存",
+    "clearAllSuccess": "全站缓存已清除",
+    "clearByPathTitle": "按路径清除缓存",
+    "clearByPathDesc": "清除指定页面路径的缓存",
+    "clearPath": "清除缓存",
+    "clearPathSuccess": "缓存已清除",
+    "clearFailed": "清除失败",
+    "enterPath": "请输入路径"
+  },
+  "health": {
+    "status": "状态码",
+    "responseTime": "响应时间",
+    "runCheck": "开始检查"
+  },
+  "sitemap": {
+    "url": "Sitemap地址",
+    "lastModified": "最后更新",
+    "fileSize": "文件大小",
+    "available": "可用",
+    "unavailable": "不可用",
+    "refresh": "刷新Sitemap",
+    "refreshSuccess": "Sitemap已刷新",
+    "refreshFailed": "刷新失败"
   }
 }

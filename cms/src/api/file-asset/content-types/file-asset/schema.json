@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "file_assets",
+  "info": {
+    "singularName": "file-asset",
+    "pluralName": "file-assets",
+    "displayName": "文件资产"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "fileType": { "type": "enumeration", "enum": ["doc", "software", "firmware", "app"], "required": true },
+    "productModel": { "type": "string" },
+    "version": { "type": "string" },
+    "fileUrl": { "type": "string" },
+    "fileSize": { "type": "string" },
+    "downloadCount": { "type": "integer", "default": 0 },
+    "description": { "type": "text" },
+    "isActive": { "type": "boolean", "default": true }
+  }
+}

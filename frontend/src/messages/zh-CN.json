@@ -151,7 +151,12 @@
     "ctaApplyDemo": "申请 Demo",
     "ctaApiDocs": "API 文档",
     "ctaContactSales": "联系商务",
-    "ctaButton": "立即咨询"
+    "ctaButton": "立即咨询",
+    "softwareHems": "家庭能源智慧管理",
+    "softwareEss": "工商业储能套利",
+    "softwareEvcms": "充电站智能调度",
+    "softwarePqms": "电能质量监测治理",
+    "softwareVpp": "虚拟电厂聚合调度"
   },
   "solutions": {
     "title": "解决方案",

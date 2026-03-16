@@ -18,7 +18,28 @@
     "jobs": "Jobs",
     "products": "Products",
     "solutions": "Solutions",
-    "brands": "Compatible Brands"
+    "brands": "Compatible Brands",
+    "cases": "Cases",
+    "fileAssets": "File Assets",
+    "productRelations": "Product Relations",
+    "seoConfig": "SEO Config",
+    "notificationConfig": "Notifications",
+    "pageContent": "Page Content",
+    "i18nDict": "i18n Dictionary",
+    "mediaLibrary": "Media Library",
+    "accountMgmt": "Accounts",
+    "auditLogs": "Audit Logs",
+    "cacheMgmt": "Cache",
+    "healthCheck": "Health Check",
+    "sitemapMgmt": "Sitemap",
+    "group": {
+      "content": "Content",
+      "pages": "Content & Pages",
+      "assets": "Assets",
+      "leads": "Leads & Tickets",
+      "system": "System Config",
+      "ops": "Operations"
+    }
   },
   "dashboard": {
     "leads": "Total Leads",
@@ -101,5 +122,117 @@
     "category": "Category",
     "logo": "Logo",
     "capabilities": "Capabilities"
+  },
+  "cases": {
+    "client": "Client",
+    "location": "Location",
+    "solutionType": "Solution Type",
+    "sortOrder": "Sort Order",
+    "slug": "Slug",
+    "summary": "Summary",
+    "content": "Content"
+  },
+  "fileAssets": {
+    "name": "File Name",
+    "fileType": "File Type",
+    "productModel": "Product Model",
+    "version": "Version",
+    "fileUrl": "File URL",
+    "fileSize": "File Size",
+    "downloadCount": "Downloads",
+    "isActive": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "productRelations": {
+    "productSlug": "Product Slug",
+    "solutionSlug": "Solution Slug",
+    "showOnProduct": "Show on Product",
+    "showOnSolution": "Show on Solution",
+    "sortOrder": "Sort Order"
+  },
+  "seo": {
+    "pageKey": "Page Key",
+    "pageTitle": "Page Title",
+    "metaDescription": "Meta Description",
+    "ogTitle": "OG Title",
+    "ogDescription": "OG Description",
+    "ogImage": "OG Image",
+    "keywords": "Keywords"
+  },
+  "notification": {
+    "configKey": "Config Key",
+    "webhookUrl": "Webhook URL",
+    "emailTo": "Email To",
+    "isEnabled": "Enabled",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  },
+  "pageContent": {
+    "pageKey": "Page Key",
+    "blockKey": "Block Key",
+    "content": "Content (JSON)",
+    "jsonPlaceholder": "Enter JSON content"
+  },
+  "i18n": {
+    "key": "Key",
+    "zhCN": "Chinese (Simplified)",
+    "zhTW": "Chinese (Traditional)",
+    "enUS": "English",
+    "de": "German",
+    "fr": "French",
+    "pt": "Portuguese",
+    "es": "Spanish",
+    "ru": "Russian",
+    "statusField": "Status",
+    "pending": "Pending",
+    "approved": "Approved"
+  },
+  "media": {
+    "preview": "Preview",
+    "mime": "Type",
+    "size": "Size",
+    "upload": "Upload"
+  },
+  "account": {
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "isActive": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "password": "Password"
+  },
+  "audit": {
+    "action": "Action",
+    "user": "User",
+    "model": "Model",
+    "payload": "Payload"
+  },
+  "cache": {
+    "clearAllTitle": "Clear All Cache",
+    "clearAllDesc": "Clear ISR cache for all pages. The frontend will regenerate all pages.",
+    "clearAll": "Clear All Cache",
+    "clearAllSuccess": "All cache cleared",
+    "clearByPathTitle": "Clear Cache by Path",
+    "clearByPathDesc": "Clear cache for a specific page path",
+    "clearPath": "Clear Cache",
+    "clearPathSuccess": "Cache cleared",
+    "clearFailed": "Clear failed",
+    "enterPath": "Please enter a path"
+  },
+  "health": {
+    "status": "Status Code",
+    "responseTime": "Response Time",
+    "runCheck": "Run Check"
+  },
+  "sitemap": {
+    "url": "Sitemap URL",
+    "lastModified": "Last Modified",
+    "fileSize": "File Size",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "refresh": "Refresh Sitemap",
+    "refreshSuccess": "Sitemap refreshed",
+    "refreshFailed": "Refresh failed"
   }
 }

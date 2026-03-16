@@ -151,7 +151,12 @@
     "viewDetail": "Learn More",
     "hardwareLabel": "Hardware",
     "softwareLabel": "Software",
-    "brandsMissing": "Can't find your brand? View full compatibility list"
+    "brandsMissing": "Can't find your brand? View full compatibility list",
+    "softwareHems": "Gestion Énergie Résidentielle",
+    "softwareEss": "Stockage Énergie C&I",
+    "softwareEvcms": "Gestion Bornes de Charge",
+    "softwarePqms": "Qualité d\u0027énergie",
+    "softwareVpp": "Centrale Virtuelle"
   },
   "solutions": {
     "title": "Solutions",

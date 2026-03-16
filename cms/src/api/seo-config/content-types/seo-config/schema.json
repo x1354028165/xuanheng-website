@@ -1,0 +1,15 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seo_configs",
+  "info": { "singularName": "seo-config", "pluralName": "seo-configs", "displayName": "SEO配置" },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "pageKey": { "type": "string", "required": true, "unique": true },
+    "pageTitle": { "type": "string" },
+    "metaDescription": { "type": "text" },
+    "ogTitle": { "type": "string" },
+    "ogDescription": { "type": "text" },
+    "ogImage": { "type": "string" },
+    "keywords": { "type": "text" }
+  }
+}

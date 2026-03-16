@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
-import { Search, ChevronDown } from "lucide-react";
+import { Search, ChevronDown, X } from "lucide-react";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import Image from "next/image";
 
@@ -115,9 +115,14 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const languages = [
-  { code: "zh-CN" as const, label: "简体中文", short: "中" },
-  { code: "en-US" as const, label: "English", short: "EN" },
-  { code: "zh-TW" as const, label: "繁體中文", short: "繁" },
+  { code: "zh-CN" as const, label: "简体中文", native: "Chinese (Simplified)", flag: "🇨🇳", short: "中文" },
+  { code: "en-US" as const, label: "English", native: "English (US)", flag: "🇺🇸", short: "EN" },
+  { code: "zh-TW" as const, label: "繁體中文", native: "Chinese (Traditional)", flag: "🇹🇼", short: "繁中" },
+  { code: "de" as const, label: "Deutsch", native: "German", flag: "🇩🇪", short: "DE" },
+  { code: "fr" as const, label: "Français", native: "French", flag: "🇫🇷", short: "FR" },
+  { code: "es" as const, label: "Español", native: "Spanish", flag: "🇪🇸", short: "ES" },
+  { code: "pt" as const, label: "Português", native: "Portuguese", flag: "🇵🇹", short: "PT" },
+  { code: "ru" as const, label: "Русский", native: "Russian", flag: "🇷🇺", short: "RU" },
 ];
 
 /* ─── Component ─── */
@@ -144,9 +149,8 @@ export function Header({ locale }: { locale: string }) {
   // Mobile accordion
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
-  // Language dropdown
-  const [langOpen, setLangOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
+  // Language full-page overlay
+  const [langPageOpen, setLangPageOpen] = useState(false);
 
   useEffect(() => {
     const p = window.location.pathname;
@@ -179,15 +183,6 @@ export function Header({ locale }: { locale: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [currentLocale, pathname]);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleMouseEnter = useCallback((key: string) => {
     if (closeTimerRef.current) {
@@ -204,8 +199,7 @@ export function Header({ locale }: { locale: string }) {
   }, []);
 
   const switchLocale = (targetLocale: string) => {
-    router.push(pathname, { locale: targetLocale as "zh-CN" | "en-US" | "zh-TW" });
-    setLangOpen(false);
+    router.push(pathname, { locale: targetLocale as "zh-CN" | "en-US" | "zh-TW" | "de" | "fr" | "es" | "pt" | "ru" });
   };
 
   const currentLang = languages.find((l) => l.code === currentLocale) || languages[0];
@@ -283,7 +277,7 @@ export function Header({ locale }: { locale: string }) {
             {isTransparent ? (
               <Image src="/images/logo-white.png" alt="AlwaysControl Technology" width={160} height={36} className="h-9 w-auto" />
             ) : (
-              <Image src="/images/logo.jpg" alt="AlwaysControl Technology" width={160} height={36} className="h-9 w-auto" />
+              <Image src="/images/logo.png" alt="AlwaysControl Technology" width={160} height={36} className="h-9 w-auto" />
             )}
           </Link>
 
@@ -335,49 +329,20 @@ export function Header({ locale }: { locale: string }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className={`rounded-md p-2 transition-colors ${isTransparent ? "text-white/60 hover:text-white hover:bg-white/10" : "text-[#0F172A]/60 hover:text-[#38C4E8] hover:bg-gray-100"}`}
+              className={`rounded-md p-2 transition-colors ${isTransparent ? "text-white/60 hover:text-white hover:bg-white/10" : "text-[#0F172A] hover:text-[#38C4E8] hover:bg-gray-100"}`}
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
             </button>
 
-            {/* Language switcher */}
-            <div ref={langRef} className="relative hidden sm:block">
-              <button
-                onClick={() => setLangOpen(!langOpen)}
-                className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
-                type="button"
-              >
-                <span>🌐</span>
-                <span>{currentLang.short}</span>
-                <svg
-                  className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 top-full mt-1 z-50 w-36 rounded-lg bg-white border border-[#E2E8F0] shadow-xl py-1 overflow-hidden">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => switchLocale(lang.code)}
-                      className={`w-full text-left px-3 py-2 text-sm transition-colors ${
-                        currentLocale === lang.code
-                          ? "text-[#38C4E8] bg-[#F8FAFC]"
-                          : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-[#F8FAFC]"
-                      }`}
-                    >
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* Language switcher trigger */}
+            <button
+              onClick={() => setLangPageOpen(true)}
+              className={`hidden sm:flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
+            >
+              <span>{currentLang.flag}</span>
+              <span>{currentLang.short}</span>
+            </button>
 
             {/* Mobile hamburger */}
             <button
@@ -486,24 +451,13 @@ export function Header({ locale }: { locale: string }) {
 
               {/* Mobile Language Switcher */}
               <div className="border-t border-white/10 mt-2 pt-2">
-                <div className="flex gap-2 px-3">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        switchLocale(lang.code);
-                        setMobileOpen(false);
-                      }}
-                      className={`rounded-md px-3 py-2 text-sm transition-colors ${
-                        currentLocale === lang.code
-                          ? "text-brand-cyan bg-white/10"
-                          : "text-white/60 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      {lang.short}
-                    </button>
-                  ))}
-                </div>
+                <button
+                  onClick={() => { setMobileOpen(false); setLangPageOpen(true); }}
+                  className="flex items-center gap-2 px-3 py-3 text-base font-medium text-white/80 hover:text-brand-cyan hover:bg-white/5 transition-colors rounded-md w-full"
+                >
+                  <span>{currentLang.flag}</span>
+                  <span>{currentLang.label}</span>
+                </button>
               </div>
             </nav>
           </div>
@@ -511,6 +465,37 @@ export function Header({ locale }: { locale: string }) {
       </header>
 
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} locale={locale} />
+
+      {/* Language full-page overlay */}
+      {langPageOpen && (
+        <div className="fixed inset-0 z-[200] bg-white flex flex-col">
+          <div className="flex items-center justify-between px-8 h-[72px] border-b border-[#E2E8F0]">
+            <span className="text-[#0F172A] font-semibold text-lg">选择语言 / Select Language</span>
+            <button onClick={() => setLangPageOpen(false)} className="p-2 rounded-md hover:bg-gray-100">
+              <X className="h-6 w-6 text-[#0F172A]" />
+            </button>
+          </div>
+          <div className="flex-1 flex items-center justify-center px-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[800px] w-full">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => { switchLocale(lang.code); setLangPageOpen(false); }}
+                  className={`flex flex-col items-start p-6 rounded-2xl border-2 transition-all duration-200 text-left hover:border-[#38C4E8] hover:shadow-md ${
+                    currentLocale === lang.code
+                      ? "border-[#38C4E8] bg-[#F0FAFE]"
+                      : "border-[#E2E8F0] bg-white"
+                  }`}
+                >
+                  <span className="text-2xl mb-2">{lang.flag}</span>
+                  <span className="font-semibold text-[#0F172A] text-base">{lang.label}</span>
+                  <span className="text-sm text-[#64748B] mt-1">{lang.native}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

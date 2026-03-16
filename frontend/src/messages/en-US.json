@@ -151,7 +151,12 @@
     "ctaApplyDemo": "Request Demo",
     "ctaApiDocs": "API Docs",
     "ctaContactSales": "Contact Sales",
-    "ctaButton": "Get in Touch"
+    "ctaButton": "Get in Touch",
+    "softwareHems": "Residential Energy Management",
+    "softwareEss": "C&I Energy Storage Arbitrage",
+    "softwareEvcms": "EV Charging Smart Dispatch",
+    "softwarePqms": "Power Quality Monitoring",
+    "softwareVpp": "Virtual Power Plant Aggregation"
   },
   "solutions": {
     "title": "Solutions",

@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_contents",
+  "info": { "singularName": "page-content", "pluralName": "page-contents", "displayName": "页面内容" },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "pageKey": { "type": "string", "required": true, "unique": true },
+    "blockKey": { "type": "string" },
+    "content": { "type": "json" },
+    "description": { "type": "string" }
+  }
+}

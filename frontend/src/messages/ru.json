@@ -151,7 +151,12 @@
     "viewDetail": "Learn More",
     "hardwareLabel": "Hardware",
     "softwareLabel": "Software",
-    "brandsMissing": "Can't find your brand? View full compatibility list"
+    "brandsMissing": "Can't find your brand? View full compatibility list",
+    "softwareHems": "Управление энергией дома",
+    "softwareEss": "Хранение энергии C&I",
+    "softwareEvcms": "Управление зарядкой EV",
+    "softwarePqms": "Качество электроэнергии",
+    "softwareVpp": "Виртуальная электростанция"
   },
   "solutions": {
     "title": "Решения",

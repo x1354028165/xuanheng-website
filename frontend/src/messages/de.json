@@ -151,7 +151,12 @@
     "viewDetail": "Learn More",
     "hardwareLabel": "Hardware",
     "softwareLabel": "Software",
-    "brandsMissing": "Can't find your brand? View full compatibility list"
+    "brandsMissing": "Can't find your brand? View full compatibility list",
+    "softwareHems": "Heim-Energiemanagement",
+    "softwareEss": "Gewerbe-Energiespeicher",
+    "softwareEvcms": "E-Ladesäulen-Steuerung",
+    "softwarePqms": "Stromqualitätsüberwachung",
+    "softwareVpp": "Virtuelles Kraftwerk"
   },
   "solutions": {
     "title": "Lösungen",

@@ -144,7 +144,7 @@ async function translateEntry(
 
   for (const locale of targetLocales) {
     try {
-      const translatedData: Record<string, string> = {};
+      const translatedData: Record<string, any> = {};
 
       if (locale === 'zh-TW') {
         // OpenCC 本地转换，不调 DeepSeek

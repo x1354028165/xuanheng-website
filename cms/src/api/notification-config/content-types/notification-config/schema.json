@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notification_configs",
+  "info": { "singularName": "notification-config", "pluralName": "notification-configs", "displayName": "通知配置" },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "configKey": { "type": "string", "required": true, "unique": true },
+    "webhookUrl": { "type": "string" },
+    "emailTo": { "type": "string" },
+    "isEnabled": { "type": "boolean", "default": true },
+    "description": { "type": "string" }
+  }
+}

@@ -151,7 +151,12 @@
     "viewDetail": "查看詳情",
     "hardwareLabel": "硬體 · Hardware",
     "softwareLabel": "軟體 · Software",
-    "brandsMissing": "沒有找到您的品牌？查看完整相容列表"
+    "brandsMissing": "沒有找到您的品牌？查看完整相容列表",
+    "softwareHems": "家庭能源智慧管理",
+    "softwareEss": "工商業儲能套利",
+    "softwareEvcms": "充電站智能調度",
+    "softwarePqms": "電能質量監測治理",
+    "softwareVpp": "虛擬電廠聚合調度"
   },
   "solutions": {
     "title": "解決方案",

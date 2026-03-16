@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cases",
+  "info": {
+    "singularName": "case",
+    "pluralName": "cases",
+    "displayName": "案例管理"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "title" },
+    "summary": { "type": "text" },
+    "content": { "type": "richtext" },
+    "cover": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "client": { "type": "string" },
+    "location": { "type": "string" },
+    "solutionType": { "type": "string" },
+    "sortOrder": { "type": "integer", "default": 0 }
+  }
+}

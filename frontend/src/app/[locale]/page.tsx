@@ -304,7 +304,13 @@ export default async function HomePage({
 
         {/* Software tabs */}
         <div className="mt-8">
-          <SoftwareTabs />
+          <SoftwareTabs tabLabels={{
+            HEMS: t("softwareHems"),
+            ESS: t("softwareEss"),
+            EVCMS: t("softwareEvcms"),
+            PQMS: t("softwarePqms"),
+            VPP: t("softwareVpp"),
+          }} />
         </div>
       </section>
 
