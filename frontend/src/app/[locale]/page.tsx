@@ -110,7 +110,7 @@ export default async function HomePage({
       titleKey: 'accordionPqms',
       descKey: 'accordionPqmsDesc',
       href: '/solutions/pqms',
-      bgImage: 'https://images.unsplash.com/photo-1545259742-a0f2c1a2d2b5?w=800&q=70',
+      bgImage: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=70',
     },
   ];
 
@@ -292,12 +292,13 @@ export default async function HomePage({
           {hwProducts.map((name) => (
             <div
               key={name}
-              className="bg-[#F8FAFC] rounded-2xl pt-10 pb-7 px-6 text-center border-[1.5px] border-transparent cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.25)]"
+              className="bg-[#F8FAFC] rounded-2xl px-6 text-center border-[1.5px] border-transparent cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.25)] flex flex-col items-center justify-center"
+              style={{ height: '565px' }}
             >
-              <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center justify-center mb-8">
                 <DeviceSVG />
               </div>
-              <div className="text-[clamp(20px,1.5vw,28px)] font-extrabold text-[#0F172A] tracking-[-0.5px]">
+              <div className="text-[clamp(20px,1.5vw,26px)] font-medium text-[#0F172A] tracking-[-0.5px]">
                 {name}
               </div>
             </div>
