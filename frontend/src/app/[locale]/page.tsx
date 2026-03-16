@@ -188,7 +188,7 @@ export default async function HomePage({
 
       {/* ===== 2. STATS ===== */}
       <section className="bg-white py-20 px-[60px]">
-        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-[1440px] mx-auto divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-[1652px] mx-auto divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
           {[
             { num: '80', suffix: '+', label: t('statsBrandsLabel') },
             { num: '30', suffix: '+', label: t('statsCountriesLabel') },
@@ -210,8 +210,8 @@ export default async function HomePage({
       </section>
 
       {/* ===== 2.5 接入方式 ===== */}
-      <section className="bg-[#F8FAFC] py-24 px-6">
-        <div className="max-w-[1200px] mx-auto">
+      <section className="bg-[#F8FAFC] py-24 px-[60px]">
+        <div className="max-w-[1652px] mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-4">
               {t("accessTitle")}
@@ -257,9 +257,9 @@ export default async function HomePage({
       </section>
 
       {/* ===== 4. PRODUCTS ===== */}
-      <section className="bg-white pt-24 pb-20">
+      <section className="bg-white pt-24 pb-20 px-[60px]">
         {/* Section header */}
-        <div className="text-center mb-14 px-6">
+        <div className="text-center mb-14">
           <h2 className="text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-4">
             {t('productsTitle')}
           </h2>
@@ -267,14 +267,14 @@ export default async function HomePage({
         </div>
 
         {/* HARDWARE label */}
-        <div className="max-w-[1200px] mx-auto px-6 mb-8">
+        <div className="max-w-[1652px] mx-auto mb-8">
           <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
             {t('hardwareLabel')}
           </span>
         </div>
 
         {/* Hardware cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1200px] mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1652px] mx-auto">
           {hwProducts.map((name) => (
             <div
               key={name}
@@ -291,7 +291,7 @@ export default async function HomePage({
         </div>
 
         {/* SOFTWARE label */}
-        <div className="max-w-[1200px] mx-auto px-6 mt-[72px] pt-12 border-t border-[#E2E8F0]">
+        <div className="max-w-[1652px] mx-auto mt-[72px] pt-12 border-t border-[#E2E8F0]">
           <span className="text-[clamp(12px,0.75vw,14px)] font-bold tracking-[2px] uppercase text-[#38C4E8]">
             {t('softwareLabel')}
           </span>
@@ -310,7 +310,7 @@ export default async function HomePage({
       </section>
 
       {/* ===== 5. BRANDS ===== */}
-      <section className="bg-white py-24 px-6">
+      <section className="bg-white py-24 px-[60px]">
         <div className="text-center mb-16">
           <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
             {t('brandsTitle')}
@@ -339,14 +339,14 @@ export default async function HomePage({
       </section>
 
       {/* ===== 6. NEWS ===== */}
-      <section className="bg-[#F8FAFC] py-24 px-6">
+      <section className="bg-[#F8FAFC] py-24 px-[60px]">
         <div className="text-center mb-16">
           <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold text-[#0F172A] tracking-[-1px] mb-4">
             {t('newsTitle')}
           </h2>
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('newsSubtitle')}</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1652px] mx-auto">
           {articles.slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
             return (
@@ -383,7 +383,7 @@ export default async function HomePage({
       </section>
 
       {/* ===== 7. BOTTOM CTA ===== */}
-      <section className="bg-[#0C1829] py-24 px-6">
+      <section className="bg-[#0C1829] py-24 px-[60px]">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">{t('ctaTitle')}</h2>
           <p className="text-lg text-gray-300 mb-8">{t('ctaSubtitle')}</p>
