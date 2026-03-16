@@ -75,53 +75,35 @@ export default async function HomePage({
     brands = MOCK_BRANDS_LIST as unknown as StrapiCompatibleBrand[];
   }
 
-  // Accordion data
-  const accordionItems = [
-    {
-      tag: '户用',
-      titleKey: 'accordionHems',
-      descKey: 'accordionHemsDesc',
-      href: '/solutions/hems',
-      bgImage: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
-    },
-    {
-      tag: '工商业',
-      titleKey: 'accordionEss',
-      descKey: 'accordionEssDesc',
-      href: '/solutions/ess',
-      bgImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
-    },
-    {
-      tag: '充电站',
-      titleKey: 'accordionEvcms',
-      descKey: 'accordionEvcmsDesc',
-      href: '/solutions/evcms',
-      bgImage: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
-    },
-    {
-      tag: 'VPP',
-      titleKey: 'accordionVpp',
-      descKey: 'accordionVppDesc',
-      href: '/solutions/vpp',
-      bgImage: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
-    },
-    {
-      tag: '电能质量',
-      titleKey: 'accordionPqms',
-      descKey: 'accordionPqmsDesc',
-      href: '/solutions/pqms',
-      bgImage: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=70',
-    },
-  ];
+  // Fallback cover images per slug（CMS cover为空时使用）
+  const SOLUTION_FALLBACK_COVER: Record<string, string> = {
+    hems: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
+    ess: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
+    evcms: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
+    vpp: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
+    pqms: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=70',
+  };
+  const SOLUTION_TAG: Record<string, string> = {
+    hems: '户用', ess: '工商业', evcms: '充电站', vpp: 'VPP', pqms: '电能质量',
+  };
 
-  const accordionData = accordionItems.map((item) => ({
-    tag: item.tag,
-    title: t(item.titleKey),
-    description: t(item.descKey),
-    href: item.href,
-    bgImage: item.bgImage,
-    linkText: t('viewDetail'),
-  }));
+  // accordionData 从 CMS solutions 构建，cover 为空时使用 fallback
+  const SOLUTION_ORDER = ['hems', 'ess', 'evcms', 'vpp', 'pqms'];
+  const solutionMap = Object.fromEntries(solutions.map(s => [s.slug, s]));
+  const accordionData = SOLUTION_ORDER.map(slug => {
+    const s = solutionMap[slug];
+    const coverUrl = s?.cover
+      ? (typeof s.cover === 'string' ? s.cover : (s.cover as { url?: string })?.url ?? SOLUTION_FALLBACK_COVER[slug])
+      : SOLUTION_FALLBACK_COVER[slug];
+    return {
+      tag: SOLUTION_TAG[slug] ?? slug,
+      title: s?.title ?? t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
+      description: s?.tagline ?? '',
+      href: `/solutions/${slug}`,
+      bgImage: coverUrl,
+      linkText: t('viewDetail'),
+    };
+  });
 
   // Hardware products
   const hwProducts = [
