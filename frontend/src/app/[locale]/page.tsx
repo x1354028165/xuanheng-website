@@ -143,7 +143,7 @@ export default async function HomePage({
           className="object-cover object-[center_60%]"
           priority
         />
-        {/* Gradient overlay 1 */}
+        {/* Gradient overlay */}
         <div className="absolute inset-0 pointer-events-none" style={{
           background: 'linear-gradient(to bottom, rgba(0,0,0,.10) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.30) 100%)',
         }} />
@@ -158,31 +158,31 @@ export default async function HomePage({
           background: 'radial-gradient(circle, rgba(56,196,232,.2) 0%, rgba(56,196,232,.05) 40%, transparent 65%)',
         }} />
 
-        {/* Center content */}
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
-            {t('heroLine1')}<br />{t('heroLine2')}
-          </h1>
-          <p className="mt-6 text-[clamp(15px,1.1vw,20px)] text-white/80 max-w-[680px] mx-auto leading-relaxed">
-            {t('heroSubtitle')}
-          </p>
-        </div>
-
-        {/* Bottom CTA buttons */}
-        <div className="absolute bottom-20 left-0 right-0 z-20 flex justify-center gap-4 px-6 flex-col sm:flex-row items-center">
-          <Link
-            href="/support/docs"
-            className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[clamp(14px,0.9vw,16px)] transition-colors duration-200 hover:bg-white"
-          >
-            {t('viewDocs')}
-          </Link>
-          <Link
-            href="/contact"
-            className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
-            style={{ background: 'rgba(255,255,255,.12)' }}
-          >
-            {t('contactUs')}
-          </Link>
+        {/* 标题 + 副标题 + CTA 作为整体居中组 */}
+        <div className="relative z-10 flex flex-col items-center text-center px-6 gap-12">
+          <div>
+            <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
+              {t('heroLine1')}<br />{t('heroLine2')}
+            </h1>
+            <p className="mt-5 text-[clamp(15px,1.1vw,20px)] text-white/80 max-w-[680px] mx-auto leading-relaxed">
+              {t('heroSubtitle')}
+            </p>
+          </div>
+          <div className="flex justify-center gap-4 flex-col sm:flex-row items-center w-full">
+            <Link
+              href="/support/docs"
+              className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[clamp(14px,0.9vw,16px)] transition-colors duration-200 hover:bg-white"
+            >
+              {t('viewDocs')}
+            </Link>
+            <Link
+              href="/contact"
+              className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+              style={{ background: 'rgba(255,255,255,.12)' }}
+            >
+              {t('contactUs')}
+            </Link>
+          </div>
         </div>
       </section>
 
