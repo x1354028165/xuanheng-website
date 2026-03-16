@@ -136,3 +136,27 @@ body {
     @apply font-sans;
   }
 }
+/* 首页透明导航：JS 执行前通过 CSS 立即生效，消除白色闪现 */
+html[data-page="home"] header {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom-color: transparent !important;
+}
+html[data-page="home"] header a,
+html[data-page="home"] header span,
+html[data-page="home"] header button {
+  color: white !important;
+}
+/* 滚动后白色 navbar — JS 添加 data-scrolled 后覆盖 */
+html[data-page="home"][data-scrolled] header {
+  background: rgba(255,255,255,0.92) !important;
+  backdrop-filter: blur(24px) !important;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08) !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+html[data-page="home"][data-scrolled] header a,
+html[data-page="home"][data-scrolled] header span,
+html[data-page="home"][data-scrolled] header button {
+  color: #0F172A !important;
+}

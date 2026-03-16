@@ -131,8 +131,8 @@ export default async function HomePage({
 
   return (
     <>
-      {/* 首页标志：在 React 加载前告知 Header 当前是首页，避免透明导航闪现 */}
-      <script dangerouslySetInnerHTML={{ __html: "window.__IS_HOME_PAGE=true;" }} />
+      {/* 首页标志：同步脚本，React 加载前立即设置 CSS attribute，消除白色闪现 */}
+      <script dangerouslySetInnerHTML={{ __html: "document.documentElement.setAttribute('data-page','home');" }} />
 
       {/* ===== 1. HERO ===== */}
       <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#0C1829]">

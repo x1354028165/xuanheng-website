@@ -148,17 +148,35 @@ export function Header({ locale }: { locale: string }) {
   const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 只在客户端运行，使用 window.location 100% 可靠
-    const checkTransparent = () => {
-      const p = window.location.pathname;
-      const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
-      setIsTransparent(onHome && window.scrollY < 20);
+    const p = window.location.pathname;
+    const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
+
+    if (!onHome) {
+      // 非首页：清除 data-page，确保白色导航
+      document.documentElement.removeAttribute("data-page");
+      document.documentElement.removeAttribute("data-scrolled");
+      setIsTransparent(false);
+      return;
+    }
+
+    // 首页：通过 CSS attribute 控制透明/白色，JS 控制 React 状态保持同步
+    document.documentElement.setAttribute("data-page", "home");
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 20;
+      if (scrolled) {
+        document.documentElement.setAttribute("data-scrolled", "");
+        setIsTransparent(false);
+      } else {
+        document.documentElement.removeAttribute("data-scrolled");
+        setIsTransparent(true);
+      }
     };
 
-    checkTransparent(); // 初始检查
-    window.addEventListener("scroll", checkTransparent, { passive: true });
-    return () => window.removeEventListener("scroll", checkTransparent);
-  }, [currentLocale, pathname]); // pathname 变化（客户端路由）时重新检查
+    handleScroll(); // 初始执行
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [currentLocale, pathname]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
