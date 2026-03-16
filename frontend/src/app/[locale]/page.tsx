@@ -145,7 +145,7 @@ export default async function HomePage({
         />
         {/* Gradient overlay 1 */}
         <div className="absolute inset-0 pointer-events-none" style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,.25) 0%, rgba(0,0,0,.10) 45%, rgba(0,0,0,.55) 100%)',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,.10) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.30) 100%)',
         }} />
         {/* Top glow */}
         <div className="absolute pointer-events-none" style={{
@@ -164,6 +164,9 @@ export default async function HomePage({
           <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
             {t('heroLine1')}<br />{t('heroLine2')}
           </h1>
+          <p className="mt-6 text-[clamp(15px,1.1vw,20px)] text-white/80 max-w-[680px] mx-auto leading-relaxed">
+            {t('heroSubtitle')}
+          </p>
         </div>
 
         {/* Bottom CTA buttons */}

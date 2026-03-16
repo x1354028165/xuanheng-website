@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
-import { Search, ChevronDown, X } from "lucide-react";
+import { Search, ChevronDown, X, Globe } from "lucide-react";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import Image from "next/image";
 
@@ -340,8 +340,7 @@ export function Header({ locale }: { locale: string }) {
               onClick={() => setLangPageOpen(true)}
               className={`hidden sm:flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
             >
-              <span>{currentLang.flag}</span>
-              <span>{currentLang.short}</span>
+              <Globe className="h-4 w-4" />
             </button>
 
             {/* Mobile hamburger */}
