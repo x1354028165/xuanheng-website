@@ -37,11 +37,10 @@ const nextConfig: NextConfig = {
         pathname: '/uploads/**',
       },
       {
-        // Strapi 生产服务器（公网IP）
+        // Strapi 生产服务器（公网IP，走nginx代理）
         protocol: 'http',
         hostname: '32.236.16.227',
-        port: '1337',
-        pathname: '/uploads/**',
+        pathname: '/strapi/uploads/**',
       },
       {
         // 占位图（开发/无CMS时的fallback）
@@ -128,7 +127,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://*.aliyuncs.com https://placehold.co https://images.unsplash.com http://localhost:1337 http://32.236.16.227:1337",
+              "img-src 'self' data: blob: https://*.aliyuncs.com https://placehold.co https://images.unsplash.com http://localhost:1337 http://32.236.16.227",
               "font-src 'self' https://fonts.gstatic.com",
               "connect-src 'self' http://localhost:1337 https://*.aliyuncs.com https://challenges.cloudflare.com",
               "frame-src https://challenges.cloudflare.com",

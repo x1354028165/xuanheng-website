@@ -3,12 +3,24 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
 const STRAPI_INTERNAL_URL = process.env.STRAPI_INTERNAL_URL || 'http://localhost:1337';
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || '';
 
+// nginx代理Strapi媒体文件的公网base URL（去掉:1337端口，加/strapi路径）
+// e.g. http://32.236.16.227:1337 → http://32.236.16.227/strapi
+const STRAPI_MEDIA_PUBLIC_BASE = STRAPI_URL.replace(/:1337$/, '').replace(/:1337\/.*$/, '') + '/strapi';
+
 export function getStrapiURL(path = ''): string {
   return `${STRAPI_URL}${path}`;
 }
 
 export function getStrapiMedia(url: string | null | undefined): string {
   if (!url) return 'https://placehold.co/800x600/0C1829/38C4E8?text=AlwaysControl';
+  // 相对路径 /uploads/... → 走 nginx 代理的公网绝对URL
+  if (url.startsWith('/uploads/')) {
+    return `${STRAPI_MEDIA_PUBLIC_BASE}${url}`;
+  }
+  // 绝对URL含 :1337/uploads/ → 替换为 nginx 代理公网URL
+  if (url.startsWith('http://') && url.includes(':1337')) {
+    return url.replace(/^http:\/\/([^/]+):1337(\/uploads\/)/, `http://$1/strapi$2`);
+  }
   if (url.startsWith('http')) return url;
   return `${STRAPI_URL}${url}`;
 }
