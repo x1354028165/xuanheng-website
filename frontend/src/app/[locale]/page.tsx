@@ -226,7 +226,7 @@ export default async function HomePage({
             {/* 云端直连 */}
             {([
               { img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop", title: t("accessCloudTitle"), points: [t("accessCloudPoint1"), t("accessCloudPoint2"), t("accessCloudPoint3")], iconPath: "M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" },
-              { img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop", title: t("accessGatewayTitle"), points: [t("accessGatewayPoint1"), t("accessGatewayPoint2"), t("accessGatewayPoint3")], iconPath: "M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" },
+              { img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop", title: t("accessGatewayTitle"), points: [t("accessGatewayPoint1"), t("accessGatewayPoint2"), t("accessGatewayPoint3")], iconPath: "M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" },
             ] as { img: string; title: string; points: string[]; iconPath: string }[]).map((card, i) => (
               <div key={i} className="relative overflow-hidden rounded-2xl group cursor-pointer" style={{ aspectRatio: '806/520' }}>
                 {/* 背景图 — 无蒙版 */}
@@ -294,16 +294,16 @@ export default async function HomePage({
               className="bg-white rounded-2xl px-8 text-center border border-[#E2E8F0] cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.4)] flex flex-col"
               style={{ height: '565px' }}
             >
-              {/* 图片区域 — 固定高度，设备居中 */}
-              <div className="flex items-center justify-center flex-1 w-full py-8">
+              {/* 图片区域 — 固定320px高，object-contain统一视觉尺寸 */}
+              <div className="flex items-center justify-center w-full" style={{ height: '360px' }}>
                 {hw.img ? (
                   <Image
                     src={hw.img}
                     alt={hw.name}
-                    width={420}
-                    height={320}
-                    className="object-contain w-full h-full"
-                    style={{ maxHeight: '380px' }}
+                    width={340}
+                    height={300}
+                    className="object-contain"
+                    style={{ maxWidth: '75%', maxHeight: '300px', width: 'auto', height: 'auto' }}
                   />
                 ) : (
                   <DeviceSVG />
