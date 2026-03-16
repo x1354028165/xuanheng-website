@@ -192,7 +192,7 @@ export default async function HomePage({
 
       {/* ===== 2. STATS ===== */}
       <section className="bg-white py-20 px-[60px]">
-        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-[1652px] mx-auto divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-[1440px] mx-auto divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
           {[
             { num: '80', suffix: '+', label: t('statsBrandsLabel') },
             { num: '30', suffix: '+', label: t('statsCountriesLabel') },
@@ -215,7 +215,7 @@ export default async function HomePage({
 
       {/* ===== 2.5 接入方式 ===== */}
       <section className="bg-white py-24 px-[60px]">
-        <div className="max-w-[1652px] mx-auto">
+        <div className="max-w-[1440px] mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-4">
               {t("accessTitle")}
@@ -280,7 +280,7 @@ export default async function HomePage({
         </div>
 
         {/* Hardware cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1652px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1440px] mx-auto">
           {hwProducts.map((hw) => (
             <div
               key={hw.name}
@@ -311,7 +311,7 @@ export default async function HomePage({
         </div>
 
         {/* Software tabs */}
-        <div className="mt-[72px] max-w-[1652px] mx-auto">
+        <div className="mt-[72px] max-w-[1440px] mx-auto">
           <SoftwareTabs tabLabels={{
             HEMS: t("softwareHems"),
             ESS: t("softwareEss"),
@@ -359,7 +359,7 @@ export default async function HomePage({
           </h2>
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('newsSubtitle')}</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1652px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
           {articles.slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
             return (
