@@ -27,7 +27,7 @@ export default function SoftwareTabs({ tabLabels }: { tabLabels?: Record<string,
   const [active, setActive] = useState(0);
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6">
+    <div className="w-full">
       {/* Image preview area */}
       <div className="w-full rounded-xl overflow-hidden relative" style={{ aspectRatio: '16/7', background: '#F8FAFC' }}>
         {tabs.map((tab, idx) => (
