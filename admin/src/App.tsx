@@ -12,6 +12,19 @@ import Jobs from './pages/Jobs';
 import Products from './pages/Products';
 import Solutions from './pages/Solutions';
 import Brands from './pages/Brands';
+import Cases from './pages/Cases';
+import FileAssets from './pages/FileAssets';
+import ProductRelations from './pages/ProductRelations';
+import SeoConfig from './pages/SeoConfig';
+import NotificationConfig from './pages/NotificationConfig';
+import PageContent from './pages/PageContent';
+import I18nDict from './pages/I18nDict';
+import MediaLibrary from './pages/MediaLibrary';
+import AccountMgmt from './pages/AccountMgmt';
+import AuditLogs from './pages/AuditLogs';
+import CacheMgmt from './pages/CacheMgmt';
+import HealthCheck from './pages/HealthCheck';
+import SitemapMgmt from './pages/SitemapMgmt';
 import type { ReactNode } from 'react';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -28,9 +41,19 @@ function PublicRoute({ children }: { children: ReactNode }) {
 
 export default function App() {
   return (
-    <ConfigProvider theme={{ token: { colorPrimary: '#1A3FAD' } }}>
+    <ConfigProvider theme={{
+      token: { colorPrimary: '#1A3FAD' },
+      components: {
+        Menu: {
+          itemMarginBlock: 0,
+          itemMarginInline: 0,
+          itemBorderRadius: 0,
+          subMenuItemBorderRadius: 0,
+        },
+      },
+    }}>
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/admin">
           <Routes>
             <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
             <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
@@ -44,6 +67,19 @@ export default function App() {
               <Route path="products" element={<Products />} />
               <Route path="solutions" element={<Solutions />} />
               <Route path="brands" element={<Brands />} />
+              <Route path="cases" element={<Cases />} />
+              <Route path="file-assets" element={<FileAssets />} />
+              <Route path="product-relations" element={<ProductRelations />} />
+              <Route path="seo-config" element={<SeoConfig />} />
+              <Route path="notification-config" element={<NotificationConfig />} />
+              <Route path="page-content" element={<PageContent />} />
+              <Route path="i18n-dict" element={<I18nDict />} />
+              <Route path="media-library" element={<MediaLibrary />} />
+              <Route path="account-mgmt" element={<AccountMgmt />} />
+              <Route path="audit-logs" element={<AuditLogs />} />
+              <Route path="cache-mgmt" element={<CacheMgmt />} />
+              <Route path="health-check" element={<HealthCheck />} />
+              <Route path="sitemap" element={<SitemapMgmt />} />
             </Route>
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
