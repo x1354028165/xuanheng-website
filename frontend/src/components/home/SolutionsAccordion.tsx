@@ -18,18 +18,15 @@ export default function SolutionsAccordion({ items }: { items: SolutionItem[] })
   return (
     <>
       {/* Desktop: horizontal accordion */}
-      <div className="hidden lg:flex gap-[10px] w-full max-w-[1652px] mx-auto h-[520px]">
+      <div className="hidden lg:flex gap-3 w-full max-w-[1652px] mx-auto h-[540px]">
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="relative overflow-hidden rounded-xl cursor-pointer group"
+            className="relative overflow-hidden rounded-2xl cursor-pointer group"
             style={{
-              width: activeIndex !== null
-                ? (activeIndex === idx ? '520px' : '273px')
-                : '322.31px',
+              flex: activeIndex === idx ? 2.8 : 1,
               minWidth: 0,
-              flexShrink: 0,
-              transition: 'width 0.5s cubic-bezier(.4,0,.2,1)',
+              transition: 'flex 0.5s cubic-bezier(.4,0,.2,1)',
               background: '#1a2a3a',
             }}
             onMouseEnter={() => setActiveIndex(idx)}
