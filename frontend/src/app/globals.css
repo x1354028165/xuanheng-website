@@ -176,6 +176,8 @@ html[data-page="home"][data-scrolled] header {
 }
 html[data-page="home"][data-scrolled] header a,
 html[data-page="home"][data-scrolled] header span,
-html[data-page="home"][data-scrolled] header button {
+html[data-page="home"][data-scrolled] header button,
+html[data-page="home"][data-scrolled] header > div > div > button,
+html[data-page="home"][data-scrolled] header > div > div > button:not([data-dropdown-item]) {
   color: #0F172A !important;
 }
