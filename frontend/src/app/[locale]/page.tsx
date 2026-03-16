@@ -124,7 +124,11 @@ export default async function HomePage({
   }));
 
   // Hardware products
-  const hwProducts = ['Neuron II', 'Neuron III', 'Neuron III Lite'];
+  const hwProducts = [
+    { name: 'Neuron II',       img: '/images/neuron-ii.jpg' },
+    { name: 'Neuron III',      img: null },
+    { name: 'Neuron III Lite', img: null },
+  ];
 
   // Brand fallback names
   const fallbackBrands = ['BYD', 'CATL', 'Growatt', 'SolarEdge', 'Victron', 'Tesla', 'Deye', 'Sungrow', 'Fronius', 'SMA', 'GoodWe', 'Sofar'];
@@ -289,17 +293,27 @@ export default async function HomePage({
 
         {/* Hardware cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[1652px] mx-auto">
-          {hwProducts.map((name) => (
+          {hwProducts.map((hw) => (
             <div
-              key={name}
+              key={hw.name}
               className="bg-[#F8FAFC] rounded-2xl px-6 text-center border-[1.5px] border-transparent cursor-pointer transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-[5px] hover:border-[rgba(56,196,232,.25)] flex flex-col items-center justify-center"
               style={{ height: '565px' }}
             >
-              <div className="flex items-center justify-center mb-8">
-                <DeviceSVG />
+              <div className="flex items-center justify-center mb-8 w-full">
+                {hw.img ? (
+                  <Image
+                    src={hw.img}
+                    alt={hw.name}
+                    width={420}
+                    height={280}
+                    className="object-contain w-full max-h-[340px]"
+                  />
+                ) : (
+                  <DeviceSVG />
+                )}
               </div>
               <div className="text-[clamp(20px,1.5vw,26px)] font-medium text-[#0F172A] tracking-[-0.5px]">
-                {name}
+                {hw.name}
               </div>
             </div>
           ))}
