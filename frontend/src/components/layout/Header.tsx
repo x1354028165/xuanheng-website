@@ -6,6 +6,7 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { Search, ChevronDown } from "lucide-react";
 import { SearchDialog } from "@/components/search/SearchDialog";
+import Image from "next/image";
 
 /* ─── Types ─── */
 interface SubItem {
@@ -279,9 +280,11 @@ export function Header({ locale }: { locale: string }) {
         <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className={`text-xl font-bold font-display transition-colors ${isTransparent ? "text-white" : "text-[#0F172A]"}`}>
-              AlwaysControl
-            </span>
+            {isTransparent ? (
+              <Image src="/images/logo-white.png" alt="AlwaysControl Technology" width={160} height={36} className="h-9 w-auto" />
+            ) : (
+              <Image src="/images/logo.jpg" alt="AlwaysControl Technology" width={160} height={36} className="h-9 w-auto" />
+            )}
           </Link>
 
           {/* Desktop Nav */}

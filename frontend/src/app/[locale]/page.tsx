@@ -160,9 +160,7 @@ export default async function HomePage({
 
         {/* Center content */}
         <div className="relative z-10 text-center px-6">
-          <p className="text-white/85 text-sm md:text-base font-medium mb-3 tracking-wide">
-            AlwaysControl Technology
-          </p>
+          <Image src="/images/logo-white.png" alt="AlwaysControl Technology" width={240} height={54} className="mx-auto mb-6 h-14 w-auto" />
           <h1 className="text-[clamp(40px,4.2vw,80px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.3)', letterSpacing: '-1px' }}>
             {t('heroLine1')}<br />{t('heroLine2')}
           </h1>
@@ -213,6 +211,45 @@ export default async function HomePage({
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ===== 2.5 接入方式 ===== */}
+      <section className="bg-[#F8FAFC] py-24 px-6">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-[clamp(32px,2.5vw,48px)] font-extrabold text-[#0F172A] tracking-[-1.5px] mb-4">
+              {t("accessTitle")}
+            </h2>
+            <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t("accessSubtitle")}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl p-10 border border-[#E2E8F0] hover:border-[#38C4E8] hover:shadow-[0_12px_40px_rgba(56,196,232,.12)] transition-all duration-300">
+              <div className="text-4xl mb-4">☁️</div>
+              <h3 className="text-2xl font-bold text-[#0F172A] mb-3">{t("accessCloudTitle")}</h3>
+              <ul className="space-y-2 text-[#64748B] text-[15px] mb-6">
+                <li>✓ {t("accessCloudPoint1")}</li>
+                <li>✓ {t("accessCloudPoint2")}</li>
+                <li>✓ {t("accessCloudPoint3")}</li>
+              </ul>
+              <div className="text-sm font-medium text-[#38C4E8]">{t("accessCloudUseCase")}</div>
+            </div>
+            <div className="bg-white rounded-2xl p-10 border border-[#E2E8F0] hover:border-[#1A3FAD] hover:shadow-[0_12px_40px_rgba(26,63,173,.12)] transition-all duration-300">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="text-2xl font-bold text-[#0F172A] mb-3">{t("accessGatewayTitle")}</h3>
+              <ul className="space-y-2 text-[#64748B] text-[15px] mb-6">
+                <li>✓ {t("accessGatewayPoint1")}</li>
+                <li>✓ {t("accessGatewayPoint2")}</li>
+                <li>✓ {t("accessGatewayPoint3")}</li>
+              </ul>
+              <div className="text-sm font-medium text-[#1A3FAD]">{t("accessGatewayUseCase")}</div>
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link href="/ecosystem" className="inline-flex items-center gap-2 text-[#0F172A] font-semibold hover:text-[#38C4E8] transition-colors">
+              {t("accessViewMore")} →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -355,6 +392,13 @@ export default async function HomePage({
               className="inline-flex items-center rounded bg-white/92 px-8 py-3.5 text-base font-semibold text-[#0C1829] transition-colors duration-200 hover:bg-white"
             >
               {t('ctaApplyDemo')}
+            </Link>
+            <Link
+              href="/developers"
+              className="inline-flex items-center rounded border-[1.5px] border-white/60 px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-white/20"
+              style={{ background: 'rgba(255,255,255,.12)' }}
+            >
+              {t('ctaApiDocs')}
             </Link>
             <Link
               href="/contact"
