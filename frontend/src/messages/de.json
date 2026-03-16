@@ -156,7 +156,8 @@
     "softwareEss": "Gewerbe-Energiespeicher",
     "softwareEvcms": "E-Ladesäulen-Steuerung",
     "softwarePqms": "Stromqualitätsüberwachung",
-    "softwareVpp": "Virtuelles Kraftwerk"
+    "softwareVpp": "Virtuelles Kraftwerk",
+    "viewDocs": "Dokumentation"
   },
   "solutions": {
     "title": "Lösungen",

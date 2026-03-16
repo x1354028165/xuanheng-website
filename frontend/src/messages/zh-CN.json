@@ -156,7 +156,8 @@
     "softwareEss": "工商业储能套利",
     "softwareEvcms": "充电站智能调度",
     "softwarePqms": "电能质量监测治理",
-    "softwareVpp": "虚拟电厂聚合调度"
+    "softwareVpp": "虚拟电厂聚合调度",
+    "viewDocs": "查看文档"
   },
   "solutions": {
     "title": "解决方案",

@@ -156,7 +156,8 @@
     "softwareEss": "Хранение энергии C&I",
     "softwareEvcms": "Управление зарядкой EV",
     "softwarePqms": "Качество электроэнергии",
-    "softwareVpp": "Виртуальная электростанция"
+    "softwareVpp": "Виртуальная электростанция",
+    "viewDocs": "Документация"
   },
   "solutions": {
     "title": "Решения",

@@ -169,17 +169,10 @@ export default async function HomePage({
         {/* Bottom CTA buttons */}
         <div className="absolute bottom-20 left-0 right-0 z-20 flex justify-center gap-4 px-6 flex-col sm:flex-row items-center">
           <Link
-            href="/solutions"
+            href="/support/docs"
             className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[clamp(14px,0.9vw,16px)] transition-colors duration-200 hover:bg-white"
           >
-            {t('viewSolutions')}
-          </Link>
-          <Link
-            href="/developers"
-            className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/30 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/10 backdrop-blur-sm"
-            style={{ background: 'rgba(255,255,255,.06)' }}
-          >
-            {t('developerCenter')}
+            {t('viewDocs')}
           </Link>
           <Link
             href="/contact"

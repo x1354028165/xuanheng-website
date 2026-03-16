@@ -156,7 +156,8 @@
     "softwareEss": "Almacenamiento C&I",
     "softwareEvcms": "Gestión Carga EV",
     "softwarePqms": "Calidad de Energía",
-    "softwareVpp": "Planta Virtual"
+    "softwareVpp": "Planta Virtual",
+    "viewDocs": "Ver Documentación"
   },
   "solutions": {
     "title": "Soluciones",

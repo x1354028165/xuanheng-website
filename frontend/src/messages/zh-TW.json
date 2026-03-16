@@ -156,7 +156,8 @@
     "softwareEss": "工商業儲能套利",
     "softwareEvcms": "充電站智能調度",
     "softwarePqms": "電能質量監測治理",
-    "softwareVpp": "虛擬電廠聚合調度"
+    "softwareVpp": "虛擬電廠聚合調度",
+    "viewDocs": "查看文件"
   },
   "solutions": {
     "title": "解決方案",
