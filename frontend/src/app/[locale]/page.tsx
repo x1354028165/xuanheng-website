@@ -187,8 +187,8 @@ export default async function HomePage({
       </section>
 
       {/* ===== 2. STATS ===== */}
-      <section className="bg-white py-24 px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+      <section className="bg-white py-20 px-[60px]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-[1440px] mx-auto divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
           {[
             { num: '80', suffix: '+', label: t('statsBrandsLabel') },
             { num: '30', suffix: '+', label: t('statsCountriesLabel') },
@@ -196,12 +196,12 @@ export default async function HomePage({
           ].map((stat) => (
             <div
               key={stat.label}
-              className="bg-white border border-[#E2E8F0] rounded-2xl py-10 px-6 text-center"
+              className="flex flex-col items-center justify-center py-14 px-8 text-center"
             >
-              <div className="text-[clamp(44px,3.5vw,64px)] font-extrabold text-[#38C4E8] leading-none tracking-[-2px]">
-                {stat.num}<span className="text-[clamp(22px,2vw,32px)]">{stat.suffix}</span>
+              <div className="text-[clamp(64px,5.5vw,96px)] font-black text-[#0F172A] leading-none tracking-[-3px]">
+                {stat.num}<sup className="text-[clamp(28px,2.2vw,40px)] font-black align-super ml-0.5">{stat.suffix}</sup>
               </div>
-              <div className="mt-3 text-[clamp(14px,0.9vw,17px)] font-semibold text-[#0F172A]">
+              <div className="mt-4 text-[13px] font-medium text-[#94A3B8] tracking-[2px] uppercase">
                 {stat.label}
               </div>
             </div>
