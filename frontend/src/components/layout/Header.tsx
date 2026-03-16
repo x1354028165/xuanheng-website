@@ -466,32 +466,45 @@ export function Header({ locale }: { locale: string }) {
 
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} locale={locale} />
 
-      {/* Language full-page overlay */}
+      {/* Language full-page overlay — Tesla style */}
       {langPageOpen && (
-        <div className="fixed inset-0 z-[200] bg-white flex flex-col">
-          <div className="flex items-center justify-between px-8 h-[72px] border-b border-[#E2E8F0]">
-            <span className="text-[#0F172A] font-semibold text-lg">选择语言 / Select Language</span>
-            <button onClick={() => setLangPageOpen(false)} className="p-2 rounded-md hover:bg-gray-100">
-              <X className="h-6 w-6 text-[#0F172A]" />
+        <div className="fixed inset-0 z-[200] bg-white overflow-y-auto">
+          {/* 顶栏 */}
+          <div className="sticky top-0 bg-white border-b border-[#E2E8F0] px-8 sm:px-16 h-16 flex items-center justify-between">
+            <span className="text-[13px] font-medium text-[#64748B] tracking-[2px] uppercase">Language</span>
+            <button
+              onClick={() => setLangPageOpen(false)}
+              className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#F1F5F9] transition-colors"
+            >
+              <X className="h-5 w-5 text-[#0F172A]" />
             </button>
           </div>
-          <div className="flex-1 flex items-center justify-center px-8">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-[800px] w-full">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => { switchLocale(lang.code); setLangPageOpen(false); }}
-                  className={`flex flex-col items-start p-6 rounded-2xl border-2 transition-all duration-200 text-left hover:border-[#38C4E8] hover:shadow-md ${
-                    currentLocale === lang.code
-                      ? "border-[#38C4E8] bg-[#F0FAFE]"
-                      : "border-[#E2E8F0] bg-white"
-                  }`}
-                >
-                  <span className="text-2xl mb-2">{lang.flag}</span>
-                  <span className="font-semibold text-[#0F172A] text-base">{lang.label}</span>
-                  <span className="text-sm text-[#64748B] mt-1">{lang.native}</span>
-                </button>
-              ))}
+
+          {/* 语言列表 */}
+          <div className="max-w-[720px] mx-auto px-8 sm:px-16 py-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+              {languages.map((lang) => {
+                const isActive = currentLocale === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => { switchLocale(lang.code); setLangPageOpen(false); }}
+                    className={`group flex items-center justify-between py-5 px-4 text-left transition-colors duration-150 hover:bg-[#F8FAFC] ${isActive ? "border-l-[3px] border-[#38C4E8]" : "border-l-[3px] border-transparent"}`}
+                  >
+                    <div>
+                      <div className={`text-[17px] leading-snug ${isActive ? "font-bold text-[#0F172A]" : "font-medium text-[#0F172A]"}`}>
+                        {lang.label}
+                      </div>
+                      <div className="text-[13px] text-[#94A3B8] mt-0.5">{lang.native}</div>
+                    </div>
+                    {isActive && (
+                      <svg className="w-5 h-5 text-[#38C4E8] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
