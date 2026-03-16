@@ -127,7 +127,7 @@ export default async function HomePage({
   const hwProducts = [
     { name: 'Neuron II',       img: '/images/neuron-ii.jpg' },
     { name: 'Neuron III',      img: null },
-    { name: 'Neuron III Lite', img: null },
+    { name: 'Neuron III Lite', img: '/images/neuron-iii-lite.jpg' },
   ];
 
   // Brand fallback names
