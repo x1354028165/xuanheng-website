@@ -41,32 +41,26 @@ export default function SolutionsAccordion({ items }: { items: SolutionItem[] })
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.3) 100%)',
             }} />
-            {/* Vertical label (collapsed) */}
+            {/* Collapsed label — horizontal, centered */}
             <div
-              className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white font-bold text-lg whitespace-nowrap transition-opacity duration-300"
-              style={{
-                writingMode: 'vertical-rl',
-                textOrientation: 'mixed',
-                opacity: activeIndex === idx ? 0 : 1,
-              }}
+              className="absolute inset-0 flex items-end justify-center pb-6 text-white font-semibold text-[15px] whitespace-nowrap transition-opacity duration-300"
+              style={{ opacity: activeIndex === idx ? 0 : 1 }}
             >
-              {item.title}
+              {item.tag}
             </div>
-            {/* Expanded content */}
+            {/* Expanded content — no tag label */}
             <div
-              className="absolute bottom-0 left-0 right-0 p-8 text-white transition-all duration-400"
+              className="absolute bottom-0 left-0 right-0 p-8 text-white"
               style={{
                 opacity: activeIndex === idx ? 1 : 0,
-                transform: activeIndex === idx ? 'translateY(0)' : 'translateY(20px)',
-                transitionDelay: activeIndex === idx ? '150ms' : '0ms',
+                transform: activeIndex === idx ? 'translateY(0)' : 'translateY(16px)',
+                transition: 'opacity 0.4s, transform 0.4s',
+                transitionDelay: activeIndex === idx ? '120ms' : '0ms',
               }}
             >
-              <div className="text-[11px] font-bold tracking-[1.5px] uppercase text-[#38C4E8] mb-2">
-                {item.tag}
-              </div>
-              <h3 className="text-2xl font-extrabold mb-2.5 leading-tight">{item.title}</h3>
-              <p className="text-sm text-white/75 leading-relaxed mb-4">{item.description}</p>
-              <Link href={item.href} className="text-sm font-semibold text-[#38C4E8] hover:underline">
+              <h3 className="text-[22px] font-extrabold mb-2 leading-tight">{item.title}</h3>
+              <p className="text-[13px] text-white/75 leading-relaxed mb-4">{item.description}</p>
+              <Link href={item.href} className="text-[13px] font-semibold text-[#38C4E8] hover:underline">
                 {item.linkText} →
               </Link>
             </div>
