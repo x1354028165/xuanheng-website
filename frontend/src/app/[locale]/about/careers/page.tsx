@@ -1,7 +1,24 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { getJobPostings } from '@/lib/api';
+import type { Metadata } from 'next';
 
 export const revalidate = 3600;
+
+const SITE_NAME: Record<string, string> = {
+  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
+  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
+  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
+};
+const CAREERS_TITLES: Record<string, string> = {
+  'zh-CN': '加入我们', 'zh-TW': '加入我們',
+  'en-US': 'Careers', 'de': 'Karriere', 'fr': 'Carrières',
+  'es': 'Carreras', 'pt': 'Carreiras', 'ru': 'Вакансии',
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return { title: `${CAREERS_TITLES[locale] ?? 'Careers'} | ${SITE_NAME[locale] ?? 'AlwaysControl'}` };
+}
 
 export default async function CareersPage({
   params,

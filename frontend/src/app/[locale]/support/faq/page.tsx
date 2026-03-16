@@ -2,6 +2,23 @@ import Link from 'next/link';
 import { getFAQs } from '@/lib/api';
 import { MOCK_FAQS } from '@/lib/mock-data';
 import FAQClientFilter from './FAQClientFilter';
+import type { Metadata } from 'next';
+
+const SITE_NAME: Record<string, string> = {
+  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
+  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
+  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
+};
+const FAQ_TITLES: Record<string, string> = {
+  'zh-CN': '常见问题', 'zh-TW': '常見問題',
+  'en-US': 'FAQ', 'de': 'FAQ', 'fr': 'FAQ',
+  'es': 'Preguntas Frecuentes', 'pt': 'Perguntas Frequentes', 'ru': 'Часто задаваемые вопросы',
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return { title: `${FAQ_TITLES[locale] ?? 'FAQ'} | ${SITE_NAME[locale] ?? 'AlwaysControl'}` };
+}
 
 export const revalidate = 60;
 

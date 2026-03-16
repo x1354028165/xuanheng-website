@@ -5,6 +5,22 @@ import Image from 'next/image';
 import { getSolutions, getSolutionBySlug } from '@/lib/api';
 import { MOCK_SOLUTIONS, MOCK_PRODUCTS, getMockSolution } from '@/lib/mock-data';
 import { getSolutionMessage, getSolutionLabel, getProductMessage, interpolate } from '@/lib/i18n-helpers';
+import type { Metadata } from 'next';
+
+const SITE_NAME: Record<string, string> = {
+  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
+  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
+  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const strapiSolution = await getSolutionBySlug(slug, locale);
+  const mockSolution = getMockSolution(slug);
+  const solutionTitle = strapiSolution?.title ?? getSolutionMessage(locale, slug, 'title') ?? mockSolution?.title ?? slug;
+  const site = SITE_NAME[locale] ?? 'AlwaysControl';
+  return { title: `${solutionTitle} | ${site}` };
+}
 
 export const dynamicParams = true;
 export const revalidate = 60;

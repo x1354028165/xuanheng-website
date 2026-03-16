@@ -6,6 +6,22 @@ import { getProducts, getProductBySlug } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import { MOCK_PRODUCTS, MOCK_SOLUTIONS, getMockProduct } from '@/lib/mock-data';
 import { getProductMessage, getProductLabel, getSpecLabel, getSolutionMessage, getSolutionLabel, interpolate } from '@/lib/i18n-helpers';
+import type { Metadata } from 'next';
+
+const SITE_NAME: Record<string, string> = {
+  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
+  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
+  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const strapiProduct = await getProductBySlug(slug, locale);
+  const mockProduct = getMockProduct(slug);
+  const productTitle = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
+  const site = SITE_NAME[locale] ?? 'AlwaysControl';
+  return { title: `${productTitle} | ${site}` };
+}
 
 export const dynamicParams = true;
 export const revalidate = 60;

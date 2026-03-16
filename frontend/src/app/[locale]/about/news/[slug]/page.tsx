@@ -6,6 +6,27 @@ import { getArticleBySlug } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
 import { MOCK_ARTICLES } from '@/lib/mock-data';
+import type { Metadata } from 'next';
+
+const SITE_NAME: Record<string, string> = {
+  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
+  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
+  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
+  let title = slug;
+  const article = await getArticleBySlug(slug, locale);
+  if (article?.title) {
+    title = article.title;
+  } else {
+    const mock = MOCK_ARTICLES.find((a) => a.slug === slug);
+    if (mock?.title) title = mock.title;
+  }
+  const site = SITE_NAME[locale] ?? 'AlwaysControl';
+  return { title: `${title} | ${site}` };
+}
 
 export function generateStaticParams() {
   return MOCK_ARTICLES.map((a) => ({ slug: a.slug }));
