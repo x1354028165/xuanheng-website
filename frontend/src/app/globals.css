@@ -143,11 +143,30 @@ html[data-page="home"] header {
   box-shadow: none !important;
   border-bottom-color: transparent !important;
 }
-html[data-page="home"] header a,
-html[data-page="home"] header span,
-html[data-page="home"] header button {
+/* 只针对顶层导航链接/按钮变白，排除 dropdown 内容（有 bg-white 的容器内） */
+html[data-page="home"] header > div a,
+html[data-page="home"] header > div > div > a,
+html[data-page="home"] header > div > div > button:not([data-dropdown-item]) {
   color: white !important;
 }
+html[data-page="home"] header > div > div > span {
+  color: white !important;
+}
+/* 品牌名 */
+html[data-page="home"] header span.font-bold {
+  color: white !important;
+}
+/* dropdown 内容不受影响（bg-white 容器内部恢复深色文字） */
+html[data-page="home"] header .bg-white a,
+html[data-page="home"] header .bg-white button,
+html[data-page="home"] header .bg-white span {
+  color: #0F172A !important;
+}
+/* active 导航项保持品牌色 */
+html[data-page="home"] header a.\!text-\[\#38C4E8\] {
+  color: #38C4E8 !important;
+}
+
 /* 滚动后白色 navbar — JS 添加 data-scrolled 后覆盖 */
 html[data-page="home"][data-scrolled] header {
   background: rgba(255,255,255,0.92) !important;

@@ -301,7 +301,7 @@ export function Header({ locale }: { locale: string }) {
                     href={nav.href}
                     className={`inline-flex items-center gap-0.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-[#38C4E8]"
+                        ? "!text-[#38C4E8] font-semibold"
                         : isTransparent
                           ? "text-white/85 hover:text-white"
                           : "text-[#0F172A]/80 hover:text-[#38C4E8]"
