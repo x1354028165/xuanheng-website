@@ -246,14 +246,14 @@
 
       <h3>任务清单</h3>
       <ul class="task-list">
-        <li><span class="checkbox">☐</span> <span class="task-id">P0-1</span> 初始化 Next.js 14 项目（App Router）<br>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-1</span> 初始化 Next.js 16 项目（App Router）<br>
           <code>npx create-next-app@latest frontend --typescript --tailwind --app --src-dir</code>，确认 <code>src/app/</code> 结构存在</li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-2</span> 配置 Tailwind CSS + 字体<br>
           引入 Google Fonts：Plus Jakarta Sans + Inter，配置 <code>tailwind.config.ts</code> 字体变量<br>
           <span style="color:#c0392b;">⚠️ 子任务：</span>安装并注册 <code>@tailwindcss/typography</code> 插件（<code>npm install @tailwindcss/typography</code>，写入 <code>tailwind.config.ts</code> plugins）</li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-3</span> 配置 next-intl 多语言（基础路由，详细配置见 P0-Y）<br>
           支持 locale：<code>zh-CN</code>（默认）、<code>en-US</code>、<code>zh-TW</code>（Phase 0 开放），底座定义全部8个 locale（zh-CN/en-US/zh-TW/de/fr/pt/es/ru），目录：<code>src/messages/zh-CN.json</code>（建立完整 key 结构），路由：<code>/[locale]/...</code></li>
-        <li><span class="checkbox">☐</span> <span class="task-id">P0-4</span> 配置 Strapi v4<br>
+        <li><span class="checkbox">☐</span> <span class="task-id">P0-4</span> 配置 Strapi v5<br>
           初始化至 <code>cms/</code>，数据库：PostgreSQL（本地开发用 SQLite），创建 API Token</li>
         <li><span class="checkbox">☐</span> <span class="task-id">P0-5</span> 基础布局组件<br>
           <code>Header.tsx</code>（导航透明浮层） + <code>Footer.tsx</code> + 根布局 <code>layout.tsx</code></li>
