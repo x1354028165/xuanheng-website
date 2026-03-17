@@ -98,6 +98,8 @@ export async function getArticles(
   page = 1,
   pageSize = 12
 ): Promise<StrapiResponse<StrapiArticle>> {
+  // Strapi locale mapping: en-US→en，其他非zh-CN→en fallback
+  const strapiLocale = locale === 'en-US' ? 'en' : locale;
   const emptyResponse: StrapiResponse<StrapiArticle> = {
     data: [],
     meta: { pagination: { page: 1, pageSize, pageCount: 0, total: 0 } },
@@ -105,11 +107,20 @@ export async function getArticles(
 
   try {
     const res = await fetchWithFallback<StrapiResponse<StrapiArticle>>('/articles', {
-      locale,
+      locale: strapiLocale,
       populate: '*',
       sort: 'publishedAt:desc',
       pagination: { page, pageSize },
     });
+    // 如果非zh-CN拿到空结果，fallback到zh-CN
+    if ((res.data?.length ?? 0) === 0 && strapiLocale !== 'zh-CN') {
+      return fetchWithFallback<StrapiResponse<StrapiArticle>>('/articles', {
+        locale: 'zh-CN',
+        populate: '*',
+        sort: 'publishedAt:desc',
+        pagination: { page, pageSize },
+      });
+    }
     return res;
   } catch {
     console.warn('[API] getArticles failed, returning empty response');

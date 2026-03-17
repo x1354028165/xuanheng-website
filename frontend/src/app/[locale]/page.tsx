@@ -372,32 +372,50 @@ export default async function HomePage({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
           {articles.slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
+            const dateStr = article.publishedDate
+              ? article.publishedDate.replace(/-/g, '.')
+              : '';
             return (
               <Link
                 key={article.documentId}
                 href={`/about/news/${article.slug}`}
-                className="group bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-[0_8px_30px_rgba(0,0,0,.06)] hover:-translate-y-0.5"
+                className="group bg-white rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-1 block"
               >
-                {coverUrl ? (
-                  <div className="relative w-full h-[200px] overflow-hidden">
-                    <Image src={coverUrl} alt={article.title} fill className="object-cover" />
-                  </div>
-                ) : (
-                  <div className="w-full h-[200px]" style={{ background: NEWS_COLORS[idx % 3], opacity: 0.15 }} />
-                )}
-                <div className="p-6">
-                  {article.publishedDate && (
-                    <div className="text-xs text-[#64748B] mb-2">{article.publishedDate}</div>
+                {/* Cover image */}
+                <div className="relative w-full overflow-hidden rounded-t-2xl" style={{ aspectRatio: '16/9' }}>
+                  {coverUrl ? (
+                    <Image src={coverUrl} alt={article.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center" style={{ background: NEWS_COLORS[idx % 3] }}>
+                      <span className="text-white/60 text-4xl font-bold">N</span>
+                    </div>
                   )}
-                  <h3 className="text-[17px] font-bold text-[#0F172A] leading-snug mb-2 line-clamp-2">
+                </div>
+                {/* Content */}
+                <div className="px-1 pt-4 pb-2">
+                  <h3 className="text-[18px] font-bold text-[#0F172A] leading-snug mb-3 line-clamp-2 group-hover:text-[#38C4E8] transition-colors">
                     {article.title}
                   </h3>
-                  {article.summary && (
-                    <p className="text-sm text-[#64748B] leading-relaxed mb-4 line-clamp-2">{article.summary}</p>
-                  )}
-                  <span className="text-sm font-semibold text-[#38C4E8] group-hover:text-[#2BA8C8] transition-colors">
-                    {tc('readMore')} →
-                  </span>
+                  <div className="flex items-center gap-4 text-[13px] text-[#94A3B8]">
+                    {dateStr && (
+                      <span className="flex items-center gap-1.5">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="1" y="3" width="14" height="12" rx="2" stroke="#94A3B8" strokeWidth="1.4"/>
+                          <path d="M5 1v3M11 1v3M1 7h14" stroke="#94A3B8" strokeWidth="1.4" strokeLinecap="round"/>
+                        </svg>
+                        {dateStr}
+                      </span>
+                    )}
+                    {article.viewCount != null && (
+                      <span className="flex items-center gap-1.5">
+                        <svg width="15" height="11" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 6.5C1 6.5 4 1 9 1s8 5.5 8 5.5-3 5.5-8 5.5S1 6.5 1 6.5Z" stroke="#94A3B8" strokeWidth="1.4"/>
+                          <circle cx="9" cy="6.5" r="2.2" stroke="#94A3B8" strokeWidth="1.4"/>
+                        </svg>
+                        {article.viewCount}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </Link>
             );
