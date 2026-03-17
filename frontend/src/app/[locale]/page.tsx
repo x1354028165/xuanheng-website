@@ -335,8 +335,8 @@ export default async function HomePage({
                 style={{ aspectRatio: '2 / 1' }}
               >
                 {logoUrl ? (
-                  <Image src={logoUrl} alt={name} width={100} height={40}
-                    className="object-contain max-h-[36px] w-auto" />
+                  <Image src={logoUrl} alt={name} width={140} height={56}
+                    className="object-contain max-h-[52px] w-auto" />
                 ) : (
                   <span className="text-[14px] font-semibold text-[#475569] tracking-[0.5px]">{name}</span>
                 )}

@@ -71,7 +71,6 @@ export async function getSolutions(locale = 'zh-CN'): Promise<StrapiSolution[]> 
   console.warn('[API] getSolutions failed for all locales');
   return [];
 }
-}
 
 export async function getSolutionBySlug(
   slug: string,
