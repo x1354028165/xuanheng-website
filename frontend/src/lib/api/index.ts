@@ -50,29 +50,27 @@ export async function getProductBySlug(
 // ---------------------------------------------------------------------------
 
 export async function getSolutions(locale = 'zh-CN'): Promise<StrapiSolution[]> {
-  // Strapi locale映射：en-US→en，其余非zh-CN locale fallback到zh-CN
-  const strapiLocale = locale === 'en-US' ? 'en' : locale;
-  try {
-    const res = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
-      locale: strapiLocale,
-      populate: '*',
-      sort: ['createdAt:desc'],
-    });
-    const data = res.data ?? [];
-    // 空结果时fallback到zh-CN（其他locale尚未配置CMS数据）
-    if (data.length === 0 && strapiLocale !== 'zh-CN') {
-      const fallback = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
-        locale: 'zh-CN',
+  // fallback链：locale → en（国际通用）→ zh-CN（兜底）
+  const tryLocales = locale === 'zh-CN' ? ['zh-CN']
+    : locale === 'en' || locale === 'en-US' ? ['en', 'zh-CN']
+    : [locale, 'en', 'zh-CN'];
+  for (const l of tryLocales) {
+    try {
+      const strapiLocale = l === 'en-US' ? 'en' : l;
+      const res = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
+        locale: strapiLocale,
         populate: '*',
         sort: ['createdAt:desc'],
       });
-      return fallback.data ?? [];
+      const data = res.data ?? [];
+      if (data.length > 0) return data;
+    } catch {
+      // 继续下一个fallback
     }
-    return data;
-  } catch {
-    console.warn('[API] getSolutions failed, returning empty array');
-    return [];
   }
+  console.warn('[API] getSolutions failed for all locales');
+  return [];
+}
 }
 
 export async function getSolutionBySlug(

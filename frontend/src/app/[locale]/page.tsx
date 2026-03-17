@@ -54,8 +54,8 @@ export default async function HomePage({
   const tc = await getTranslations({ locale, namespace: 'common' });
 
   // Fetch data with mock fallbacks
-  // 首页只从CMS取封面图（所有语言共用），标题/标签走翻译文件
-  let solutions = await getSolutions('zh-CN');
+  // 按locale查CMS，fallback链：locale→en→zh-CN
+  let solutions = await getSolutions(locale);
   if (!solutions || solutions.length === 0) {
     solutions = MOCK_SOLUTIONS as unknown as StrapiSolution[];
   }
@@ -104,8 +104,8 @@ export default async function HomePage({
         : rawCoverUrl;
     return {
       tag: SOLUTION_TAG[slug] ?? slug,
-      title: s?.title ?? t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
-      description: s?.tagline ?? '',
+      title: s?.title || t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
+      description: s?.tagline || t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}Desc`),
       href: `/solutions/${slug}`,
       bgImage: coverUrl,
       linkText: t('viewDetail'),
@@ -325,9 +325,8 @@ export default async function HomePage({
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
             const name = typeof brand === 'string' ? brand : brand.name;
-            const STRAPI_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
             const logoUrl = typeof brand !== 'string' && brand.logo?.url
-              ? (brand.logo.url.startsWith('http') ? brand.logo.url : `${STRAPI_BASE}${brand.logo.url}`)
+              ? getStrapiMedia(brand.logo.url)
               : null;
             return (
               <div
