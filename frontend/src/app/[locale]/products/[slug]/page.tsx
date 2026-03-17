@@ -187,42 +187,34 @@ export default async function ProductDetailPage({
               )}
             </div>
 
-            {/* Right: Product Image Card */}
+            {/* Right: Product Image on dark background */}
             <div className="flex items-center justify-center lg:justify-end">
               <div className="relative w-full max-w-md">
-                {/* Glow behind card */}
-                <div className="absolute inset-0 scale-95 rounded-3xl bg-[#38C4E8]/20 blur-2xl" />
-                {/* Image card */}
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/95 shadow-2xl shadow-black/40 backdrop-blur-sm">
-                  <div className="relative flex h-72 items-center justify-center p-8 sm:h-96">
-                    {strapiProduct?.cover?.url ? (
-                      <Image
-                        src={getStrapiMedia(strapiProduct.cover.url)}
-                        alt={strapiProduct.cover.alternativeText || title}
-                        fill
-                        className="object-contain p-8"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                    ) : mockProduct?.cover ? (
-                      <Image
-                        src={mockProduct.cover}
-                        alt={title}
-                        fill
-                        className="object-contain p-8"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                    ) : (
-                      <div className="text-center">
-                        <div className="text-8xl mb-4 opacity-80">{category === 'hardware' ? '⚡' : '☁️'}</div>
-                        <p className="text-[#64748B] text-sm font-medium">{title}</p>
-                      </div>
-                    )}
-                  </div>
-                  {/* Card footer badge */}
-                  <div className="border-t border-[#E2E8F0] bg-[#F8FAFC] px-6 py-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#1A3FAD] uppercase tracking-wider">旭衡电子 · AlwaysControl</span>
-                    <span className="h-2 w-2 rounded-full bg-[#38C4E8] shadow-lg shadow-[#38C4E8]/50" />
-                  </div>
+                {/* Soft glow */}
+                <div className="absolute inset-0 rounded-3xl bg-[#38C4E8]/10 blur-3xl" />
+                <div className="relative flex h-72 items-center justify-center sm:h-96">
+                  {strapiProduct?.cover?.url ? (
+                    <Image
+                      src={getStrapiMedia(strapiProduct.cover.url)}
+                      alt={strapiProduct.cover.alternativeText || title}
+                      fill
+                      className="object-contain drop-shadow-[0_0_40px_rgba(56,196,232,0.25)]"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  ) : mockProduct?.cover ? (
+                    <Image
+                      src={mockProduct.cover}
+                      alt={title}
+                      fill
+                      className="object-contain drop-shadow-[0_0_40px_rgba(56,196,232,0.25)]"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <div className="text-9xl opacity-60">{category === 'hardware' ? '⚡' : '☁️'}</div>
+                      <p className="mt-4 text-white/50 text-sm font-medium">{title}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
