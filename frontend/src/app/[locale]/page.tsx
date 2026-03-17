@@ -159,10 +159,10 @@ export default async function HomePage({
           </div>
           <div className="flex justify-center gap-4 flex-col sm:flex-row items-center w-full">
             <Link
-              href="/support/docs"
+              href="/solutions"
               className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[clamp(14px,0.9vw,16px)] transition-colors duration-200 hover:bg-white"
             >
-              {t('viewDocs')}
+              {t('viewSolutions')}
             </Link>
             <Link
               href="/contact"
@@ -170,13 +170,6 @@ export default async function HomePage({
               style={{ background: 'rgba(255,255,255,.12)' }}
             >
               {t('contactUs')}
-            </Link>
-            <Link
-              href="/contact?type=demo"
-              className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
-              style={{ background: 'rgba(255,255,255,.12)' }}
-            >
-              {t('applyDemo')}
             </Link>
           </div>
         </div>
