@@ -90,9 +90,6 @@ export default async function ProductDetailPage({
   const downloadBtn = getProductLabel(locale, 'downloadBtn');
   const viewBrands = getProductLabel(locale, 'viewBrands');
 
-  // Pick top 3 specs for banner highlights
-  const bannerHighlights = finalSpecs.slice(0, 3);
-
   return (
     <>
       {/* ===== PRODUCT HERO BANNER ===== */}
@@ -117,49 +114,16 @@ export default async function ProductDetailPage({
         </div>
 
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav className="mb-10 flex items-center gap-2 text-sm text-white/50">
-            <Link href="/" className="hover:text-white/80 transition-colors">
-              {locale === 'zh-CN' || locale === 'zh-TW' ? '首页' : 'Home'}
-            </Link>
-            <span>/</span>
-            <Link href="/products" className="hover:text-white/80 transition-colors">
-              {tn('products')}
-            </Link>
-            <span>/</span>
-            <span className="text-white/80">{title}</span>
-          </nav>
-
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[45fr_55fr] lg:items-center pb-16">
-            {/* Left: Text Content */}
+            {/* Left: Title + CTA only */}
             <div className="flex flex-col">
-              {/* Category badge */}
-              <span className="mb-5 inline-flex w-fit items-center gap-1.5 rounded-full border border-[#38C4E8]/40 bg-[#38C4E8]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#38C4E8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#38C4E8]" />
-                {category === 'hardware' ? hardwareLabel : softwareLabel}
-              </span>
-
               {/* Product title */}
               <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
                 {title}
               </h1>
 
-              {/* Tagline */}
-              {tagline && (
-                <p className="mt-5 text-xl font-medium text-[#38C4E8]">
-                  {tagline}
-                </p>
-              )}
-
-              {/* Description (first paragraph only in banner) */}
-              {description && (
-                <p className="mt-4 text-base leading-relaxed text-white/60 line-clamp-3">
-                  {description.split('\n')[0]}
-                </p>
-              )}
-
               {/* CTA buttons */}
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center rounded-lg bg-[#38C4E8] px-7 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg shadow-[#38C4E8]/20 transition-all duration-300 hover:bg-[#5DD3F0] hover:shadow-xl hover:shadow-[#38C4E8]/30 hover:-translate-y-0.5"
@@ -173,18 +137,6 @@ export default async function ProductDetailPage({
                   {viewSpecs} ↓
                 </a>
               </div>
-
-              {/* Key specs highlight strip */}
-              {bannerHighlights.length > 0 && (
-                <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                  {bannerHighlights.map(([key, value]) => (
-                    <div key={key} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
-                      <p className="text-xs font-medium text-[#38C4E8]/80 mb-1">{key}</p>
-                      <p className="text-sm font-semibold text-white leading-snug line-clamp-2">{String(value)}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Right: Product Image — full-size hero */}
