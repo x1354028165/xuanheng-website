@@ -66,7 +66,7 @@ export default async function ProductDetailPage({
   const description = strapiProduct?.description ?? getProductMessage(locale, slug, 'description') ?? mockProduct?.description ?? '';
 
   // Build specs from direct message access
-  const specKeys = ['cpu', 'mcu', 'memory', 'emmc', 'serial', 'can', 'eth', 'wireless', '4g', 'plc', 'ct', 'lcd', 'keys', 'led', 'thsensor', 'meter', 'install', 'power', 'watt', 'temp', 'humidity', 'size', 'partner'];
+  const specKeys = ['comms', 'protocols', 'cpu', 'memory', 'temp', 'ip', 'power', 'size', 'meter', 'dlb'];
   const specs: [string, string][] = [];
   for (const key of specKeys) {
     const specValue = getProductMessage(locale, slug, `spec_${key}`);
