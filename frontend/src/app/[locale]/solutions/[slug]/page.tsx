@@ -118,48 +118,94 @@ export default async function SolutionDetailPage({
 
   return (
     <>
-      {/* Page Header */}
-      <section className="relative bg-[#F8FAFC] pb-16 pt-32">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/solutions"
-            className="mb-8 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors"
-          >
-            &larr; {t('backToList')}
-          </Link>
+      {/* ===== SOLUTION HERO BANNER ===== */}
+      <section className="relative min-h-[600px] overflow-hidden bg-gradient-to-br from-[#0C1829] via-[#0F2347] to-[#1A3FAD] pt-24 pb-0">
+        {/* Background decorative elements */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#38C4E8]/5" />
+          <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-[#1A3FAD]/40" />
+          <svg className="absolute inset-0 h-full w-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid-sol" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-sol)" />
+          </svg>
+          <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-[#38C4E8]/10 blur-3xl" />
+        </div>
 
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl md:text-5xl">
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[45fr_55fr] lg:items-center pb-16">
+            {/* Left: Title + CTA */}
+            <div className="flex flex-col">
+              {/* Tagline badge */}
+              {tagline && (
+                <div className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-[#38C4E8]/40 bg-[#38C4E8]/10 px-3.5 py-1 text-sm font-medium text-[#38C4E8] tracking-wide backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#38C4E8]" />
+                  {tagline}
+                </div>
+              )}
+
+              {/* Solution title */}
+              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
                 {title}
               </h1>
-              {tagline && (
-                <p className="mt-4 text-xl text-[#38C4E8]">{tagline}</p>
-              )}
+
+              {/* Description */}
               {description && (
-                <p className="mt-6 text-[#64748B] leading-relaxed text-lg">{description}</p>
+                <p className="mt-5 text-base text-white/70 leading-relaxed max-w-lg">
+                  {description}
+                </p>
               )}
-              <div className="mt-8">
+
+              {/* CTA button */}
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#2BA8C8] hover:shadow-xl"
+                  className="w-[220px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[15px] transition-colors duration-200 hover:bg-white"
                 >
                   {applyDemo}
                 </Link>
+                <a
+                  href="#highlights"
+                  className="w-[220px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+                  style={{ background: "rgba(255,255,255,.12)" }}
+                >
+                  了解更多 ↓
+                </a>
               </div>
             </div>
-            <div className="relative h-64 overflow-hidden rounded-xl bg-white border border-[#E2E8F0] flex items-center justify-center sm:h-80 lg:h-96">
-              {strapiSolution?.cover?.url ? (
-                <Image
-                  src={`${STRAPI_PUBLIC_URL}${strapiSolution.cover.url}`}
-                  alt={strapiSolution.cover.alternativeText || title}
-                  fill
-                  className="object-contain p-4"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="text-6xl text-[#38C4E8]/20">🔋</div>
-              )}
+
+            {/* Right: Solution cover image */}
+            <div className="flex items-center justify-center lg:justify-end lg:-mr-8">
+              <div className="relative w-full">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[#38C4E8]/15 blur-[100px]" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[240px] w-[240px] rounded-full bg-[#38C4E8]/20 blur-[50px]" />
+                <div className="relative h-[420px] sm:h-[500px] lg:h-[560px]">
+                  {strapiSolution?.cover?.url ? (
+                    <Image
+                      src={`${STRAPI_PUBLIC_URL}${strapiSolution.cover.url}`}
+                      alt={strapiSolution.cover.alternativeText || title}
+                      fill
+                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
+                  ) : mockSolution?.cover ? (
+                    <Image
+                      src={mockSolution.cover}
+                      alt={title}
+                      fill
+                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center">
+                      <div className="text-8xl opacity-30">⚡</div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -189,7 +235,7 @@ export default async function SolutionDetailPage({
 
       {/* Solution Highlights */}
       {finalHighlights.length > 0 && (
-        <section className="bg-[#F8FAFC] py-24">
+        <section id="highlights" className="bg-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{highlightsTitle}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
