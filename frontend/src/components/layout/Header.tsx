@@ -172,8 +172,10 @@ export function Header({ locale }: { locale: string }) {
   useEffect(() => {
     const p = window.location.pathname;
     const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
+    // Product detail pages also have a dark hero banner — treat same as home
+    const onDarkHero = onHome || /\/products\/[^/]+\/?$/.test(p);
 
-    if (!onHome) {
+    if (!onDarkHero) {
       document.documentElement.removeAttribute("data-page");
       document.documentElement.removeAttribute("data-scrolled");
       setIsTransparent(false);
