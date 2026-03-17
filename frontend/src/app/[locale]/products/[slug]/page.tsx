@@ -58,6 +58,7 @@ export default async function ProductDetailPage({
   const mockProduct = getMockProduct(slug);
 
   const title = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
+  const bannerTitle = mockProduct?.displayTitle ?? title;
   const tagline = strapiProduct?.tagline ?? getProductMessage(locale, slug, 'tagline') ?? mockProduct?.tagline ?? '';
   const description = strapiProduct?.description ?? getProductMessage(locale, slug, 'description') ?? mockProduct?.description ?? '';
 
@@ -118,8 +119,8 @@ export default async function ProductDetailPage({
             {/* Left: Title + CTA only */}
             <div className="flex flex-col">
               {/* Product title */}
-              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-                {title}
+              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl break-words">
+                {bannerTitle}
               </h1>
 
               {/* CTA buttons */}

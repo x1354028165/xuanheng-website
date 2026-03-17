@@ -8,6 +8,7 @@ export const LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'pt', 'es', 'ru']
 export interface MockProduct {
   documentId: string;
   title: string;
+  displayTitle?: string; // Banner 展示标题（可选），不影响列表/SEO
   slug: string;
   tagline: string;
   category: 'hardware' | 'software';
@@ -21,6 +22,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
   {
     documentId: 'p1',
     title: 'Neuron II',
+    displayTitle: '智能网关——Neuron II',
     slug: 'neuron-ii',
     tagline: '通用多协议网关（4G/WiFi/RS485/CAN）',
     category: 'hardware',
