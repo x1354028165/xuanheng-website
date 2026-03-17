@@ -372,7 +372,7 @@ export default async function HomePage({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1440px] mx-auto">
           {articles.filter(a => !a.title?.includes('验收测试')).slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
-            const rawDate = article.publishedDate || article.publishedAt?.substring(0, 10);
+            const rawDate = (article.publishedDate || article.publishedAt || '').substring(0, 10);
             const dateStr = rawDate ? rawDate.replace(/-/g, '.') : '';
             return (
               <Link
