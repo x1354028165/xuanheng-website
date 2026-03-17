@@ -158,7 +158,12 @@
     "softwarePqms": "Qualité d'énergie",
     "softwareVpp": "Centrale Virtuelle",
     "viewDocs": "Documentation",
-    "applyDemo": "Demander une démo"
+    "applyDemo": "Demander une démo",
+    "tagHems": "Résidentiel",
+    "tagEss": "Industrie",
+    "tagEvcms": "Recharge VE",
+    "tagVpp": "VPP",
+    "tagPqms": "Qualité élec."
   },
   "solutions": {
     "title": "Solutions",

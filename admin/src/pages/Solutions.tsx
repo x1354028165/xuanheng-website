@@ -32,7 +32,7 @@ export default function Solutions() {
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const openEdit = (record: Record<string, unknown>) => {
-    setEditingId(record.id as number);
+    setEditingId((record.documentId ?? record.id) as number);
     setPendingCoverId(null);
     const cover = record.cover as { url?: string; id?: number } | null;
     setCoverPreview(cover?.url ? cover.url : null);
@@ -77,14 +77,15 @@ export default function Solutions() {
         payload.cover = pendingCoverId;
       }
       await api.put(`${API_URL}/${editingId}`, payload);
-      message.success('保存成功');
+      await api.post(`${API_URL}/${editingId}/actions/publish`, {});
+      message.success('保存并发布成功');
       setDrawerOpen(false);
       fetchData();
     } catch { message.error('保存失败'); }
   };
 
   const columns = [
-    { title: 'ID', dataIndex: 'id', width: 60 },
+    { title: 'Slug', dataIndex: 'slug', width: 100 },
     {
       title: '封面', dataIndex: 'cover', width: 80,
       render: (cover: { url?: string } | null) => cover?.url

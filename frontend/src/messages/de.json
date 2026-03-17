@@ -158,7 +158,12 @@
     "softwarePqms": "Stromqualitätsüberwachung",
     "softwareVpp": "Virtuelles Kraftwerk",
     "viewDocs": "Dokumentation",
-    "applyDemo": "Demo anfordern"
+    "applyDemo": "Demo anfordern",
+    "tagHems": "Wohngebäude",
+    "tagEss": "Gewerbe",
+    "tagEvcms": "E-Laden",
+    "tagVpp": "VPP",
+    "tagPqms": "Stromqualität"
   },
   "solutions": {
     "title": "Lösungen",

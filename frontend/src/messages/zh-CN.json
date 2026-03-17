@@ -158,7 +158,12 @@
     "softwarePqms": "电能质量监测治理",
     "softwareVpp": "虚拟电厂聚合调度",
     "viewDocs": "查看文档",
-    "applyDemo": "申请演示"
+    "applyDemo": "申请演示",
+    "tagHems": "户用",
+    "tagEss": "工商业",
+    "tagEvcms": "充电站",
+    "tagVpp": "VPP",
+    "tagPqms": "电能质量"
   },
   "solutions": {
     "title": "解决方案",

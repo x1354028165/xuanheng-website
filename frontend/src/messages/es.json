@@ -158,7 +158,12 @@
     "softwarePqms": "Calidad de Energía",
     "softwareVpp": "Planta Virtual",
     "viewDocs": "Ver Documentación",
-    "applyDemo": "Solicitar demo"
+    "applyDemo": "Solicitar demo",
+    "tagHems": "Residencial",
+    "tagEss": "Industrial",
+    "tagEvcms": "Carga VE",
+    "tagVpp": "VPP",
+    "tagPqms": "Calidad elec."
   },
   "solutions": {
     "title": "Soluciones",

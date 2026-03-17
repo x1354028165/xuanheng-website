@@ -158,7 +158,12 @@
     "softwarePqms": "Power Quality Monitoring",
     "softwareVpp": "Virtual Power Plant Aggregation",
     "viewDocs": "View Docs",
-    "applyDemo": "Request Demo"
+    "applyDemo": "Request Demo",
+    "tagHems": "Residential",
+    "tagEss": "C&I",
+    "tagEvcms": "EV Charging",
+    "tagVpp": "VPP",
+    "tagPqms": "Power Quality"
   },
   "solutions": {
     "title": "Solutions",

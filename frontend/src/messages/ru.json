@@ -158,7 +158,12 @@
     "softwarePqms": "Качество электроэнергии",
     "softwareVpp": "Виртуальная электростанция",
     "viewDocs": "Документация",
-    "applyDemo": "Запросить демо"
+    "applyDemo": "Запросить демо",
+    "tagHems": "Жилые",
+    "tagEss": "Коммерч.",
+    "tagEvcms": "Зарядка ЭА",
+    "tagVpp": "VPP",
+    "tagPqms": "Кач. энергии"
   },
   "solutions": {
     "title": "Решения",

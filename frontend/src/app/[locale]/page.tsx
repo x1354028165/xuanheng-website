@@ -84,7 +84,7 @@ export default async function HomePage({
     pqms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_pqms_fa5639a754.png`,
   };
   const SOLUTION_TAG: Record<string, string> = {
-    hems: '户用', ess: '工商业', evcms: '充电站', vpp: 'VPP', pqms: '电能质量',
+    hems: t('tagHems'), ess: t('tagEss'), evcms: t('tagEvcms'), vpp: t('tagVpp'), pqms: t('tagPqms'),
   };
 
   // accordionData 从 CMS solutions 构建，cover 为空时使用 fallback
@@ -95,9 +95,12 @@ export default async function HomePage({
     const rawCoverUrl = s?.cover
       ? (typeof s.cover === 'string' ? s.cover : (s.cover as { url?: string })?.url ?? SOLUTION_FALLBACK_COVER[slug])
       : SOLUTION_FALLBACK_COVER[slug];
+    // 外部链接（Unsplash等）替换为本地服务器图片，避免国内访问失败
     const coverUrl = rawCoverUrl?.startsWith('/uploads/')
       ? getStrapiMedia(rawCoverUrl)
-      : rawCoverUrl;
+      : (rawCoverUrl?.startsWith('http') && !rawCoverUrl.includes('32.236.16.227'))
+        ? SOLUTION_FALLBACK_COVER[slug]
+        : rawCoverUrl;
     return {
       tag: SOLUTION_TAG[slug] ?? slug,
       title: s?.title ?? t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),

@@ -158,7 +158,12 @@
     "softwarePqms": "電能質量監測治理",
     "softwareVpp": "虛擬電廠聚合調度",
     "viewDocs": "查看文件",
-    "applyDemo": "申請演示"
+    "applyDemo": "申請演示",
+    "tagHems": "戶用",
+    "tagEss": "工商業",
+    "tagEvcms": "充電站",
+    "tagVpp": "VPP",
+    "tagPqms": "電能質量"
   },
   "solutions": {
     "title": "解決方案",
