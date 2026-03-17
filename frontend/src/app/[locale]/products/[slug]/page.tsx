@@ -126,13 +126,14 @@ export default async function ProductDetailPage({
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-7 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg shadow-[#38C4E8]/20 transition-all duration-300 hover:bg-[#5DD3F0] hover:shadow-xl hover:shadow-[#38C4E8]/30 hover:-translate-y-0.5"
+                  className="w-[220px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[15px] transition-colors duration-200 hover:bg-white"
                 >
                   {contactSales}
                 </Link>
                 <a
                   href="#specs"
-                  className="inline-flex items-center rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+                  className="w-[220px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+                  style={{ background: 'rgba(255,255,255,.12)' }}
                 >
                   {viewSpecs} ↓
                 </a>
