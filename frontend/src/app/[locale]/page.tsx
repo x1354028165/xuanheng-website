@@ -372,8 +372,9 @@ export default async function HomePage({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
           {articles.slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
-            const dateStr = article.publishedDate
-              ? article.publishedDate.replace(/-/g, '.')
+            const rawDate = article.publishedDate || article.publishedAt?.substring(0, 10);
+            const dateStr = rawDate
+              ? rawDate.replace(/-/g, '.')
               : '';
             return (
               <Link
