@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import api from '../lib/axios';
 
 const API_URL = '/content-manager/collection-types/api::solution.solution';
-const STRAPI_BASE = '/';
+const STRAPI_BASE = '/strapi';
 
 export default function Solutions() {
   const { t } = useTranslation();
@@ -89,7 +89,7 @@ export default function Solutions() {
     {
       title: '封面', dataIndex: 'cover', width: 80,
       render: (cover: { url?: string } | null) => cover?.url
-        ? <Image src={cover.url} width={60} height={40} style={{ objectFit: 'cover', borderRadius: 4 }} />
+        ? <Image src={cover.url.startsWith('/uploads/') ? `/strapi${cover.url}` : cover.url} width={60} height={40} style={{ objectFit: 'cover', borderRadius: 4 }} />
         : <span style={{ color: '#ccc', fontSize: 12 }}>无图</span>,
     },
     { title: '标题', dataIndex: 'title', ellipsis: true },
