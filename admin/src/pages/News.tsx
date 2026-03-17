@@ -16,7 +16,7 @@ export default function News() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null); // Strapi v5: use documentId
   const [form] = Form.useForm();
 
   const fetchData = useCallback(async () => {
@@ -41,7 +41,7 @@ export default function News() {
   };
 
   const openEdit = (record: Record<string, unknown>) => {
-    setEditingId(record.id as number);
+    setEditingId((record.documentId ?? record.id) as string);
     form.setFieldsValue(record);
     setDrawerOpen(true);
   };
@@ -62,7 +62,7 @@ export default function News() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       await api.delete(`${API_URL}/${id}`);
       message.success('OK');
@@ -75,10 +75,11 @@ export default function News() {
   const togglePublish = async (record: Record<string, unknown>) => {
     try {
       const isPublished = !!record.publishedAt;
+      const docId = (record.documentId ?? record.id) as string;
       if (isPublished) {
-        await api.post(`${API_URL}/${record.id}/actions/unpublish`);
+        await api.post(`${API_URL}/${docId}/actions/unpublish`);
       } else {
-        await api.post(`${API_URL}/${record.id}/actions/publish`);
+        await api.post(`${API_URL}/${docId}/actions/publish`);
       }
       message.success('OK');
       fetchData();
@@ -105,7 +106,7 @@ export default function News() {
           <Button size="small" onClick={(e) => { e.stopPropagation(); togglePublish(record); }}>
             {record.publishedAt ? t('common.unpublish') : t('common.publish')}
           </Button>
-          <Popconfirm title={t('common.confirmDelete')} onConfirm={() => handleDelete(record.id as number)}>
+          <Popconfirm title={t('common.confirmDelete')} onConfirm={() => handleDelete((record.documentId ?? record.id) as string)}>
             <Button size="small" danger onClick={(e) => e.stopPropagation()}>{t('common.delete')}</Button>
           </Popconfirm>
         </Space>
