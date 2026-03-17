@@ -59,6 +59,7 @@ export default async function ProductDetailPage({
 
   const title = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
   const bannerTitle = mockProduct?.displayTitle ?? title;
+  const positioning = mockProduct?.positioning ?? '';
   const tagline = strapiProduct?.tagline ?? getProductMessage(locale, slug, 'tagline') ?? mockProduct?.tagline ?? '';
   const description = strapiProduct?.description ?? getProductMessage(locale, slug, 'description') ?? mockProduct?.description ?? '';
 
@@ -122,6 +123,13 @@ export default async function ProductDetailPage({
               <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl break-words">
                 {bannerTitle}
               </h1>
+
+              {/* Positioning */}
+              {positioning && (
+                <p className="mt-3 text-lg font-medium text-[#38C4E8]/90 tracking-wide">
+                  {positioning}
+                </p>
+              )}
 
               {/* CTA buttons */}
               <div className="mt-10 flex flex-wrap gap-4">

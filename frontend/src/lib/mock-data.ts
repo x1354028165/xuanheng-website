@@ -9,6 +9,7 @@ export interface MockProduct {
   documentId: string;
   title: string;
   displayTitle?: string; // Banner 展示标题（可选），不影响列表/SEO
+  positioning?: string;  // Banner 定位副标题
   slug: string;
   tagline: string;
   category: 'hardware' | 'software';
@@ -23,6 +24,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     documentId: 'p1',
     title: 'Neuron II',
     displayTitle: '智能网关——Neuron II',
+    positioning: '通用多协议网关',
     slug: 'neuron-ii',
     tagline: '通用多协议网关（4G/WiFi/RS485/CAN）',
     category: 'hardware',
@@ -43,6 +45,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
   {
     documentId: 'p2',
     title: 'Neuron III',
+    positioning: '充电站专用控制器',
     slug: 'neuron-iii',
     tagline: '充电站专用控制器（内置电表 + DLB 动态负载均衡）',
     category: 'hardware',
@@ -64,6 +67,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
   {
     documentId: 'p3',
     title: 'Neuron III Lite',
+    positioning: '防跳闸轻量控制器',
     slug: 'neuron-iii-lite',
     tagline: '防跳闸控制器（配套 ATP III）',
     category: 'hardware',
