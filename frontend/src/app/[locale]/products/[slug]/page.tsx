@@ -51,6 +51,7 @@ export default async function ProductDetailPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'products' });
   const tc = await getTranslations({ locale, namespace: 'common' });
+  const tn = await getTranslations({ locale, namespace: 'nav' });
 
   // Try Strapi first, fall back to direct message access, then mock
   const strapiProduct = await getProductBySlug(slug, locale);
@@ -89,71 +90,150 @@ export default async function ProductDetailPage({
   const downloadBtn = getProductLabel(locale, 'downloadBtn');
   const viewBrands = getProductLabel(locale, 'viewBrands');
 
+  // Pick top 3 specs for banner highlights
+  const bannerHighlights = finalSpecs.slice(0, 3);
+
   return (
     <>
-      {/* Product Header */}
-      <section className="bg-[#F8FAFC] pb-16 pt-32">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/products"
-            className="mb-8 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors"
-          >
-            &larr; {t('backToList')}
-          </Link>
+      {/* ===== PRODUCT HERO BANNER ===== */}
+      <section className="relative min-h-[600px] overflow-hidden bg-gradient-to-br from-[#0C1829] via-[#0F2347] to-[#1A3FAD] pt-24 pb-0">
+        {/* Background decorative elements */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          {/* Large circle top-right */}
+          <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#38C4E8]/5" />
+          {/* Small circle bottom-left */}
+          <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-[#1A3FAD]/40" />
+          {/* Grid lines */}
+          <svg className="absolute inset-0 h-full w-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+          {/* Glow accent top-left */}
+          <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-[#38C4E8]/10 blur-3xl" />
+        </div>
 
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
-            {/* Product Image */}
-            <div className="relative h-72 overflow-hidden rounded-xl bg-white flex items-center justify-center sm:h-96 border border-[#E2E8F0]">
-              {strapiProduct?.cover?.url ? (
-                <Image
-                  src={getStrapiMedia(strapiProduct.cover.url)}
-                  alt={strapiProduct.cover.alternativeText || title}
-                  fill
-                  className="object-contain p-4"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="text-center">
-                  <div className="text-6xl mb-4">{category === 'hardware' ? '⚡' : '☁️'}</div>
-                  <p className="text-[#64748B] text-sm">{title}</p>
-                </div>
-              )}
-            </div>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav className="mb-10 flex items-center gap-2 text-sm text-white/50">
+            <Link href="/" className="hover:text-white/80 transition-colors">
+              {locale === 'zh-CN' || locale === 'zh-TW' ? '首页' : 'Home'}
+            </Link>
+            <span>/</span>
+            <Link href="/products" className="hover:text-white/80 transition-colors">
+              {tn('products')}
+            </Link>
+            <span>/</span>
+            <span className="text-white/80">{title}</span>
+          </nav>
 
-            {/* Product Info */}
-            <div>
-              <span className="inline-block rounded-full bg-[#38C4E8]/10 px-3 py-1 text-xs font-medium text-[#38C4E8] mb-4">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center pb-16">
+            {/* Left: Text Content */}
+            <div className="flex flex-col">
+              {/* Category badge */}
+              <span className="mb-5 inline-flex w-fit items-center gap-1.5 rounded-full border border-[#38C4E8]/40 bg-[#38C4E8]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#38C4E8]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#38C4E8]" />
                 {category === 'hardware' ? hardwareLabel : softwareLabel}
               </span>
-              <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl">
+
+              {/* Product title */}
+              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
                 {title}
               </h1>
+
+              {/* Tagline */}
               {tagline && (
-                <p className="mt-4 text-lg text-[#38C4E8]">{tagline}</p>
+                <p className="mt-5 text-xl font-medium text-[#38C4E8]">
+                  {tagline}
+                </p>
               )}
+
+              {/* Description (first paragraph only in banner) */}
               {description && (
-                <div className="mt-6 text-[#64748B] leading-relaxed">
-                  {description.split('\n').map((paragraph: string, idx: number) => (
-                    <p key={idx} className="mt-3 first:mt-0">{paragraph}</p>
-                  ))}
-                </div>
+                <p className="mt-4 text-base leading-relaxed text-white/60 line-clamp-3">
+                  {description.split('\n')[0]}
+                </p>
               )}
+
+              {/* CTA buttons */}
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#2BA8C8] hover:shadow-xl"
+                  className="inline-flex items-center rounded-lg bg-[#38C4E8] px-7 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg shadow-[#38C4E8]/20 transition-all duration-300 hover:bg-[#5DD3F0] hover:shadow-xl hover:shadow-[#38C4E8]/30 hover:-translate-y-0.5"
                 >
                   {contactSales}
                 </Link>
                 <a
                   href="#specs"
-                  className="inline-flex items-center rounded-lg border border-[#38C4E8] px-6 py-3 text-base font-semibold text-[#38C4E8] transition-all duration-300 hover:bg-[#38C4E8]/5"
+                  className="inline-flex items-center rounded-lg border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/40"
                 >
                   {viewSpecs} ↓
                 </a>
               </div>
+
+              {/* Key specs highlight strip */}
+              {bannerHighlights.length > 0 && (
+                <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {bannerHighlights.map(([key, value]) => (
+                    <div key={key} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
+                      <p className="text-xs font-medium text-[#38C4E8]/80 mb-1">{key}</p>
+                      <p className="text-sm font-semibold text-white leading-snug line-clamp-2">{String(value)}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right: Product Image Card */}
+            <div className="flex items-center justify-center lg:justify-end">
+              <div className="relative w-full max-w-md">
+                {/* Glow behind card */}
+                <div className="absolute inset-0 scale-95 rounded-3xl bg-[#38C4E8]/20 blur-2xl" />
+                {/* Image card */}
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/95 shadow-2xl shadow-black/40 backdrop-blur-sm">
+                  <div className="relative flex h-72 items-center justify-center p-8 sm:h-96">
+                    {strapiProduct?.cover?.url ? (
+                      <Image
+                        src={getStrapiMedia(strapiProduct.cover.url)}
+                        alt={strapiProduct.cover.alternativeText || title}
+                        fill
+                        className="object-contain p-8"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    ) : mockProduct?.cover ? (
+                      <Image
+                        src={mockProduct.cover}
+                        alt={title}
+                        fill
+                        className="object-contain p-8"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className="text-center">
+                        <div className="text-8xl mb-4 opacity-80">{category === 'hardware' ? '⚡' : '☁️'}</div>
+                        <p className="text-[#64748B] text-sm font-medium">{title}</p>
+                      </div>
+                    )}
+                  </div>
+                  {/* Card footer badge */}
+                  <div className="border-t border-[#E2E8F0] bg-[#F8FAFC] px-6 py-3 flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#1A3FAD] uppercase tracking-wider">旭衡电子 · AlwaysControl</span>
+                    <span className="h-2 w-2 rounded-full bg-[#38C4E8] shadow-lg shadow-[#38C4E8]/50" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Wave divider */}
+        <div className="relative h-16 w-full overflow-hidden">
+          <svg viewBox="0 0 1440 64" preserveAspectRatio="none" className="absolute bottom-0 left-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,32 C360,64 1080,0 1440,32 L1440,64 L0,64 Z" fill="#F8FAFC"/>
+          </svg>
         </div>
       </section>
 
