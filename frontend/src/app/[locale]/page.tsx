@@ -369,54 +369,39 @@ export default async function HomePage({
           </h2>
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('newsSubtitle')}</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1440px] mx-auto">
-          {articles.slice(0, 3).map((article, idx) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1440px] mx-auto">
+          {articles.filter(a => !a.title?.includes('验收测试')).slice(0, 3).map((article, idx) => {
             const coverUrl = article.cover?.url ? getStrapiMedia(article.cover.url) : null;
             const rawDate = article.publishedDate || article.publishedAt?.substring(0, 10);
-            const dateStr = rawDate
-              ? rawDate.replace(/-/g, '.')
-              : '';
+            const dateStr = rawDate ? rawDate.replace(/-/g, '.') : '';
             return (
               <Link
                 key={article.documentId}
                 href={`/about/news/${article.slug}`}
-                className="group bg-white rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-[0_12px_40px_rgba(0,0,0,.08)] hover:-translate-y-1 block"
+                className="group flex flex-col bg-white rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,.10)] hover:-translate-y-1.5 block"
               >
-                {/* Cover image */}
-                <div className="relative w-full overflow-hidden rounded-t-2xl" style={{ aspectRatio: '16/9' }}>
+                {/* Cover image — fixed 16:9 */}
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
                   {coverUrl ? (
-                    <Image src={coverUrl} alt={article.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <Image src={coverUrl} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center" style={{ background: NEWS_COLORS[idx % 3] }}>
-                      <span className="text-white/60 text-4xl font-bold">N</span>
-                    </div>
+                    <div className="w-full h-full" style={{ background: `linear-gradient(135deg, ${NEWS_COLORS[idx % 3]} 0%, ${NEWS_COLORS[(idx+1) % 3]} 100%)` }} />
                   )}
                 </div>
-                {/* Content */}
-                <div className="px-1 pt-4 pb-2">
-                  <h3 className="text-[18px] font-bold text-[#0F172A] leading-snug mb-3 line-clamp-2 group-hover:text-[#38C4E8] transition-colors">
+                {/* Content — flex-col stretch so meta sticks to bottom */}
+                <div className="flex flex-col flex-1 px-6 pt-5 pb-6">
+                  <h3 className="text-[17px] font-bold text-[#0F172A] leading-[1.5] mb-auto line-clamp-2 group-hover:text-[#38C4E8] transition-colors" style={{ minHeight: '3em' }}>
                     {article.title}
                   </h3>
-                  <div className="flex items-center gap-4 text-[13px] text-[#94A3B8]">
-                    {dateStr && (
-                      <span className="flex items-center gap-1.5">
-                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="1" y="3" width="14" height="12" rx="2" stroke="#94A3B8" strokeWidth="1.4"/>
-                          <path d="M5 1v3M11 1v3M1 7h14" stroke="#94A3B8" strokeWidth="1.4" strokeLinecap="round"/>
-                        </svg>
-                        {dateStr}
-                      </span>
-                    )}
-                    {article.viewCount != null && (
-                      <span className="flex items-center gap-1.5">
-                        <svg width="15" height="11" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M1 6.5C1 6.5 4 1 9 1s8 5.5 8 5.5-3 5.5-8 5.5S1 6.5 1 6.5Z" stroke="#94A3B8" strokeWidth="1.4"/>
-                          <circle cx="9" cy="6.5" r="2.2" stroke="#94A3B8" strokeWidth="1.4"/>
-                        </svg>
-                        {article.viewCount}
-                      </span>
-                    )}
-                  </div>
+                  {dateStr && (
+                    <div className="flex items-center gap-1.5 text-[12px] text-[#94A3B8] mt-4">
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                        <rect x="1" y="3" width="14" height="12" rx="2" stroke="#94A3B8" strokeWidth="1.4"/>
+                        <path d="M5 1v3M11 1v3M1 7h14" stroke="#94A3B8" strokeWidth="1.4" strokeLinecap="round"/>
+                      </svg>
+                      {dateStr}
+                    </div>
+                  )}
                 </div>
               </Link>
             );
