@@ -303,13 +303,22 @@ export default async function HomePage({
 
         {/* Software tabs */}
         <div className="mt-[72px] max-w-[1440px] mx-auto">
-          <SoftwareTabs tabLabels={{
-            HEMS: t("softwareHems"),
-            ESS: t("softwareEss"),
-            EVCMS: t("softwareEvcms"),
-            PQMS: t("softwarePqms"),
-            VPP: t("softwareVpp"),
-          }} />
+          <SoftwareTabs
+            tabLabels={{
+              HEMS: t("softwareHems"),
+              ESS: t("softwareEss"),
+              EVCMS: t("softwareEvcms"),
+              PQMS: t("softwarePqms"),
+              VPP: t("softwareVpp"),
+            }}
+            coverImages={{
+              HEMS: accordionData.find(a => a.href.includes('hems'))?.bgImage ?? '',
+              ESS: accordionData.find(a => a.href.includes('ess'))?.bgImage ?? '',
+              EVCMS: accordionData.find(a => a.href.includes('evcms'))?.bgImage ?? '',
+              PQMS: accordionData.find(a => a.href.includes('pqms'))?.bgImage ?? '',
+              VPP: accordionData.find(a => a.href.includes('vpp'))?.bgImage ?? '',
+            }}
+          />
         </div>
       </section>
 

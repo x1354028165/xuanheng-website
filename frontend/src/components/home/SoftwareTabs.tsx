@@ -23,25 +23,36 @@ const descriptions: Record<string, string> = {
   VPP: '虚拟电厂聚合调度',
 };
 
-export default function SoftwareTabs({ tabLabels }: { tabLabels?: Record<string, string> }) {
+export default function SoftwareTabs({ tabLabels, coverImages }: { tabLabels?: Record<string, string>; coverImages?: Record<string, string> }) {
   const [active, setActive] = useState(0);
 
   return (
     <div className="w-full">
       {/* Image preview area */}
       <div className="w-full rounded-xl overflow-hidden relative" style={{ aspectRatio: '16/7', background: '#F8FAFC' }}>
-        {tabs.map((tab, idx) => (
-          <div
-            key={tab.name}
-            className="absolute inset-0 flex items-center justify-center transition-opacity duration-500"
-            style={{
-              background: tab.gradient,
-              opacity: active === idx ? 1 : 0,
-            }}
-          >
-            <span className="text-white/40 text-4xl font-bold">{tab.name} Platform</span>
-          </div>
-        ))}
+        {tabs.map((tab, idx) => {
+          const imgUrl = coverImages?.[tab.name];
+          return (
+            <div
+              key={tab.name}
+              className="absolute inset-0 flex items-center justify-center transition-opacity duration-500"
+              style={{
+                opacity: active === idx ? 1 : 0,
+                background: imgUrl ? 'transparent' : tab.gradient,
+              }}
+            >
+              {imgUrl ? (
+                <img
+                  src={imgUrl}
+                  alt={tab.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-white/40 text-4xl font-bold">{tab.name} Platform</span>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Tab row */}
@@ -52,7 +63,7 @@ export default function SoftwareTabs({ tabLabels }: { tabLabels?: Record<string,
             onClick={() => setActive(idx)}
             className="pt-5 pb-5 pr-4 text-left -mt-px cursor-pointer transition-colors duration-200"
             style={{
-              borderTop: active === idx ? '3px solid #38C4E8' : '3px solid transparent',
+              borderTop: active === idx ? '3px solid #0F172A' : '3px solid transparent',
             }}
           >
             <div
