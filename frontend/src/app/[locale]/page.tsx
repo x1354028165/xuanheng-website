@@ -77,11 +77,11 @@ export default async function HomePage({
 
   // Fallback cover images per slug（CMS cover为空时使用）
   const SOLUTION_FALLBACK_COVER: Record<string, string> = {
-    hems: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=800&q=70',
-    ess: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70',
-    evcms: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=70',
-    vpp: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70',
-    pqms: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=70',
+    hems: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_hems_a8004b7cb5.png`,
+    ess: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_ess_cddd8b826a.png`,
+    evcms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_evcms_8140cfbdb4.png`,
+    vpp: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_vpp_a239a134e3.png`,
+    pqms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_pqms_fa5639a754.png`,
   };
   const SOLUTION_TAG: Record<string, string> = {
     hems: '户用', ess: '工商业', evcms: '充电站', vpp: 'VPP', pqms: '电能质量',
@@ -92,9 +92,12 @@ export default async function HomePage({
   const solutionMap = Object.fromEntries(solutions.map(s => [s.slug, s]));
   const accordionData = SOLUTION_ORDER.map(slug => {
     const s = solutionMap[slug];
-    const coverUrl = s?.cover
+    const rawCoverUrl = s?.cover
       ? (typeof s.cover === 'string' ? s.cover : (s.cover as { url?: string })?.url ?? SOLUTION_FALLBACK_COVER[slug])
       : SOLUTION_FALLBACK_COVER[slug];
+    const coverUrl = rawCoverUrl?.startsWith('/uploads/')
+      ? getStrapiMedia(rawCoverUrl)
+      : rawCoverUrl;
     return {
       tag: SOLUTION_TAG[slug] ?? slug,
       title: s?.title ?? t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
