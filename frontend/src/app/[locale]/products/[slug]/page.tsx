@@ -130,7 +130,7 @@ export default async function ProductDetailPage({
             <span className="text-white/80">{title}</span>
           </nav>
 
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center pb-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[45fr_55fr] lg:items-center pb-16">
             {/* Left: Text Content */}
             <div className="flex flex-col">
               {/* Category badge */}
@@ -187,32 +187,33 @@ export default async function ProductDetailPage({
               )}
             </div>
 
-            {/* Right: Product Image on dark background */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <div className="relative w-full max-w-md">
-                {/* Soft glow */}
-                <div className="absolute inset-0 rounded-3xl bg-[#38C4E8]/10 blur-3xl" />
-                <div className="relative flex h-72 items-center justify-center sm:h-96">
+            {/* Right: Product Image — full-size hero */}
+            <div className="flex items-center justify-center lg:justify-end lg:-mr-8">
+              <div className="relative w-full">
+                {/* Radial glow behind image */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[#38C4E8]/15 blur-[100px]" />
+                {/* Second smaller hot-spot glow */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[240px] w-[240px] rounded-full bg-[#38C4E8]/20 blur-[50px]" />
+                <div className="relative h-[480px] sm:h-[580px] lg:h-[620px]">
                   {strapiProduct?.cover?.url ? (
                     <Image
                       src={getStrapiMedia(strapiProduct.cover.url)}
                       alt={strapiProduct.cover.alternativeText || title}
                       fill
-                      className="object-contain drop-shadow-[0_0_40px_rgba(56,196,232,0.25)]"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
                     />
                   ) : mockProduct?.cover ? (
                     <Image
                       src={mockProduct.cover}
                       alt={title}
                       fill
-                      className="object-contain drop-shadow-[0_0_40px_rgba(56,196,232,0.25)]"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
                     />
                   ) : (
-                    <div className="text-center">
-                      <div className="text-9xl opacity-60">{category === 'hardware' ? '⚡' : '☁️'}</div>
-                      <p className="mt-4 text-white/50 text-sm font-medium">{title}</p>
+                    <div className="flex h-full items-center justify-center">
+                      <div className="text-[12rem] opacity-40">{category === 'hardware' ? '⚡' : '☁️'}</div>
                     </div>
                   )}
                 </div>
