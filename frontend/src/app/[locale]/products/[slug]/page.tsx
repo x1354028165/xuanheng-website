@@ -58,7 +58,9 @@ export default async function ProductDetailPage({
   const mockProduct = getMockProduct(slug);
 
   const title = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
-  const bannerTitle = mockProduct?.displayTitle ?? title;
+  // Banner 大标题：只用纯型号（Neuron II / III / Lite），不带中文描述
+  const bannerModelName = mockProduct?.title ?? slug;
+  const bannerTitle = mockProduct?.displayTitle ?? title; // 保留备用（暂未用于 h1）
   const positioning = mockProduct?.positioning ?? '';
   const tagline = strapiProduct?.tagline ?? getProductMessage(locale, slug, 'tagline') ?? mockProduct?.tagline ?? '';
   const description = strapiProduct?.description ?? getProductMessage(locale, slug, 'description') ?? mockProduct?.description ?? '';
@@ -119,17 +121,18 @@ export default async function ProductDetailPage({
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[45fr_55fr] lg:items-center pb-16">
             {/* Left: Title + CTA only */}
             <div className="flex flex-col">
-              {/* Product title */}
-              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl break-words">
-                {bannerTitle}
-              </h1>
-
-              {/* Positioning */}
+              {/* Positioning badge — above title */}
               {positioning && (
-                <p className="mt-3 text-lg font-medium text-[#38C4E8]/90 tracking-wide">
+                <div className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-[#38C4E8]/40 bg-[#38C4E8]/10 px-3.5 py-1 text-sm font-medium text-[#38C4E8] tracking-wide backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#38C4E8]" />
                   {positioning}
-                </p>
+                </div>
               )}
+
+              {/* Product title — model name only, keeps single line */}
+              <h1 className="text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl whitespace-nowrap">
+                {bannerModelName}
+              </h1>
 
               {/* CTA buttons */}
               <div className="mt-10 flex flex-wrap gap-4">
