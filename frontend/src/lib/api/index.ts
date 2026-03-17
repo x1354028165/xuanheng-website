@@ -50,13 +50,25 @@ export async function getProductBySlug(
 // ---------------------------------------------------------------------------
 
 export async function getSolutions(locale = 'zh-CN'): Promise<StrapiSolution[]> {
+  // Strapi locale映射：en-US→en，其余非zh-CN locale fallback到zh-CN
+  const strapiLocale = locale === 'en-US' ? 'en' : locale;
   try {
     const res = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
-      locale,
+      locale: strapiLocale,
       populate: '*',
       sort: ['createdAt:desc'],
     });
-    return res.data ?? [];
+    const data = res.data ?? [];
+    // 空结果时fallback到zh-CN（其他locale尚未配置CMS数据）
+    if (data.length === 0 && strapiLocale !== 'zh-CN') {
+      const fallback = await fetchWithFallback<StrapiResponse<StrapiSolution>>('/solutions', {
+        locale: 'zh-CN',
+        populate: '*',
+        sort: ['createdAt:desc'],
+      });
+      return fallback.data ?? [];
+    }
+    return data;
   } catch {
     console.warn('[API] getSolutions failed, returning empty array');
     return [];

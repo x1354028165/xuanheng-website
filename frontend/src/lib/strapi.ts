@@ -119,7 +119,7 @@ export async function fetchStrapi<T = unknown>(
   const res = await fetch(url, {
     headers,
     signal: AbortSignal.timeout(8000),  // 防止构建期挂起
-    next: { revalidate: 3600 },
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) {

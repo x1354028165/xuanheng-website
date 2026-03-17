@@ -77,11 +77,11 @@ export default async function HomePage({
 
   // Fallback cover images per slug（CMS cover为空时使用）
   const SOLUTION_FALLBACK_COVER: Record<string, string> = {
-    hems: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_hems_a8004b7cb5.png`,
-    ess: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_ess_cddd8b826a.png`,
-    evcms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_evcms_8140cfbdb4.png`,
-    vpp: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_vpp_a239a134e3.png`,
-    pqms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_pqms_fa5639a754.png`,
+    hems: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_hems_real_e169716a7e.jpg`,
+    ess: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_ess_real_8afb1e9d62.jpg`,
+    evcms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_evcms_real_d7c6169495.jpg`,
+    vpp: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_vpp_real_48675dec3f.jpg`,
+    pqms: `${process.env.NEXT_PUBLIC_API_URL?.replace(/:1337$/, '') ?? ''}/strapi/uploads/solution_pqms_real_eeb399956e.jpg`,
   };
   const SOLUTION_TAG: Record<string, string> = {
     hems: t('tagHems'), ess: t('tagEss'), evcms: t('tagEvcms'), vpp: t('tagVpp'), pqms: t('tagPqms'),
