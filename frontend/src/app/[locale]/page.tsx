@@ -104,8 +104,8 @@ export default async function HomePage({
         : rawCoverUrl;
     return {
       tag: SOLUTION_TAG[slug] ?? slug,
-      title: s?.title || t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
-      description: s?.tagline || t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}Desc`),
+      title: t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}`),
+      description: t(`accordion${slug.charAt(0).toUpperCase()+slug.slice(1)}Desc`),
       href: `/solutions/${slug}`,
       bgImage: coverUrl,
       linkText: t('viewDetail'),
