@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getSolutions, getSolutionBySlug } from '@/lib/api';
 import { MOCK_SOLUTIONS, MOCK_PRODUCTS, getMockSolution } from '@/lib/mock-data';
 import { getSolutionMessage, getSolutionLabel, getProductMessage, interpolate } from '@/lib/i18n-helpers';
+import FeatureTabs from '@/components/solutions/FeatureTabs';
 import type { Metadata } from 'next';
 
 const SITE_NAME: Record<string, string> = {
@@ -44,27 +45,24 @@ export async function generateStaticParams() {
 
 const SOLUTION_CASES: Record<string, Array<{area: string; scale: string; problem: string}>> = {
   hems: [
-    { area: "🇹🇼 台湾台北", scale: "家庭 8kW 光伏 + 10kWh 储能", problem: "电费节省 35%，自发自用率提升至 72%" },
-    { area: "🇦🇺 澳大利亚悉尼", scale: "3.5kW 光伏 + 5kWh 储能", problem: "月节省电费约 180 澳元" },
-    { area: "🇩🇪 德国慕尼黑", scale: "12kW 光伏 + 20kWh 储能 + 双充电桩", problem: "综合能耗降低 42%" },
+    { area: "🇹🇼 中国台湾别墅小区", scale: "多户家庭光伏 + 储能系统，品牌各异", problem: "统一接入后电费节省 35%，自发自用率提升至 72%" },
+    { area: "🇦🇺 澳洲家庭储能用户", scale: "结合当地峰谷电价结构，3.5kW 光伏 + 5kWh 储能", problem: "自动切换用电策略，月节省电费约 180 澳元" },
   ],
   ess: [
-    { area: "🇨🇳 广东东莞某工厂", scale: "500kWh 工商储能柜", problem: "需量费削减 28%，年节电费 120 万元" },
-    { area: "🇨🇳 上海某商业综合体", scale: "200kWh 多品牌混合储能", problem: "峰谷套利年收益 80 万元" },
-    { area: "🇪🇸 西班牙某园区", scale: "1MWh 储能 + 光伏", problem: "参与辅助服务市场，年额外收益约 40 万元" },
+    { area: "🇨🇳 深圳龙华分布式储能", scale: "多品牌 PCS/BMS 混合部署", problem: "5 天完成云平台搭建，10 天完成跨品牌设备接入" },
+    { area: "🇨🇳 上海某商业综合体", scale: "200kWh 多品牌混合储能", problem: "峰谷套利年收益 80 万元，运维效率提升 80%" },
   ],
   evcms: [
-    { area: "🇨🇳 深圳某停车场", scale: "60 个充电桩，原配电 200kW", problem: "部署 DLB 后跳闸率降至 0，无需扩容" },
-    { area: "🇳🇱 荷兰某物流中心", scale: "OCPP 2.0.1 多品牌 30 桩", problem: "运维成本降低 60%" },
-    { area: "🇨🇳 北京某酒店", scale: "20 桩有序充电", problem: "年充电电费节省 25 万元" },
+    { area: "🇨🇳 深圳罗湖办公楼停车场", scale: "40 桩，原主线 150kW，未扩容", problem: "部署 DLB 后跳闸率降至 0，充电吞吐量提升 60%" },
+    { area: "🇲🇾 马来西亚充电站", scale: "多品牌 OCPP 充电桩混合部署", problem: "统一管理平台上线，运维人力成本降低 55%" },
   ],
   vpp: [
-    { area: "🇨🇳 某省级能源聚合商", scale: "聚合 500 个分布式储能站（50MWh）", problem: "首年创收 200 万元" },
-    { area: "🇯🇵 日本某能源运营商", scale: "户用 + 工商储混合调度", problem: "平均响应时间 < 2s" },
+    { area: "🇦🇺 澳大利亚 VPP 运营商", scale: "聚合多品牌家庭储能设备，参与 FCAS 需求响应", problem: "调度指令 500ms 内下发，资产利用率显著提升" },
+    { area: "🇨🇳 某省级能源聚合商", scale: "聚合 500 个分布式储能站（50MWh）", problem: "首年创收 200 万元，响应时间 < 2s" },
   ],
   pqms: [
-    { area: "🇨🇳 江苏某精密制造工厂", scale: "THD > 15%，设备频繁故障", problem: "设备故障率下降 78%" },
-    { area: "🇨🇳 广西某医院", scale: "关键医疗设备电压波动", problem: "7×24 实时监测，提前预警 3 次潜在故障" },
+    { area: "🇨🇳 工业园区谐波治理", scale: "THD > 15%，精密设备频繁故障", problem: "谐波源精准定位，设备故障率下降 78%" },
+    { area: "🇨🇳 数据中心电能质量管控", scale: "关键负荷电压波动，人工巡检滞后", problem: "7×24 实时监测，提前预警 3 次潜在故障，减少 90% 现场巡检" },
   ],
 };
 
@@ -94,9 +92,12 @@ export default async function SolutionDetailPage({
   }
   const finalPainPoints = painPoints.length > 0 ? painPoints : (mockSolution?.painPoints ?? []);
 
+  // Scene background
+  const sceneBackground = getSolutionMessage(locale, slug, 'background') ?? '';
+
   // Features/highlights from direct message access
   const features: string[] = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 4; i++) {
     const val = getSolutionMessage(locale, slug, `feature${i}`);
     if (val) features.push(val);
   }
@@ -119,160 +120,141 @@ export default async function SolutionDetailPage({
   return (
     <>
       {/* ===== SOLUTION HERO BANNER ===== */}
-      <section className="relative min-h-[600px] overflow-hidden bg-gradient-to-br from-[#0C1829] via-[#0F2347] to-[#1A3FAD] pt-24 pb-0">
-        {/* Background decorative elements */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#38C4E8]/5" />
-          <div className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-[#1A3FAD]/40" />
-          <svg className="absolute inset-0 h-full w-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid-sol" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid-sol)" />
-          </svg>
-          <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-[#38C4E8]/10 blur-3xl" />
-        </div>
+      <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#0C1829]">
+        {/* Background image — plain img tag to avoid next/image remotePatterns issues */}
+        {(() => {
+          const SOLUTION_BG: Record<string, string> = {
+            hems:  '/strapi/uploads/solution_hems_real_e169716a7e.jpg',
+            ess:   '/strapi/uploads/solution_ess_real_8afb1e9d62.jpg',
+            evcms: '/strapi/uploads/solution_evcms_real_d7c6169495.jpg',
+            vpp:   '/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
+            pqms:  '/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
+          };
+          const bgSrc = SOLUTION_BG[slug];
+          return bgSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={bgSrc}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+          ) : null;
+        })()}
+        {/* Gradient overlay — dark enough to keep text readable */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to bottom, rgba(12,24,41,.55) 0%, rgba(12,24,41,.45) 50%, rgba(12,24,41,.70) 100%)',
+        }} />
+        {/* Cyan glow accent */}
+        <div className="absolute pointer-events-none" style={{
+          top: '-150px', left: '50%', transform: 'translateX(-50%)',
+          width: '800px', height: '400px', borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(56,196,232,.15) 0%, rgba(56,196,232,.04) 40%, transparent 65%)',
+        }} />
 
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[45fr_55fr] lg:items-center pb-16">
-            {/* Left: Title + CTA */}
-            <div className="flex flex-col">
-              {/* Tagline badge */}
-              {tagline && (
-                <div className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-[#38C4E8]/40 bg-[#38C4E8]/10 px-3.5 py-1 text-sm font-medium text-[#38C4E8] tracking-wide backdrop-blur-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#38C4E8]" />
-                  {tagline}
-                </div>
-              )}
+        {/* Content — centered like homepage */}
+        <div className="relative z-10 flex flex-col items-center text-center px-6 gap-6 max-w-4xl mx-auto">
+          {/* Solution title — first */}
+          <h1 className="text-[clamp(36px,4vw,72px)] font-bold text-white leading-[1.15] tracking-tight" style={{ textShadow: '0 1px 20px rgba(0,0,0,.4)', letterSpacing: '-0.5px' }}>
+            {title}
+          </h1>
 
-              {/* Solution title */}
-              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-                {title}
-              </h1>
-
-              {/* Description */}
-              {description && (
-                <p className="mt-5 text-base text-white/70 leading-relaxed max-w-lg">
-                  {description}
-                </p>
-              )}
-
-              {/* CTA button */}
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="w-[220px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[15px] transition-colors duration-200 hover:bg-white"
-                >
-                  {applyDemo}
-                </Link>
-                <a
-                  href="#highlights"
-                  className="w-[220px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
-                  style={{ background: "rgba(255,255,255,.12)" }}
-                >
-                  了解更多 ↓
-                </a>
-              </div>
+          {/* Tagline — below title, #1A3FAD pill */}
+          {tagline && (
+            <div className="inline-flex items-center rounded-full px-5 py-2 text-sm font-semibold text-white tracking-wide"
+              style={{ background: '#1A3FAD', backdropFilter: 'blur(8px)' }}>
+              {tagline}
             </div>
+          )}
 
-            {/* Right: Solution cover image */}
-            <div className="flex items-center justify-center lg:justify-end lg:-mr-8">
-              <div className="relative w-full">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[#38C4E8]/15 blur-[100px]" />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[240px] w-[240px] rounded-full bg-[#38C4E8]/20 blur-[50px]" />
-                <div className="relative h-[420px] sm:h-[500px] lg:h-[560px]">
-                  {strapiSolution?.cover?.url ? (
-                    <Image
-                      src={`${STRAPI_PUBLIC_URL}${strapiSolution.cover.url}`}
-                      alt={strapiSolution.cover.alternativeText || title}
-                      fill
-                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
-                      sizes="(max-width: 1024px) 100vw, 55vw"
-                    />
-                  ) : mockSolution?.cover ? (
-                    <Image
-                      src={mockSolution.cover}
-                      alt={title}
-                      fill
-                      className="object-contain drop-shadow-[0_0_80px_rgba(56,196,232,0.4)]"
-                      sizes="(max-width: 1024px) 100vw, 55vw"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <div className="text-8xl opacity-30">⚡</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+          {/* Description */}
+          {description && (
+            <p className="text-[clamp(15px,1.1vw,20px)] text-white/80 max-w-[680px] leading-relaxed">
+              {description}
+            </p>
+          )}
+
+          {/* CTA buttons */}
+          <div className="flex justify-center gap-4 flex-col sm:flex-row items-center w-full">
+            <Link
+              href="/contact"
+              className="w-[280px] max-w-[340px] py-3.5 text-center rounded bg-white/92 text-[#0f172a] font-semibold text-[15px] transition-colors duration-200 hover:bg-white"
+            >
+              {applyDemo}
+            </Link>
+            <a
+              href="#highlights"
+              className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
+              style={{ background: 'rgba(255,255,255,.12)' }}
+            >
+              了解更多 ↓
+            </a>
           </div>
         </div>
+
       </section>
 
-      {/* Pain Points */}
+      {/* ===== §0 场景背景 ===== */}
+      {sceneBackground && (
+        <section className="bg-white py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">场景背景</h2>
+            <p className="text-[#64748B] text-lg leading-relaxed">{sceneBackground}</p>
+          </div>
+        </section>
+      )}
+
+      {/* ===== §1 核心痛点 ===== */}
       {finalPainPoints.length > 0 && (
-        <section className="bg-white py-24">
+        <section className="bg-white py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{painPointsTitle}</h2>
+            <h2 className="mb-10 text-3xl font-bold text-[#0F172A] text-center">{painPointsTitle}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-              {finalPainPoints.map((point, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center"
-                >
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-500 text-xl">
-                    ⚠️
+              {finalPainPoints.map((point, idx) => {
+                const colonIdx = point.indexOf('：');
+                const label = colonIdx > 0 ? point.slice(0, colonIdx) : `0${idx + 1}`;
+                const desc = colonIdx > 0 ? point.slice(colonIdx + 1).trim() : point;
+                return (
+                  <div key={idx} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-7">
+                    <div className="mb-3 text-3xl font-black text-[#E2E8F0]">{String(idx + 1).padStart(2, '0')}</div>
+                    <h3 className="mb-2 text-base font-bold text-[#0F172A]">{label}</h3>
+                    <p className="text-sm text-[#64748B] leading-relaxed">{desc}</p>
                   </div>
-                  <p className="text-[#64748B] text-sm leading-relaxed">{point}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
       )}
 
-      {/* Solution Highlights */}
-      {finalHighlights.length > 0 && (
-        <section id="highlights" className="bg-[#F8FAFC] py-24">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{highlightsTitle}</h2>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              {finalHighlights.map((highlight, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-4 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6"
-                >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#38C4E8]/10 text-[#38C4E8]">
-                    ✓
-                  </div>
-                  <p className="text-[#64748B] leading-relaxed">{highlight}</p>
-                </div>
-              ))}
-            </div>
+      {/* ===== §2a 方案描述 ===== */}
+      {description && (
+        <section className="bg-[#F8FAFC] py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">方案描述</h2>
+            <p className="text-[#64748B] text-lg leading-relaxed">{description}</p>
           </div>
         </section>
       )}
 
-      {/* Access Modes */}
-      {mockSolution && mockSolution.accessModes && mockSolution.accessModes.length > 0 && (
-        <section className="bg-white py-24">
+      {/* ===== §2b 接入方式 ===== */}
+      {mockSolution?.accessModes && mockSolution.accessModes.length > 0 && (
+        <section className="bg-white py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-2 text-2xl font-bold text-[#0F172A] text-center">{t('accessModesTitle')}</h2>
+            <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">{t('accessModesTitle')}</h2>
             <p className="mb-10 text-center text-[#64748B]">{t('accessModesSubtitle')}</p>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {mockSolution.accessModes.includes('cloud') && (
-                <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center shadow-sm">
+                <div className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8">
                   <div className="text-4xl mb-4">☁️</div>
-                  <h3 className="text-lg font-semibold text-[#0F172A] mb-2">{t('accessCloud')}</h3>
+                  <h3 className="text-lg font-bold text-[#0F172A] mb-2">{t('accessCloud')}</h3>
                   <p className="text-sm text-[#64748B] leading-relaxed">{t('accessCloudDesc')}</p>
                 </div>
               )}
               {mockSolution.accessModes.includes('gateway') && (
-                <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 text-center shadow-sm">
+                <div className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8">
                   <div className="text-4xl mb-4">🔗</div>
-                  <h3 className="text-lg font-semibold text-[#0F172A] mb-2">{t('accessGateway')}</h3>
+                  <h3 className="text-lg font-bold text-[#0F172A] mb-2">{t('accessGateway')}</h3>
                   <p className="text-sm text-[#64748B] leading-relaxed">{t('accessGatewayDesc')}</p>
                 </div>
               )}
@@ -281,17 +263,40 @@ export default async function SolutionDetailPage({
         </section>
       )}
 
-      {/* Application Cases */}
+      {/* ===== §3 核心能力 Tab（左文字右图） ===== */}
+      {finalHighlights.length > 0 && (() => {
+        const SOLUTION_BG: Record<string, string> = {
+          hems:  'http://32.236.16.227/strapi/uploads/solution_hems_real_e169716a7e.jpg',
+          ess:   'http://32.236.16.227/strapi/uploads/solution_ess_real_8afb1e9d62.jpg',
+          evcms: 'http://32.236.16.227/strapi/uploads/solution_evcms_real_d7c6169495.jpg',
+          vpp:   'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
+          pqms:  'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
+        };
+        const featureItems = finalHighlights.map((h) => {
+          const colonIdx = h.indexOf('：');
+          if (colonIdx > 0) return { label: h.slice(0, colonIdx), desc: h.slice(colonIdx + 1).trim() };
+          return { label: h.slice(0, 14), desc: h };
+        });
+        return (
+          <FeatureTabs
+            title={highlightsTitle ?? '核心功能列表'}
+            features={featureItems}
+            bgImage={SOLUTION_BG[slug] ?? ''}
+          />
+        );
+      })()}
+
+      {/* ===== §4 应用案例 ===== */}
       {cases.length > 0 && (
-        <section className="bg-white py-20">
+        <section id="cases" className="bg-[#F8FAFC] py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[#0F172A] mb-8">应用案例</h2>
+            <h2 className="text-3xl font-bold text-[#0F172A] mb-10 text-center">应用案例</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {cases.map((c, i) => (
-                <div key={i} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6">
-                  <div className="text-lg font-semibold text-[#0F172A] mb-2">{c.area}</div>
-                  <div className="text-sm text-[#64748B] mb-3">{c.scale}</div>
-                  <div className="text-sm text-[#0F172A] bg-[#38C4E8]/5 border border-[#38C4E8]/20 rounded-lg p-3">
+                <div key={i} className="rounded-2xl border border-[#E2E8F0] bg-white p-7 flex flex-col gap-3">
+                  <div className="text-sm font-semibold text-[#38C4E8]">{c.area}</div>
+                  <div className="text-base font-bold text-[#0F172A]">{c.scale}</div>
+                  <div className="mt-auto text-sm text-[#64748B] bg-[#F8FAFC] rounded-xl p-4 border border-[#E2E8F0]">
                     ✅ {c.problem}
                   </div>
                 </div>
@@ -301,11 +306,12 @@ export default async function SolutionDetailPage({
         </section>
       )}
 
-      {/* Related Products */}
+      {/* ===== §5 本方案使用的产品 ===== */}
       {relatedProducts.length > 0 && (
-        <section className="bg-[#F8FAFC] py-24">
+        <section className="bg-white py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{recommendedProducts}</h2>
+            <h2 className="mb-2 text-3xl font-bold text-[#0F172A] text-center">{recommendedProducts}</h2>
+            <p className="mb-10 text-center text-[#64748B] text-sm">本方案涉及的产品，点击了解详情</p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
               {relatedProducts.map((product) => {
                 const pTitle = getProductMessage(locale, product.slug, 'title') ?? product.title;
@@ -314,19 +320,19 @@ export default async function SolutionDetailPage({
                   <Link
                     key={product.slug}
                     href={`/products/${product.slug}`}
-                    className="group rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                    className="group rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
                   >
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-3 mb-4">
                       <span className="text-2xl">{product.category === 'hardware' ? '⚡' : '☁️'}</span>
                       <span className="inline-block rounded-full bg-[#38C4E8]/10 px-2 py-0.5 text-xs text-[#38C4E8] font-medium">
                         {product.category === 'hardware' ? hardwareLabel : softwareLabel}
                       </span>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+                    <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
                       {pTitle}
                     </h3>
-                    <p className="mt-2 text-sm text-[#64748B]">{pTagline}</p>
-                    <span className="mt-4 inline-flex items-center text-sm font-medium text-[#38C4E8]">
+                    <p className="mt-2 text-sm text-[#64748B] line-clamp-2">{pTagline}</p>
+                    <span className="mt-5 inline-flex items-center text-sm font-semibold text-[#38C4E8]">
                       {viewProduct} →
                     </span>
                   </Link>
@@ -337,7 +343,7 @@ export default async function SolutionDetailPage({
         </section>
       )}
 
-      {/* CTA */}
+      {/* ===== CTA ===== */}
       <section className="bg-gradient-to-br from-[#1A3FAD] to-[#0C1829] py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-white sm:text-3xl">

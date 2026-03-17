@@ -175,7 +175,7 @@
     "backToList": "Zurück zur Lösungsübersicht",
     "hems": {
       "title": "Residential Energy Storage",
-      "tagline": "PV + Storage + Charging, Smart Home Energy",
+      "tagline": "Häusliche Energieautarkie",
       "description": "Integrated energy management for residential PV, battery storage, and EV charging — maximizing green energy self-consumption and reducing electricity costs.",
       "pain1": "High bills: Peak-hour electricity costs are significant",
       "pain2": "Instability: Power outages affect quality of life",
@@ -186,7 +186,7 @@
     },
     "ess": {
       "title": "Commercial & Industrial Storage",
-      "tagline": "Demand Management, Cost Reduction",
+      "tagline": "Multi-Standort-Überwachung von Gewerbespeichern",
       "description": "Help factories, malls and offices reduce total electricity costs by 20–40% through demand management and peak-valley arbitrage.",
       "pain1": "High demand charges: Peak usage spikes demand fees",
       "pain2": "Missed arbitrage: Unable to exploit peak-valley price spreads",
@@ -197,7 +197,7 @@
     },
     "evcms": {
       "title": "EV Charging Station",
-      "tagline": "Multi-Charger Coordination, Anti-Trip",
+      "tagline": "Lastausgleich für mehrere Ladestationen",
       "description": "Complete solution for charging station operators: multi-charger coordination, dynamic load balancing (DLB), billing management — maximize throughput while protecting grid safety.",
       "pain1": "Trip risk: Multiple simultaneous charges overload transformers",
       "pain2": "Complex ops: Multiple charger brands hard to manage",
@@ -208,7 +208,7 @@
     },
     "vpp": {
       "title": "Virtual Power Plant",
-      "tagline": "Aggregate Resources, Participate in Grid Services",
+      "tagline": "Virtuelles Kraftwerk Dispatch (Individuell)",
       "description": "Aggregate distributed storage, PV and EV chargers into a virtual power plant to participate in grid ancillary services and generate additional revenue.",
       "pain1": "Idle assets: Storage assets are underutilized",
       "pain2": "Policy complexity: How to enter electricity markets is unclear",
@@ -219,7 +219,7 @@
     },
     "pqms": {
       "title": "Power Quality Management",
-      "tagline": "Monitor Harmonics, Protect Equipment",
+      "tagline": "Fernüberwachung der Stromqualität",
       "description": "Comprehensive power quality monitoring and mitigation — detect harmonics, voltage imbalance, and power factor issues in real time to protect sensitive equipment.",
       "pain1": "Equipment damage: Harmonic pollution causes frequent failures",
       "pain2": "High consumption: Low power factor increases reactive losses",
@@ -293,7 +293,8 @@
       "spec_temp": "-10°C ~ +50°C",
       "spec_ip": "IP44",
       "spec_power": "AC 220V",
-      "spec_size": "100 × 80 × 30 mm"
+      "spec_size": "100 × 80 × 30 mm",
+      "positioning": "Universelles Multi-Protokoll-Gateway"
     },
     "hems": {
       "title": "HEMS",
@@ -324,8 +325,8 @@
     "softwareLabel": "Cloud Platform",
     "contactSales": "Contact Sales",
     "viewSpecs": "View Specs",
-    "applicableScenarios": "Applicable Scenarios",
-    "viewSolution": "View Solution",
+    "applicableScenarios": "Kompatible Plattformen",
+    "viewSolution": "Plattform ansehen",
     "resourceDownload": "Resource Downloads",
     "userManual": "{title} User Manual",
     "installGuide": "{title} Installation Guide",

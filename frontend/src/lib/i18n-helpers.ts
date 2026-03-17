@@ -13,14 +13,14 @@ import ru from '@/messages/ru.json';
 type Messages = typeof zhCN;
 
 const messageMap: Record<string, Messages> = {
-  'zh-CN': zhCN as Messages,
-  'en-US': enUS as Messages,
-  'zh-TW': zhTW as Messages,
-  'de': de as Messages,
-  'fr': fr as Messages,
-  'pt': pt as Messages,
-  'es': es as Messages,
-  'ru': ru as Messages,
+  'zh-CN': zhCN as unknown as Messages,
+  'en-US': enUS as unknown as Messages,
+  'zh-TW': zhTW as unknown as Messages,
+  'de': de as unknown as Messages,
+  'fr': fr as unknown as Messages,
+  'pt': pt as unknown as Messages,
+  'es': es as unknown as Messages,
+  'ru': ru as unknown as Messages,
 };
 
 function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {

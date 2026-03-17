@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" fill="none">
+  <!-- 屏幕外壳 -->
+  <rect x="60" y="20" width="360" height="220" rx="12" fill="#1E293B"/>
+  <!-- 屏幕内框 -->
+  <rect x="72" y="32" width="336" height="196" rx="6" fill="#0F172A"/>
+  <!-- 屏幕显示区（浅蓝渐变模拟UI） -->
+  <rect x="76" y="36" width="328" height="188" rx="4" fill="url(#screenGrad)"/>
+  <!-- 模拟UI内容 -->
+  <rect x="84" y="44" width="80" height="8" rx="4" fill="white" opacity="0.3"/>
+  <rect x="84" y="58" width="200" height="6" rx="3" fill="white" opacity="0.15"/>
+  <rect x="84" y="70" width="150" height="6" rx="3" fill="white" opacity="0.15"/>
+  <!-- 图表模拟 -->
+  <rect x="84" y="86" width="140" height="70" rx="4" fill="white" opacity="0.08"/>
+  <rect x="234" y="86" width="162" height="70" rx="4" fill="white" opacity="0.08"/>
+  <rect x="84" y="166" width="312" height="50" rx="4" fill="white" opacity="0.08"/>
+  <!-- 摄像头 -->
+  <circle cx="240" cy="26" r="3" fill="#334155"/>
+  <!-- 底座连接 -->
+  <path d="M160 240 L320 240 L340 270 L140 270 Z" fill="#1E293B"/>
+  <!-- 底座 -->
+  <rect x="80" y="270" width="320" height="16" rx="8" fill="#1E293B"/>
+  <rect x="100" y="278" width="280" height="4" rx="2" fill="#334155"/>
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="screenGrad" x1="76" y1="36" x2="404" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1A3FAD"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1A3FAD" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -175,7 +175,7 @@
     "backToList": "返回方案列表",
     "hems": {
       "title": "戶用家庭儲能",
-      "tagline": "光儲充一體，智慧管家",
+      "tagline": "家庭能源自給自足",
       "description": "為家庭用戶提供光伏發電、儲能電池、充電樁的一體化能源管理解決方案，最大化綠色能源自用率，降低電費支出。",
       "pain1": "電費高：尖峰時段用電成本高",
       "pain2": "不穩定：停電影響生活品質",
@@ -186,7 +186,7 @@
     },
     "ess": {
       "title": "工商業儲能",
-      "tagline": "需量管理，降本增效",
+      "tagline": "工商業儲能多站點監控",
       "description": "幫助工廠、商場、辦公大樓等工商業用戶透過儲能實現需量管理、尖離峰套利，降低綜合電費成本 20~40%。",
       "pain1": "需量費高：尖峰用電導致需量費激增",
       "pain2": "尖離峰價差：無法有效利用尖離峰電價差套利",
@@ -197,7 +197,7 @@
     },
     "evcms": {
       "title": "充電站管理",
-      "tagline": "多樁協同，防跳閘",
+      "tagline": "充電站多樁負載均衡",
       "description": "為充電站營運商提供多樁協調、動態負載均衡（DLB）、收費管理等完整解決方案，保障用電安全的同時最大化充電吞吐量。",
       "pain1": "跳閘風險：多樁同時充電導致變壓器過載",
       "pain2": "營運複雜：多品牌充電樁難以統一管理",
@@ -208,7 +208,7 @@
     },
     "vpp": {
       "title": "VPP虛擬電廠",
-      "tagline": "聚合資源，參與調峰",
+      "tagline": "虛擬電廠調度平台（定制）",
       "description": "將分散式儲能、光伏、充電樁聚合為虛擬電廠，參與電網調峰調頻輔助服務市場，為客戶創造額外收益。",
       "pain1": "資產閒置：儲能資產未充分利用",
       "pain2": "政策複雜：不了解如何參與電力市場",
@@ -219,7 +219,7 @@
     },
     "pqms": {
       "title": "電能品質管理",
-      "tagline": "監測諧波，保護設備",
+      "tagline": "電能質量遠程監控",
       "description": "提供全面的電能品質監測與治理方案，即時檢測諧波、電壓不平衡、功率因數等問題，保護精密設備安全運行。",
       "pain1": "設備損壞：諧波污染導致設備頻繁故障",
       "pain2": "能耗高：功率因數低增加無功損耗",
@@ -266,7 +266,8 @@
       "spec_temp": "-20°C ~ +60°C",
       "spec_ip": "IP54",
       "spec_power": "DC 12V / PoE",
-      "spec_size": "140 × 100 × 35 mm"
+      "spec_size": "140 × 100 × 35 mm",
+      "positioning": "通用多協議網關"
     },
     "neuron-iii": {
       "title": "Neuron III",
@@ -280,7 +281,8 @@
       "spec_temp": "-20°C ~ +55°C",
       "spec_ip": "IP65",
       "spec_power": "AC 220V / DC 12V",
-      "spec_size": "200 × 140 × 45 mm"
+      "spec_size": "200 × 140 × 45 mm",
+      "positioning": "充電站專用控制器"
     },
     "neuron-iii-lite": {
       "title": "Neuron III Lite",
@@ -293,7 +295,8 @@
       "spec_temp": "-10°C ~ +50°C",
       "spec_ip": "IP44",
       "spec_power": "AC 220V",
-      "spec_size": "100 × 80 × 30 mm"
+      "spec_size": "100 × 80 × 30 mm",
+      "positioning": "防跳閘輕量控制器"
     },
     "hems": {
       "title": "HEMS",
@@ -324,8 +327,8 @@
     "softwareLabel": "雲端平台",
     "contactSales": "聯繫銷售",
     "viewSpecs": "查看規格",
-    "applicableScenarios": "適用場景",
-    "viewSolution": "查看解決方案",
+    "applicableScenarios": "適用平台",
+    "viewSolution": "查看平台",
     "resourceDownload": "資源下載",
     "userManual": "{title} 使用手冊",
     "installGuide": "{title} 安裝指南",
