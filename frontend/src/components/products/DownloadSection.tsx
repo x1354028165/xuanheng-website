@@ -27,15 +27,17 @@ export default function DownloadSection({ title, coverImg, files }: DownloadSect
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <h2 className="mb-12 text-3xl font-bold text-[#0F172A] text-center">资料下载</h2>
 
-        <div className="flex gap-8 items-start">
+        <div className="flex gap-12 items-start">
 
-          {/* 左侧：筛选面板 */}
-          <aside className="w-52 shrink-0 flex flex-col gap-6">
-            {/* 产品图 */}
-            <div className="rounded-2xl overflow-hidden bg-[#F8FAFC] flex items-center justify-center p-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={coverImg} alt={title} className="w-full h-auto object-contain max-h-40" />
-            </div>
+          {/* 左侧：产品图（裸图，无卡片）+ 分类筛选 */}
+          <aside className="w-48 shrink-0 flex flex-col gap-8">
+            {/* 产品图 — 直接展示，无背景卡片 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={coverImg}
+              alt={title}
+              className="w-full h-auto object-contain max-h-44"
+            />
 
             {/* 文档类型筛选 */}
             <div>
@@ -50,9 +52,9 @@ export default function DownloadSection({ title, coverImg, files }: DownloadSect
                       }`}
                     >
                       <span className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
-                        selected === cat ? 'border-[#0F172A]' : 'border-[#CBD5E1]'
+                        selected === cat ? 'border-[#38C4E8]' : 'border-[#CBD5E1]'
                       }`}>
-                        {selected === cat && <span className="w-2 h-2 rounded-full bg-[#0F172A]" />}
+                        {selected === cat && <span className="w-2 h-2 rounded-full bg-[#38C4E8]" />}
                       </span>
                       {cat}
                     </button>
@@ -72,29 +74,37 @@ export default function DownloadSection({ title, coverImg, files }: DownloadSect
               filtered.map((file) => (
                 <div
                   key={file.name}
-                  className="flex items-center justify-between px-6 py-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] transition-colors cursor-pointer"
+                  className="flex items-center justify-between px-6 py-4 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#38C4E8]/10">
-                      <svg className="w-5 h-5 text-[#38C4E8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    {/* 文件图标 */}
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+                      <svg className="w-6 h-6 text-[#94A3B8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                       </svg>
                     </div>
+                    {/* 文件名 + 分类 */}
                     <div>
                       <p className="text-sm font-medium text-[#0F172A]">{file.name}</p>
                       <p className="text-xs text-[#94A3B8] mt-0.5">{file.category}</p>
                     </div>
                   </div>
+                  {/* 格式·大小 + 下载图标 */}
                   <div className="flex items-center gap-4 shrink-0 ml-4">
                     <span className="text-xs text-[#94A3B8]">{file.format} · {file.size}</span>
                     {file.link ? (
-                      <a href={file.link} className="text-[#38C4E8] hover:text-[#1A3FAD] transition-colors">
+                      <a
+                        href={file.link}
+                        download
+                        className="text-[#38C4E8] hover:text-[#1A3FAD] transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                       </a>
                     ) : (
-                      <svg className="w-4 h-4 text-[#64748B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <svg className="w-4 h-4 text-[#CBD5E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
                     )}
