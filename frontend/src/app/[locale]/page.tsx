@@ -54,7 +54,8 @@ export default async function HomePage({
   const tc = await getTranslations({ locale, namespace: 'common' });
 
   // Fetch data with mock fallbacks
-  let solutions = await getSolutions(locale);
+  // 首页只从CMS取封面图（所有语言共用），标题/标签走翻译文件
+  let solutions = await getSolutions('zh-CN');
   if (!solutions || solutions.length === 0) {
     solutions = MOCK_SOLUTIONS as unknown as StrapiSolution[];
   }
