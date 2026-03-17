@@ -548,5 +548,20 @@
         "desc": "Registro para obtener clave API"
       }
     }
-  }
+  },
+  "accordionHems": "Gestión Energética Residencial",
+  "accordionEss": "Almacenamiento Industrial y Comercial",
+  "accordionEvcms": "Gestión de Estación de Carga",
+  "accordionVpp": "Planta de Energía Virtual",
+  "accordionPqms": "Monitoreo de Calidad Eléctrica",
+  "accordionHemsDesc": "Solar, almacenamiento y carga integrados – ahorre más del 30% en electricidad",
+  "accordionEssDesc": "Arbitraje de picos, expansión dinámica, monitoreo multi-sitio",
+  "accordionEvcmsDesc": "Equilibrio de carga, protección contra sobrecargas, distribución dinámica",
+  "accordionVppDesc": "Despacho agregado distribuido, participación en mercados auxiliares",
+  "accordionPqmsDesc": "Análisis armónico en tiempo real, alertas multinivel, informes de conformidad",
+  "tagHems": "Residencial",
+  "tagEss": "Industrial",
+  "tagEvcms": "Carga",
+  "tagVpp": "VPP",
+  "tagPqms": "Calidad"
 }

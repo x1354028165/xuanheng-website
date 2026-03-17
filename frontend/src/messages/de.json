@@ -548,5 +548,20 @@
         "desc": "Registrierung für API Key"
       }
     }
-  }
+  },
+  "accordionHems": "Heimspeicher & Energiemanagement",
+  "accordionEss": "Gewerbe- & Industriespeicher",
+  "accordionEvcms": "Ladestation Management",
+  "accordionVpp": "Virtuelles Kraftwerk",
+  "accordionPqms": "Stromqualitätsüberwachung",
+  "accordionHemsDesc": "Solar, Speicher und Laden integriert – Energiekosten um 30%+ senken",
+  "accordionEssDesc": "Spitzenlast-Arbitrage, dynamische Kapazitätserweiterung, Multi-Standort-Monitoring",
+  "accordionEvcmsDesc": "Lastausgleich, Überlastschutz, dynamische Leistungsverteilung in Echtzeit",
+  "accordionVppDesc": "Verteilte Aggregationssteuerung, Teilnahme am Regelenergiemarkt",
+  "accordionPqmsDesc": "Echtzeit-Oberwellenanalyse, mehrstufige Alarme, Compliance-Berichte",
+  "tagHems": "Heimspeicher",
+  "tagEss": "Gewerbe",
+  "tagEvcms": "Laden",
+  "tagVpp": "VPP",
+  "tagPqms": "Stromqualität"
 }

@@ -548,5 +548,20 @@
         "desc": "Inscription pour obtenir une clé API"
       }
     }
-  }
+  },
+  "accordionHems": "Gestion Énergétique Résidentielle",
+  "accordionEss": "Stockage Industriel & Commercial",
+  "accordionEvcms": "Gestion de Station de Recharge",
+  "accordionVpp": "Centrale Électrique Virtuelle",
+  "accordionPqms": "Surveillance Qualité Électrique",
+  "accordionHemsDesc": "Solaire, stockage et recharge intégrés – réduisez vos factures de 30%+",
+  "accordionEssDesc": "Arbitrage heures creuses/pleines, extension dynamique, supervision multi-sites",
+  "accordionEvcmsDesc": "Équilibrage de charge, protection contre surcharges, distribution dynamique",
+  "accordionVppDesc": "Agrégation distribuée, participation aux marchés de services auxiliaires",
+  "accordionPqmsDesc": "Analyse harmonique en temps réel, alertes multi-niveaux, rapports conformité",
+  "tagHems": "Résidentiel",
+  "tagEss": "Industrie",
+  "tagEvcms": "Recharge",
+  "tagVpp": "VPP",
+  "tagPqms": "Qualité"
 }

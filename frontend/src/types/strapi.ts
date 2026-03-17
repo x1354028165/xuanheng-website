@@ -85,6 +85,7 @@ export interface StrapiArticle {
   summary: string | null;
   cover: StrapiMedia | null;
   publishedDate: string | null;
+  viewCount: number | null;
   is_translation_locked: boolean;
   seo: StrapiSEO | null;
   publishedAt: string | null;
