@@ -80,12 +80,17 @@ export default async function ProductDetailPage({
     }
   }
 
-  // Fallback to mock specs if no translation specs found
-  const finalSpecs = specs.length > 0 ? specs : Object.entries(mockProduct?.specs ?? {});
+  // Priority: Strapi keySpecs → i18n translation specs → mock specs
+  const strapiKeySpecs = strapiProduct?.keySpecs;
+  const finalSpecs: [string, string][] = (strapiKeySpecs && strapiKeySpecs.length > 0)
+    ? strapiKeySpecs.map((s) => [s.key, s.value] as [string, string])
+    : specs.length > 0
+      ? specs
+      : Object.entries(mockProduct?.specs ?? {}) as [string, string][];
 
   const scenarioSlugs = mockProduct?.scenarios ?? [];
   const relatedSolutions = MOCK_SOLUTIONS.filter(s => scenarioSlugs.includes(s.slug));
-  const category = mockProduct?.category ?? 'hardware';
+  const category = strapiProduct?.category ?? mockProduct?.category ?? 'hardware';
 
   // Direct message access for labels
   const hardwareLabel = getProductLabel(locale, 'hardwareLabel');
@@ -218,6 +223,28 @@ export default async function ProductDetailPage({
         </section>
       )}
 
+      {/* ===== GALLERY SECTION (from Strapi) ===== */}
+      {strapiProduct?.gallery && strapiProduct.gallery.length > 0 && (
+        <section className="bg-[#F8FAFC] py-16">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{t('gallery') ?? '产品图库'}</h2>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {strapiProduct.gallery.map((img, idx) => (
+                <div key={img.documentId ?? idx} className="relative overflow-hidden rounded-xl border border-[#E2E8F0] bg-white" style={{ aspectRatio: '4/3' }}>
+                  <Image
+                    src={getStrapiMedia(img.url)}
+                    alt={img.alternativeText || `${title} ${idx + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ========== SOFTWARE PRODUCT LAYOUT ========== */}
       {category === 'software' ? (
         <>
@@ -237,9 +264,8 @@ export default async function ProductDetailPage({
               <section className="bg-[#F8FAFC] py-20">
                 <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
                   <p className="text-[#64748B] text-lg leading-relaxed mb-8 text-center">{s.text}</p>
-                  <div className="rounded-2xl overflow-hidden" style={{ aspectRatio: '16/7' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={s.img} alt={title} className="w-full h-full object-cover object-center" />
+                  <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: '16/7' }}>
+                    <Image src={s.img} alt={title} fill className="object-cover object-center" />
                   </div>
                 </div>
               </section>
@@ -298,7 +324,9 @@ export default async function ProductDetailPage({
               vpp:   'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
               pqms:  'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
             };
-            const features = SW_FEATURES[slug] ?? [];
+            const features = (strapiProduct?.features && strapiProduct.features.length > 0)
+              ? strapiProduct.features
+              : (SW_FEATURES[slug] ?? []);
             return features.length > 0 ? (
               <FeatureTabs
                 title="核心功能"
@@ -397,6 +425,15 @@ export default async function ProductDetailPage({
       ) : (
         <>
           {/* ========== HARDWARE PRODUCT LAYOUT (原有) ========== */}
+          {/* 硬件产品：若Strapi有features，渲染功能Tab */}
+          {strapiProduct?.features && strapiProduct.features.length > 0 && (
+            <FeatureTabs
+              title="核心功能"
+              features={strapiProduct.features}
+              bgImage=""
+            />
+          )}
+
           {finalSpecs.length > 0 && (
             <section id="specs" className="bg-white py-24">
               <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
@@ -436,9 +473,8 @@ export default async function ProductDetailPage({
                       <Link key={solution.slug} href={`/solutions/${solution.slug}`}
                         className="group rounded-2xl bg-white overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                         {/* 顶部图片 */}
-                        <div className="w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={img} alt={sTitle} className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+                        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/10' }}>
+                          <Image src={img} alt={sTitle} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-500" />
                         </div>
                         {/* 底部文字区 */}
                         <div className="p-6">

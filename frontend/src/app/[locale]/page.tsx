@@ -383,8 +383,7 @@ export default async function HomePage({
                 {/* Cover image — fixed 16:9 */}
                 <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16/9' }}>
                   {coverUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={coverUrl} alt={article.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <Image src={coverUrl} alt={article.title || ""} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   ) : (
                     <div className="w-full h-full" style={{ background: `linear-gradient(135deg, ${NEWS_COLORS[idx % 3]} 0%, ${NEWS_COLORS[(idx+1) % 3]} 100%)` }} />
                   )}

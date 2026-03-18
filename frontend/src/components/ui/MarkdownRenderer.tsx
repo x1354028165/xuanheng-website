@@ -1,3 +1,7 @@
+// NOTE: This component generates HTML strings from Markdown, not JSX.
+// Using raw <img> tags is intentional here — next/image cannot be used inside
+// dangerouslySetInnerHTML. The eslint rule @next/next/no-img-element is
+// suppressed at the usage site for this reason.
 'use client';
 
 import { useMemo } from 'react';
