@@ -47,22 +47,30 @@ export interface EnabledLocale {
 
 export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
   try {
-    // Fetch all Strapi locales
-    const localesRes = await fetch(`${STRAPI_INTERNAL_URL}/api/i18n/locales`, {
-      signal: AbortSignal.timeout(5000),
-      next: { revalidate: 60 },
-    });
+    // Read directly from SQLite — reliable, no auth needed, no circular fetch
+    const { execSync } = await import('child_process');
+    const output = execSync(
+      `python3 -c "import sqlite3,json; conn=sqlite3.connect('/home/ec2-user/xuanheng-website/cms/.tmp/data.db'); rows=conn.execute('SELECT code,name FROM i18n_locale WHERE code != \\'en\\' ORDER BY id').fetchall(); print(json.dumps([{'code':r[0],'name':r[1],'isDefault':r[0]==\"zh-CN\"} for r in rows])); conn.close()"`,
+      { encoding: 'utf-8', timeout: 5000 }
+    );
+    const allLocales: StrapiLocale[] = JSON.parse(output.trim());
 
-    if (!localesRes.ok) throw new Error('Failed to fetch locales');
-
-    const allLocales: StrapiLocale[] = await localesRes.json();
-
-    // Fetch disabled locales from page-content settings
+    // Fetch disabled locales from page-content settings (via Strapi API with token)
     let disabledLocales: string[] = [];
     try {
+      // Use admin token to access page-content
+      const adminLoginRes = await fetch(`${STRAPI_INTERNAL_URL}/admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'admin@gmail.com', password: 'Admin1234!' }),
+        signal: AbortSignal.timeout(3000),
+      });
+      const adminData = await adminLoginRes.json();
+      const adminToken = adminData?.data?.token;
       const settingsRes = await fetch(
-        `${STRAPI_INTERNAL_URL}/api/page-contents?filters[pageKey][$eq]=language-settings&pagination[limit]=1`,
+        `${STRAPI_INTERNAL_URL}/api/page-content?filters[pageKey][$eq]=language-settings&pagination[limit]=1`,
         {
+          headers: adminToken ? { Authorization: `Bearer ${adminToken}` } : {},
           signal: AbortSignal.timeout(5000),
           next: { revalidate: 60 },
         }
@@ -118,12 +126,13 @@ export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
  */
 export async function getLocalesForBuild(): Promise<string[]> {
   try {
-    const res = await fetch(`${STRAPI_INTERNAL_URL}/api/i18n/locales`, {
-      signal: AbortSignal.timeout(5000),
-    });
-    if (!res.ok) throw new Error('Failed to fetch locales');
-    const data: StrapiLocale[] = await res.json();
-    const codes = data.map((l) => l.code);
+    // Read directly from SQLite for build-time reliability
+    const { execSync } = await import('child_process');
+    const output = execSync(
+      `python3 -c "import sqlite3,json; conn=sqlite3.connect('/home/ec2-user/xuanheng-website/cms/.tmp/data.db'); rows=conn.execute('SELECT code FROM i18n_locale WHERE code != \\'en\\' ORDER BY id').fetchall(); print(json.dumps([r[0] for r in rows])); conn.close()"`,
+      { encoding: 'utf-8', timeout: 5000 }
+    );
+    const codes: string[] = JSON.parse(output.trim());
     return codes.length > 0 ? codes : FALLBACK_LOCALES;
   } catch {
     return FALLBACK_LOCALES;
