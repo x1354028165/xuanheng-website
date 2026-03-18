@@ -5,33 +5,11 @@ import { getArticles } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import type { Metadata } from 'next';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子',
-  'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl',
-  'de': 'AlwaysControl',
-  'fr': 'AlwaysControl',
-  'es': 'AlwaysControl',
-  'pt': 'AlwaysControl',
-  'ru': 'AlwaysControl',
-};
-
-const NEWS_TITLES: Record<string, string> = {
-  'zh-CN': '新闻动态',
-  'zh-TW': '新聞動態',
-  'en-US': 'News',
-  'de': 'Neuigkeiten',
-  'fr': 'Actualités',
-  'es': 'Noticias',
-  'pt': 'Notícias',
-  'ru': 'Новости',
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const title = NEWS_TITLES[locale] ?? 'News';
-  const site = SITE_NAME[locale] ?? 'AlwaysControl';
-  return { title: `${title} | ${site}` };
+  const tMeta = await getTranslations({ locale, namespace: 'meta' });
+  const tAbout = await getTranslations({ locale, namespace: 'about' });
+  return { title: `${tAbout('newsTitle')} | ${tMeta('siteName')}` };
 }
 import { MOCK_ARTICLES } from '@/lib/mock-data';
 import type { StrapiArticle } from '@/types/strapi';

@@ -3,20 +3,13 @@ import { getDocResources, getSoftwareDownloads, getFirmwareVersions } from '@/li
 import DocsClient from './DocsClient';
 import type { Metadata } from 'next';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
-  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
-};
-const DOCS_TITLES: Record<string, string> = {
-  'zh-CN': '技术文档', 'zh-TW': '技術文件',
-  'en-US': 'Technical Docs', 'de': 'Technische Dokumente', 'fr': 'Documentation Technique',
-  'es': 'Documentación Técnica', 'pt': 'Documentação Técnica', 'ru': 'Техническая документация',
-};
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return { title: `${DOCS_TITLES[locale] ?? 'Technical Docs'} | ${SITE_NAME[locale] ?? 'AlwaysControl'}` };
+  const tMeta = await getTranslations({ locale, namespace: 'meta' });
+  const tHelp = await getTranslations({ locale, namespace: 'help' });
+  return { title: `${tHelp('docsTitle')} | ${tMeta('siteName')}` };
 }
 
 export default async function DocsPage({

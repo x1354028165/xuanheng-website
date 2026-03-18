@@ -10,18 +10,13 @@ import FeatureTabs from '@/components/solutions/FeatureTabs';
 import DownloadSection from '@/components/products/DownloadSection';
 import type { Metadata } from 'next';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
-  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
   const strapiProduct = await getProductBySlug(slug, locale);
   const mockProduct = getMockProduct(slug);
   const productTitle = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
-  const site = SITE_NAME[locale] ?? 'AlwaysControl';
+  const site = t('siteName');
   return { title: `${productTitle} | ${site}` };
 }
 

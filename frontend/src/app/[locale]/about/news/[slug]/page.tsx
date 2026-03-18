@@ -8,14 +8,9 @@ import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
 import { MOCK_ARTICLES } from '@/lib/mock-data';
 import type { Metadata } from 'next';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
-  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
   let title = slug;
   const article = await getArticleBySlug(slug, locale);
   if (article?.title) {
@@ -24,8 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const mock = MOCK_ARTICLES.find((a) => a.slug === slug);
     if (mock?.title) title = mock.title;
   }
-  const site = SITE_NAME[locale] ?? 'AlwaysControl';
-  return { title: `${title} | ${site}` };
+  return { title: `${title} | ${t('siteName')}` };
 }
 
 export function generateStaticParams() {

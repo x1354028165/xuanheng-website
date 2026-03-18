@@ -8,18 +8,13 @@ import { getSolutionMessage, getSolutionLabel, getProductMessage, interpolate } 
 import FeatureTabs from '@/components/solutions/FeatureTabs';
 import type { Metadata } from 'next';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
-  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
   const strapiSolution = await getSolutionBySlug(slug, locale);
   const mockSolution = getMockSolution(slug);
   const solutionTitle = strapiSolution?.title ?? getSolutionMessage(locale, slug, 'title') ?? mockSolution?.title ?? slug;
-  const site = SITE_NAME[locale] ?? 'AlwaysControl';
+  const site = t('siteName');
   return { title: `${solutionTitle} | ${site}` };
 }
 

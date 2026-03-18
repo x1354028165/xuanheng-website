@@ -144,6 +144,25 @@ export default function Solutions() {
       }
       message.success('保存并发布成功');
       initialValuesRef.current = captureFormSnapshot();
+
+      // Sync cover image to all other locales when saving zh-CN
+      if (locale === 'zh-CN' && pendingCoverId !== null) {
+        try {
+          const localesRes = await api.get('/i18n/locales');
+          const allLocales = (Array.isArray(localesRes.data) ? localesRes.data : [])
+            .map((l: Record<string, unknown>) => l.code as string)
+            .filter((c: string) => c !== 'zh-CN' && c !== 'en');
+          for (const loc of allLocales) {
+            try {
+              await api.put(`${API_URL}/${editingDocId}?locale=${loc}`, { cover: pendingCoverId });
+              try { await api.post(`${API_URL}/${editingDocId}/actions/publish?locale=${loc}`, {}); } catch { /* */ }
+            } catch { /* locale may not exist yet */ }
+          }
+          message.success('封面已同步到其他语言');
+        } catch { /* silent */ }
+      }
+
+      setPendingCoverId(null);
       setDrawerOpen(false);
       fetchData();
     } catch { message.error('保存失败'); }

@@ -6,20 +6,11 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 
-const SITE_NAME: Record<string, string> = {
-  'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
-  'en-US': 'AlwaysControl', 'de': 'AlwaysControl', 'fr': 'AlwaysControl',
-  'es': 'AlwaysControl', 'pt': 'AlwaysControl', 'ru': 'AlwaysControl',
-};
-const FAQ_TITLES: Record<string, string> = {
-  'zh-CN': '常见问题', 'zh-TW': '常見問題',
-  'en-US': 'FAQ', 'de': 'FAQ', 'fr': 'FAQ',
-  'es': 'Preguntas Frecuentes', 'pt': 'Perguntas Frequentes', 'ru': 'Часто задаваемые вопросы',
-};
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  return { title: `${FAQ_TITLES[locale] ?? 'FAQ'} | ${SITE_NAME[locale] ?? 'AlwaysControl'}` };
+  const tMeta = await getTranslations({ locale, namespace: 'meta' });
+  const tHelp = await getTranslations({ locale, namespace: 'help' });
+  return { title: `${tHelp('faqTitle')} | ${tMeta('siteName')}` };
 }
 
 export const revalidate = 60;
