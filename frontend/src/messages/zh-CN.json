@@ -872,7 +872,8 @@
         "year": "2025",
         "text": "全球化布局"
       }
-    ]
+    ],
+    "capabilitiesTitle": "核心能力"
   },
   "contact": {
     "title": "联系我们",
@@ -900,7 +901,8 @@
       "phone": "+86 136-0300-5641",
       "email": "support@alwayscontrol.com.cn",
       "hours": "周一至周五 9:00-18:00"
-    }
+    },
+    "teamTitle": "联系人团队"
   },
   "help": {
     "title": "帮助中心",

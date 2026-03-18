@@ -52,7 +52,8 @@
     "partTime": "兼職",
     "subtitle": "旭衡電子 — 新能源領域智慧管理與控制技術領航者",
     "title": "關於我們",
-    "type": "工作型別"
+    "type": "工作型別",
+    "capabilitiesTitle": "核心能力"
   },
   "common": {
     "backToHome": "返回首頁",
@@ -101,7 +102,8 @@
     },
     "subtitle": "我們隨時準備為您服務",
     "success": "訊息已傳送，我們會盡快與您聯絡",
-    "title": "聯絡我們"
+    "title": "聯絡我們",
+    "teamTitle": "聯絡人團隊"
   },
   "cookie": {
     "acceptAll": "接受全部",

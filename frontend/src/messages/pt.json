@@ -52,7 +52,8 @@
     "partTime": "Meio período",
     "subtitle": "AlwaysControl — Pioneira em gestão inteligente e tecnologia de controle no setor de novas energias",
     "title": "Sobre Nós",
-    "type": "Tipo de vaga"
+    "type": "Tipo de vaga",
+    "capabilitiesTitle": "Capacidades principais"
   },
   "common": {
     "backToHome": "Voltar ao início",
@@ -101,7 +102,8 @@
     },
     "subtitle": "Estamos sempre prontos para atendê-lo",
     "success": "Mensagem enviada com sucesso. Entraremos em contato em breve.",
-    "title": "Fale Conosco"
+    "title": "Fale Conosco",
+    "teamTitle": "Nossa equipe"
   },
   "cookie": {
     "acceptAll": "Aceitar todos",
