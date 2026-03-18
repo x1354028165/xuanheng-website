@@ -147,7 +147,7 @@ async function translateJsonField(jsonValue: unknown, targetLang: string): Promi
       model: 'deepseek-chat',
       messages: [{
         role: 'user',
-        content: `将以下JSON中的中文文本翻译为${targetLanguage}，保持JSON结构完整，只翻译string值，不翻译key名，返回纯JSON不加代码块：\n${jsonStr}`,
+        content: `将以下JSON中的所有中文string值翻译为${targetLanguage}。注意：JSON的property name（如"key","value","label","desc","points"）保持不变，但property的值（value）如果是中文则必须翻译。返回纯JSON不加代码块：\n${jsonStr}`,
       }],
       temperature: 0.1,
       max_tokens: 4096,
@@ -336,11 +336,26 @@ async function translateEntry(
           }
 
           if (isJson && parsed !== null) {
-            // Translate JSON structure via dedicated DeepSeek call (not through translateText)
-            try {
-              translatedData[key] = await translateJsonField(parsed, locale);
-            } catch {
-              translatedData[key] = parsed; // fallback to original
+            // keySpecs special handling: translate each {key, value} pair separately
+            if ((key === 'keySpecs' || key === 'key_specs') && Array.isArray(parsed)) {
+              try {
+                const translated = [];
+                for (const item of parsed as Array<{key: string; value: string}>) {
+                  const tKey = item.key ? await translateText(item.key, locale) : item.key;
+                  const tValue = item.value ? await translateText(item.value, locale) : item.value;
+                  translated.push({ key: tKey, value: tValue });
+                }
+                translatedData[key] = translated;
+              } catch {
+                translatedData[key] = parsed;
+              }
+            } else {
+              // Other JSON fields (features etc): translate as structured JSON
+              try {
+                translatedData[key] = await translateJsonField(parsed, locale);
+              } catch {
+                translatedData[key] = parsed; // fallback to original
+              }
             }
           } else {
             translatedData[key] = await translateText(value, locale);
@@ -403,7 +418,7 @@ async function translateEntry(
       meta.status[locale] = 'auto';
       meta.sourceTexts[locale] = { ...currentFields };
 
-      console.log(`[translate] ✅ ${uid} / ${documentId} → ${locale}`);
+      console.log(`[translate] ✅ ${uid} / ${documentId} → ${locale}`, "fields:", Object.keys(translatedData));
 
       // Rate limit: 1s delay for DeepSeek calls (not needed for zh-TW/OpenCC)
       if (locale !== 'zh-TW') {
