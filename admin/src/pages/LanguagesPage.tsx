@@ -205,18 +205,13 @@ export default function LanguagesPage() {
       setModalOpen(false);
       form.resetFields();
 
-      // Trigger batch translation for the new locale (content + UI keys)
+      // Trigger batch translation for the new locale (content + UI keys merged in batch)
       setBatchTranslating(true);
       try {
-        // Translate content (products, articles, solutions, etc.)
-        await api.post('/strapi/api/translate/batch', {
+        await api.post('/api/translate/batch', {
           targetLocales: [code],
         });
-        // Translate UI dictionary keys
-        await api.post('/strapi/api/translate/batch-ui-keys', {
-          targetLocale: code,
-        });
-        message.info(t('languages.batchStarted') || 'Batch translation started in background (content + UI keys)');
+        message.info(t('languages.batchStarted') || 'Batch translation started (content + UI keys)');
       } catch {
         message.warning(t('languages.batchFailed') || 'Batch translation failed to start');
       } finally {
@@ -252,16 +247,11 @@ export default function LanguagesPage() {
     setBatchTranslating(true);
     try {
       // Translate content
-      await api.post('/strapi/api/translate/batch', {
+      // batch 现在包含内容翻译 + UI词条翻译
+      await api.post('/api/translate/batch', {
         targetLocales: enabledLocales,
       });
-      // Translate UI keys for each locale
-      for (const locale of enabledLocales) {
-        await api.post('/strapi/api/translate/batch-ui-keys', {
-          targetLocale: locale,
-        });
-      }
-      message.success(t('languages.batchStarted') || 'Batch translation started in background (content + UI keys)');
+      message.success(t('languages.batchStarted') || 'Batch translation started (content + UI keys)');
     } catch {
       message.error(t('languages.batchFailed') || 'Batch translation failed');
     } finally {

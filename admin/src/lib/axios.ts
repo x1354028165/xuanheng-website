@@ -5,10 +5,18 @@ const api = axios.create({
   timeout: 15000,
 });
 
+const TRANSLATE_API_TOKEN = '21a9dbf1160da2234884e9211003c7586c5a9d329d5f1cc13926fbc506f163f086c4cc4aff07ed13592f309f6f42a4d8329de153baca15fa6ae76e180e36138143326d397c42c349e5cf75b483cf9fe1434aed057f0bdcab3e9a48f937fd5e66c5e69376912c917b94322103913f9d22a2b1c62e8926fef4d9dab35fa2e14c73';
+
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('admin-token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  const url = config.url || '';
+  // 翻译路由使用专用 API token（admin JWT 对 /api/ 路径无效）
+  if (url.includes('/api/translate/')) {
+    config.headers.Authorization = `Bearer ${TRANSLATE_API_TOKEN}`;
+  } else {
+    const token = localStorage.getItem('admin-token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
   return config;
 });

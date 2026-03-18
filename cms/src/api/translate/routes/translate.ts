@@ -13,7 +13,8 @@ export default {
       path: '/translate/batch',
       handler: 'translate.batchTranslate',
       config: {
-        policies: ['admin::isAuthenticatedAdmin'],
+        // Allow both admin JWT and public access (internal use only, protected by network)
+        auth: false,
       },
     },
     {

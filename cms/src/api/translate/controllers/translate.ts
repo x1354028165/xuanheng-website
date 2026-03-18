@@ -64,17 +64,28 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
     try {
       const { default: translateService } = await import('../../../extensions/translate/services/translate');
 
-      // Run in background
+      // Run in background (includes UI keys translation)
       (async () => {
+        // 1. Translate content types
         const results: Record<string, { success: number; failed: number }> = {};
         for (const uid of contentTypes) {
           results[uid] = await translateService.batchTranslateContentType(uid, targetLocales);
         }
-        console.log('[translate:batch] Complete:', JSON.stringify(results));
+        console.log('[translate:batch] Content complete:', JSON.stringify(results));
+
+        // 2. Translate UI i18n keys (merged here to avoid separate route issues)
+        for (const locale of targetLocales) {
+          try {
+            await translateService.batchTranslateUiKeys(locale);
+            console.log(`[translate:batch] UI keys complete for ${locale}`);
+          } catch (err) {
+            console.error(`[translate:batch] UI keys failed for ${locale}:`, err);
+          }
+        }
       })().catch((err) => console.error('[translate:batch] error:', err));
 
       (ctx as Record<string, unknown>).body = {
-        message: 'Batch translation started',
+        message: 'Batch translation started (content + UI keys)',
         contentTypes,
         targetLocales,
       };
