@@ -19,7 +19,7 @@ interface I18nKeyEntry {
  */
 export async function fetchI18nKeys(locale: string): Promise<Record<string, unknown>> {
   try {
-    const url = `${STRAPI_INTERNAL_URL}/api/i18n-keys?pagination[limit]=500`;
+    const url = `${STRAPI_INTERNAL_URL}/api/i18n-keys?pagination[limit]=500&populate=*`;
     const res = await fetch(url, {
       signal: AbortSignal.timeout(5000),
       next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
