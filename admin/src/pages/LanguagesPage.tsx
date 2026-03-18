@@ -99,7 +99,8 @@ const WORLD_LANGUAGES: WorldLanguage[] = [
 ];
 
 // Store enabled state in a page-config entry keyed "language-settings"
-const SETTINGS_API = '/content-manager/collection-types/api::page-content.page-content';
+// Strapi v5: use /api/page-content (public API with admin token via axios interceptor)
+const SETTINGS_API = '/api/page-content';
 
 export default function LanguagesPage() {
   const { t } = useTranslation();
@@ -114,8 +115,9 @@ export default function LanguagesPage() {
   // Fetch language settings (disabled locales stored in page-content)
   const fetchSettings = useCallback(async () => {
     try {
-      const res = await api.get(`${SETTINGS_API}?filters[pageKey][$eq]=language-settings&pageSize=1`);
-      const results = res.data?.results ?? [];
+      // Strapi v5: filters use bracket notation, response has data array
+      const res = await api.get(`${SETTINGS_API}?filters[pageKey][$eq]=language-settings&pagination[limit]=1`);
+      const results = res.data?.data ?? res.data?.results ?? [];
       if (results.length > 0) {
         const entry = results[0] as Record<string, unknown>;
         setSettingsDocId(entry.documentId as string);
@@ -152,17 +154,22 @@ export default function LanguagesPage() {
   const saveDisabledLocales = async (newDisabled: string[]) => {
     try {
       if (settingsDocId) {
+        // Strapi v5: PUT /api/page-content/:documentId
         await api.put(`${SETTINGS_API}/${settingsDocId}`, {
-          content: { disabledLocales: newDisabled },
+          data: { content: { disabledLocales: newDisabled } },
         });
       } else {
         const res = await api.post(SETTINGS_API, {
-          pageKey: 'language-settings',
-          blockKey: 'disabled-locales',
-          content: { disabledLocales: newDisabled },
-          description: 'Language enable/disable settings',
+          data: {
+            pageKey: 'language-settings',
+            blockKey: 'disabled-locales',
+            content: { disabledLocales: newDisabled },
+            description: 'Language enable/disable settings',
+          },
         });
-        setSettingsDocId((res.data as Record<string, unknown>).documentId as string);
+        // Strapi v5 response: { data: { documentId, ... } }
+        const entry = (res.data?.data ?? res.data) as Record<string, unknown>;
+        setSettingsDocId(entry.documentId as string);
       }
       setDisabledLocales(newDisabled);
       message.success(t('languages.settingsSaved') || 'Settings saved');
