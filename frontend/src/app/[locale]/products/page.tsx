@@ -64,7 +64,7 @@ export default async function ProductsPage({
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'hardwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {(usesMock ? hardware : products.slice(0, 3)).map((product) => (
+            {hardware.map((product) => (
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}
@@ -99,7 +99,7 @@ export default async function ProductsPage({
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-8 text-2xl font-bold text-[#0F172A]">{getProductLabel(locale, 'softwareSectionTitle')}</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {(usesMock ? software : products.slice(3)).map((product) => (
+            {software.map((product) => (
               <Link
                 key={product.documentId}
                 href={`/products/${product.slug}`}

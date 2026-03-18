@@ -281,6 +281,7 @@ async function translateEntry(
   const sourceEntry = await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).findOne({
     documentId,
     locale: 'zh-CN',
+    populate: '*',
   });
 
   if (!sourceEntry) {
@@ -289,6 +290,7 @@ async function translateEntry(
   }
 
   const currentFields = getTranslatableFields(sourceEntry as Record<string, unknown>);
+  console.log(`[translate] Fields extracted for ${uid}/${documentId}: ${Object.keys(currentFields).join(', ')}`);
   if (Object.keys(currentFields).length === 0) {
     console.log(`[translate] No translatable fields found for ${uid} / ${documentId}`);
     return;
