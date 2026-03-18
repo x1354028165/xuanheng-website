@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 interface DownloadFile {
   name: string;
   category: string;
@@ -12,9 +14,11 @@ interface DownloadSectionProps {
   title: string;
   coverImg: string;
   files: DownloadFile[];
+  sectionTitle?: string;
 }
 
-export default function DownloadSection({ title, coverImg, files }: DownloadSectionProps) {
+export default function DownloadSection({ title, coverImg, files, sectionTitle }: DownloadSectionProps) {
+  const t = useTranslations('products');
   // 按 category 分组，保持原始顺序
   const groups: { category: string; files: DownloadFile[] }[] = [];
   files.forEach((f) => {
@@ -29,7 +33,7 @@ export default function DownloadSection({ title, coverImg, files }: DownloadSect
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-14 text-3xl font-bold text-[#0F172A] text-center">资料下载</h2>
+        <h2 className="mb-14 text-3xl font-bold text-[#0F172A] text-center">{sectionTitle ?? t('downloadSectionTitle')}</h2>
 
         <div className="flex gap-16 items-start">
 

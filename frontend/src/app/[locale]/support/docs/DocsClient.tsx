@@ -4,38 +4,12 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-// Fallback hardcoded data
-const MOCK_DOCS = [
-  { title: 'Neuron II 用户手册', version: 'v2.1', product: 'Neuron II', fileType: 'PDF' },
-  { title: 'Neuron II 安装指南', version: 'v2.0', product: 'Neuron II', fileType: 'PDF' },
-  { title: 'Neuron III 用户手册', version: 'v1.2', product: 'Neuron III', fileType: 'PDF' },
-  { title: 'Neuron III 快速安装指南', version: 'v1.0', product: 'Neuron III', fileType: 'PDF' },
-  { title: 'Neuron III Lite 用户手册', version: 'v1.0', product: 'Neuron III Lite', fileType: 'PDF' },
-  { title: 'HEMS 云平台使用指南', version: 'v3.0', product: 'HEMS', fileType: 'PDF' },
-  { title: 'ESS 运维手册', version: 'v1.5', product: 'ESS', fileType: 'PDF' },
-  { title: 'EVCMS API 接口文档', version: 'v2.1', product: 'EVCMS', fileType: 'PDF' },
-  { title: 'PQMS 电能质量监测手册', version: 'v1.0', product: 'PQMS', fileType: 'PDF' },
-  { title: 'VPP 虚拟电厂接入指南', version: 'v1.0', product: 'VPP', fileType: 'PDF' },
-];
-
-const MOCK_SOFTWARE = [
-  { name: 'Neuron 配置工具', description: '网关参数配置、固件升级、设备诊断', version: 'v3.0.2', platform: 'Windows/macOS/Linux' },
-  { name: 'AlwaysControl HEMS App', description: '家庭能源管理移动应用', version: 'v2.5.0', platform: 'Android/iOS' },
-  { name: 'AlwaysControl ESS App', description: '储能系统监控移动应用', version: 'v1.2.0', platform: 'Android/iOS' },
-];
-
-const MOCK_FIRMWARE = [
-  { model: 'Neuron II', version: 'v2.1.3', releaseDate: '2026-03-10', changelog: '修复 Modbus TCP 连接稳定性问题' },
-  { model: 'Neuron III', version: 'v1.2.0', releaseDate: '2026-03-01', changelog: 'DLB 响应速度优化至 80ms' },
-  { model: 'Neuron III Lite', version: 'v1.0.2', releaseDate: '2026-02-28', changelog: '首个稳定版本' },
-];
-
 type Tab = 'docs' | 'software' | 'firmware';
 
 interface Props {
-  cmsDocResources: any[];
-  cmsSoftware: any[];
-  cmsFirmware: any[];
+  cmsDocResources: Array<Record<string, unknown>>;
+  cmsSoftware: Array<Record<string, unknown>>;
+  cmsFirmware: Array<Record<string, unknown>>;
   docsTitle: string;
   docsSubtitle: string;
 }
@@ -48,16 +22,41 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
   const [docFilter, setDocFilter] = useState(ALL_LABEL);
   const [fwFilter, setFwFilter] = useState(ALL_LABEL);
 
-  // 使用CMS数据，fallback到硬编码
+  // Fallback hardcoded data with translated strings
+  const MOCK_DOCS = [
+    { title: t('mockDocNeuronIIManual'), version: 'v2.1', product: 'Neuron II', fileType: 'PDF' },
+    { title: t('mockDocNeuronIIInstall'), version: 'v2.0', product: 'Neuron II', fileType: 'PDF' },
+    { title: t('mockDocNeuronIIIManual'), version: 'v1.2', product: 'Neuron III', fileType: 'PDF' },
+    { title: t('mockDocNeuronIIIInstall'), version: 'v1.0', product: 'Neuron III', fileType: 'PDF' },
+    { title: t('mockDocNeuronIIILiteManual'), version: 'v1.0', product: 'Neuron III Lite', fileType: 'PDF' },
+    { title: t('mockDocHemsGuide'), version: 'v3.0', product: 'HEMS', fileType: 'PDF' },
+    { title: t('mockDocEssManual'), version: 'v1.5', product: 'ESS', fileType: 'PDF' },
+    { title: t('mockDocEvcmsApi'), version: 'v2.1', product: 'EVCMS', fileType: 'PDF' },
+    { title: t('mockDocPqmsManual'), version: 'v1.0', product: 'PQMS', fileType: 'PDF' },
+    { title: t('mockDocVppGuide'), version: 'v1.0', product: 'VPP', fileType: 'PDF' },
+  ];
+
+  const MOCK_SOFTWARE = [
+    { name: t('mockSwNeuronTool'), description: t('mockSwNeuronToolDesc'), version: 'v3.0.2', platform: 'Windows/macOS/Linux' },
+    { name: 'AlwaysControl HEMS App', description: t('mockSwHemsAppDesc'), version: 'v2.5.0', platform: 'Android/iOS' },
+    { name: 'AlwaysControl ESS App', description: t('mockSwEssAppDesc'), version: 'v1.2.0', platform: 'Android/iOS' },
+  ];
+
+  const MOCK_FIRMWARE = [
+    { model: 'Neuron II', version: 'v2.1.3', releaseDate: '2026-03-10', changelog: t('mockFwNeuronIIChangelog') },
+    { model: 'Neuron III', version: 'v1.2.0', releaseDate: '2026-03-01', changelog: t('mockFwNeuronIIIChangelog') },
+    { model: 'Neuron III Lite', version: 'v1.0.2', releaseDate: '2026-02-28', changelog: t('mockFwNeuronIIILiteChangelog') },
+  ];
+
   const docs = cmsDocResources.length > 0 ? cmsDocResources : MOCK_DOCS;
   const software = cmsSoftware.length > 0 ? cmsSoftware : MOCK_SOFTWARE;
   const firmware = cmsFirmware.length > 0 ? cmsFirmware : MOCK_FIRMWARE;
 
-  const allProducts = [ALL_LABEL, ...Array.from(new Set(docs.map((d: any) => d.product)))];
-  const allModels = [ALL_LABEL, ...Array.from(new Set(firmware.map((f: any) => f.model)))];
+  const allProducts = [ALL_LABEL, ...Array.from(new Set(docs.map((d: Record<string, unknown>) => d.product as string)))];
+  const allModels = [ALL_LABEL, ...Array.from(new Set(firmware.map((f: Record<string, unknown>) => f.model as string)))];
 
-  const filteredDocs = docFilter === ALL_LABEL ? docs : docs.filter((d: any) => d.product === docFilter);
-  const filteredFw = fwFilter === ALL_LABEL ? firmware : firmware.filter((f: any) => f.model === fwFilter);
+  const filteredDocs = docFilter === ALL_LABEL ? docs : docs.filter((d: Record<string, unknown>) => d.product === docFilter);
+  const filteredFw = fwFilter === ALL_LABEL ? firmware : firmware.filter((f: Record<string, unknown>) => f.model === fwFilter);
 
   return (
     <main className="bg-[#F8FAFC] min-h-screen pt-32 pb-16">
@@ -85,7 +84,6 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
           ))}
         </div>
 
-        {/* 技术文档 */}
         {activeTab === 'docs' && (
           <div>
             <div className="mb-4 flex flex-wrap gap-2">
@@ -113,19 +111,19 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {filteredDocs.map((doc: any, i: number) => (
+                  {filteredDocs.map((doc: Record<string, unknown>, i: number) => (
                     <tr key={i} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 font-medium text-[#0F172A]">{doc.title || doc.name}</td>
-                      <td className="px-4 py-3 text-[#64748B]">{doc.product}</td>
-                      <td className="px-4 py-3 text-[#64748B]">{doc.version}</td>
+                      <td className="px-4 py-3 font-medium text-[#0F172A]">{(doc.title || doc.name) as string}</td>
+                      <td className="px-4 py-3 text-[#64748B]">{doc.product as string}</td>
+                      <td className="px-4 py-3 text-[#64748B]">{doc.version as string}</td>
                       <td className="px-4 py-3">
                         <span className="rounded bg-red-50 px-2 py-0.5 text-xs text-red-600">
-                          {doc.fileType || 'PDF'}
+                          {(doc.fileType || 'PDF') as string}
                         </span>
                       </td>
                       <td className="px-4 py-3">
                         {doc.fileUrl ? (
-                          <a href={doc.fileUrl} className="text-[#38C4E8] hover:underline">{tc('download')}</a>
+                          <a href={doc.fileUrl as string} className="text-[#38C4E8] hover:underline">{tc('download')}</a>
                         ) : (
                           <span className="text-gray-400">{t('notUploaded')}</span>
                         )}
@@ -138,19 +136,18 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
           </div>
         )}
 
-        {/* 软件下载 */}
         {activeTab === 'software' && (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {software.map((sw: any, i: number) => (
+            {software.map((sw: Record<string, unknown>, i: number) => (
               <div key={i} className="rounded-xl border border-gray-200 bg-white p-6">
-                <h3 className="font-semibold text-[#0F172A]">{sw.name}</h3>
-                <p className="mt-1 text-sm text-[#64748B]">{sw.description || sw.desc}</p>
+                <h3 className="font-semibold text-[#0F172A]">{sw.name as string}</h3>
+                <p className="mt-1 text-sm text-[#64748B]">{(sw.description || sw.desc) as string}</p>
                 <div className="mt-3 flex items-center gap-2">
-                  <span className="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-600">{sw.version}</span>
-                  <span className="text-xs text-[#94A3B8]">{sw.platform}</span>
+                  <span className="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-600">{sw.version as string}</span>
+                  <span className="text-xs text-[#94A3B8]">{sw.platform as string}</span>
                 </div>
                 {sw.fileUrl ? (
-                  <a href={sw.fileUrl} className="mt-4 block text-center rounded-lg bg-[#38C4E8] px-4 py-2 text-sm text-white hover:bg-[#2bb0d4]">
+                  <a href={sw.fileUrl as string} className="mt-4 block text-center rounded-lg bg-[#38C4E8] px-4 py-2 text-sm text-white hover:bg-[#2bb0d4]">
                     {tc('download')}
                   </a>
                 ) : (
@@ -163,7 +160,6 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
           </div>
         )}
 
-        {/* 固件版本 */}
         {activeTab === 'firmware' && (
           <div>
             <div className="mb-4 flex flex-wrap gap-2">
@@ -180,18 +176,18 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
               ))}
             </div>
             <div className="space-y-3">
-              {filteredFw.map((fw: any, i: number) => (
+              {filteredFw.map((fw: Record<string, unknown>, i: number) => (
                 <div key={i} className="rounded-xl border border-gray-200 bg-white p-5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="font-semibold text-[#0F172A]">{fw.model}</span>
-                      <span className="rounded bg-green-50 px-2 py-0.5 text-xs text-green-600">{fw.version}</span>
+                      <span className="font-semibold text-[#0F172A]">{fw.model as string}</span>
+                      <span className="rounded bg-green-50 px-2 py-0.5 text-xs text-green-600">{fw.version as string}</span>
                     </div>
-                    <span className="text-sm text-[#94A3B8]">{fw.releaseDate}</span>
+                    <span className="text-sm text-[#94A3B8]">{fw.releaseDate as string}</span>
                   </div>
-                  <p className="mt-2 text-sm text-[#64748B]">{fw.changelog}</p>
+                  <p className="mt-2 text-sm text-[#64748B]">{fw.changelog as string}</p>
                   {fw.fileUrl ? (
-                    <a href={fw.fileUrl} className="mt-3 inline-flex text-sm text-[#38C4E8] hover:underline">
+                    <a href={fw.fileUrl as string} className="mt-3 inline-flex text-sm text-[#38C4E8] hover:underline">
                       {t('downloadFirmware')}
                     </a>
                   ) : (

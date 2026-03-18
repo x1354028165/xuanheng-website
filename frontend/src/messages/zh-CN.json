@@ -163,7 +163,12 @@
     "tagEss": "工商业",
     "tagEvcms": "充电站",
     "tagVpp": "VPP",
-    "tagPqms": "电能质量"
+    "tagPqms": "电能质量",
+    "swDescHems": "家庭能源智慧管理",
+    "swDescEss": "工商业储能套利",
+    "swDescEvcms": "充电站智能调度",
+    "swDescPqms": "电能质量监测治理",
+    "swDescVpp": "虚拟电厂聚合调度"
   },
   "solutions": {
     "title": "解决方案",
@@ -184,7 +189,14 @@
       "feature2": "智能调度引擎：自动识别用电高峰，低谷充电、高峰放电，每月节省电费 30%+",
       "feature3": "App 远程监控：随时随地查看实时发电量、电池状态与用电统计，掌握家庭能源全貌",
       "feature4": "云端直连接入：无需额外网关硬件，设备通过云端 API 直接接入，快速低成本部署",
-      "background": "家庭用户已安装光伏 + 储能系统，但各设备品牌不同、协议各异，缺乏统一的监控与调度入口；峰谷电价政策复杂，手动管理无法最大化节电收益。"
+      "background": "家庭用户已安装光伏 + 储能系统，但各设备品牌不同、协议各异，缺乏统一的监控与调度入口；峰谷电价政策复杂，手动管理无法最大化节电收益。",
+      "caseCount": "2",
+      "case0Area": "🇹🇼 中国台湾别墅小区",
+      "case0Scale": "多户家庭光伏 + 储能系统，品牌各异",
+      "case0Problem": "统一接入后电费节省 35%，自发自用率提升至 72%",
+      "case1Area": "🇦🇺 澳洲家庭储能用户",
+      "case1Scale": "结合当地峰谷电价结构，3.5kW 光伏 + 5kWh 储能",
+      "case1Problem": "自动切换用电策略，月节省电费约 180 澳元"
     },
     "ess": {
       "title": "工商业储能",
@@ -197,7 +209,14 @@
       "feature2": "动态增容方案：在现有变压器容量下智能扩展可用功率，无需高额扩容费用",
       "feature3": "备用电源模式：关键负荷不间断供电，突发停电自动切换，生产零中断",
       "feature4": "多站点统一管理：集中监控多个储能站点，运维效率提升 80%，告警分级推送",
-      "background": "工厂、商业楼宇、园区面临峰谷电价差大、用电成本高的压力，储能系统作为核心降本手段，但分布式多站点管理复杂、跨品牌设备接入难。"
+      "background": "工厂、商业楼宇、园区面临峰谷电价差大、用电成本高的压力，储能系统作为核心降本手段，但分布式多站点管理复杂、跨品牌设备接入难。",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 深圳龙华分布式储能",
+      "case0Scale": "多品牌 PCS/BMS 混合部署",
+      "case0Problem": "5 天完成云平台搭建，10 天完成跨品牌设备接入",
+      "case1Area": "🇨🇳 上海某商业综合体",
+      "case1Scale": "200kWh 多品牌混合储能",
+      "case1Problem": "峰谷套利年收益 80 万元，运维效率提升 80%"
     },
     "evcms": {
       "title": "充电站管理",
@@ -210,7 +229,14 @@
       "feature2": "现有容量最大化利用：在不扩容主线的前提下，支持更多充电桩同时运行",
       "feature3": "OCPP 2.0.1 标准协议：兼容市场主流品牌充电桩，无需替换现有设备",
       "feature4": "实时监控与运营数据：充电记录、故障告警、功率曲线一站式可视化管理",
-      "background": "停车场、办公楼、企业园区需要部署多台充电桩，但主线电容有限，多桩同时快充极易触发主断路器跳闸；充电桩品牌混杂，协议不一，统一管理困难。"
+      "background": "停车场、办公楼、企业园区需要部署多台充电桩，但主线电容有限，多桩同时快充极易触发主断路器跳闸；充电桩品牌混杂，协议不一，统一管理困难。",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 深圳罗湖办公楼停车场",
+      "case0Scale": "40 桩，原主线 150kW，未扩容",
+      "case0Problem": "部署 DLB 后跳闸率降至 0，充电吞吐量提升 60%",
+      "case1Area": "🇲🇾 马来西亚充电站",
+      "case1Scale": "多品牌 OCPP 充电桩混合部署",
+      "case1Problem": "统一管理平台上线，运维人力成本降低 55%"
     },
     "vpp": {
       "title": "VPP虚拟电厂",
@@ -223,7 +249,14 @@
       "feature2": "500ms 调度指令下发：响应速度达电网辅助服务市场最高要求，收益可最大化",
       "feature3": "纯云端架构部署：无需现场部署硬件网关，降低项目实施门槛与运维成本",
       "feature4": "多种电力市场接入：支持现货市场、调峰调频辅助服务等多种交易模式",
-      "background": "分散的能源资产无法单独参与电网调度。VPP 通过聚合大量分布式电池，将其统一协调为一座\"虚拟电厂\"，在高峰时集中放电，在低谷时集中储能，参与电力现货市场与需求响应机制获取收益。"
+      "background": "分散的能源资产无法单独参与电网调度。VPP 通过聚合大量分布式电池，将其统一协调为一座\"虚拟电厂\"，在高峰时集中放电，在低谷时集中储能，参与电力现货市场与需求响应机制获取收益。",
+      "caseCount": "2",
+      "case0Area": "🇦🇺 澳大利亚 VPP 运营商",
+      "case0Scale": "聚合多品牌家庭储能设备，参与 FCAS 需求响应",
+      "case0Problem": "调度指令 500ms 内下发，资产利用率显著提升",
+      "case1Area": "🇨🇳 某省级能源聚合商",
+      "case1Scale": "聚合 500 个分布式储能站（50MWh）",
+      "case1Problem": "首年创收 200 万元，响应时间 < 2s"
     },
     "pqms": {
       "title": "电能质量管理",
@@ -236,7 +269,14 @@
       "feature2": "远程参数优化：在线调整补偿参数，减少 90% 以上现场巡检频次",
       "feature3": "自动报告生成：日报/周报/月报自动输出，满足电网公司合规检查要求",
       "feature4": "多级告警推送：企微、邮件、短信实时通知，异常提前预警防患于未然",
-      "background": "工业园区、数据中心、医院、商业综合体对电能质量要求严苛，谐波污染、电压骤降、三相不平衡等问题直接影响设备寿命与生产安全，但传统人工巡检模式响应慢、覆盖不全。"
+      "background": "工业园区、数据中心、医院、商业综合体对电能质量要求严苛，谐波污染、电压骤降、三相不平衡等问题直接影响设备寿命与生产安全，但传统人工巡检模式响应慢、覆盖不全。",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 工业园区谐波治理",
+      "case0Scale": "THD > 15%，精密设备频繁故障",
+      "case0Problem": "谐波源精准定位，设备故障率下降 78%",
+      "case1Area": "🇨🇳 数据中心电能质量管控",
+      "case1Scale": "关键负荷电压波动，人工巡检滞后",
+      "case1Problem": "7×24 实时监测，提前预警 3 次潜在故障，减少 90% 现场巡检"
     },
     "painPointsTitle": "核心痛点",
     "highlightsTitle": "功能亮点",
@@ -257,7 +297,70 @@
     "sceneBackground": "场景背景",
     "solutionDescription": "方案描述",
     "applicationCases": "应用案例",
-    "relatedProductsDesc": "本方案涉及的产品，点击了解详情"
+    "relatedProductsDesc": "本方案涉及的产品，点击了解详情",
+    "cases": {
+      "hems": [
+        {
+          "area": "🇹🇼 中国台湾别墅小区",
+          "scale": "多户家庭光伏 + 储能系统，品牌各异",
+          "problem": "统一接入后电费节省 35%，自发自用率提升至 72%"
+        },
+        {
+          "area": "🇦🇺 澳洲家庭储能用户",
+          "scale": "结合当地峰谷电价结构，3.5kW 光伏 + 5kWh 储能",
+          "problem": "自动切换用电策略，月节省电费约 180 澳元"
+        }
+      ],
+      "ess": [
+        {
+          "area": "🇨🇳 深圳龙华分布式储能",
+          "scale": "多品牌 PCS/BMS 混合部署",
+          "problem": "5 天完成云平台搭建，10 天完成跨品牌设备接入"
+        },
+        {
+          "area": "🇨🇳 上海某商业综合体",
+          "scale": "200kWh 多品牌混合储能",
+          "problem": "峰谷套利年收益 80 万元，运维效率提升 80%"
+        }
+      ],
+      "evcms": [
+        {
+          "area": "🇨🇳 深圳罗湖办公楼停车场",
+          "scale": "40 桩，原主线 150kW，未扩容",
+          "problem": "部署 DLB 后跳闸率降至 0，充电吞吐量提升 60%"
+        },
+        {
+          "area": "🇲🇾 马来西亚充电站",
+          "scale": "多品牌 OCPP 充电桩混合部署",
+          "problem": "统一管理平台上线，运维人力成本降低 55%"
+        }
+      ],
+      "vpp": [
+        {
+          "area": "🇦🇺 澳大利亚 VPP 运营商",
+          "scale": "聚合多品牌家庭储能设备，参与 FCAS 需求响应",
+          "problem": "调度指令 500ms 内下发，资产利用率显著提升"
+        },
+        {
+          "area": "🇨🇳 某省级能源聚合商",
+          "scale": "聚合 500 个分布式储能站（50MWh）",
+          "problem": "首年创收 200 万元，响应时间 < 2s"
+        }
+      ],
+      "pqms": [
+        {
+          "area": "🇨🇳 工业园区谐波治理",
+          "scale": "THD > 15%，精密设备频繁故障",
+          "problem": "谐波源精准定位，设备故障率下降 78%"
+        },
+        {
+          "area": "🇨🇳 数据中心电能质量管控",
+          "scale": "关键负荷电压波动，人工巡检滞后",
+          "problem": "7×24 实时监测，提前预警 3 次潜在故障，减少 90% 现场巡检"
+        }
+      ]
+    },
+    "coreFeaturesList": "核心功能列表"
   },
   "products": {
     "title": "产品中心",
@@ -317,31 +420,136 @@
       "title": "HEMS",
       "tagline": "家庭储能能量管理系统",
       "description": "HEMS（Home Energy Management System）为家庭储能场景提供智能能量调度，优化光储充一体化用能策略，降低电费支出。",
-      "positioning": "家庭光储充统一管理"
+      "positioning": "家庭光储充统一管理",
+      "swScenarioText": "支持光伏、储能等新能源电站的数据采集、电站监控、运维运营全套管理业务。通过云端大数据分析平台，帮助用户实现旗下所有新能源电站的透明化管理、自动化运维、智能化诊断和辅助决策等核心功能。全面满足用户在新能源电站生命周期中的各层次需求，最大化提升电站价值，保护用户核心资产。",
+      "swFeatureCount": "3",
+      "swFeature0Label": "安全稳定",
+      "swFeature0Desc": "基于网络攻击防御与数据隐私保护双重架构，实现能源管理系统的可信运行环境与资产安全闭环。",
+      "swFeature0Point0": "金融级安全防护与权限管控",
+      "swFeature0Point1": "灾备恢复 + 加密双备份",
+      "swFeature0Point2": "国内外合规认证",
+      "swFeature1Label": "省心运维",
+      "swFeature1Desc": "组件级—站级—批量诊断全覆盖，运维意见精准指导，简化运维工作，提升运维效率。",
+      "swFeature1Point0": "AI 智能运维助手",
+      "swFeature1Point1": "实时故障告警 & 自动诊断",
+      "swFeature1Point2": "全周期可追溯运维保障",
+      "swFeature2Label": "智能体验",
+      "swFeature2Desc": "先进算法智能调度，多种能源模式随心选择，绿电管理掌上轻松实现。",
+      "swFeature2Point0": "极简配置，一步到位",
+      "swFeature2Point1": "AI 能源管理，智能高效",
+      "swFeature2Point2": "自定义仪表盘，随心掌控"
     },
     "ess": {
       "title": "ESS",
       "tagline": "工商业储能管理系统",
       "description": "ESS（Energy Storage System）面向工商业储能场景，支持峰谷套利、需量管理、备用电源等多种应用模式。",
-      "positioning": "工商业储能多站点监控"
+      "positioning": "工商业储能多站点监控",
+      "swScenarioText": "可用于工厂、商业楼宇、园区等多站点储能资产统一监控与调度，实现跨品牌设备接入、峰谷自动套利与需量管控，降低综合用电成本 20~40%。",
+      "swFeatureCount": "4",
+      "swFeature0Label": "多站点统一监控",
+      "swFeature0Desc": "一个平台管理所有储能站点，实时查看各站 SOC、功率、健康状态，运维效率提升 80%，告警分级推送。",
+      "swFeature0Point0": "多站点一屏总览",
+      "swFeature0Point1": "告警分级智能推送",
+      "swFeature0Point2": "健康状态实时追踪",
+      "swFeature1Label": "智能峰谷套利",
+      "swFeature1Desc": "自动识别最优充放电时机，低充高放，最大化电价差收益，策略引擎动态响应实时电价波动。",
+      "swFeature1Point0": "实时电价动态响应",
+      "swFeature1Point1": "最优充放策略自动执行",
+      "swFeature1Point2": "收益报表自动生成",
+      "swFeature2Label": "需量管理",
+      "swFeature2Desc": "实时监控功率需量，智能削峰填谷，避免高额需量费超限，无需高额变压器扩容费。",
+      "swFeature2Point0": "功率需量实时监控",
+      "swFeature2Point1": "削峰填谷自动调度",
+      "swFeature2Point2": "扩容费用大幅降低",
+      "swFeature3Label": "能效报告",
+      "swFeature3Desc": "日报/周报/月报自动生成，支持导出 Excel/PDF，完整的能源消耗与收益分析，辅助运营决策。",
+      "swFeature3Point0": "日/周/月报自动生成",
+      "swFeature3Point1": "支持 Excel/PDF 导出",
+      "swFeature3Point2": "完整能源收益分析"
     },
     "evcms": {
       "title": "EVCMS",
       "tagline": "充电站管理系统",
       "description": "EVCMS（EV Charging Management System）提供充电站全生命周期管理，支持多桩协同、动态负载均衡、OCPP协议接入。",
-      "positioning": "充电站多桩负载均衡"
+      "positioning": "充电站多桩负载均衡",
+      "swScenarioText": "可用于停车场、办公楼、园区等多桩充电站的动态负载均衡与运营管理，在不扩容主线的前提下实现多桩协同充电与智能计费。",
+      "swFeatureCount": "4",
+      "swFeature0Label": "DLB 动态负载均衡",
+      "swFeature0Desc": "毫秒级实时检测主线总负载，动态分配各桩可用功率，在不扩容主线的前提下支持更多充电桩同时运行，彻底杜绝跳闸。",
+      "swFeature0Point0": "毫秒级功率动态分配",
+      "swFeature0Point1": "零扩容支持多桩并充",
+      "swFeature0Point2": "彻底杜绝跳闸风险",
+      "swFeature1Label": "OCPP 协议兼容",
+      "swFeature1Desc": "支持 OCPP 1.6J / 2.0.1，兼容市场主流充电桩品牌，无需替换现有硬件，快速接入统一管理。",
+      "swFeature1Point0": "OCPP 1.6J / 2.0.1 全兼容",
+      "swFeature1Point1": "主流品牌无缝接入",
+      "swFeature1Point2": "无需替换现有设备",
+      "swFeature2Label": "智能计费系统",
+      "swFeature2Desc": "支持按时计费、按电量计费、会员优惠等多种计费策略，一键结算，支持 VIP 优先模式与排队模式。",
+      "swFeature2Point0": "多维计费策略灵活配置",
+      "swFeature2Point1": "VIP 优先 + 排队模式",
+      "swFeature2Point2": "一键结算，快速收款",
+      "swFeature3Label": "运营数据分析",
+      "swFeature3Desc": "充电记录、故障告警、功率曲线实时可视化，全站运营数据一站式掌握，助力站点效益最大化。",
+      "swFeature3Point0": "充电记录全量追溯",
+      "swFeature3Point1": "功率曲线实时可视化",
+      "swFeature3Point2": "站点收益一站式分析"
     },
     "pqms": {
       "title": "PQMS",
       "tagline": "电能质量监测系统",
       "description": "PQMS（Power Quality Monitoring System）实时监测电网电能质量，提供谐波分析、电压波动预警、用电审计等功能。",
-      "positioning": "电能质量远程监控"
+      "positioning": "电能质量远程监控",
+      "swScenarioText": "可用于工业园区、数据中心、医院等场所的电能质量远程监测与治理，实现谐波分析、补偿参数在线调优与合规报告自动生成。",
+      "swFeatureCount": "4",
+      "swFeature0Label": "50次谐波全面监测",
+      "swFeature0Desc": "实时采集电压、电流、功率因数、谐波至第50次，精准捕捉各次谐波分量，快速定位问题设备与污染源。",
+      "swFeature0Point0": "全参数实时采集",
+      "swFeature0Point1": "50次谐波精准捕捉",
+      "swFeature0Point2": "问题设备快速定位",
+      "swFeature1Label": "多站点地图可视化",
+      "swFeature1Desc": "站点健康状态地图化展示，一眼掌握全网电能质量分布，多监测点数据统一分析中心。",
+      "swFeature1Point0": "站点健康地图总览",
+      "swFeature1Point1": "全网电能质量分布",
+      "swFeature1Point2": "多点数据统一分析",
+      "swFeature2Label": "远程参数调优",
+      "swFeature2Desc": "在线调整 SVG/APF 补偿参数，减少 90% 以上现场巡检频次，支持远程 OTA 升级现场设备固件。",
+      "swFeature2Point0": "SVG/APF 参数在线调整",
+      "swFeature2Point1": "现场巡检减少 90%+",
+      "swFeature2Point2": "远程 OTA 固件升级",
+      "swFeature3Label": "合规报告自动生成",
+      "swFeature3Desc": "日报/周报/月报一键导出，满足电网公司合规检查要求，历史分析报告帮助定位电能质量劣化根因。",
+      "swFeature3Point0": "合规报告一键导出",
+      "swFeature3Point1": "满足电网公司检查要求",
+      "swFeature3Point2": "历史劣化根因分析"
     },
     "vpp": {
       "title": "VPP",
       "tagline": "虚拟电厂聚合平台",
       "description": "VPP（Virtual Power Plant）聚合分布式储能、光伏、充电桩等资源，参与电网调峰调频，实现资产增值。",
-      "positioning": "虚拟电厂调度平台"
+      "positioning": "虚拟电厂调度平台",
+      "swScenarioText": "可用于 VPP 运营商聚合多品牌分布式储能设备，通过云端 API 实现批量调度与实时状态监控，参与电网辅助服务市场获取收益。",
+      "swFeatureCount": "4",
+      "swFeature0Label": "万级设备聚合",
+      "swFeature0Desc": "统一调度分布式储能、光伏、充电桩，聚合规模不受限，支持异构品牌混合部署，已打通主流储能品牌云端 API。",
+      "swFeature0Point0": "万级设备统一调度",
+      "swFeature0Point1": "异构品牌混合部署",
+      "swFeature0Point2": "主流云端 API 已打通",
+      "swFeature1Label": "500ms 指令下发",
+      "swFeature1Desc": "调度响应速度达电网辅助服务最高要求，支持秒级批量指令下发，实时状态订阅：SOC、功率、告警状态毫秒级推送。",
+      "swFeature1Point0": "500ms 调度响应",
+      "swFeature1Point1": "秒级批量指令下发",
+      "swFeature1Point2": "SOC/功率毫秒级推送",
+      "swFeature2Label": "多品牌 API 适配",
+      "swFeature2Desc": "VPP 运营商无需自研接入层，旭衡统一调度接口支持充放电指令、SOC 查询、告警订阅，完整调度记录与审计。",
+      "swFeature2Point0": "统一接口免自研",
+      "swFeature2Point1": "充放电 + 告警订阅全覆盖",
+      "swFeature2Point2": "完整调度记录与审计",
+      "swFeature3Label": "自定义调度策略",
+      "swFeature3Desc": "支持对接上游电网信号或自定义调度策略，满足不同电力市场交易模式，灵活适配各地监管要求。",
+      "swFeature3Point0": "电网信号直连对接",
+      "swFeature3Point1": "自定义策略引擎",
+      "swFeature3Point2": "灵活适配各地监管"
     },
     "hardwareLabel": "智能网关",
     "softwareLabel": "云平台",
@@ -380,7 +588,236 @@
     "accessMethodsTitle": "接入方式",
     "accessMethodsSubtitle": "接入方式由你决定，没有绑定关系",
     "applyDemoExperience": "申请 Demo 体验",
-    "contactBusiness": "联系商务"
+    "contactBusiness": "联系商务",
+    "recommendHwTitle": "推荐搭配硬件网关",
+    "recommendHwSubtitle": "与以下硬件网关配合使用，实现设备本地接入与离线运行",
+    "viewDetailArrow": "查看详情 →",
+    "quickStartGuide": "{title} 快速上手指南",
+    "apiIntegrationDoc": "{title} API 集成文档",
+    "openapiSpec": "{title} OpenAPI 规范",
+    "firmwareFile": "{title} 固件 v2.3.1",
+    "configTool": "{title} 配置工具 v1.2",
+    "downloadCategories": {
+      "userManual": "用户手册",
+      "apiDocs": "API 文档",
+      "datasheet": "数据手册",
+      "installGuide": "安装指南",
+      "firmware": "固件",
+      "toolSoftware": "工具软件"
+    },
+    "hwDesc": {
+      "neuron-ii": "通用多协议网关（4G/WiFi/RS485/CAN）",
+      "neuron-iii": "充电站专用控制器（内置电表+DLB）",
+      "neuron-iii-lite": "防跳闸控制器（配套 ATP III）"
+    },
+    "swScenarios": {
+      "hems": "支持光伏、储能等新能源电站的数据采集、电站监控、运维运营全套管理业务。通过云端大数据分析平台，帮助用户实现旗下所有新能源电站的透明化管理、自动化运维、智能化诊断和辅助决策等核心功能。全面满足用户在新能源电站生命周期中的各层次需求，最大化提升电站价值，保护用户核心资产。",
+      "ess": "可用于工厂、商业楼宇、园区等多站点储能资产统一监控与调度，实现跨品牌设备接入、峰谷自动套利与需量管控，降低综合用电成本 20~40%。",
+      "evcms": "可用于停车场、办公楼、园区等多桩充电站的动态负载均衡与运营管理，在不扩容主线的前提下实现多桩协同充电与智能计费。",
+      "vpp": "可用于 VPP 运营商聚合多品牌分布式储能设备，通过云端 API 实现批量调度与实时状态监控，参与电网辅助服务市场获取收益。",
+      "pqms": "可用于工业园区、数据中心、医院等场所的电能质量远程监测与治理，实现谐波分析、补偿参数在线调优与合规报告自动生成。"
+    },
+    "swFeatures": {
+      "hems": [
+        {
+          "label": "安全稳定",
+          "desc": "基于网络攻击防御与数据隐私保护双重架构，实现能源管理系统的可信运行环境与资产安全闭环。",
+          "points": [
+            "金融级安全防护与权限管控",
+            "灾备恢复 + 加密双备份",
+            "国内外合规认证"
+          ]
+        },
+        {
+          "label": "省心运维",
+          "desc": "组件级—站级—批量诊断全覆盖，运维意见精准指导，简化运维工作，提升运维效率。",
+          "points": [
+            "AI 智能运维助手",
+            "实时故障告警 & 自动诊断",
+            "全周期可追溯运维保障"
+          ]
+        },
+        {
+          "label": "智能体验",
+          "desc": "先进算法智能调度，多种能源模式随心选择，绿电管理掌上轻松实现。",
+          "points": [
+            "极简配置，一步到位",
+            "AI 能源管理，智能高效",
+            "自定义仪表盘，随心掌控"
+          ]
+        }
+      ],
+      "ess": [
+        {
+          "label": "多站点统一监控",
+          "desc": "一个平台管理所有储能站点，实时查看各站 SOC、功率、健康状态，运维效率提升 80%，告警分级推送。",
+          "points": [
+            "多站点一屏总览",
+            "告警分级智能推送",
+            "健康状态实时追踪"
+          ]
+        },
+        {
+          "label": "智能峰谷套利",
+          "desc": "自动识别最优充放电时机，低充高放，最大化电价差收益，策略引擎动态响应实时电价波动。",
+          "points": [
+            "实时电价动态响应",
+            "最优充放策略自动执行",
+            "收益报表自动生成"
+          ]
+        },
+        {
+          "label": "需量管理",
+          "desc": "实时监控功率需量，智能削峰填谷，避免高额需量费超限，无需高额变压器扩容费。",
+          "points": [
+            "功率需量实时监控",
+            "削峰填谷自动调度",
+            "扩容费用大幅降低"
+          ]
+        },
+        {
+          "label": "能效报告",
+          "desc": "日报/周报/月报自动生成，支持导出 Excel/PDF，完整的能源消耗与收益分析，辅助运营决策。",
+          "points": [
+            "日/周/月报自动生成",
+            "支持 Excel/PDF 导出",
+            "完整能源收益分析"
+          ]
+        }
+      ],
+      "evcms": [
+        {
+          "label": "DLB 动态负载均衡",
+          "desc": "毫秒级实时检测主线总负载，动态分配各桩可用功率，在不扩容主线的前提下支持更多充电桩同时运行，彻底杜绝跳闸。",
+          "points": [
+            "毫秒级功率动态分配",
+            "零扩容支持多桩并充",
+            "彻底杜绝跳闸风险"
+          ]
+        },
+        {
+          "label": "OCPP 协议兼容",
+          "desc": "支持 OCPP 1.6J / 2.0.1，兼容市场主流充电桩品牌，无需替换现有硬件，快速接入统一管理。",
+          "points": [
+            "OCPP 1.6J / 2.0.1 全兼容",
+            "主流品牌无缝接入",
+            "无需替换现有设备"
+          ]
+        },
+        {
+          "label": "智能计费系统",
+          "desc": "支持按时计费、按电量计费、会员优惠等多种计费策略，一键结算，支持 VIP 优先模式与排队模式。",
+          "points": [
+            "多维计费策略灵活配置",
+            "VIP 优先 + 排队模式",
+            "一键结算，快速收款"
+          ]
+        },
+        {
+          "label": "运营数据分析",
+          "desc": "充电记录、故障告警、功率曲线实时可视化，全站运营数据一站式掌握，助力站点效益最大化。",
+          "points": [
+            "充电记录全量追溯",
+            "功率曲线实时可视化",
+            "站点收益一站式分析"
+          ]
+        }
+      ],
+      "vpp": [
+        {
+          "label": "万级设备聚合",
+          "desc": "统一调度分布式储能、光伏、充电桩，聚合规模不受限，支持异构品牌混合部署，已打通主流储能品牌云端 API。",
+          "points": [
+            "万级设备统一调度",
+            "异构品牌混合部署",
+            "主流云端 API 已打通"
+          ]
+        },
+        {
+          "label": "500ms 指令下发",
+          "desc": "调度响应速度达电网辅助服务最高要求，支持秒级批量指令下发，实时状态订阅：SOC、功率、告警状态毫秒级推送。",
+          "points": [
+            "500ms 调度响应",
+            "秒级批量指令下发",
+            "SOC/功率毫秒级推送"
+          ]
+        },
+        {
+          "label": "多品牌 API 适配",
+          "desc": "VPP 运营商无需自研接入层，旭衡统一调度接口支持充放电指令、SOC 查询、告警订阅，完整调度记录与审计。",
+          "points": [
+            "统一接口免自研",
+            "充放电 + 告警订阅全覆盖",
+            "完整调度记录与审计"
+          ]
+        },
+        {
+          "label": "自定义调度策略",
+          "desc": "支持对接上游电网信号或自定义调度策略，满足不同电力市场交易模式，灵活适配各地监管要求。",
+          "points": [
+            "电网信号直连对接",
+            "自定义策略引擎",
+            "灵活适配各地监管"
+          ]
+        }
+      ],
+      "pqms": [
+        {
+          "label": "50次谐波全面监测",
+          "desc": "实时采集电压、电流、功率因数、谐波至第50次，精准捕捉各次谐波分量，快速定位问题设备与污染源。",
+          "points": [
+            "全参数实时采集",
+            "50次谐波精准捕捉",
+            "问题设备快速定位"
+          ]
+        },
+        {
+          "label": "多站点地图可视化",
+          "desc": "站点健康状态地图化展示，一眼掌握全网电能质量分布，多监测点数据统一分析中心。",
+          "points": [
+            "站点健康地图总览",
+            "全网电能质量分布",
+            "多点数据统一分析"
+          ]
+        },
+        {
+          "label": "远程参数调优",
+          "desc": "在线调整 SVG/APF 补偿参数，减少 90% 以上现场巡检频次，支持远程 OTA 升级现场设备固件。",
+          "points": [
+            "SVG/APF 参数在线调整",
+            "现场巡检减少 90%+",
+            "远程 OTA 固件升级"
+          ]
+        },
+        {
+          "label": "合规报告自动生成",
+          "desc": "日报/周报/月报一键导出，满足电网公司合规检查要求，历史分析报告帮助定位电能质量劣化根因。",
+          "points": [
+            "合规报告一键导出",
+            "满足电网公司检查要求",
+            "历史劣化根因分析"
+          ]
+        }
+      ]
+    },
+    "hwGatewayTitle": "推荐搭配硬件网关",
+    "hwGatewaySubtitle": "与以下硬件网关配合使用，实现设备本地接入与离线运行",
+    "hwNeuronIIDesc": "通用多协议网关（4G/WiFi/RS485/CAN）",
+    "hwNeuronIIIDesc": "充电站专用控制器（内置电表+DLB）",
+    "hwNeuronIIILiteDesc": "防跳闸控制器（配套 ATP III）",
+    "viewDetailsArrow": "查看详情 →",
+    "downloadSectionTitle": "资料下载",
+    "apiIntegDoc": "{title} API 集成文档",
+    "openApiSpec": "{title} OpenAPI 规范",
+    "configToolFile": "{title} 配置工具 v1.2",
+    "fileCatUserManual": "用户手册",
+    "fileCatInstallGuide": "安装指南",
+    "fileCatDatasheet": "数据手册",
+    "fileCatApiDoc": "API 文档",
+    "fileCatFirmware": "固件",
+    "fileCatTool": "工具软件",
+    "coreFeaturesLabel": "核心功能",
+    "galleryFallback": "产品图库"
   },
   "about": {
     "title": "关于我们",
@@ -509,7 +946,69 @@
     "downloadLink": "下载",
     "notUploaded": "暂未上传",
     "fileNotUploaded": "文件待上传",
-    "downloadFirmware": "下载固件 →"
+    "downloadFirmware": "下载固件 →",
+    "allCategories": "全部",
+    "searchPlaceholder": "搜索问题...",
+    "noMatchingFaq": "未找到匹配的问题",
+    "softwareDownloadTitle": "软件下载",
+    "softwareDownloadSubtitle": "下载旭衡电子官方软件工具和移动应用",
+    "industrialSoftware": "工控软件",
+    "mobileApp": "移动 App",
+    "updatedAt": "更新于 {date}",
+    "needDocs": "需要产品文档或固件更新？",
+    "goToDocCenter": "前往文档中心 →",
+    "androidApkDirect": "Android APK 直装",
+    "neuronConfigTool": "Neuron 配置工具",
+    "neuronConfigToolDesc": "网关参数配置、固件升级、设备诊断",
+    "hemsAppDesc": "家庭能源管理移动应用",
+    "essAppDesc": "储能系统监控移动应用",
+    "mockDocs": {
+      "neuronIIManual": "Neuron II 用户手册",
+      "neuronIIInstall": "Neuron II 安装指南",
+      "neuronIIIManual": "Neuron III 用户手册",
+      "neuronIIIInstall": "Neuron III 快速安装指南",
+      "neuronIIILiteManual": "Neuron III Lite 用户手册",
+      "hemsGuide": "HEMS 云平台使用指南",
+      "essManual": "ESS 运维手册",
+      "evcmsApiDoc": "EVCMS API 接口文档",
+      "pqmsManual": "PQMS 电能质量监测手册",
+      "vppGuide": "VPP 虚拟电厂接入指南"
+    },
+    "mockFirmwareChangelogs": {
+      "neuronII": "修复 Modbus TCP 连接稳定性问题",
+      "neuronIII": "DLB 响应速度优化至 80ms",
+      "neuronIIILite": "首个稳定版本"
+    },
+    "downloadTitle": "软件下载",
+    "downloadSubtitle": "下载旭衡电子官方软件工具和移动应用",
+    "categoryIndustrial": "工控软件",
+    "categoryMobile": "移动 App",
+    "updatedOn": "更新于 {date}",
+    "goToDocs": "前往文档中心 →",
+    "backToHelpCenter": "返回帮助中心",
+    "faqPageTitle": "常见问题 (FAQ)",
+    "faqPageSubtitle": "快速找到您的问题答案",
+    "noMatchingQuestions": "未找到匹配的问题",
+    "mockDocNeuronIIManual": "Neuron II 用户手册",
+    "mockDocNeuronIIInstall": "Neuron II 安装指南",
+    "mockDocNeuronIIIManual": "Neuron III 用户手册",
+    "mockDocNeuronIIIInstall": "Neuron III 快速安装指南",
+    "mockDocNeuronIIILiteManual": "Neuron III Lite 用户手册",
+    "mockDocHemsGuide": "HEMS 云平台使用指南",
+    "mockDocEssManual": "ESS 运维手册",
+    "mockDocEvcmsApi": "EVCMS API 接口文档",
+    "mockDocPqmsManual": "PQMS 电能质量监测手册",
+    "mockDocVppGuide": "VPP 虚拟电厂接入指南",
+    "mockSwNeuronTool": "Neuron 配置工具",
+    "mockSwNeuronToolDesc": "网关参数配置、固件升级、设备诊断",
+    "mockSwHemsApp": "AlwaysControl HEMS App",
+    "mockSwHemsAppDesc": "家庭能源管理移动应用",
+    "mockSwEssApp": "AlwaysControl ESS App",
+    "mockSwEssAppDesc": "储能系统监控移动应用",
+    "mockSwAndroidApk": "Android APK 直装",
+    "mockFwNeuronIIChangelog": "修复 Modbus TCP 连接稳定性问题",
+    "mockFwNeuronIIIChangelog": "DLB 响应速度优化至 80ms",
+    "mockFwNeuronIIILiteChangelog": "首个稳定版本"
   },
   "footer": {
     "company": "旭衡电子",
@@ -541,7 +1040,35 @@
     "allAccess": "全部接入方式",
     "cloud": "☁️ 云端",
     "gateway": "🔗 网关",
-    "contactCta": "没有找到您的品牌？联系我们"
+    "contactCta": "没有找到您的品牌？联系我们",
+    "capabilityTelemetry": "实时数据读取",
+    "capabilityControl": "充放电控制",
+    "capabilityHistory": "历史数据导出",
+    "filterDeviceType": "设备类型",
+    "filterAccessMethod": "接入方式",
+    "filterCapability": "能力",
+    "filterStatus": "状态",
+    "filterAll": "全部",
+    "filterBattery": "储能电池",
+    "filterInverter": "光伏逆变器",
+    "filterCharger": "充电桩",
+    "filterMeter": "智能电表",
+    "filterCloudDirect": "云端直连",
+    "filterGatewayAccess": "网关接入",
+    "filterBothAccess": "两者均支持",
+    "filterControlSupport": "支持充放电控制",
+    "filterTelemetryOnly": "仅实时读取",
+    "filterSupported": "已支持",
+    "filterDeveloping": "开发中",
+    "clearFilters": "清除所有筛选",
+    "brandCount": "共 {count} 个品牌",
+    "cloudDirectLabel": "云端直连",
+    "gatewayAccessLabel": "网关接入",
+    "supportedStatus": "已支持",
+    "developingStatus": "开发中",
+    "brandNotFound": "没有找到您的品牌？",
+    "contactUsQuick": "联系我们，快速接入",
+    "contactUsBtn": "联系我们"
   },
   "search": {
     "title": "搜索",
@@ -602,5 +1129,16 @@
         "desc": "完成申请，获取 API Key"
       }
     }
+  },
+  "meta": {
+    "siteName": "旭衡电子",
+    "siteNameEn": "AlwaysControl",
+    "siteDescription": "AlwaysControl Technology — 跨品牌能源管理解决方案，覆盖户用储能、工商储、充电站、VPP全场景",
+    "aboutPage": "关于我们",
+    "contactPage": "联系我们",
+    "ecosystemPage": "兼容生态",
+    "productsPage": "产品中心",
+    "helpPage": "帮助中心",
+    "developersPage": "开发者中心"
   }
 }

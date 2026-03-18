@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface FAQ {
   documentId: string;
@@ -11,13 +12,15 @@ interface FAQ {
 }
 
 export default function FAQClientFilter({ faqs }: { faqs: FAQ[] }) {
-  const categories = ['全部', ...Array.from(new Set(faqs.map((f) => f.category).filter(Boolean))) as string[]];
-  const [activeCategory, setActiveCategory] = useState('全部');
+  const t = useTranslations('help');
+  const allLabel = t('allCategories');
+  const categories = [allLabel, ...Array.from(new Set(faqs.map((f) => f.category).filter(Boolean))) as string[]];
+  const [activeCategory, setActiveCategory] = useState(allLabel);
   const [searchTerm, setSearchTerm] = useState('');
   const [openId, setOpenId] = useState<string | null>(null);
 
   const filtered = faqs.filter((faq) => {
-    const matchCategory = activeCategory === '全部' || faq.category === activeCategory;
+    const matchCategory = activeCategory === allLabel || faq.category === activeCategory;
     const matchSearch =
       !searchTerm ||
       faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,7 +34,7 @@ export default function FAQClientFilter({ faqs }: { faqs: FAQ[] }) {
       <div className="mb-8">
         <input
           type="text"
-          placeholder="搜索问题..."
+          placeholder={t('searchPlaceholder')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full rounded-lg border border-[#E2E8F0] bg-white px-4 py-3 text-[#0F172A] placeholder-[#94A3B8] focus:border-[#38C4E8] focus:outline-none focus:ring-1 focus:ring-[#38C4E8]/20"
@@ -92,7 +95,7 @@ export default function FAQClientFilter({ faqs }: { faqs: FAQ[] }) {
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="text-center text-[#475569] py-8">未找到匹配的问题</p>
+          <p className="text-center text-[#475569] py-8">{t('noMatchingFaq')}</p>
         )}
       </div>
     </>

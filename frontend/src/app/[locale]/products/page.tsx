@@ -17,8 +17,10 @@ function getCoverUrl(cover: StrapiMedia | string | null | undefined): string | n
 }
 
 import type { Metadata } from 'next';
-export async function generateMetadata(): Promise<Metadata> {
-  return { title: '产品中心 | 旭衡电子' };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return { title: `${t('productsPage')} | ${locale === 'zh-CN' || locale === 'zh-TW' ? t('siteName') : t('siteNameEn')}` };
 }
 
 

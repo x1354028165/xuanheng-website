@@ -6,8 +6,10 @@ import { MOCK_BRANDS } from '@/lib/mock-data';
 import type { StrapiCompatibleBrand } from '@/types/strapi';
 
 import type { Metadata } from 'next';
-export async function generateMetadata(): Promise<Metadata> {
-  return { title: '兼容生态 | 旭衡电子' };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return { title: `${t('ecosystemPage')} | ${locale === 'zh-CN' || locale === 'zh-TW' ? t('siteName') : t('siteNameEn')}` };
 }
 
 

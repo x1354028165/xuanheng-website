@@ -163,7 +163,12 @@
     "tagEss": "C&I",
     "tagEvcms": "EV Charging",
     "tagVpp": "VPP",
-    "tagPqms": "Power Quality"
+    "tagPqms": "Power Quality",
+    "swDescHems": "Smart Home Energy Management",
+    "swDescEss": "Commercial & Industrial Energy Storage Arbitrage",
+    "swDescEvcms": "Smart Charging Station Dispatch",
+    "swDescPqms": "Power Quality Monitoring & Management",
+    "swDescVpp": "Virtual Power Plant Aggregation & Dispatch"
   },
   "solutions": {
     "title": "Solutions",
@@ -184,7 +189,14 @@
       "feature2": "Smart scheduling: Optimize based on weather and usage patterns",
       "feature3": "Backup power: Seamless off-grid switching, zero interruption",
       "feature4": "Cloud Direct Access: No additional gateway hardware required; devices connect directly via cloud APIs for rapid, low-cost deployment.",
-      "background": "Households have installed photovoltaic + energy storage systems, but the devices come from different brands with varied protocols, lacking a unified monitoring and dispatch interface. Complex peak/off-peak electricity pricing policies make manual management unable to maximize energy-saving benefits."
+      "background": "Households have installed photovoltaic + energy storage systems, but the devices come from different brands with varied protocols, lacking a unified monitoring and dispatch interface. Complex peak/off-peak electricity pricing policies make manual management unable to maximize energy-saving benefits.",
+      "caseCount": "2",
+      "case0Area": "🇹🇼 Villa Community, Taiwan, China",
+      "case0Scale": "Multi-household PV + ESS systems with various brands",
+      "case0Problem": "35% electricity cost reduction after unified integration, self-consumption rate increased to 72%",
+      "case1Area": "🇦🇺 Home Energy Storage Users, Australia",
+      "case1Scale": "3.5kW PV + 5kWh ESS integrated with local peak/off-peak tariff structure",
+      "case1Problem": "Automatic electricity usage strategy switching, saving approximately 180 AUD per month"
     },
     "ess": {
       "title": "Commercial & Industrial Storage",
@@ -197,7 +209,14 @@
       "feature2": "Arbitrage engine: Identify optimal charge/discharge timing automatically",
       "feature3": "Multi-brand: Manage all storage brands from one platform",
       "feature4": "Multi-site Unified Management: Centralized monitoring of multiple energy storage sites, improving operational efficiency by 80% with tiered alarm notifications.",
-      "background": "Factories, commercial buildings, and campuses face high pressure from large peak/off-peak electricity price differences and high electricity costs. While energy storage systems are a core cost-saving solution, managing distributed multi-site setups is complex, and integrating cross-brand equipment is challenging."
+      "background": "Factories, commercial buildings, and campuses face high pressure from large peak/off-peak electricity price differences and high electricity costs. While energy storage systems are a core cost-saving solution, managing distributed multi-site setups is complex, and integrating cross-brand equipment is challenging.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Distributed Energy Storage, Longhua, Shenzhen",
+      "case0Scale": "Hybrid deployment of multi-brand PCS/BMS",
+      "case0Problem": "Cloud platform deployment completed in 5 days, cross-brand device integration achieved in 10 days",
+      "case1Area": "🇨🇳 A commercial complex in Shanghai",
+      "case1Scale": "200kWh multi-brand hybrid energy storage",
+      "case1Problem": "Annual peak-valley arbitrage revenue of 800,000 RMB, O&M efficiency improved by 80%"
     },
     "evcms": {
       "title": "EV Charging Station",
@@ -210,7 +229,14 @@
       "feature2": "OCPP protocol: Compatible with major charger brands",
       "feature3": "Smart billing: Flexible pricing strategies and membership management",
       "feature4": "Real-time Monitoring & Operational Data: One-stop visual management of charging records, fault alarms, and power curves.",
-      "background": "Parking lots, office buildings, and corporate campuses need to deploy multiple charging piles, but main line capacity is limited. Simultaneous fast charging by multiple piles can easily trip the main circuit breaker. Mixed charging pile brands and varying protocols make unified management difficult."
+      "background": "Parking lots, office buildings, and corporate campuses need to deploy multiple charging piles, but main line capacity is limited. Simultaneous fast charging by multiple piles can easily trip the main circuit breaker. Mixed charging pile brands and varying protocols make unified management difficult.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Office building parking lot in Luohu, Shenzhen",
+      "case0Scale": "40 charging piles, original main line 150kW, no capacity expansion",
+      "case0Problem": "Trip rate reduced to 0 after DLB deployment, charging throughput increased by 60%",
+      "case1Area": "🇲🇾 Charging station in Malaysia",
+      "case1Scale": "Mixed deployment of multi-brand OCPP charging piles",
+      "case1Problem": "Unified management platform launched, O&M labor costs reduced by 55%"
     },
     "vpp": {
       "title": "Virtual Power Plant",
@@ -223,7 +249,14 @@
       "feature2": "Market access: Connect to major power spot markets and ancillary services",
       "feature3": "Revenue analytics: Real-time arbitrage calculation with transparent settlement",
       "feature4": "Multiple Electricity Market Access: Supports various trading models such as spot markets and peak-shaving/frequency regulation ancillary services.",
-      "background": "Dispersed energy assets cannot individually participate in grid dispatch. VPP aggregates a large number of distributed batteries, coordinating them into a unified 'virtual power plant' that collectively discharges during peak hours and stores energy during off-peak hours, participating in electricity spot markets and demand response mechanisms to generate revenue."
+      "background": "Dispersed energy assets cannot individually participate in grid dispatch. VPP aggregates a large number of distributed batteries, coordinating them into a unified 'virtual power plant' that collectively discharges during peak hours and stores energy during off-peak hours, participating in electricity spot markets and demand response mechanisms to generate revenue.",
+      "caseCount": "2",
+      "case0Area": "🇦🇺 VPP operator in Australia",
+      "case0Scale": "Aggregating multi-brand residential energy storage devices to participate in FCAS demand response",
+      "case0Problem": "Dispatch commands issued within 500ms, asset utilization significantly improved",
+      "case1Area": "🇨🇳 A Provincial Energy Aggregator",
+      "case1Scale": "Aggregating 500 Distributed Energy Storage Stations (50MWh)",
+      "case1Problem": "First-year revenue of 2 million RMB, response time < 2s"
     },
     "pqms": {
       "title": "Power Quality Management",
@@ -236,7 +269,14 @@
       "feature2": "Harmonic analysis: Identify harmonic sources with remediation guidance",
       "feature3": "Alerting: Real-time anomaly push notifications, proactive prevention",
       "feature4": "Multi-level Alarm Notifications: Real-time alerts via Enterprise WeChat, email, and SMS for early warning of abnormalities to prevent issues.",
-      "background": "Industrial parks, data centers, hospitals, and commercial complexes have stringent requirements for power quality. Issues like harmonic pollution, voltage sags, and three-phase imbalance directly affect equipment lifespan and production safety, but traditional manual inspection methods are slow and lack comprehensive coverage."
+      "background": "Industrial parks, data centers, hospitals, and commercial complexes have stringent requirements for power quality. Issues like harmonic pollution, voltage sags, and three-phase imbalance directly affect equipment lifespan and production safety, but traditional manual inspection methods are slow and lack comprehensive coverage.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Industrial Park Harmonic Management",
+      "case0Scale": "THD > 15%, frequent failures of precision equipment",
+      "case0Problem": "Accurate harmonic source localization, equipment failure rate reduced by 78%",
+      "case1Area": "🇨🇳 Data Center Power Quality Management",
+      "case1Scale": "Voltage fluctuations in critical loads, manual inspections lagging",
+      "case1Problem": "7×24 real-time monitoring, early warning of 3 potential faults, reducing on-site inspections by 90%"
     },
     "painPointsTitle": "Pain Points",
     "highlightsTitle": "Key Features",
@@ -257,7 +297,70 @@
     "sceneBackground": "Scene Background",
     "solutionDescription": "Solution Description",
     "applicationCases": "Application Cases",
-    "relatedProductsDesc": "Products involved in this solution, click to learn details"
+    "relatedProductsDesc": "Products involved in this solution, click to learn details",
+    "cases": {
+      "hems": [
+        {
+          "area": "🇹🇼 Villa Community in Taiwan, China",
+          "scale": "Multi-household PV + ESS systems, various brands",
+          "problem": "Unified access reduced electricity costs by 35%, self-consumption rate increased to 72%"
+        },
+        {
+          "area": "🇦🇺 Australian Home Energy Storage Users",
+          "scale": "Combined with local peak-valley tariff structure, 3.5kW PV + 5kWh ESS",
+          "problem": "Automatic switching of electricity usage strategy, monthly savings of approximately 180 AUD"
+        }
+      ],
+      "ess": [
+        {
+          "area": "🇨🇳 Distributed Energy Storage in Longhua, Shenzhen",
+          "scale": "Mixed deployment of multi-brand PCS/BMS",
+          "problem": "Cloud platform built in 5 days, cross-brand device integration completed in 10 days"
+        },
+        {
+          "area": "🇨🇳 A Commercial Complex in Shanghai",
+          "scale": "200kWh multi-brand hybrid energy storage",
+          "problem": "Annual peak-valley arbitrage revenue of 800,000 RMB, operational efficiency improved by 80%"
+        }
+      ],
+      "evcms": [
+        {
+          "area": "🇨🇳 Office Building Parking Lot in Luohu, Shenzhen",
+          "scale": "40 chargers, original main line 150kW, no capacity expansion",
+          "problem": "After DLB deployment, trip rate dropped to 0, charging throughput increased by 60%"
+        },
+        {
+          "area": "🇲🇾 Charging Station in Malaysia",
+          "scale": "Mixed deployment of multi-brand OCPP charging piles",
+          "problem": "Unified management platform launched, reducing operational labor costs by 55%"
+        }
+      ],
+      "vpp": [
+        {
+          "area": "🇦🇺 VPP Operator in Australia",
+          "scale": "Aggregating multi-brand home energy storage devices, participating in FCAS demand response",
+          "problem": "Dispatch commands issued within 500ms, asset utilization significantly improved"
+        },
+        {
+          "area": "🇨🇳 A Provincial Energy Aggregator",
+          "scale": "Aggregating 500 Distributed Energy Storage Stations (50MWh)",
+          "problem": "First-year revenue of 2 million RMB, response time < 2s"
+        }
+      ],
+      "pqms": [
+        {
+          "area": "🇨🇳 Industrial Park Harmonic Management",
+          "scale": "THD > 15%, frequent failures of precision equipment",
+          "problem": "Accurate harmonic source localization, equipment failure rate reduced by 78%"
+        },
+        {
+          "area": "🇨🇳 Data Center Power Quality Management",
+          "scale": "Voltage fluctuations in critical loads, manual inspections lagging",
+          "problem": "7×24 real-time monitoring, early warning of 3 potential faults, reducing on-site inspections by 90%"
+        }
+      ]
+    },
+    "coreFeaturesList": "Core Features List"
   },
   "products": {
     "title": "Products",
@@ -317,31 +420,136 @@
       "title": "HEMS",
       "tagline": "Home Energy Management System",
       "description": "HEMS provides intelligent energy scheduling for residential energy storage, optimizing PV-storage-charging integration to maximize green energy self-consumption and reduce electricity bills.",
-      "positioning": "Unified Management for Home PV, Storage, and Charging"
+      "positioning": "Unified Management for Home PV, Storage, and Charging",
+      "swScenarioText": "Supports comprehensive management services for new energy power stations, including data acquisition, station monitoring, operation, and maintenance for photovoltaic, energy storage, and other new energy sources. Through a cloud-based big data analytics platform, it helps users achieve transparent management, automated operation and maintenance, intelligent diagnostics, and decision support for all their new energy power stations. It fully meets users' needs at various levels throughout the power station lifecycle, maximizing station value and protecting users' core assets.",
+      "swFeatureCount": "3",
+      "swFeature0Label": "Secure & Stable",
+      "swFeature0Desc": "Based on a dual architecture for network attack defense and data privacy protection, it creates a trusted operating environment and a closed-loop for asset security in the energy management system.",
+      "swFeature0Point0": "Financial-grade security protection and access control",
+      "swFeature0Point1": "Disaster recovery + encrypted dual backup",
+      "swFeature0Point2": "Compliance certifications for domestic and international standards",
+      "swFeature1Label": "Effortless O&M",
+      "swFeature1Desc": "Comprehensive coverage from component-level to station-level to batch diagnostics, with precise guidance for maintenance, simplifying O&M tasks and improving efficiency.",
+      "swFeature1Point0": "AI Intelligent O&M Assistant",
+      "swFeature1Point1": "Real-time fault alarms & automatic diagnostics",
+      "swFeature1Point2": "Full lifecycle traceable O&M guarantee",
+      "swFeature2Label": "Intelligent Experience",
+      "swFeature2Desc": "Advanced algorithms for intelligent scheduling, multiple energy modes to choose from, and easy green power management at your fingertips.",
+      "swFeature2Point0": "Minimalist configuration, one-step setup",
+      "swFeature2Point1": "AI energy management, intelligent and efficient",
+      "swFeature2Point2": "Customizable dashboard, full control at your fingertips"
     },
     "ess": {
       "title": "ESS",
       "tagline": "Commercial & Industrial Energy Storage System",
       "description": "ESS targets commercial and industrial energy storage, supporting peak-valley arbitrage, demand management, and backup power applications.",
-      "positioning": "Multi-site Monitoring for Commercial & Industrial Energy Storage"
+      "positioning": "Multi-site Monitoring for Commercial & Industrial Energy Storage",
+      "swScenarioText": "Can be used for unified monitoring and dispatch of energy storage assets across multiple sites such as factories, commercial buildings, and parks. Enables cross-brand device integration, automatic peak-valley arbitrage, and demand management, reducing overall electricity costs by 20~40%.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Multi-site Unified Monitoring",
+      "swFeature0Desc": "Manage all energy storage sites from a single platform, view real-time SOC, power, and health status of each site. Increases operational efficiency by 80% with hierarchical alarm notifications.",
+      "swFeature0Point0": "Multi-site overview on a single screen",
+      "swFeature0Point1": "Intelligent hierarchical alarm notifications",
+      "swFeature0Point2": "Real-time health status tracking",
+      "swFeature1Label": "Intelligent Peak-Valley Arbitrage",
+      "swFeature1Desc": "Automatically identifies optimal charging and discharging times, charging during low-price periods and discharging during high-price periods to maximize revenue from electricity price differentials. The strategy engine dynamically responds to real-time price fluctuations.",
+      "swFeature1Point0": "Dynamic response to real-time electricity prices",
+      "swFeature1Point1": "Automatic execution of optimal charge/discharge strategies",
+      "swFeature1Point2": "Automatic generation of revenue reports",
+      "swFeature2Label": "Demand Management",
+      "swFeature2Desc": "Real-time monitoring of power demand, intelligent peak shaving and valley filling to avoid exceeding high demand charges, eliminating the need for costly transformer capacity expansion.",
+      "swFeature2Point0": "Real-time power demand monitoring",
+      "swFeature2Point1": "Automatic peak shaving and valley filling scheduling",
+      "swFeature2Point2": "Significant reduction in capacity expansion costs",
+      "swFeature3Label": "Energy Efficiency Report",
+      "swFeature3Desc": "Daily/Weekly/Monthly reports are automatically generated, supporting export to Excel/PDF. Complete energy consumption and revenue analysis to assist operational decision-making.",
+      "swFeature3Point0": "Automatic generation of daily/weekly/monthly reports",
+      "swFeature3Point1": "Supports Excel/PDF export",
+      "swFeature3Point2": "Complete energy revenue analysis"
     },
     "evcms": {
       "title": "EVCMS",
       "tagline": "EV Charging Management System",
       "description": "EVCMS provides full lifecycle EV charging station management, supporting multi-charger coordination, dynamic load balancing, and OCPP protocol integration.",
-      "positioning": "Multi-pile Load Balancing for Charging Stations"
+      "positioning": "Multi-pile Load Balancing for Charging Stations",
+      "swScenarioText": "Can be used for dynamic load balancing and operational management of multi-pile charging stations in parking lots, office buildings, campuses, etc., enabling coordinated multi-pile charging and smart billing without expanding the main power line capacity.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "DLB Dynamic Load Balancing",
+      "swFeature0Desc": "Millisecond-level real-time detection of the total main line load, dynamically allocating available power to each pile. Supports more charging piles operating simultaneously without expanding the main line, completely preventing tripping.",
+      "swFeature0Point0": "Millisecond-level dynamic power allocation",
+      "swFeature0Point1": "Zero expansion supports multi-pile simultaneous charging",
+      "swFeature0Point2": "Completely eliminates tripping risk",
+      "swFeature1Label": "OCPP Protocol Compatibility",
+      "swFeature1Desc": "Supports OCPP 1.6J / 2.0.1, compatible with mainstream charging pile brands on the market. No need to replace existing hardware, enabling quick integration for unified management.",
+      "swFeature1Point0": "Full compatibility with OCPP 1.6J / 2.0.1",
+      "swFeature1Point1": "Seamless access for mainstream brands",
+      "swFeature1Point2": "No need to replace existing equipment",
+      "swFeature2Label": "Intelligent Billing System",
+      "swFeature2Desc": "Supports various billing strategies such as time-based billing, energy-based billing, and member discounts. Features one-click settlement and supports VIP priority mode and queue mode.",
+      "swFeature2Point0": "Flexible configuration of multi-dimensional billing strategies",
+      "swFeature2Point1": "VIP Priority + Queue Mode",
+      "swFeature2Point2": "One-click settlement, fast payment collection",
+      "swFeature3Label": "Operational Data Analysis",
+      "swFeature3Desc": "Real-time visualization of charging records, fault alarms, and power curves. One-stop access to full-site operational data, helping maximize site efficiency.",
+      "swFeature3Point0": "Complete traceability of charging records",
+      "swFeature3Point1": "Real-time visualization of power curves",
+      "swFeature3Point2": "One-stop analysis of site revenue"
     },
     "pqms": {
       "title": "PQMS",
       "tagline": "Power Quality Monitoring System",
       "description": "PQMS monitors power grid quality in real time, providing harmonic analysis, voltage fluctuation alerts, and electricity auditing.",
-      "positioning": "Remote Power Quality Monitoring"
+      "positioning": "Remote Power Quality Monitoring",
+      "swScenarioText": "Can be used for remote power quality monitoring and management in places such as industrial parks, data centers, and hospitals, enabling harmonic analysis, online optimization of compensation parameters, and automatic generation of compliance reports.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Comprehensive monitoring of up to 50th order harmonics",
+      "swFeature0Desc": "Real-time collection of voltage, current, power factor, and harmonics up to the 50th order, accurately capturing each harmonic component, and quickly locating problematic equipment and pollution sources.",
+      "swFeature0Point0": "Real-time collection of all parameters",
+      "swFeature0Point1": "Accurate capture of 50th order harmonics",
+      "swFeature0Point2": "Quick location of problematic equipment",
+      "swFeature1Label": "Multi-site map visualization",
+      "swFeature1Desc": "Map-based display of site health status, providing an overview of the entire network's power quality distribution at a glance, with a unified analysis center for data from multiple monitoring points.",
+      "swFeature1Point0": "Overview of site health map",
+      "swFeature1Point1": "Distribution of power quality across the entire network",
+      "swFeature1Point2": "Unified analysis of multi-point data",
+      "swFeature2Label": "Remote parameter optimization",
+      "swFeature2Desc": "Online adjustment of SVG/APF compensation parameters, reducing on-site inspection frequency by over 90%, supporting remote OTA firmware upgrades for field devices.",
+      "swFeature2Point0": "Online adjustment of SVG/APF parameters",
+      "swFeature2Point1": "On-site inspections reduced by 90%+",
+      "swFeature2Point2": "Remote OTA firmware upgrade",
+      "swFeature3Label": "Automatic compliance report generation",
+      "swFeature3Desc": "One-click export of daily/weekly/monthly reports to meet grid company compliance inspection requirements. Historical analysis reports help identify root causes of power quality degradation.",
+      "swFeature3Point0": "One-click export of compliance reports",
+      "swFeature3Point1": "Meets grid company inspection requirements",
+      "swFeature3Point2": "Historical root cause analysis of degradation"
     },
     "vpp": {
       "title": "VPP",
       "tagline": "Virtual Power Plant Aggregation Platform",
       "description": "VPP aggregates distributed energy storage, PV, and EV chargers to participate in grid peak shaving and frequency regulation, unlocking additional revenue.",
-      "positioning": "Virtual Power Plant Dispatch Platform"
+      "positioning": "Virtual Power Plant Dispatch Platform",
+      "swScenarioText": "Can be used by VPP operators to aggregate multi-brand distributed energy storage devices, enabling batch scheduling and real-time status monitoring via cloud APIs, and participating in grid ancillary service markets for revenue.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Ten-thousand-level device aggregation",
+      "swFeature0Desc": "Unified scheduling of distributed energy storage, photovoltaics, and charging piles, with unlimited aggregation scale. Supports mixed deployment of heterogeneous brands and has integrated cloud APIs of mainstream energy storage brands.",
+      "swFeature0Point0": "Unified scheduling of ten-thousand-level devices",
+      "swFeature0Point1": "Mixed deployment of heterogeneous brands",
+      "swFeature0Point2": "Mainstream cloud APIs have been integrated",
+      "swFeature1Label": "500ms Command Dispatch",
+      "swFeature1Desc": "Scheduling response speed meets the highest requirements for grid ancillary services, supports second-level batch command dispatch, real-time status subscription: SOC, power, alarm status pushed at millisecond level.",
+      "swFeature1Point0": "500ms Scheduling Response",
+      "swFeature1Point1": "Second-level Batch Command Dispatch",
+      "swFeature1Point2": "SOC/Power Millisecond-level Push",
+      "swFeature2Label": "Multi-brand API Adaptation",
+      "swFeature2Desc": "VPP operators do not need to develop their own access layer. AlwaysControl's unified scheduling interface supports charge/discharge commands, SOC queries, alarm subscriptions, complete scheduling records and auditing.",
+      "swFeature2Point0": "Unified Interface, No Self-development Required",
+      "swFeature2Point1": "Full Coverage of Charge/Discharge + Alarm Subscription",
+      "swFeature2Point2": "Complete Scheduling Records and Auditing",
+      "swFeature3Label": "Custom Scheduling Strategies",
+      "swFeature3Desc": "Supports connecting to upstream grid signals or custom scheduling strategies, meeting different electricity market trading models, flexibly adapting to local regulatory requirements.",
+      "swFeature3Point0": "Direct Grid Signal Connection",
+      "swFeature3Point1": "Custom Strategy Engine",
+      "swFeature3Point2": "Flexibly adapts to local regulations"
     },
     "hardwareLabel": "Smart Gateway",
     "softwareLabel": "Cloud Platform",
@@ -380,7 +588,236 @@
     "accessMethodsTitle": "Access Methods",
     "accessMethodsSubtitle": "You decide the access method, no binding relationship",
     "applyDemoExperience": "Apply for Demo Experience",
-    "contactBusiness": "Contact Business"
+    "contactBusiness": "Contact Business",
+    "recommendHwTitle": "Recommended Hardware Gateway",
+    "recommendHwSubtitle": "Works with the following hardware gateways to enable local device access and offline operation",
+    "viewDetailArrow": "View Details →",
+    "quickStartGuide": "{title} Quick Start Guide",
+    "apiIntegrationDoc": "{title} API Integration Documentation",
+    "openapiSpec": "{title} OpenAPI Specification",
+    "firmwareFile": "{title} Firmware v2.3.1",
+    "configTool": "{title} Configuration Tool v1.2",
+    "downloadCategories": {
+      "userManual": "User Manual",
+      "apiDocs": "API Documentation",
+      "datasheet": "Datasheet",
+      "installGuide": "Installation Guide",
+      "firmware": "Firmware",
+      "toolSoftware": "Tool Software"
+    },
+    "hwDesc": {
+      "neuron-ii": "Universal Multi-Protocol Gateway (4G/WiFi/RS485/CAN)",
+      "neuron-iii": "Dedicated Controller for Charging Stations (Built-in Meter + DLB)",
+      "neuron-iii-lite": "Anti-Trip Controller (Compatible with ATP III)"
+    },
+    "swScenarios": {
+      "hems": "Supports comprehensive management services for new energy power stations, including data acquisition, station monitoring, operation, and maintenance for applications like photovoltaics and energy storage. Through a cloud-based big data analytics platform, it helps users achieve transparent management, automated operation and maintenance, intelligent diagnostics, and assisted decision-making for all their new energy power stations. It fully meets users' needs at various levels throughout the power station lifecycle, maximizing station value and protecting core assets.",
+      "ess": "Can be used for unified monitoring and dispatch of multi-site energy storage assets in factories, commercial buildings, campuses, etc. It enables cross-brand device integration, automatic peak-valley arbitrage, and demand management, reducing overall electricity costs by 20~40%.",
+      "evcms": "Can be used for dynamic load balancing and operational management of multi-pile charging stations in parking lots, office buildings, campuses, etc. It enables coordinated charging and intelligent billing for multiple piles without the need for main line capacity expansion.",
+      "vpp": "Can be used by VPP operators to aggregate multi-brand distributed energy storage devices. It enables batch dispatch and real-time status monitoring through cloud APIs, allowing participation in grid ancillary service markets for revenue generation.",
+      "pqms": "Can be used for remote monitoring and management of power quality in industrial parks, data centers, hospitals, and other facilities. It enables harmonic analysis, online optimization of compensation parameters, and automatic generation of compliance reports."
+    },
+    "swFeatures": {
+      "hems": [
+        {
+          "label": "Secure and Stable",
+          "desc": "Based on a dual architecture for network attack defense and data privacy protection, it creates a trusted operating environment and a closed-loop for asset security in the energy management system.",
+          "points": [
+            "Financial-grade security protection and access control",
+            "Disaster recovery + encrypted dual backup",
+            "Compliance certifications for domestic and international standards"
+          ]
+        },
+        {
+          "label": "Worry-Free Operation and Maintenance",
+          "desc": "Comprehensive coverage from component-level to station-level to batch diagnostics, with precise guidance for maintenance recommendations, simplifying O&M tasks and improving efficiency.",
+          "points": [
+            "AI-powered intelligent O&M assistant",
+            "Real-time fault alarms & automatic diagnostics",
+            "Full-cycle traceable O&M guarantee"
+          ]
+        },
+        {
+          "label": "Intelligent Experience",
+          "desc": "Advanced algorithm-based intelligent scheduling, multiple energy modes to choose from, and easy green power management at your fingertips.",
+          "points": [
+            "Minimalist configuration, one-step setup",
+            "AI-powered energy management, smart and efficient",
+            "Customizable dashboard, control at your will"
+          ]
+        }
+      ],
+      "ess": [
+        {
+          "label": "Unified Multi-Site Monitoring",
+          "desc": "Manage all energy storage sites from a single platform, view real-time SOC, power, and health status of each site, improving O&M efficiency by 80%, with tiered alarm notifications.",
+          "points": [
+            "Multi-site overview on a single screen",
+            "Intelligent tiered alarm notifications",
+            "Real-time health status tracking"
+          ]
+        },
+        {
+          "label": "Intelligent Peak-Valley Arbitrage",
+          "desc": "Automatically identifies optimal charging and discharging times, charging during low-price periods and discharging during high-price periods, maximizing revenue from electricity price differentials. The strategy engine dynamically responds to real-time price fluctuations.",
+          "points": [
+            "Dynamic response to real-time electricity prices",
+            "Automatic execution of optimal charging/discharging strategies",
+            "Automatic generation of revenue reports"
+          ]
+        },
+        {
+          "label": "Demand Management",
+          "desc": "Monitors power demand in real-time, intelligently shaves peaks and fills valleys to avoid exceeding demand charge limits and high transformer capacity expansion fees.",
+          "points": [
+            "Real-time monitoring of power demand",
+            "Automatic peak shaving and valley filling dispatch",
+            "Significant reduction in capacity expansion costs"
+          ]
+        },
+        {
+          "label": "Energy Efficiency Reports",
+          "desc": "Automatic generation of daily/weekly/monthly reports, supports export to Excel/PDF, providing complete energy consumption and revenue analysis to aid operational decisions.",
+          "points": [
+            "Automatic daily/weekly/monthly report generation",
+            "Supports Excel/PDF export",
+            "Complete energy revenue analysis"
+          ]
+        }
+      ],
+      "evcms": [
+        {
+          "label": "DLB Dynamic Load Balancing",
+          "desc": "Millisecond-level real-time detection of total main line load, dynamically allocates available power to each pile, supports simultaneous operation of more charging piles without main line capacity expansion, completely eliminating tripping risks.",
+          "points": [
+            "Millisecond-level dynamic power allocation",
+            "Zero capacity expansion supports multi-pile simultaneous charging",
+            "Completely eliminates tripping risks"
+          ]
+        },
+        {
+          "label": "OCPP Protocol Compatibility",
+          "desc": "Supports OCPP 1.6J / 2.0.1, compatible with mainstream charging pile brands on the market, enabling quick integration into unified management without replacing existing hardware.",
+          "points": [
+            "Full compatibility with OCPP 1.6J / 2.0.1",
+            "Seamless integration with mainstream brands",
+            "No need to replace existing equipment"
+          ]
+        },
+        {
+          "label": "Intelligent Billing System",
+          "desc": "Supports various billing strategies such as time-based, energy-based, and member discounts, one-click settlement, with support for VIP priority mode and queue mode.",
+          "points": [
+            "Flexible configuration of multi-dimensional billing strategies",
+            "VIP priority + queue mode",
+            "One-click settlement, fast payment collection"
+          ]
+        },
+        {
+          "label": "Operational Data Analysis",
+          "desc": "Real-time visualization of charging records, fault alarms, and power curves, providing one-stop access to full-site operational data, helping maximize site benefits.",
+          "points": [
+            "Full traceability of charging records",
+            "Real-time visualization of power curves",
+            "One-stop analysis of site revenue"
+          ]
+        }
+      ],
+      "vpp": [
+        {
+          "label": "Aggregation of Tens of Thousands of Devices",
+          "desc": "Unified dispatch of distributed energy storage, photovoltaics, and charging piles, with unlimited aggregation scale, supports mixed deployment of heterogeneous brands, and has integrated cloud APIs of mainstream energy storage brands.",
+          "points": [
+            "Unified dispatch of tens of thousands of devices",
+            "Mixed deployment of heterogeneous brands",
+            "Integration of mainstream cloud APIs completed"
+          ]
+        },
+        {
+          "label": "500ms Command Issuance",
+          "desc": "Dispatch response speed meets the highest requirements for grid ancillary services, supports second-level batch command issuance, real-time status subscription: SOC, power, alarm status pushed at millisecond level.",
+          "points": [
+            "500ms dispatch response",
+            "Second-level batch command issuance",
+            "Millisecond-level SOC/power push"
+          ]
+        },
+        {
+          "label": "Multi-Brand API Adaptation",
+          "desc": "VPP operators do not need to develop their own access layer. AlwaysControl's unified dispatch interface supports charge/discharge commands, SOC queries, alarm subscriptions, with complete dispatch records and auditing.",
+          "points": [
+            "Unified interface eliminates self-development",
+            "Comprehensive coverage of charge/discharge + alarm subscription",
+            "Complete dispatch records and auditing"
+          ]
+        },
+        {
+          "label": "Customizable Dispatch Strategies",
+          "desc": "Supports connection to upstream grid signals or custom dispatch strategies, meeting different electricity market trading models, and flexibly adapting to local regulatory requirements.",
+          "points": [
+            "Direct connection to grid signals",
+            "Customizable strategy engine",
+            "Flexible adaptation to local regulations"
+          ]
+        }
+      ],
+      "pqms": [
+        {
+          "label": "Comprehensive Monitoring up to 50th Harmonic",
+          "desc": "Real-time acquisition of voltage, current, power factor, and harmonics up to the 50th order, accurately capturing each harmonic component, quickly locating problematic equipment and pollution sources.",
+          "points": [
+            "Real-time acquisition of all parameters",
+            "Accurate capture of 50th order harmonics",
+            "Quick location of problematic equipment"
+          ]
+        },
+        {
+          "label": "Multi-Site Map Visualization",
+          "desc": "Map-based display of site health status, providing an overview of power quality distribution across the entire network at a glance, with a unified analysis center for multi-monitoring point data.",
+          "points": [
+            "Overview map of site health",
+            "Distribution of power quality across the entire network",
+            "Unified analysis of multi-point data"
+          ]
+        },
+        {
+          "label": "Remote Parameter Optimization",
+          "desc": "Online adjustment of SVG/APF compensation parameters, reducing on-site inspection frequency by over 90%, supports remote OTA firmware upgrades for field devices.",
+          "points": [
+            "Online adjustment of SVG/APF parameters",
+            "On-site inspections reduced by 90%+",
+            "Remote OTA firmware upgrades"
+          ]
+        },
+        {
+          "label": "Automatic Compliance Report Generation",
+          "desc": "One-click export of daily/weekly/monthly reports, meeting grid company compliance inspection requirements, historical analysis reports help identify root causes of power quality degradation.",
+          "points": [
+            "One-click export of compliance reports",
+            "Meets grid company inspection requirements",
+            "Root cause analysis of historical degradation"
+          ]
+        }
+      ]
+    },
+    "hwGatewayTitle": "Recommended Hardware Gateway Pairing",
+    "hwGatewaySubtitle": "Use in conjunction with the following hardware gateways to achieve local device access and offline operation",
+    "hwNeuronIIDesc": "Universal Multi-Protocol Gateway (4G/WiFi/RS485/CAN)",
+    "hwNeuronIIIDesc": "Charging Station Dedicated Controller (Built-in Meter + DLB)",
+    "hwNeuronIIILiteDesc": "Anti-Trip Controller (Compatible with ATP III)",
+    "viewDetailsArrow": "View Details →",
+    "downloadSectionTitle": "Documentation Download",
+    "apiIntegDoc": "{title} API Integration Documentation",
+    "openApiSpec": "{title} OpenAPI Specification",
+    "configToolFile": "{title} Configuration Tool v1.2",
+    "fileCatUserManual": "User Manual",
+    "fileCatInstallGuide": "Installation Guide",
+    "fileCatDatasheet": "Datasheet",
+    "fileCatApiDoc": "API Documentation",
+    "fileCatFirmware": "Firmware",
+    "fileCatTool": "Tool Software",
+    "coreFeaturesLabel": "Core Features",
+    "galleryFallback": "Product Gallery"
   },
   "about": {
     "title": "About Us",
@@ -509,7 +946,69 @@
     "downloadLink": "Download",
     "notUploaded": "Not Uploaded Yet",
     "fileNotUploaded": "File Pending Upload",
-    "downloadFirmware": "Download Firmware →"
+    "downloadFirmware": "Download Firmware →",
+    "allCategories": "All",
+    "searchPlaceholder": "Search for questions...",
+    "noMatchingFaq": "No matching questions found",
+    "softwareDownloadTitle": "Software Download",
+    "softwareDownloadSubtitle": "Download official AlwaysControl software tools and mobile applications",
+    "industrialSoftware": "Industrial Control Software",
+    "mobileApp": "Mobile App",
+    "updatedAt": "Updated on {date}",
+    "needDocs": "Need product documentation or firmware updates?",
+    "goToDocCenter": "Go to Documentation Center →",
+    "androidApkDirect": "Android APK Direct Install",
+    "neuronConfigTool": "Neuron Configuration Tool",
+    "neuronConfigToolDesc": "Gateway parameter configuration, firmware upgrade, device diagnostics",
+    "hemsAppDesc": "Home Energy Management mobile application",
+    "essAppDesc": "Energy Storage System Monitoring Mobile Application",
+    "mockDocs": {
+      "neuronIIManual": "Neuron II User Manual",
+      "neuronIIInstall": "Neuron II Installation Guide",
+      "neuronIIIManual": "Neuron III User Manual",
+      "neuronIIIInstall": "Neuron III Quick Installation Guide",
+      "neuronIIILiteManual": "Neuron III Lite User Manual",
+      "hemsGuide": "HEMS Cloud Platform User Guide",
+      "essManual": "ESS Operation and Maintenance Manual",
+      "evcmsApiDoc": "EVCMS API Interface Documentation",
+      "pqmsManual": "PQMS Power Quality Monitoring Manual",
+      "vppGuide": "VPP Virtual Power Plant Access Guide"
+    },
+    "mockFirmwareChangelogs": {
+      "neuronII": "Fixed Modbus TCP connection stability issues",
+      "neuronIII": "Optimized DLB response speed to 80ms",
+      "neuronIIILite": "First stable version"
+    },
+    "downloadTitle": "Software Download",
+    "downloadSubtitle": "Download AlwaysControl official software tools and mobile applications",
+    "categoryIndustrial": "Industrial Control Software",
+    "categoryMobile": "Mobile App",
+    "updatedOn": "Updated on {date}",
+    "goToDocs": "Go to Documentation Center →",
+    "backToHelpCenter": "Back to Help Center",
+    "faqPageTitle": "Frequently Asked Questions (FAQ)",
+    "faqPageSubtitle": "Quickly find answers to your questions",
+    "noMatchingQuestions": "No matching questions found",
+    "mockDocNeuronIIManual": "Neuron II User Manual",
+    "mockDocNeuronIIInstall": "Neuron II Installation Guide",
+    "mockDocNeuronIIIManual": "Neuron III User Manual",
+    "mockDocNeuronIIIInstall": "Neuron III Quick Installation Guide",
+    "mockDocNeuronIIILiteManual": "Neuron III Lite User Manual",
+    "mockDocHemsGuide": "HEMS Cloud Platform User Guide",
+    "mockDocEssManual": "ESS Operation Manual",
+    "mockDocEvcmsApi": "EVCMS API Interface Documentation",
+    "mockDocPqmsManual": "PQMS Power Quality Monitoring Manual",
+    "mockDocVppGuide": "VPP Virtual Power Plant Access Guide",
+    "mockSwNeuronTool": "Neuron Configuration Tool",
+    "mockSwNeuronToolDesc": "Gateway parameter configuration, firmware upgrade, device diagnostics",
+    "mockSwHemsApp": "AlwaysControl HEMS App",
+    "mockSwHemsAppDesc": "Home Energy Management Mobile Application",
+    "mockSwEssApp": "AlwaysControl ESS App",
+    "mockSwEssAppDesc": "Energy Storage System Monitoring Mobile Application",
+    "mockSwAndroidApk": "Android APK Direct Installation",
+    "mockFwNeuronIIChangelog": "Fixed Modbus TCP connection stability issues",
+    "mockFwNeuronIIIChangelog": "Optimized DLB response speed to 80ms",
+    "mockFwNeuronIIILiteChangelog": "First stable version"
   },
   "footer": {
     "company": "AlwaysControl",
@@ -541,7 +1040,35 @@
     "allAccess": "All Access Methods",
     "cloud": "☁️ Cloud",
     "gateway": "🔗 Gateway",
-    "contactCta": "Can't find your brand? Contact us"
+    "contactCta": "Can't find your brand? Contact us",
+    "capabilityTelemetry": "Real-time data reading",
+    "capabilityControl": "Charge/Discharge Control",
+    "capabilityHistory": "Historical Data Export",
+    "filterDeviceType": "Device Type",
+    "filterAccessMethod": "Access Method",
+    "filterCapability": "Capability",
+    "filterStatus": "Status",
+    "filterAll": "All",
+    "filterBattery": "Energy Storage Battery",
+    "filterInverter": "PV Inverter",
+    "filterCharger": "Charging Pile",
+    "filterMeter": "Smart Meter",
+    "filterCloudDirect": "Cloud Direct Connection",
+    "filterGatewayAccess": "Gateway Access",
+    "filterBothAccess": "Both Supported",
+    "filterControlSupport": "Supports Charge/Discharge Control",
+    "filterTelemetryOnly": "Real-time Reading Only",
+    "filterSupported": "Supported",
+    "filterDeveloping": "Under Development",
+    "clearFilters": "Clear All Filters",
+    "brandCount": "Total {count} Brands",
+    "cloudDirectLabel": "Cloud Direct Connection",
+    "gatewayAccessLabel": "Gateway Access",
+    "supportedStatus": "Supported",
+    "developingStatus": "Under Development",
+    "brandNotFound": "Can't find your brand?",
+    "contactUsQuick": "Contact us for quick integration",
+    "contactUsBtn": "Contact Us"
   },
   "search": {
     "title": "Search",
@@ -602,5 +1129,16 @@
         "desc": "Complete registration to get API Key"
       }
     }
+  },
+  "meta": {
+    "siteName": "AlwaysControl",
+    "siteNameEn": "AlwaysControl",
+    "siteDescription": "AlwaysControl Technology — Cross-brand energy management solutions covering residential energy storage, commercial & industrial energy storage, charging stations, and VPP full-scenario applications",
+    "aboutPage": "About Us",
+    "contactPage": "Contact Us",
+    "ecosystemPage": "Compatible Ecosystem",
+    "productsPage": "Product Center",
+    "helpPage": "Help Center",
+    "developersPage": "Developer Center"
   }
 }

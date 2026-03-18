@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface SoftwareTab {
   name: string;
@@ -15,16 +16,17 @@ const tabs: SoftwareTab[] = [
   { name: 'VPP', gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)' },
 ];
 
-const descriptions: Record<string, string> = {
-  HEMS: '家庭能源智慧管理',
-  ESS: '工商业储能套利',
-  EVCMS: '充电站智能调度',
-  PQMS: '电能质量监测治理',
-  VPP: '虚拟电厂聚合调度',
-};
-
 export default function SoftwareTabs({ tabLabels, coverImages }: { tabLabels?: Record<string, string>; coverImages?: Record<string, string> }) {
   const [active, setActive] = useState(0);
+  const t = useTranslations('home');
+
+  const descriptions: Record<string, string> = {
+    HEMS: t('swDescHems'),
+    ESS: t('swDescEss'),
+    EVCMS: t('swDescEvcms'),
+    PQMS: t('swDescPqms'),
+    VPP: t('swDescVpp'),
+  };
 
   return (
     <div className="w-full">

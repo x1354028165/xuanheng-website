@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
-  Table, Button, Drawer, Form, Input, Typography, message, Image, Select, Tabs, Card, Space, Tag,
+  Table, Button, Drawer, Form, Input, Typography, message, Image, Select, Tabs, Card, Space, Tag, Modal,
 } from 'antd';
 import { UploadOutlined, PlusOutlined, DeleteOutlined, HolderOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -72,6 +72,17 @@ export default function Products() {
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const featureImageRefs = useRef<Record<number, HTMLInputElement | null>>({});
   const sensors = useSensors(useSensor(PointerSensor));
+  const initialValuesRef = useRef<string>('');
+
+  const captureFormSnapshot = () => {
+    const values = form.getFieldsValue();
+    return JSON.stringify({ ...values, category, features, keySpecs, gallery: gallery.map(g => g.id), coverPreview });
+  };
+
+  const hasUnsavedChanges = (): boolean => {
+    if (!initialValuesRef.current) return false;
+    return captureFormSnapshot() !== initialValuesRef.current;
+  };
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -106,6 +117,10 @@ export default function Products() {
       description: record.description,
     });
     setDrawerOpen(true);
+    // Capture initial snapshot after state settles
+    setTimeout(() => {
+      initialValuesRef.current = captureFormSnapshot();
+    }, 0);
   };
 
   const handleUpload = async (file: File) => {
@@ -218,6 +233,31 @@ export default function Products() {
         refetchMeta();
       }
       message.success('保存成功');
+      initialValuesRef.current = captureFormSnapshot();
+
+      // Phase 4: If saving zh-CN with image changes, sync images to all other locales
+      if (locale === 'zh-CN' && (pendingCoverId !== null || gallery.length > 0)) {
+        try {
+          const localesRes = await api.get('/i18n/locales');
+          const allLocales = (Array.isArray(localesRes.data) ? localesRes.data : [])
+            .map((l: Record<string, unknown>) => l.code as string)
+            .filter((c: string) => c !== 'zh-CN' && c !== 'en');
+          const imgPayload: Record<string, unknown> = {};
+          if (pendingCoverId !== null) imgPayload.cover = pendingCoverId;
+          if (gallery.length > 0) imgPayload.gallery = gallery.map((g) => g.id);
+          if (Object.keys(imgPayload).length > 0) {
+            for (const loc of allLocales) {
+              try {
+                await api.put(`${API_URL}/${editingDocId}?locale=${loc}`, imgPayload);
+                try { await api.post(`${API_URL}/${editingDocId}/actions/publish?locale=${loc}`, {}); } catch { /* */ }
+              } catch { /* locale may not exist yet */ }
+            }
+            message.success('图片已同步到其他语言');
+          }
+        } catch { /* silent */ }
+      }
+
+      setPendingCoverId(null);
       setDrawerOpen(false);
       fetchData();
     } catch { message.error('保存失败'); }
@@ -264,11 +304,23 @@ export default function Products() {
           <LocaleTabs
             currentLocale={locale}
             onLocaleChange={async (v) => {
+              if (hasUnsavedChanges()) {
+                const confirmed = await new Promise<boolean>((resolve) => {
+                  Modal.confirm({
+                    title: '切换语言',
+                    content: '当前修改尚未保存，切换后会丢失。是否继续？',
+                    okText: '继续切换',
+                    cancelText: '取消',
+                    onOk: () => resolve(true),
+                    onCancel: () => resolve(false),
+                  });
+                });
+                if (!confirmed) return;
+              }
               setLocale(v);
               if (editingDocId) {
                 try {
                   const res = await api.get(`${API_URL}/${editingDocId}?locale=${v}&populate=cover,gallery`);
-                  // content-manager API returns {data: {...}, meta: {...}}
                   const rec = (res.data?.data ?? res.data) as Record<string, unknown>;
                   form.setFieldsValue({ title: rec.title ?? '', tagline: rec.tagline ?? '', description: rec.description ?? '' });
                   setCategory((rec.category as string) ?? 'hardware');
@@ -278,6 +330,8 @@ export default function Products() {
                   setCoverPreview(cover?.url ?? null);
                   const galleryData = rec.gallery as GalleryImage[] | null;
                   setGallery(Array.isArray(galleryData) ? galleryData.map((g) => ({ id: g.id, url: g.url, name: g.name })) : []);
+                  // Update snapshot after loading new locale data
+                  setTimeout(() => { initialValuesRef.current = captureFormSnapshot(); }, 0);
                 } catch { /* */ }
               }
             }}

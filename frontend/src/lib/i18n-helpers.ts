@@ -61,6 +61,25 @@ export function getSolutionLabel(locale: string, field: string): string {
   return value ?? field;
 }
 
+// Get arbitrary JSON data from messages (for complex structures like arrays/objects)
+export function getProductData(locale: string, path: string): unknown {
+  const messages = messageMap[locale] ?? messageMap['zh-CN'];
+  return getNestedValue(messages.products as unknown as Record<string, unknown>, path) ??
+    getNestedValue((messageMap['zh-CN']).products as unknown as Record<string, unknown>, path);
+}
+
+export function getSolutionData(locale: string, path: string): unknown {
+  const messages = messageMap[locale] ?? messageMap['zh-CN'];
+  return getNestedValue(messages.solutions as unknown as Record<string, unknown>, path) ??
+    getNestedValue((messageMap['zh-CN']).solutions as unknown as Record<string, unknown>, path);
+}
+
+export function getHelpMessage(locale: string, field: string): string {
+  const messages = messageMap[locale] ?? messageMap['zh-CN'];
+  const value = getNestedValue(messages as unknown as Record<string, unknown>, `help.${field}`);
+  return value ?? getNestedValue(messageMap['zh-CN'] as unknown as Record<string, unknown>, `help.${field}`) ?? field;
+}
+
 // Interpolation helper for patterns like "{title} User Manual"
 export function interpolate(template: string, vars: Record<string, string>): string {
   let result = template;

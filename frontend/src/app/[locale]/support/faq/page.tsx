@@ -3,6 +3,8 @@ import { getFAQs } from '@/lib/api';
 import { MOCK_FAQS } from '@/lib/mock-data';
 import FAQClientFilter from './FAQClientFilter';
 import type { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 const SITE_NAME: Record<string, string> = {
   'zh-CN': '旭衡电子', 'zh-TW': '旭衡電子',
@@ -28,6 +30,8 @@ export default async function FAQPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'help' });
 
   // Fetch from Strapi, fall back to mock data
   const strapiFaqs = await getFAQs(locale);
@@ -52,10 +56,10 @@ export default async function FAQPage({
       <section className="bg-[#F8FAFC] pb-8 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link href="/support" className="mb-4 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors">
-            &larr; 返回帮助中心
+            &larr; {t('backToHelpCenter')}
           </Link>
-          <h1 className="text-3xl font-bold text-[#0F172A]">常见问题 (FAQ)</h1>
-          <p className="mt-2 text-[#64748B]">快速找到您的问题答案</p>
+          <h1 className="text-3xl font-bold text-[#0F172A]">{t('faqPageTitle')}</h1>
+          <p className="mt-2 text-[#64748B]">{t('faqPageSubtitle')}</p>
         </div>
       </section>
 

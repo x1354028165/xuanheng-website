@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
-  Table, Button, Drawer, Form, Input, Typography, message, Image, Tabs, Card, Space,
+  Table, Button, Drawer, Form, Input, Typography, message, Image, Tabs, Card, Space, Modal,
 } from 'antd';
 import { UploadOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +37,17 @@ export default function Solutions() {
   const { meta: translationMeta, refetchMeta } = useTranslationMeta(editingDocId, CONTENT_UID);
   const [form] = Form.useForm();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const initialValuesRef = useRef<string>('');
+
+  const captureFormSnapshot = () => {
+    const values = form.getFieldsValue();
+    return JSON.stringify({ ...values, features, cases, coverPreview });
+  };
+
+  const hasUnsavedChanges = (): boolean => {
+    if (!initialValuesRef.current) return false;
+    return captureFormSnapshot() !== initialValuesRef.current;
+  };
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -67,6 +78,7 @@ export default function Solutions() {
       description: record.description,
     });
     setDrawerOpen(true);
+    setTimeout(() => { initialValuesRef.current = captureFormSnapshot(); }, 0);
   };
 
   const handleUpload = async (file: File) => {
@@ -131,6 +143,7 @@ export default function Solutions() {
         refetchMeta();
       }
       message.success('保存并发布成功');
+      initialValuesRef.current = captureFormSnapshot();
       setDrawerOpen(false);
       fetchData();
     } catch { message.error('保存失败'); }
@@ -173,6 +186,19 @@ export default function Solutions() {
           <LocaleTabs
             currentLocale={locale}
             onLocaleChange={async (v) => {
+              if (hasUnsavedChanges()) {
+                const confirmed = await new Promise<boolean>((resolve) => {
+                  Modal.confirm({
+                    title: '切换语言',
+                    content: '当前修改尚未保存，切换后会丢失。是否继续？',
+                    okText: '继续切换',
+                    cancelText: '取消',
+                    onOk: () => resolve(true),
+                    onCancel: () => resolve(false),
+                  });
+                });
+                if (!confirmed) return;
+              }
               setLocale(v);
               if (editingDocId) {
                 try {
@@ -183,6 +209,7 @@ export default function Solutions() {
                   setCases(Array.isArray(rec.cases) ? (rec.cases as CaseItem[]) : []);
                   const cover = rec.cover as { url?: string } | null;
                   setCoverPreview(cover?.url ?? null);
+                  setTimeout(() => { initialValuesRef.current = captureFormSnapshot(); }, 0);
                 } catch { /* */ }
               }
             }}

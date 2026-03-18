@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { getStrapiMedia } from '@/lib/strapi';
 import type { StrapiCompatibleBrand } from '@/types/strapi';
@@ -17,63 +18,64 @@ interface BrandFilterProps {
   };
 }
 
-const CAPABILITY_MAP: Record<string, { label: string }> = {
-  telemetry:  { label: '实时数据读取' },
-  control:    { label: '充放电控制' },
-  history:    { label: '历史数据导出' },
-  遥测:       { label: '实时数据读取' },
-  控制:       { label: '充放电控制' },
-};
-
 interface FilterGroup {
   title: string;
   key: string;
   options: { label: string; value: string | null }[];
 }
 
-const FILTER_GROUPS: FilterGroup[] = [
-  {
-    title: '设备类型',
-    key: 'category',
-    options: [
-      { label: '全部', value: null },
-      { label: '储能电池', value: '储能电池' },
-      { label: '光伏逆变器', value: '光伏逆变器' },
-      { label: '充电桩', value: '充电桩' },
-      { label: '智能电表', value: '智能电表' },
-    ],
-  },
-  {
-    title: '接入方式',
-    key: 'access',
-    options: [
-      { label: '全部', value: null },
-      { label: '云端直连', value: '云端' },
-      { label: '网关接入', value: '网关' },
-      { label: '两者均支持', value: 'both' },
-    ],
-  },
-  {
-    title: '能力',
-    key: 'capability',
-    options: [
-      { label: '全部', value: null },
-      { label: '支持充放电控制', value: 'control' },
-      { label: '仅实时读取', value: 'telemetry-only' },
-    ],
-  },
-  {
-    title: '状态',
-    key: 'status',
-    options: [
-      { label: '全部', value: null },
-      { label: '已支持', value: '已接入' },
-      { label: '开发中', value: '适配中' },
-    ],
-  },
-];
-
 export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
+  const t = useTranslations('ecosystem');
+
+  const capabilityMap: Record<string, string> = {
+    telemetry: t('capabilityTelemetry'),
+    control: t('capabilityControl'),
+    history: t('capabilityHistory'),
+    '遥测': t('capabilityTelemetry'),
+    '控制': t('capabilityControl'),
+  };
+
+  const filterGroups: FilterGroup[] = [
+    {
+      title: t('filterDeviceType'),
+      key: 'category',
+      options: [
+        { label: t('filterAll'), value: null },
+        { label: t('filterBattery'), value: '储能电池' },
+        { label: t('filterInverter'), value: '光伏逆变器' },
+        { label: t('filterCharger'), value: '充电桩' },
+        { label: t('filterMeter'), value: '智能电表' },
+      ],
+    },
+    {
+      title: t('filterAccessMethod'),
+      key: 'access',
+      options: [
+        { label: t('filterAll'), value: null },
+        { label: t('filterCloudDirect'), value: '云端' },
+        { label: t('filterGatewayAccess'), value: '网关' },
+        { label: t('filterBothAccess'), value: 'both' },
+      ],
+    },
+    {
+      title: t('filterCapability'),
+      key: 'capability',
+      options: [
+        { label: t('filterAll'), value: null },
+        { label: t('filterControlSupport'), value: 'control' },
+        { label: t('filterTelemetryOnly'), value: 'telemetry-only' },
+      ],
+    },
+    {
+      title: t('filterStatus'),
+      key: 'status',
+      options: [
+        { label: t('filterAll'), value: null },
+        { label: t('filterSupported'), value: '已接入' },
+        { label: t('filterDeveloping'), value: '适配中' },
+      ],
+    },
+  ];
   const [filters, setFilters] = useState<Record<string, string | null>>({
     category: null,
     access: null,
@@ -114,12 +116,12 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
             onClick={() => setFilters({ category: null, access: null, capability: null, status: null })}
             className="mb-6 text-[13px] text-[#86868B] hover:text-[#1D1D1F] transition-colors"
           >
-            清除所有筛选
+            {t('clearFilters')}
           </button>
         )}
 
         {/* 筛选分组 */}
-        {FILTER_GROUPS.map((group) => (
+        {filterGroups.map((group) => (
           <div key={group.key} className="mb-8">
             <p className="text-[11px] font-medium text-[#86868B] uppercase tracking-widest mb-3">
               {group.title}
@@ -162,7 +164,7 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
       <div className="flex-1 pl-12">
         {/* 结果数 */}
         <p className="text-[13px] text-[#86868B] mb-8">
-          共 {filteredBrands.length} 个品牌
+          {t('brandCount', { count: filteredBrands.length })}
         </p>
 
         {filteredBrands.length === 0 ? (
@@ -207,7 +209,7 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
                         <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                         </svg>
-                        云端直连
+                        {t('cloudDirectLabel')}
                       </div>
                     )}
                     {(brand.accessMethod === '网关' || brand.accessMethod === 'both' || brand.accessMethod === '两者') && (
@@ -215,17 +217,16 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
                         <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
-                        网关接入
+                        {t('gatewayAccessLabel')}
                       </div>
                     )}
                     {caps.map((cap) => {
-                      const info = CAPABILITY_MAP[cap];
                       return (
                         <div key={cap} className="flex items-center gap-2">
                           <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
-                          {info ? info.label : cap}
+                          {capabilityMap[cap] ?? cap}
                         </div>
                       );
                     })}
@@ -239,7 +240,7 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
                       <span className={`w-1.5 h-1.5 rounded-full ${
                         isSupported ? 'bg-[#30D158]' : 'bg-[#D2D2D7]'
                       }`} />
-                      {isSupported ? '已支持' : '开发中'}
+                      {isSupported ? t('supportedStatus') : t('developingStatus')}
                     </span>
                   </div>
                 </div>
@@ -250,13 +251,13 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
 
         {/* 底部 CTA */}
         <div className="mt-20 text-center py-12">
-          <p className="text-[22px] font-semibold text-[#1D1D1F] mb-2">没有找到您的品牌？</p>
-          <p className="text-[15px] text-[#86868B] mb-8">联系我们，快速接入</p>
+          <p className="text-[22px] font-semibold text-[#1D1D1F] mb-2">{t('brandNotFound')}</p>
+          <p className="text-[15px] text-[#86868B] mb-8">{t('contactUsQuick')}</p>
           <a
             href="/contact"
             className="inline-flex items-center rounded-full bg-[#1D1D1F] px-8 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#000]"
           >
-            联系我们
+            {t('contactUsBtn')}
           </a>
         </div>
       </div>

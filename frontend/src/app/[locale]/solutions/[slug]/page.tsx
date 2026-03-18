@@ -43,28 +43,7 @@ export async function generateStaticParams() {
   return result;
 }
 
-const SOLUTION_CASES: Record<string, Array<{area: string; scale: string; problem: string}>> = {
-  hems: [
-    { area: "🇹🇼 中国台湾别墅小区", scale: "多户家庭光伏 + 储能系统，品牌各异", problem: "统一接入后电费节省 35%，自发自用率提升至 72%" },
-    { area: "🇦🇺 澳洲家庭储能用户", scale: "结合当地峰谷电价结构，3.5kW 光伏 + 5kWh 储能", problem: "自动切换用电策略，月节省电费约 180 澳元" },
-  ],
-  ess: [
-    { area: "🇨🇳 深圳龙华分布式储能", scale: "多品牌 PCS/BMS 混合部署", problem: "5 天完成云平台搭建，10 天完成跨品牌设备接入" },
-    { area: "🇨🇳 上海某商业综合体", scale: "200kWh 多品牌混合储能", problem: "峰谷套利年收益 80 万元，运维效率提升 80%" },
-  ],
-  evcms: [
-    { area: "🇨🇳 深圳罗湖办公楼停车场", scale: "40 桩，原主线 150kW，未扩容", problem: "部署 DLB 后跳闸率降至 0，充电吞吐量提升 60%" },
-    { area: "🇲🇾 马来西亚充电站", scale: "多品牌 OCPP 充电桩混合部署", problem: "统一管理平台上线，运维人力成本降低 55%" },
-  ],
-  vpp: [
-    { area: "🇦🇺 澳大利亚 VPP 运营商", scale: "聚合多品牌家庭储能设备，参与 FCAS 需求响应", problem: "调度指令 500ms 内下发，资产利用率显著提升" },
-    { area: "🇨🇳 某省级能源聚合商", scale: "聚合 500 个分布式储能站（50MWh）", problem: "首年创收 200 万元，响应时间 < 2s" },
-  ],
-  pqms: [
-    { area: "🇨🇳 工业园区谐波治理", scale: "THD > 15%，精密设备频繁故障", problem: "谐波源精准定位，设备故障率下降 78%" },
-    { area: "🇨🇳 数据中心电能质量管控", scale: "关键负荷电压波动，人工巡检滞后", problem: "7×24 实时监测，提前预警 3 次潜在故障，减少 90% 现场巡检" },
-  ],
-};
+type CaseItemType = { area: string; scale: string; problem: string };
 
 export default async function SolutionDetailPage({
   params,
@@ -106,9 +85,16 @@ export default async function SolutionDetailPage({
   const relatedProductSlugs = mockSolution?.relatedProducts ?? [];
   const relatedProducts = MOCK_PRODUCTS.filter(p => relatedProductSlugs.includes(p.slug));
 
+  // Build cases from translation keys (fallback for when Strapi has no data)
+  const caseCount = parseInt(getSolutionMessage(locale, slug, 'caseCount') ?? '0');
+  const i18nCases = Array.from({ length: caseCount }, (_, i) => ({
+    area: getSolutionMessage(locale, slug, `case${i}Area`) ?? '',
+    scale: getSolutionMessage(locale, slug, `case${i}Scale`) ?? '',
+    problem: getSolutionMessage(locale, slug, `case${i}Problem`) ?? '',
+  })).filter(c => c.area);
   const cases = (strapiSolution?.cases && strapiSolution.cases.length > 0)
     ? strapiSolution.cases
-    : (SOLUTION_CASES[slug] ?? []);
+    : i18nCases;
 
   // Labels from direct message access
   const painPointsTitle = getSolutionLabel(locale, 'painPointsTitle');
@@ -279,7 +265,7 @@ export default async function SolutionDetailPage({
         if (strapiFeatures && strapiFeatures.length > 0) {
           return (
             <FeatureTabs
-              title={highlightsTitle ?? '核心功能列表'}
+              title={highlightsTitle ?? t('coreFeaturesList')}
               features={strapiFeatures}
               bgImage={SOLUTION_BG[slug] ?? ''}
             />
@@ -294,7 +280,7 @@ export default async function SolutionDetailPage({
           });
           return (
             <FeatureTabs
-              title={highlightsTitle ?? '核心功能列表'}
+              title={highlightsTitle ?? t('coreFeaturesList')}
               features={featureItems}
               bgImage={SOLUTION_BG[slug] ?? ''}
             />

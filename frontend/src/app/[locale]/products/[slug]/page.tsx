@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getProducts, getProductBySlug, getProductRelations } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import { MOCK_PRODUCTS, MOCK_SOLUTIONS, getMockProduct } from '@/lib/mock-data';
-import { getProductMessage, getProductLabel, getSpecLabel, getSolutionMessage, getSolutionLabel, interpolate } from '@/lib/i18n-helpers';
+import { getProductMessage, getProductLabel, getProductData, getSpecLabel, getSolutionMessage, getSolutionLabel, interpolate } from '@/lib/i18n-helpers';
 import FeatureTabs from '@/components/solutions/FeatureTabs';
 import DownloadSection from '@/components/products/DownloadSection';
 import type { Metadata } from 'next';
@@ -234,7 +234,7 @@ export default async function ProductDetailPage({
       {strapiProduct?.gallery && strapiProduct.gallery.length > 0 && (
         <section className="bg-[#F8FAFC] py-16">
           <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{t('gallery') ?? '产品图库'}</h2>
+            <h2 className="mb-8 text-2xl font-bold text-[#0F172A] text-center">{t('gallery')}</h2>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {strapiProduct.gallery.map((img, idx) => (
                 <div key={img.documentId ?? idx} className="relative overflow-hidden rounded-xl border border-[#E2E8F0] bg-white" style={{ aspectRatio: '4/3' }}>
@@ -259,20 +259,21 @@ export default async function ProductDetailPage({
 
           {/* Banner 下方：描述文字 + 大图 */}
           {(() => {
-            const SW_SCENARIOS: Record<string, { text: string; img: string }> = {
-              hems:  { text: '支持光伏、储能等新能源电站的数据采集、电站监控、运维运营全套管理业务。通过云端大数据分析平台，帮助用户实现旗下所有新能源电站的透明化管理、自动化运维、智能化诊断和辅助决策等核心功能。全面满足用户在新能源电站生命周期中的各层次需求，最大化提升电站价值，保护用户核心资产。', img: 'http://32.236.16.227/strapi/uploads/solution_hems_real_e169716a7e.jpg' },
-              ess:   { text: '可用于工厂、商业楼宇、园区等多站点储能资产统一监控与调度，实现跨品牌设备接入、峰谷自动套利与需量管控，降低综合用电成本 20~40%。', img: 'http://32.236.16.227/strapi/uploads/solution_ess_real_8afb1e9d62.jpg' },
-              evcms: { text: '可用于停车场、办公楼、园区等多桩充电站的动态负载均衡与运营管理，在不扩容主线的前提下实现多桩协同充电与智能计费。', img: 'http://32.236.16.227/strapi/uploads/solution_evcms_real_d7c6169495.jpg' },
-              vpp:   { text: '可用于 VPP 运营商聚合多品牌分布式储能设备，通过云端 API 实现批量调度与实时状态监控，参与电网辅助服务市场获取收益。', img: 'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg' },
-              pqms:  { text: '可用于工业园区、数据中心、医院等场所的电能质量远程监测与治理，实现谐波分析、补偿参数在线调优与合规报告自动生成。', img: 'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg' },
+            const scenarioText = getProductMessage(locale, slug, 'swScenarioText');
+            const SW_SCENARIO_IMGS: Record<string, string> = {
+              hems:  'http://32.236.16.227/strapi/uploads/solution_hems_real_e169716a7e.jpg',
+              ess:   'http://32.236.16.227/strapi/uploads/solution_ess_real_8afb1e9d62.jpg',
+              evcms: 'http://32.236.16.227/strapi/uploads/solution_evcms_real_d7c6169495.jpg',
+              vpp:   'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
+              pqms:  'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
             };
-            const s = SW_SCENARIOS[slug];
-            return s ? (
+            const scenarioImg = SW_SCENARIO_IMGS[slug];
+            return (scenarioText && scenarioImg) ? (
               <section className="bg-[#F8FAFC] py-20">
                 <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-                  <p className="text-[#64748B] text-lg leading-relaxed mb-8 text-center">{s.text}</p>
+                  <p className="text-[#64748B] text-lg leading-relaxed mb-8 text-center">{scenarioText}</p>
                   <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: '16/7' }}>
-                    <Image src={s.img} alt={title} fill className="object-cover object-center" />
+                    <Image src={scenarioImg} alt={title} fill className="object-cover object-center" />
                   </div>
                 </div>
               </section>
@@ -281,49 +282,6 @@ export default async function ProductDetailPage({
 
           {/* ② 核心功能 — FeatureTabs（Tab切换 + 左文字右图，与解决方案页一致） */}
           {(() => {
-            const SW_FEATURES: Record<string, Array<{label: string; desc: string; points?: string[]}>> = {
-              hems: [
-                {
-                  label: '安全稳定',
-                  desc: '基于网络攻击防御与数据隐私保护双重架构，实现能源管理系统的可信运行环境与资产安全闭环。',
-                  points: ['金融级安全防护与权限管控', '灾备恢复 + 加密双备份', '国内外合规认证'],
-                },
-                {
-                  label: '省心运维',
-                  desc: '组件级—站级—批量诊断全覆盖，运维意见精准指导，简化运维工作，提升运维效率。',
-                  points: ['AI 智能运维助手', '实时故障告警 & 自动诊断', '全周期可追溯运维保障'],
-                },
-                {
-                  label: '智能体验',
-                  desc: '先进算法智能调度，多种能源模式随心选择，绿电管理掌上轻松实现。',
-                  points: ['极简配置，一步到位', 'AI 能源管理，智能高效', '自定义仪表盘，随心掌控'],
-                },
-              ],
-              ess: [
-                { label: '多站点统一监控', desc: '一个平台管理所有储能站点，实时查看各站 SOC、功率、健康状态，运维效率提升 80%，告警分级推送。', points: ['多站点一屏总览', '告警分级智能推送', '健康状态实时追踪'] },
-                { label: '智能峰谷套利', desc: '自动识别最优充放电时机，低充高放，最大化电价差收益，策略引擎动态响应实时电价波动。', points: ['实时电价动态响应', '最优充放策略自动执行', '收益报表自动生成'] },
-                { label: '需量管理', desc: '实时监控功率需量，智能削峰填谷，避免高额需量费超限，无需高额变压器扩容费。', points: ['功率需量实时监控', '削峰填谷自动调度', '扩容费用大幅降低'] },
-                { label: '能效报告', desc: '日报/周报/月报自动生成，支持导出 Excel/PDF，完整的能源消耗与收益分析，辅助运营决策。', points: ['日/周/月报自动生成', '支持 Excel/PDF 导出', '完整能源收益分析'] },
-              ],
-              evcms: [
-                { label: 'DLB 动态负载均衡', desc: '毫秒级实时检测主线总负载，动态分配各桩可用功率，在不扩容主线的前提下支持更多充电桩同时运行，彻底杜绝跳闸。', points: ['毫秒级功率动态分配', '零扩容支持多桩并充', '彻底杜绝跳闸风险'] },
-                { label: 'OCPP 协议兼容', desc: '支持 OCPP 1.6J / 2.0.1，兼容市场主流充电桩品牌，无需替换现有硬件，快速接入统一管理。', points: ['OCPP 1.6J / 2.0.1 全兼容', '主流品牌无缝接入', '无需替换现有设备'] },
-                { label: '智能计费系统', desc: '支持按时计费、按电量计费、会员优惠等多种计费策略，一键结算，支持 VIP 优先模式与排队模式。', points: ['多维计费策略灵活配置', 'VIP 优先 + 排队模式', '一键结算，快速收款'] },
-                { label: '运营数据分析', desc: '充电记录、故障告警、功率曲线实时可视化，全站运营数据一站式掌握，助力站点效益最大化。', points: ['充电记录全量追溯', '功率曲线实时可视化', '站点收益一站式分析'] },
-              ],
-              vpp: [
-                { label: '万级设备聚合', desc: '统一调度分布式储能、光伏、充电桩，聚合规模不受限，支持异构品牌混合部署，已打通主流储能品牌云端 API。', points: ['万级设备统一调度', '异构品牌混合部署', '主流云端 API 已打通'] },
-                { label: '500ms 指令下发', desc: '调度响应速度达电网辅助服务最高要求，支持秒级批量指令下发，实时状态订阅：SOC、功率、告警状态毫秒级推送。', points: ['500ms 调度响应', '秒级批量指令下发', 'SOC/功率毫秒级推送'] },
-                { label: '多品牌 API 适配', desc: 'VPP 运营商无需自研接入层，旭衡统一调度接口支持充放电指令、SOC 查询、告警订阅，完整调度记录与审计。', points: ['统一接口免自研', '充放电 + 告警订阅全覆盖', '完整调度记录与审计'] },
-                { label: '自定义调度策略', desc: '支持对接上游电网信号或自定义调度策略，满足不同电力市场交易模式，灵活适配各地监管要求。', points: ['电网信号直连对接', '自定义策略引擎', '灵活适配各地监管'] },
-              ],
-              pqms: [
-                { label: '50次谐波全面监测', desc: '实时采集电压、电流、功率因数、谐波至第50次，精准捕捉各次谐波分量，快速定位问题设备与污染源。', points: ['全参数实时采集', '50次谐波精准捕捉', '问题设备快速定位'] },
-                { label: '多站点地图可视化', desc: '站点健康状态地图化展示，一眼掌握全网电能质量分布，多监测点数据统一分析中心。', points: ['站点健康地图总览', '全网电能质量分布', '多点数据统一分析'] },
-                { label: '远程参数调优', desc: '在线调整 SVG/APF 补偿参数，减少 90% 以上现场巡检频次，支持远程 OTA 升级现场设备固件。', points: ['SVG/APF 参数在线调整', '现场巡检减少 90%+', '远程 OTA 固件升级'] },
-                { label: '合规报告自动生成', desc: '日报/周报/月报一键导出，满足电网公司合规检查要求，历史分析报告帮助定位电能质量劣化根因。', points: ['合规报告一键导出', '满足电网公司检查要求', '历史劣化根因分析'] },
-              ],
-            };
             const SOLUTION_BG: Record<string, string> = {
               hems:  'http://32.236.16.227/strapi/uploads/solution_hems_real_e169716a7e.jpg',
               ess:   'http://32.236.16.227/strapi/uploads/solution_ess_real_8afb1e9d62.jpg',
@@ -331,9 +289,24 @@ export default async function ProductDetailPage({
               vpp:   'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
               pqms:  'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
             };
+            // Build features from translation keys
+            const featureCount = parseInt(getProductMessage(locale, slug, 'swFeatureCount') ?? '0');
+            const i18nFeatures = Array.from({ length: featureCount }, (_, i) => {
+              const pts: string[] = [];
+              for (let j = 0; j < 5; j++) {
+                const pt = getProductMessage(locale, slug, `swFeature${i}Point${j}`);
+                if (pt) pts.push(pt);
+                else break;
+              }
+              return {
+                label: getProductMessage(locale, slug, `swFeature${i}Label`) ?? '',
+                desc: getProductMessage(locale, slug, `swFeature${i}Desc`) ?? '',
+                points: pts.length > 0 ? pts : undefined,
+              };
+            }).filter(f => f.label);
             const features = (strapiProduct?.features && strapiProduct.features.length > 0)
               ? strapiProduct.features
-              : (SW_FEATURES[slug] ?? []);
+              : i18nFeatures.length > 0 ? i18nFeatures : [];
             return features.length > 0 ? (
               <FeatureTabs
                 title={t('coreFeatures')}
@@ -399,29 +372,31 @@ export default async function ProductDetailPage({
             const hwSlugs = strapiRelations.filter(r => r.showOnProduct).map(r => r.solutionSlug)
               .filter(s => ['neuron-ii','neuron-iii','neuron-iii-lite'].includes(s));
             if (hwSlugs.length === 0) return null;
-            const HW_INFO: Record<string, { title: string; desc: string; img: string }> = {
-              'neuron-ii':       { title: 'Neuron II',       desc: '通用多协议网关（4G/WiFi/RS485/CAN）', img: '/images/neuron-ii-clean.png' },
-              'neuron-iii':      { title: 'Neuron III',      desc: '充电站专用控制器（内置电表+DLB）',   img: '/images/neuron-iii-clean.png' },
-              'neuron-iii-lite': { title: 'Neuron III Lite', desc: '防跳闸控制器（配套 ATP III）',       img: '/images/neuron-iii-lite-clean.png' },
+            const HW_IMG: Record<string, string> = {
+              'neuron-ii': '/images/neuron-ii-clean.png',
+              'neuron-iii': '/images/neuron-iii-clean.png',
+              'neuron-iii-lite': '/images/neuron-iii-lite-clean.png',
             };
             return (
               <section className="bg-[#F8FAFC] py-20">
                 <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-                  <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">推荐搭配硬件网关</h2>
-                  <p className="mb-10 text-center text-[#64748B]">与以下硬件网关配合使用，实现设备本地接入与离线运行</p>
+                  <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">{getProductLabel(locale, 'recommendHwTitle')}</h2>
+                  <p className="mb-10 text-center text-[#64748B]">{getProductLabel(locale, 'recommendHwSubtitle')}</p>
                   <div className={`grid gap-6 ${hwSlugs.length === 1 ? 'grid-cols-1 max-w-sm mx-auto' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
                     {hwSlugs.map(hwSlug => {
-                      const hw = HW_INFO[hwSlug];
-                      if (!hw) return null;
+                      const hwImg = HW_IMG[hwSlug];
+                      if (!hwImg) return null;
+                      const hwTitle = getProductMessage(locale, hwSlug, 'title') ?? hwSlug;
+                      const hwDescText = (getProductData(locale, `hwDesc.${hwSlug}`) as string | undefined) ?? getProductMessage(locale, hwSlug, 'tagline') ?? '';
                       return (
                         <Link key={hwSlug} href={`/products/${hwSlug}`}
                           className="group flex flex-col items-center rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                           <div className="relative h-32 w-full mb-4">
-                            <Image src={hw.img} alt={hw.title} fill className="object-contain" sizes="200px" />
+                            <Image src={hwImg} alt={hwTitle} fill className="object-contain" sizes="200px" />
                           </div>
-                          <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">{hw.title}</h3>
-                          <p className="mt-1 text-sm text-[#64748B] text-center">{hw.desc}</p>
-                          <span className="mt-4 text-sm font-medium text-[#38C4E8]">查看详情 →</span>
+                          <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">{hwTitle}</h3>
+                          <p className="mt-1 text-sm text-[#64748B] text-center">{hwDescText}</p>
+                          <span className="mt-4 text-sm font-medium text-[#38C4E8]">{getProductLabel(locale, 'viewDetailArrow')}</span>
                         </Link>
                       );
                     })}
@@ -457,13 +432,14 @@ export default async function ProductDetailPage({
           {/* ⑥ 资源下载 */}
           <DownloadSection
             title={title}
+            sectionTitle={resourceDownload}
             coverImg="/images/mockup-laptop.svg"
             files={[
-              { name: interpolate(getProductLabel(locale, 'userManual'), { title }), category: '用户手册', format: 'PDF', size: '3.2 MB' },
-              { name: `${title} 快速上手指南`, category: '用户手册', format: 'PDF', size: '1.0 MB' },
-              { name: `${title} API 集成文档`, category: 'API 文档', format: 'PDF', size: '2.5 MB' },
-              { name: `${title} OpenAPI 规范`, category: 'API 文档', format: 'YAML', size: '0.3 MB' },
-              { name: interpolate(getProductLabel(locale, 'datasheet'), { title }), category: '数据手册', format: 'PDF', size: '0.8 MB' },
+              { name: interpolate(getProductLabel(locale, 'userManual'), { title }), category: t('fileCatUserManual'), format: 'PDF', size: '3.2 MB' },
+              { name: interpolate(t('quickStartGuide'), { title }), category: t('fileCatUserManual'), format: 'PDF', size: '1.0 MB' },
+              { name: interpolate(t('apiIntegDoc'), { title }), category: t('fileCatApiDoc'), format: 'PDF', size: '2.5 MB' },
+              { name: interpolate(t('openApiSpec'), { title }), category: t('fileCatApiDoc'), format: 'YAML', size: '0.3 MB' },
+              { name: interpolate(getProductLabel(locale, 'datasheet'), { title }), category: t('fileCatDatasheet'), format: 'PDF', size: '0.8 MB' },
             ]}
           />
         </>
@@ -473,7 +449,7 @@ export default async function ProductDetailPage({
           {/* 硬件产品：若Strapi有features，渲染功能Tab */}
           {strapiProduct?.features && strapiProduct.features.length > 0 && (
             <FeatureTabs
-              title="核心功能"
+              title={t('coreFeatures')}
               features={strapiProduct.features}
               bgImage=""
             />
@@ -536,6 +512,7 @@ export default async function ProductDetailPage({
           )}
           <DownloadSection
             title={title}
+            sectionTitle={resourceDownload}
             coverImg={(() => {
               const HW_IMGS: Record<string, string> = {
                 'neuron-ii': '/images/neuron-ii-clean.png',
@@ -545,11 +522,11 @@ export default async function ProductDetailPage({
               return HW_IMGS[slug] ?? `/images/${slug}.jpg`;
             })()}
             files={[
-              { name: interpolate(getProductLabel(locale, 'userManual'), { title }), category: '用户手册', format: 'PDF', size: '3.2 MB' },
-              { name: interpolate(getProductLabel(locale, 'installGuide'), { title }), category: '安装指南', format: 'PDF', size: '1.5 MB' },
-              { name: interpolate(getProductLabel(locale, 'datasheet'), { title }), category: '数据手册', format: 'PDF', size: '0.8 MB' },
-              { name: `${title} 固件 v2.3.1`, category: '固件', format: 'BIN', size: '12.4 MB' },
-              { name: `${title} 配置工具 v1.2`, category: '工具软件', format: 'EXE', size: '45 MB' },
+              { name: interpolate(getProductLabel(locale, 'userManual'), { title }), category: t('fileCatUserManual'), format: 'PDF', size: '3.2 MB' },
+              { name: interpolate(getProductLabel(locale, 'installGuide'), { title }), category: t('fileCatInstallGuide'), format: 'PDF', size: '1.5 MB' },
+              { name: interpolate(getProductLabel(locale, 'datasheet'), { title }), category: t('fileCatDatasheet'), format: 'PDF', size: '0.8 MB' },
+              { name: interpolate(t('firmwareFile'), { title }), category: t('fileCatFirmware'), format: 'BIN', size: '12.4 MB' },
+              { name: interpolate(t('configToolFile'), { title }), category: t('fileCatTool'), format: 'EXE', size: '45 MB' },
             ]}
           />
         </>

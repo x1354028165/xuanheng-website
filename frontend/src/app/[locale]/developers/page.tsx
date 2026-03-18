@@ -3,8 +3,10 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
 import type { Metadata } from 'next';
-export async function generateMetadata(): Promise<Metadata> {
-  return { title: '开发者中心 | 旭衡电子' };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return { title: `${t('developersPage')} | ${locale === 'zh-CN' || locale === 'zh-TW' ? t('siteName') : t('siteNameEn')}` };
 }
 
 

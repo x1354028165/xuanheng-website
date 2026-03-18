@@ -163,7 +163,12 @@
     "tagEss": "Gewerbe",
     "tagEvcms": "E-Laden",
     "tagVpp": "VPP",
-    "tagPqms": "Stromqualität"
+    "tagPqms": "Stromqualität",
+    "swDescHems": "Intelligentes Energiemanagement für Privathaushalte",
+    "swDescEss": "Arbitrage für gewerbliche und industrielle Energiespeicher",
+    "swDescEvcms": "Intelligente Steuerung von Ladestationen",
+    "swDescPqms": "Überwachung und Verbesserung der Stromqualität",
+    "swDescVpp": "Aggregation und Steuerung virtueller Kraftwerke"
   },
   "solutions": {
     "title": "Lösungen",
@@ -184,7 +189,14 @@
       "feature2": "Smart scheduling: Optimize based on weather and usage patterns",
       "feature3": "Backup power: Seamless off-grid switching, zero interruption",
       "feature4": "Cloud-Direktverbindung: Keine zusätzliche Gateway-Hardware erforderlich, Geräte werden direkt über Cloud-APIs eingebunden, schnelle und kostengünstige Bereitstellung",
-      "background": "Privathaushalte haben bereits PV- und Speichersysteme installiert, aber die Geräte stammen von verschiedenen Marken mit unterschiedlichen Protokollen, es fehlt ein einheitlicher Überwachungs- und Steuerungszugang; die Spitzen- und Schwachlasttarife sind komplex, eine manuelle Verwaltung kann die Stromkosteneinsparungen nicht maximieren."
+      "background": "Privathaushalte haben bereits PV- und Speichersysteme installiert, aber die Geräte stammen von verschiedenen Marken mit unterschiedlichen Protokollen, es fehlt ein einheitlicher Überwachungs- und Steuerungszugang; die Spitzen- und Schwachlasttarife sind komplex, eine manuelle Verwaltung kann die Stromkosteneinsparungen nicht maximieren.",
+      "caseCount": "2",
+      "case0Area": "🇹🇼 Villenviertel in Taiwan, China",
+      "case0Scale": "Mehrfamilien-PV + Speichersysteme, verschiedene Marken",
+      "case0Problem": "Nach einheitlichem Anschluss 35% Stromkostenersparnis, Eigenverbrauchsquote auf 72% gesteigert",
+      "case1Area": "🇦🇺 Australische Haushalte mit Energiespeichern",
+      "case1Scale": "Kombiniert mit lokalen Spitzen-/Nebenzeittarifen, 3,5 kW PV + 5 kWh Speicher",
+      "case1Problem": "Automatische Umschaltung der Verbrauchsstrategie, monatliche Ersparnis von ca. 180 AUD"
     },
     "ess": {
       "title": "Commercial & Industrial Storage",
@@ -197,7 +209,14 @@
       "feature2": "Arbitrage engine: Identify optimal charge/discharge timing automatically",
       "feature3": "Multi-brand: Manage all storage brands from one platform",
       "feature4": "Einheitliche Verwaltung mehrerer Standorte: Zentrale Überwachung mehrerer Energiespeicher-Standorte, Steigerung der Betriebseffizienz um 80%, gestaffelte Alarmbenachrichtigungen",
-      "background": "Fabriken, Gewerbegebäude und Campus stehen unter dem Druck hoher Stromkosten aufgrund großer Unterschiede zwischen Spitzen- und Schwachlasttarifen. Energiespeichersysteme sind ein zentrales Mittel zur Kostensenkung, aber das Management verteilter, mehrerer Standorte ist komplex und der Anschluss geräteübergreifender Marken schwierig."
+      "background": "Fabriken, Gewerbegebäude und Campus stehen unter dem Druck hoher Stromkosten aufgrund großer Unterschiede zwischen Spitzen- und Schwachlasttarifen. Energiespeichersysteme sind ein zentrales Mittel zur Kostensenkung, aber das Management verteilter, mehrerer Standorte ist komplex und der Anschluss geräteübergreifender Marken schwierig.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Dezentrale Energiespeicher in Longhua, Shenzhen",
+      "case0Scale": "Gemischter Einsatz von PCS/BMS verschiedener Marken",
+      "case0Problem": "Cloud-Plattform in 5 Tagen aufgebaut, geräteübergreifender Anschluss in 10 Tagen abgeschlossen",
+      "case1Area": "🇨🇳 Ein Handelszentrum in Shanghai",
+      "case1Scale": "200 kWh gemischter Energiespeicher verschiedener Marken",
+      "case1Problem": "Jährlicher Arbitragegewinn 800.000 CNY, Wartungseffizienz um 80% gesteigert"
     },
     "evcms": {
       "title": "EV Charging Station",
@@ -210,7 +229,14 @@
       "feature2": "OCPP protocol: Compatible with major charger brands",
       "feature3": "Smart billing: Flexible pricing strategies and membership management",
       "feature4": "Echtzeitüberwachung und Betriebsdaten: Ladevorgänge, Störungsalarme, Leistungskurven – alles in einem visuellen Management-System",
-      "background": "Parkplätze, Bürogebäude und Firmencampus benötigen die Installation mehrerer Ladestationen, aber die Kapazität der Hauptleitung ist begrenzt. Gleichzeitiges Schnellladen mehrerer Säulen kann leicht zur Auslösung des Hauptschalters führen; die Ladestationen stammen von verschiedenen Marken mit unterschiedlichen Protokollen, eine einheitliche Verwaltung ist schwierig."
+      "background": "Parkplätze, Bürogebäude und Firmencampus benötigen die Installation mehrerer Ladestationen, aber die Kapazität der Hauptleitung ist begrenzt. Gleichzeitiges Schnellladen mehrerer Säulen kann leicht zur Auslösung des Hauptschalters führen; die Ladestationen stammen von verschiedenen Marken mit unterschiedlichen Protokollen, eine einheitliche Verwaltung ist schwierig.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Parkplatz eines Bürogebäudes in Luohu, Shenzhen",
+      "case0Scale": "40 Ladepunkte, ursprüngliche Hauptleitung 150 kW, nicht erweitert",
+      "case0Problem": "Nach DLB-Einsatz Ausfallrate auf 0 gesenkt, Ladedurchsatz um 60% gesteigert",
+      "case1Area": "🇲🇾 Ladestation in Malaysia",
+      "case1Scale": "Gemischter Einsatz von OCPP-Ladestationen verschiedener Marken",
+      "case1Problem": "Einheitliche Managementplattform eingeführt, Personalkosten für Wartung um 55% gesenkt"
     },
     "vpp": {
       "title": "Virtual Power Plant",
@@ -223,7 +249,14 @@
       "feature2": "Market access: Connect to major power spot markets and ancillary services",
       "feature3": "Revenue analytics: Real-time arbitrage calculation with transparent settlement",
       "feature4": "Zugang zu verschiedenen Strommärkten: Unterstützung von Spotmärkten, Ausgleichs- und Frequenzregelungsdienstleistungen und anderen Handelsmodellen",
-      "background": "Verstreute Energieanlagen können nicht einzeln an der Netzsteuerung teilnehmen. Eine VPP aggregiert eine große Anzahl dezentraler Batterien und koordiniert sie zu einem 'virtuellen Kraftwerk', das während der Spitzenlastzeiten gesammelt einspeist und während der Schwachlastzeiten gesammelt speichert, um am Strom-Spotmarkt und an Nachfragesteuerungsmechanismen teilzunehmen und Erträge zu erzielen."
+      "background": "Verstreute Energieanlagen können nicht einzeln an der Netzsteuerung teilnehmen. Eine VPP aggregiert eine große Anzahl dezentraler Batterien und koordiniert sie zu einem 'virtuellen Kraftwerk', das während der Spitzenlastzeiten gesammelt einspeist und während der Schwachlastzeiten gesammelt speichert, um am Strom-Spotmarkt und an Nachfragesteuerungsmechanismen teilzunehmen und Erträge zu erzielen.",
+      "caseCount": "2",
+      "case0Area": "🇦🇺 VPP-Betreiber in Australien",
+      "case0Scale": "Aggregation von Haushalts-Energiespeichern verschiedener Marken, Teilnahme an FCAS-Nachfragesteuerung",
+      "case0Problem": "Steuerungsbefehle innerhalb von 500 ms erteilt, Anlagenauslastung deutlich verbessert",
+      "case1Area": "🇨🇳 Ein Provinz-Energieaggregator",
+      "case1Scale": "Aggregation von 500 dezentralen Energiespeicherstationen (50 MWh)",
+      "case1Problem": "Erstjahresumsatz von 2 Mio. RMB, Reaktionszeit < 2s"
     },
     "pqms": {
       "title": "Power Quality Management",
@@ -236,7 +269,14 @@
       "feature2": "Harmonic analysis: Identify harmonic sources with remediation guidance",
       "feature3": "Alerting: Real-time anomaly push notifications, proactive prevention",
       "feature4": "Mehrstufige Alarmbenachrichtigung: Echtzeit-Benachrichtigungen per Unternehmens-WeChat, E-Mail, SMS, frühzeitige Warnung vor Anomalien zur Vorbeugung",
-      "background": "Industriegebiete, Rechenzentren, Krankenhäuser und gemischt genutzte Gewerbegebäude haben strenge Anforderungen an die Stromqualität. Probleme wie Oberschwingungen, Spannungseinbrüche und Drehstromasymmetrie beeinflussen direkt die Lebensdauer der Geräte und die Produktionssicherheit, aber traditionelle manuelle Inspektionsmethoden sind langsam und unvollständig."
+      "background": "Industriegebiete, Rechenzentren, Krankenhäuser und gemischt genutzte Gewerbegebäude haben strenge Anforderungen an die Stromqualität. Probleme wie Oberschwingungen, Spannungseinbrüche und Drehstromasymmetrie beeinflussen direkt die Lebensdauer der Geräte und die Produktionssicherheit, aber traditionelle manuelle Inspektionsmethoden sind langsam und unvollständig.",
+      "caseCount": "2",
+      "case0Area": "🇨🇳 Oberschwingungsbehandlung in einem Industriegebiet",
+      "case0Scale": "THD > 15%, häufige Ausfälle von Präzisionsgeräten",
+      "case0Problem": "Präzise Lokalisierung der Oberschwingungsquelle, Geräteausfallrate um 78% gesenkt",
+      "case1Area": "🇨🇳 Stromqualitätsmanagement in einem Rechenzentrum",
+      "case1Scale": "Spannungsschwankungen bei kritischen Lasten, manuelle Inspektionen verzögert",
+      "case1Problem": "7×24 Echtzeitüberwachung, 3 potenzielle Ausfälle frühzeitig gewarnt, 90% weniger Vor-Ort-Inspektionen"
     },
     "painPointsTitle": "Pain Points",
     "highlightsTitle": "Key Features",
@@ -257,7 +297,70 @@
     "sceneBackground": "Szenariohintergrund",
     "solutionDescription": "Lösungsbeschreibung",
     "applicationCases": "Anwendungsfälle",
-    "relatedProductsDesc": "In dieser Lösung beteiligte Produkte. Klicken Sie für Details"
+    "relatedProductsDesc": "In dieser Lösung beteiligte Produkte. Klicken Sie für Details",
+    "cases": {
+      "hems": [
+        {
+          "area": "🇹🇼 Villa-Siedlung in Taiwan, China",
+          "scale": "Mehrfamilien-PV + Speichersysteme, verschiedene Marken",
+          "problem": "Nach einheitlichem Anschluss 35% Stromkostenersparnis, Eigenverbrauchsquote auf 72% gesteigert"
+        },
+        {
+          "area": "🇦🇺 Australische Haushalts-Energiespeicher-Nutzer",
+          "scale": "Kombination mit lokaler Spitzen-/Nebenzeittarifstruktur, 3,5 kW PV + 5 kWh Speicher",
+          "problem": "Automatische Umschaltung der Verbrauchsstrategie, monatliche Ersparnis von ca. 180 AUD"
+        }
+      ],
+      "ess": [
+        {
+          "area": "🇨🇳 Dezentrale Energiespeicher in Longhua, Shenzhen",
+          "scale": "Gemischter Einsatz von PCS/BMS verschiedener Marken",
+          "problem": "Cloud-Plattform in 5 Tagen aufgebaut, geräteübergreifender Anschluss in 10 Tagen abgeschlossen"
+        },
+        {
+          "area": "🇨🇳 Ein Geschäftsgebäudekomplex in Shanghai",
+          "scale": "200 kWh gemischter Speicher verschiedener Marken",
+          "problem": "Jahresertrag von 800.000 RMB durch Spitzen-/Nebenzeitarbitrage, Wartungseffizienz um 80% gesteigert"
+        }
+      ],
+      "evcms": [
+        {
+          "area": "🇨🇳 Parkplatz eines Bürogebäudes in Luohu, Shenzhen",
+          "scale": "40 Ladepunkte, ursprüngliche Hauptleitung 150 kW, keine Erweiterung",
+          "problem": "Nach DLB-Einsatz Ausfallrate auf 0 gesenkt, Ladedurchsatz um 60% gesteigert"
+        },
+        {
+          "area": "🇲🇾 Ladestation in Malaysia",
+          "scale": "Gemischter Einsatz von OCPP-Ladepunkten verschiedener Marken",
+          "problem": "Einheitliche Managementplattform eingeführt, Wartungspersonalkosten um 55% gesenkt"
+        }
+      ],
+      "vpp": [
+        {
+          "area": "🇦🇺 Australischer VPP-Betreiber",
+          "scale": "Aggregation von Haushalts-Energiespeichergeräten verschiedener Marken, Teilnahme an FCAS-Nachfragesteuerung",
+          "problem": "Steuerungsbefehle innerhalb von 500 ms ausgegeben, Anlagenauslastung deutlich gesteigert"
+        },
+        {
+          "area": "🇨🇳 Ein Provinz-Energieaggregator",
+          "scale": "Aggregation von 500 dezentralen Energiespeicherstationen (50 MWh)",
+          "problem": "Erstjahresumsatz von 2 Mio. RMB, Reaktionszeit < 2s"
+        }
+      ],
+      "pqms": [
+        {
+          "area": "🇨🇳 Oberschwingungsbehandlung in einem Industriegebiet",
+          "scale": "THD > 15%, häufige Ausfälle von Präzisionsgeräten",
+          "problem": "Präzise Lokalisierung der Oberschwingungsquelle, Geräteausfallrate um 78% gesenkt"
+        },
+        {
+          "area": "🇨🇳 Stromqualitätsmanagement in einem Rechenzentrum",
+          "scale": "Spannungsschwankungen bei kritischen Lasten, manuelle Inspektionen verzögert",
+          "problem": "7×24 Echtzeitüberwachung, 3 potenzielle Ausfälle frühzeitig gewarnt, 90% weniger Vor-Ort-Inspektionen"
+        }
+      ]
+    },
+    "coreFeaturesList": "Liste der Kernfunktionen"
   },
   "products": {
     "title": "Produkte",
@@ -317,31 +420,136 @@
       "title": "HEMS",
       "tagline": "Home Energy Management System",
       "description": "HEMS provides intelligent energy scheduling for residential energy storage, optimizing PV-storage-charging integration to maximize green energy self-consumption and reduce electricity bills.",
-      "positioning": "Einheitliches Management für häusliche PV-, Speicher- und Ladelösungen"
+      "positioning": "Einheitliches Management für häusliche PV-, Speicher- und Ladelösungen",
+      "swScenarioText": "Unterstützt die gesamten Managementaufgaben von Datenakquisition, Anlagenüberwachung, Wartung und Betrieb für neue Energieanlagen wie PV und Speicher. Hilft Benutzern durch eine Cloud-basierte Big-Data-Analyseplattform, Transparenz, automatisierte Wartung, intelligente Diagnose und Entscheidungsunterstützung für alle ihre neuen Energieanlagen zu realisieren. Erfüllt umfassend die verschiedenen Anforderungen während des Lebenszyklus neuer Energieanlagen, maximiert den Anlagenwert und schützt das Kernvermögen der Benutzer.",
+      "swFeatureCount": "3",
+      "swFeature0Label": "Sicher und stabil",
+      "swFeature0Desc": "Basierend auf einer Doppelarchitektur aus Netzwerkangriffsabwehr und Datenschutz, ermöglicht eine vertrauenswürdige Betriebsumgebung und einen geschlossenen Sicherheitskreislauf für Energiemanagementsysteme.",
+      "swFeature0Point0": "Finanzstufiger Sicherheitsschutz und Berechtigungskontrolle",
+      "swFeature0Point1": "Notfallwiederherstellung + verschlüsselte Doppelsicherung",
+      "swFeature0Point2": "Nationale und internationale Konformitätszertifizierungen",
+      "swFeature1Label": "Sorglose Wartung",
+      "swFeature1Desc": "Umfassende Diagnose auf Komponenten-, Anlagen- und Stapelbasis, präzise Wartungsempfehlungen, vereinfacht Wartungsarbeiten und steigert die Wartungseffizienz.",
+      "swFeature1Point0": "KI-gestützter intelligenter Wartungsassistent",
+      "swFeature1Point1": "Echtzeit-Störungsalarm & automatische Diagnose",
+      "swFeature1Point2": "Rückverfolgbare Wartungsgarantie über den gesamten Lebenszyklus",
+      "swFeature2Label": "Intelligentes Erlebnis",
+      "swFeature2Desc": "Intelligente Steuerung durch fortschrittliche Algorithmen, freie Wahl zwischen verschiedenen Energiemodi, einfache Verwaltung von Grünstrom per Handy.",
+      "swFeature2Point0": "Minimale Konfiguration, sofort einsatzbereit",
+      "swFeature2Point1": "KI-Energiemanagement, intelligent und effizient",
+      "swFeature2Point2": "Anpassbares Dashboard, volle Kontrolle nach Ihren Wünschen"
     },
     "ess": {
       "title": "ESS",
       "tagline": "Commercial & Industrial Energy Storage System",
       "description": "ESS targets commercial and industrial energy storage, supporting peak-valley arbitrage, demand management, and backup power applications.",
-      "positioning": "Überwachung mehrerer Standorte für gewerbliche und industrielle Energiespeicher"
+      "positioning": "Überwachung mehrerer Standorte für gewerbliche und industrielle Energiespeicher",
+      "swScenarioText": "Einsetzbar für die einheitliche Überwachung und Steuerung von Energiespeicheranlagen an mehreren Standorten wie Fabriken, Gewerbegebäuden und Parks. Ermöglicht den Anschluss geräteübergreifender Marken, automatische Arbitrage zwischen Spitzen- und Schwachlastzeiten sowie Lastmanagement, um die Gesamtstromkosten um 20–40 % zu senken.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Einheitliche Überwachung mehrerer Standorte",
+      "swFeature0Desc": "Verwalten Sie alle Speicherstandorte über eine Plattform, sehen Sie SOC, Leistung und Gesundheitszustand in Echtzeit, steigern Sie die Wartungseffizienz um 80 % und erhalten Sie abgestufte Alarmbenachrichtigungen.",
+      "swFeature0Point0": "Übersicht aller Standorte auf einem Bildschirm",
+      "swFeature0Point1": "Intelligente, abgestufte Alarmbenachrichtigungen",
+      "swFeature0Point2": "Echtzeit-Verfolgung des Gesundheitszustands",
+      "swFeature1Label": "Intelligente Arbitrage zwischen Spitzen- und Schwachlastzeiten",
+      "swFeature1Desc": "Automatische Erkennung der optimalen Lade- und Entladezeitpunkte, Laden bei niedrigen und Entladen bei hohen Preisen zur Maximierung der Ertragsdifferenz. Die Strategie-Engine reagiert dynamisch auf Echtzeit-Strompreisschwankungen.",
+      "swFeature1Point0": "Dynamische Reaktion auf Echtzeit-Strompreise",
+      "swFeature1Point1": "Automatische Ausführung optimaler Lade- und Entladestrategien",
+      "swFeature1Point2": "Automatische Erstellung von Ertragsberichten",
+      "swFeature2Label": "Lastmanagement",
+      "swFeature2Desc": "Echtzeitüberwachung der Leistungsnachfrage, intelligentes Lastausgleichsmanagement zur Vermeidung von Überschreitungen und hohen Nachfragegebühren, ohne teure Trafo-Erweiterungen.",
+      "swFeature2Point0": "Echtzeitüberwachung der Leistungsnachfrage",
+      "swFeature2Point1": "Automatische Steuerung des Lastausgleichs",
+      "swFeature2Point2": "Erheblich reduzierte Erweiterungskosten",
+      "swFeature3Label": "Energieeffizienzberichte",
+      "swFeature3Desc": "Automatische Erstellung von Tages-/Wochen-/Monatsberichten, Export in Excel/PDF, umfassende Analyse des Energieverbrauchs und der Erträge zur Unterstützung von Betriebsentscheidungen.",
+      "swFeature3Point0": "Automatische Erstellung von Tages-/Wochen-/Monatsberichten",
+      "swFeature3Point1": "Unterstützung für Excel/PDF-Export",
+      "swFeature3Point2": "Umfassende Analyse der Energieerträge"
     },
     "evcms": {
       "title": "EVCMS",
       "tagline": "EV Charging Management System",
       "description": "EVCMS provides full lifecycle EV charging station management, supporting multi-charger coordination, dynamic load balancing, and OCPP protocol integration.",
-      "positioning": "Lastausgleich für mehrere Ladepunkte in Ladestationen"
+      "positioning": "Lastausgleich für mehrere Ladepunkte in Ladestationen",
+      "swScenarioText": "Einsetzbar für dynamisches Lastausgleichsmanagement und Betriebsmanagement von Ladestationen mit mehreren Säulen auf Parkplätzen, in Bürogebäuden, Parks usw. Ermöglicht koordiniertes Laden mehrerer Säulen und intelligente Abrechnung ohne Erweiterung der Hauptleitung.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "DLB Dynamisches Lastausgleichsmanagement",
+      "swFeature0Desc": "Millisekundengenaue Echtzeiterfassung der Gesamtlast der Hauptleitung, dynamische Zuweisung der verfügbaren Leistung pro Säule. Unterstützt den gleichzeitigen Betrieb mehrerer Ladestationen ohne Erweiterung der Hauptleitung und verhindert Stromausfälle vollständig.",
+      "swFeature0Point0": "Millisekundengenaue dynamische Leistungszuweisung",
+      "swFeature0Point1": "Unterstützung für Mehrfachladung ohne Netzausbau",
+      "swFeature0Point2": "Vollständige Vermeidung von Abschaltrisiken",
+      "swFeature1Label": "OCPP-Protokollkompatibilität",
+      "swFeature1Desc": "Unterstützt OCPP 1.6J / 2.0.1, kompatibel mit marktführenden Ladesäulenmarken, ermöglicht schnelle Integration in ein einheitliches Management ohne Austausch vorhandener Hardware.",
+      "swFeature1Point0": "Vollständige Kompatibilität mit OCPP 1.6J / 2.0.1",
+      "swFeature1Point1": "Nahtlose Integration marktführender Marken",
+      "swFeature1Point2": "Kein Austausch vorhandener Geräte erforderlich",
+      "swFeature2Label": "Intelligentes Abrechnungssystem",
+      "swFeature2Desc": "Unterstützt verschiedene Abrechnungsstrategien wie Zeit-, Verbrauchs- und Mitgliederrabatte, Ein-Klick-Abrechnung, mit VIP-Prioritäts- und Warteschlangenmodus.",
+      "swFeature2Point0": "Flexible Konfiguration mehrdimensionaler Abrechnungsstrategien",
+      "swFeature2Point1": "VIP-Priorität + Warteschlangenmodus",
+      "swFeature2Point2": "Ein-Klick-Abrechnung, schnelle Zahlungsabwicklung",
+      "swFeature3Label": "Betriebsdatenanalyse",
+      "swFeature3Desc": "Echtzeitvisualisierung von Ladevorgängen, Störungsmeldungen und Leistungskurven, zentrale Erfassung aller Betriebsdaten einer Station zur Maximierung der Standorteffizienz.",
+      "swFeature3Point0": "Vollständige Rückverfolgung aller Ladevorgänge",
+      "swFeature3Point1": "Echtzeitvisualisierung der Leistungskurven",
+      "swFeature3Point2": "Zentrale Analyse der Standorterträge"
     },
     "pqms": {
       "title": "PQMS",
       "tagline": "Power Quality Monitoring System",
       "description": "PQMS monitors power grid quality in real time, providing harmonic analysis, voltage fluctuation alerts, and electricity auditing.",
-      "positioning": "Fernüberwachung der Stromqualität"
+      "positioning": "Fernüberwachung der Stromqualität",
+      "swScenarioText": "Einsetzbar zur Fernüberwachung und -regelung der Stromqualität in Industriegebieten, Rechenzentren, Krankenhäusern etc., ermöglicht Harmonischeanalyse, Online-Optimierung von Kompensationsparametern und automatische Erstellung von Konformitätsberichten.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Umfassende Überwachung bis zur 50. Harmonischen",
+      "swFeature0Desc": "Echtzeiterfassung von Spannung, Strom, Leistungsfaktor und Harmonischen bis zur 50. Ordnung, präzise Erfassung aller Harmonischenkomponenten, schnelle Lokalisierung problematischer Geräte und Störquellen.",
+      "swFeature0Point0": "Echtzeiterfassung aller Parameter",
+      "swFeature0Point1": "Präzise Erfassung bis zur 50. Harmonischen",
+      "swFeature0Point2": "Schnelle Lokalisierung problematischer Geräte",
+      "swFeature1Label": "Visualisierung mehrerer Standorte auf Karte",
+      "swFeature1Desc": "Kartenbasierte Darstellung des Gesundheitszustands von Standorten, Überblick über die Stromqualitätsverteilung im gesamten Netz, zentrale Analysezentrale für Daten mehrerer Messpunkte.",
+      "swFeature1Point0": "Übersichtskarte der Standortgesundheit",
+      "swFeature1Point1": "Stromqualitätsverteilung im gesamten Netz",
+      "swFeature1Point2": "Zentrale Analyse von Mehrpunktdaten",
+      "swFeature2Label": "Fernoptimierung von Parametern",
+      "swFeature2Desc": "Online-Anpassung der SVG/APF-Kompensationsparameter, Reduzierung der Vor-Ort-Inspektionshäufigkeit um über 90%, Unterstützung von Remote-OTA-Upgrades für die Firmware von Feldgeräten.",
+      "swFeature2Point0": "Online-Anpassung der SVG/APF-Parameter",
+      "swFeature2Point1": "Vor-Ort-Inspektionen um 90%+ reduziert",
+      "swFeature2Point2": "Remote-OTA-Firmware-Upgrade",
+      "swFeature3Label": "Automatische Erstellung von Compliance-Berichten",
+      "swFeature3Desc": "Tages-/Wochen-/Monatsberichte mit einem Klick exportieren, um den Compliance-Prüfanforderungen der Netzbetreiber zu entsprechen. Historische Analyseberichte helfen, die Grundursachen für die Verschlechterung der Energiequalität zu ermitteln.",
+      "swFeature3Point0": "Compliance-Berichte mit einem Klick exportieren",
+      "swFeature3Point1": "Erfüllt die Prüfanforderungen der Netzbetreiber",
+      "swFeature3Point2": "Analyse der Grundursachen für historische Verschlechterungen"
     },
     "vpp": {
       "title": "VPP",
       "tagline": "Virtual Power Plant Aggregation Platform",
       "description": "VPP aggregates distributed energy storage, PV, and EV chargers to participate in grid peak shaving and frequency regulation, unlocking additional revenue.",
-      "positioning": "Dispatch-Plattform für Virtuelle Kraftwerke"
+      "positioning": "Dispatch-Plattform für Virtuelle Kraftwerke",
+      "swScenarioText": "Kann von VPP-Betreibern zur Aggregation von verteilten Energiespeichersystemen verschiedener Marken genutzt werden. Ermöglicht durch Cloud-APIs die Stapelsteuerung und Echtzeitstatusüberwachung sowie die Teilnahme am Markt für netzunterstützende Dienstleistungen zur Erzielung von Einnahmen.",
+      "swFeatureCount": "4",
+      "swFeature0Label": "Aggregation von zehntausenden Geräten",
+      "swFeature0Desc": "Einheitliche Steuerung von verteilten Energiespeichern, PV-Anlagen und Ladestationen. Die Aggregationsgröße ist unbegrenzt. Unterstützt die gemischte Bereitstellung heterogener Marken. Cloud-APIs gängiger Speichermarken sind bereits angebunden.",
+      "swFeature0Point0": "Einheitliche Steuerung zehntausender Geräte",
+      "swFeature0Point1": "Gemischte Bereitstellung heterogener Marken",
+      "swFeature0Point2": "Cloud-APIs gängiger Marken angebunden",
+      "swFeature1Label": "Befehlsausführung in 500ms",
+      "swFeature1Desc": "Die Steuerungsreaktionszeit erfüllt die höchsten Anforderungen für netzunterstützende Dienstleistungen. Unterstützt die sekundengenaue Stapelbefehlsausgabe und Echtzeitstatusabonnements: SOC, Leistung und Alarmstatus werden im Millisekundenbereich gepusht.",
+      "swFeature1Point0": "Steuerungsreaktion in 500ms",
+      "swFeature1Point1": "Sekundengenaue Stapelbefehlsausgabe",
+      "swFeature1Point2": "SOC/Leistung im Millisekunden-Push",
+      "swFeature2Label": "API-Anpassung für mehrere Marken",
+      "swFeature2Desc": "VPP-Betreiber benötigen keine eigene Zugangsschicht. Die einheitliche Steuerungsschnittstelle von AlwaysControl unterstützt Lade-/Entladebefehle, SOC-Abfragen und Alarmabonnements mit vollständiger Steuerungsprotokollierung und Auditierung.",
+      "swFeature2Point0": "Einheitliche Schnittstelle, keine Eigenentwicklung nötig",
+      "swFeature2Point1": "Umfassende Abdeckung: Laden/Entladen + Alarmabonnements",
+      "swFeature2Point2": "Vollständige Steuerungsprotokollierung und Auditierung",
+      "swFeature3Label": "Benutzerdefinierte Steuerungsstrategien",
+      "swFeature3Desc": "Unterstützt die Anbindung an übergeordnete Netzsignale oder benutzerdefinierte Steuerungsstrategien. Erfüllt verschiedene Strommarkthandelsmodelle und passt sich flexibel lokalen regulatorischen Anforderungen an.",
+      "swFeature3Point0": "Direkte Anbindung an Netzsignale",
+      "swFeature3Point1": "Benutzerdefinierte Strategie-Engine",
+      "swFeature3Point2": "Flexible Anpassung an lokale Vorschriften"
     },
     "hardwareLabel": "Smart Gateway",
     "softwareLabel": "Cloud Platform",
@@ -380,7 +588,236 @@
     "accessMethodsTitle": "Zugangsmethoden",
     "accessMethodsSubtitle": "Sie entscheiden über die Zugangsmethode, keine Bindung",
     "applyDemoExperience": "Demo anfordern",
-    "contactBusiness": "Vertrieb kontaktieren"
+    "contactBusiness": "Vertrieb kontaktieren",
+    "recommendHwTitle": "Empfohlene Hardware-Gateways",
+    "recommendHwSubtitle": "In Kombination mit den folgenden Hardware-Gateways für lokalen Gerätezugang und Offline-Betrieb",
+    "viewDetailArrow": "Details anzeigen →",
+    "quickStartGuide": "{title} Schnellstartanleitung",
+    "apiIntegrationDoc": "{title} API-Integrationsdokumentation",
+    "openapiSpec": "{title} OpenAPI-Spezifikation",
+    "firmwareFile": "{title} Firmware v2.3.1",
+    "configTool": "{title} Konfigurationstool v1.2",
+    "downloadCategories": {
+      "userManual": "Benutzerhandbuch",
+      "apiDocs": "API-Dokumentation",
+      "datasheet": "Datenblatt",
+      "installGuide": "Installationsanleitung",
+      "firmware": "Firmware",
+      "toolSoftware": "Tool-Software"
+    },
+    "hwDesc": {
+      "neuron-ii": "Universelles Multi-Protokoll-Gateway (4G/WiFi/RS485/CAN)",
+      "neuron-iii": "Dedizierte Ladestationssteuerung (mit integriertem Stromzähler + DLB)",
+      "neuron-iii-lite": "Überlastschutzsteuerung (für ATP III)"
+    },
+    "swScenarios": {
+      "hems": "Unterstützt das gesamte Management von Datenakquise, Anlagenüberwachung, Betrieb und Wartung für erneuerbare Energieanlagen wie PV und Speicher. Durch eine Cloud-basierte Big-Data-Analyseplattform hilft es Nutzern, Kernfunktionen wie transparentes Management, automatisierte Wartung, intelligente Diagnose und Entscheidungsunterstützung für alle ihre erneuerbaren Energieanlagen zu realisieren. Erfüllt umfassend die Bedürfnisse der Nutzer über den gesamten Lebenszyklus der Anlage hinweg, maximiert den Anlagenwert und schützt das Kernvermögen.",
+      "ess": "Eignet sich für die einheitliche Überwachung und Steuerung von Speicheranlagen an mehreren Standorten wie Fabriken, Gewerbegebäuden und Parks. Ermöglicht den Zugang geräteübergreifender Marken, automatische Arbitrage zwischen Spitzen- und Schwachlastzeiten sowie Lastmanagement, um die Gesamtstromkosten um 20–40 % zu senken.",
+      "evcms": "Eignet sich für dynamisches Lastmanagement und Betriebsmanagement von Ladeparks in Parkhäusern, Bürogebäuden und Parks. Ermöglicht koordiniertes Laden mehrerer Ladepunkte und intelligente Abrechnung ohne Erweiterung der Hauptleitung.",
+      "vpp": "Eignet sich für VPP-Betreiber zur Aggregation von verteilten Speichersystemen verschiedener Marken. Ermöglicht Massensteuerung und Echtzeitstatusüberwachung über Cloud-APIs zur Teilnahme am Markt für netzunterstützende Dienstleistungen und Erzielung von Einnahmen.",
+      "pqms": "Eignet sich für die Fernüberwachung und -optimierung der Stromqualität in Industriegebieten, Rechenzentren und Krankenhäusern. Ermöglicht Oberschwingungsanalyse, Online-Optimierung von Kompensationsparametern und automatische Erstellung von Konformitätsberichten."
+    },
+    "swFeatures": {
+      "hems": [
+        {
+          "label": "Sicher und stabil",
+          "desc": "Basierend auf einer dualen Architektur für Netzangriffsabwehr und Datenschutz, schafft eine vertrauenswürdige Betriebsumgebung und einen geschlossenen Sicherheitskreislauf für Energiemanagementsysteme.",
+          "points": [
+            "Finanzstufe Sicherheit und Berechtigungssteuerung",
+            "Notfallwiederherstellung + verschlüsselte Doppelsicherung",
+            "Konformitätszertifizierungen national und international"
+          ]
+        },
+        {
+          "label": "Sorglose Wartung",
+          "desc": "Umfassende Diagnose auf Komponenten-, Anlagen- und Massenebene, präzise Wartungsempfehlungen vereinfachen die Wartungsarbeit und steigern die Effizienz.",
+          "points": [
+            "KI-gestützter intelligenter Wartungsassistent",
+            "Echtzeit-Störmeldungen & automatische Diagnose",
+            "Rückverfolgbare Wartungsgarantie über den gesamten Lebenszyklus"
+          ]
+        },
+        {
+          "label": "Intelligentes Erlebnis",
+          "desc": "Intelligente Steuerung durch fortschrittliche Algorithmen, freie Wahl zwischen verschiedenen Energiemodi, einfache Verwaltung von Grünstrom über mobile Geräte.",
+          "points": [
+            "Minimale Konfiguration, sofort einsatzbereit",
+            "KI-Energiemanagement, intelligent und effizient",
+            "Anpassbares Dashboard, volle Kontrolle"
+          ]
+        }
+      ],
+      "ess": [
+        {
+          "label": "Einheitliche Überwachung mehrerer Standorte",
+          "desc": "Verwalten Sie alle Speicherstandorte über eine Plattform, sehen Sie SOC, Leistung und Gesundheitsstatus jedes Standorts in Echtzeit, steigern Sie die Wartungseffizienz um 80 %, mit gestaffelter Alarmweiterleitung.",
+          "points": [
+            "Mehrere Standorte auf einen Blick",
+            "Intelligente gestaffelte Alarmweiterleitung",
+            "Echtzeitverfolgung des Gesundheitsstatus"
+          ]
+        },
+        {
+          "label": "Intelligente Arbitrage zwischen Spitzen- und Schwachlastzeiten",
+          "desc": "Automatische Erkennung optimaler Lade- und Entladezeitpunkte, Laden bei niedrigen und Entladen bei hohen Preisen zur Maximierung der Einnahmen aus Preisunterschieden. Die Strategie-Engine reagiert dynamisch auf Echtzeitpreisschwankungen.",
+          "points": [
+            "Dynamische Reaktion auf Echtzeitstrompreise",
+            "Automatische Ausführung optimaler Lade-/Entladestrategien",
+            "Automatische Erstellung von Ertragsberichten"
+          ]
+        },
+        {
+          "label": "Lastmanagement",
+          "desc": "Echtzeitüberwachung der Leistungsnachfrage, intelligentes Lastmanagement zur Vermeidung hoher Nachfragegebühren und teurer Trafo-Erweiterungen.",
+          "points": [
+            "Echtzeitüberwachung der Leistungsnachfrage",
+            "Automatische Steuerung zur Lastglättung",
+            "Erheblich reduzierte Erweiterungskosten"
+          ]
+        },
+        {
+          "label": "Energieeffizienzberichte",
+          "desc": "Automatische Erstellung von Tages-/Wochen-/Monatsberichten, Export in Excel/PDF, umfassende Analyse von Energieverbrauch und Ertrag zur Unterstützung betrieblicher Entscheidungen.",
+          "points": [
+            "Automatische Tages-/Wochen-/Monatsberichte",
+            "Unterstützung für Excel/PDF-Export",
+            "Umfassende Energieertragsanalyse"
+          ]
+        }
+      ],
+      "evcms": [
+        {
+          "label": "DLB Dynamisches Lastmanagement",
+          "desc": "Millisekundengenaue Echtzeiterfassung der Gesamtlast der Hauptleitung, dynamische Zuweisung der verfügbaren Leistung an jede Ladestation. Ermöglicht den gleichzeitigen Betrieb mehrerer Ladepunkte ohne Erweiterung der Hauptleitung und verhindert zuverlässig Überlastungen.",
+          "points": [
+            "Millisekundengenaue dynamische Leistungszuweisung",
+            "Unterstützung mehrerer Ladepunkte ohne Erweiterung",
+            "Vollständige Beseitigung des Überlastrisikos"
+          ]
+        },
+        {
+          "label": "OCPP-Protokollkompatibilität",
+          "desc": "Unterstützt OCPP 1.6J / 2.0.1, kompatibel mit gängigen Ladestationsmarken. Ermöglicht schnelle Integration in ein einheitliches Management ohne Austausch vorhandener Hardware.",
+          "points": [
+            "Volle Kompatibilität mit OCPP 1.6J / 2.0.1",
+            "Nahtloser Anschluss gängiger Marken",
+            "Kein Austausch vorhandener Geräte erforderlich"
+          ]
+        },
+        {
+          "label": "Intelligentes Abrechnungssystem",
+          "desc": "Unterstützt verschiedene Abrechnungsstrategien wie Zeit-, Verbrauchs- und Mitgliederrabatte. Ein-Klick-Abrechnung, mit VIP-Prioritäts- und Warteschlangenmodus.",
+          "points": [
+            "Flexible Konfiguration mehrdimensionaler Abrechnungsstrategien",
+            "VIP-Priorität + Warteschlangenmodus",
+            "Ein-Klick-Abrechnung, schnelle Zahlungsabwicklung"
+          ]
+        },
+        {
+          "label": "Betriebsdatenanalyse",
+          "desc": "Echtzeitvisualisierung von Ladevorgängen, Störmeldungen und Leistungskurven. Zentrale Erfassung aller Betriebsdaten einer Station zur Maximierung der Standortrentabilität.",
+          "points": [
+            "Vollständige Rückverfolgung von Ladevorgängen",
+            "Echtzeitvisualisierung von Leistungskurven",
+            "Zentrale Analyse der Standorterträge"
+          ]
+        }
+      ],
+      "vpp": [
+        {
+          "label": "Aggregation von zehntausenden Geräten",
+          "desc": "Einheitliche Steuerung verteilter Speicher, PV-Anlagen und Ladestationen. Unbegrenzte Aggregationsgröße, unterstützt gemischte Bereitstellung heterogener Marken. Cloud-APIs gängiger Speichermarken sind bereits integriert.",
+          "points": [
+            "Einheitliche Steuerung zehntausender Geräte",
+            "Gemischte Bereitstellung heterogener Marken",
+            "Cloud-APIs gängiger Marken bereits integriert"
+          ]
+        },
+        {
+          "label": "500ms-Befehlsausgabe",
+          "desc": "Steuerungsantwortzeiten erfüllen höchste Anforderungen netzunterstützender Dienstleistungen. Unterstützt sekundengenaue Massenbefehlsausgabe und Echtzeitstatusabonnements: SOC, Leistung und Alarmstatus werden millisekundengenau übermittelt.",
+          "points": [
+            "500ms Steuerungsantwortzeit",
+            "Sekundengenaue Massenbefehlsausgabe",
+            "Millisekundengenaue SOC/Leistungsübermittlung"
+          ]
+        },
+        {
+          "label": "API-Anpassung für mehrere Marken",
+          "desc": "VPP-Betreiber benötigen keine eigene Zugangsschicht. Die einheitliche Steuerungsschnittstelle von AlwaysControl unterstützt Lade-/Entladebefehle, SOC-Abfragen und Alarmabonnements mit vollständiger Steuerungsprotokollierung und -prüfung.",
+          "points": [
+            "Einheitliche Schnittstelle, keine Eigenentwicklung nötig",
+            "Umfassende Abdeckung von Lade/Entlade + Alarmabonnements",
+            "Vollständige Steuerungsprotokollierung und -prüfung"
+          ]
+        },
+        {
+          "label": "Benutzerdefinierte Steuerungsstrategien",
+          "desc": "Unterstützt die Anbindung an übergeordnete Netzschnittstellen oder benutzerdefinierte Steuerungsstrategien. Erfüllt verschiedene Strommarkthandelsmodelle und passt sich flexibel lokalen Vorschriften an.",
+          "points": [
+            "Direkte Anbindung an Netzschnittstellen",
+            "Benutzerdefinierte Strategie-Engine",
+            "Flexible Anpassung an lokale Vorschriften"
+          ]
+        }
+      ],
+      "pqms": [
+        {
+          "label": "Umfassende Überwachung bis zur 50. Oberschwingung",
+          "desc": "Echtzeiterfassung von Spannung, Strom, Leistungsfaktor und Oberschwingungen bis zur 50. Ordnung. Präzise Erfassung aller Oberschwingungskomponenten, schnelle Lokalisierung problematischer Geräte und Verursacher.",
+          "points": [
+            "Echtzeiterfassung aller Parameter",
+            "Präzise Erfassung bis zur 50. Oberschwingung",
+            "Schnelle Lokalisierung problematischer Geräte"
+          ]
+        },
+        {
+          "label": "Visualisierung mehrerer Standorte auf einer Karte",
+          "desc": "Kartendarstellung des Gesundheitsstatus der Standorte. Auf einen Blick Überblick über die Stromqualitätsverteilung im gesamten Netz, zentrale Analysezentrale für Daten mehrerer Messpunkte.",
+          "points": [
+            "Kartenübersicht des Standortgesundheitsstatus",
+            "Verteilung der Stromqualität im gesamten Netz",
+            "Zentrale Analyse von Daten mehrerer Punkte"
+          ]
+        },
+        {
+          "label": "Fernoptimierung von Parametern",
+          "desc": "Online-Anpassung von SVG/APF-Kompensationsparametern, Reduzierung der Vor-Ort-Inspektionshäufigkeit um über 90 %. Unterstützt Fern-OTA-Updates der Gerätefirmware vor Ort.",
+          "points": [
+            "Online-Anpassung von SVG/APF-Parametern",
+            "Reduzierung der Vor-Ort-Inspektionen um >90 %",
+            "Fern-OTA-Firmware-Updates"
+          ]
+        },
+        {
+          "label": "Automatische Erstellung von Konformitätsberichten",
+          "desc": "Ein-Klick-Export von Tages-/Wochen-/Monatsberichten. Erfüllt die Konformitätsprüfanforderungen der Netzbetreiber. Historische Analyseberichte helfen, die Ursachen von Stromqualitätsverschlechterungen zu ermitteln.",
+          "points": [
+            "Ein-Klick-Export von Konformitätsberichten",
+            "Erfüllt Prüfanforderungen der Netzbetreiber",
+            "Analyse historischer Verschlechterungsursachen"
+          ]
+        }
+      ]
+    },
+    "hwGatewayTitle": "Empfohlene Hardware-Gateways",
+    "hwGatewaySubtitle": "In Kombination mit den folgenden Hardware-Gateways für lokalen Gerätezugang und Offline-Betrieb",
+    "hwNeuronIIDesc": "Universelles Mehrprotokoll-Gateway (4G/WiFi/RS485/CAN)",
+    "hwNeuronIIIDesc": "Spezial-Controller für Ladestationen (mit integriertem Stromzähler + DLB)",
+    "hwNeuronIIILiteDesc": "Abschaltverhinderungs-Controller (für ATP III)",
+    "viewDetailsArrow": "Details anzeigen →",
+    "downloadSectionTitle": "Dokumente herunterladen",
+    "apiIntegDoc": "{title} API-Integrationsdokumentation",
+    "openApiSpec": "{title} OpenAPI-Spezifikation",
+    "configToolFile": "{title} Konfigurationstool v1.2",
+    "fileCatUserManual": "Benutzerhandbuch",
+    "fileCatInstallGuide": "Installationsanleitung",
+    "fileCatDatasheet": "Datenblatt",
+    "fileCatApiDoc": "API-Dokumentation",
+    "fileCatFirmware": "Firmware",
+    "fileCatTool": "Tool-Software",
+    "coreFeaturesLabel": "Kernfunktionen",
+    "galleryFallback": "Produktgalerie"
   },
   "about": {
     "title": "Über uns",
@@ -509,7 +946,69 @@
     "downloadLink": "Download",
     "notUploaded": "Noch nicht hochgeladen",
     "fileNotUploaded": "Datei steht zum Hochladen bereit",
-    "downloadFirmware": "Firmware herunterladen →"
+    "downloadFirmware": "Firmware herunterladen →",
+    "allCategories": "Alle",
+    "searchPlaceholder": "Frage suchen...",
+    "noMatchingFaq": "Keine passende Frage gefunden",
+    "softwareDownloadTitle": "Software-Download",
+    "softwareDownloadSubtitle": "Laden Sie offizielle Software-Tools und mobile Apps von AlwaysControl herunter",
+    "industrialSoftware": "Industriesteuerungs-Software",
+    "mobileApp": "Mobile App",
+    "updatedAt": "Aktualisiert am {date}",
+    "needDocs": "Benötigen Sie Produktdokumentation oder Firmware-Updates?",
+    "goToDocCenter": "Zum Dokumentationszentrum →",
+    "androidApkDirect": "Android APK Direktinstallation",
+    "neuronConfigTool": "Neuron Konfigurationstool",
+    "neuronConfigToolDesc": "Gateway-Parameterkonfiguration, Firmware-Upgrade, Gerätediagnose",
+    "hemsAppDesc": "Mobile App für Heim-Energiemanagement",
+    "essAppDesc": "Mobile App zur Überwachung von Energiespeichersystemen",
+    "mockDocs": {
+      "neuronIIManual": "Neuron II Benutzerhandbuch",
+      "neuronIIInstall": "Neuron II Installationsanleitung",
+      "neuronIIIManual": "Neuron III Benutzerhandbuch",
+      "neuronIIIInstall": "Neuron III Schnellinstallationsanleitung",
+      "neuronIIILiteManual": "Neuron III Lite Benutzerhandbuch",
+      "hemsGuide": "HEMS Cloud-Plattform Benutzerhandbuch",
+      "essManual": "ESS Betriebs- und Wartungshandbuch",
+      "evcmsApiDoc": "EVCMS API-Schnittstellendokumentation",
+      "pqmsManual": "PQMS Handbuch zur Stromqualitätsüberwachung",
+      "vppGuide": "VPP Leitfaden für die Anbindung an virtuelle Kraftwerke"
+    },
+    "mockFirmwareChangelogs": {
+      "neuronII": "Behebung von Stabilitätsproblemen bei Modbus TCP-Verbindungen",
+      "neuronIII": "DLB-Ansprechzeit auf 80ms optimiert",
+      "neuronIIILite": "Erste stabile Version"
+    },
+    "downloadTitle": "Software-Download",
+    "downloadSubtitle": "Laden Sie offizielle Software-Tools und mobile Apps von AlwaysControl herunter",
+    "categoryIndustrial": "Industrielle Steuerungssoftware",
+    "categoryMobile": "Mobile App",
+    "updatedOn": "Aktualisiert am {date}",
+    "goToDocs": "Zum Dokumentationszentrum →",
+    "backToHelpCenter": "Zurück zum Hilfezentrum",
+    "faqPageTitle": "Häufig gestellte Fragen (FAQ)",
+    "faqPageSubtitle": "Schnell Antworten auf Ihre Fragen finden",
+    "noMatchingQuestions": "Keine passenden Fragen gefunden",
+    "mockDocNeuronIIManual": "Neuron II Benutzerhandbuch",
+    "mockDocNeuronIIInstall": "Neuron II Installationsanleitung",
+    "mockDocNeuronIIIManual": "Neuron III Benutzerhandbuch",
+    "mockDocNeuronIIIInstall": "Neuron III Schnellinstallationsanleitung",
+    "mockDocNeuronIIILiteManual": "Neuron III Lite Benutzerhandbuch",
+    "mockDocHemsGuide": "HEMS Cloud-Plattform Benutzerhandbuch",
+    "mockDocEssManual": "ESS Betriebshandbuch",
+    "mockDocEvcmsApi": "EVCMS API-Schnittstellendokumentation",
+    "mockDocPqmsManual": "PQMS Handbuch zur Stromqualitätsüberwachung",
+    "mockDocVppGuide": "VPP Leitfaden für virtuelle Kraftwerksanbindung",
+    "mockSwNeuronTool": "Neuron Konfigurationstool",
+    "mockSwNeuronToolDesc": "Gateway-Parameterkonfiguration, Firmware-Upgrade, Gerätediagnose",
+    "mockSwHemsApp": "AlwaysControl HEMS App",
+    "mockSwHemsAppDesc": "Mobile App für Heimenergiemanagement",
+    "mockSwEssApp": "AlwaysControl ESS App",
+    "mockSwEssAppDesc": "Mobile App zur Überwachung von Energiespeichersystemen",
+    "mockSwAndroidApk": "Android APK Direktinstallation",
+    "mockFwNeuronIIChangelog": "Behebung von Stabilitätsproblemen bei Modbus TCP-Verbindungen",
+    "mockFwNeuronIIIChangelog": "DLB-Ansprechzeit auf 80ms optimiert",
+    "mockFwNeuronIIILiteChangelog": "Erste stabile Version"
   },
   "footer": {
     "company": "AlwaysControl",
@@ -541,7 +1040,35 @@
     "allAccess": "Alle Zugangsmethoden",
     "cloud": "☁️ Cloud",
     "gateway": "🔗 Gateway",
-    "contactCta": "Ihre Marke nicht gefunden? Kontaktieren Sie uns"
+    "contactCta": "Ihre Marke nicht gefunden? Kontaktieren Sie uns",
+    "capabilityTelemetry": "Echtzeitdatenauslesung",
+    "capabilityControl": "Lade- und Entladesteuerung",
+    "capabilityHistory": "Export von Verlaufsdaten",
+    "filterDeviceType": "Gerätetyp",
+    "filterAccessMethod": "Zugriffsmethode",
+    "filterCapability": "Funktionalität",
+    "filterStatus": "Status",
+    "filterAll": "Alle",
+    "filterBattery": "Energiespeicherbatterie",
+    "filterInverter": "PV-Wechselrichter",
+    "filterCharger": "Ladesäule",
+    "filterMeter": "Intelligenter Stromzähler",
+    "filterCloudDirect": "Direkte Cloud-Verbindung",
+    "filterGatewayAccess": "Gateway-Anbindung",
+    "filterBothAccess": "Beides unterstützt",
+    "filterControlSupport": "Unterstützt Lade- und Entladesteuerung",
+    "filterTelemetryOnly": "Nur Echtzeit-Lesung",
+    "filterSupported": "Unterstützt",
+    "filterDeveloping": "In Entwicklung",
+    "clearFilters": "Alle Filter löschen",
+    "brandCount": "Insgesamt {count} Marken",
+    "cloudDirectLabel": "Direkte Cloud-Verbindung",
+    "gatewayAccessLabel": "Gateway-Zugang",
+    "supportedStatus": "Unterstützt",
+    "developingStatus": "In Entwicklung",
+    "brandNotFound": "Ihre Marke nicht gefunden?",
+    "contactUsQuick": "Kontaktieren Sie uns für schnelle Integration",
+    "contactUsBtn": "Kontaktieren Sie uns"
   },
   "search": {
     "title": "Suche",
@@ -617,5 +1144,16 @@
   "tagEss": "Gewerbe",
   "tagEvcms": "Laden",
   "tagVpp": "VPP",
-  "tagPqms": "Stromqualität"
+  "tagPqms": "Stromqualität",
+  "meta": {
+    "siteName": "Xuheng Elektronik",
+    "siteNameEn": "AlwaysControl",
+    "siteDescription": "AlwaysControl Technology — Energie-Management-Lösungen für alle Marken, abdeckend Haushalts-ESS, Gewerbe-ESS, Ladestationen und VPP-Szenarien",
+    "aboutPage": "Über uns",
+    "contactPage": "Kontakt",
+    "ecosystemPage": "Kompatibles Ökosystem",
+    "productsPage": "Produktzentrum",
+    "helpPage": "Hilfezentrum",
+    "developersPage": "Entwicklerzentrum"
+  }
 }

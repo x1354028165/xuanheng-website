@@ -4,55 +4,55 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-const DOWNLOADS = {
-  industrial: [
-    {
-      name: 'Neuron 配置工具',
-      desc: '网关参数配置、固件升级、设备诊断',
-      version: 'v3.0.2',
-      date: '2026-03-10',
-      items: [
-        { label: 'Windows x64', ext: '.exe', size: '45MB' },
-        { label: 'macOS Intel', ext: '.dmg', size: '52MB' },
-        { label: 'macOS ARM (Apple Silicon)', ext: '.dmg', size: '48MB' },
-        { label: 'Linux x64', ext: '.AppImage', size: '50MB' },
-      ],
-    },
-  ],
-  mobile: [
-    {
-      name: 'AlwaysControl HEMS App',
-      desc: '家庭能源管理移动应用',
-      version: 'v2.5.0',
-      date: '2026-03-08',
-      items: [
-        { label: 'Google Play', ext: '', size: '' },
-        { label: 'App Store', ext: '', size: '' },
-        { label: 'Android APK 直装', ext: '.apk', size: '38MB' },
-      ],
-    },
-    {
-      name: 'AlwaysControl ESS App',
-      desc: '储能系统监控移动应用',
-      version: 'v1.2.0',
-      date: '2026-02-20',
-      items: [
-        { label: 'Google Play', ext: '', size: '' },
-        { label: 'App Store', ext: '', size: '' },
-      ],
-    },
-  ],
-};
-
 type Category = 'industrial' | 'mobile';
 
 export default function DownloadPage() {
   const t = useTranslations("help");
   const [activeCategory, setActiveCategory] = useState<Category>('industrial');
 
+  const DOWNLOADS = {
+    industrial: [
+      {
+        name: t('mockSwNeuronTool'),
+        desc: t('mockSwNeuronToolDesc'),
+        version: 'v3.0.2',
+        date: '2026-03-10',
+        items: [
+          { label: 'Windows x64', ext: '.exe', size: '45MB' },
+          { label: 'macOS Intel', ext: '.dmg', size: '52MB' },
+          { label: 'macOS ARM (Apple Silicon)', ext: '.dmg', size: '48MB' },
+          { label: 'Linux x64', ext: '.AppImage', size: '50MB' },
+        ],
+      },
+    ],
+    mobile: [
+      {
+        name: 'AlwaysControl HEMS App',
+        desc: t('mockSwHemsAppDesc'),
+        version: 'v2.5.0',
+        date: '2026-03-08',
+        items: [
+          { label: 'Google Play', ext: '', size: '' },
+          { label: 'App Store', ext: '', size: '' },
+          { label: t('mockSwAndroidApk'), ext: '.apk', size: '38MB' },
+        ],
+      },
+      {
+        name: 'AlwaysControl ESS App',
+        desc: t('mockSwEssAppDesc'),
+        version: 'v1.2.0',
+        date: '2026-02-20',
+        items: [
+          { label: 'Google Play', ext: '', size: '' },
+          { label: 'App Store', ext: '', size: '' },
+        ],
+      },
+    ],
+  };
+
   const categories: { key: Category; icon: string; label: string }[] = [
-    { key: 'industrial', icon: '🖥', label: '工控软件' },
-    { key: 'mobile', icon: '📱', label: '移动 App' },
+    { key: 'industrial', icon: '🖥', label: t('categoryIndustrial') },
+    { key: 'mobile', icon: '📱', label: t('categoryMobile') },
   ];
 
   const currentDownloads = DOWNLOADS[activeCategory];
@@ -64,8 +64,8 @@ export default function DownloadPage() {
           <Link href="/support" className="mb-4 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors">
             &larr; {t('backToHelp')}
           </Link>
-          <h1 className="text-3xl font-bold text-[#0F172A]">软件下载</h1>
-          <p className="mt-2 text-[#64748B]">下载旭衡电子官方软件工具和移动应用</p>
+          <h1 className="text-3xl font-bold text-[#0F172A]">{t('downloadTitle')}</h1>
+          <p className="mt-2 text-[#64748B]">{t('downloadSubtitle')}</p>
         </div>
       </section>
 
@@ -101,7 +101,7 @@ export default function DownloadPage() {
                   <span className="rounded bg-[#ECFDF5] px-2 py-0.5 text-xs font-medium text-[#059669]">{sw.version}</span>
                 </div>
                 <p className="text-sm text-[#475569] mb-1">{sw.desc}</p>
-                <p className="text-xs text-[#94A3B8] mb-4">更新于 {sw.date}</p>
+                <p className="text-xs text-[#94A3B8] mb-4">{t('updatedOn', { date: sw.date })}</p>
                 <div className="space-y-2">
                   {sw.items.map((dl, i) => (
                     <button
@@ -122,12 +122,12 @@ export default function DownloadPage() {
       {/* Also check docs */}
       <section className="bg-white py-12 text-center">
         <div className="mx-auto max-w-lg px-6">
-          <p className="text-[#475569] mb-4">需要产品文档或固件更新？</p>
+          <p className="text-[#475569] mb-4">{t('needDocs')}</p>
           <Link
             href="/support/docs"
             className="inline-flex items-center gap-2 text-[#38C4E8] hover:underline font-medium"
           >
-            前往文档中心 →
+            {t('goToDocs')}
           </Link>
         </div>
       </section>
