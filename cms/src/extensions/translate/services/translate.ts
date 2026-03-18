@@ -37,6 +37,7 @@ const TARGET_LOCALES = ['zh-TW', 'en-US', 'de', 'fr', 'pt', 'es', 'ru'];
 const TRANSLATABLE_FIELDS = [
   'title', 'content', 'description', 'summary', 'tagline',
   'excerpt', 'question', 'answer', 'value',
+  'features', 'keySpecs', 'key_specs', 'specs',
 ];
 
 const twConverter = OpenCC.Converter({ from: 'cn', to: 'twp' });
@@ -153,6 +154,12 @@ function getTranslatableFields(entry: Record<string, unknown>): Record<string, s
     const val = entry[key];
     if (typeof val === 'string' && val.trim()) {
       fields[key] = val;
+    } else if (Array.isArray(val) || (val !== null && typeof val === 'object')) {
+      // Serialize JSON fields (features, key_specs) as JSON string for translation
+      const serialized = JSON.stringify(val);
+      if (serialized && serialized !== 'null' && serialized !== '[]' && serialized !== '{}') {
+        fields[key] = serialized;
+      }
     }
   }
   return fields;
@@ -245,7 +252,32 @@ async function translateEntry(
       } else {
         // DeepSeek API: serial field-by-field translation
         for (const [key, value] of Object.entries(currentFields)) {
-          translatedData[key] = await translateText(value, locale);
+          // Detect JSON fields (features, key_specs) — translate as structured JSON
+          let isJson = false;
+          let parsed: unknown = null;
+          if (value.trim().startsWith('[') || value.trim().startsWith('{')) {
+            try { parsed = JSON.parse(value); isJson = true; } catch { /* not JSON */ }
+          }
+
+          if (isJson && parsed !== null) {
+            // Translate JSON structure: send as JSON, ask DeepSeek to return JSON
+            try {
+              const jsonStr = JSON.stringify(parsed);
+              const prompt = `将以下JSON数组/对象中的中文文本翻译为${LANGUAGE_NAMES[locale] || locale}，保持完整JSON结构不变，只翻译string值，不翻译key名，返回纯JSON不要代码块：\n${jsonStr}`;
+              const translated = await translateText(prompt, locale, 'zh-CN');
+              // Extract JSON from response
+              const jsonMatch = translated.match(/(\[[\s\S]*\]|\{[\s\S]*\})/);
+              if (jsonMatch) {
+                try { translatedData[key] = JSON.parse(jsonMatch[1]); } catch { translatedData[key] = parsed; }
+              } else {
+                translatedData[key] = parsed; // fallback to original
+              }
+            } catch {
+              translatedData[key] = parsed; // fallback
+            }
+          } else {
+            translatedData[key] = await translateText(value, locale);
+          }
         }
       }
 
@@ -253,6 +285,22 @@ async function translateEntry(
       // This correctly registers the locale version in Strapi v5's document system
       // (Document Service update() alone does not create new locale entries visible in admin)
       const adminToken = await getAdminToken();
+
+      // Copy image relations from zh-CN source to this locale
+      // Fetch zh-CN entry to get cover/gallery file IDs
+      try {
+        const zhEntry = await fetch(
+          `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=zh-CN&populate=cover,gallery`,
+          { headers: { Authorization: `Bearer ${adminToken}` } }
+        );
+        if (zhEntry.ok) {
+          const zhData = await zhEntry.json() as { data?: Record<string, unknown> };
+          const zhContent = zhData.data ?? {};
+          if (zhContent.cover) translatedData['cover'] = zhContent.cover;
+          if (zhContent.gallery) translatedData['gallery'] = zhContent.gallery;
+        }
+      } catch { /* image copy is best-effort */ }
+
       const putRes = await fetch(
         `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=${locale}`,
         {
