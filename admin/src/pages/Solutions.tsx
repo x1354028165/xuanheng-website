@@ -177,7 +177,7 @@ export default function Solutions() {
               if (editingDocId) {
                 try {
                   const res = await api.get(`${API_URL}/${editingDocId}?locale=${v}&populate=cover`);
-                  const rec = res.data as Record<string, unknown>;
+                  const rec = (res.data?.data ?? res.data) as Record<string, unknown>;
                   form.setFieldsValue({ title: rec.title, tagline: rec.tagline, description: rec.description });
                   setFeatures(Array.isArray(rec.features) ? (rec.features as FeatureItem[]) : []);
                   setCases(Array.isArray(rec.cases) ? (rec.cases as CaseItem[]) : []);

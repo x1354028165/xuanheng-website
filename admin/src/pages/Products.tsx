@@ -268,8 +268,9 @@ export default function Products() {
               if (editingDocId) {
                 try {
                   const res = await api.get(`${API_URL}/${editingDocId}?locale=${v}&populate=cover,gallery`);
-                  const rec = res.data as Record<string, unknown>;
-                  form.setFieldsValue({ title: rec.title, tagline: rec.tagline, description: rec.description });
+                  // content-manager API returns {data: {...}, meta: {...}}
+                  const rec = (res.data?.data ?? res.data) as Record<string, unknown>;
+                  form.setFieldsValue({ title: rec.title ?? '', tagline: rec.tagline ?? '', description: rec.description ?? '' });
                   setCategory((rec.category as string) ?? 'hardware');
                   setFeatures(Array.isArray(rec.features) ? (rec.features as FeatureItem[]) : []);
                   setKeySpecs(Array.isArray(rec.keySpecs) ? (rec.keySpecs as SpecItem[]) : []);
