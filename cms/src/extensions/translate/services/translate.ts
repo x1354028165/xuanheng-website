@@ -231,20 +231,41 @@ async function translateEntry(
       }
 
       // Write translated content via Strapi v5 Document Service
-      await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).update({
+      // Step 1: update() creates or updates the draft entry for this locale
+      const docService = strapi.documents(uid as Parameters<typeof strapi.documents>[0]);
+      await docService.update({
         documentId,
         locale,
         data: translatedData,
       });
 
-      // Publish the translated locale so it appears on the frontend
+      // Step 2: publish() clones the draft to create a published entry
       try {
-        await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).publish({
+        await docService.publish({
           documentId,
           locale,
         });
       } catch (pubErr) {
         console.warn(`[translate] ⚠️ Publish failed [${locale}]:`, pubErr);
+      }
+
+      // Step 3: Ensure draft still exists after publish.
+      // In some scenarios (bulk imports, prior bugs) only a published row
+      // may exist without a corresponding draft, which makes the entry
+      // invisible in the content-manager admin panel. Re-calling update()
+      // is idempotent — it either confirms the draft or recreates it.
+      const draftCheck = await docService.findOne({
+        documentId,
+        locale,
+        status: 'draft',
+      });
+      if (!draftCheck) {
+        console.log(`[translate] Draft missing for ${locale}, recreating…`);
+        await docService.update({
+          documentId,
+          locale,
+          data: translatedData,
+        });
       }
 
       // Update meta: mark as auto, store sourceTexts
