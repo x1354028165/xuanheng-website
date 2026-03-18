@@ -42,6 +42,9 @@ const TRANSLATABLE_FIELDS = [
 
 const twConverter = OpenCC.Converter({ from: 'cn', to: 'twp' });
 
+// Image relation fields to copy from zh-CN to other locales
+const IMAGE_FIELDS = ['cover', 'gallery'];
+
 // URL protection: extract → placeholder → translate → restore
 const URL_REGEX = /https?:\/\/[^\s<>"\])+]+|\/uploads\/[^\s<>"\])+]+/g;
 
@@ -120,6 +123,72 @@ export async function translateText(
 
 function convertToTW(text: string): string {
   return twConverter(text);
+}
+
+/**
+ * Translate a JSON field (features, keySpecs) via a dedicated DeepSeek call.
+ * Sends the raw JSON directly — does NOT wrap through translateText() to avoid
+ * double system-prompt confusion.
+ */
+async function translateJsonField(jsonValue: unknown, targetLang: string): Promise<unknown> {
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) throw new Error('DEEPSEEK_API_KEY not set');
+
+  const jsonStr = JSON.stringify(jsonValue);
+  const targetLanguage = LANGUAGE_NAMES[targetLang] || targetLang;
+
+  const response = await fetch(DEEPSEEK_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [{
+        role: 'user',
+        content: `将以下JSON中的中文文本翻译为${targetLanguage}，保持JSON结构完整，只翻译string值，不翻译key名，返回纯JSON不加代码块：\n${jsonStr}`,
+      }],
+      temperature: 0.1,
+      max_tokens: 4096,
+    }),
+  });
+
+  if (!response.ok) {
+    const errBody = await response.text();
+    throw new Error(`DeepSeek JSON translate error (${response.status}): ${errBody}`);
+  }
+
+  const data = (await response.json()) as {
+    choices?: Array<{ message?: { content?: string } }>;
+  };
+  const content = data.choices?.[0]?.message?.content?.trim() ?? '';
+
+  // Strip markdown code block wrappers
+  const cleaned = content.replace(/^```[\w]*\n?/i, '').replace(/\n?```$/i, '').trim();
+
+  // Extract JSON from response
+  const match = cleaned.match(/(\[[\s\S]*\]|\{[\s\S]*\})/);
+  if (match) {
+    try { return JSON.parse(match[1]); } catch { return jsonValue; }
+  }
+  return jsonValue;
+}
+
+/**
+ * Extract image relation IDs for content-manager PUT.
+ * Single media: returns number ID. Multi media: returns array of IDs.
+ */
+function extractMediaId(mediaValue: unknown): number | null {
+  if (!mediaValue || typeof mediaValue !== 'object') return null;
+  return (mediaValue as { id?: number }).id ?? null;
+}
+
+function extractMediaIds(mediaValue: unknown): number[] {
+  if (!Array.isArray(mediaValue)) return [];
+  return mediaValue
+    .map((item) => (item as { id?: number }).id)
+    .filter((id): id is number => typeof id === 'number');
 }
 
 /**
@@ -247,7 +316,12 @@ async function translateEntry(
       if (locale === 'zh-TW') {
         // OpenCC local conversion, no API call
         for (const [key, value] of Object.entries(currentFields)) {
-          translatedData[key] = convertToTW(value);
+          const converted = convertToTW(value);
+          // Parse JSON fields back to objects (they were serialized for translation)
+          if (converted.trim().startsWith('[') || converted.trim().startsWith('{')) {
+            try { translatedData[key] = JSON.parse(converted); continue; } catch { /* not JSON */ }
+          }
+          translatedData[key] = converted;
         }
       } else {
         // DeepSeek API: serial field-by-field translation
@@ -260,20 +334,11 @@ async function translateEntry(
           }
 
           if (isJson && parsed !== null) {
-            // Translate JSON structure: send as JSON, ask DeepSeek to return JSON
+            // Translate JSON structure via dedicated DeepSeek call (not through translateText)
             try {
-              const jsonStr = JSON.stringify(parsed);
-              const prompt = `将以下JSON数组/对象中的中文文本翻译为${LANGUAGE_NAMES[locale] || locale}，保持完整JSON结构不变，只翻译string值，不翻译key名，返回纯JSON不要代码块：\n${jsonStr}`;
-              const translated = await translateText(prompt, locale, 'zh-CN');
-              // Extract JSON from response
-              const jsonMatch = translated.match(/(\[[\s\S]*\]|\{[\s\S]*\})/);
-              if (jsonMatch) {
-                try { translatedData[key] = JSON.parse(jsonMatch[1]); } catch { translatedData[key] = parsed; }
-              } else {
-                translatedData[key] = parsed; // fallback to original
-              }
+              translatedData[key] = await translateJsonField(parsed, locale);
             } catch {
-              translatedData[key] = parsed; // fallback
+              translatedData[key] = parsed; // fallback to original
             }
           } else {
             translatedData[key] = await translateText(value, locale);
@@ -286,20 +351,24 @@ async function translateEntry(
       // (Document Service update() alone does not create new locale entries visible in admin)
       const adminToken = await getAdminToken();
 
-      // Copy image relations from zh-CN source to this locale
-      // Fetch zh-CN entry to get cover/gallery file IDs
+      // Copy image relations from zh-CN source to this locale (IDs only)
       try {
         const zhEntry = await fetch(
-          `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=zh-CN&populate=cover,gallery`,
+          `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=zh-CN`,
           { headers: { Authorization: `Bearer ${adminToken}` } }
         );
         if (zhEntry.ok) {
           const zhData = await zhEntry.json() as { data?: Record<string, unknown> };
           const zhContent = zhData.data ?? {};
-          if (zhContent.cover) translatedData['cover'] = zhContent.cover;
-          if (zhContent.gallery) translatedData['gallery'] = zhContent.gallery;
+          // content-manager PUT accepts media as ID (single) or array of IDs (multi)
+          const coverId = extractMediaId(zhContent.cover);
+          if (coverId) translatedData['cover'] = coverId;
+          const galleryIds = extractMediaIds(zhContent.gallery);
+          if (galleryIds.length > 0) translatedData['gallery'] = galleryIds;
         }
-      } catch { /* image copy is best-effort */ }
+      } catch (imgErr) {
+        console.warn(`[translate] ⚠️ Image copy failed [${locale}]:`, imgErr);
+      }
 
       const putRes = await fetch(
         `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=${locale}`,
