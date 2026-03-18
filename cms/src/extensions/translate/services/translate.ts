@@ -237,6 +237,16 @@ async function translateEntry(
         data: translatedData,
       });
 
+      // Publish the translated locale so it appears on the frontend
+      try {
+        await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).publish({
+          documentId,
+          locale,
+        });
+      } catch (pubErr) {
+        console.warn(`[translate] ⚠️ Publish failed [${locale}]:`, pubErr);
+      }
+
       // Update meta: mark as auto, store sourceTexts
       meta.status[locale] = 'auto';
       meta.sourceTexts[locale] = { ...currentFields };
