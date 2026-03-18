@@ -1,5 +1,40 @@
 import type { Core } from '@strapi/strapi';
 
+// Helper: translate all i18n-key entries for a given locale
+async function translateUiKeysForLocale(
+  targetLocale: string,
+  strapi: Core.Strapi,
+  translateService: { translateText: (text: string, lang: string) => Promise<string> }
+): Promise<void> {
+  const { default: OpenCC } = await import('opencc-js');
+  const twConverter = targetLocale === 'zh-TW' ? OpenCC.Converter({ from: 'cn', to: 'twp' }) : null;
+  let page = 1;
+  const pageSize = 100;
+  const UID = 'api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0];
+
+  while (true) {
+    const entries = await strapi.documents(UID).findMany({ limit: pageSize, start: (page - 1) * pageSize });
+    if (!entries || !Array.isArray(entries) || entries.length === 0) break;
+
+    for (const entry of entries) {
+      const rec = entry as Record<string, unknown>;
+      const translations = (rec.translations ?? {}) as Record<string, string>;
+      const zhCN = translations['zh-CN'];
+      if (!zhCN || translations[targetLocale]) continue;
+      try {
+        const translated = twConverter ? twConverter(zhCN) : await translateService.translateText(zhCN, targetLocale);
+        if (!twConverter) await new Promise((r) => setTimeout(r, 500));
+        await strapi.documents(UID).update({
+          documentId: rec.documentId as string,
+          data: { translations: { ...translations, [targetLocale]: translated } } as Record<string, unknown>,
+        });
+      } catch { /* continue */ }
+    }
+    if (entries.length < pageSize) break;
+    page++;
+  }
+}
+
 const TRANSLATABLE_CONTENT_TYPES = [
   'api::product.product',
   'api::article.article',
@@ -73,10 +108,10 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
         }
         console.log('[translate:batch] Content complete:', JSON.stringify(results));
 
-        // 2. Translate UI i18n keys (merged here to avoid separate route issues)
+        // 2. Translate UI i18n keys inline (batchTranslateUiKeys is in controller scope)
         for (const locale of targetLocales) {
           try {
-            await translateService.batchTranslateUiKeys(locale);
+            await translateUiKeysForLocale(locale, strapi, translateService);
             console.log(`[translate:batch] UI keys complete for ${locale}`);
           } catch (err) {
             console.error(`[translate:batch] UI keys failed for ${locale}:`, err);
@@ -215,7 +250,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
 
       await strapi.documents('api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0]).update({
         documentId,
-        data: { translations: updatedTranslations },
+        data: { translations: updatedTranslations } as Record<string, unknown>,
       });
 
       (ctx as Record<string, unknown>).body = {
@@ -293,7 +328,7 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
 
               await strapi.documents('api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0]).update({
                 documentId: rec.documentId as string,
-                data: { translations: updatedTranslations },
+                data: { translations: updatedTranslations } as Record<string, unknown>,
               });
 
               totalTranslated++;

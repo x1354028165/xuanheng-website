@@ -1,6 +1,25 @@
 import OpenCC from 'opencc-js';
 
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions';
+const STRAPI_ADMIN_EMAIL = 'admin@gmail.com';
+const STRAPI_ADMIN_PASSWORD = 'Admin1234!';
+
+let _adminToken: string | null = null;
+let _tokenExpiry = 0;
+
+async function getAdminToken(): Promise<string> {
+  if (_adminToken && Date.now() < _tokenExpiry) return _adminToken;
+  const res = await fetch('http://localhost:1337/admin/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: STRAPI_ADMIN_EMAIL, password: STRAPI_ADMIN_PASSWORD }),
+  });
+  const data = await res.json() as { data?: { token?: string } };
+  _adminToken = data?.data?.token ?? null;
+  _tokenExpiry = Date.now() + 25 * 60 * 1000;
+  if (!_adminToken) throw new Error('Failed to get admin token');
+  return _adminToken;
+}
 
 const LANGUAGE_NAMES: Record<string, string> = {
   'zh-CN': '简体中文',
@@ -230,42 +249,35 @@ async function translateEntry(
         }
       }
 
-      // Write translated content via Strapi v5 Document Service
-      // Step 1: update() creates or updates the draft entry for this locale
-      const docService = strapi.documents(uid as Parameters<typeof strapi.documents>[0]);
-      await docService.update({
-        documentId,
-        locale,
-        data: translatedData,
-      });
+      // Write translated content via content-manager REST API
+      // This correctly registers the locale version in Strapi v5's document system
+      // (Document Service update() alone does not create new locale entries visible in admin)
+      const adminToken = await getAdminToken();
+      const putRes = await fetch(
+        `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}?locale=${locale}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` },
+          body: JSON.stringify(translatedData),
+        }
+      );
 
-      // Step 2: publish() clones the draft to create a published entry
-      try {
-        await docService.publish({
-          documentId,
-          locale,
-        });
-      } catch (pubErr) {
-        console.warn(`[translate] ⚠️ Publish failed [${locale}]:`, pubErr);
+      if (!putRes.ok) {
+        const errText = await putRes.text();
+        throw new Error(`content-manager PUT failed (${putRes.status}): ${errText.substring(0, 100)}`);
       }
 
-      // Step 3: Ensure draft still exists after publish.
-      // In some scenarios (bulk imports, prior bugs) only a published row
-      // may exist without a corresponding draft, which makes the entry
-      // invisible in the content-manager admin panel. Re-calling update()
-      // is idempotent — it either confirms the draft or recreates it.
-      const draftCheck = await docService.findOne({
-        documentId,
-        locale,
-        status: 'draft',
-      });
-      if (!draftCheck) {
-        console.log(`[translate] Draft missing for ${locale}, recreating…`);
-        await docService.update({
-          documentId,
-          locale,
-          data: translatedData,
-        });
+      // Publish via content-manager REST API
+      const pubRes = await fetch(
+        `http://localhost:1337/content-manager/collection-types/${uid}/${documentId}/actions/publish?locale=${locale}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${adminToken}` },
+          body: '{}',
+        }
+      );
+      if (!pubRes.ok) {
+        console.warn(`[translate] ⚠️ Publish failed [${locale}]: ${pubRes.status}`);
       }
 
       // Update meta: mark as auto, store sourceTexts
