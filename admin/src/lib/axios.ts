@@ -16,10 +16,16 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (error) => {
+    // 只有明确的 401（token 无效/过期）才跳转登录
+    // 网络错误、Strapi 重启中的 502/503 等不跳转
     if (error.response?.status === 401) {
-      localStorage.removeItem('admin-token');
-      localStorage.removeItem('admin-user');
-      window.location.href = '/admin/login';
+      const token = localStorage.getItem('admin-token');
+      // 只有当前有 token 时才处理（避免登录请求本身 401 触发循环）
+      if (token && !error.config?.url?.includes('/admin/login')) {
+        localStorage.removeItem('admin-token');
+        localStorage.removeItem('admin-user');
+        window.location.href = '/admin/login';
+      }
     }
     return Promise.reject(error);
   }

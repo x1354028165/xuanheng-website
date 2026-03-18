@@ -133,13 +133,15 @@ export default function LanguagesPage() {
     try {
       const res = await api.get('/i18n/locales');
       const data = Array.isArray(res.data) ? res.data : [];
-      const mapped: LocaleItem[] = data.map((l: Record<string, unknown>) => ({
-        id: l.id as number,
-        code: l.code as string,
-        name: (l.name as string) || LANGUAGE_LABELS[l.code as string] || (l.code as string),
-        isDefault: l.isDefault as boolean,
-        isEnabled: !disabledLocales.includes(l.code as string),
-      }));
+      const mapped: LocaleItem[] = data
+        .filter((l: Record<string, unknown>) => l.code !== 'en') // 隐藏 Strapi 内置基础 locale
+        .map((l: Record<string, unknown>) => ({
+          id: l.id as number,
+          code: l.code as string,
+          name: (l.name as string) || LANGUAGE_LABELS[l.code as string] || (l.code as string),
+          isDefault: l.isDefault as boolean,
+          isEnabled: !disabledLocales.includes(l.code as string),
+        }));
       setLocales(mapped);
     } catch {
       message.error(t('common.error') || 'Failed to load locales');

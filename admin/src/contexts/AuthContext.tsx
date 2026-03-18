@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import api from '../lib/axios';
 
 interface User {
@@ -39,6 +39,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('admin-user');
     setToken(null);
     setUser(null);
+  }, []);
+
+  // 启动时验证 token 有效性（Strapi 不可用时保留 token，不强制退出）
+  useEffect(() => {
+    const storedToken = localStorage.getItem('admin-token');
+    if (!storedToken) return;
+    api.get('/admin/users/me').catch((err) => {
+      // 只有真实的 401 才清除 token
+      // 502/503/网络错误 = Strapi 暂时不可用，保留 token
+      if (err.response?.status === 401) {
+        localStorage.removeItem('admin-token');
+        localStorage.removeItem('admin-user');
+        setToken(null);
+        setUser(null);
+      }
+      // 其他错误（网络/502）静默忽略，保持登录态
+    });
   }, []);
 
   return (
