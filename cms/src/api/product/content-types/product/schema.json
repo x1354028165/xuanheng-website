@@ -58,6 +58,31 @@
         "images"
       ]
     },
+    "category": {
+      "type": "enumeration",
+      "enum": ["hardware", "software"],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "features": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "keySpecs": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "specs": {
       "type": "json"
     },
@@ -73,6 +98,14 @@
     "sortOrder": {
       "type": "integer",
       "default": 0
+    },
+    "translationMeta": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

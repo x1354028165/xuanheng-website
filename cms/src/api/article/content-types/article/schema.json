@@ -62,6 +62,14 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "translationMeta": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

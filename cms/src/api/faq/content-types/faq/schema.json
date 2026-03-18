@@ -43,6 +43,14 @@
     "is_translation_locked": {
       "type": "boolean",
       "default": false
+    },
+    "translationMeta": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }
