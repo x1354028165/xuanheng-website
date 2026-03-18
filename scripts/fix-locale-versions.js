@@ -44,7 +44,7 @@ async function getAdminToken() {
   const res = await fetch(`${STRAPI_URL}/admin/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: 'admin@gmail.com', password: 'Admin1234!' }),
+    body: JSON.stringify({ email: 'admin@gmail.com', password: process.env.STRAPI_ADMIN_PASSWORD || 'Admin1234!' }),
   });
   const data = await res.json();
   if (!data?.data?.token) {

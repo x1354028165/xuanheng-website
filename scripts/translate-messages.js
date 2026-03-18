@@ -13,7 +13,7 @@ const DEEPSEEK_URL = 'https://api.deepseek.com/chat/completions';
 
 const MESSAGES_DIR = path.join(__dirname, '../frontend/src/messages');
 
-const TARGET_LOCALES = ['en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru'];
+const TARGET_LOCALES = ['en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru', 'ar'];
 
 const LANG_NAMES = {
   'en-US': 'English',
@@ -23,6 +23,7 @@ const LANG_NAMES = {
   'es': 'Spanish',
   'pt': 'Portuguese',
   'ru': 'Russian',
+  'ar': 'Arabic',
 };
 
 function flatten(obj, prefix = '') {

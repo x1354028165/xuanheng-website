@@ -45,10 +45,9 @@ export default async function ProductsPage({
     products = MOCK_PRODUCTS as unknown as StrapiProduct[];
   }
 
-  // Group by category
-  const hardware = MOCK_PRODUCTS.filter(p => p.category === 'hardware');
-  const software = MOCK_PRODUCTS.filter(p => p.category === 'software');
-  const usesMock = products.length <= 8 && products[0]?.slug === 'neuron-ii';
+  // Group by category from actual products (Strapi or mock)
+  const hardware = products.filter(p => p.category === 'hardware');
+  const software = products.filter(p => p.category === 'software');
 
   return (
     <>

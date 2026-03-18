@@ -2,7 +2,7 @@ import OpenCC from 'opencc-js';
 
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/chat/completions';
 const STRAPI_ADMIN_EMAIL = 'admin@gmail.com';
-const STRAPI_ADMIN_PASSWORD = 'Admin1234!';
+const STRAPI_ADMIN_PASSWORD = process.env.STRAPI_ADMIN_PASSWORD || 'Admin1234!';
 
 let _adminToken: string | null = null;
 let _tokenExpiry = 0;
