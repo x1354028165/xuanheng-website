@@ -47,52 +47,18 @@ export interface EnabledLocale {
 
 export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
   try {
-    // Read directly from SQLite — reliable, no auth needed, no circular fetch
-    const { execSync } = await import('child_process');
-    const output = execSync(
-      `python3 -c "import sqlite3,json; conn=sqlite3.connect('/home/ec2-user/xuanheng-website/cms/.tmp/data.db'); rows=conn.execute('SELECT code,name FROM i18n_locale WHERE code != \\'en\\' ORDER BY id').fetchall(); print(json.dumps([{'code':r[0],'name':r[1],'isDefault':r[0]==\"zh-CN\"} for r in rows])); conn.close()"`,
-      { encoding: 'utf-8', timeout: 5000 }
-    );
-    const allLocales: StrapiLocale[] = JSON.parse(output.trim());
+    // Fetch from internal /api/locales proxy (reads SQLite, no auth needed)
+    // Use absolute URL to avoid circular references in Server Components
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const res = await fetch(`${SITE_URL}/api/locales`, {
+      next: { revalidate: 30 },
+    });
+    if (!res.ok) throw new Error('locales API failed');
+    const allLocales: StrapiLocale[] = await res.json();
+    if (!allLocales.length) throw new Error('empty locales');
 
-    // Fetch disabled locales from page-content settings (via Strapi API with token)
-    let disabledLocales: string[] = [];
-    try {
-      // Use admin token to access page-content
-      const adminLoginRes = await fetch(`${STRAPI_INTERNAL_URL}/admin/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: 'admin@gmail.com', password: 'Admin1234!' }),
-        signal: AbortSignal.timeout(3000),
-      });
-      const adminData = await adminLoginRes.json();
-      const adminToken = adminData?.data?.token;
-      const settingsRes = await fetch(
-        `${STRAPI_INTERNAL_URL}/api/page-content?filters[pageKey][$eq]=language-settings&pagination[limit]=1`,
-        {
-          headers: adminToken ? { Authorization: `Bearer ${adminToken}` } : {},
-          signal: AbortSignal.timeout(5000),
-          next: { revalidate: 60 },
-        }
-      );
-      if (settingsRes.ok) {
-        const settingsJson = await settingsRes.json();
-        const entries = settingsJson.data ?? [];
-        if (entries.length > 0) {
-          const content = entries[0].content as Record<string, unknown> | null;
-          if (Array.isArray(content?.disabledLocales)) {
-            disabledLocales = content.disabledLocales as string[];
-          }
-        }
-      }
-    } catch {
-      // Settings may not exist yet — all locales enabled by default
-    }
-
-    // Filter and map to EnabledLocale
-    const enabledLocales = allLocales
-      .filter((l) => !disabledLocales.includes(l.code))
-      .map((l) => {
+    // Map to EnabledLocale (no disabled filtering needed — handled in /api/locales)
+    const enabledLocales = allLocales.map((l) => {
         const meta = LANGUAGE_META[l.code];
         return {
           code: l.code,
@@ -126,13 +92,11 @@ export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
  */
 export async function getLocalesForBuild(): Promise<string[]> {
   try {
-    // Read directly from SQLite for build-time reliability
     const { execSync } = await import('child_process');
-    const output = execSync(
-      `python3 -c "import sqlite3,json; conn=sqlite3.connect('/home/ec2-user/xuanheng-website/cms/.tmp/data.db'); rows=conn.execute('SELECT code FROM i18n_locale WHERE code != \\'en\\' ORDER BY id').fetchall(); print(json.dumps([r[0] for r in rows])); conn.close()"`,
-      { encoding: 'utf-8', timeout: 5000 }
-    );
-    const codes: string[] = JSON.parse(output.trim());
+    const scriptPath = '/home/ec2-user/xuanheng-website/frontend/scripts/get-locales.py';
+    const output = execSync(`python3 ${scriptPath}`, { encoding: 'utf-8', timeout: 5000 });
+    const locales: StrapiLocale[] = JSON.parse(output.trim());
+    const codes = locales.map((l) => l.code);
     return codes.length > 0 ? codes : FALLBACK_LOCALES;
   } catch {
     return FALLBACK_LOCALES;

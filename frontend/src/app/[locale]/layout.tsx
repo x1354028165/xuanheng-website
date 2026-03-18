@@ -48,7 +48,25 @@ export default async function LocaleLayout({
   } catch { /* fallback 到翻译文件 */ }
 
   // Fetch enabled locales from Strapi (with fallback)
-  const enabledLocales = await fetchEnabledLocales();
+  // Fetch enabled locales — use /api/locales proxy (reads SQLite, always reliable)
+  let enabledLocales = await fetchEnabledLocales();
+  if (!enabledLocales || enabledLocales.length <= 2) {
+    // Fallback: call our own API route directly
+    try {
+      const res = await fetch('http://localhost:3000/api/locales', {
+        next: { revalidate: 30 },
+        signal: AbortSignal.timeout(3000),
+      });
+      if (res.ok) {
+        const data: Array<{ code: string; name: string; isDefault: boolean }> = await res.json();
+        const { LANGUAGE_META } = await import('@/lib/api/locales');
+        enabledLocales = data.map((l) => {
+          const meta = LANGUAGE_META[l.code] ?? { label: l.name, native: l.name, flag: '🌐', short: l.code.toUpperCase() };
+          return { code: l.code, label: meta.label, native: meta.native, flag: meta.flag, short: meta.short };
+        });
+      }
+    } catch { /* use whatever fetchEnabledLocales returned */ }
+  }
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
