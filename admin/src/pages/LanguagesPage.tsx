@@ -269,6 +269,13 @@ export default function LanguagesPage() {
 
   const columns = [
     {
+      title: '#',
+      width: 52,
+      render: (_: unknown, __: unknown, index: number) => (
+        <span style={{ color: '#94a3b8', fontSize: 13 }}>{index + 1}</span>
+      ),
+    },
+    {
       title: t('languages.code') || 'Code',
       dataIndex: 'code',
       width: 120,
@@ -280,7 +287,8 @@ export default function LanguagesPage() {
       render: (name: string, record: LocaleItem) => (
         <span>
           {LANGUAGE_LABELS[record.code] || name}
-          {record.isDefault && <Tag color="gold" style={{ marginLeft: 8 }}>{t('languages.default') || 'Default'}</Tag>}
+          {record.isDefault && <Tag color="gold" style={{ marginLeft: 8 }}>{t('languages.default') || '默认'}</Tag>}
+          {record.code === 'zh-CN' && !record.isDefault && <Tag color="cyan" style={{ marginLeft: 8 }}>基础语言</Tag>}
         </span>
       ),
     },
@@ -290,7 +298,7 @@ export default function LanguagesPage() {
       render: (_: unknown, record: LocaleItem) => (
         <Switch
           checked={!disabledLocales.includes(record.code)}
-          disabled={record.code === 'zh-CN'}
+          disabled={record.code === 'zh-CN' || record.isDefault}
           onChange={(checked) => handleToggleEnabled(record.code, checked)}
         />
       ),
