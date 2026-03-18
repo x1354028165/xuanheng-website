@@ -252,7 +252,12 @@
     "accessCloud": "☁️ Cloud Direct",
     "accessCloudDesc": "Direct cloud API access for supported devices, no hardware needed",
     "accessGateway": "🔗 Gateway LAN",
-    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN"
+    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN",
+    "learnMoreDown": "Узнать больше ↓",
+    "sceneBackground": "Контекст сценария",
+    "solutionDescription": "Описание решения",
+    "applicationCases": "Примеры применения",
+    "relatedProductsDesc": "Продукты, задействованные в данном решении. Нажмите, чтобы узнать подробности"
   },
   "products": {
     "title": "Продукция",
@@ -365,7 +370,17 @@
       "size": "Dimensions",
       "meter": "Built-in Meter",
       "dlb": "DLB Response"
-    }
+    },
+    "consultNow": "Немедленно проконсультироваться",
+    "coreFeatures": "Ключевые функции",
+    "cloudDirectTitle": "Прямое облачное подключение",
+    "cloudDirectDesc": "Прямое подключение через облачный API бренда без шлюза, нулевая стоимость оборудования, быстрое развертывание",
+    "gatewayLanTitle": "Локальная сеть шлюза",
+    "gatewayLanDesc": "Локальное развертывание шлюза Neuron, данные не передаются в облако, локальное управление в реальном времени, подходит для промышленных сценариев",
+    "accessMethodsTitle": "Способы подключения",
+    "accessMethodsSubtitle": "Способ подключения определяете вы, нет привязки",
+    "applyDemoExperience": "Запросить демо-версию",
+    "contactBusiness": "Связаться с отделом продаж"
   },
   "about": {
     "title": "О нас",
@@ -473,7 +488,28 @@
     "repairSuccess": "Заявка на ремонт отправлена. Мы свяжемся с вами в ближайшее время.",
     "compatibilityTitle": "Version Compatibility Matrix",
     "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
-    "backToHelp": "Назад в Справочный центр"
+    "backToHelp": "Назад в Справочный центр",
+    "firmwareVersion": "Версия прошивки",
+    "cloudMinVersion": "Минимальная версия облачной платформы",
+    "toolMinVersion": "Минимальная версия инструмента настройки",
+    "remarks": "Примечания",
+    "currentRecommended": "Текущая рекомендуемая",
+    "endingSoonMaintenance": "Обслуживание скоро прекратится",
+    "endedMaintenance": "Обслуживание прекращено",
+    "basicVersion": "Базовая версия",
+    "currentVersion": "Текущая версия",
+    "all": "Все",
+    "tabDocs": "Техническая документация",
+    "tabSoftware": "Загрузка ПО",
+    "tabFirmware": "Версии прошивки",
+    "docName": "Название документа",
+    "product": "Продукт",
+    "version": "Версия",
+    "format": "Формат",
+    "downloadLink": "Скачать",
+    "notUploaded": "Еще не загружено",
+    "fileNotUploaded": "Файл ожидает загрузки",
+    "downloadFirmware": "Скачать прошивку →"
   },
   "footer": {
     "company": "AlwaysControl",

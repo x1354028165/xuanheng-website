@@ -3,21 +3,39 @@ import { Link } from '@/i18n/navigation';
 
 export const revalidate = 3600;
 
-const COMPATIBILITY_DATA = {
+// Note values use semantic keys for i18n; mapped to t() at render time
+type NoteKey = 'recommended' | 'endingSoon' | 'ended' | 'basic' | 'current' | '';
+const COMPATIBILITY_DATA: Record<string, Array<{ firmware: string; cloud: string; tool: string; noteKey: NoteKey }>> = {
   'Neuron II': [
-    { firmware: 'v2.1', cloud: 'HEMS v3.0+ / ESS v2.0+ / PQMS v1.5+', tool: '配置工具 v3.0+', note: '当前推荐' },
-    { firmware: 'v2.0', cloud: 'HEMS v2.5+ / ESS v1.8+ / PQMS v1.3+', tool: '配置工具 v2.8+', note: '' },
-    { firmware: 'v1.9', cloud: 'HEMS v2.0+ / ESS v1.5+', tool: '配置工具 v2.5+', note: '即将停止维护' },
-    { firmware: 'v1.8', cloud: 'HEMS v1.5+', tool: '配置工具 v2.0+', note: '已停止维护' },
+    { firmware: 'v2.1', cloud: 'HEMS v3.0+ / ESS v2.0+ / PQMS v1.5+', tool: 'Config Tool v3.0+', noteKey: 'recommended' },
+    { firmware: 'v2.0', cloud: 'HEMS v2.5+ / ESS v1.8+ / PQMS v1.3+', tool: 'Config Tool v2.8+', noteKey: '' },
+    { firmware: 'v1.9', cloud: 'HEMS v2.0+ / ESS v1.5+', tool: 'Config Tool v2.5+', noteKey: 'endingSoon' },
+    { firmware: 'v1.8', cloud: 'HEMS v1.5+', tool: 'Config Tool v2.0+', noteKey: 'ended' },
   ],
   'Neuron III': [
-    { firmware: 'v1.2', cloud: 'EVCMS v1.5+', tool: '配置工具 v3.0+', note: '当前推荐' },
-    { firmware: 'v1.1', cloud: 'EVCMS v1.4+', tool: '配置工具 v2.8+', note: '' },
-    { firmware: 'v1.0', cloud: 'EVCMS v1.3+', tool: '配置工具 v2.5+', note: '基础版本' },
+    { firmware: 'v1.2', cloud: 'EVCMS v1.5+', tool: 'Config Tool v3.0+', noteKey: 'recommended' },
+    { firmware: 'v1.1', cloud: 'EVCMS v1.4+', tool: 'Config Tool v2.8+', noteKey: '' },
+    { firmware: 'v1.0', cloud: 'EVCMS v1.3+', tool: 'Config Tool v2.5+', noteKey: 'basic' },
   ],
   'Neuron III Lite': [
-    { firmware: 'v1.0', cloud: 'EVCMS v1.5+', tool: '配置工具 v3.0+', note: '当前版本' },
+    { firmware: 'v1.0', cloud: 'EVCMS v1.5+', tool: 'Config Tool v3.0+', noteKey: 'current' },
   ],
+};
+
+const NOTE_STYLES: Record<string, string> = {
+  recommended: 'bg-green-500/10 text-green-600',
+  endingSoon: 'bg-yellow-500/10 text-yellow-600',
+  ended: 'bg-red-500/10 text-red-600',
+  basic: 'text-[#475569]',
+  current: 'text-[#475569]',
+};
+
+const NOTE_KEYS: Record<string, string> = {
+  recommended: 'currentRecommended',
+  endingSoon: 'endingSoonMaintenance',
+  ended: 'endedMaintenance',
+  basic: 'basicVersion',
+  current: 'currentVersion',
 };
 
 export default async function CompatibilityPage({
@@ -34,10 +52,10 @@ export default async function CompatibilityPage({
       <section className="bg-[#F8FAFC] pb-8 pt-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link href="/support" className="mb-4 inline-flex items-center text-sm text-[#64748B] hover:text-[#38C4E8] transition-colors">
-            &larr; 返回帮助中心
+            &larr; {t('backToHelp')}
           </Link>
-          <h1 className="text-3xl font-bold text-[#0F172A]">版本兼容矩阵</h1>
-          <p className="mt-2 text-[#64748B]">查询固件版本与云平台、配置工具的兼容关系</p>
+          <h1 className="text-3xl font-bold text-[#0F172A]">{t('compatibilityTitle')}</h1>
+          <p className="mt-2 text-[#64748B]">{t('compatibilitySubtitle')}</p>
         </div>
       </section>
 
@@ -52,10 +70,10 @@ export default async function CompatibilityPage({
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[#F8FAFC]">
-                      <th className="px-6 py-3 text-left font-medium text-[#475569]">固件版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-[#475569]">云平台最低版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-[#475569]">配置工具最低版本</th>
-                      <th className="px-4 py-3 text-left font-medium text-[#475569]">备注</th>
+                      <th className="px-6 py-3 text-left font-medium text-[#475569]">{t('firmwareVersion')}</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">{t('cloudMinVersion')}</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">{t('toolMinVersion')}</th>
+                      <th className="px-4 py-3 text-left font-medium text-[#475569]">{t('remarks')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,23 +83,10 @@ export default async function CompatibilityPage({
                         <td className="px-4 py-3 text-[#475569]">{row.cloud}</td>
                         <td className="px-4 py-3 text-[#475569]">{row.tool}</td>
                         <td className="px-4 py-3">
-                          {row.note === '当前推荐' && (
-                            <span className="rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-600">
-                              {row.note}
+                          {row.noteKey && (
+                            <span className={`${['recommended', 'endingSoon', 'ended'].includes(row.noteKey) ? 'rounded-full px-2.5 py-0.5 font-medium' : ''} text-xs ${NOTE_STYLES[row.noteKey] ?? ''}`}>
+                              {t(NOTE_KEYS[row.noteKey])}
                             </span>
-                          )}
-                          {row.note === '即将停止维护' && (
-                            <span className="rounded-full bg-yellow-500/10 px-2.5 py-0.5 text-xs font-medium text-yellow-600">
-                              {row.note}
-                            </span>
-                          )}
-                          {row.note === '已停止维护' && (
-                            <span className="rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-medium text-red-600">
-                              {row.note}
-                            </span>
-                          )}
-                          {row.note && !['当前推荐', '即将停止维护', '已停止维护'].includes(row.note) && (
-                            <span className="text-[#475569] text-xs">{row.note}</span>
                           )}
                         </td>
                       </tr>

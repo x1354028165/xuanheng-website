@@ -252,7 +252,12 @@
     "accessCloud": "☁️ 云端直连",
     "accessCloudDesc": "无需网关，通过品牌云 API 直接接入，零硬件成本，快速部署",
     "accessGateway": "🔗 网关局域网",
-    "accessGatewayDesc": "Neuron 网关现场部署，数据不上云，本地实时控制，适合工业场景"
+    "accessGatewayDesc": "Neuron 网关现场部署，数据不上云，本地实时控制，适合工业场景",
+    "learnMoreDown": "了解更多 ↓",
+    "sceneBackground": "场景背景",
+    "solutionDescription": "方案描述",
+    "applicationCases": "应用案例",
+    "relatedProductsDesc": "本方案涉及的产品，点击了解详情"
   },
   "products": {
     "title": "产品中心",
@@ -365,7 +370,17 @@
       "size": "尺寸",
       "meter": "内置电表",
       "dlb": "DLB 响应"
-    }
+    },
+    "consultNow": "立即咨询",
+    "coreFeatures": "核心功能",
+    "cloudDirectTitle": "云端直连",
+    "cloudDirectDesc": "无需网关，通过品牌云 API 直接接入，零硬件成本，快速部署",
+    "gatewayLanTitle": "网关局域网",
+    "gatewayLanDesc": "Neuron 网关现场部署，数据不上云，本地实时控制，适合工业场景",
+    "accessMethodsTitle": "接入方式",
+    "accessMethodsSubtitle": "接入方式由你决定，没有绑定关系",
+    "applyDemoExperience": "申请 Demo 体验",
+    "contactBusiness": "联系商务"
   },
   "about": {
     "title": "关于我们",
@@ -473,7 +488,28 @@
     "repairSuccess": "维修申请已提交，我们会尽快与您联系",
     "compatibilityTitle": "版本兼容矩阵",
     "compatibilitySubtitle": "查询固件与云平台的版本兼容关系",
-    "backToHelp": "返回帮助中心"
+    "backToHelp": "返回帮助中心",
+    "firmwareVersion": "固件版本",
+    "cloudMinVersion": "云平台最低版本",
+    "toolMinVersion": "配置工具最低版本",
+    "remarks": "备注",
+    "currentRecommended": "当前推荐",
+    "endingSoonMaintenance": "即将停止维护",
+    "endedMaintenance": "已停止维护",
+    "basicVersion": "基础版本",
+    "currentVersion": "当前版本",
+    "all": "全部",
+    "tabDocs": "技术文档",
+    "tabSoftware": "软件下载",
+    "tabFirmware": "固件版本",
+    "docName": "文档名称",
+    "product": "产品",
+    "version": "版本",
+    "format": "格式",
+    "downloadLink": "下载",
+    "notUploaded": "暂未上传",
+    "fileNotUploaded": "文件待上传",
+    "downloadFirmware": "下载固件 →"
   },
   "footer": {
     "company": "旭衡电子",

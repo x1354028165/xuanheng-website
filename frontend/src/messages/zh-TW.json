@@ -252,7 +252,12 @@
     "accessCloud": "☁️ 雲端直連",
     "accessCloudDesc": "無需網關，透過品牌雲 API 直接接入，零硬體成本，快速部署",
     "accessGateway": "🔗 網關區域網",
-    "accessGatewayDesc": "Neuron 網關現場部署，資料不上雲，本地即時控制，適合工業場景"
+    "accessGatewayDesc": "Neuron 網關現場部署，資料不上雲，本地即時控制，適合工業場景",
+    "learnMoreDown": "了解更多 ↓",
+    "sceneBackground": "場景背景",
+    "solutionDescription": "方案描述",
+    "applicationCases": "應用案例",
+    "relatedProductsDesc": "本方案涉及的產品，點擊了解詳情"
   },
   "products": {
     "title": "產品中心",
@@ -365,7 +370,17 @@
       "size": "尺寸",
       "meter": "內建電錶",
       "dlb": "DLB 回應"
-    }
+    },
+    "consultNow": "立即諮詢",
+    "coreFeatures": "核心功能",
+    "cloudDirectTitle": "雲端直連",
+    "cloudDirectDesc": "無需閘道，透過品牌雲 API 直接接入，零硬體成本，快速部署",
+    "gatewayLanTitle": "閘道區域網路",
+    "gatewayLanDesc": "Neuron 閘道現場部署，資料不上雲，本地即時控制，適合工業場景",
+    "accessMethodsTitle": "接入方式",
+    "accessMethodsSubtitle": "接入方式由你決定，沒有綁定關係",
+    "applyDemoExperience": "申請 Demo 體驗",
+    "contactBusiness": "聯繫商務"
   },
   "about": {
     "title": "關於我們",
@@ -473,7 +488,28 @@
     "repairSuccess": "維修申請已提交，我們會盡快與您聯絡",
     "compatibilityTitle": "版本相容矩陣",
     "compatibilitySubtitle": "查詢韌體與雲平臺的版本相容關係",
-    "backToHelp": "返回幫助中心"
+    "backToHelp": "返回幫助中心",
+    "firmwareVersion": "韌體版本",
+    "cloudMinVersion": "雲平台最低版本",
+    "toolMinVersion": "配置工具最低版本",
+    "remarks": "備註",
+    "currentRecommended": "當前推薦",
+    "endingSoonMaintenance": "即將停止維護",
+    "endedMaintenance": "已停止維護",
+    "basicVersion": "基礎版本",
+    "currentVersion": "當前版本",
+    "all": "全部",
+    "tabDocs": "技術文件",
+    "tabSoftware": "軟體下載",
+    "tabFirmware": "韌體版本",
+    "docName": "文件名稱",
+    "product": "產品",
+    "version": "版本",
+    "format": "格式",
+    "downloadLink": "下載",
+    "notUploaded": "暫未上傳",
+    "fileNotUploaded": "檔案待上傳",
+    "downloadFirmware": "下載韌體 →"
   },
   "footer": {
     "company": "旭衡電子",

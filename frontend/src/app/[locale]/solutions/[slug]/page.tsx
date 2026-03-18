@@ -106,7 +106,9 @@ export default async function SolutionDetailPage({
   const relatedProductSlugs = mockSolution?.relatedProducts ?? [];
   const relatedProducts = MOCK_PRODUCTS.filter(p => relatedProductSlugs.includes(p.slug));
 
-  const cases = SOLUTION_CASES[slug] ?? [];
+  const cases = (strapiSolution?.cases && strapiSolution.cases.length > 0)
+    ? strapiSolution.cases
+    : (SOLUTION_CASES[slug] ?? []);
 
   // Labels from direct message access
   const painPointsTitle = getSolutionLabel(locale, 'painPointsTitle');
@@ -187,7 +189,7 @@ export default async function SolutionDetailPage({
               className="w-[280px] max-w-[340px] py-3.5 text-center rounded border-[1.5px] border-white/60 text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-white/20 backdrop-blur-sm"
               style={{ background: 'rgba(255,255,255,.12)' }}
             >
-              了解更多 ↓
+              {t('learnMoreDown')}
             </a>
           </div>
         </div>
@@ -198,7 +200,7 @@ export default async function SolutionDetailPage({
       {sceneBackground && (
         <section className="bg-white py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">场景背景</h2>
+            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">{t('sceneBackground')}</h2>
             <p className="text-[#64748B] text-lg leading-relaxed">{sceneBackground}</p>
           </div>
         </section>
@@ -231,7 +233,7 @@ export default async function SolutionDetailPage({
       {description && (
         <section className="bg-[#F8FAFC] py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">方案描述</h2>
+            <h2 className="mb-6 text-3xl font-bold text-[#0F172A]">{t('solutionDescription')}</h2>
             <p className="text-[#64748B] text-lg leading-relaxed">{description}</p>
           </div>
         </section>
@@ -264,7 +266,7 @@ export default async function SolutionDetailPage({
       )}
 
       {/* ===== §3 核心能力 Tab（左文字右图） ===== */}
-      {finalHighlights.length > 0 && (() => {
+      {(() => {
         const SOLUTION_BG: Record<string, string> = {
           hems:  'http://32.236.16.227/strapi/uploads/solution_hems_real_e169716a7e.jpg',
           ess:   'http://32.236.16.227/strapi/uploads/solution_ess_real_8afb1e9d62.jpg',
@@ -272,25 +274,40 @@ export default async function SolutionDetailPage({
           vpp:   'http://32.236.16.227/strapi/uploads/solution_vpp_real_48675dec3f.jpg',
           pqms:  'http://32.236.16.227/strapi/uploads/solution_pqms_real_eeb399956e.jpg',
         };
-        const featureItems = finalHighlights.map((h) => {
-          const colonIdx = h.indexOf('：');
-          if (colonIdx > 0) return { label: h.slice(0, colonIdx), desc: h.slice(colonIdx + 1).trim() };
-          return { label: h.slice(0, 14), desc: h };
-        });
-        return (
-          <FeatureTabs
-            title={highlightsTitle ?? '核心功能列表'}
-            features={featureItems}
-            bgImage={SOLUTION_BG[slug] ?? ''}
-          />
-        );
+        // Prefer Strapi features (rich structure with label/desc/points) over i18n highlights
+        const strapiFeatures = strapiSolution?.features;
+        if (strapiFeatures && strapiFeatures.length > 0) {
+          return (
+            <FeatureTabs
+              title={highlightsTitle ?? '核心功能列表'}
+              features={strapiFeatures}
+              bgImage={SOLUTION_BG[slug] ?? ''}
+            />
+          );
+        }
+        // Fallback to i18n highlights
+        if (finalHighlights.length > 0) {
+          const featureItems = finalHighlights.map((h) => {
+            const colonIdx = h.indexOf('：');
+            if (colonIdx > 0) return { label: h.slice(0, colonIdx), desc: h.slice(colonIdx + 1).trim() };
+            return { label: h.slice(0, 14), desc: h };
+          });
+          return (
+            <FeatureTabs
+              title={highlightsTitle ?? '核心功能列表'}
+              features={featureItems}
+              bgImage={SOLUTION_BG[slug] ?? ''}
+            />
+          );
+        }
+        return null;
       })()}
 
       {/* ===== §4 应用案例 ===== */}
       {cases.length > 0 && (
         <section id="cases" className="bg-[#F8FAFC] py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-[#0F172A] mb-10 text-center">应用案例</h2>
+            <h2 className="text-3xl font-bold text-[#0F172A] mb-10 text-center">{t('applicationCases')}</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {cases.map((c, i) => (
                 <div key={i} className="rounded-2xl border border-[#E2E8F0] bg-white p-7 flex flex-col gap-3">
@@ -311,7 +328,7 @@ export default async function SolutionDetailPage({
         <section className="bg-white py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <h2 className="mb-2 text-3xl font-bold text-[#0F172A] text-center">{recommendedProducts}</h2>
-            <p className="mb-10 text-center text-[#64748B] text-sm">本方案涉及的产品，点击了解详情</p>
+            <p className="mb-10 text-center text-[#64748B] text-sm">{t('relatedProductsDesc')}</p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
               {relatedProducts.map((product) => {
                 const pTitle = getProductMessage(locale, product.slug, 'title') ?? product.title;

@@ -252,7 +252,12 @@
     "accessCloud": "☁️ Cloud Direct",
     "accessCloudDesc": "No gateway needed. Connect via brand cloud API with zero hardware cost and rapid deployment",
     "accessGateway": "🔗 Gateway LAN",
-    "accessGatewayDesc": "On-site Neuron gateway deployment. Data stays local with real-time control, ideal for industrial scenarios"
+    "accessGatewayDesc": "On-site Neuron gateway deployment. Data stays local with real-time control, ideal for industrial scenarios",
+    "learnMoreDown": "Learn More ↓",
+    "sceneBackground": "Scene Background",
+    "solutionDescription": "Solution Description",
+    "applicationCases": "Application Cases",
+    "relatedProductsDesc": "Products involved in this solution, click to learn details"
   },
   "products": {
     "title": "Products",
@@ -365,7 +370,17 @@
       "size": "Dimensions",
       "meter": "Built-in Meter",
       "dlb": "DLB Response"
-    }
+    },
+    "consultNow": "Consult Now",
+    "coreFeatures": "Core Features",
+    "cloudDirectTitle": "Cloud Direct Connect",
+    "cloudDirectDesc": "No gateway required, direct access via brand cloud API, zero hardware cost, rapid deployment",
+    "gatewayLanTitle": "Gateway LAN",
+    "gatewayLanDesc": "Neuron gateway deployed on-site, data stays local, real-time local control, suitable for industrial scenarios",
+    "accessMethodsTitle": "Access Methods",
+    "accessMethodsSubtitle": "You decide the access method, no binding relationship",
+    "applyDemoExperience": "Apply for Demo Experience",
+    "contactBusiness": "Contact Business"
   },
   "about": {
     "title": "About Us",
@@ -473,7 +488,28 @@
     "repairSuccess": "Repair request submitted. We will contact you shortly.",
     "compatibilityTitle": "Version Compatibility Matrix",
     "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
-    "backToHelp": "Back to Help Center"
+    "backToHelp": "Back to Help Center",
+    "firmwareVersion": "Firmware Version",
+    "cloudMinVersion": "Cloud Platform Minimum Version",
+    "toolMinVersion": "Configuration Tool Minimum Version",
+    "remarks": "Remarks",
+    "currentRecommended": "Currently Recommended",
+    "endingSoonMaintenance": "Ending Maintenance Soon",
+    "endedMaintenance": "Maintenance Ended",
+    "basicVersion": "Basic Version",
+    "currentVersion": "Current Version",
+    "all": "All",
+    "tabDocs": "Technical Documentation",
+    "tabSoftware": "Software Download",
+    "tabFirmware": "Firmware Version",
+    "docName": "Document Name",
+    "product": "Product",
+    "version": "Version",
+    "format": "Format",
+    "downloadLink": "Download",
+    "notUploaded": "Not Uploaded Yet",
+    "fileNotUploaded": "File Pending Upload",
+    "downloadFirmware": "Download Firmware →"
   },
   "footer": {
     "company": "AlwaysControl",

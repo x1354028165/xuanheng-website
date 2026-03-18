@@ -252,7 +252,12 @@
     "accessCloud": "☁️ Cloud Direct",
     "accessCloudDesc": "Direct cloud API access for supported devices, no hardware needed",
     "accessGateway": "🔗 Gateway LAN",
-    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN"
+    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN",
+    "learnMoreDown": "En savoir plus ↓",
+    "sceneBackground": "Contexte du scénario",
+    "solutionDescription": "Description de la solution",
+    "applicationCases": "Cas d'application",
+    "relatedProductsDesc": "Produits concernés par cette solution, cliquez pour plus de détails"
   },
   "products": {
     "title": "Produits",
@@ -365,7 +370,17 @@
       "size": "Dimensions",
       "meter": "Built-in Meter",
       "dlb": "DLB Response"
-    }
+    },
+    "consultNow": "Consulter maintenant",
+    "coreFeatures": "Fonctionnalités principales",
+    "cloudDirectTitle": "Connexion directe au cloud",
+    "cloudDirectDesc": "Aucune passerelle requise, accès direct via l'API cloud de la marque, coût matériel nul, déploiement rapide",
+    "gatewayLanTitle": "Passerelle réseau local",
+    "gatewayLanDesc": "Déploiement sur site de la passerelle Neuron, les données ne montent pas dans le cloud, contrôle local en temps réel, adapté aux scénarios industriels",
+    "accessMethodsTitle": "Méthodes d'accès",
+    "accessMethodsSubtitle": "La méthode d'accès dépend de vous, aucune relation d'exclusivité",
+    "applyDemoExperience": "Demander une démo",
+    "contactBusiness": "Contacter le commercial"
   },
   "about": {
     "title": "À propos",
@@ -473,7 +488,28 @@
     "repairSuccess": "Demande de réparation soumise. Nous vous contacterons bientôt.",
     "compatibilityTitle": "Version Compatibility Matrix",
     "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
-    "backToHelp": "Retour au Centre d'aide"
+    "backToHelp": "Retour au Centre d'aide",
+    "firmwareVersion": "Version du firmware",
+    "cloudMinVersion": "Version minimale de la plateforme cloud",
+    "toolMinVersion": "Version minimale de l'outil de configuration",
+    "remarks": "Remarques",
+    "currentRecommended": "Recommandé actuellement",
+    "endingSoonMaintenance": "Maintenance bientôt arrêtée",
+    "endedMaintenance": "Maintenance arrêtée",
+    "basicVersion": "Version de base",
+    "currentVersion": "Version actuelle",
+    "all": "Tous",
+    "tabDocs": "Documentation technique",
+    "tabSoftware": "Téléchargement logiciel",
+    "tabFirmware": "Version du firmware",
+    "docName": "Nom du document",
+    "product": "Produit",
+    "version": "Version",
+    "format": "Format",
+    "downloadLink": "Télécharger",
+    "notUploaded": "Pas encore téléchargé",
+    "fileNotUploaded": "Fichier en attente de téléchargement",
+    "downloadFirmware": "Télécharger le firmware →"
   },
   "footer": {
     "company": "AlwaysControl",

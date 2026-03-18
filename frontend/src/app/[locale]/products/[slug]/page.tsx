@@ -124,7 +124,7 @@ export default async function ProductDetailPage({
                 <div className="mt-10">
                   <Link href="/contact"
                     className="inline-flex items-center justify-center w-[220px] py-3.5 text-center rounded bg-[#0F172A] text-white font-semibold text-[15px] transition-colors duration-200 hover:bg-[#1A3FAD]">
-                    立即咨询
+                    {t('consultNow')}
                   </Link>
                 </div>
               </div>
@@ -329,7 +329,7 @@ export default async function ProductDetailPage({
               : (SW_FEATURES[slug] ?? []);
             return features.length > 0 ? (
               <FeatureTabs
-                title="核心功能"
+                title={t('coreFeatures')}
                 features={features}
                 bgImage={SOLUTION_BG[slug] ?? ''}
               />
@@ -341,20 +341,20 @@ export default async function ProductDetailPage({
             const accessModes = relatedSolutions[0] ? (['hems','ess'].includes(slug) ? ['cloud','gateway'] : slug === 'evcms' ? ['gateway'] : slug === 'vpp' ? ['cloud'] : ['gateway','cloud']) : [];
             const cards = [
               accessModes.includes('cloud') && {
-                icon: '☁️', title: '云端直连',
-                desc: '无需网关，通过品牌云 API 直接接入，零硬件成本，快速部署',
+                icon: '☁️', title: t('cloudDirectTitle'),
+                desc: t('cloudDirectDesc'),
               },
               accessModes.includes('gateway') && {
-                icon: '🔗', title: '网关局域网',
-                desc: 'Neuron 网关现场部署，数据不上云，本地实时控制，适合工业场景',
+                icon: '🔗', title: t('gatewayLanTitle'),
+                desc: t('gatewayLanDesc'),
               },
             ].filter(Boolean) as { icon: string; title: string; desc: string }[];
 
             return cards.length > 0 ? (
               <section className="bg-white py-20">
                 <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-                  <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">接入方式</h2>
-                  <p className="mb-10 text-center text-[#64748B]">接入方式由你决定，没有绑定关系</p>
+                  <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">{t('accessMethodsTitle')}</h2>
+                  <p className="mb-10 text-center text-[#64748B]">{t('accessMethodsSubtitle')}</p>
 
                   {/* 大背景卡片 — 浅蓝灰渐变，参考阳光云风格 */}
                   <div className="rounded-3xl overflow-hidden" style={{ background: 'linear-gradient(135deg, #EBF4FF 0%, #E0EFFE 50%, #EBF4FF 100%)', minHeight: '280px' }}>
@@ -520,11 +520,11 @@ export default async function ProductDetailPage({
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/contact"
               className="inline-flex items-center rounded-lg bg-[#38C4E8] px-8 py-3.5 text-base font-semibold text-[#0C1829] shadow-lg transition-all duration-300 hover:bg-[#38C4E8]/90 hover:shadow-xl">
-              {category === 'software' ? '申请 Demo 体验' : contactSales}
+              {category === 'software' ? t('applyDemoExperience') : contactSales}
             </Link>
             <Link href="/contact"
               className="inline-flex items-center rounded-lg border border-white/30 px-8 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-white/10">
-              联系商务
+              {t('contactBusiness')}
             </Link>
           </div>
         </div>

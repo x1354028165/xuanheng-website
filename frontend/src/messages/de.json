@@ -252,7 +252,12 @@
     "accessCloud": "☁️ Cloud Direct",
     "accessCloudDesc": "Direct cloud API access for supported devices, no hardware needed",
     "accessGateway": "🔗 Gateway LAN",
-    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN"
+    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN",
+    "learnMoreDown": "Mehr erfahren ↓",
+    "sceneBackground": "Szenariohintergrund",
+    "solutionDescription": "Lösungsbeschreibung",
+    "applicationCases": "Anwendungsfälle",
+    "relatedProductsDesc": "In dieser Lösung beteiligte Produkte. Klicken Sie für Details"
   },
   "products": {
     "title": "Produkte",
@@ -365,7 +370,17 @@
       "size": "Dimensions",
       "meter": "Built-in Meter",
       "dlb": "DLB Response"
-    }
+    },
+    "consultNow": "Jetzt beraten lassen",
+    "coreFeatures": "Kernfunktionen",
+    "cloudDirectTitle": "Cloud-Direktverbindung",
+    "cloudDirectDesc": "Kein Gateway erforderlich, direkter Zugang über die Brand-Cloud-API, null Hardwarekosten, schnelle Bereitstellung",
+    "gatewayLanTitle": "Gateway-LAN",
+    "gatewayLanDesc": "Vor-Ort-Bereitstellung des Neuron-Gateways, Daten bleiben in der Cloud, lokale Echtzeitsteuerung, geeignet für Industrieszenarien",
+    "accessMethodsTitle": "Zugangsmethoden",
+    "accessMethodsSubtitle": "Sie entscheiden über die Zugangsmethode, keine Bindung",
+    "applyDemoExperience": "Demo anfordern",
+    "contactBusiness": "Vertrieb kontaktieren"
   },
   "about": {
     "title": "Über uns",
@@ -473,7 +488,28 @@
     "repairSuccess": "Reparaturanfrage eingereicht. Wir werden uns in Kürze bei Ihnen melden.",
     "compatibilityTitle": "Version Compatibility Matrix",
     "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
-    "backToHelp": "Zurück zum Hilfezentrum"
+    "backToHelp": "Zurück zum Hilfezentrum",
+    "firmwareVersion": "Firmware-Version",
+    "cloudMinVersion": "Mindestversion der Cloud-Plattform",
+    "toolMinVersion": "Mindestversion des Konfigurationstools",
+    "remarks": "Bemerkungen",
+    "currentRecommended": "Aktuell empfohlen",
+    "endingSoonMaintenance": "Wartung wird bald eingestellt",
+    "endedMaintenance": "Wartung eingestellt",
+    "basicVersion": "Basisversion",
+    "currentVersion": "Aktuelle Version",
+    "all": "Alle",
+    "tabDocs": "Technische Dokumentation",
+    "tabSoftware": "Software-Download",
+    "tabFirmware": "Firmware-Version",
+    "docName": "Dokumentname",
+    "product": "Produkt",
+    "version": "Version",
+    "format": "Format",
+    "downloadLink": "Download",
+    "notUploaded": "Noch nicht hochgeladen",
+    "fileNotUploaded": "Datei steht zum Hochladen bereit",
+    "downloadFirmware": "Firmware herunterladen →"
   },
   "footer": {
     "company": "AlwaysControl",

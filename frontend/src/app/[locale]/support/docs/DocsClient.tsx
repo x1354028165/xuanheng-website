@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 // Fallback hardcoded data
@@ -40,20 +41,23 @@ interface Props {
 }
 
 export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, docsTitle, docsSubtitle }: Props) {
+  const t = useTranslations('help');
+  const tc = useTranslations('common');
   const [activeTab, setActiveTab] = useState<Tab>('docs');
-  const [docFilter, setDocFilter] = useState('全部');
-  const [fwFilter, setFwFilter] = useState('全部');
+  const ALL_LABEL = t('all');
+  const [docFilter, setDocFilter] = useState(ALL_LABEL);
+  const [fwFilter, setFwFilter] = useState(ALL_LABEL);
 
   // 使用CMS数据，fallback到硬编码
   const docs = cmsDocResources.length > 0 ? cmsDocResources : MOCK_DOCS;
   const software = cmsSoftware.length > 0 ? cmsSoftware : MOCK_SOFTWARE;
   const firmware = cmsFirmware.length > 0 ? cmsFirmware : MOCK_FIRMWARE;
 
-  const allProducts = ['全部', ...Array.from(new Set(docs.map((d: any) => d.product)))];
-  const allModels = ['全部', ...Array.from(new Set(firmware.map((f: any) => f.model)))];
+  const allProducts = [ALL_LABEL, ...Array.from(new Set(docs.map((d: any) => d.product)))];
+  const allModels = [ALL_LABEL, ...Array.from(new Set(firmware.map((f: any) => f.model)))];
 
-  const filteredDocs = docFilter === '全部' ? docs : docs.filter((d: any) => d.product === docFilter);
-  const filteredFw = fwFilter === '全部' ? firmware : firmware.filter((f: any) => f.model === fwFilter);
+  const filteredDocs = docFilter === ALL_LABEL ? docs : docs.filter((d: any) => d.product === docFilter);
+  const filteredFw = fwFilter === ALL_LABEL ? firmware : firmware.filter((f: any) => f.model === fwFilter);
 
   return (
     <main className="bg-[#F8FAFC] min-h-screen pt-32 pb-16">
@@ -76,7 +80,7 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
                   : 'border-transparent text-[#64748B] hover:text-[#0F172A]'
               }`}
             >
-              {tab === 'docs' ? '技术文档' : tab === 'software' ? '软件下载' : '固件版本'}
+              {tab === 'docs' ? t('tabDocs') : tab === 'software' ? t('tabSoftware') : t('tabFirmware')}
             </button>
           ))}
         </div>
@@ -101,11 +105,11 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 text-[#64748B]">
                   <tr>
-                    <th className="px-4 py-3 text-left font-medium">文档名称</th>
-                    <th className="px-4 py-3 text-left font-medium">产品</th>
-                    <th className="px-4 py-3 text-left font-medium">版本</th>
-                    <th className="px-4 py-3 text-left font-medium">格式</th>
-                    <th className="px-4 py-3 text-left font-medium">下载</th>
+                    <th className="px-4 py-3 text-left font-medium">{t('docName')}</th>
+                    <th className="px-4 py-3 text-left font-medium">{t('product')}</th>
+                    <th className="px-4 py-3 text-left font-medium">{t('version')}</th>
+                    <th className="px-4 py-3 text-left font-medium">{t('format')}</th>
+                    <th className="px-4 py-3 text-left font-medium">{t('downloadLink')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -121,9 +125,9 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
                       </td>
                       <td className="px-4 py-3">
                         {doc.fileUrl ? (
-                          <a href={doc.fileUrl} className="text-[#38C4E8] hover:underline">下载</a>
+                          <a href={doc.fileUrl} className="text-[#38C4E8] hover:underline">{tc('download')}</a>
                         ) : (
-                          <span className="text-gray-400">暂未上传</span>
+                          <span className="text-gray-400">{t('notUploaded')}</span>
                         )}
                       </td>
                     </tr>
@@ -147,11 +151,11 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
                 </div>
                 {sw.fileUrl ? (
                   <a href={sw.fileUrl} className="mt-4 block text-center rounded-lg bg-[#38C4E8] px-4 py-2 text-sm text-white hover:bg-[#2bb0d4]">
-                    下载
+                    {tc('download')}
                   </a>
                 ) : (
                   <div className="mt-4 text-center text-sm text-gray-400 border border-dashed border-gray-200 rounded-lg py-2">
-                    文件待上传
+                    {t('fileNotUploaded')}
                   </div>
                 )}
               </div>
@@ -188,10 +192,10 @@ export default function DocsClient({ cmsDocResources, cmsSoftware, cmsFirmware, 
                   <p className="mt-2 text-sm text-[#64748B]">{fw.changelog}</p>
                   {fw.fileUrl ? (
                     <a href={fw.fileUrl} className="mt-3 inline-flex text-sm text-[#38C4E8] hover:underline">
-                      下载固件 →
+                      {t('downloadFirmware')}
                     </a>
                   ) : (
-                    <span className="mt-3 inline-flex text-sm text-gray-400">文件待上传</span>
+                    <span className="mt-3 inline-flex text-sm text-gray-400">{t('fileNotUploaded')}</span>
                   )}
                 </div>
               ))}

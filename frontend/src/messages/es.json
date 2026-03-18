@@ -252,7 +252,12 @@
     "accessCloud": "☁️ Cloud Direct",
     "accessCloudDesc": "Direct cloud API access for supported devices, no hardware needed",
     "accessGateway": "🔗 Gateway LAN",
-    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN"
+    "accessGatewayDesc": "Connect devices via Neuron gateway on local LAN",
+    "learnMoreDown": "Saber más ↓",
+    "sceneBackground": "Contexto del escenario",
+    "solutionDescription": "Descripción de la solución",
+    "applicationCases": "Casos de aplicación",
+    "relatedProductsDesc": "Productos involucrados en esta solución, haz clic para más detalles"
   },
   "products": {
     "title": "Productos",
@@ -365,7 +370,17 @@
       "size": "Dimensions",
       "meter": "Built-in Meter",
       "dlb": "DLB Response"
-    }
+    },
+    "consultNow": "Consultar ahora",
+    "coreFeatures": "Funciones principales",
+    "cloudDirectTitle": "Conexión directa a la nube",
+    "cloudDirectDesc": "Sin necesidad de puerta de enlace, acceso directo a través de la API en la nube de la marca, costo cero en hardware, despliegue rápido",
+    "gatewayLanTitle": "Puerta de enlace LAN",
+    "gatewayLanDesc": "Despliegue in situ de la puerta de enlace Neuron, los datos no suben a la nube, control local en tiempo real, ideal para escenarios industriales",
+    "accessMethodsTitle": "Métodos de acceso",
+    "accessMethodsSubtitle": "Tú decides el método de acceso, sin relaciones de vinculación",
+    "applyDemoExperience": "Solicitar experiencia de Demo",
+    "contactBusiness": "Contactar con ventas"
   },
   "about": {
     "title": "Sobre Nosotros",
@@ -473,7 +488,28 @@
     "repairSuccess": "Solicitud de reparación enviada. Nos pondremos en contacto pronto.",
     "compatibilityTitle": "Version Compatibility Matrix",
     "compatibilitySubtitle": "Check firmware and cloud platform version compatibility",
-    "backToHelp": "Volver al Centro de Ayuda"
+    "backToHelp": "Volver al Centro de Ayuda",
+    "firmwareVersion": "Versión del firmware",
+    "cloudMinVersion": "Versión mínima de la plataforma en la nube",
+    "toolMinVersion": "Versión mínima de la herramienta de configuración",
+    "remarks": "Observaciones",
+    "currentRecommended": "Recomendado actual",
+    "endingSoonMaintenance": "Fin del mantenimiento próximamente",
+    "endedMaintenance": "Mantenimiento finalizado",
+    "basicVersion": "Versión básica",
+    "currentVersion": "Versión actual",
+    "all": "Todos",
+    "tabDocs": "Documentación técnica",
+    "tabSoftware": "Descarga de software",
+    "tabFirmware": "Versión del firmware",
+    "docName": "Nombre del documento",
+    "product": "Producto",
+    "version": "Versión",
+    "format": "Formato",
+    "downloadLink": "Descargar",
+    "notUploaded": "Aún no subido",
+    "fileNotUploaded": "Archivo pendiente de subir",
+    "downloadFirmware": "Descargar firmware →"
   },
   "footer": {
     "company": "AlwaysControl",
