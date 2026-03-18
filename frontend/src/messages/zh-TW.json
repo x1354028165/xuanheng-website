@@ -182,7 +182,9 @@
       "pain3": "難管理：各設備無法協同工作",
       "feature1": "尖離峰套利：自動在離峰時充電，尖峰時放電",
       "feature2": "智慧調度：根據天氣預報和用電習慣最佳化策略",
-      "feature3": "停電保障：離網模式自動切換，零中斷供電"
+      "feature3": "停電保障：離網模式自動切換，零中斷供電",
+      "feature4": "雲端直連接取：無需額外閘道硬體，設備透過雲端 API 直接接入，快速低成本部署",
+      "background": "家庭用戶已安裝光伏 + 儲能系統，但各設備品牌不同、協定各異，缺乏統一的監控與調度入口；峰谷電價政策複雜，手動管理無法最大化節電收益。"
     },
     "ess": {
       "title": "工商業儲能",
@@ -193,7 +195,9 @@
       "pain3": "設備雜：多品牌儲能設備無統一管理平台",
       "feature1": "需量管理：即時監控功率，防止需量超限",
       "feature2": "尖離峰套利：智慧識別最優充放電時機",
-      "feature3": "跨品牌相容：一個平台管理所有品牌儲能設備"
+      "feature3": "跨品牌相容：一個平台管理所有品牌儲能設備",
+      "feature4": "多站點統一管理：集中監控多個儲能站點，運維效率提升 80%，告警分級推送",
+      "background": "工廠、商業樓宇、園區面臨峰谷電價差大、用電成本高的壓力，儲能系統作為核心降本手段，但分散式多站點管理複雜、跨品牌設備接入困難。"
     },
     "evcms": {
       "title": "充電站管理",
@@ -204,7 +208,9 @@
       "pain3": "收益低：充電功率分配不合理影響營運效率",
       "feature1": "DLB動態均衡：毫秒級回應，防跳閘保用電",
       "feature2": "OCPP協議：相容主流品牌充電樁",
-      "feature3": "智慧計費：支援多種收費策略和會員管理"
+      "feature3": "智慧計費：支援多種收費策略和會員管理",
+      "feature4": "即時監控與營運數據：充電記錄、故障告警、功率曲線一站式可視化管理",
+      "background": "停車場、辦公樓、企業園區需要部署多台充電樁，但主線電容有限，多樁同時快充極易觸發主斷路器跳脫；充電樁品牌混雜，協定不一，統一管理困難。"
     },
     "vpp": {
       "title": "VPP虛擬電廠",
@@ -215,7 +221,9 @@
       "pain3": "技術門檻：VPP接入技術門檻高",
       "feature1": "資源聚合：統一調度管理分散式能源",
       "feature2": "市場接入：對接主流電力現貨市場和輔助服務市場",
-      "feature3": "收益分析：即時計算調峰收益，透明結算"
+      "feature3": "收益分析：即時計算調峰收益，透明結算",
+      "feature4": "多種電力市場接入：支援現貨市場、調峰調頻輔助服務等多種交易模式",
+      "background": "分散的能源資產無法單獨參與電網調度。VPP 透過聚合大量分散式電池，將其統一協調為一座「虛擬電廠」，在高峰時集中放電，在低谷時集中儲能，參與電力現貨市場與需求響應機制獲取收益。"
     },
     "pqms": {
       "title": "電能品質管理",
@@ -226,7 +234,9 @@
       "pain3": "難溯源：電能品質問題難以定位",
       "feature1": "即時監測：7×24小時電能品質資料採集",
       "feature2": "諧波分析：識別諧波源，提供治理建議",
-      "feature3": "報警預警：異常即時推送，防患於未然"
+      "feature3": "報警預警：異常即時推送，防患於未然",
+      "feature4": "多級告警推送：企微、郵件、簡訊即時通知，異常提前預警防患於未然",
+      "background": "工業園區、資料中心、醫院、商業綜合體對電能品質要求嚴苛，諧波污染、電壓驟降、三相不平衡等問題直接影響設備壽命與生產安全，但傳統人工巡檢模式回應慢、覆蓋不全。"
     },
     "painPointsTitle": "核心痛點",
     "highlightsTitle": "功能亮點",
@@ -301,27 +311,32 @@
     "hems": {
       "title": "HEMS",
       "tagline": "家庭儲能能量管理系統",
-      "description": "HEMS（Home Energy Management System）為家庭儲能場景提供智慧能量調度，最佳化光儲充一體化用能策略，降低電費支出。"
+      "description": "HEMS（Home Energy Management System）為家庭儲能場景提供智慧能量調度，最佳化光儲充一體化用能策略，降低電費支出。",
+      "positioning": "家庭光儲充統一管理"
     },
     "ess": {
       "title": "ESS",
       "tagline": "工商業儲能管理系統",
-      "description": "ESS（Energy Storage System）面向工商業儲能場景，支援尖離峰套利、需量管理、備用電源等多種應用模式。"
+      "description": "ESS（Energy Storage System）面向工商業儲能場景，支援尖離峰套利、需量管理、備用電源等多種應用模式。",
+      "positioning": "工商業儲能多站點監控"
     },
     "evcms": {
       "title": "EVCMS",
       "tagline": "充電站管理系統",
-      "description": "EVCMS（EV Charging Management System）提供充電站全生命週期管理，支援多樁協同、動態負載均衡、OCPP協議接入。"
+      "description": "EVCMS（EV Charging Management System）提供充電站全生命週期管理，支援多樁協同、動態負載均衡、OCPP協議接入。",
+      "positioning": "充電站多樁負載平衡"
     },
     "pqms": {
       "title": "PQMS",
       "tagline": "電能品質監測系統",
-      "description": "PQMS（Power Quality Monitoring System）即時監測電網電能品質，提供諧波分析、電壓波動預警、用電審計等功能。"
+      "description": "PQMS（Power Quality Monitoring System）即時監測電網電能品質，提供諧波分析、電壓波動預警、用電審計等功能。",
+      "positioning": "電能品質遠端監控"
     },
     "vpp": {
       "title": "VPP",
       "tagline": "虛擬電廠聚合平台",
-      "description": "VPP（Virtual Power Plant）聚合分散式儲能、光伏、充電樁等資源，參與電網調峰調頻，實現資產增值。"
+      "description": "VPP（Virtual Power Plant）聚合分散式儲能、光伏、充電樁等資源，參與電網調峰調頻，實現資產增值。",
+      "positioning": "虛擬電廠調度平台"
     },
     "hardwareLabel": "智慧閘道器",
     "softwareLabel": "雲端平台",

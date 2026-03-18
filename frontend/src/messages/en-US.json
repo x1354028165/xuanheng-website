@@ -182,7 +182,9 @@
       "pain3": "No coordination: Devices cannot work together intelligently",
       "feature1": "Peak-valley arbitrage: Auto charge at low rates, discharge at peak",
       "feature2": "Smart scheduling: Optimize based on weather and usage patterns",
-      "feature3": "Backup power: Seamless off-grid switching, zero interruption"
+      "feature3": "Backup power: Seamless off-grid switching, zero interruption",
+      "feature4": "Cloud Direct Access: No additional gateway hardware required; devices connect directly via cloud APIs for rapid, low-cost deployment.",
+      "background": "Households have installed photovoltaic + energy storage systems, but the devices come from different brands with varied protocols, lacking a unified monitoring and dispatch interface. Complex peak/off-peak electricity pricing policies make manual management unable to maximize energy-saving benefits."
     },
     "ess": {
       "title": "Commercial & Industrial Storage",
@@ -193,7 +195,9 @@
       "pain3": "Mixed fleet: Multiple storage brands with no unified management",
       "feature1": "Demand control: Real-time power monitoring to prevent overages",
       "feature2": "Arbitrage engine: Identify optimal charge/discharge timing automatically",
-      "feature3": "Multi-brand: Manage all storage brands from one platform"
+      "feature3": "Multi-brand: Manage all storage brands from one platform",
+      "feature4": "Multi-site Unified Management: Centralized monitoring of multiple energy storage sites, improving operational efficiency by 80% with tiered alarm notifications.",
+      "background": "Factories, commercial buildings, and campuses face high pressure from large peak/off-peak electricity price differences and high electricity costs. While energy storage systems are a core cost-saving solution, managing distributed multi-site setups is complex, and integrating cross-brand equipment is challenging."
     },
     "evcms": {
       "title": "EV Charging Station",
@@ -204,7 +208,9 @@
       "pain3": "Low revenue: Inefficient power allocation hurts operations",
       "feature1": "DLB: Millisecond response, anti-trip protection",
       "feature2": "OCPP protocol: Compatible with major charger brands",
-      "feature3": "Smart billing: Flexible pricing strategies and membership management"
+      "feature3": "Smart billing: Flexible pricing strategies and membership management",
+      "feature4": "Real-time Monitoring & Operational Data: One-stop visual management of charging records, fault alarms, and power curves.",
+      "background": "Parking lots, office buildings, and corporate campuses need to deploy multiple charging piles, but main line capacity is limited. Simultaneous fast charging by multiple piles can easily trip the main circuit breaker. Mixed charging pile brands and varying protocols make unified management difficult."
     },
     "vpp": {
       "title": "Virtual Power Plant",
@@ -215,7 +221,9 @@
       "pain3": "High barrier: VPP technical integration is complex",
       "feature1": "Resource aggregation: Unified dispatch of distributed energy",
       "feature2": "Market access: Connect to major power spot markets and ancillary services",
-      "feature3": "Revenue analytics: Real-time arbitrage calculation with transparent settlement"
+      "feature3": "Revenue analytics: Real-time arbitrage calculation with transparent settlement",
+      "feature4": "Multiple Electricity Market Access: Supports various trading models such as spot markets and peak-shaving/frequency regulation ancillary services.",
+      "background": "Dispersed energy assets cannot individually participate in grid dispatch. VPP aggregates a large number of distributed batteries, coordinating them into a unified 'virtual power plant' that collectively discharges during peak hours and stores energy during off-peak hours, participating in electricity spot markets and demand response mechanisms to generate revenue."
     },
     "pqms": {
       "title": "Power Quality Management",
@@ -226,7 +234,9 @@
       "pain3": "Hard to trace: Power quality issues are difficult to diagnose",
       "feature1": "24/7 monitoring: Continuous power quality data collection",
       "feature2": "Harmonic analysis: Identify harmonic sources with remediation guidance",
-      "feature3": "Alerting: Real-time anomaly push notifications, proactive prevention"
+      "feature3": "Alerting: Real-time anomaly push notifications, proactive prevention",
+      "feature4": "Multi-level Alarm Notifications: Real-time alerts via Enterprise WeChat, email, and SMS for early warning of abnormalities to prevent issues.",
+      "background": "Industrial parks, data centers, hospitals, and commercial complexes have stringent requirements for power quality. Issues like harmonic pollution, voltage sags, and three-phase imbalance directly affect equipment lifespan and production safety, but traditional manual inspection methods are slow and lack comprehensive coverage."
     },
     "painPointsTitle": "Pain Points",
     "highlightsTitle": "Key Features",
@@ -266,7 +276,8 @@
       "spec_temp": "-20°C ~ +60°C",
       "spec_ip": "IP54",
       "spec_power": "DC 12V / PoE",
-      "spec_size": "140 × 100 × 35 mm"
+      "spec_size": "140 × 100 × 35 mm",
+      "positioning": "Universal Multi-protocol Gateway"
     },
     "neuron-iii": {
       "title": "Neuron III",
@@ -280,7 +291,8 @@
       "spec_temp": "-20°C ~ +55°C",
       "spec_ip": "IP65",
       "spec_power": "AC 220V / DC 12V",
-      "spec_size": "200 × 140 × 45 mm"
+      "spec_size": "200 × 140 × 45 mm",
+      "positioning": "Charging Station Dedicated Controller"
     },
     "neuron-iii-lite": {
       "title": "Neuron III Lite",
@@ -294,32 +306,37 @@
       "spec_ip": "IP44",
       "spec_power": "AC 220V",
       "spec_size": "100 × 80 × 30 mm",
-      "positioning": "Universal Multi-Protocol Gateway"
+      "positioning": "Lightweight Anti-Trip Controller"
     },
     "hems": {
       "title": "HEMS",
       "tagline": "Home Energy Management System",
-      "description": "HEMS provides intelligent energy scheduling for residential energy storage, optimizing PV-storage-charging integration to maximize green energy self-consumption and reduce electricity bills."
+      "description": "HEMS provides intelligent energy scheduling for residential energy storage, optimizing PV-storage-charging integration to maximize green energy self-consumption and reduce electricity bills.",
+      "positioning": "Unified Management for Home PV, Storage, and Charging"
     },
     "ess": {
       "title": "ESS",
       "tagline": "Commercial & Industrial Energy Storage System",
-      "description": "ESS targets commercial and industrial energy storage, supporting peak-valley arbitrage, demand management, and backup power applications."
+      "description": "ESS targets commercial and industrial energy storage, supporting peak-valley arbitrage, demand management, and backup power applications.",
+      "positioning": "Multi-site Monitoring for Commercial & Industrial Energy Storage"
     },
     "evcms": {
       "title": "EVCMS",
       "tagline": "EV Charging Management System",
-      "description": "EVCMS provides full lifecycle EV charging station management, supporting multi-charger coordination, dynamic load balancing, and OCPP protocol integration."
+      "description": "EVCMS provides full lifecycle EV charging station management, supporting multi-charger coordination, dynamic load balancing, and OCPP protocol integration.",
+      "positioning": "Multi-pile Load Balancing for Charging Stations"
     },
     "pqms": {
       "title": "PQMS",
       "tagline": "Power Quality Monitoring System",
-      "description": "PQMS monitors power grid quality in real time, providing harmonic analysis, voltage fluctuation alerts, and electricity auditing."
+      "description": "PQMS monitors power grid quality in real time, providing harmonic analysis, voltage fluctuation alerts, and electricity auditing.",
+      "positioning": "Remote Power Quality Monitoring"
     },
     "vpp": {
       "title": "VPP",
       "tagline": "Virtual Power Plant Aggregation Platform",
-      "description": "VPP aggregates distributed energy storage, PV, and EV chargers to participate in grid peak shaving and frequency regulation, unlocking additional revenue."
+      "description": "VPP aggregates distributed energy storage, PV, and EV chargers to participate in grid peak shaving and frequency regulation, unlocking additional revenue.",
+      "positioning": "Virtual Power Plant Dispatch Platform"
     },
     "hardwareLabel": "Smart Gateway",
     "softwareLabel": "Cloud Platform",
