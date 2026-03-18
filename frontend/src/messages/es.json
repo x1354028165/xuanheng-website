@@ -54,16 +54,6 @@
     "title": "Sobre Nosotros",
     "type": "Tipo de empleo"
   },
-  "accordionEss": "Almacenamiento Industrial y Comercial",
-  "accordionEssDesc": "Arbitraje de picos, expansión dinámica, monitoreo multi-sitio",
-  "accordionEvcms": "Gestión de Estación de Carga",
-  "accordionEvcmsDesc": "Equilibrio de carga, protección contra sobrecargas, distribución dinámica",
-  "accordionHems": "Gestión Energética Residencial",
-  "accordionHemsDesc": "Solar, almacenamiento y carga integrados – ahorre más del 30% en electricidad",
-  "accordionPqms": "Monitoreo de Calidad Eléctrica",
-  "accordionPqmsDesc": "Análisis armónico en tiempo real, alertas multinivel, informes de conformidad",
-  "accordionVpp": "Planta de Energía Virtual",
-  "accordionVppDesc": "Despacho agregado distribuido, participación en mercados auxiliares",
   "common": {
     "backToHome": "Volver al inicio",
     "cancel": "Cancelar",
@@ -1150,10 +1140,5 @@
       "tagline": "Despacho de planta virtual (personalizado)",
       "title": "Virtual Power Plant"
     }
-  },
-  "tagEss": "Industrial",
-  "tagEvcms": "Carga",
-  "tagHems": "Residencial",
-  "tagPqms": "Calidad",
-  "tagVpp": "VPP"
+  }
 }

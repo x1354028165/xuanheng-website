@@ -54,16 +54,6 @@
     "title": "Sobre Nós",
     "type": "Tipo de vaga"
   },
-  "accordionEss": "Armazenamento Industrial e Comercial",
-  "accordionEssDesc": "Arbitragem de pico, expansão dinâmica, monitoramento multi-site",
-  "accordionEvcms": "Gestão de Estação de Carregamento",
-  "accordionEvcmsDesc": "Balanceamento de carga, proteção contra sobrecarga, distribuição dinâmica",
-  "accordionHems": "Gestão de Energia Residencial",
-  "accordionHemsDesc": "Solar, armazenamento e carregamento integrados – economize 30%+ na conta",
-  "accordionPqms": "Monitoramento de Qualidade de Energia",
-  "accordionPqmsDesc": "Análise harmônica em tempo real, alertas multinível, relatórios de conformidade",
-  "accordionVpp": "Usina Virtual",
-  "accordionVppDesc": "Despacho agregado distribuído, participação em mercados auxiliares",
   "common": {
     "backToHome": "Voltar ao início",
     "cancel": "Cancelar",
@@ -1150,10 +1140,5 @@
       "tagline": "Despacho de usina virtual (personalizado)",
       "title": "Virtual Power Plant"
     }
-  },
-  "tagEss": "Industrial",
-  "tagEvcms": "Carregamento",
-  "tagHems": "Residencial",
-  "tagPqms": "Qualidade",
-  "tagVpp": "VPP"
+  }
 }
