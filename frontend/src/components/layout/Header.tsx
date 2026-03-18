@@ -7,6 +7,7 @@ import { useLocale } from "next-intl";
 import { Search, ChevronDown, X, Globe } from "lucide-react";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import Image from "next/image";
+import type { EnabledLocale } from "@/lib/api/locales";
 
 /* ─── Types ─── */
 interface SubItem {
@@ -130,19 +131,33 @@ const NAV_ITEMS: NavItem[] = [
   { key: "contact", href: "/contact" },
 ];
 
-const languages = [
-  { code: "zh-CN" as const, label: "简体中文", native: "Chinese (Simplified)", flag: "🇨🇳", short: "中文" },
-  { code: "en-US" as const, label: "English", native: "English (US)", flag: "🇺🇸", short: "EN" },
-  { code: "zh-TW" as const, label: "繁體中文", native: "Chinese (Traditional)", flag: "🇹🇼", short: "繁中" },
-  { code: "de" as const, label: "Deutsch", native: "German", flag: "🇩🇪", short: "DE" },
-  { code: "fr" as const, label: "Français", native: "French", flag: "🇫🇷", short: "FR" },
-  { code: "es" as const, label: "Español", native: "Spanish", flag: "🇪🇸", short: "ES" },
-  { code: "pt" as const, label: "Português", native: "Portuguese", flag: "🇵🇹", short: "PT" },
-  { code: "ru" as const, label: "Русский", native: "Russian", flag: "🇷🇺", short: "RU" },
+const DEFAULT_LANGUAGES: EnabledLocale[] = [
+  { code: "zh-CN", label: "简体中文", native: "Chinese (Simplified)", flag: "🇨🇳", short: "中文" },
+  { code: "en-US", label: "English", native: "English (US)", flag: "🇺🇸", short: "EN" },
+  { code: "zh-TW", label: "繁體中文", native: "Chinese (Traditional)", flag: "🇹🇼", short: "繁中" },
+  { code: "de", label: "Deutsch", native: "German", flag: "🇩🇪", short: "DE" },
+  { code: "fr", label: "Français", native: "French", flag: "🇫🇷", short: "FR" },
+  { code: "es", label: "Español", native: "Spanish", flag: "🇪🇸", short: "ES" },
+  { code: "pt", label: "Português", native: "Portuguese", flag: "🇵🇹", short: "PT" },
+  { code: "ru", label: "Русский", native: "Russian", flag: "🇷🇺", short: "RU" },
 ];
 
 /* ─── Component ─── */
-export function Header({ locale }: { locale: string }) {
+export function Header({
+  locale,
+  productCovers = {},
+  productTitles = {},
+  productTaglines = {},
+  enabledLocales,
+}: {
+  locale: string;
+  productCovers?: Record<string, string>;
+  productTitles?: Record<string, string>;
+  productTaglines?: Record<string, string>;
+  enabledLocales?: EnabledLocale[];
+}) {
+  // Use dynamic locales from Strapi if provided, otherwise fall back to static list
+  const languages = enabledLocales && enabledLocales.length > 0 ? enabledLocales : DEFAULT_LANGUAGES;
   const t = useTranslations("nav");
   const pathname = usePathname();
   const router = useRouter();
@@ -223,7 +238,8 @@ export function Header({ locale }: { locale: string }) {
   }, []);
 
   const switchLocale = (targetLocale: string) => {
-    router.push(pathname, { locale: targetLocale as "zh-CN" | "en-US" | "zh-TW" | "de" | "fr" | "es" | "pt" | "ru" });
+    // next-intl router expects static Locale type; dynamic locales fall back via middleware
+    router.push(pathname, { locale: targetLocale as "zh-CN" });
   };
 
   const currentLang = languages.find((l) => l.code === currentLocale) || languages[0];
@@ -251,7 +267,7 @@ export function Header({ locale }: { locale: string }) {
                 className={`text-left px-4 py-3 rounded-lg transition-colors text-sm font-medium ${
                   activeProductTab === idx
                     ? "bg-[#F1F5F9] text-[#1A3FAD]"
-                    : "text-[#0F172A] hover:bg-[#F8FAFC] hover:text-[#38C4E8]"
+                    : "text-[#0F172A] hover:bg-[#F8FAFC] hover:text-[#1A3FAD]"
                 }`}
               >
                 {t(group.labelKey)}
@@ -266,8 +282,12 @@ export function Header({ locale }: { locale: string }) {
             </div>
             <div className={`grid gap-4 ${activeGroup.items.length <= 3 ? "grid-cols-3" : "grid-cols-3 lg:grid-cols-5"}`}>
               {activeGroup.items.map((item) => {
-                const img = PRODUCT_IMAGES[item.key];
+                // 优先用 Strapi 封面，fallback 到本地图片
+                const img = productCovers[item.key] || PRODUCT_IMAGES[item.key];
                 const emoji = SOFTWARE_ICONS[item.key];
+                // 优先用Strapi数据，fallback翻译文件
+                const displayTitle = productTitles[item.key] || t(`products-${item.key}`);
+                const displayDesc = productTaglines[item.key] || t(item.desc);
 
                 return (
                   <Link
@@ -292,11 +312,11 @@ export function Header({ locale }: { locale: string }) {
                       </div>
                     )}
                     <div className="text-center">
-                      <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
-                        {t(`products-${item.key}`)}
+                      <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
+                        {displayTitle}
                       </div>
                       <div className="text-xs text-[#94A3B8] mt-1 leading-relaxed">
-                        {t(item.desc)}
+                        {displayDesc}
                       </div>
                     </div>
                   </Link>
@@ -326,9 +346,9 @@ export function Header({ locale }: { locale: string }) {
                 onClick={() => setOpenDropdown(null)}
                 className="group flex items-center gap-4 rounded-lg px-4 py-3 transition-colors hover:bg-[#F8FAFC]"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#38C4E8] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#1A3FAD] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                 <div>
-                  <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+                  <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
                     {t(`solutions-${item.key}`)}
                   </div>
                   <div className="text-xs text-[#94A3B8] mt-0.5">{t(item.desc)}</div>
@@ -352,7 +372,7 @@ export function Header({ locale }: { locale: string }) {
             onClick={() => setOpenDropdown(null)}
             className="group rounded-xl p-5 transition-colors hover:bg-[#F8FAFC]"
           >
-            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
               {t(`about-${item.key}`)}
             </div>
             <div className="text-xs text-[#94A3B8] mt-1">{t(item.desc)}</div>
@@ -373,7 +393,7 @@ export function Header({ locale }: { locale: string }) {
             onClick={() => setOpenDropdown(null)}
             className="group rounded-xl p-5 transition-colors hover:bg-[#F8FAFC]"
           >
-            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#38C4E8] transition-colors">
+            <div className="text-sm font-medium text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">
               {t(`help-${item.key}`)}
             </div>
             <div className="text-xs text-[#94A3B8] mt-1">{t(item.desc)}</div>
@@ -444,12 +464,12 @@ export function Header({ locale }: { locale: string }) {
                     href={nav.href}
                     className={`inline-flex items-center gap-0.5 px-3 py-2 text-sm font-medium transition-colors ${
                       isActive
-                        ? "text-[#38C4E8] font-semibold"
+                        ? "text-[#1A3FAD] font-semibold"
                         : openDropdown === nav.key
-                          ? isTransparent ? "text-white" : "text-[#38C4E8]"
+                          ? isTransparent ? "text-white" : "text-[#1A3FAD]"
                           : isTransparent
                             ? "text-white/85 hover:text-white"
-                            : "text-[#0F172A] hover:text-[#38C4E8]"
+                            : "text-[#0F172A] hover:text-[#1A3FAD]"
                     }`}
                   >
                     {t(nav.key)}
@@ -464,7 +484,7 @@ export function Header({ locale }: { locale: string }) {
 
                   {/* Active indicator underline */}
                   {(isActive || openDropdown === nav.key) && (
-                    <div className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#38C4E8] rounded-full" />
+                    <div className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#1A3FAD] rounded-full" />
                   )}
                 </div>
               );
@@ -475,7 +495,7 @@ export function Header({ locale }: { locale: string }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className={`rounded-md p-2 transition-colors ${isTransparent ? "text-white/60 hover:text-white hover:bg-white/10" : "text-[#0F172A] hover:text-[#38C4E8] hover:bg-gray-100"}`}
+              className={`rounded-md p-2 transition-colors ${isTransparent ? "text-white/60 hover:text-white hover:bg-white/10" : "text-[#0F172A] hover:text-[#1A3FAD] hover:bg-gray-100"}`}
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
@@ -484,7 +504,7 @@ export function Header({ locale }: { locale: string }) {
             {/* Language switcher trigger */}
             <button
               onClick={() => { setMobileOpen(false); setLangPageOpen(true); }}
-              className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#38C4E8] hover:bg-gray-100"}`}
+              className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs transition-colors ${isTransparent ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#0F172A]/70 hover:text-[#1A3FAD] hover:bg-gray-100"}`}
             >
               <Globe className="h-5 w-5" />
             </button>
