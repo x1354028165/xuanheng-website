@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import { getLocalesForBuild } from '@/lib/api/locales';
 
 const MODEL_PATHS: Record<string, string[]> = {
   product: ['/products'],
@@ -10,8 +11,6 @@ const MODEL_PATHS: Record<string, string[]> = {
   'job-posting': ['/about/careers'],
   'i18n-key': ['/'],
 };
-
-const LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru'];
 
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown> = {};
@@ -40,6 +39,7 @@ export async function POST(request: NextRequest) {
   };
 
   if (model) {
+    const LOCALES = await getLocalesForBuild();
     const basePaths = MODEL_PATHS[model] ?? ['/'];
     for (const locale of LOCALES) {
       for (const base of basePaths) {

@@ -7,10 +7,14 @@ import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { getProducts } from "@/lib/api";
 import { getStrapiMedia } from "@/lib/strapi";
-import { fetchEnabledLocales } from "@/lib/api/locales";
+import { fetchEnabledLocales, getLocalesForBuild } from "@/lib/api/locales";
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+// Dynamic: fetch enabled locales from Strapi at build time
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const codes = await getLocalesForBuild();
+  return codes.map((locale) => ({ locale }));
 }
 
 export default async function LocaleLayout({
@@ -22,6 +26,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
+  // Validate against the full superset — middleware already redirects disabled locales
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }

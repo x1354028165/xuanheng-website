@@ -111,6 +111,25 @@ export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
   }
 }
 
+/**
+ * Fetch locale codes for build-time generateStaticParams.
+ * Returns just the code strings (not full EnabledLocale objects).
+ * Falls back to core 8 locales if Strapi is unreachable.
+ */
+export async function getLocalesForBuild(): Promise<string[]> {
+  try {
+    const res = await fetch(`${STRAPI_INTERNAL_URL}/api/i18n/locales`, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) throw new Error('Failed to fetch locales');
+    const data: StrapiLocale[] = await res.json();
+    const codes = data.map((l) => l.code);
+    return codes.length > 0 ? codes : FALLBACK_LOCALES;
+  } catch {
+    return FALLBACK_LOCALES;
+  }
+}
+
 function getFallbackLocales(): EnabledLocale[] {
   return FALLBACK_LOCALES.map((code) => {
     const meta = LANGUAGE_META[code];
