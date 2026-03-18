@@ -190,7 +190,14 @@
     "ru": "Russian",
     "statusField": "Status",
     "pending": "Pending",
-    "approved": "Approved"
+    "approved": "Approved",
+    "coverage": "Coverage",
+    "filterNamespace": "Filter namespace",
+    "otherLanguages": "Other Languages",
+    "saveAndTranslate": "Save & Translate",
+    "autoTranslateTooltip": "Auto-translate zh-CN to all languages",
+    "translateSuccess": "Translation complete",
+    "translateFailed": "Translation failed"
   },
   "media": {
     "preview": "Preview",

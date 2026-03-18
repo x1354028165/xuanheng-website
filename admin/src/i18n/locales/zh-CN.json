@@ -190,7 +190,14 @@
     "ru": "俄语",
     "statusField": "审核状态",
     "pending": "待审核",
-    "approved": "已审核"
+    "approved": "已审核",
+    "coverage": "覆盖率",
+    "filterNamespace": "按命名空间筛选",
+    "otherLanguages": "其他语言",
+    "saveAndTranslate": "保存并翻译",
+    "autoTranslateTooltip": "自动将中文翻译为所有语言",
+    "translateSuccess": "翻译完成",
+    "translateFailed": "翻译失败"
   },
   "media": {
     "preview": "预览",

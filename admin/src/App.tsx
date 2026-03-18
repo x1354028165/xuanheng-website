@@ -19,6 +19,7 @@ import SeoConfig from './pages/SeoConfig';
 import NotificationConfig from './pages/NotificationConfig';
 import PageContent from './pages/PageContent';
 import I18nDict from './pages/I18nDict';
+import I18nKeysPage from './pages/I18nKeysPage';
 import MediaLibrary from './pages/MediaLibrary';
 import AccountMgmt from './pages/AccountMgmt';
 import AuditLogs from './pages/AuditLogs';
@@ -77,7 +78,7 @@ export default function App() {
               <Route path="seo-config" element={<SeoConfig />} />
               <Route path="notification-config" element={<NotificationConfig />} />
               <Route path="page-content" element={<PageContent />} />
-              <Route path="i18n-dict" element={<I18nDict />} />
+              <Route path="i18n-dict" element={<I18nKeysPage />} />
               <Route path="media-library" element={<MediaLibrary />} />
               <Route path="account-mgmt" element={<AccountMgmt />} />
               <Route path="audit-logs" element={<AuditLogs />} />
