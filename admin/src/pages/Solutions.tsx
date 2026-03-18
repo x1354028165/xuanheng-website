@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
-  Table, Button, Drawer, Form, Input, Typography, message, Image, Select, Tabs, Card, Space,
+  Table, Button, Drawer, Form, Input, Typography, message, Image, Tabs, Card, Space,
 } from 'antd';
 import { UploadOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';

@@ -71,7 +71,7 @@ export default async function HomePage({
     articles = MOCK_ARTICLES_LIST as unknown as StrapiArticle[];
   }
 
-  let brands = await getCompatibleBrands();
+  let brands = await getCompatibleBrands({ showOnHomepage: true });
   if (!brands || brands.length === 0) {
     brands = MOCK_BRANDS_LIST as unknown as StrapiCompatibleBrand[];
   }
@@ -332,7 +332,7 @@ export default async function HomePage({
           <p className="text-[clamp(15px,1vw,18px)] text-[#64748B]">{t('brandsSubtitle')}</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {(brands.length > 0 ? brands.slice(0, 12) : fallbackBrands).map((brand, idx) => {
+          {(brands.length > 0 ? brands.filter(b => b.showOnHomepage !== false).slice(0, 12) : fallbackBrands).map((brand, idx) => {
             const name = typeof brand === 'string' ? brand : brand.name;
             const logoUrl = typeof brand !== 'string' && brand.logo?.url
               ? getStrapiMedia(brand.logo.url)

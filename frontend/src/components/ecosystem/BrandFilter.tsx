@@ -17,12 +17,12 @@ interface BrandFilterProps {
   };
 }
 
-const CAPABILITY_MAP: Record<string, { label: string; icon: string }> = {
-  telemetry:  { label: '实时数据读取（遥测）', icon: '📡' },
-  control:    { label: '充放电控制（调度）',   icon: '⚡' },
-  history:    { label: '历史数据导出',          icon: '📊' },
-  遥测:       { label: '实时数据读取（遥测）', icon: '📡' },
-  控制:       { label: '充放电控制（调度）',   icon: '⚡' },
+const CAPABILITY_MAP: Record<string, { label: string }> = {
+  telemetry:  { label: '实时数据读取' },
+  control:    { label: '充放电控制' },
+  history:    { label: '历史数据导出' },
+  遥测:       { label: '实时数据读取' },
+  控制:       { label: '充放电控制' },
 };
 
 interface FilterGroup {
@@ -85,6 +85,8 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
+  const hasActiveFilters = Object.values(filters).some(v => v !== null);
+
   const filteredBrands = useMemo(() => {
     return brands.filter(b => {
       if (filters.category && b.category !== filters.category) return false;
@@ -102,114 +104,142 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
   }, [brands, filters]);
 
   return (
-    <div className="flex gap-12 items-start">
+    <div className="flex gap-0 items-start">
 
       {/* ===== 左侧筛选面板 ===== */}
-      <aside className="w-52 shrink-0 flex flex-col gap-8">
+      <aside className="w-[220px] shrink-0 sticky top-28">
+        {/* 重置按钮 */}
+        {hasActiveFilters && (
+          <button
+            onClick={() => setFilters({ category: null, access: null, capability: null, status: null })}
+            className="mb-6 text-[13px] text-[#86868B] hover:text-[#1D1D1F] transition-colors"
+          >
+            清除所有筛选
+          </button>
+        )}
+
+        {/* 筛选分组 */}
         {FILTER_GROUPS.map((group) => (
-          <div key={group.key}>
-            <p className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider mb-3">{group.title}</p>
-            <ul className="flex flex-col gap-2">
+          <div key={group.key} className="mb-8">
+            <p className="text-[11px] font-medium text-[#86868B] uppercase tracking-widest mb-3">
+              {group.title}
+            </p>
+            <div className="flex flex-col gap-0.5">
               {group.options.map((opt) => {
                 const isActive = filters[group.key] === opt.value;
                 return (
-                  <li key={opt.label}>
-                    <button
-                      onClick={() => setFilter(group.key, opt.value)}
-                      className={`flex items-center gap-2.5 w-full text-left text-sm transition-colors ${
-                        isActive ? 'text-[#0F172A] font-semibold' : 'text-[#64748B] hover:text-[#0F172A]'
+                  <button
+                    key={opt.label}
+                    onClick={() => setFilter(group.key, opt.value)}
+                    className={`flex items-center gap-2.5 w-full text-left py-1.5 text-[14px] transition-colors ${
+                      isActive
+                        ? 'text-[#1D1D1F] font-semibold'
+                        : 'text-[#86868B] hover:text-[#1D1D1F]'
+                    }`}
+                  >
+                    {/* 极简 radio 圆圈 */}
+                    <span
+                      className={`w-4 h-4 rounded-full border-[1.5px] shrink-0 flex items-center justify-center transition-all ${
+                        isActive
+                          ? 'border-[#1D1D1F]'
+                          : 'border-[#D2D2D7] group-hover:border-[#86868B]'
                       }`}
                     >
-                      <span className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
-                        isActive ? 'border-[#38C4E8]' : 'border-[#CBD5E1]'
-                      }`}>
-                        {isActive && <span className="w-2 h-2 rounded-full bg-[#38C4E8]" />}
-                      </span>
-                      {opt.label}
-                    </button>
-                  </li>
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-[#1D1D1F]" />
+                      )}
+                    </span>
+                    <span>{opt.label}</span>
+                  </button>
                 );
               })}
-            </ul>
+            </div>
           </div>
         ))}
       </aside>
 
       {/* ===== 右侧品牌卡片网格 ===== */}
-      <div className="flex-1">
+      <div className="flex-1 pl-12">
         {/* 结果数 */}
-        <p className="text-sm text-[#64748B] mb-6">
-          共 <span className="font-semibold text-[#0F172A]">{filteredBrands.length}</span> 个品牌
+        <p className="text-[13px] text-[#86868B] mb-8">
+          共 {filteredBrands.length} 个品牌
         </p>
 
         {filteredBrands.length === 0 ? (
-          <p className="text-center text-[#64748B] py-20">{noBrandsLabel}</p>
+          <p className="text-center text-[#86868B] py-20 text-[15px]">{noBrandsLabel}</p>
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {filteredBrands.map((brand) => {
               const logoUrl = brand.logo ? getStrapiMedia(brand.logo.url) : null;
-              const caps    = brand.capabilities ?? [];
-              const isActive = brand.status === '已接入';
+              const caps = brand.capabilities ?? [];
+              const isSupported = brand.status === '已接入';
 
               return (
                 <div
                   key={brand.documentId}
-                  className="relative flex flex-col rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+                  className="group flex flex-col rounded-xl border border-[#E8E8ED] bg-white p-6 transition-shadow duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
                 >
-                  {/* 品牌 Logo + 名称 */}
-                  <div className="flex items-center gap-3 mb-4">
+                  {/* Logo + 名称 */}
+                  <div className="flex items-center gap-3 mb-5">
                     {logoUrl ? (
-                      <div className="relative h-10 w-10 flex-shrink-0">
+                      <div className="relative h-10 w-10 shrink-0">
                         <Image src={logoUrl} alt={brand.name} fill className="object-contain" sizes="40px" />
                       </div>
                     ) : (
-                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[#1A3FAD]/10 text-base font-bold text-[#1A3FAD]">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#F5F5F7] text-[15px] font-semibold text-[#1D1D1F]">
                         {brand.name.charAt(0)}
                       </div>
                     )}
                     <div>
-                      <h3 className="text-base font-bold text-[#0F172A]">{brand.name}</h3>
+                      <h3 className="text-[15px] font-semibold text-[#1D1D1F] leading-tight">{brand.name}</h3>
                       {brand.category && (
-                        <span className="inline-block mt-0.5 rounded-full bg-[#F1F5F9] px-2 py-0.5 text-xs text-[#64748B]">
+                        <span className="text-[12px] text-[#86868B] mt-0.5 block">
                           {brand.category}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  {/* 接入方式 */}
-                  <div className="flex flex-col gap-1.5 mb-3">
+                  {/* 接入方式 & 能力 */}
+                  <div className="flex flex-col gap-2 mb-5 text-[13px] text-[#424245]">
                     {(brand.accessMethod === '云端' || brand.accessMethod === 'both' || brand.accessMethod === '两者') && (
-                      <div className="flex items-center gap-2 text-sm text-[#0F172A]">
-                        <span className="text-[#38C4E8]">✅</span> 云端直连
+                      <div className="flex items-center gap-2">
+                        <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
+                        云端直连
                       </div>
                     )}
                     {(brand.accessMethod === '网关' || brand.accessMethod === 'both' || brand.accessMethod === '两者') && (
-                      <div className="flex items-center gap-2 text-sm text-[#0F172A]">
-                        <span className="text-[#38C4E8]">✅</span> 网关接入
+                      <div className="flex items-center gap-2">
+                        <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        网关接入
                       </div>
                     )}
+                    {caps.map((cap) => {
+                      const info = CAPABILITY_MAP[cap];
+                      return (
+                        <div key={cap} className="flex items-center gap-2">
+                          <svg className="w-3.5 h-3.5 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          {info ? info.label : cap}
+                        </div>
+                      );
+                    })}
                   </div>
 
-                  {/* 能力标签 */}
-                  {caps.length > 0 && (
-                    <div className="flex flex-col gap-1.5 mb-4">
-                      {caps.map((cap) => {
-                        const info = CAPABILITY_MAP[cap];
-                        return (
-                          <div key={cap} className="flex items-center gap-2 text-sm text-[#0F172A]">
-                            <span className="text-[#38C4E8]">✅</span>
-                            {info ? info.label : cap}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-
                   {/* 状态 */}
-                  <div className="mt-auto pt-3 border-t border-[#F1F5F9]">
-                    <span className={`text-xs font-medium ${isActive ? 'text-emerald-600' : 'text-amber-600'}`}>
-                      {isActive ? '● 已支持' : '○ 开发中'}
+                  <div className="mt-auto pt-4 border-t border-[#F5F5F7]">
+                    <span className={`inline-flex items-center gap-1.5 text-[12px] font-medium ${
+                      isSupported ? 'text-[#1D1D1F]' : 'text-[#86868B]'
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${
+                        isSupported ? 'bg-[#30D158]' : 'bg-[#D2D2D7]'
+                      }`} />
+                      {isSupported ? '已支持' : '开发中'}
                     </span>
                   </div>
                 </div>
@@ -219,14 +249,14 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
         )}
 
         {/* 底部 CTA */}
-        <div className="mt-16 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] px-8 py-10 text-center">
-          <p className="text-lg font-semibold text-[#0F172A] mb-2">没有找到您的品牌？</p>
-          <p className="text-[#64748B] mb-6">联系我们，快速接入</p>
+        <div className="mt-20 text-center py-12">
+          <p className="text-[22px] font-semibold text-[#1D1D1F] mb-2">没有找到您的品牌？</p>
+          <p className="text-[15px] text-[#86868B] mb-8">联系我们，快速接入</p>
           <a
             href="/contact"
-            className="inline-flex items-center rounded-lg bg-[#1A3FAD] px-8 py-3 text-base font-semibold text-white shadow transition-all duration-300 hover:bg-[#1535A0] hover:shadow-lg"
+            className="inline-flex items-center rounded-full bg-[#1D1D1F] px-8 py-3 text-[15px] font-medium text-white transition-colors hover:bg-[#000]"
           >
-            联系我们 →
+            联系我们
           </a>
         </div>
       </div>

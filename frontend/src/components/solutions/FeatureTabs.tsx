@@ -6,6 +6,7 @@ interface Feature {
   label: string;
   desc: string;
   points?: string[];
+  image?: string;
 }
 
 interface FeatureTabsProps {
@@ -108,10 +109,10 @@ export default function FeatureTabs({ title, features, bgImage }: FeatureTabsPro
 
           {/* Right: 图片，与左侧垂直居中对齐 */}
           <div className="relative w-full rounded-2xl overflow-hidden shadow-lg" style={{ aspectRatio: '4/3' }}>
-            {bgImage ? (
+            {(current.image || bgImage) ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={bgImage}
+                src={current.image || bgImage}
                 alt={current.label}
                 className="w-full h-full object-cover object-center"
               />

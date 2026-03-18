@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  Table, Button, Modal, Form, Input, Typography, message, Space, Tag, Switch, Popconfirm, Alert, Progress,
+  Table, Button, Modal, Form, Select, Typography, message, Space, Tag, Switch, Popconfirm, Alert,
 } from 'antd';
 import { PlusOutlined, TranslationOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +25,78 @@ const LANGUAGE_LABELS: Record<string, string> = {
   'es': 'Español / Spanish',
   'ru': 'Русский / Russian',
 };
+
+interface WorldLanguage {
+  code: string;
+  zh: string;
+  en: string;
+  flag: string;
+}
+
+const WORLD_LANGUAGES: WorldLanguage[] = [
+  { code: 'af', zh: '南非荷兰语', en: 'Afrikaans', flag: '🇿🇦' },
+  { code: 'ar', zh: '阿拉伯语', en: 'Arabic', flag: '🇸🇦' },
+  { code: 'az', zh: '阿塞拜疆语', en: 'Azerbaijani', flag: '🇦🇿' },
+  { code: 'be', zh: '白俄罗斯语', en: 'Belarusian', flag: '🇧🇾' },
+  { code: 'bg', zh: '保加利亚语', en: 'Bulgarian', flag: '🇧🇬' },
+  { code: 'bn', zh: '孟加拉语', en: 'Bengali', flag: '🇧🇩' },
+  { code: 'bs', zh: '波斯尼亚语', en: 'Bosnian', flag: '🇧🇦' },
+  { code: 'ca', zh: '加泰罗尼亚语', en: 'Catalan', flag: '🇪🇸' },
+  { code: 'cs', zh: '捷克语', en: 'Czech', flag: '🇨🇿' },
+  { code: 'cy', zh: '威尔士语', en: 'Welsh', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿' },
+  { code: 'da', zh: '丹麦语', en: 'Danish', flag: '🇩🇰' },
+  { code: 'de', zh: '德语', en: 'German', flag: '🇩🇪' },
+  { code: 'el', zh: '希腊语', en: 'Greek', flag: '🇬🇷' },
+  { code: 'en', zh: '英语', en: 'English', flag: '🇬🇧' },
+  { code: 'en-US', zh: '美式英语', en: 'English (US)', flag: '🇺🇸' },
+  { code: 'es', zh: '西班牙语', en: 'Spanish', flag: '🇪🇸' },
+  { code: 'et', zh: '爱沙尼亚语', en: 'Estonian', flag: '🇪🇪' },
+  { code: 'fa', zh: '波斯语', en: 'Persian', flag: '🇮🇷' },
+  { code: 'fi', zh: '芬兰语', en: 'Finnish', flag: '🇫🇮' },
+  { code: 'fil', zh: '菲律宾语', en: 'Filipino', flag: '🇵🇭' },
+  { code: 'fr', zh: '法语', en: 'French', flag: '🇫🇷' },
+  { code: 'ga', zh: '爱尔兰语', en: 'Irish', flag: '🇮🇪' },
+  { code: 'he', zh: '希伯来语', en: 'Hebrew', flag: '🇮🇱' },
+  { code: 'hi', zh: '印地语', en: 'Hindi', flag: '🇮🇳' },
+  { code: 'hr', zh: '克罗地亚语', en: 'Croatian', flag: '🇭🇷' },
+  { code: 'hu', zh: '匈牙利语', en: 'Hungarian', flag: '🇭🇺' },
+  { code: 'id', zh: '印度尼西亚语', en: 'Indonesian', flag: '🇮🇩' },
+  { code: 'is', zh: '冰岛语', en: 'Icelandic', flag: '🇮🇸' },
+  { code: 'it', zh: '意大利语', en: 'Italian', flag: '🇮🇹' },
+  { code: 'ja', zh: '日语', en: 'Japanese', flag: '🇯🇵' },
+  { code: 'ka', zh: '格鲁吉亚语', en: 'Georgian', flag: '🇬🇪' },
+  { code: 'kk', zh: '哈萨克语', en: 'Kazakh', flag: '🇰🇿' },
+  { code: 'km', zh: '高棉语', en: 'Khmer', flag: '🇰🇭' },
+  { code: 'ko', zh: '韩语', en: 'Korean', flag: '🇰🇷' },
+  { code: 'lt', zh: '立陶宛语', en: 'Lithuanian', flag: '🇱🇹' },
+  { code: 'lv', zh: '拉脱维亚语', en: 'Latvian', flag: '🇱🇻' },
+  { code: 'mk', zh: '马其顿语', en: 'Macedonian', flag: '🇲🇰' },
+  { code: 'mn', zh: '蒙古语', en: 'Mongolian', flag: '🇲🇳' },
+  { code: 'ms', zh: '马来语', en: 'Malay', flag: '🇲🇾' },
+  { code: 'my', zh: '缅甸语', en: 'Burmese', flag: '🇲🇲' },
+  { code: 'nb', zh: '挪威语', en: 'Norwegian', flag: '🇳🇴' },
+  { code: 'nl', zh: '荷兰语', en: 'Dutch', flag: '🇳🇱' },
+  { code: 'pl', zh: '波兰语', en: 'Polish', flag: '🇵🇱' },
+  { code: 'pt', zh: '葡萄牙语', en: 'Portuguese', flag: '🇵🇹' },
+  { code: 'pt-BR', zh: '巴西葡萄牙语', en: 'Portuguese (Brazil)', flag: '🇧🇷' },
+  { code: 'ro', zh: '罗马尼亚语', en: 'Romanian', flag: '🇷🇴' },
+  { code: 'ru', zh: '俄语', en: 'Russian', flag: '🇷🇺' },
+  { code: 'sk', zh: '斯洛伐克语', en: 'Slovak', flag: '🇸🇰' },
+  { code: 'sl', zh: '斯洛文尼亚语', en: 'Slovenian', flag: '🇸🇮' },
+  { code: 'sq', zh: '阿尔巴尼亚语', en: 'Albanian', flag: '🇦🇱' },
+  { code: 'sr', zh: '塞尔维亚语', en: 'Serbian', flag: '🇷🇸' },
+  { code: 'sv', zh: '瑞典语', en: 'Swedish', flag: '🇸🇪' },
+  { code: 'sw', zh: '斯瓦希里语', en: 'Swahili', flag: '🇹🇿' },
+  { code: 'ta', zh: '泰米尔语', en: 'Tamil', flag: '🇮🇳' },
+  { code: 'th', zh: '泰语', en: 'Thai', flag: '🇹🇭' },
+  { code: 'tr', zh: '土耳其语', en: 'Turkish', flag: '🇹🇷' },
+  { code: 'uk', zh: '乌克兰语', en: 'Ukrainian', flag: '🇺🇦' },
+  { code: 'ur', zh: '乌尔都语', en: 'Urdu', flag: '🇵🇰' },
+  { code: 'uz', zh: '乌兹别克语', en: 'Uzbek', flag: '🇺🇿' },
+  { code: 'vi', zh: '越南语', en: 'Vietnamese', flag: '🇻🇳' },
+  { code: 'zh-CN', zh: '简体中文', en: 'Chinese (Simplified)', flag: '🇨🇳' },
+  { code: 'zh-TW', zh: '繁体中文', en: 'Chinese (Traditional)', flag: '🇹🇼' },
+];
 
 // Store enabled state in a page-config entry keyed "language-settings"
 const SETTINGS_API = '/content-manager/collection-types/api::page-content.page-content';
@@ -110,10 +182,13 @@ export default function LanguagesPage() {
     await saveDisabledLocales(newDisabled);
   };
 
+  const existingCodes = locales.map((l) => l.code);
+
   const handleAddLocale = async () => {
     const values = await form.validateFields();
     const code = (values.code as string).trim();
-    const name = (values.name as string)?.trim() || code;
+    const lang = WORLD_LANGUAGES.find((l) => l.code === code);
+    const name = lang ? `${lang.zh} / ${lang.en}` : code;
 
     try {
       await api.post('/i18n/locales', { code, name, isDefault: false });
@@ -121,13 +196,18 @@ export default function LanguagesPage() {
       setModalOpen(false);
       form.resetFields();
 
-      // Trigger batch translation for the new locale
+      // Trigger batch translation for the new locale (content + UI keys)
       setBatchTranslating(true);
       try {
+        // Translate content (products, articles, solutions, etc.)
         await api.post('/strapi/api/translate/batch', {
           targetLocales: [code],
         });
-        message.info(t('languages.batchStarted') || 'Batch translation started in background');
+        // Translate UI dictionary keys
+        await api.post('/strapi/api/translate/batch-ui-keys', {
+          targetLocale: code,
+        });
+        message.info(t('languages.batchStarted') || 'Batch translation started in background (content + UI keys)');
       } catch {
         message.warning(t('languages.batchFailed') || 'Batch translation failed to start');
       } finally {
@@ -162,10 +242,17 @@ export default function LanguagesPage() {
 
     setBatchTranslating(true);
     try {
+      // Translate content
       await api.post('/strapi/api/translate/batch', {
         targetLocales: enabledLocales,
       });
-      message.success(t('languages.batchStarted') || 'Batch translation started in background');
+      // Translate UI keys for each locale
+      for (const locale of enabledLocales) {
+        await api.post('/strapi/api/translate/batch-ui-keys', {
+          targetLocale: locale,
+        });
+      }
+      message.success(t('languages.batchStarted') || 'Batch translation started in background (content + UI keys)');
     } catch {
       message.error(t('languages.batchFailed') || 'Batch translation failed');
     } finally {
@@ -270,15 +357,27 @@ export default function LanguagesPage() {
           <Form.Item
             name="code"
             label={t('languages.code') || 'Language Code'}
-            rules={[{ required: true, message: 'e.g. ja, ko, ar, it' }]}
+            rules={[{ required: true, message: t('common.required') || 'Required' }]}
           >
-            <Input placeholder="e.g. ja, ko, ar" />
-          </Form.Item>
-          <Form.Item
-            name="name"
-            label={t('languages.name') || 'Display Name'}
-          >
-            <Input placeholder="e.g. 日本語 / Japanese" />
+            <Select
+              showSearch
+              placeholder={t('languages.code') || 'Select a language'}
+              filterOption={(input, option) => {
+                const lang = WORLD_LANGUAGES.find((l) => l.code === option?.value);
+                if (!lang) return false;
+                const lower = input.toLowerCase();
+                return (
+                  lang.code.toLowerCase().includes(lower) ||
+                  lang.zh.includes(input) ||
+                  lang.en.toLowerCase().includes(lower)
+                );
+              }}
+              options={WORLD_LANGUAGES.map((lang) => ({
+                value: lang.code,
+                label: `${lang.flag} ${lang.zh} (${lang.en}) — ${lang.code}`,
+                disabled: existingCodes.includes(lang.code),
+              }))}
+            />
           </Form.Item>
         </Form>
         <Alert

@@ -27,7 +27,7 @@
       ]
     },
     "category": {
-      "type": "string"
+      "type": "json"
     },
     "websiteUrl": {
       "type": "string"
@@ -41,6 +41,23 @@
       "default": true
     },
     "capabilities": {
+      "type": "json"
+    },
+    "accessMethod": {
+      "type": "enumeration",
+      "enum": ["cloud", "gateway", "both"],
+      "default": "both"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["connected", "adapting"],
+      "default": "connected"
+    },
+    "showOnHomepage": {
+      "type": "boolean",
+      "default": true
+    },
+    "models": {
       "type": "json"
     }
   }

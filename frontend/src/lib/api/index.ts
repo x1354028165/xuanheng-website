@@ -166,14 +166,19 @@ export async function getFAQs(locale = 'zh-CN'): Promise<StrapiFAQ[]> {
 // Compatible Brands
 // ---------------------------------------------------------------------------
 
-export async function getCompatibleBrands(): Promise<StrapiCompatibleBrand[]> {
+export async function getCompatibleBrands(options?: { showOnHomepage?: boolean }): Promise<StrapiCompatibleBrand[]> {
   try {
+    const params: Record<string, unknown> = {
+      populate: '*',
+      sort: ['name:asc'],
+      'pagination[limit]': -1,
+    };
+    if (options?.showOnHomepage === true) {
+      params['filters[showOnHomepage][$eq]'] = true;
+    }
     const res = await fetchStrapi<StrapiResponse<StrapiCompatibleBrand>>(
       '/compatible-brands',
-      {
-        populate: '*',
-        sort: ['name:asc'],
-      }
+      params,
     );
     return res.data ?? [];
   } catch {
@@ -247,6 +252,31 @@ export async function getFirmwareVersions(): Promise<any[]> {
     return res.data ?? [];
   } catch {
     console.warn('[API] getFirmwareVersions failed, returning empty array');
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Product Relations
+// ---------------------------------------------------------------------------
+
+export async function getProductRelations(productSlug: string): Promise<{ productSlug: string; solutionSlug: string; showOnProduct: boolean; showOnSolution: boolean; sortOrder: number }[]> {
+  try {
+    // 用原生 fetch + cache:'no-store' 避免 SSG build 时 dedup 缓存污染
+    const STRAPI_INTERNAL = process.env.STRAPI_INTERNAL_URL || 'http://localhost:1337';
+    const url = `${STRAPI_INTERNAL}/api/product-relations?filters[productSlug][$eq]=${encodeURIComponent(productSlug)}&sort=sortOrder:asc&pagination[limit]=20`;
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) return [];
+    const res: StrapiResponse<any> = await resp.json();
+    return (res.data ?? []).map((item: any) => ({
+      productSlug: item.productSlug,
+      solutionSlug: item.solutionSlug,
+      showOnProduct: item.showOnProduct ?? true,
+      showOnSolution: item.showOnSolution ?? true,
+      sortOrder: item.sortOrder ?? 0,
+    }));
+  } catch {
+    console.warn(`[API] getProductRelations(${productSlug}) failed`);
     return [];
   }
 }

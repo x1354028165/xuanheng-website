@@ -480,6 +480,12 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    translationMeta: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -536,8 +542,10 @@ export interface ApiCompatibleBrandCompatibleBrand
     };
   };
   attributes: {
+    accessMethod: Schema.Attribute.Enumeration<['cloud', 'gateway', 'both']> &
+      Schema.Attribute.DefaultTo<'both'>;
     capabilities: Schema.Attribute.JSON;
-    category: Schema.Attribute.String;
+    category: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -549,9 +557,13 @@ export interface ApiCompatibleBrandCompatibleBrand
     > &
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images'>;
+    models: Schema.Attribute.JSON;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    showOnHomepage: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    status: Schema.Attribute.Enumeration<['connected', 'adapting']> &
+      Schema.Attribute.DefaultTo<'connected'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -633,6 +645,12 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
         };
       }>;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    translationMeta: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -731,10 +749,6 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    de: Schema.Attribute.Text;
-    en_US: Schema.Attribute.Text;
-    es: Schema.Attribute.Text;
-    fr: Schema.Attribute.Text;
     key: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -744,16 +758,14 @@ export interface ApiI18NKeyI18NKey extends Struct.CollectionTypeSchema {
       'api::i18n-key.i18n-key'
     > &
       Schema.Attribute.Private;
-    pt: Schema.Attribute.Text;
+    namespace: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    ru: Schema.Attribute.Text;
-    status: Schema.Attribute.Enumeration<['pending', 'approved']> &
-      Schema.Attribute.DefaultTo<'pending'>;
+    sourceText: Schema.Attribute.Text;
+    translations: Schema.Attribute.JSON;
+    translationStatus: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    zh_CN: Schema.Attribute.Text;
-    zh_TW: Schema.Attribute.Text;
   };
 }
 
@@ -965,6 +977,12 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    category: Schema.Attribute.Enumeration<['hardware', 'software']> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -975,9 +993,21 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    features: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     gallery: Schema.Attribute.Media<'images', true>;
     is_translation_locked: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    keySpecs: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -999,6 +1029,12 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
+        };
+      }>;
+    translationMeta: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
         };
       }>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1134,6 +1170,12 @@ export interface ApiSolutionSolution extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    cases: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1144,6 +1186,13 @@ export interface ApiSolutionSolution extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    features: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    gallery: Schema.Attribute.Media<'images', true>;
     is_translation_locked: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String;
@@ -1152,6 +1201,12 @@ export interface ApiSolutionSolution extends Struct.CollectionTypeSchema {
       'api::solution.solution'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'>;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
@@ -1166,6 +1221,12 @@ export interface ApiSolutionSolution extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
+        };
+      }>;
+    translationMeta: Schema.Attribute.JSON &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
         };
       }>;
     updatedAt: Schema.Attribute.DateTime;

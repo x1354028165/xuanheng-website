@@ -6,43 +6,20 @@
 
 const STRAPI_INTERNAL_URL = process.env.STRAPI_INTERNAL_URL || 'http://localhost:1337';
 
-// Mapping from routing locale codes to Strapi i18n_key column names
-const LOCALE_TO_FIELD: Record<string, string> = {
-  'zh-CN': 'zh_CN',
-  'zh-TW': 'zh_TW',
-  'en-US': 'en_US',
-  'de': 'de',
-  'fr': 'fr',
-  'pt': 'pt',
-  'es': 'es',
-  'ru': 'ru',
-};
-
 interface I18nKeyEntry {
   key: string;
-  zh_CN: string | null;
-  zh_TW: string | null;
-  en_US: string | null;
-  de: string | null;
-  fr: string | null;
-  pt: string | null;
-  es: string | null;
-  ru: string | null;
-  status: string;
+  translations: Record<string, string> | null;
 }
 
 /**
- * Fetch all approved i18n keys from Strapi and return as nested object
+ * Fetch all i18n keys from Strapi and return as nested object
  * for the given locale (matching next-intl message structure).
  *
  * Keys like "nav.home" become { nav: { home: "value" } }
  */
 export async function fetchI18nKeys(locale: string): Promise<Record<string, unknown>> {
-  const field = LOCALE_TO_FIELD[locale];
-  if (!field) return {};
-
   try {
-    const url = `${STRAPI_INTERNAL_URL}/api/i18n-keys?pagination[limit]=500&filters[status][$eq]=approved`;
+    const url = `${STRAPI_INTERNAL_URL}/api/i18n-keys?pagination[limit]=500`;
     const res = await fetch(url, {
       signal: AbortSignal.timeout(5000),
       next: { revalidate: 60 }, // ISR: revalidate every 60 seconds
@@ -56,7 +33,10 @@ export async function fetchI18nKeys(locale: string): Promise<Record<string, unkn
     const result: Record<string, unknown> = {};
 
     for (const entry of entries) {
-      const value = entry[field as keyof I18nKeyEntry] as string | null;
+      const translations = entry.translations;
+      if (!translations) continue;
+
+      const value = translations[locale];
       if (!value || !value.trim()) continue;
 
       // Convert dot-notation key to nested object

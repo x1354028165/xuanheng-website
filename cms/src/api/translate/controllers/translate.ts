@@ -142,11 +142,11 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
   /**
    * Translate i18n dictionary keys (zh-CN → all languages)
    * POST /translate/i18n-keys
-   * Body: { documentId, fields?: string[] }
+   * Body: { documentId }
    */
   async translateI18nKeys(ctx: Record<string, unknown>) {
     const body = (ctx as Record<string, Record<string, unknown>>).request?.body as
-      | { documentId?: string; fields?: string[] }
+      | { documentId?: string }
       | undefined;
 
     const documentId = body?.documentId;
@@ -171,43 +171,138 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       }
 
       const rec = entry as Record<string, unknown>;
-      const zhCN = rec.zh_CN as string;
+      const translations = (rec.translations ?? {}) as Record<string, string>;
+      const zhCN = translations['zh-CN'];
 
       if (!zhCN) {
         (ctx as Record<string, unknown>).status = 400;
-        (ctx as Record<string, unknown>).body = { error: 'zh_CN field is empty' };
+        (ctx as Record<string, unknown>).body = { error: 'zh-CN translation is empty' };
         return;
       }
+
+      // Get all enabled locales from Strapi i18n plugin
+      const enabledLocales = await translateService.getEnabledLocales();
 
       const OpenCC = (await import('opencc-js')).default;
       const twConverter = OpenCC.Converter({ from: 'cn', to: 'twp' });
 
-      const updateData: Record<string, string> = {};
+      const updatedTranslations = { ...translations };
 
-      // zh-TW via OpenCC
-      updateData.zh_TW = twConverter(zhCN);
-
-      // Other languages via DeepSeek
-      const otherLocales = ['en_US', 'de', 'fr', 'pt', 'es', 'ru'];
-      const localeMap: Record<string, string> = {
-        en_US: 'en-US', de: 'de', fr: 'fr', pt: 'pt', es: 'es', ru: 'ru',
-      };
-
-      for (const field of otherLocales) {
+      for (const locale of enabledLocales) {
+        if (locale === 'zh-CN') continue;
         try {
-          updateData[field] = await translateService.translateText(zhCN, localeMap[field]);
-          await new Promise((r) => setTimeout(r, 1000));
+          if (locale === 'zh-TW') {
+            updatedTranslations['zh-TW'] = twConverter(zhCN);
+          } else {
+            updatedTranslations[locale] = await translateService.translateText(zhCN, locale);
+            await new Promise((r) => setTimeout(r, 1000));
+          }
         } catch (err) {
-          console.error(`[translate:i18n-keys] Failed to translate ${field}:`, err);
+          console.error(`[translate:i18n-keys] Failed to translate ${locale}:`, err);
         }
       }
 
       await strapi.documents('api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0]).update({
         documentId,
-        data: updateData,
+        data: { translations: updatedTranslations },
       });
 
-      (ctx as Record<string, unknown>).body = { message: 'Translation complete', translated: Object.keys(updateData) };
+      (ctx as Record<string, unknown>).body = {
+        message: 'Translation complete',
+        translated: Object.keys(updatedTranslations),
+      };
+    } catch (err) {
+      (ctx as Record<string, unknown>).status = 500;
+      (ctx as Record<string, unknown>).body = { error: String(err) };
+    }
+  },
+
+  /**
+   * Batch translate all UI keys to a target locale
+   * POST /translate/batch-ui-keys
+   * Body: { targetLocale: "ja" }
+   */
+  async batchTranslateUiKeys(ctx: Record<string, unknown>) {
+    const body = (ctx as Record<string, Record<string, unknown>>).request?.body as
+      | { targetLocale?: string }
+      | undefined;
+
+    const targetLocale = body?.targetLocale;
+
+    if (!targetLocale) {
+      (ctx as Record<string, unknown>).status = 400;
+      (ctx as Record<string, unknown>).body = { error: 'targetLocale is required' };
+      return;
+    }
+
+    try {
+      const { default: translateService } = await import('../../../extensions/translate/services/translate');
+
+      // Return immediately, run in background
+      (async () => {
+        const OpenCC = (await import('opencc-js')).default;
+        const twConverter = targetLocale === 'zh-TW'
+          ? OpenCC.Converter({ from: 'cn', to: 'twp' })
+          : null;
+
+        // Fetch all i18n keys
+        let page = 1;
+        const pageSize = 100;
+        let totalTranslated = 0;
+        let totalFailed = 0;
+
+        while (true) {
+          const entries = await strapi.documents('api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0]).findMany({
+            limit: pageSize,
+            start: (page - 1) * pageSize,
+          });
+
+          if (!entries || !Array.isArray(entries) || entries.length === 0) break;
+
+          for (const entry of entries) {
+            const rec = entry as Record<string, unknown>;
+            const translations = (rec.translations ?? {}) as Record<string, string>;
+            const zhCN = translations['zh-CN'];
+
+            if (!zhCN) continue;
+
+            // Skip if translation already exists for this locale
+            if (translations[targetLocale]) continue;
+
+            try {
+              let translated: string;
+              if (twConverter) {
+                translated = twConverter(zhCN);
+              } else {
+                translated = await translateService.translateText(zhCN, targetLocale);
+                await new Promise((r) => setTimeout(r, 500)); // Rate limit
+              }
+
+              const updatedTranslations = { ...translations, [targetLocale]: translated };
+
+              await strapi.documents('api::i18n-key.i18n-key' as Parameters<typeof strapi.documents>[0]).update({
+                documentId: rec.documentId as string,
+                data: { translations: updatedTranslations },
+              });
+
+              totalTranslated++;
+            } catch (err) {
+              console.error(`[translate:batch-ui-keys] Failed for key "${rec.key}":`, err);
+              totalFailed++;
+            }
+          }
+
+          if (entries.length < pageSize) break;
+          page++;
+        }
+
+        console.log(`[translate:batch-ui-keys] Complete for ${targetLocale}: ${totalTranslated} translated, ${totalFailed} failed`);
+      })().catch((err) => console.error('[translate:batch-ui-keys] error:', err));
+
+      (ctx as Record<string, unknown>).body = {
+        message: 'Batch UI key translation started',
+        targetLocale,
+      };
     } catch (err) {
       (ctx as Record<string, unknown>).status = 500;
       (ctx as Record<string, unknown>).body = { error: String(err) };

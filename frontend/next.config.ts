@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   ...(basePath ? { basePath } : {}),
   trailingSlash: true,
 
+  // API 路由不走 trailingSlash 重定向
+  skipTrailingSlashRedirect: true,
+
   // Performance: enable gzip/brotli compression
   compress: true,
 

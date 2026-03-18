@@ -2,7 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { getProducts, getProductBySlug } from '@/lib/api';
+import { getProducts, getProductBySlug, getProductRelations } from '@/lib/api';
 import { getStrapiMedia } from '@/lib/strapi';
 import { MOCK_PRODUCTS, MOCK_SOLUTIONS, getMockProduct } from '@/lib/mock-data';
 import { getProductMessage, getProductLabel, getSpecLabel, getSolutionMessage, getSolutionLabel, interpolate } from '@/lib/i18n-helpers';
@@ -62,11 +62,13 @@ export default async function ProductDetailPage({
   const mockProduct = getMockProduct(slug);
 
   const title = strapiProduct?.title ?? getProductMessage(locale, slug, 'title') ?? mockProduct?.title ?? slug;
-  // Banner 大标题：只用纯型号（Neuron II / III / Lite），不带中文描述
-  const bannerModelName = mockProduct?.title ?? slug;
-  const bannerTitle = mockProduct?.displayTitle ?? title; // 保留备用（暂未用于 h1）
-  const positioning = getProductMessage(locale, slug, 'positioning') ?? mockProduct?.positioning ?? '';
+  // Banner 大标题：优先用 Strapi title，fallback mock（纯型号）
+  const bannerModelName = strapiProduct?.title ?? mockProduct?.title ?? slug;
+  const bannerTitle = bannerModelName;
+  // tagline：优先 Strapi，fallback 翻译文件
   const tagline = strapiProduct?.tagline ?? getProductMessage(locale, slug, 'tagline') ?? mockProduct?.tagline ?? '';
+  // positioning：优先用 tagline（含完整描述），fallback 翻译文件 positioning
+  const positioning = tagline || (getProductMessage(locale, slug, 'positioning') ?? mockProduct?.positioning ?? '');
   const description = strapiProduct?.description ?? getProductMessage(locale, slug, 'description') ?? mockProduct?.description ?? '';
 
   // Build specs from direct message access
@@ -88,8 +90,13 @@ export default async function ProductDetailPage({
       ? specs
       : Object.entries(mockProduct?.specs ?? {}) as [string, string][];
 
-  const scenarioSlugs = mockProduct?.scenarios ?? [];
-  const relatedSolutions = MOCK_SOLUTIONS.filter(s => scenarioSlugs.includes(s.slug));
+  // 产品关联：优先从 Strapi product-relations 读，fallback mock
+  const strapiRelations = await getProductRelations(slug);
+  const strapiRelationSlugs = strapiRelations.filter(r => r.showOnProduct).map(r => r.solutionSlug);
+  const mockScenarioSlugs = mockProduct?.scenarios ?? [];
+  // 合并（Strapi有数据就用Strapi，否则用mock）
+  const finalRelationSlugs = strapiRelationSlugs.length > 0 ? strapiRelationSlugs : mockScenarioSlugs;
+  const relatedSolutions = MOCK_SOLUTIONS.filter(s => finalRelationSlugs.includes(s.slug));
   const category = strapiProduct?.category ?? mockProduct?.category ?? 'hardware';
 
   // Direct message access for labels
@@ -386,7 +393,45 @@ export default async function ProductDetailPage({
             ) : null;
           })()}
 
-          {/* ④ 技术规格 — 与硬件产品同款样式 */}
+          {/* ④ 推荐硬件网关（软件产品专属，从 Strapi product-relations 读） */}
+          {(() => {
+            // 软件产品关联的硬件：solutionSlug = 硬件slug（反向查询）
+            const hwSlugs = strapiRelations.filter(r => r.showOnProduct).map(r => r.solutionSlug)
+              .filter(s => ['neuron-ii','neuron-iii','neuron-iii-lite'].includes(s));
+            if (hwSlugs.length === 0) return null;
+            const HW_INFO: Record<string, { title: string; desc: string; img: string }> = {
+              'neuron-ii':       { title: 'Neuron II',       desc: '通用多协议网关（4G/WiFi/RS485/CAN）', img: '/images/neuron-ii-clean.png' },
+              'neuron-iii':      { title: 'Neuron III',      desc: '充电站专用控制器（内置电表+DLB）',   img: '/images/neuron-iii-clean.png' },
+              'neuron-iii-lite': { title: 'Neuron III Lite', desc: '防跳闸控制器（配套 ATP III）',       img: '/images/neuron-iii-lite-clean.png' },
+            };
+            return (
+              <section className="bg-[#F8FAFC] py-20">
+                <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+                  <h2 className="mb-3 text-3xl font-bold text-[#0F172A] text-center">推荐搭配硬件网关</h2>
+                  <p className="mb-10 text-center text-[#64748B]">与以下硬件网关配合使用，实现设备本地接入与离线运行</p>
+                  <div className={`grid gap-6 ${hwSlugs.length === 1 ? 'grid-cols-1 max-w-sm mx-auto' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+                    {hwSlugs.map(hwSlug => {
+                      const hw = HW_INFO[hwSlug];
+                      if (!hw) return null;
+                      return (
+                        <Link key={hwSlug} href={`/products/${hwSlug}`}
+                          className="group flex flex-col items-center rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                          <div className="relative h-32 w-full mb-4">
+                            <Image src={hw.img} alt={hw.title} fill className="object-contain" sizes="200px" />
+                          </div>
+                          <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#1A3FAD] transition-colors">{hw.title}</h3>
+                          <p className="mt-1 text-sm text-[#64748B] text-center">{hw.desc}</p>
+                          <span className="mt-4 text-sm font-medium text-[#38C4E8]">查看详情 →</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+            );
+          })()}
+
+          {/* ⑤ 技术规格 — 与硬件产品同款样式 */}
           {finalSpecs.length > 0 && (
             <section id="specs" className="bg-white py-24">
               <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">

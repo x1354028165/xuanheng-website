@@ -258,7 +258,7 @@ async function translateEntry(
     await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).update({
       documentId,
       locale: 'zh-CN',
-      data: { translationMeta: meta },
+      data: { translationMeta: meta } as Record<string, unknown>,
     });
   } catch (err) {
     console.error(`[translate] Failed to save translationMeta:`, err);
@@ -287,7 +287,7 @@ async function setManualStatus(
   await strapi.documents(uid as Parameters<typeof strapi.documents>[0]).update({
     documentId,
     locale: 'zh-CN',
-    data: { translationMeta: meta },
+    data: { translationMeta: meta } as Record<string, unknown>,
   });
 }
 

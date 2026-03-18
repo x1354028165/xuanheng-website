@@ -94,14 +94,28 @@ export interface StrapiArticle {
   updatedAt: string;
 }
 
+export interface StrapiProductFeature {
+  label: string;
+  desc: string;
+  points?: string[];
+}
+
+export interface StrapiKeySpec {
+  key: string;
+  value: string;
+}
+
 export interface StrapiProduct {
   documentId: string;
   title: string;
   slug: string;
   tagline: string | null;
   description: string | null;
+  category: 'hardware' | 'software' | null;
   cover: StrapiMedia | null;
   gallery: StrapiMedia[] | null;
+  features: StrapiProductFeature[] | null;
+  keySpecs: StrapiKeySpec[] | null;
   specs: Record<string, string> | null;
   is_translation_locked: boolean;
   seo: StrapiSEO | null;
@@ -111,6 +125,18 @@ export interface StrapiProduct {
   updatedAt: string;
 }
 
+export interface StrapiSolutionFeature {
+  label: string;
+  desc: string;
+  points?: string[];
+}
+
+export interface StrapiSolutionCase {
+  area: string;
+  scale: string;
+  problem: string;
+}
+
 export interface StrapiSolution {
   documentId: string;
   title: string;
@@ -118,6 +144,10 @@ export interface StrapiSolution {
   tagline: string | null;
   description: string | null;
   cover: StrapiMedia | null;
+  gallery: StrapiMedia[] | null;
+  features: StrapiSolutionFeature[] | null;
+  cases: StrapiSolutionCase[] | null;
+  sections: Record<string, unknown>[] | null;
   sortOrder: number;
   is_translation_locked: boolean;
   seo: StrapiSEO | null;
@@ -147,6 +177,7 @@ export interface StrapiCompatibleBrand {
   accessMethod?: string | null;
   capabilities?: string[] | null;
   status?: string | null;
+  showOnHomepage?: boolean | null;
   websiteUrl: string | null;
   sortOrder: number;
   createdAt: string;

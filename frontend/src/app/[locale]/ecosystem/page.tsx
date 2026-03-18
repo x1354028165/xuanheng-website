@@ -29,19 +29,19 @@ export default async function EcosystemPage({
 
   return (
     <>
-      <section className="bg-[#F8FAFC] pb-12 pt-32">
-        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl md:text-5xl">
+      <section className="bg-white pb-12 pt-32">
+        <div className="mx-auto max-w-[1440px] px-4 text-center sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-semibold text-[#1D1D1F] sm:text-4xl md:text-[40px]">
             {t('title')}
           </h1>
-          <p className="mt-4 text-lg text-[#64748B]">
+          <p className="mt-4 text-[17px] text-[#86868B]">
             {t('subtitle')}
           </p>
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <BrandFilter
             brands={brands}
             allLabel={t('allBrands')}

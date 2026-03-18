@@ -129,7 +129,7 @@ export default function LocaleTabs({
   );
 }
 
-export function FieldStatusTag({ meta, locale, field }: {
+export function FieldStatusTag({ meta, locale, field: _field }: {
   meta: TranslationMeta | null;
   locale: string;
   field: string;

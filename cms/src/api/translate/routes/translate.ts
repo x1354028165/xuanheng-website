@@ -40,5 +40,13 @@ export default {
         policies: ['admin::isAuthenticatedAdmin'],
       },
     },
+    {
+      method: 'POST',
+      path: '/translate/batch-ui-keys',
+      handler: 'translate.batchTranslateUiKeys',
+      config: {
+        policies: ['admin::isAuthenticatedAdmin'],
+      },
+    },
   ],
 };

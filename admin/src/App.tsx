@@ -18,7 +18,6 @@ import ProductRelations from './pages/ProductRelations';
 import SeoConfig from './pages/SeoConfig';
 import NotificationConfig from './pages/NotificationConfig';
 import PageContent from './pages/PageContent';
-import I18nDict from './pages/I18nDict';
 import I18nKeysPage from './pages/I18nKeysPage';
 import MediaLibrary from './pages/MediaLibrary';
 import AccountMgmt from './pages/AccountMgmt';

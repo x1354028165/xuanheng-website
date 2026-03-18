@@ -20,37 +20,17 @@
       "required": true,
       "unique": true
     },
-    "zh_CN": {
-      "type": "text"
+    "translations": {
+      "type": "json"
     },
-    "zh_TW": {
-      "type": "text"
+    "namespace": {
+      "type": "string"
     },
-    "en_US": {
-      "type": "text"
+    "translationStatus": {
+      "type": "json"
     },
-    "de": {
+    "sourceText": {
       "type": "text"
-    },
-    "fr": {
-      "type": "text"
-    },
-    "pt": {
-      "type": "text"
-    },
-    "es": {
-      "type": "text"
-    },
-    "ru": {
-      "type": "text"
-    },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "pending",
-        "approved"
-      ],
-      "default": "pending"
     }
   }
 }
