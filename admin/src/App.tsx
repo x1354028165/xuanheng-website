@@ -28,6 +28,7 @@ import SitemapMgmt from './pages/SitemapMgmt';
 import DocResources from './pages/DocResources';
 import FirmwareVersions from './pages/FirmwareVersions';
 import SoftwareDownloads from './pages/SoftwareDownloads';
+import LanguagesPage from './pages/LanguagesPage';
 import type { ReactNode } from 'react';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -86,6 +87,7 @@ export default function App() {
               <Route path="doc-resources" element={<DocResources />} />
               <Route path="firmware-versions" element={<FirmwareVersions />} />
               <Route path="software-downloads" element={<SoftwareDownloads />} />
+              <Route path="languages" element={<LanguagesPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

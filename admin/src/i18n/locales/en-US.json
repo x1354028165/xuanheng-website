@@ -35,6 +35,7 @@
     "docResources": "Doc Resources",
     "firmwareVersions": "Firmware Versions",
     "softwareDownloads": "Software Downloads",
+    "languages": "Languages",
     "group": {
       "content": "Content",
       "pages": "Content & Pages",
@@ -253,6 +254,29 @@
     "fileUrl": "File URL",
     "releaseDate": "Release Date",
     "sortOrder": "Sort Order"
+  },
+  "languages": {
+    "title": "Language Management",
+    "code": "Language Code",
+    "name": "Language Name",
+    "enabled": "Enabled",
+    "default": "Default",
+    "addLanguage": "Add Language",
+    "addAndTranslate": "Add & Start Translation",
+    "addSuccess": "Language added",
+    "addFailed": "Failed to add language",
+    "addNote": "After adding, batch translation will automatically start for all existing content.",
+    "deleteSuccess": "Language deleted",
+    "deleteFailed": "Failed to delete language",
+    "confirmDelete": "Delete this language? All translations will be lost.",
+    "cannotDisableDefault": "Cannot disable default language",
+    "settingsSaved": "Settings saved",
+    "settingsFailed": "Failed to save settings",
+    "batchTranslateAll": "Batch Translate All",
+    "batchStarted": "Batch translation started in background",
+    "batchFailed": "Batch translation failed",
+    "batchInProgress": "Batch translation is running in the background...",
+    "noTargetLocales": "No target locales to translate"
   },
   "sitemap": {
     "url": "Sitemap URL",

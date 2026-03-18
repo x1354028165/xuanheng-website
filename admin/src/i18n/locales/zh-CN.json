@@ -35,6 +35,7 @@
     "docResources": "技术文档管理",
     "firmwareVersions": "固件版本管理",
     "softwareDownloads": "软件下载管理",
+    "languages": "语言管理",
     "group": {
       "content": "内容管理",
       "pages": "内容与页面",
@@ -253,6 +254,29 @@
     "fileUrl": "文件URL",
     "releaseDate": "发布日期",
     "sortOrder": "排序"
+  },
+  "languages": {
+    "title": "语言管理",
+    "code": "语言代码",
+    "name": "语言名称",
+    "enabled": "启用",
+    "default": "默认",
+    "addLanguage": "新增语言",
+    "addAndTranslate": "添加并翻译",
+    "addSuccess": "语言已添加",
+    "addFailed": "添加语言失败",
+    "addNote": "添加后将自动翻译所有现有内容",
+    "deleteSuccess": "语言已删除",
+    "deleteFailed": "删除语言失败",
+    "confirmDelete": "删除此语言？所有翻译内容将丢失。",
+    "cannotDisableDefault": "不能禁用默认语言",
+    "settingsSaved": "设置已保存",
+    "settingsFailed": "保存设置失败",
+    "batchTranslateAll": "全量翻译",
+    "batchStarted": "批量翻译已在后台启动",
+    "batchFailed": "批量翻译启动失败",
+    "batchInProgress": "批量翻译正在后台运行...",
+    "noTargetLocales": "没有需要翻译的目标语言"
   },
   "sitemap": {
     "url": "Sitemap地址",

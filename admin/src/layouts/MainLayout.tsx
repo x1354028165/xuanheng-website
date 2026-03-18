@@ -92,6 +92,7 @@ export default function MainLayout() {
       icon: <SettingOutlined />,
       label: t('menu.group.system'),
       children: [
+        { key: '/languages', icon: <GlobalOutlined />, label: t('menu.languages') },
         { key: '/i18n-dict', icon: <TranslationOutlined />, label: t('menu.i18nDict') },
         { key: '/seo-config', icon: <SearchOutlined />, label: t('menu.seoConfig') },
         { key: '/notification-config', icon: <BellOutlined />, label: t('menu.notificationConfig') },
