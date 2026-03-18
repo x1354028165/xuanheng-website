@@ -23,9 +23,16 @@ const LOCALE_LABELS: Record<string, string> = {
   'pt': 'PT',
   'es': 'ES',
   'ru': 'RU',
+  'ar': 'AR',
+  'ja': 'JA',
+  'ko': 'KO',
+  'it': 'IT',
+  'nl': 'NL',
+  'tr': 'TR',
 };
 
-const ALL_LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru'];
+// Fallback list — dynamically fetched from Strapi at runtime
+const FALLBACK_LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru'];
 
 interface LocaleTabsProps {
   currentLocale: string;
@@ -78,6 +85,18 @@ export default function LocaleTabs({
 }: LocaleTabsProps) {
   const { meta } = useTranslationMeta(documentId ?? null, uid ?? '');
   const [translating, setTranslating] = useState(false);
+  const [allLocales, setAllLocales] = useState<string[]>(FALLBACK_LOCALES);
+
+  // 动态从 Strapi 获取启用的语言列表
+  useEffect(() => {
+    api.get('/i18n/locales').then((res) => {
+      const data = Array.isArray(res.data) ? res.data : [];
+      const codes: string[] = data
+        .filter((l: Record<string, unknown>) => l.code !== 'en')
+        .map((l: Record<string, unknown>) => l.code as string);
+      if (codes.length > 0) setAllLocales(codes);
+    }).catch(() => { /* 保持 fallback */ });
+  }, []);
 
   const handleTranslate = async () => {
     if (!documentId || !uid) return;
@@ -92,7 +111,7 @@ export default function LocaleTabs({
     }
   };
 
-  const options = ALL_LOCALES.map((locale) => {
+  const options = allLocales.map((locale) => {
     const statusInfo = meta?.status[locale] ? STATUS_ICONS[meta.status[locale]] : null;
     const label = (
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
