@@ -57,12 +57,27 @@ export default function Brands() {
 
   const openEdit = (record: Record<string, unknown>) => {
     setEditingDocId(record.documentId as string);
-    const caps = typeof record.capabilities === 'string'
-      ? JSON.parse(record.capabilities)
-      : (record.capabilities ?? []);
-    const cats = typeof record.category === 'string'
-      ? JSON.parse(record.category || '[]')
-      : (record.category ?? []);
+    const caps = (() => {
+      try {
+        return typeof record.capabilities === 'string'
+          ? JSON.parse(record.capabilities)
+          : (record.capabilities ?? []);
+      } catch { return []; }
+    })();
+    const cats = (() => {
+      try {
+        if (!record.category) return [];
+        if (Array.isArray(record.category)) return record.category;
+        if (typeof record.category === 'string') {
+          const trimmed = record.category.trim();
+          // 尝试JSON解析
+          if (trimmed.startsWith('[')) return JSON.parse(trimmed);
+          // 普通字符串：直接作为单个选项
+          return trimmed ? [trimmed] : [];
+        }
+        return [];
+      } catch { return []; }
+    })();
     form.setFieldsValue({ ...record, capabilities: caps, category: cats });
     const logo = record.logo as { url?: string; id?: number } | null;
     if (logo?.url) {

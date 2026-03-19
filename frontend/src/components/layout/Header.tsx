@@ -188,7 +188,7 @@ export function Header({
     const p = window.location.pathname;
     const onHome = p === `/${currentLocale}` || p === `/${currentLocale}/` || p === "/";
     // Product detail pages also have a dark hero banner — treat same as home
-    const onDarkHero = onHome || /\/products\/[^/]+\/?$/.test(p) || /\/solutions\/[^/]+\/?$/.test(p);
+    const onDarkHero = onHome || /\/products\/[^/]+\/?$/.test(p) || /\/solutions\/[^/]+\/?$/.test(p) || /\/about\/?$/.test(p);
 
     if (!onDarkHero) {
       document.documentElement.removeAttribute("data-page");
