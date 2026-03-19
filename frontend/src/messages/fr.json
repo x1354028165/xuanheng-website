@@ -74,7 +74,8 @@
     "address": "Adresse",
     "phone": "Téléphone",
     "email": "E-mail",
-    "hours": "Horaires"
+    "hours": "Horaires",
+    "viewMap": "Voir la carte"
   },
   "home": {
     "heroTitle": "Agrégation transparente des actifs énergétiques multi-scénarios, redéfinir la valeur de l'énergie distribuée",

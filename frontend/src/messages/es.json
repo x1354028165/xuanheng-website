@@ -93,7 +93,8 @@
     "address": "Dirección",
     "phone": "Teléfono",
     "email": "Correo electrónico",
-    "hours": "Horario"
+    "hours": "Horario",
+    "viewMap": "Ver mapa"
   },
   "contact": {
     "error": "Error al enviar. Inténtelo de nuevo más tarde.",

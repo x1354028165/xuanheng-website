@@ -183,18 +183,26 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 </div>
               </div>
             </div>
-            {/* 右边：地图 */}
-            <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] shadow-sm">
-              <iframe
-                src="https://uri.amap.com/marker?position=113.856,22.602&name=旭衡电子&src=xuanheng&coordinate=gaode&callnative=0"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: '320px' }}
-                allowFullScreen
-                loading="lazy"
-                title="Office Location"
+            {/* 右边：地图（静态图片+点击跳转） */}
+            <a
+              href="https://uri.amap.com/marker?position=113.856,22.602&name=旭衡电子&coordinate=gaode&callnative=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block overflow-hidden rounded-2xl border border-[#E2E8F0] shadow-sm relative group"
+              style={{ minHeight: '320px' }}
+            >
+              <Image
+                src="https://restapi.amap.com/v3/staticmap?location=113.856,22.602&zoom=15&size=600*400&markers=mid,,A:113.856,22.602&key=a7a90e05a37d3f6bf76d4a9032fc9129"
+                alt="Office Location Map"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
-            </div>
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors">
+                <span className="bg-white/90 px-4 py-2 rounded-lg text-sm font-medium text-[#1A3FAD] opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                  {tc('viewMap')} →
+                </span>
+              </div>
+            </a>
           </div>
         </div>
       </section>

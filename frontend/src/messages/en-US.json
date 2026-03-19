@@ -74,7 +74,8 @@
     "address": "Address",
     "phone": "Phone",
     "email": "Email",
-    "hours": "Business Hours"
+    "hours": "Business Hours",
+    "viewMap": "View Map"
   },
   "home": {
     "heroLine1": "Seamlessly Aggregate All-Scenario Energy Assets",

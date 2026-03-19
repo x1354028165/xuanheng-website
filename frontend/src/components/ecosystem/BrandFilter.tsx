@@ -98,7 +98,7 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
       if (filters.category    && b.category          !== filters.category)    return false;
       if (filters.access      && b.accessMethod       !== filters.access)      return false;
       if (filters.integration && b.integrationLevel   !== filters.integration) return false;
-      if (filters.status      && b.status             !== filters.status)      return false;
+      if (filters.status      && b.supportStatus             !== filters.status)      return false;
       return true;
     });
   }, [brands, filters]);
@@ -159,7 +159,7 @@ export function BrandFilter({ brands, noBrandsLabel }: BrandFilterProps) {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {filteredBrands.map((brand) => {
               const logoUrl = brand.logo ? getStrapiMedia(brand.logo.url) : null;
-              const isSupported = brand.status === 'connected';
+              const isSupported = brand.supportStatus === 'connected';
 
               return (
                 <div

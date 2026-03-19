@@ -93,7 +93,8 @@
     "address": "公司地址",
     "phone": "聯繫電話",
     "email": "電子郵箱",
-    "hours": "工作時間"
+    "hours": "工作時間",
+    "viewMap": "查看地圖"
   },
   "contact": {
     "error": "傳送失敗，請稍後重試",

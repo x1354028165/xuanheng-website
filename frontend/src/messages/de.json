@@ -74,7 +74,8 @@
     "address": "Adresse",
     "phone": "Telefon",
     "email": "E-Mail",
-    "hours": "Geschäftszeiten"
+    "hours": "Geschäftszeiten",
+    "viewMap": "Karte anzeigen"
   },
   "home": {
     "heroTitle": "Nahtlose Aggregation aller Energieanlagen — Verteilte Energiewerte neu definieren",

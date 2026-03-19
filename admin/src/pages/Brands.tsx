@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
   Table, Button, Drawer, Form, Space, Popconfirm, Typography, message,
-  Radio, Switch, InputNumber, Tag, Checkbox,
+  Radio, Switch, InputNumber, Tag, Checkbox, Input,
 } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -93,7 +93,7 @@ export default function Brands() {
       category: [],
       accessMethod: 'both',
       integrationLevel: 'full_control',
-      status: 'connected',
+      supportStatus: 'connected',
       showOnHomepage: true,
       isVisible: true,
       sortOrder: 0,
@@ -122,7 +122,7 @@ export default function Brands() {
       category: catValue,
       accessMethod: record.accessMethod,
       integrationLevel: record.integrationLevel,
-      status: record.status,
+      status: record.supportStatus,
       showOnHomepage: record.showOnHomepage,
       isVisible: record.isVisible,
       sortOrder: record.sortOrder,
@@ -191,11 +191,10 @@ export default function Brands() {
     {
       title: '设备类型',
       dataIndex: 'category',
-      width: 140,
+      ellipsis: true,
       render: (v: unknown) => {
         const arr: string[] = Array.isArray(v) ? v : (v ? [String(v)] : []);
-        if (!arr.length) return '—';
-        return <>{arr.map(c => <Tag key={c}>{c}</Tag>)}</>;
+        return arr.length ? arr.join('；') : '—';
       },
     },
     {
@@ -215,7 +214,7 @@ export default function Brands() {
     },
     {
       title: '支持状态',
-      dataIndex: 'status',
+      dataIndex: 'supportStatus',
       width: 90,
       render: (v: string) => {
         const meta = STATUS_TAG[v];
@@ -278,24 +277,17 @@ export default function Brands() {
       >
         <Form form={form} layout="vertical">
           <Form.Item name="name" label="品牌名称" rules={[{ required: true }]}>
-            <input className="ant-input" style={{ width: '100%', padding: '4px 11px', border: '1px solid #d9d9d9', borderRadius: 6 }} />
+            <Input />
           </Form.Item>
 
-          <Form.Item name="category" label="设备类型">
-            <div>
-              <Space style={{ marginBottom: 8 }}>
-                <Button size="small" onClick={() => form.setFieldValue('category', CATEGORY_OPTIONS.map(o => o.value))}>
-                  全选
-                </Button>
-                <Button size="small" onClick={() => form.setFieldValue('category', [])}>
-                  取消全选
-                </Button>
-              </Space>
-              <Checkbox.Group
-                options={CATEGORY_OPTIONS}
-                style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
-              />
-            </div>
+          <Form.Item label="设备类型">
+            <Space style={{ marginBottom: 8 }}>
+              <Button size="small" onClick={() => form.setFieldValue('category', CATEGORY_OPTIONS.map(o => o.value))}>全选</Button>
+              <Button size="small" onClick={() => form.setFieldValue('category', [])}>取消全选</Button>
+            </Space>
+            <Form.Item name="category" noStyle>
+              <Checkbox.Group options={CATEGORY_OPTIONS} style={{ display: 'flex', flexDirection: 'column', gap: 8 }} />
+            </Form.Item>
           </Form.Item>
 
           <Form.Item label="品牌 Logo">
@@ -332,7 +324,7 @@ export default function Brands() {
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item name="status" label="支持状态">
+          <Form.Item name="supportStatus" label="支持状态">
             <Radio.Group>
               <Radio value="connected">已支持</Radio>
               <Radio value="adapting">开发中</Radio>
@@ -352,7 +344,7 @@ export default function Brands() {
           </Form.Item>
 
           <Form.Item name="websiteUrl" label="官网链接">
-            <input className="ant-input" style={{ width: '100%', padding: '4px 11px', border: '1px solid #d9d9d9', borderRadius: 6 }} />
+            <Input placeholder="https://" />
           </Form.Item>
         </Form>
       </Drawer>
