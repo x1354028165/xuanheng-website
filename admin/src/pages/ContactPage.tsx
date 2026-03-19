@@ -41,7 +41,24 @@ export default function ContactPage() {
         if (record) {
           setDocumentId(record.documentId as string);
           let parsed: ContactContent = DEFAULT_CONTENT;
-          try { parsed = JSON.parse(record.content as string) as ContactContent; } catch { /* use default */ }
+          try {
+            const raw = record.content;
+            const data = typeof raw === 'string' ? JSON.parse(raw) : raw;
+            // Map Strapi field names to form field names
+            if (data?.contacts) {
+              parsed = {
+                contacts: data.contacts.map((c: Record<string, string>) => ({
+                  name: c.name || '',
+                  position: c.position || c.title || '',
+                  email: c.email || '',
+                  phone: c.phone || '',
+                })),
+                companyAddress: data.companyAddress || '',
+                companyPhone: data.companyPhone || '',
+                companyEmail: data.companyEmail || '',
+              };
+            }
+          } catch { /* use default */ }
           form.setFieldsValue(parsed);
         } else {
           form.setFieldsValue(DEFAULT_CONTENT);
