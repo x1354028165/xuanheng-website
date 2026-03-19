@@ -5,7 +5,7 @@ import { fetchI18nKeys, deepMerge } from '@/lib/api/i18n-keys';
 
 /** Locale codes that have a local messages/*.json file */
 const LOCALES_WITH_JSON = new Set([
-  'zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru', 'ar',
+  'zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru', 'ar', 'ja',
 ]);
 
 export default getRequestConfig(async ({ requestLocale }) => {

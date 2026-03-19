@@ -10,6 +10,7 @@ import pt from '@/messages/pt.json';
 import es from '@/messages/es.json';
 import ru from '@/messages/ru.json';
 import ar from '@/messages/ar.json';
+import ja from '@/messages/ja.json';
 
 type Messages = typeof zhCN;
 
@@ -23,6 +24,7 @@ const messageMap: Record<string, Messages> = {
   'es': es as unknown as Messages,
   'ru': ru as unknown as Messages,
   'ar': ar as unknown as Messages,
+  'ja': ja as unknown as Messages,
 };
 
 function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {

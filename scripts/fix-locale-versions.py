@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sqlite3, json, urllib.request, time
+import sqlite3, json, urllib.request, time, os
 
 STRAPI_URL = 'http://localhost:1337'
 DB_PATH = '/home/ec2-user/xuanheng-website/cms/.tmp/data.db'
@@ -12,7 +12,7 @@ CONTENT_TYPES = [
 ]
 
 def get_admin_token():
-    data = json.dumps({'email':'admin@gmail.com','password': process.env.STRAPI_ADMIN_PASSWORD || os.environ.get('STRAPI_ADMIN_PASSWORD', 'Admin1234!')}).encode()
+    data = json.dumps({'email':'admin@gmail.com','password': os.environ.get('STRAPI_ADMIN_PASSWORD', 'Admin1234!')}).encode()
     req = urllib.request.Request(f'{STRAPI_URL}/admin/login', data=data, headers={'Content-Type':'application/json'})
     with urllib.request.urlopen(req) as r:
         return json.loads(r.read()).get('data',{}).get('token','')

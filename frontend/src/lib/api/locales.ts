@@ -18,7 +18,7 @@ interface StrapiLocale {
   isDefault: boolean;
 }
 
-const FALLBACK_LOCALES = ['zh-CN', 'en-US'];
+const FALLBACK_LOCALES = ['zh-CN', 'en-US', 'zh-TW', 'de', 'fr', 'es', 'pt', 'ru', 'ar', 'ja'];
 
 // Language metadata for display
 export const LANGUAGE_META: Record<string, { label: string; native: string; flag: string; short: string }> = {
@@ -47,14 +47,11 @@ export interface EnabledLocale {
 
 export async function fetchEnabledLocales(): Promise<EnabledLocale[]> {
   try {
-    // Fetch from internal /api/locales proxy (reads SQLite, no auth needed)
-    // Use absolute URL to avoid circular references in Server Components
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-    const res = await fetch(`${SITE_URL}/api/locales`, {
-      next: { revalidate: 30 },
-    });
-    if (!res.ok) throw new Error('locales API failed');
-    const allLocales: StrapiLocale[] = await res.json();
+    // Read directly from SQLite — works at build time and runtime, no circular fetch
+    const { execSync } = await import('child_process');
+    const scriptPath = '/home/ec2-user/xuanheng-website/frontend/scripts/get-locales.py';
+    const output = execSync(`python3 ${scriptPath}`, { encoding: 'utf-8', timeout: 5000 });
+    const allLocales: StrapiLocale[] = JSON.parse(output.trim());
     if (!allLocales.length) throw new Error('empty locales');
 
     // Map to EnabledLocale (no disabled filtering needed — handled in /api/locales)
