@@ -70,14 +70,18 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      {/* Core Numbers */}
-      <section className="bg-[#0C1829] py-20">
+      {/* Core Numbers - 参考首页风格 */}
+      <section className="bg-white py-20 border-b border-[#E2E8F0]">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {coreNumbers.map((num) => (
-              <div key={num.label} className="text-center">
-                <p className="text-4xl font-black text-[#38C4E8]">{num.value}</p>
-                <p className="mt-2 text-sm text-gray-400">{num.label}</p>
+              <div key={num.label} className="flex flex-col items-center justify-center py-8 text-center">
+                <div className="text-[clamp(64px,5.5vw,96px)] font-black text-[#0F172A] leading-none tracking-[-3px]">
+                  {num.value}
+                </div>
+                <div className="mt-4 text-[13px] font-medium text-[#94A3B8] tracking-[2px] uppercase">
+                  {num.label}
+                </div>
               </div>
             ))}
           </div>

@@ -27,7 +27,9 @@
       ]
     },
     "category": {
-      "type": "json"
+      "type": "enumeration",
+      "enum": ["储能电池", "光伏逆变器", "充电桩", "智能电表", "其他"],
+      "default": "其他"
     },
     "websiteUrl": {
       "type": "string"
@@ -40,8 +42,10 @@
       "type": "boolean",
       "default": true
     },
-    "capabilities": {
-      "type": "json"
+    "integrationLevel": {
+      "type": "enumeration",
+      "enum": ["read", "read_history", "full_control"],
+      "default": "read"
     },
     "accessMethod": {
       "type": "enumeration",
@@ -56,9 +60,6 @@
     "showOnHomepage": {
       "type": "boolean",
       "default": true
-    },
-    "models": {
-      "type": "json"
     }
   }
 }
