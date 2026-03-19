@@ -64,13 +64,16 @@
     "backToHome": "Zurück zur Startseite",
     "download": "Herunterladen",
     "share": "Teilen",
-    "contactUs": "Kontaktieren Sie uns",
+    "contactUs": "Kontakt",
     "getStarted": "Jetzt starten",
     "readMore": "Weiterlesen",
     "viewDetails": "Details anzeigen",
     "previous": "Vorherige",
     "next": "Nächste",
-    "page": "Seite {page}"
+    "page": "Seite {page}",
+    "address": "Adresse",
+    "phone": "Telefon",
+    "email": "E-Mail"
   },
   "home": {
     "heroTitle": "Nahtlose Aggregation aller Energieanlagen — Verteilte Energiewerte neu definieren",

@@ -70,7 +70,10 @@
     "viewDetails": "詳細を見る",
     "previous": "前へ",
     "next": "次へ",
-    "page": "{page}ページ"
+    "page": "{page}ページ",
+    "address": "所在地",
+    "phone": "電話番号",
+    "email": "メールアドレス"
   },
   "home": {
     "heroLine1": "あらゆるシナリオのエネルギー資産をシームレスに集約",

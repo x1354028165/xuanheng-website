@@ -73,7 +73,7 @@
   "common": {
     "backToHome": "返回首頁",
     "cancel": "取消",
-    "contactUs": "聯絡我們",
+    "contactUs": "聯繫我們",
     "download": "下載",
     "error": "出錯了",
     "getStarted": "開始使用",
@@ -89,7 +89,10 @@
     "share": "分享",
     "submit": "提交",
     "viewAll": "檢視全部",
-    "viewDetails": "檢視詳情"
+    "viewDetails": "檢視詳情",
+    "address": "公司地址",
+    "phone": "聯繫電話",
+    "email": "電子郵箱"
   },
   "contact": {
     "error": "傳送失敗，請稍後重試",

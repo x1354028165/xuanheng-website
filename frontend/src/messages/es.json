@@ -89,7 +89,10 @@
     "share": "Compartir",
     "submit": "Enviar",
     "viewAll": "Ver todo",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Correo electrónico"
   },
   "contact": {
     "error": "Error al enviar. Inténtelo de nuevo más tarde.",

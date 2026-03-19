@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
   Table, Button, Drawer, Form, Space, Popconfirm, Typography, message,
-  Radio, Switch, InputNumber, Tag, Checkbox,
+  Radio, Switch, InputNumber, Tag,
 } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';

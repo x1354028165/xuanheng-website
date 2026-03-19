@@ -73,7 +73,7 @@
   "common": {
     "backToHome": "Voltar ao início",
     "cancel": "Cancelar",
-    "contactUs": "Fale conosco",
+    "contactUs": "Contato",
     "download": "Download",
     "error": "Ocorreu um erro",
     "getStarted": "Começar",
@@ -89,7 +89,10 @@
     "share": "Compartilhar",
     "submit": "Enviar",
     "viewAll": "Ver tudo",
-    "viewDetails": "Ver detalhes"
+    "viewDetails": "Ver detalhes",
+    "address": "Endereço",
+    "phone": "Telefone",
+    "email": "E-mail"
   },
   "contact": {
     "error": "Falha no envio. Tente novamente mais tarde.",

@@ -70,7 +70,10 @@
     "viewDetails": "View Details",
     "previous": "Previous",
     "next": "Next",
-    "page": "Page {page}"
+    "page": "Page {page}",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email"
   },
   "home": {
     "heroLine1": "Seamlessly Aggregate All-Scenario Energy Assets",
