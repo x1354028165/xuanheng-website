@@ -166,15 +166,18 @@ export async function getFAQs(locale = 'zh-CN'): Promise<StrapiFAQ[]> {
 // Compatible Brands
 // ---------------------------------------------------------------------------
 
-export async function getCompatibleBrands(options?: { showOnHomepage?: boolean }): Promise<StrapiCompatibleBrand[]> {
+export async function getCompatibleBrands(options?: { showOnHomepage?: boolean; showOnEcosystem?: boolean }): Promise<StrapiCompatibleBrand[]> {
   try {
     const params: Record<string, unknown> = {
       populate: '*',
-      sort: ['name:asc'],
-      'pagination[limit]': -1,
+      sort: ['sortOrder:asc', 'name:asc'],
+      'pagination[pageSize]': 200,
     };
     if (options?.showOnHomepage === true) {
       params['filters[showOnHomepage][$eq]'] = true;
+    }
+    if (options?.showOnEcosystem === true) {
+      params['filters[isVisible][$eq]'] = true;
     }
     const res = await fetchStrapi<StrapiResponse<StrapiCompatibleBrand>>(
       '/compatible-brands',

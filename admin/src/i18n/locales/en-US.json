@@ -36,6 +36,8 @@
     "firmwareVersions": "Firmware Versions",
     "softwareDownloads": "Software Downloads",
     "languages": "Languages",
+    "aboutPage": "About Us",
+    "contactPage": "Contact Us",
     "group": {
       "content": "Content",
       "pages": "Content & Pages",
@@ -304,6 +306,31 @@
     "batchFailed": "Batch translation failed",
     "batchInProgress": "Batch translation is running in the background...",
     "noTargetLocales": "No target locales to translate"
+  },
+  "about": {
+    "title": "About Us - Page Editor",
+    "companyIntro": "Company Introduction",
+    "coreNumbers": "Core Numbers",
+    "numberValue": "Value",
+    "numberLabel": "Label",
+    "coreCapabilities": "Core Capabilities",
+    "capabilityIcon": "Icon (emoji)",
+    "capabilityTitle": "Title",
+    "capabilityDesc": "Description",
+    "milestones": "Milestones",
+    "milestoneYear": "Year",
+    "milestoneText": "Event",
+    "addMilestone": "Add Milestone"
+  },
+  "contact": {
+    "title": "Contact Us - Page Editor",
+    "companyInfo": "Company Info",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "contacts": "Contact Persons",
+    "position": "Position",
+    "addContact": "Add Contact"
   },
   "sitemap": {
     "url": "Sitemap URL",

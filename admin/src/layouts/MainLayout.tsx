@@ -63,6 +63,8 @@ export default function MainLayout() {
         { key: '/page-content', icon: <FileSearchOutlined />, label: t('menu.pageContent') },
         { key: '/products', icon: <AppstoreOutlined />, label: t('menu.products') },
         { key: '/solutions', icon: <BulbOutlined />, label: t('menu.solutions') },
+        { key: '/about-page', icon: <TeamOutlined />, label: t('menu.aboutPage') },
+        { key: '/contact-page', icon: <UserOutlined />, label: t('menu.contactPage') },
       ],
     },
     {

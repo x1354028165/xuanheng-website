@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import {
-  Table, Input, Button, Drawer, Form, Space, Popconfirm, Typography, message, Select, Tag, Tabs, Tooltip, Segmented,
+  Table, Input, Button, Drawer, Form, Space, Popconfirm, Typography, message, Tag, Tabs, Tooltip, Segmented,
 } from 'antd';
 import { PlusOutlined, TranslationOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';

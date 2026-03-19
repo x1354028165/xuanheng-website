@@ -13,7 +13,7 @@ export default function Brands() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingDocId, setEditingDocId] = useState<string | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoId, setLogoId] = useState<number | null>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -22,7 +22,7 @@ export default function Brands() {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await api.get(`${API_URL}?page=${page}&pageSize=10&sort=sortOrder:asc,createdAt:desc`);
+      const res = await api.get(`${API_URL}?page=${page}&pageSize=10&sort=sortOrder:asc,createdAt:desc&populate=logo`);
       setData(res.data?.results ?? []);
       setTotal(res.data?.pagination?.total ?? 0);
     } catch { /* */ } finally {
@@ -48,7 +48,7 @@ export default function Brands() {
   };
 
   const openCreate = () => {
-    setEditingId(null);
+    setEditingDocId(null);
     form.resetFields();
     setLogoPreview(null);
     setLogoId(null);
@@ -56,7 +56,7 @@ export default function Brands() {
   };
 
   const openEdit = (record: Record<string, unknown>) => {
-    setEditingId(record.id as number);
+    setEditingDocId(record.documentId as string);
     const caps = typeof record.capabilities === 'string'
       ? JSON.parse(record.capabilities)
       : (record.capabilities ?? []);
@@ -77,14 +77,15 @@ export default function Brands() {
 
   const handleSave = async () => {
     const values = await form.validateFields();
+    // Strapi Content Manager API requires data wrapped in { data: {...} }
     const payload: Record<string, unknown> = { ...values };
     if (logoId) payload.logo = logoId;
     if (Array.isArray(values.capabilities)) {
       payload.capabilities = values.capabilities;
     }
     try {
-      if (editingId) {
-        await api.put(`${API_URL}/${editingId}`, payload);
+      if (editingDocId) {
+        await api.put(`${API_URL}/${editingDocId}`, payload);
       } else {
         await api.post(API_URL, payload);
       }
@@ -96,12 +97,25 @@ export default function Brands() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (documentId: string) => {
     try {
-      await api.delete(`${API_URL}/${id}`);
-      message.success('OK');
+      await api.delete(`${API_URL}/${documentId}`);
+      message.success('删除成功');
       fetchData();
-    } catch { message.error('Failed'); }
+    } catch { message.error('删除失败'); }
+  };
+
+  // 行内开关切换（showOnHomepage / isVisible）
+  const handleToggle = async (documentId: string, field: string, checked: boolean) => {
+    try {
+      await api.put(`${API_URL}/${documentId}`, { [field]: checked });
+      setData(prev => prev.map(item =>
+        item.documentId === documentId ? { ...item, [field]: checked } : item
+      ));
+    } catch {
+      message.error('更新失败');
+      fetchData(); // 失败时刷新恢复真实状态
+    }
   };
 
   const columns = [
@@ -146,15 +160,6 @@ export default function Brands() {
       },
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      width: 90,
-      render: (v: string) => {
-        const statusMap: Record<string, string> = { connected: '已接入', adapting: '适配中' };
-        return <Tag color={v === 'connected' ? 'green' : 'orange'}>{statusMap[v] ?? v ?? '—'}</Tag>;
-      },
-    },
-    {
       title: '首页可见',
       dataIndex: 'showOnHomepage',
       width: 90,
@@ -162,14 +167,7 @@ export default function Brands() {
         <Switch
           checked={!!val}
           size="small"
-          onChange={async (checked) => {
-            try {
-              await api.put(`${API_URL}/${record.id}`, { showOnHomepage: checked });
-              fetchData();
-            } catch {
-              message.error('更新失败');
-            }
-          }}
+          onChange={(checked) => handleToggle(record.documentId as string, 'showOnHomepage', checked)}
         />
       ),
     },
@@ -181,14 +179,7 @@ export default function Brands() {
         <Switch
           checked={!!val}
           size="small"
-          onChange={async (checked) => {
-            try {
-              await api.put(`${API_URL}/${record.id}`, { isVisible: checked });
-              fetchData();
-            } catch {
-              message.error('更新失败');
-            }
-          }}
+          onChange={(checked) => handleToggle(record.documentId as string, 'isVisible', checked)}
         />
       ),
     },
@@ -197,7 +188,7 @@ export default function Brands() {
       render: (_: unknown, record: Record<string, unknown>) => (
         <Space>
           <Button size="small" onClick={() => openEdit(record)}>{t('common.edit')}</Button>
-          <Popconfirm title={t('common.confirmDelete')} onConfirm={() => handleDelete(record.id as number)}>
+          <Popconfirm title={t('common.confirmDelete')} onConfirm={() => handleDelete(record.documentId as string)}>
             <Button size="small" danger>{t('common.delete')}</Button>
           </Popconfirm>
         </Space>
@@ -211,10 +202,10 @@ export default function Brands() {
         <Typography.Title level={4} style={{ margin: 0 }}>{t('menu.brands')}</Typography.Title>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>{t('common.create')}</Button>
       </div>
-      <Table dataSource={data} columns={columns} rowKey="id" loading={loading}
+      <Table dataSource={data} columns={columns} rowKey="documentId" loading={loading}
         pagination={{ current: page, pageSize: 10, total, onChange: setPage, showTotal: (t2) => t('common.total', { total: t2 }) }}
-        scroll={{ x: 1100 }} />
-      <Drawer title={editingId ? t('common.edit') : t('common.create')} open={drawerOpen} onClose={() => setDrawerOpen(false)} width={520}
+        scroll={{ x: 1000 }} />
+      <Drawer title={editingDocId ? t('common.edit') : t('common.create')} open={drawerOpen} onClose={() => setDrawerOpen(false)} width={520}
         extra={<Space><Button onClick={() => setDrawerOpen(false)}>{t('common.cancel')}</Button><Button type="primary" onClick={handleSave}>{t('common.save')}</Button></Space>}>
         <Form form={form} layout="vertical">
           <Form.Item name="name" label="品牌名称" rules={[{ required: true }]}>
@@ -260,12 +251,6 @@ export default function Brands() {
               { label: '充放电控制（调度）', value: 'control' },
               { label: '历史数据导出', value: 'history' },
             ]} />
-          </Form.Item>
-          <Form.Item name="status" label="接入状态">
-            <Radio.Group>
-              <Radio value="connected">已接入</Radio>
-              <Radio value="adapting">适配中</Radio>
-            </Radio.Group>
           </Form.Item>
           <Form.Item name="showOnHomepage" label="首页可见" valuePropName="checked">
             <Switch />

@@ -24,7 +24,7 @@ export default async function EcosystemPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: 'ecosystem' });
-  let brands = await getCompatibleBrands();
+  let brands = await getCompatibleBrands({ showOnEcosystem: true });
   if (!brands || brands.length === 0) {
     brands = MOCK_BRANDS as unknown as StrapiCompatibleBrand[];
   }

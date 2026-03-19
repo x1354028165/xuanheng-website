@@ -36,6 +36,8 @@
     "firmwareVersions": "固件版本管理",
     "softwareDownloads": "软件下载管理",
     "languages": "语言管理",
+    "aboutPage": "关于我们",
+    "contactPage": "联系我们",
     "group": {
       "content": "内容管理",
       "pages": "内容与页面",
@@ -304,6 +306,31 @@
     "batchFailed": "批量翻译启动失败",
     "batchInProgress": "批量翻译正在后台运行...",
     "noTargetLocales": "没有需要翻译的目标语言"
+  },
+  "about": {
+    "title": "关于我们 - 页面编辑",
+    "companyIntro": "公司简介",
+    "coreNumbers": "核心数字",
+    "numberValue": "数字",
+    "numberLabel": "标签",
+    "coreCapabilities": "核心能力",
+    "capabilityIcon": "图标(emoji)",
+    "capabilityTitle": "标题",
+    "capabilityDesc": "描述",
+    "milestones": "发展历程",
+    "milestoneYear": "年份",
+    "milestoneText": "事件描述",
+    "addMilestone": "添加里程碑"
+  },
+  "contact": {
+    "title": "联系我们 - 页面编辑",
+    "companyInfo": "公司信息",
+    "address": "公司地址",
+    "phone": "联系电话",
+    "email": "联系邮箱",
+    "contacts": "联系人列表",
+    "position": "职位",
+    "addContact": "添加联系人"
   },
   "sitemap": {
     "url": "Sitemap地址",
