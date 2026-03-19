@@ -873,7 +873,22 @@
         "text": "التوسع العالمي"
       }
     ],
-    "capabilitiesTitle": "القدرات الأساسية"
+    "capabilitiesTitle": "القدرات الأساسية",
+    "coreNum1Label": "العلامات التجارية المتوافقة",
+    "coreNum2Label": "الدول المغطاة",
+    "coreNum3Label": "المشاريع المنجزة",
+    "cap1Title": "تكامل الأجهزة والبرمجيات",
+    "cap1Desc": "مجموعة تقنية كاملة من بوابات الحافة إلى المنصات السحابية",
+    "cap2Title": "تكامل متعدد العلامات",
+    "cap2Desc": "تكيف البروتوكولات لأكثر من 200 علامة تجارية",
+    "cap3Title": "تغطية متعددة السيناريوهات",
+    "cap3Desc": "سكني/تجاري/محطات شحن/محطة طاقة افتراضية/جودة الطاقة",
+    "coreNum1Value": "200+",
+    "coreNum2Value": "50+",
+    "coreNum3Value": "1000+",
+    "cap1Icon": "🔧",
+    "cap2Icon": "🔗",
+    "cap3Icon": "🌐"
   },
   "contact": {
     "title": "اتصل بنا",
@@ -902,7 +917,19 @@
       "email": "support@alwayscontrol.com.cn",
       "hours": "من الاثنين إلى الجمعة 9:00-18:00"
     },
-    "teamTitle": "فريقنا"
+    "teamTitle": "فريقنا",
+    "person1Title": "مدير المبيعات",
+    "person2Title": "مدير الدعم الفني",
+    "person3Title": "مدير تطوير الأعمال",
+    "person1Name": "Rory",
+    "person2Name": "Julie",
+    "person3Name": "Alan",
+    "person1Email": "rory@alwayscontrol.com.cn",
+    "person2Email": "julie@alwayscontrol.com.cn",
+    "person3Email": "alan@alwayscontrol.com.cn",
+    "person1Phone": "+86 136-0300-5641",
+    "person2Phone": "+86 136-0300-5642",
+    "person3Phone": "+86 136-0300-5643"
   },
   "help": {
     "title": "مركز المساعدة",

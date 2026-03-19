@@ -873,7 +873,22 @@
         "text": "Global Expansion"
       }
     ],
-    "capabilitiesTitle": "Core Capabilities"
+    "capabilitiesTitle": "Core Capabilities",
+    "coreNum1Label": "Compatible Brands",
+    "coreNum2Label": "Countries Covered",
+    "coreNum3Label": "Delivered Projects",
+    "cap1Title": "Integrated H/W & S/W",
+    "cap1Desc": "Complete technology stack from edge gateways to cloud platforms",
+    "cap2Title": "Cross-Brand Integration",
+    "cap2Desc": "Protocol adaptation covering 200+ brands, no vendor lock-in",
+    "cap3Title": "Multi-Scenario Coverage",
+    "cap3Desc": "Residential/C&I storage/EV charging/VPP/power quality",
+    "coreNum1Value": "200+",
+    "coreNum2Value": "50+",
+    "coreNum3Value": "1000+",
+    "cap1Icon": "🔧",
+    "cap2Icon": "🔗",
+    "cap3Icon": "🌐"
   },
   "contact": {
     "title": "Contact Us",
@@ -902,7 +917,19 @@
       "email": "support@alwayscontrol.com.cn",
       "hours": "Monday to Friday, 9:00 AM - 6:00 PM"
     },
-    "teamTitle": "Our Team"
+    "teamTitle": "Our Team",
+    "person1Title": "Sales Director",
+    "person2Title": "Technical Support Manager",
+    "person3Title": "Business Development Manager",
+    "person1Name": "Rory",
+    "person2Name": "Julie",
+    "person3Name": "Alan",
+    "person1Email": "rory@alwayscontrol.com.cn",
+    "person2Email": "julie@alwayscontrol.com.cn",
+    "person3Email": "alan@alwayscontrol.com.cn",
+    "person1Phone": "+86 136-0300-5641",
+    "person2Phone": "+86 136-0300-5642",
+    "person3Phone": "+86 136-0300-5643"
   },
   "help": {
     "title": "Help Center",

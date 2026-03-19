@@ -8,50 +8,32 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: `${t('aboutPage')} | ${locale === 'zh-CN' || locale === 'zh-TW' ? t('siteName') : t('siteNameEn')}` };
 }
 
-const STRAPI_URL = process.env.STRAPI_INTERNAL_URL || 'http://localhost:1337';
-
-interface CoreNumber { value: string; label: string; }
-interface CoreCapability { title: string; icon: string; description: string; }
-
-async function getAboutData(): Promise<{
-  coreNumbers: CoreNumber[];
-  coreCapabilities: CoreCapability[];
-}> {
-  try {
-    const res = await fetch(
-      `${STRAPI_URL}/api/page-content?filters[pageKey][$eq]=about-page&populate=*`,
-      { next: { revalidate: 60 } }
-    );
-    if (!res.ok) return { coreNumbers: [], coreCapabilities: [] };
-    const json = await res.json();
-    const entry = json.data?.[0];
-    return entry?.content ?? { coreNumbers: [], coreCapabilities: [] };
-  } catch {
-    return { coreNumbers: [], coreCapabilities: [] };
-  }
-}
-
 export const revalidate = 3600;
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
   const t = await getTranslations({ locale, namespace: 'about' });
-  const data = await getAboutData();
 
   const milestones = Array.from({ length: 8 }, (_, i) => ({
     year: t(`milestones.${i}.year`),
     text: t(`milestones.${i}.text`),
   }));
 
+  const coreNumbers = [
+    { value: t('coreNum1Value'), label: t('coreNum1Label') },
+    { value: t('coreNum2Value'), label: t('coreNum2Label') },
+    { value: t('coreNum3Value'), label: t('coreNum3Label') },
+  ];
+
+  const capabilities = [
+    { icon: t('cap1Icon'), title: t('cap1Title'), desc: t('cap1Desc') },
+    { icon: t('cap2Icon'), title: t('cap2Title'), desc: t('cap2Desc') },
+    { icon: t('cap3Icon'), title: t('cap3Title'), desc: t('cap3Desc') },
+  ];
+
   return (
     <>
-      {/* Header */}
       <section className="bg-[#F8FAFC] pb-12 pt-32">
         <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-[#0F172A] sm:text-4xl md:text-5xl">{t('title')}</h1>
@@ -59,7 +41,6 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Company Introduction */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-4 text-xl font-bold text-[#0F172A]">{t('companyIntro')}</h2>
@@ -67,41 +48,37 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Core Numbers (from Strapi) */}
-      {data.coreNumbers.length > 0 && (
-        <section className="bg-[#0C1829] py-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-              {data.coreNumbers.map((num) => (
-                <div key={num.label} className="text-center">
-                  <p className="text-4xl font-black text-[#38C4E8]">{num.value}</p>
-                  <p className="mt-2 text-sm text-gray-400">{num.label}</p>
-                </div>
-              ))}
-            </div>
+      {/* Core Numbers */}
+      <section className="bg-[#0C1829] py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {coreNumbers.map((num) => (
+              <div key={num.label} className="text-center">
+                <p className="text-4xl font-black text-[#38C4E8]">{num.value}</p>
+                <p className="mt-2 text-sm text-gray-400">{num.label}</p>
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Core Capabilities (from Strapi) */}
-      {data.coreCapabilities.length > 0 && (
-        <section className="bg-white py-24">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A]">{t('capabilitiesTitle')}</h2>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-              {data.coreCapabilities.map((cap) => (
-                <div key={cap.title} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8 text-center">
-                  <span className="text-4xl">{cap.icon}</span>
-                  <h3 className="mt-4 text-lg font-bold text-[#0F172A]">{cap.title}</h3>
-                  <p className="mt-2 text-sm text-[#475569]">{cap.description}</p>
-                </div>
-              ))}
-            </div>
+      {/* Core Capabilities */}
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A]">{t('capabilitiesTitle')}</h2>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {capabilities.map((cap) => (
+              <div key={cap.title} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8 text-center">
+                <span className="text-4xl">{cap.icon}</span>
+                <h3 className="mt-4 text-lg font-bold text-[#0F172A]">{cap.title}</h3>
+                <p className="mt-2 text-sm text-[#475569]">{cap.desc}</p>
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* Development Milestones Timeline */}
+      {/* Milestones */}
       <section className="bg-[#F8FAFC] py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-2 text-center text-2xl font-bold text-[#0F172A]">{t('historyTitle')}</h2>
@@ -109,12 +86,12 @@ export default async function AboutPage({
           <div className="relative">
             <div className="absolute left-4 top-0 h-full w-0.5 bg-[#1A3FAD]/20 md:left-1/2 md:-translate-x-px" />
             <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <div key={milestone.year} className={`relative flex items-start gap-6 md:gap-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              {milestones.map((m, i) => (
+                <div key={m.year} className={`relative flex items-start gap-6 md:gap-0 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   <div className="absolute left-4 z-10 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-[#38C4E8] bg-white md:left-1/2" />
-                  <div className={`ml-10 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                    <span className="inline-block rounded-full bg-[#1A3FAD] px-3 py-1 text-sm font-bold text-white">{milestone.year}</span>
-                    <p className="mt-2 text-[#475569]">{milestone.text}</p>
+                  <div className={`ml-10 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
+                    <span className="inline-block rounded-full bg-[#1A3FAD] px-3 py-1 text-sm font-bold text-white">{m.year}</span>
+                    <p className="mt-2 text-[#475569]">{m.text}</p>
                   </div>
                 </div>
               ))}
@@ -123,7 +100,6 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Links to News and Careers */}
       <section className="bg-white py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 sm:grid-cols-2">

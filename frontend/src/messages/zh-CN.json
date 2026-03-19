@@ -873,7 +873,22 @@
         "text": "全球化布局"
       }
     ],
-    "capabilitiesTitle": "核心能力"
+    "capabilitiesTitle": "核心能力",
+    "coreNum1Value": "200+",
+    "coreNum1Label": "兼容品牌",
+    "coreNum2Value": "50+",
+    "coreNum2Label": "覆盖国家",
+    "coreNum3Value": "1000+",
+    "coreNum3Label": "已交付项目",
+    "cap1Title": "软硬一体",
+    "cap1Icon": "🔧",
+    "cap1Desc": "从边缘网关到云平台的完整技术栈，软硬件协同优化",
+    "cap2Title": "跨品牌接入",
+    "cap2Icon": "🔗",
+    "cap2Desc": "协议适配能力覆盖200+品牌，无绑定关系",
+    "cap3Title": "多场景覆盖",
+    "cap3Icon": "🌐",
+    "cap3Desc": "户用储能/工商储/充电站/VPP/电能质量全场景"
   },
   "contact": {
     "title": "联系我们",
@@ -902,7 +917,19 @@
       "email": "support@alwayscontrol.com.cn",
       "hours": "周一至周五 9:00-18:00"
     },
-    "teamTitle": "联系人团队"
+    "teamTitle": "联系人团队",
+    "person1Name": "Rory",
+    "person1Title": "销售总监",
+    "person1Email": "rory@alwayscontrol.com.cn",
+    "person1Phone": "+86 136-0300-5641",
+    "person2Name": "Julie",
+    "person2Title": "技术支持经理",
+    "person2Email": "julie@alwayscontrol.com.cn",
+    "person2Phone": "+86 136-0300-5642",
+    "person3Name": "Alan",
+    "person3Title": "商务合作经理",
+    "person3Email": "alan@alwayscontrol.com.cn",
+    "person3Phone": "+86 136-0300-5643"
   },
   "help": {
     "title": "帮助中心",
