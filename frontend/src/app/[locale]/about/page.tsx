@@ -28,9 +28,18 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   ];
 
   const capabilities = [
-    { icon: t('cap1Icon'), title: t('cap1Title'), desc: t('cap1Desc') },
-    { icon: t('cap2Icon'), title: t('cap2Title'), desc: t('cap2Desc') },
-    { icon: t('cap3Icon'), title: t('cap3Title'), desc: t('cap3Desc') },
+    {
+      icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" /></svg>,
+      title: t('cap1Title'), desc: t('cap1Desc'),
+    },
+    {
+      icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-2.12l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l4.5-4.5a4.5 4.5 0 016.364 6.364z" /></svg>,
+      title: t('cap2Title'), desc: t('cap2Desc'),
+    },
+    {
+      icon: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5a17.92 17.92 0 01-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg>,
+      title: t('cap3Title'), desc: t('cap3Desc'),
+    },
   ];
 
   return (
@@ -71,7 +80,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* Core Numbers - 参考首页风格 */}
-      <section className="bg-white py-20 border-b border-[#E2E8F0]">
+      <section className="bg-white py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {coreNumbers.map((num) => (
@@ -94,8 +103,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <h2 className="mb-12 text-center text-2xl font-bold text-[#0F172A]">{t('capabilitiesTitle')}</h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {capabilities.map((cap) => (
-              <div key={cap.title} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8 text-center">
-                <span className="text-4xl">{cap.icon}</span>
+              <div key={cap.title} className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-8 text-center flex flex-col items-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#1A3FAD]/10 text-[#1A3FAD]">
+                  {cap.icon}
+                </div>
                 <h3 className="mt-4 text-lg font-bold text-[#0F172A]">{cap.title}</h3>
                 <p className="mt-2 text-sm text-[#475569]">{cap.desc}</p>
               </div>

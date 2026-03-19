@@ -1097,7 +1097,12 @@
     "developingStatus": "قيد التطوير",
     "brandNotFound": "لم تجد علامتك التجارية؟",
     "contactUsQuick": "اتصل بنا للانضمام السريع",
-    "contactUsBtn": "اتصل بنا"
+    "contactUsBtn": "اتصل بنا",
+    "filterOther": "أخرى",
+    "filterIntegration": "مستوى التكامل",
+    "filterIntegrationBasic": "أساسي",
+    "filterIntegrationStandard": "معياري",
+    "filterIntegrationFull": "كامل"
   },
   "search": {
     "title": "بحث",

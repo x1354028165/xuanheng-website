@@ -1,10 +1,48 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { Table, Input, Button, Drawer, Form, Space, Popconfirm, Typography, message, Select, Radio, Checkbox, Switch, InputNumber, Tag } from 'antd';
+import {
+  Table, Button, Drawer, Form, Space, Popconfirm, Typography, message,
+  Radio, Switch, InputNumber, Tag, Checkbox,
+} from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import api from '../lib/axios';
 
 const API_URL = '/content-manager/collection-types/api::compatible-brand.compatible-brand';
+
+const CATEGORY_OPTIONS = [
+  { label: '储能电池', value: '储能电池' },
+  { label: '光伏逆变器', value: '光伏逆变器' },
+  { label: '充电桩', value: '充电桩' },
+  { label: '智能电表', value: '智能电表' },
+  { label: '其他', value: '其他' },
+];
+
+const ACCESS_METHOD_OPTIONS = [
+  { label: '云端直联', value: 'cloud' },
+  { label: '网关接入', value: 'gateway' },
+  { label: '两者均支持', value: 'both' },
+];
+
+const INTEGRATION_LEVEL_OPTIONS = [
+  { label: '基础接入（实时数据读取）', value: 'read' },
+  { label: '标准接入（实时 + 历史数据）', value: 'read_history' },
+  { label: '完整接入（实时 + 历史 + 充放电控制）', value: 'full_control' },
+];
+
+const INTEGRATION_LEVEL_TAG: Record<string, { label: string; color: string }> = {
+  read:          { label: '基础接入', color: 'default' },
+  read_history:  { label: '标准接入', color: 'blue' },
+  full_control:  { label: '完整接入', color: 'green' },
+};
+
+const ACCESS_METHOD_TAG: Record<string, string> = {
+  cloud: '云端直联', gateway: '网关接入', both: '两者均支持',
+};
+
+const STATUS_TAG: Record<string, { label: string; color: string }> = {
+  connected: { label: '已支持', color: 'success' },
+  adapting:  { label: '开发中', color: 'warning' },
+};
 
 export default function Brands() {
   const { t } = useTranslation();
@@ -25,7 +63,7 @@ export default function Brands() {
       const res = await api.get(`${API_URL}?page=${page}&pageSize=10&sort=sortOrder:asc,createdAt:desc&populate=logo`);
       setData(res.data?.results ?? []);
       setTotal(res.data?.pagination?.total ?? 0);
-    } catch { /* */ } finally {
+    } catch { /**/ } finally {
       setLoading(false);
     }
   }, [page]);
@@ -57,28 +95,17 @@ export default function Brands() {
 
   const openEdit = (record: Record<string, unknown>) => {
     setEditingDocId(record.documentId as string);
-    const caps = (() => {
-      try {
-        return typeof record.capabilities === 'string'
-          ? JSON.parse(record.capabilities)
-          : (record.capabilities ?? []);
-      } catch { return []; }
-    })();
-    const cats = (() => {
-      try {
-        if (!record.category) return [];
-        if (Array.isArray(record.category)) return record.category;
-        if (typeof record.category === 'string') {
-          const trimmed = record.category.trim();
-          // 尝试JSON解析
-          if (trimmed.startsWith('[')) return JSON.parse(trimmed);
-          // 普通字符串：直接作为单个选项
-          return trimmed ? [trimmed] : [];
-        }
-        return [];
-      } catch { return []; }
-    })();
-    form.setFieldsValue({ ...record, capabilities: caps, category: cats });
+    form.setFieldsValue({
+      name: record.name,
+      category: record.category,
+      accessMethod: record.accessMethod,
+      integrationLevel: record.integrationLevel,
+      status: record.status,
+      showOnHomepage: record.showOnHomepage,
+      isVisible: record.isVisible,
+      sortOrder: record.sortOrder,
+      websiteUrl: record.websiteUrl,
+    });
     const logo = record.logo as { url?: string; id?: number } | null;
     if (logo?.url) {
       setLogoPreview(logo.url);
@@ -92,12 +119,8 @@ export default function Brands() {
 
   const handleSave = async () => {
     const values = await form.validateFields();
-    // Strapi Content Manager API requires data wrapped in { data: {...} }
     const payload: Record<string, unknown> = { ...values };
     if (logoId) payload.logo = logoId;
-    if (Array.isArray(values.capabilities)) {
-      payload.capabilities = values.capabilities;
-    }
     try {
       if (editingDocId) {
         await api.put(`${API_URL}/${editingDocId}`, payload);
@@ -120,7 +143,6 @@ export default function Brands() {
     } catch { message.error('删除失败'); }
   };
 
-  // 行内开关切换（showOnHomepage / isVisible）
   const handleToggle = async (documentId: string, field: string, checked: boolean) => {
     try {
       await api.put(`${API_URL}/${documentId}`, { [field]: checked });
@@ -129,7 +151,7 @@ export default function Brands() {
       ));
     } catch {
       message.error('更新失败');
-      fetchData(); // 失败时刷新恢复真实状态
+      fetchData();
     }
   };
 
@@ -137,53 +159,50 @@ export default function Brands() {
     {
       title: 'Logo',
       dataIndex: 'logo',
-      width: 80,
+      width: 64,
       render: (logo: { url?: string } | null) => {
-        const url = logo?.url;
-        if (!url) return '—';
-        const src = url;
-        return <img src={src} alt="logo" style={{ height: 32, objectFit: 'contain' }} />;
+        if (!logo?.url) return <div style={{ width: 32, height: 32, background: '#f5f5f5', borderRadius: 4 }} />;
+        return <img src={logo.url} alt="logo" style={{ height: 32, objectFit: 'contain' }} />;
       },
     },
-    { title: t('brands.brandName'), dataIndex: 'name', ellipsis: true },
+    { title: '品牌名称', dataIndex: 'name', ellipsis: true },
     {
       title: '设备类型',
       dataIndex: 'category',
-      width: 140,
-      render: (v: unknown) => {
-        const arr: string[] = Array.isArray(v) ? v : (v ? [String(v)] : []);
-        return arr.map(c => <Tag key={c}>{c}</Tag>);
-      },
+      width: 110,
+      render: (v: string) => v ? <Tag>{v}</Tag> : '—',
     },
     {
       title: '接入方式',
       dataIndex: 'accessMethod',
+      width: 110,
+      render: (v: string) => <Tag>{ACCESS_METHOD_TAG[v] ?? v ?? '—'}</Tag>,
+    },
+    {
+      title: '对接进度',
+      dataIndex: 'integrationLevel',
       width: 100,
       render: (v: string) => {
-        const map: Record<string, string> = { cloud: '云端', gateway: '网关', both: '双路' };
-        return <Tag>{map[v] ?? v ?? '—'}</Tag>;
+        const meta = INTEGRATION_LEVEL_TAG[v];
+        return meta ? <Tag color={meta.color}>{meta.label}</Tag> : '—';
       },
     },
     {
-      title: '能力',
-      dataIndex: 'capabilities',
-      ellipsis: true,
-      render: (caps: unknown) => {
-        const arr: string[] = Array.isArray(caps) ? caps : (typeof caps === 'string' ? JSON.parse(caps || '[]') : []);
-        const MAP: Record<string, string> = { telemetry: '遥测', control: '控制', history: '历史' };
-        return arr.map(c => <Tag key={c}>{MAP[c] ?? c}</Tag>);
+      title: '支持状态',
+      dataIndex: 'status',
+      width: 90,
+      render: (v: string) => {
+        const meta = STATUS_TAG[v];
+        return meta ? <Tag color={meta.color}>{meta.label}</Tag> : '—';
       },
     },
     {
       title: '首页可见',
       dataIndex: 'showOnHomepage',
-      width: 90,
+      width: 80,
       render: (val: boolean, record: Record<string, unknown>) => (
-        <Switch
-          checked={!!val}
-          size="small"
-          onChange={(checked) => handleToggle(record.documentId as string, 'showOnHomepage', checked)}
-        />
+        <Switch checked={!!val} size="small"
+          onChange={(checked) => handleToggle(record.documentId as string, 'showOnHomepage', checked)} />
       ),
     },
     {
@@ -191,15 +210,12 @@ export default function Brands() {
       dataIndex: 'isVisible',
       width: 90,
       render: (val: boolean, record: Record<string, unknown>) => (
-        <Switch
-          checked={!!val}
-          size="small"
-          onChange={(checked) => handleToggle(record.documentId as string, 'isVisible', checked)}
-        />
+        <Switch checked={!!val} size="small"
+          onChange={(checked) => handleToggle(record.documentId as string, 'isVisible', checked)} />
       ),
     },
     {
-      title: t('common.operations'), width: 140,
+      title: t('common.operations'), width: 130,
       render: (_: unknown, record: Record<string, unknown>) => (
         <Space>
           <Button size="small" onClick={() => openEdit(record)}>{t('common.edit')}</Button>
@@ -217,27 +233,38 @@ export default function Brands() {
         <Typography.Title level={4} style={{ margin: 0 }}>{t('menu.brands')}</Typography.Title>
         <Button type="primary" icon={<PlusOutlined />} onClick={openCreate}>{t('common.create')}</Button>
       </div>
-      <Table dataSource={data} columns={columns} rowKey="documentId" loading={loading}
+
+      <Table
+        dataSource={data} columns={columns} rowKey="documentId" loading={loading}
         pagination={{ current: page, pageSize: 10, total, onChange: setPage, showTotal: (t2) => t('common.total', { total: t2 }) }}
-        scroll={{ x: 1000 }} />
-      <Drawer title={editingDocId ? t('common.edit') : t('common.create')} open={drawerOpen} onClose={() => setDrawerOpen(false)} width={520}
-        extra={<Space><Button onClick={() => setDrawerOpen(false)}>{t('common.cancel')}</Button><Button type="primary" onClick={handleSave}>{t('common.save')}</Button></Space>}>
+        scroll={{ x: 1100 }}
+      />
+
+      <Drawer
+        title={editingDocId ? t('common.edit') : t('common.create')}
+        open={drawerOpen} onClose={() => setDrawerOpen(false)} width={520}
+        extra={
+          <Space>
+            <Button onClick={() => setDrawerOpen(false)}>{t('common.cancel')}</Button>
+            <Button type="primary" onClick={handleSave}>{t('common.save')}</Button>
+          </Space>
+        }
+      >
         <Form form={form} layout="vertical">
           <Form.Item name="name" label="品牌名称" rules={[{ required: true }]}>
-            <Input />
+            <input className="ant-input" style={{ width: '100%', padding: '4px 11px', border: '1px solid #d9d9d9', borderRadius: 6 }} />
           </Form.Item>
+
           <Form.Item name="category" label="设备类型">
-            <Select mode="multiple" allowClear options={[
-              { label: '储能电池', value: '储能电池' },
-              { label: '光伏逆变器', value: '光伏逆变器' },
-              { label: '充电桩', value: '充电桩' },
-              { label: '智能电表', value: '智能电表' },
-              { label: '其他', value: '其他' },
-            ]} />
+            <Radio.Group optionType="button" buttonStyle="solid" options={CATEGORY_OPTIONS} />
           </Form.Item>
+
           <Form.Item label="品牌 Logo">
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              {logoPreview && <img src={logoPreview} alt="logo" style={{ height: 48, objectFit: 'contain', border: '1px solid #f0f0f0', padding: 4, borderRadius: 4 }} />}
+              {logoPreview && (
+                <img src={logoPreview} alt="logo"
+                  style={{ height: 48, objectFit: 'contain', border: '1px solid #f0f0f0', padding: 4, borderRadius: 4 }} />
+              )}
               <Button onClick={() => logoInputRef.current?.click()} icon={<UploadOutlined />}>
                 {logoPreview ? '更换' : '上传'} Logo
               </Button>
@@ -245,36 +272,44 @@ export default function Brands() {
                 <Button danger size="small" onClick={() => { setLogoPreview(null); setLogoId(null); }}>移除</Button>
               )}
             </div>
-            <input
-              ref={logoInputRef}
-              type="file"
-              accept="image/*"
-              style={{ display: 'none' }}
-              onChange={handleLogoUpload}
-            />
+            <input ref={logoInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleLogoUpload} />
           </Form.Item>
+
           <Form.Item name="accessMethod" label="接入方式">
+            <Radio.Group optionType="button" buttonStyle="solid" options={ACCESS_METHOD_OPTIONS} />
+          </Form.Item>
+
+          <Form.Item name="integrationLevel" label="对接进度">
             <Radio.Group>
-              <Radio value="cloud">云端直连</Radio>
-              <Radio value="gateway">网关接入</Radio>
-              <Radio value="both">两者均支持</Radio>
+              {INTEGRATION_LEVEL_OPTIONS.map(opt => (
+                <Radio key={opt.value} value={opt.value} style={{ display: 'block', marginBottom: 8 }}>
+                  {opt.label}
+                </Radio>
+              ))}
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="capabilities" label="支持能力">
-            <Checkbox.Group options={[
-              { label: '实时数据读取（遥测）', value: 'telemetry' },
-              { label: '充放电控制（调度）', value: 'control' },
-              { label: '历史数据导出', value: 'history' },
-            ]} />
+
+          <Form.Item name="status" label="支持状态">
+            <Radio.Group optionType="button" buttonStyle="solid">
+              <Radio.Button value="connected">已支持</Radio.Button>
+              <Radio.Button value="adapting">开发中</Radio.Button>
+            </Radio.Group>
           </Form.Item>
+
           <Form.Item name="showOnHomepage" label="首页可见" valuePropName="checked">
             <Switch />
           </Form.Item>
+
           <Form.Item name="isVisible" label="生态页可见" valuePropName="checked">
             <Switch />
           </Form.Item>
+
           <Form.Item name="sortOrder" label="排序（小值在前）">
             <InputNumber min={0} style={{ width: '100%' }} />
+          </Form.Item>
+
+          <Form.Item name="websiteUrl" label="官网链接">
+            <input className="ant-input" style={{ width: '100%', padding: '4px 11px', border: '1px solid #d9d9d9', borderRadius: 6 }} />
           </Form.Item>
         </Form>
       </Drawer>

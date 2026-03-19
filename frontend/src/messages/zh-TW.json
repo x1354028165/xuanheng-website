@@ -209,7 +209,12 @@
     "noBrands": "暫無品牌資料",
     "subtitle": "廣泛相容主流新能源設備品牌",
     "supportedStatus": "已支援",
-    "title": "相容生態"
+    "title": "相容生態",
+    "filterOther": "其他",
+    "filterIntegration": "對接進度",
+    "filterIntegrationBasic": "基礎接入",
+    "filterIntegrationStandard": "標準接入",
+    "filterIntegrationFull": "完整接入"
   },
   "error": {
     "backToHome": "返回首頁",

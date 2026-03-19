@@ -1097,7 +1097,12 @@
     "developingStatus": "开发中",
     "brandNotFound": "没有找到您的品牌？",
     "contactUsQuick": "联系我们，快速接入",
-    "contactUsBtn": "联系我们"
+    "contactUsBtn": "联系我们",
+    "filterOther": "其他",
+    "filterIntegration": "对接进度",
+    "filterIntegrationBasic": "基础接入",
+    "filterIntegrationStandard": "标准接入",
+    "filterIntegrationFull": "完整接入"
   },
   "search": {
     "title": "搜索",

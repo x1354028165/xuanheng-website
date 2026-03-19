@@ -209,7 +209,12 @@
     "noBrands": "Nenhum dado de marca disponível",
     "subtitle": "Ampla compatibilidade com as principais marcas de dispositivos energéticos",
     "supportedStatus": "Supported",
-    "title": "Ecossistema compatível"
+    "title": "Ecossistema compatível",
+    "filterOther": "Outro",
+    "filterIntegration": "Nível de integração",
+    "filterIntegrationBasic": "Básico",
+    "filterIntegrationStandard": "Padrão",
+    "filterIntegrationFull": "Completo"
   },
   "error": {
     "backToHome": "Voltar à página inicial",

@@ -1097,7 +1097,12 @@
     "developingStatus": "En développement",
     "brandNotFound": "Votre marque n'est pas trouvée ?",
     "contactUsQuick": "Contactez-nous pour un accès rapide",
-    "contactUsBtn": "Contactez-nous"
+    "contactUsBtn": "Contactez-nous",
+    "filterOther": "Autre",
+    "filterIntegration": "Niveau d'intégration",
+    "filterIntegrationBasic": "Basique",
+    "filterIntegrationStandard": "Standard",
+    "filterIntegrationFull": "Complet"
   },
   "search": {
     "title": "Recherche",

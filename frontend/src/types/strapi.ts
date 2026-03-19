@@ -173,11 +173,12 @@ export interface StrapiCompatibleBrand {
   documentId: string;
   name: string;
   logo: StrapiMedia | null;
-  category: string | null;
-  accessMethod?: string | null;
-  capabilities?: string[] | null;
-  status?: string | null;
+  category: '储能电池' | '光伏逆变器' | '充电桩' | '智能电表' | '其他' | null;
+  accessMethod?: 'cloud' | 'gateway' | 'both' | null;
+  integrationLevel?: 'read' | 'read_history' | 'full_control' | null;
+  status?: 'connected' | 'adapting' | null;
   showOnHomepage?: boolean | null;
+  isVisible?: boolean | null;
   websiteUrl: string | null;
   sortOrder: number;
   createdAt: string;

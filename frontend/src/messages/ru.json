@@ -219,7 +219,12 @@
     "noBrands": "Данные о брендах отсутствуют",
     "subtitle": "Широкая совместимость с ведущими брендами энергетических устройств",
     "supportedStatus": "Supported",
-    "title": "Совместимая экосистема"
+    "title": "Совместимая экосистема",
+    "filterOther": "Другое",
+    "filterIntegration": "Уровень интеграции",
+    "filterIntegrationBasic": "Базовый",
+    "filterIntegrationStandard": "Стандартный",
+    "filterIntegrationFull": "Полный"
   },
   "error": {
     "backToHome": "На главную",

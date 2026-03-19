@@ -1097,7 +1097,12 @@
     "developingStatus": "開発中",
     "brandNotFound": "お探しのブランドが見つかりませんか？",
     "contactUsQuick": "お問い合わせ、迅速な接続",
-    "contactUsBtn": "お問い合わせ"
+    "contactUsBtn": "お問い合わせ",
+    "filterOther": "その他",
+    "filterIntegration": "統合レベル",
+    "filterIntegrationBasic": "基本",
+    "filterIntegrationStandard": "標準",
+    "filterIntegrationFull": "完全"
   },
   "search": {
     "title": "検索",

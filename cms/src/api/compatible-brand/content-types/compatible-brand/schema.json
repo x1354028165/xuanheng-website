@@ -22,14 +22,10 @@
     "logo": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "category": {
-      "type": "enumeration",
-      "enum": ["储能电池", "光伏逆变器", "充电桩", "智能电表", "其他"],
-      "default": "其他"
+      "type": "string"
     },
     "websiteUrl": {
       "type": "string"
