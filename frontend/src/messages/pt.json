@@ -92,7 +92,8 @@
     "viewDetails": "Ver detalhes",
     "address": "Endereço",
     "phone": "Telefone",
-    "email": "E-mail"
+    "email": "E-mail",
+    "hours": "Horário"
   },
   "contact": {
     "error": "Falha no envio. Tente novamente mais tarde.",

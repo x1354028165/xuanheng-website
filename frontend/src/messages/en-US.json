@@ -73,7 +73,8 @@
     "page": "Page {page}",
     "address": "Address",
     "phone": "Phone",
-    "email": "Email"
+    "email": "Email",
+    "hours": "Business Hours"
   },
   "home": {
     "heroLine1": "Seamlessly Aggregate All-Scenario Energy Assets",

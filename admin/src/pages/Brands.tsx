@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import {
   Table, Button, Drawer, Form, Space, Popconfirm, Typography, message,
-  Radio, Switch, InputNumber, Tag,
+  Radio, Switch, InputNumber, Tag, Checkbox,
 } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -95,9 +95,20 @@ export default function Brands() {
 
   const openEdit = (record: Record<string, unknown>) => {
     setEditingDocId(record.documentId as string);
+    // category 可能是字符串或数组，统一转为数组
+    const catValue = (() => {
+      const c = record.category;
+      if (!c) return [];
+      if (Array.isArray(c)) return c;
+      if (typeof c === 'string') {
+        try { if (c.trim().startsWith('[')) return JSON.parse(c); } catch { /**/ }
+        return c ? [c] : [];
+      }
+      return [];
+    })();
     form.setFieldsValue({
       name: record.name,
-      category: record.category,
+      category: catValue,
       accessMethod: record.accessMethod,
       integrationLevel: record.integrationLevel,
       status: record.status,
@@ -169,8 +180,12 @@ export default function Brands() {
     {
       title: '设备类型',
       dataIndex: 'category',
-      width: 110,
-      render: (v: string) => v ? <Tag>{v}</Tag> : '—',
+      width: 140,
+      render: (v: unknown) => {
+        const arr: string[] = Array.isArray(v) ? v : (v ? [String(v)] : []);
+        if (!arr.length) return '—';
+        return <>{arr.map(c => <Tag key={c}>{c}</Tag>)}</>;
+      },
     },
     {
       title: '接入方式',
@@ -256,7 +271,7 @@ export default function Brands() {
           </Form.Item>
 
           <Form.Item name="category" label="设备类型">
-            <Radio.Group optionType="button" buttonStyle="solid" options={CATEGORY_OPTIONS} />
+            <Checkbox.Group options={CATEGORY_OPTIONS} style={{ display: 'flex', flexDirection: 'column', gap: 8 }} />
           </Form.Item>
 
           <Form.Item label="品牌 Logo">
@@ -276,7 +291,11 @@ export default function Brands() {
           </Form.Item>
 
           <Form.Item name="accessMethod" label="接入方式">
-            <Radio.Group optionType="button" buttonStyle="solid" options={ACCESS_METHOD_OPTIONS} />
+            <Radio.Group>
+              {ACCESS_METHOD_OPTIONS.map(opt => (
+                <Radio key={opt.value} value={opt.value}>{opt.label}</Radio>
+              ))}
+            </Radio.Group>
           </Form.Item>
 
           <Form.Item name="integrationLevel" label="对接进度">
@@ -290,9 +309,9 @@ export default function Brands() {
           </Form.Item>
 
           <Form.Item name="status" label="支持状态">
-            <Radio.Group optionType="button" buttonStyle="solid">
-              <Radio.Button value="connected">已支持</Radio.Button>
-              <Radio.Button value="adapting">开发中</Radio.Button>
+            <Radio.Group>
+              <Radio value="connected">已支持</Radio>
+              <Radio value="adapting">开发中</Radio>
             </Radio.Group>
           </Form.Item>
 

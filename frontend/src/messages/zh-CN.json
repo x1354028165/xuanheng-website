@@ -73,7 +73,8 @@
     "page": "第 {page} 页",
     "address": "公司地址",
     "phone": "联系电话",
-    "email": "电子邮箱"
+    "email": "电子邮箱",
+    "hours": "工作时间"
   },
   "home": {
     "heroLine1": "无缝聚合全场景能源资产",

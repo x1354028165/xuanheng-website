@@ -92,7 +92,8 @@
     "viewDetails": "檢視詳情",
     "address": "公司地址",
     "phone": "聯繫電話",
-    "email": "電子郵箱"
+    "email": "電子郵箱",
+    "hours": "工作時間"
   },
   "contact": {
     "error": "傳送失敗，請稍後重試",
