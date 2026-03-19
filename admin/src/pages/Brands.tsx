@@ -87,7 +87,18 @@ export default function Brands() {
 
   const openCreate = () => {
     setEditingDocId(null);
-    form.resetFields();
+    // 新增默认值
+    form.setFieldsValue({
+      name: '',
+      category: [],
+      accessMethod: 'both',
+      integrationLevel: 'full_control',
+      status: 'connected',
+      showOnHomepage: true,
+      isVisible: true,
+      sortOrder: 0,
+      websiteUrl: '',
+    });
     setLogoPreview(null);
     setLogoId(null);
     setDrawerOpen(true);
@@ -271,7 +282,20 @@ export default function Brands() {
           </Form.Item>
 
           <Form.Item name="category" label="设备类型">
-            <Checkbox.Group options={CATEGORY_OPTIONS} style={{ display: 'flex', flexDirection: 'column', gap: 8 }} />
+            <div>
+              <Space style={{ marginBottom: 8 }}>
+                <Button size="small" onClick={() => form.setFieldValue('category', CATEGORY_OPTIONS.map(o => o.value))}>
+                  全选
+                </Button>
+                <Button size="small" onClick={() => form.setFieldValue('category', [])}>
+                  取消全选
+                </Button>
+              </Space>
+              <Checkbox.Group
+                options={CATEGORY_OPTIONS}
+                style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
+              />
+            </div>
           </Form.Item>
 
           <Form.Item label="品牌 Logo">

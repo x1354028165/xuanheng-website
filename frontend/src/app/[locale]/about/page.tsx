@@ -186,13 +186,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             {/* 右边：地图 */}
             <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] shadow-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.5!2d113.85!3d22.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDM2JzAwLjAiTiAxMTPCsDUxJzAwLjAiRQ!5e0!3m2!1sen!2scn!4v1"
+                src="https://uri.amap.com/marker?position=113.856,22.602&name=旭衡电子&src=xuanheng&coordinate=gaode&callnative=0"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: '320px' }}
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
                 title="Office Location"
               />
             </div>

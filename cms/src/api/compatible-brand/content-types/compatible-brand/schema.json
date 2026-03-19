@@ -10,34 +10,15 @@
     "draftAndPublish": false
   },
   "pluginOptions": {
-    "i18n": {
-      "localized": false
-    }
+    "i18n": { "localized": false }
   },
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "logo": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images"]
-    },
-    "category": {
-      "type": "string"
-    },
-    "websiteUrl": {
-      "type": "string"
-    },
-    "sortOrder": {
-      "type": "integer",
-      "default": 0
-    },
-    "isVisible": {
-      "type": "boolean",
-      "default": true
-    },
+    "name": { "type": "string", "required": true },
+    "logo": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "category": { "type": "json" },
+    "websiteUrl": { "type": "string" },
+    "sortOrder": { "type": "integer", "default": 0 },
+    "isVisible": { "type": "boolean", "default": true },
     "integrationLevel": {
       "type": "enumeration",
       "enum": ["read", "read_history", "full_control"],
@@ -48,14 +29,11 @@
       "enum": ["cloud", "gateway", "both"],
       "default": "both"
     },
-    "status": {
+    "supportStatus": {
       "type": "enumeration",
       "enum": ["connected", "adapting"],
       "default": "connected"
     },
-    "showOnHomepage": {
-      "type": "boolean",
-      "default": true
-    }
+    "showOnHomepage": { "type": "boolean", "default": true }
   }
 }
