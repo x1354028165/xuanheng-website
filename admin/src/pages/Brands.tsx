@@ -41,7 +41,7 @@ export default function Brands() {
       const res = await api.post('/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       const media = res.data[0];
       setLogoId(media.id);
-      setLogoPreview(media.url.startsWith('/uploads/') ? `/strapi${media.url}` : media.url);
+      setLogoPreview(media.url);
     } catch {
       message.error('上传失败');
     }
@@ -66,7 +66,7 @@ export default function Brands() {
     form.setFieldsValue({ ...record, capabilities: caps, category: cats });
     const logo = record.logo as { url?: string; id?: number } | null;
     if (logo?.url) {
-      setLogoPreview(logo.url.startsWith('/uploads/') ? `/strapi${logo.url}` : logo.url);
+      setLogoPreview(logo.url);
       setLogoId(logo.id ?? null);
     } else {
       setLogoPreview(null);
@@ -126,7 +126,7 @@ export default function Brands() {
       render: (logo: { url?: string } | null) => {
         const url = logo?.url;
         if (!url) return '—';
-        const src = url.startsWith('/uploads/') ? `/strapi${url}` : url;
+        const src = url;
         return <img src={src} alt="logo" style={{ height: 32, objectFit: 'contain' }} />;
       },
     },
